@@ -3,7 +3,7 @@
  * 
  * Large text section with 3D model animation
  * "From vision to system, from idea to impact..."
- * Text with outline stroke effect on thin words
+ * Professional GSAP text animation
  */
 
 'use client';
@@ -12,7 +12,9 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 interface VisionSectionProps {
     id?: string;
@@ -25,32 +27,42 @@ export default function VisionSection({ id = 'vision' }: VisionSectionProps) {
     useEffect(() => {
         if (!textRef.current || !sectionRef.current) return;
 
-        const words = textRef.current.querySelectorAll('.word');
-        
-        // Set initial state
-        gsap.set(words, { 
-            opacity: 0, 
-            y: 40,
-        });
+        const ctx = gsap.context(() => {
+            const lines = gsap.utils.toArray<HTMLElement>('.vision-line');
 
-        // Animate words on scroll
-        gsap.to(words, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: 'power3.out',
-            scrollTrigger: {
+            // Initial state - hidden below
+            gsap.set(lines, {
+                y: 100,
+                opacity: 0,
+                rotateX: -90,
+                transformOrigin: 'top center',
+            });
+
+            // Create the animation - plays only on forward scroll
+            ScrollTrigger.create({
                 trigger: sectionRef.current,
-                start: 'top 80%',
-                end: 'center center',
-                toggleActions: 'play none none reverse',
-            },
-        });
+                start: 'top 30%',
+                onEnter: () => {
+                    gsap.fromTo(lines,
+                        {
+                            y: 100,
+                            opacity: 0,
+                            rotateX: -90,
+                        },
+                        {
+                            y: 0,
+                            opacity: 1,
+                            rotateX: 0,
+                            duration: 1,
+                            stagger: 0.2,
+                            ease: 'power3.out',
+                        }
+                    );
+                },
+            });
+        }, sectionRef);
 
-        return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
     return (

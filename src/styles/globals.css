@@ -922,6 +922,9 @@ footer p {
   display: block;
   margin-bottom: 6px;
   white-space: nowrap;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
 }
 
 /* Outline stroke text - thin words */
