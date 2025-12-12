@@ -352,6 +352,38 @@ section {
 
 .hero-title {
   margin-bottom: 20px;
+  perspective: 1000px;
+}
+
+/* Animated title styles */
+.hero-title-animated {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.hero-word {
+  display: inline-flex;
+  overflow: hidden;
+  perspective: 500px;
+}
+
+.hero-word-inner {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+}
+
+.hero-word-space {
+  display: inline;
+}
+
+/* Individual letter hover effect */
+.hero-letter {
+  display: inline-block;
+  cursor: default;
+  will-change: transform, color;
+  transition: text-shadow 0.3s ease;
 }
 
 .hero-subtitle {
@@ -359,6 +391,55 @@ section {
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 32px;
   max-width: 500px;
+}
+
+/* Animated subtitle styles */
+.hero-subtitle-animated {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.subtitle-word {
+  display: inline;
+  will-change: transform, opacity, filter;
+}
+
+/* ============================================
+   Marquee Text Section
+   ============================================ */
+
+.marquee-section {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  padding: 10px 0;
+  overflow: hidden;
+  background: white;
+}
+
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-text {
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.marquee-content {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(48px, 10vw, 120px);
+  font-weight: 800;
+  color: black;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.25);
+  text-stroke: 1.5px rgba(255, 255, 255, 0.25);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  padding: 0 20px;
 }
 
 /* CTA Button - Premium Edition */

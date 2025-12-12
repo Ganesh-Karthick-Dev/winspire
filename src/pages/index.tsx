@@ -18,6 +18,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useCallback } from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
+import MarqueeText from '@/components/MarqueeText';
 import Section from '@/components/Section';
 import VisionSection from '@/components/VisionSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
@@ -163,11 +164,15 @@ export default function Home() {
           - Trigger area for initial 3D animation
         */}
                 <Hero
-                    title="Immersive 3D Experience"
+                    title={`Immersive 3D
+Experience`}
                     subtitle="Explore stunning visuals with smooth scroll animations. Built for performance and accessibility."
                     ctaText="Explore Features"
                     ctaHref="#features"
                 />
+
+                {/* Marquee Text - scroll-driven horizontal animation */}
+                <MarqueeText text="Get Results. Not Just Promise." />
 
                 {/* 
           Content Sections

@@ -5,10 +5,10 @@
  * SSR-rendered for SEO - all text content is indexable.
  * 
  * Acts as the trigger area for the initial ScrollTrigger animation.
- * Features premium CTA button with GSAP animations.
+ * Features premium CTA button and text animations with GSAP.
  */
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useMemo } from 'react';
 import gsap from 'gsap';
 
 interface HeroProps {
@@ -36,6 +36,15 @@ export default function Hero({
     const contentRef = useRef<HTMLSpanElement>(null);
     const arrowRef = useRef<HTMLSpanElement>(null);
     const glowRef = useRef<HTMLSpanElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const subtitleRef = useRef<HTMLParagraphElement>(null);
+    const heroContentRef = useRef<HTMLDivElement>(null);
+
+    // Split title into lines, then words for animation
+    const titleLines = useMemo(() =>
+        title.split('\n').map(line => line.split(' ')),
+        [title]
+    );
 
     useEffect(() => {
         const button = buttonRef.current;
@@ -43,21 +52,108 @@ export default function Hero({
         const content = contentRef.current;
         const arrow = arrowRef.current;
         const glow = glowRef.current;
+        const titleEl = titleRef.current;
+        const subtitleEl = subtitleRef.current;
+        const heroContent = heroContentRef.current;
 
-        if (!button || !shimmer || !content || !arrow || !glow) return;
+        if (!button || !shimmer || !content || !arrow || !glow || !titleEl || !subtitleEl || !heroContent) return;
 
-        // Initial animation - button entry
-        gsap.fromTo(button,
-            { opacity: 0, y: 30, scale: 0.9 },
-            {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 1,
-                delay: 0.5,
-                ease: 'power3.out'
+        // Create master timeline for coordinated animations
+        const masterTimeline = gsap.timeline({
+            defaults: { ease: 'power3.out' }
+        });
+
+        // Get all word spans in the title
+        const words = titleEl.querySelectorAll('.hero-word');
+        const wordInners = titleEl.querySelectorAll('.hero-word-inner');
+
+        // Get subtitle characters/words
+        const subtitleWords = subtitleEl.querySelectorAll('.subtitle-word');
+
+        // Initial states
+        gsap.set(wordInners, {
+            yPercent: 110,
+            opacity: 0,
+            rotateX: -45
+        });
+
+        gsap.set(subtitleWords, {
+            opacity: 0,
+            y: 20,
+            filter: 'blur(8px)'
+        });
+
+        gsap.set(button, {
+            opacity: 0,
+            y: 40,
+            scale: 0.9
+        });
+
+        // Animate title words with stagger
+        masterTimeline.to(wordInners, {
+            yPercent: 0,
+            opacity: 1,
+            rotateX: 0,
+            duration: 1.2,
+            stagger: {
+                each: 0.08,
+                ease: 'power2.out'
+            },
+            ease: 'power4.out'
+        }, 0.3);
+
+        // Animate subtitle words with blur reveal
+        masterTimeline.to(subtitleWords, {
+            opacity: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            duration: 0.8,
+            stagger: {
+                each: 0.03,
+                ease: 'power2.out'
             }
-        );
+        }, 0.8);
+
+        // Animate button entry
+        masterTimeline.to(button, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            ease: 'power3.out'
+        }, 1.2);
+
+        // === Letter Hover Animations ===
+        const letters = titleEl.querySelectorAll('.hero-letter');
+
+        letters.forEach((letter) => {
+            const letterEl = letter as HTMLElement;
+
+            const handleLetterEnter = () => {
+                gsap.to(letterEl, {
+                    scale: 1.3,
+                    y: -8,
+                    color: '#00d9ff',
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            };
+
+            const handleLetterLeave = () => {
+                gsap.to(letterEl, {
+                    scale: 1,
+                    y: 0,
+                    color: '#fff',
+                    duration: 0.4,
+                    ease: 'elastic.out(1, 0.4)'
+                });
+            };
+
+            letterEl.addEventListener('mouseenter', handleLetterEnter);
+            letterEl.addEventListener('mouseleave', handleLetterLeave);
+        });
+
+        // === Button Hover Animations ===
 
         // Magnetic hover effect
         const handleMouseMove = (e: MouseEvent) => {
@@ -181,6 +277,7 @@ export default function Hero({
             button.removeEventListener('mouseenter', handleMouseEnter);
             button.removeEventListener('mouseleave', handleMouseLeave);
             pulseAnimation.kill();
+            masterTimeline.kill();
         };
     }, []);
 
@@ -200,17 +297,45 @@ export default function Hero({
         }
     };
 
+    // Split subtitle into words
+    const subtitleWords = useMemo(() => subtitle.split(' '), [subtitle]);
+
     return (
         <section className="hero" aria-labelledby="hero-title">
-            <div className="hero-content">
-                {/* SSR-rendered H1 - critical for SEO */}
-                <h1 id="hero-title" className="hero-title">
-                    {title}
+            <div className="hero-content" ref={heroContentRef}>
+                {/* Animated H1 - letters with hover effect */}
+                <h1 id="hero-title" className="hero-title hero-title-animated" ref={titleRef}>
+                    {titleLines.map((lineWords, lineIndex) => (
+                        <span key={lineIndex} className="hero-line">
+                            {lineWords.map((word, wordIndex) => (
+                                <span key={wordIndex} className="hero-word">
+                                    <span className="hero-word-inner">
+                                        {word.split('').map((letter, letterIndex) => (
+                                            <span
+                                                key={letterIndex}
+                                                className="hero-letter"
+                                                data-letter={letter}
+                                            >
+                                                {letter}
+                                            </span>
+                                        ))}
+                                    </span>
+                                    {wordIndex < lineWords.length - 1 && <span className="hero-word-space">&nbsp;</span>}
+                                </span>
+                            ))}
+                            {lineIndex < titleLines.length - 1 && <br />}
+                        </span>
+                    ))}
                 </h1>
 
-                {/* SSR-rendered subtitle - indexable content */}
-                <p className="hero-subtitle">
-                    {subtitle}
+                {/* Animated subtitle - blur reveal */}
+                <p className="hero-subtitle hero-subtitle-animated" ref={subtitleRef}>
+                    {subtitleWords.map((word, index) => (
+                        <span key={index} className="subtitle-word">
+                            {word}
+                            {index < subtitleWords.length - 1 && ' '}
+                        </span>
+                    ))}
                 </p>
 
                 {/* Premium CTA with GSAP animations */}
@@ -257,3 +382,4 @@ export default function Hero({
         </section>
     );
 }
+
