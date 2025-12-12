@@ -11,6 +11,9 @@
 const nextConfig = {
     reactStrictMode: true,
 
+    // Turbopack configuration (Next.js 16+)
+    turbopack: {},
+
     // Enable static export if deploying to static hosting
     // output: 'export',
 

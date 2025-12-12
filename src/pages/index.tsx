@@ -19,7 +19,6 @@ import { useEffect, useRef, useCallback } from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import Section from '@/components/Section';
-import Poster from '@/components/Poster';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D, prefersReducedMotion } from '@/lib/threeUtils';
 import type { ThreeState } from '@/lib/threeManager';
@@ -30,7 +29,7 @@ import type { ThreeState } from '@/lib/threeManager';
  */
 const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
     ssr: false,
-    loading: () => <Poster />,
+    loading: () => null,
 });
 
 export default function Home() {
@@ -146,12 +145,6 @@ export default function Home() {
         >
             {/* Page wrapper for z-index stacking */}
             <div className="page-wrapper">
-                {/* 
-          Poster layer - LCP target
-          Stays visible under loader, fades out after canvas ready
-        */}
-                <Poster />
-
                 {/* 
           3D Viewer - loaded dynamically after hydration
           Uses requestIdleCallback for non-blocking initialization

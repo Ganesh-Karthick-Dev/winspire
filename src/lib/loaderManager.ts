@@ -123,7 +123,7 @@ export function showCanvas(): void {
 
 /**
  * Complete fade sequence after loading
- * Order: Loader fades → Poster fades → Canvas appears
+ * Order: Loader fades → Canvas appears
  */
 export async function finishLoader(): Promise<void> {
     // Ensure progress shows 100%
@@ -135,7 +135,6 @@ export async function finishLoader(): Promise<void> {
     // Execute fade sequence
     await animateLoaderOut();
     showCanvas();
-    await animatePosterOut();
 }
 
 /**
