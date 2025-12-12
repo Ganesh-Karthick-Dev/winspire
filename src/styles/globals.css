@@ -993,6 +993,18 @@ footer p {
   font-weight: 600;
 }
 
+/* Gradient fade from transparent to dark at top */
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent 0%, #0a0a0a 100%);
+  pointer-events: none;
+}
+
 .footer-main {
   display: flex;
   justify-content: space-between;
