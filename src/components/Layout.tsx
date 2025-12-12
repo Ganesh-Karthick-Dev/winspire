@@ -8,6 +8,7 @@
 import SEOHead from './SEOHead';
 import JsonLd from './JsonLd';
 import SkipToContent from './SkipToContent';
+import Navbar from './Navbar';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -30,12 +31,8 @@ export default function Layout({
             {/* Skip to content link for keyboard users */}
             <SkipToContent />
 
-            {/* Semantic header */}
-            <header role="banner">
-                <nav aria-label="Main navigation">
-                    {/* Navigation can be added here if needed */}
-                </nav>
-            </header>
+            {/* Navbar */}
+            <Navbar />
 
             {/* Main content area */}
             <main id="main-content" role="main" tabIndex={-1}>
