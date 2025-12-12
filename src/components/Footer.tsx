@@ -30,15 +30,26 @@ export default function Footer() {
             {/* Main Footer Content */}
             <div className="footer-main">
                 <div className="footer-left">
-                    <h3 className="footer-brand">winspire RCM</h3>
-                    <address className="footer-address">
-                        123 Innovation Street, Tech Park,<br />
-                        Bangalore, India
-                    </address>
+                    <div className="footer-office">
+                        <h4 className="footer-label">Regional Office:</h4>
+                        <address className="footer-address">
+                            Regus - UB City, Level 14 & 15,<br />
+                            Concorde Towers 1, Ashok Nagar,<br />
+                            Bangalore, India - 560001
+                        </address>
+                    </div>
+                    <div className="footer-office">
+                        <h4 className="footer-label">Headquarters:</h4>
+                        <address className="footer-address">
+                            2810 N Church St,<br />
+                            Wilmington, Delaware,<br />
+                            USA. 19802-4447
+                        </address>
+                    </div>
                 </div>
                 <div className="footer-right">
-                    <a href="mailto:hello@winspire.com" className="footer-email">
-                        hello@winspire.com
+                    <a href="mailto:contact@winspirercm.com" className="footer-email">
+                        contact@winspirercm.com
                     </a>
                 </div>
             </div>

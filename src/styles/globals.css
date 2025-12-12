@@ -238,6 +238,35 @@ a {
 }
 
 /* ============================================
+   Video Background
+   ============================================ */
+
+.video-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.video-element {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
    WebGL Canvas
    ============================================ */
 
@@ -715,7 +744,7 @@ footer p {
   position: relative;
   z-index: 10;
   background: #0a0a0a;
-  padding: 60px 40px 0;
+  padding: 30px 40px 0;
   font-family: 'Outfit', sans-serif;
   font-weight: 600;
 }
@@ -723,9 +752,16 @@ footer p {
 .footer-main {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 40px;
-  margin-bottom: 40px;
+  align-items: center;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  padding: 32px 40px;
   background: linear-gradient(135deg, rgba(40, 40, 40, 0.9) 0%, rgba(25, 25, 25, 0.95) 100%);
   backdrop-filter: blur(10px);
   border-radius: 16px;
@@ -735,20 +771,28 @@ footer p {
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.footer-brand {
-  font-size: 32px;
+.footer-office {
+  min-width: 200px;
+}
+
+.footer-label {
+  font-size: 16px;
   font-weight: 600;
   font-style: normal;
   color: #fff;
-  margin: 0 0 20px 0;
+  margin: 0 0 12px 0;
+}
+
+.footer-right {
+  text-align: right;
 }
 
 .footer-address {
   font-style: normal;
-  font-size: 15px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 1.6;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.7;
 }
 
 .footer-email {
