@@ -19,6 +19,9 @@ let loadStartTime: number = 0;
 export function resetLoaderToZero(): void {
     loadStartTime = Date.now();
 
+    // Hide scrollbar during loading
+    document.body.classList.add('loading');
+
     const progressEl = document.querySelector('.loader-progress');
     const barEl = document.querySelector('.loader-bar-fill');
     const overlayEl = document.querySelector('.loader-overlay');
@@ -135,6 +138,9 @@ export async function finishLoader(): Promise<void> {
     // Execute fade sequence
     await animateLoaderOut();
     showCanvas();
+
+    // Show scrollbar after loading complete
+    document.body.classList.remove('loading');
 }
 
 /**

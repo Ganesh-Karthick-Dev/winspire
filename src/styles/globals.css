@@ -1,8 +1,12 @@
+@import "tailwindcss";
+
 /**
  * Global Styles
  * 
  * Base CSS reset, typography, accessibility features, and loader/canvas transitions.
  * Designed for CLS-safe rendering and prefers-reduced-motion compliance.
+ * 
+ * NOTE: Use TailwindCSS for simple cases, raw CSS for complex/custom styling.
  */
 
 /* ============================================
@@ -30,6 +34,42 @@ body {
   color: #1a1a1a;
   background-color: #000;
   overflow-x: hidden;
+}
+
+/* Hide scrollbar during loading */
+body.loading {
+  overflow: hidden;
+}
+
+/* Custom scrollbar - minimal capsule style */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fff;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #fff transparent;
 }
 
 /* Disable smooth scroll for reduced motion */
