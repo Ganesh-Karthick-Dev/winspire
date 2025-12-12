@@ -420,26 +420,26 @@ section {
 
 .marquee-container {
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
+  position: relative;
 }
 
 .marquee-text {
-  display: flex;
-  white-space: nowrap;
+  display: block;
+  width: 100%;
+  text-align: center;
   will-change: transform;
 }
 
 .marquee-content {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(48px, 10vw, 120px);
+  font-size: clamp(28px, 5vw, 72px);
   font-weight: 800;
   color: black;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.25);
-  text-stroke: 1.5px rgba(255, 255, 255, 0.25);
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  line-height: 1.1;
-  padding: 0 20px;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 /* CTA Button - Premium Edition */

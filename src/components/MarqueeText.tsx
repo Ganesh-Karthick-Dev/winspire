@@ -35,11 +35,11 @@ export default function MarqueeText({
         if (!section || !textEl) return;
 
         // Set initial position off-screen to the right
-        gsap.set(textEl, { xPercent: 50 });
+        gsap.set(textEl, { xPercent: 100 });
 
         // Create scroll-triggered animation
         const animation = gsap.to(textEl, {
-            xPercent: -50,
+            xPercent: 0,
             ease: 'none',
             scrollTrigger: {
                 trigger: section,
@@ -56,9 +56,6 @@ export default function MarqueeText({
         };
     }, []);
 
-    // Duplicate text for seamless loop effect
-    const displayText = `${text} • ${text} • ${text}`;
-
     return (
         <section
             ref={sectionRef}
@@ -68,7 +65,7 @@ export default function MarqueeText({
             <div className="marquee-container">
                 <div ref={textRef} className="marquee-text">
                     <span className="marquee-content">
-                        {displayText}
+                        {text}
                     </span>
                 </div>
             </div>
