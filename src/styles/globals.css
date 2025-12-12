@@ -1011,6 +1011,26 @@ footer p {
   z-index: 5;
 }
 
+/* Light bar at center of gradient */
+.site-footer::after {
+  content: '';
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  max-width: 300px;
+  height: 1px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 20%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0.3) 80%,
+      transparent 100%);
+  pointer-events: none;
+  z-index: 6;
+}
+
 .footer-main {
   display: flex;
   justify-content: space-between;
