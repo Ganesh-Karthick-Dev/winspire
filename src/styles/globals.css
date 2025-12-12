@@ -425,21 +425,28 @@ section {
 }
 
 .marquee-text {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  padding: 0 5%;
+  box-sizing: border-box;
   text-align: center;
   will-change: transform;
 }
 
 .marquee-content {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(28px, 5vw, 72px);
+  font-size: clamp(32px, 4.8vw, 90px);
   font-weight: 800;
   color: black;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.04em;
+  word-spacing: 0.5em;
   text-transform: uppercase;
   line-height: 1.2;
   white-space: nowrap;
+  -webkit-text-stroke: 7px rgba(128, 128, 128, 0.4);
+  paint-order: stroke fill;
 }
 
 /* CTA Button - Premium Edition */
