@@ -76,6 +76,23 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* ============================================
+   Text Selection Theme - Premium Electric
+   ============================================ */
+
+::selection {
+  background: #00d9ff;
+  color: #000;
+  text-shadow: none;
+  -webkit-background-clip: text;
+}
+
+::-moz-selection {
+  background: #00d9ff;
+  color: #000;
+  text-shadow: none;
+}
+
+/* ============================================
    Typography
    ============================================ */
 
@@ -344,7 +361,143 @@ section {
   max-width: 500px;
 }
 
-/* CTA Button */
+/* CTA Button - Premium Edition */
+.cta-button-premium {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 40px;
+  background: rgba(20, 20, 25, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  text-decoration: none;
+  will-change: transform;
+}
+
+/* Animated gradient border */
+.cta-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 60px;
+  padding: 1.5px;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.2));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Subtle inner glow */
+.cta-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 60px;
+  background: linear-gradient(135deg,
+      rgba(79, 156, 249, 0.1),
+      rgba(139, 92, 246, 0.1));
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+}
+
+/* Glow effect behind button */
+.cta-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 150%;
+  background: radial-gradient(ellipse at center,
+      rgba(79, 156, 249, 0.3) 0%,
+      rgba(139, 92, 246, 0.2) 40%,
+      transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(30px);
+}
+
+/* Shimmer sweep effect */
+.cta-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.15),
+      transparent);
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+/* Button content container */
+.cta-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Text styling */
+.cta-text {
+  position: relative;
+}
+
+/* Arrow container */
+.cta-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cta-arrow svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+/* Hover state enhancements */
+.cta-button-premium:hover .cta-border::before {
+  opacity: 1;
+}
+
+/* Focus visible state */
+.cta-button-premium:focus-visible {
+  outline: 2px solid rgba(79, 156, 249, 0.8);
+  outline-offset: 4px;
+}
+
+/* Active/pressed state */
+.cta-button-premium:active {
+  transform: scale(0.98);
+}
+
+/* Legacy CTA Button - keeping for backwards compatibility */
 .cta-button {
   display: inline-flex;
   align-items: center;
