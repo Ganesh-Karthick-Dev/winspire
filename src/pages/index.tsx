@@ -19,6 +19,7 @@ import { useEffect, useRef, useCallback } from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import Section from '@/components/Section';
+import VisionSection from '@/components/VisionSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D, prefersReducedMotion } from '@/lib/threeUtils';
 import type { ThreeState } from '@/lib/threeManager';
@@ -151,7 +152,7 @@ export default function Home() {
         */}
                 {!is3DDisabled.current && (
                     <GLTFViewer
-                        url="/models/hero-draco.glb"
+                        url="/models/earth.gltf"
                         onModelReady={handleModelReady}
                     />
                 )}
@@ -206,6 +207,9 @@ export default function Home() {
                         and styling to match your brand.
                     </p>
                 </Section>
+
+                {/* Vision Section - before footer */}
+                <VisionSection />
             </div>
         </Layout>
     );
@@ -289,4 +293,29 @@ async function setupScrollAnimations(state: ThreeState) {
         y: Math.PI * 2,
         ease: 'none',
     });
+
+    // Vision section: move model to left and scale down
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: '#vision',
+            start: 'top bottom',
+            end: 'center center',
+            scrub: true,
+        },
+    })
+        .to(model.position, {
+            x: -0.9,  // Move to left side (not too far)
+            y: 0.3,
+            ease: 'power2.out',
+        }, 0)
+        .to(model.scale, {
+            x: 0.005,  // Scale down (initial is 0.01, so 0.005 = 50% smaller)
+            y: 0.005,
+            z: 0.005,
+            ease: 'power2.out',
+        }, 0)
+        .to(model.rotation, {
+            y: Math.PI * 2.3,  // Slight rotation
+            ease: 'none',
+        }, 0);
 }

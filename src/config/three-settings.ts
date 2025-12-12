@@ -47,10 +47,10 @@ export const modelSettings = {
     dracoDecoderPath: '/draco/',
 
     // Default model URL
-    defaultModelUrl: '/models/hero-draco.glb',
+    defaultModelUrl: '/models/earth.gltf',
 
-    // Scale multiplier for the model
-    defaultScale: 1.0,
+    // Scale multiplier for the model (earth.gltf has internal scale of 100, so we use 0.01)
+    defaultScale: 0.01,
 
     // Center model in scene
     centerModel: true,

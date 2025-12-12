@@ -606,3 +606,259 @@ footer p {
 .navbar-menu-link.active {
   color: #fff;
 }
+
+/* ============================================
+   Vision Section
+   ============================================ */
+
+.vision-section {
+  position: relative;
+  min-height: 70vh;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  overflow: hidden;
+}
+
+.vision-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: 1400px;
+  width: 100%;
+  gap: 60px;
+}
+
+.vision-model-space {
+  flex: 1;
+  min-width: 300px;
+}
+
+.vision-text {
+  flex: 1.5;
+  text-align: right;
+}
+
+.vision-heading {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(36px, 5.5vw, 64px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+  margin: 0;
+}
+
+.vision-line {
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Outline stroke text - thin words */
+.vision-heading .word.outline {
+  font-weight: 300;
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.9);
+  text-stroke: 1.5px rgba(255, 255, 255, 0.9);
+}
+
+/* Solid white text - bold words */
+.vision-heading .word.solid {
+  font-weight: 700;
+  font-style: normal;
+  color: #fff;
+  -webkit-text-stroke: 0;
+  text-stroke: 0;
+}
+
+/* Extra bold for "made to evolve" */
+.vision-heading .word.solid.bold {
+  font-weight: 800;
+  font-style: normal;
+}
+
+@media (max-width: 768px) {
+  .vision-section {
+    padding: 60px 24px;
+  }
+
+  .vision-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .vision-model-space {
+    min-width: unset;
+    height: 200px;
+  }
+
+  .vision-text {
+    text-align: center;
+  }
+
+  .vision-heading {
+    font-size: clamp(28px, 8vw, 42px);
+  }
+
+  .vision-heading .word.outline {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.9);
+  }
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+.site-footer {
+  position: relative;
+  z-index: 10;
+  background: #0a0a0a;
+  padding: 60px 40px 0;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+}
+
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-brand {
+  font-size: 32px;
+  font-weight: 600;
+  font-style: normal;
+  color: #fff;
+  margin: 0 0 20px 0;
+}
+
+.footer-address {
+  font-style: normal;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.6;
+}
+
+.footer-email {
+  font-size: 26px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.footer-email:hover {
+  opacity: 0.7;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-bottom-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-logo-icon {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.play-icon {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #fff;
+}
+
+.footer-copyright {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #fff;
+}
+
+.footer-divider {
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0 8px;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-social-link {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-social-link:hover {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    padding: 40px 24px 0;
+  }
+
+  .footer-main {
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 40px;
+  }
+
+  .footer-email {
+    font-size: 18px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+  }
+}

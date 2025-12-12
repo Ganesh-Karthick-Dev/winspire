@@ -7,6 +7,8 @@
  * - Progress tracking via LoadingManager
  * - Warmup sequence (shader compilation, first frame)
  * - Animation loop
+ * - Mouse cursor tracking for interactive rotation
+ * - Continuous rotation at vision section
  * 
  * This component is dynamically imported with ssr: false.
  */
@@ -32,7 +34,7 @@ interface GLTFViewerProps {
 }
 
 export default function GLTFViewer({
-    url = '/models/hero-draco.glb',
+    url = '/models/earth.gltf',
     onModelReady,
     onError,
 }: GLTFViewerProps) {
@@ -40,6 +42,80 @@ export default function GLTFViewer({
     const stateRef = useRef<ThreeState | null>(null);
     const animationRef = useRef<{ start: () => void; stop: () => void } | null>(null);
     const isInitializedRef = useRef(false);
+
+    // Mouse tracking refs
+    const mouseX = useRef(0);
+    const mouseY = useRef(0);
+    const currentMouseX = useRef(0);
+    const currentMouseY = useRef(0);
+
+    // Continuous rotation ref
+    const continuousRotation = useRef(0);
+    const isAtVisionSection = useRef(false);
+
+    // Store base rotation from GSAP
+    const baseRotationX = useRef(0);
+    const baseRotationY = useRef(0);
+
+    // Mouse move handler for interactive rotation
+    const handleMouseMove = useCallback((event: MouseEvent) => {
+        // Normalize mouse position to -1 to 1
+        mouseX.current = (event.clientX / window.innerWidth) * 2 - 1;
+        mouseY.current = (event.clientY / window.innerHeight) * 2 - 1;
+    }, []);
+
+    // Check if user has scrolled to vision section
+    const checkVisionSection = useCallback(() => {
+        const visionSection = document.getElementById('vision');
+        if (visionSection) {
+            const rect = visionSection.getBoundingClientRect();
+            // Consider "at vision" when section is 50% visible
+            isAtVisionSection.current = rect.top < window.innerHeight * 0.5 && rect.bottom > 0;
+        }
+    }, []);
+
+    // Smooth rotation update in animation loop
+    const updateRotation = useCallback(() => {
+        if (!stateRef.current?.model) return;
+
+        const model = stateRef.current.model;
+
+        // Super smooth lerp - lower = smoother
+        const smoothing = 0.02;
+
+        // Smoothly interpolate mouse position
+        currentMouseX.current += (mouseX.current - currentMouseX.current) * smoothing;
+        currentMouseY.current += (mouseY.current - currentMouseY.current) * smoothing;
+
+        // Calculate mouse-based rotation offset (subtle)
+        const mouseRotationX = currentMouseY.current * 0.15;
+        const mouseRotationY = currentMouseX.current * 0.2;
+
+        // Apply mouse rotation offset to base rotation
+        model.rotation.x = baseRotationX.current + mouseRotationX;
+
+        // Add continuous rotation when at vision section
+        if (isAtVisionSection.current) {
+            // Ultra slow rotation - 0.0005 radians per frame = ~1.7° per second
+            continuousRotation.current += 0.0005;
+        }
+
+        // Apply Y rotation: base + mouse + continuous
+        model.rotation.y = baseRotationY.current + mouseRotationY + continuousRotation.current;
+    }, []);
+
+    // Store base rotation when GSAP updates it
+    const captureBaseRotation = useCallback(() => {
+        if (!stateRef.current?.model) return;
+
+        const model = stateRef.current.model;
+
+        // Only update base if not at vision section (GSAP is still controlling)
+        if (!isAtVisionSection.current) {
+            baseRotationX.current = model.rotation.x - (currentMouseY.current * 0.15);
+            baseRotationY.current = model.rotation.y - (currentMouseX.current * 0.2) - continuousRotation.current;
+        }
+    }, []);
 
     // Initialize Three.js scene
     const initializeScene = useCallback(async (canvas: HTMLCanvasElement) => {
@@ -55,8 +131,23 @@ export default function GLTFViewer({
             const handleResize = createResizeHandler(state.renderer, state.camera);
             window.addEventListener('resize', handleResize);
 
-            // Start animation loop
-            const animation = createAnimationLoop(state.renderer, state.scene, state.camera);
+            // Set up mouse tracking
+            window.addEventListener('mousemove', handleMouseMove);
+
+            // Set up scroll tracking for vision section
+            window.addEventListener('scroll', checkVisionSection);
+
+            // Start animation loop with rotation updates
+            const animation = createAnimationLoop(
+                state.renderer,
+                state.scene,
+                state.camera,
+                () => {
+                    checkVisionSection();
+                    captureBaseRotation();
+                    updateRotation();
+                }
+            );
             animationRef.current = animation;
             animation.start();
 
@@ -68,6 +159,8 @@ export default function GLTFViewer({
             // Return cleanup function
             return () => {
                 window.removeEventListener('resize', handleResize);
+                window.removeEventListener('mousemove', handleMouseMove);
+                window.removeEventListener('scroll', checkVisionSection);
                 animation.stop();
                 state.renderer.dispose();
             };
@@ -77,7 +170,7 @@ export default function GLTFViewer({
                 onError(error instanceof Error ? error : new Error('Failed to initialize 3D scene'));
             }
         }
-    }, [url, onModelReady, onError]);
+    }, [url, onModelReady, onError, handleMouseMove, checkVisionSection, captureBaseRotation, updateRotation]);
 
     // Handle canvas ready
     const handleCanvasReady = useCallback((canvas: HTMLCanvasElement) => {
@@ -96,6 +189,8 @@ export default function GLTFViewer({
     // Cleanup on unmount
     useEffect(() => {
         return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('scroll', checkVisionSection);
             if (animationRef.current) {
                 animationRef.current.stop();
             }
@@ -103,7 +198,7 @@ export default function GLTFViewer({
                 stateRef.current.renderer.dispose();
             }
         };
-    }, []);
+    }, [handleMouseMove, checkVisionSection]);
 
     return <WebGLCanvas onCanvasReady={handleCanvasReady} />;
 }

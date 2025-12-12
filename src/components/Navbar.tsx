@@ -20,6 +20,7 @@ const navItems: NavItem[] = [
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showSingleDot, setShowSingleDot] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
     const [activeItem, setActiveItem] = useState<string | null>(null);
 
     const menuBoxRef = useRef<HTMLDivElement>(null);
@@ -33,7 +34,7 @@ export default function Navbar() {
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (menuBoxRef.current && !menuBoxRef.current.contains(event.target as Node)) {
-                closeMenu();
+                if (!isAnimating) closeMenu();
             }
         }
 
@@ -44,50 +45,63 @@ export default function Navbar() {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [isMenuOpen]);
+    }, [isMenuOpen, isAnimating]);
 
     // Close menu on escape key
     useEffect(() => {
         function handleEscape(event: KeyboardEvent) {
-            if (event.key === 'Escape') {
+            if (event.key === 'Escape' && !isAnimating) {
                 closeMenu();
             }
         }
 
         document.addEventListener('keydown', handleEscape);
         return () => document.removeEventListener('keydown', handleEscape);
-    }, []);
+    }, [isAnimating]);
 
     const openMenu = useCallback(() => {
-        setIsMenuOpen(true);
+        if (isAnimating) return;
+        setIsAnimating(true);
 
-        // Animate dots collapsing to center
+        // Step 1: Animate dots collapsing to center
         if (gridDotsRef.current) {
             const dots = gridDotsRef.current.querySelectorAll('.grid-dot');
-
-            gsap.to(dots[0], { x: 5, y: 5, duration: 0.2, ease: 'power2.in' }); // top-left
-            gsap.to(dots[1], { x: -5, y: 5, duration: 0.2, ease: 'power2.in' }); // top-right
-            gsap.to(dots[2], { x: 5, y: -5, duration: 0.2, ease: 'power2.in' }); // bottom-left
-            gsap.to(dots[3], {
-                x: -5, y: -5, duration: 0.2, ease: 'power2.in', onComplete: () => {
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    // Step 2: Switch to single dot and open menu
                     setShowSingleDot(true);
+                    setIsMenuOpen(true);
 
-                    // Now animate the menu content
                     requestAnimationFrame(() => {
-                        animateMenuOpen();
+                        setTimeout(() => {
+                            animateMenuOpen();
+                        }, 50);
                     });
                 }
             });
+
+            // Animate all dots to center with stagger
+            tl.to(dots[0], { x: 7, y: 7, opacity: 0.5, duration: 0.35, ease: 'power2.inOut' }, 0);
+            tl.to(dots[1], { x: -7, y: 7, opacity: 0.5, duration: 0.35, ease: 'power2.inOut' }, 0);
+            tl.to(dots[2], { x: 7, y: -7, opacity: 0.5, duration: 0.35, ease: 'power2.inOut' }, 0);
+            tl.to(dots[3], { x: -7, y: -7, opacity: 0.5, duration: 0.35, ease: 'power2.inOut' }, 0);
+
+            // Fade out completely
+            tl.to(dots, { opacity: 0, duration: 0.15, ease: 'power2.in' });
         } else {
             setShowSingleDot(true);
+            setIsMenuOpen(true);
             requestAnimationFrame(() => {
                 animateMenuOpen();
             });
         }
-    }, []);
+    }, [isAnimating]);
 
     const animateMenuOpen = useCallback(() => {
-        if (!menuContentRef.current || !dividerRef.current || !menuItemsRef.current) return;
+        if (!menuContentRef.current || !dividerRef.current || !menuItemsRef.current) {
+            setIsAnimating(false);
+            return;
+        }
 
         // Kill any existing animation
         if (timelineRef.current) {
@@ -97,7 +111,11 @@ export default function Navbar() {
         const menuItems = menuItemsRef.current.querySelectorAll('li');
 
         // Create timeline
-        const tl = gsap.timeline();
+        const tl = gsap.timeline({
+            onComplete: () => {
+                setIsAnimating(false);
+            }
+        });
         timelineRef.current = tl;
 
         // Set initial states
@@ -109,7 +127,7 @@ export default function Navbar() {
         tl.to(menuContentRef.current, {
             height: 'auto',
             opacity: 1,
-            duration: 0.3,
+            duration: 0.35,
             ease: 'power2.out',
         });
 
@@ -117,24 +135,26 @@ export default function Navbar() {
         tl.to(dividerRef.current, {
             scaleX: 1,
             opacity: 1,
-            duration: 0.2,
+            duration: 0.25,
             ease: 'power2.out',
-        }, '-=0.1');
+        }, '-=0.15');
 
         // Animate menu items one by one from right
         tl.to(menuItems, {
             x: 0,
             opacity: 1,
-            duration: 0.3,
+            duration: 0.35,
             stagger: 0.08,
             ease: 'power2.out',
         }, '-=0.1');
     }, []);
 
     const closeMenu = useCallback(() => {
+        if (isAnimating) return;
+        setIsAnimating(true);
+
         if (!menuContentRef.current || !dividerRef.current || !menuItemsRef.current) {
-            setIsMenuOpen(false);
-            setShowSingleDot(false);
+            animateDotsExpand();
             return;
         }
 
@@ -148,24 +168,13 @@ export default function Navbar() {
         // Create close timeline
         const tl = gsap.timeline({
             onComplete: () => {
-                setShowSingleDot(false);
                 setIsMenuOpen(false);
+                setShowSingleDot(false);
 
-                // After state changes, animate dots expanding from center
+                // After menu closes, animate dots expanding
                 requestAnimationFrame(() => {
                     setTimeout(() => {
-                        if (gridDotsRef.current) {
-                            const dots = gridDotsRef.current.querySelectorAll('.grid-dot');
-
-                            // First set them at center
-                            gsap.set(dots[0], { x: 5, y: 5 });
-                            gsap.set(dots[1], { x: -5, y: 5 });
-                            gsap.set(dots[2], { x: 5, y: -5 });
-                            gsap.set(dots[3], { x: -5, y: -5 });
-
-                            // Then animate to original positions
-                            gsap.to(dots, { x: 0, y: 0, duration: 0.3, ease: 'power2.out', stagger: 0.03 });
-                        }
+                        animateDotsExpand();
                     }, 50);
                 });
             }
@@ -177,7 +186,7 @@ export default function Navbar() {
             x: 50,
             opacity: 0,
             duration: 0.2,
-            stagger: -0.05,
+            stagger: -0.04,
             ease: 'power2.in',
         });
 
@@ -196,9 +205,44 @@ export default function Navbar() {
             duration: 0.25,
             ease: 'power2.in',
         }, '-=0.1');
+    }, [isAnimating]);
+
+    const animateDotsExpand = useCallback(() => {
+        // Wait for React to render the dots
+        requestAnimationFrame(() => {
+            if (gridDotsRef.current) {
+                const dots = gridDotsRef.current.querySelectorAll('.grid-dot');
+
+                // Set initial state - all dots at center, invisible
+                gsap.set(dots[0], { x: 7, y: 7, opacity: 0 });
+                gsap.set(dots[1], { x: -7, y: 7, opacity: 0 });
+                gsap.set(dots[2], { x: 7, y: -7, opacity: 0 });
+                gsap.set(dots[3], { x: -7, y: -7, opacity: 0 });
+
+                // Animate dots expanding from center
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        setIsAnimating(false);
+                    }
+                });
+
+                // Fade in first
+                tl.to(dots, { opacity: 1, duration: 0.15, ease: 'power2.out' });
+
+                // Then expand to original positions
+                tl.to(dots[0], { x: 0, y: 0, duration: 0.35, ease: 'power2.out' }, '-=0.05');
+                tl.to(dots[1], { x: 0, y: 0, duration: 0.35, ease: 'power2.out' }, '<');
+                tl.to(dots[2], { x: 0, y: 0, duration: 0.35, ease: 'power2.out' }, '<');
+                tl.to(dots[3], { x: 0, y: 0, duration: 0.35, ease: 'power2.out' }, '<');
+            } else {
+                setIsAnimating(false);
+            }
+        });
     }, []);
 
     const handleMenuToggle = () => {
+        if (isAnimating) return;
+
         if (isMenuOpen) {
             closeMenu();
         } else {
@@ -207,6 +251,7 @@ export default function Navbar() {
     };
 
     const handleNavClick = (href: string, label: string) => {
+        if (isAnimating) return;
         setActiveItem(label);
         closeMenu();
 
@@ -216,7 +261,7 @@ export default function Navbar() {
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
-        }, 600);
+        }, 800);
     };
 
     return (
@@ -243,9 +288,10 @@ export default function Navbar() {
                     onClick={handleMenuToggle}
                     aria-expanded={isMenuOpen}
                     aria-haspopup="true"
+                    disabled={isAnimating}
                 >
                     <span className="navbar-menu-text">MENU</span>
-                    {/* 4 dots when closed/animating, 1 dot when fully open */}
+                    {/* 4 dots or 1 dot */}
                     {showSingleDot ? (
                         <span className="navbar-single-dot"></span>
                     ) : (

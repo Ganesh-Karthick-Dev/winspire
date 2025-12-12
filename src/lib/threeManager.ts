@@ -134,14 +134,16 @@ async function loadGLTFwithManager(
             (gltf) => {
                 const model = gltf.scene;
 
-                // Center and scale model if configured
+                // Scale model first
+                model.scale.setScalar(modelSettings.defaultScale);
+
+                // Then center model if configured
                 if (modelSettings.centerModel) {
                     const box = new THREE.Box3().setFromObject(model);
                     const center = box.getCenter(new THREE.Vector3());
                     model.position.sub(center);
                 }
 
-                model.scale.setScalar(modelSettings.defaultScale);
                 resolve(model);
             },
             undefined, // Progress is handled by LoadingManager
@@ -236,16 +238,24 @@ export function createResizeHandler(
 
 /**
  * Create animation loop
+ * @param onUpdate - Optional callback called each frame before render
  */
 export function createAnimationLoop(
     renderer: WebGLRenderer,
     scene: Scene,
-    camera: PerspectiveCamera
+    camera: PerspectiveCamera,
+    onUpdate?: () => void
 ): { start: () => void; stop: () => void } {
     let animationId: number | null = null;
 
     const animate = () => {
         animationId = requestAnimationFrame(animate);
+
+        // Call update callback if provided (for mouse tracking etc.)
+        if (onUpdate) {
+            onUpdate();
+        }
+
         renderer.render(scene, camera);
     };
 

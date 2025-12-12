@@ -9,6 +9,7 @@ import SEOHead from './SEOHead';
 import JsonLd from './JsonLd';
 import SkipToContent from './SkipToContent';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -39,12 +40,8 @@ export default function Layout({
                 {children}
             </main>
 
-            {/* Semantic footer */}
-            <footer role="contentinfo">
-                <p>
-                    © {new Date().getFullYear()} Your Company. Built with Next.js, Three.js, and GSAP.
-                </p>
-            </footer>
+            {/* Footer */}
+            <Footer />
         </>
     );
 }
