@@ -118,7 +118,7 @@ export async function animatePosterOut(): Promise<void> {
  * Show the canvas by adding .ready class
  */
 export function showCanvas(): void {
-    const canvasEl = document.querySelector('canvas');
+    const canvasEl = document.querySelector('.webgl-canvas');
     if (canvasEl) {
         canvasEl.classList.add('ready');
     }

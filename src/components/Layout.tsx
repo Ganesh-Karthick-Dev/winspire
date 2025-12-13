@@ -8,7 +8,7 @@
 import SEOHead from './SEOHead';
 import JsonLd from './JsonLd';
 import SkipToContent from './SkipToContent';
-import BackgroundVideo from './BackgroundVideo';
+import AnimatedBackground from './AnimatedBackground';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -33,8 +33,8 @@ export default function Layout({
             {/* Skip to content link for keyboard users */}
             <SkipToContent />
 
-            {/* Background Video */}
-            <BackgroundVideo />
+            {/* Animated Gradient Background */}
+            <AnimatedBackground />
 
             {/* Navbar */}
             <Navbar />

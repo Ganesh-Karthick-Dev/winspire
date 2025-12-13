@@ -45,7 +45,7 @@ const WebGLCanvas = forwardRef<WebGLCanvasRef, WebGLCanvasProps>(
                     (canvasRef as React.MutableRefObject<HTMLCanvasElement | null>).current = el;
                     handleRef(el);
                 }}
-                className={className}
+                className={`webgl-canvas ${className}`}
                 aria-hidden="true"
                 role="img"
                 aria-label="3D model visualization"
