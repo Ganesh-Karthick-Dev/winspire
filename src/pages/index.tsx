@@ -320,7 +320,7 @@ async function setupScrollAnimations(state: ThreeState) {
             ease: 'power2.out',
         }, 0)
         .to(model.rotation, {
-            x : Math.PI * 1.003,
+            x: Math.PI * 1.003,
             y: Math.PI * 2,  // Slight rotation
             ease: 'none',
         }, 0);
