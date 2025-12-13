@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import gsap from 'gsap';
 
 interface NavItem {
@@ -10,15 +11,16 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-    { label: 'Home', href: '#home' },
+    { label: 'Home', href: '/' },
     { label: 'Neura AI', href: '#neura-ai' },
     { label: 'Solutions', href: '#solutions' },
     { label: 'Outcomes', href: '#outcomes' },
     { label: 'Company', href: '#company' },
-    { label: 'Book a Demo', href: '#book-demo' },
+    { label: 'Book a Demo', href: '/book-demo' },
 ];
 
 export default function Navbar() {
+    const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [showSingleDot, setShowSingleDot] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
@@ -256,11 +258,17 @@ export default function Navbar() {
         setActiveItem(label);
         closeMenu();
 
-        // Smooth scroll to section after menu closes
+        // Handle page routes vs anchor links
         setTimeout(() => {
-            const element = document.querySelector(href);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
+            if (href.startsWith('/')) {
+                // It's a page route - use Next.js router for SPA navigation
+                router.push(href);
+            } else {
+                // It's an anchor link - smooth scroll
+                const element = document.querySelector(href);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         }, 800);
     };
