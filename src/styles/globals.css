@@ -406,7 +406,8 @@ section {
 .subtitle-word {
   display: inline;
   will-change: transform, opacity, filter;
-  margin-right: 0.3em;  /* Word spacing */
+  margin-right: 0.3em;
+  /* Word spacing */
 }
 
 /* ============================================
@@ -646,6 +647,208 @@ section {
 .section-animate.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ============================================
+   Features Section - Two Column Layout
+   ============================================ */
+
+.features-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 60px;
+  background: transparent;
+}
+
+.features-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  max-width: 1400px;
+  width: 100%;
+  align-items: center;
+}
+
+/* Left side - Content */
+.features-content {
+  z-index: 10;
+}
+
+.features-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 24px;
+  line-height: 1.1;
+}
+
+.features-subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 40px;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(8px);
+}
+
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, rgba(79, 156, 249, 0.3), rgba(139, 92, 246, 0.3));
+  border-radius: 10px;
+  color: #4f9cf9;
+  flex-shrink: 0;
+}
+
+.feature-text {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+/* Right side - Glossy Model Box */
+.features-model-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 500px;
+  justify-self: center;
+  border-radius: 32px;
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(0, 0, 0, 0.1) 100%);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 -20px 40px rgba(255, 255, 255, 0.02) inset;
+  overflow: hidden;
+}
+
+.model-box-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.model-box-placeholder {
+  display: none;
+  /* Hide placeholder when model is present */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  opacity: 0.3;
+}
+
+.model-box-label {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Glossy shine effect - top highlight */
+.model-box-shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 30%,
+      transparent 100%);
+  border-radius: 32px 32px 0 0;
+  pointer-events: none;
+}
+
+/* Ambient glow behind box */
+.model-box-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center,
+      rgba(79, 156, 249, 0.15) 0%,
+      rgba(139, 92, 246, 0.1) 30%,
+      transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .features-container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .features-section {
+    padding: 80px 40px;
+  }
+
+  .features-model-box {
+    max-width: 400px;
+    order: -1;
+    /* Box appears first on mobile */
+  }
+}
+
+@media (max-width: 768px) {
+  .features-section {
+    padding: 60px 24px;
+  }
+
+  .features-model-box {
+    max-width: 320px;
+  }
+
+  .feature-item {
+    padding: 14px 16px;
+  }
 }
 
 /* ============================================

@@ -20,6 +20,7 @@ import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import MarqueeText from '@/components/MarqueeText';
 import Section from '@/components/Section';
+import FeaturesSection from '@/components/FeaturesSection';
 import VisionSection from '@/components/VisionSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D, prefersReducedMotion } from '@/lib/threeUtils';
@@ -173,19 +174,17 @@ export default function Home() {
                 {/* Marquee Text - scroll-driven horizontal animation */}
                 <MarqueeText text="Get Results. Not Just Promise." />
 
-                {/* 
-          Content Sections
-          - All text SSR-rendered for SEO
-          - GSAP entry animations on scroll
-        */}
-                <Section id="features" title="Features">
-                    <p className="section-text">
-                        This site demonstrates advanced WebGL techniques combined with
-                        modern web standards. The 3D model uses Draco compression for
-                        optimal file size, while GSAP ScrollTrigger creates seamless
-                        scroll-driven animations.
-                    </p>
-                </Section>
+                {/* Features Section - Two column with glossy model box */}
+                <FeaturesSection
+                    title="Why Choose Us"
+                    subtitle="We deliver exceptional results through innovative technology and dedicated expertise."
+                    features={[
+                        'AI-Powered Revenue Optimization',
+                        'Real-time Analytics Dashboard',
+                        'Automated Claim Processing',
+                        'Compliance & Security Built-in'
+                    ]}
+                />
 
                 <Section id="performance" title="Performance">
                     <p className="section-text">
@@ -246,18 +245,54 @@ async function setupScrollAnimations(state: ThreeState) {
         ease: 'none',
     });
 
-    // Features section: rotate model
+    // Features section: move model into glossy box on right side
     gsap.timeline({
         scrollTrigger: {
             trigger: '#features',
-            start: 'top bottom',
-            end: 'bottom top',
+            start: 'top 80%',
+            end: 'top 20%',
             scrub: true,
         },
-    }).to(model.rotation, {
-        y: Math.PI * 0.25,  // 45 degrees - more subtle
-        ease: 'none',
-    });
+    })
+        .to(model.position, {
+            x: 0.55,  // Center in the glossy box
+            y: 0,     // Center vertically
+            z: 0,
+            ease: 'power2.out',
+        }, 0)
+        .to(model.scale, {
+            x: 50,    // Smaller to fit centered in box
+            y: 50,
+            z: 50,
+            ease: 'power2.out',
+        }, 0)
+        .to(model.rotation, {
+            x : 1,
+            y: Math.PI * 0.25,  // Gentle rotation
+            ease: 'none',
+        }, 0);
+
+    // When leaving features section, restore model
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: '#features',
+            start: 'bottom 80%',
+            end: 'bottom 20%',
+            scrub: true,
+        },
+    })
+        .to(model.position, {
+            x: 0.8,   // Back to original position
+            y: 0,
+            z: 0,
+            ease: 'power2.out',
+        }, 0)
+        .to(model.scale, {
+            x: 125,   // Original scale
+            y: 125,
+            z: 125,
+            ease: 'power2.out',
+        }, 0);
 
     // Performance section: continue rotation
     gsap.timeline({
