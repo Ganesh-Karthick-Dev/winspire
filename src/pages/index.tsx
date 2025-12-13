@@ -260,12 +260,6 @@ async function setupScrollAnimations(state: ThreeState) {
             z: 0,
             ease: 'power2.out',
         }, 0)
-        .to(model.scale, {
-            x: 50,    // Smaller to fit centered in box
-            y: 50,
-            z: 50,
-            ease: 'power2.out',
-        }, 0)
         .to(model.rotation, {
             x: 1,
             y: Math.PI * 0.25,  // Gentle rotation
@@ -282,7 +276,7 @@ async function setupScrollAnimations(state: ThreeState) {
         anticipatePin: 1,
     });
 
-    // When leaving features section (after pin), restore model
+    // When leaving features section (after pin), restore model position
     gsap.timeline({
         scrollTrigger: {
             trigger: '#features',
@@ -295,12 +289,6 @@ async function setupScrollAnimations(state: ThreeState) {
             x: 0.8,   // Back to original position
             y: 0,
             z: 0,
-            ease: 'power2.out',
-        }, 0)
-        .to(model.scale, {
-            x: 125,   // Original scale
-            y: 125,
-            z: 125,
             ease: 'power2.out',
         }, 0);
 

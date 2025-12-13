@@ -146,18 +146,8 @@ export default function FeaturesSection({
                     </ul>
                 </div>
 
-                {/* Right side - Glossy box for 3D model */}
-                <div ref={boxRef} className="features-model-box" id="features-model-box">
-                    <div className="model-box-inner">
-                        {/* 3D model will be positioned here via scroll animation */}
-                        <div className="model-box-placeholder">
-                            <span className="model-box-label">3D Model Zone</span>
-                        </div>
-                    </div>
-                    {/* Glossy reflections */}
-                    <div className="model-box-shine" aria-hidden="true" />
-                    <div className="model-box-glow" aria-hidden="true" />
-                </div>
+                {/* Right side - Empty space for 3D model */}
+                <div ref={boxRef} className="features-model-area" id="features-model-box" />
             </div>
         </section>
     );
