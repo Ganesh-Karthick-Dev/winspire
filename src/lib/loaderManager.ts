@@ -139,6 +139,9 @@ export async function finishLoader(): Promise<void> {
     await animateLoaderOut();
     showCanvas();
 
+    // Mark 3D as initialized for this session (prevents loader on client-side navigation)
+    sessionStorage.setItem('3d-initialized', 'true');
+
     // Show scrollbar after loading complete
     document.body.classList.remove('loading');
 }

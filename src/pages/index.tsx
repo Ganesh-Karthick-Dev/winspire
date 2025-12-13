@@ -59,8 +59,22 @@ export default function Home() {
      * Set up Lenis smooth scroll and GSAP ScrollTrigger
      */
     useEffect(() => {
-        // Reset loader on every page mount (no caching)
-        resetLoaderToZero();
+        // Check if 3D viewer was already initialized this session
+        // (avoids showing loader on client-side navigation back to home)
+        const hasInitialized = sessionStorage.getItem('3d-initialized');
+
+        if (!hasInitialized) {
+            // First visit - show and reset loader
+            resetLoaderToZero();
+        } else {
+            // Returning via client-side navigation - hide loader immediately
+            const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
+            if (loaderOverlay) {
+                loaderOverlay.style.opacity = '0';
+                loaderOverlay.style.visibility = 'hidden';
+            }
+            document.body.classList.remove('loading');
+        }
 
         // Check if 3D should be disabled
         is3DDisabled.current = shouldDisable3D();
