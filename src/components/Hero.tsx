@@ -153,6 +153,83 @@ export default function Hero({
             letterEl.addEventListener('mouseleave', handleLetterLeave);
         });
 
+        // === Auto-playing Letter Animation ===
+        // All lines animate in parallel - same position letters animate together
+        const lettersArray = Array.from(letters) as HTMLElement[];
+
+        const animateLetterEl = (letterEl: HTMLElement) => {
+            if (!letterEl) return;
+
+            // Animate letter up and color change
+            gsap.to(letterEl, {
+                scale: 1.3,
+                y: -8,
+                color: '#00d9ff',
+                duration: 0.3,
+                ease: 'power2.out',
+                onComplete: () => {
+                    // Animate back after a short delay
+                    gsap.to(letterEl, {
+                        scale: 1,
+                        y: 0,
+                        color: '#fff',
+                        duration: 0.4,
+                        ease: 'elastic.out(1, 0.4)'
+                    });
+                }
+            });
+        };
+
+        // Run animation - all lines in parallel
+        const runParallelAnimation = () => {
+            // Group letters by line (each line is a word group in the title)
+            const lines: HTMLElement[][] = [];
+            let currentLine: HTMLElement[] = [];
+            
+            lettersArray.forEach((letter) => {
+                // Check if this letter starts a new line (after a break)
+                const parent = letter.closest('.hero-word');
+                const prevSibling = parent?.previousElementSibling;
+                
+                if (prevSibling && prevSibling.tagName === 'BR') {
+                    if (currentLine.length > 0) {
+                        lines.push(currentLine);
+                        currentLine = [];
+                    }
+                }
+                currentLine.push(letter);
+            });
+            if (currentLine.length > 0) {
+                lines.push(currentLine);
+            }
+
+            // If no BR detected, split by rough thirds
+            if (lines.length <= 1) {
+                const third = Math.ceil(lettersArray.length / 3);
+                lines.length = 0;
+                lines.push(lettersArray.slice(0, third));
+                lines.push(lettersArray.slice(third, third * 2));
+                lines.push(lettersArray.slice(third * 2));
+            }
+
+            // Find the longest line
+            const maxLength = Math.max(...lines.map(line => line.length));
+
+            // Animate position by position (all lines in parallel)
+            for (let pos = 0; pos < maxLength; pos++) {
+                setTimeout(() => {
+                    lines.forEach(line => {
+                        if (line[pos]) {
+                            animateLetterEl(line[pos]);
+                        }
+                    });
+                }, pos * 80); // 80ms between each position
+            }
+        };
+
+        // Start auto animation after entrance animation completes
+        const autoAnimationDelay = setTimeout(runParallelAnimation, 2500);
+
         // === Button Hover Animations ===
 
         // Magnetic hover effect
@@ -278,6 +355,7 @@ export default function Hero({
             button.removeEventListener('mouseleave', handleMouseLeave);
             pulseAnimation.kill();
             masterTimeline.kill();
+            clearTimeout(autoAnimationDelay);
         };
     }, []);
 
