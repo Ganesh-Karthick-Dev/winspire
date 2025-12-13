@@ -56,6 +56,7 @@ export default function GLTFViewer({
     // Store base rotation from GSAP
     const baseRotationX = useRef(0);
     const baseRotationY = useRef(0);
+    const baseRotationZ = useRef(0);
 
     // Mouse move handler for interactive rotation
     const handleMouseMove = useCallback((event: MouseEvent) => {
@@ -80,28 +81,14 @@ export default function GLTFViewer({
 
         const model = stateRef.current.model;
 
-        // Super smooth lerp - lower = smoother
-        const smoothing = 0.02;
+        // Continuous smooth rotation - Y-axis (horizontal turntable spin)
+        // 0.003 radians per frame ≈ 10° per second (smooth and premium)
+        continuousRotation.current += 0.003;
 
-        // Smoothly interpolate mouse position
-        currentMouseX.current += (mouseX.current - currentMouseX.current) * smoothing;
-        currentMouseY.current += (mouseY.current - currentMouseY.current) * smoothing;
-
-        // Calculate mouse-based rotation offset (subtle)
-        const mouseRotationX = currentMouseY.current * 0.15;
-        const mouseRotationY = currentMouseX.current * 0.2;
-
-        // Apply mouse rotation offset to base rotation
-        model.rotation.x = baseRotationX.current + mouseRotationX;
-
-        // Add continuous rotation when at vision section
-        if (isAtVisionSection.current) {
-            // Ultra slow rotation - 0.0005 radians per frame = ~1.7° per second
-            continuousRotation.current += 0.0005;
-        }
-
-        // Apply Y rotation: base + mouse + continuous
-        model.rotation.y = baseRotationY.current + mouseRotationY + continuousRotation.current;
+        // Apply rotation: Y-axis for turntable effect
+        model.rotation.x = baseRotationX.current;
+        model.rotation.y = baseRotationY.current + continuousRotation.current;
+        model.rotation.z = baseRotationZ.current;
     }, []);
 
     // Store base rotation when GSAP updates it
@@ -110,10 +97,11 @@ export default function GLTFViewer({
 
         const model = stateRef.current.model;
 
-        // Only update base if not at vision section (GSAP is still controlling)
+        // Capture base rotation (subtract continuous from Y)
         if (!isAtVisionSection.current) {
-            baseRotationX.current = model.rotation.x - (currentMouseY.current * 0.15);
-            baseRotationY.current = model.rotation.y - (currentMouseX.current * 0.2) - continuousRotation.current;
+            baseRotationX.current = model.rotation.x;
+            baseRotationY.current = model.rotation.y - continuousRotation.current;
+            baseRotationZ.current = model.rotation.z;
         }
     }, []);
 

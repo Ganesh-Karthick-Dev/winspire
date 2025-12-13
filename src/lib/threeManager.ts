@@ -141,10 +141,10 @@ async function loadGLTFwithManager(
                 // Scale model first
                 model.scale.setScalar(modelSettings.defaultScale);
 
-                // Rotate model to stand upright + add tilt
-                model.rotation.x = -Math.PI / 2;   // Stand up
-                model.rotation.y = 0.3;            // Tilt sideways
-                model.rotation.z = -0.65;           // Slight lean
+                // Rotate model to stand upright (no extra tilt for clean spin)
+                model.rotation.x = -Math.PI / 2;   // Stand up from lying flat
+                model.rotation.y = 0;              // No sideways tilt
+                model.rotation.z = 0;              // Continuous rotation applied here
 
                 // Then center model if configured
                 if (modelSettings.centerModel) {
