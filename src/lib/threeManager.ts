@@ -75,24 +75,44 @@ function initializeScene(canvas: HTMLCanvasElement, THREE: THREE): ThreeState {
 
     // Add lighting for glossy effect
 
-    // Ambient light - soft fill
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    // Ambient light - strong base for all surfaces
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
     scene.add(ambientLight);
 
-    // Hemisphere light - neutral white for accurate colors
-    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.6);
+    // Hemisphere light - balanced sky/ground fill
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x888888, 0.9);
     hemiLight.position.set(0, 20, 0);
     scene.add(hemiLight);
 
-    // Main directional light - key light
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
-    directionalLight.position.set(5, 5, 5);
-    scene.add(directionalLight);
+    // Main directional light - FRONT
+    const frontLight = new THREE.DirectionalLight(0xffffff, 0.4);
+    frontLight.position.set(2, -1, 8);
+    scene.add(frontLight);
 
-    // Rim light from behind - pure white for glossy edge
-    const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    rimLight.position.set(-5, 3, -5);
-    scene.add(rimLight);
+    // Back light - for when model rotates
+    const backLight = new THREE.DirectionalLight(0xffffff, 0.4);
+    backLight.position.set(-2, 1, -8);
+    scene.add(backLight);
+
+    // Left side light
+    const leftLight = new THREE.DirectionalLight(0xffffff, 0.3);
+    leftLight.position.set(-8, 0, 0);
+    scene.add(leftLight);
+
+    // Right side light  
+    const rightLight = new THREE.DirectionalLight(0xffffff, 0.3);
+    rightLight.position.set(8, 0, 0);
+    scene.add(rightLight);
+
+    // Bottom light - for lower parts when model rotates
+    const bottomLight = new THREE.DirectionalLight(0xffffff, 0.4);
+    bottomLight.position.set(0, -8, 4);
+    scene.add(bottomLight);
+
+    // Center point light - illuminates all surfaces for 3D depth effect
+    const centerLight = new THREE.PointLight(0xffffff, 0.8, 20);
+    centerLight.position.set(0, 0, 0);
+    scene.add(centerLight);
 
     return { scene, camera, renderer, model: null };
 }
