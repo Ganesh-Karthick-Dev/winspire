@@ -406,6 +406,7 @@ section {
 .subtitle-word {
   display: inline;
   will-change: transform, opacity, filter;
+  margin-right: 0.3em;  /* Word spacing */
 }
 
 /* ============================================

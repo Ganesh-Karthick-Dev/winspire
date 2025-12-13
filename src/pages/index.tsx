@@ -164,9 +164,8 @@ export default function Home() {
           - Trigger area for initial 3D animation
         */}
                 <Hero
-                    title={`Immersive 3D
-Experience`}
-                    subtitle="Explore stunning visuals with smooth scroll animations. Built for performance and accessibility."
+                    title={`Welcome to the Future of Revenue Cycle`}
+                    subtitle="AI-Powered. System-Driven. Outcome-Guaranteed"
                     ctaText="Explore Features"
                     ctaHref="#features"
                 />
@@ -256,7 +255,7 @@ async function setupScrollAnimations(state: ThreeState) {
             scrub: true,
         },
     }).to(model.rotation, {
-        y: Math.PI * 0.5,
+        y: Math.PI * 0.25,  // 45 degrees - more subtle
         ease: 'none',
     });
 
@@ -269,7 +268,7 @@ async function setupScrollAnimations(state: ThreeState) {
             scrub: true,
         },
     }).to(model.rotation, {
-        y: Math.PI,
+        y: Math.PI * 0.5,  // 90 degrees total
         ease: 'none',
     });
 
@@ -282,7 +281,7 @@ async function setupScrollAnimations(state: ThreeState) {
             scrub: true,
         },
     }).to(model.rotation, {
-        y: Math.PI * 1.5,
+        y: Math.PI * 0.75,  // 135 degrees total
         ease: 'none',
     });
 
@@ -295,7 +294,7 @@ async function setupScrollAnimations(state: ThreeState) {
             scrub: true,
         },
     }).to(model.rotation, {
-        y: Math.PI * 2,
+        y: Math.PI,  // 180 degrees total (half rotation)
         ease: 'none',
     });
 

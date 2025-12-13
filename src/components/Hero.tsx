@@ -25,8 +25,8 @@ interface HeroProps {
 }
 
 export default function Hero({
-    title = 'Immersive 3D Experience',
-    subtitle = 'Explore stunning visuals with smooth scroll animations. Built for performance and accessibility.',
+    title = 'Welcome to the Future of Revenue Cycle',
+    subtitle = 'AI-Powered. System-Driven. Outcome-Guaranteed.',
     ctaText = 'Get Started',
     ctaHref = '#features',
     onCtaClick,
