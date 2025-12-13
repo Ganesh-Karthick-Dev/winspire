@@ -69,8 +69,9 @@ function initializeScene(canvas: HTMLCanvasElement, THREE: THREE): ThreeState {
     });
     renderer.setPixelRatio(getOptimalPixelRatio());
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = rendererSettings.outputSettings.toneMappingExposure;
+    // Use neutral tone mapping for accurate Blender colors
+    renderer.toneMapping = THREE.NoToneMapping;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     // Add lighting for glossy effect
 
@@ -78,8 +79,8 @@ function initializeScene(canvas: HTMLCanvasElement, THREE: THREE): ThreeState {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
 
-    // Hemisphere light - sky/ground gradient for natural look
-    const hemiLight = new THREE.HemisphereLight(0x87ceeb, 0x444444, 0.8);
+    // Hemisphere light - neutral white for accurate colors
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.6);
     hemiLight.position.set(0, 20, 0);
     scene.add(hemiLight);
 
@@ -88,8 +89,8 @@ function initializeScene(canvas: HTMLCanvasElement, THREE: THREE): ThreeState {
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
 
-    // Rim light from behind - for glossy edge highlight
-    const rimLight = new THREE.DirectionalLight(0x88aaff, 0.6);
+    // Rim light from behind - pure white for glossy edge
+    const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
     rimLight.position.set(-5, 3, -5);
     scene.add(rimLight);
 
@@ -143,7 +144,7 @@ async function loadGLTFwithManager(
                 // Rotate model to stand upright + add tilt
                 model.rotation.x = -Math.PI / 2;   // Stand up
                 model.rotation.y = 0.3;            // Tilt sideways
-                model.rotation.z = -0.55;           // Slight lean
+                model.rotation.z = -0.65;           // Slight lean
 
                 // Then center model if configured
                 if (modelSettings.centerModel) {

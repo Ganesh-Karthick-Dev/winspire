@@ -314,9 +314,9 @@ async function setupScrollAnimations(state: ThreeState) {
             ease: 'power2.out',
         }, 0)
         .to(model.scale, {
-            x: -35.9,  // Scale down (initial is 0.01, so 0.005 = 50% smaller)
-            y: -35.9,
-            z: -35.9,
+            x: -50.9,  // Scale down (initial is 0.01, so 0.005 = 50% smaller)
+            y: -50.9,
+            z: -50.9,
             ease: 'power2.out',
         }, 0)
         .to(model.rotation, {
