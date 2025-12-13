@@ -49,6 +49,21 @@ export default function Document() {
                             </div>
                         </div>
                     </div>
+                    {/* Grid Transition - 12 columns for slide animation */}
+                    <div className="grid-transition">
+                        <div className="grid-column"></div>
+                        <div className="grid-column"></div>
+                        <div className="grid-column"></div>
+                        <div className="grid-column"></div>
+                        <div className="grid-column"></div>
+                        <div className="grid-column"></div>
+                        <div className="grid-column"></div>
+                        <div className="grid-column"></div>
+                        <div className="grid-column"></div>
+                        <div className="grid-column"></div>
+                        <div className="grid-column"></div>
+                        <div className="grid-column"></div>
+                    </div>
                 </div>
 
                 {/* React app mounts here */}

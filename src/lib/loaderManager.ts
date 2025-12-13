@@ -125,8 +125,67 @@ export function showCanvas(): void {
 }
 
 /**
+ * Animate the grid transition (12 columns)
+ * Phase 1: Columns slide UP from bottom (staggered L→R) to cover screen
+ * Phase 2: Columns slide DOWN to bottom (staggered L→R) to reveal content
+ */
+export async function animateGridTransition(): Promise<void> {
+    const gridContainer = document.querySelector('.grid-transition');
+    const columns = document.querySelectorAll('.grid-column');
+
+    if (!gridContainer || columns.length === 0) return;
+
+    const { gsap } = await import('gsap');
+
+    // Make grid visible
+    if (gridContainer instanceof HTMLElement) {
+        gridContainer.style.visibility = 'visible';
+    }
+
+    // Reset columns to starting position (below screen)
+    gsap.set(columns, { y: '100%' });
+
+    await new Promise<void>(resolve => {
+        const tl = gsap.timeline({
+            onComplete: () => {
+                // Hide grid after animation
+                if (gridContainer instanceof HTMLElement) {
+                    gridContainer.style.visibility = 'hidden';
+                }
+                resolve();
+            }
+        });
+
+        // Phase 1: Columns slide UP from bottom to cover the screen
+        tl.to(columns, {
+            y: '0%',
+            duration: 0.6,
+            stagger: {
+                each: 0.04,
+                from: 'start'
+            },
+            ease: 'power2.inOut'
+        });
+
+        // Short pause while fully covered
+        tl.to({}, { duration: 0.15 });
+
+        // Phase 2: Columns slide DOWN to exit (reveal content)
+        tl.to(columns, {
+            y: '-100%',
+            duration: 0.6,
+            stagger: {
+                each: 0.04,
+                from: 'start'
+            },
+            ease: 'power2.inOut'
+        });
+    });
+}
+
+/**
  * Complete fade sequence after loading
- * Order: Loader fades → Canvas appears
+ * Order: Loader fades → Grid transition → Canvas appears
  */
 export async function finishLoader(): Promise<void> {
     // Ensure progress shows 100%
@@ -135,8 +194,13 @@ export async function finishLoader(): Promise<void> {
     // Wait a frame for the 100% to render
     await new Promise(resolve => requestAnimationFrame(resolve));
 
-    // Execute fade sequence
+    // Fade out the loader overlay first
     await animateLoaderOut();
+
+    // Execute grid transition animation
+    await animateGridTransition();
+
+    // Show the canvas
     showCanvas();
 
     // Mark 3D as initialized for this session (prevents loader on client-side navigation)
