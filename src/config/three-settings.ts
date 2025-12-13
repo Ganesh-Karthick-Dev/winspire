@@ -36,7 +36,7 @@ export const cameraSettings = {
     fov: 35,
     near: 0.1,
     far: 100,
-    initialPosition: { x: 0, y: 0, z: 5 },
+    initialPosition: { x: 0, y: 0, z: 3 },  // Closer to model
 } as const;
 
 /**
@@ -47,10 +47,10 @@ export const modelSettings = {
     dracoDecoderPath: '/draco/',
 
     // Default model URL
-    defaultModelUrl: '/models/earth.gltf',
+    defaultModelUrl: '/models/Winspire Logo.glb',
 
-    // Scale multiplier for the model (earth.gltf has internal scale of 100, so we use 0.01)
-    defaultScale: 0.01,
+    // Scale multiplier for the model (larger for logo visibility)
+    defaultScale: 125,
 
     // Center model in scene
     centerModel: true,
@@ -77,11 +77,11 @@ export const performanceThresholds = {
 export const lightingSettings = {
     ambient: {
         color: 0xffffff,
-        intensity: 0.4,
+        intensity: 1.0,  // Increased for logo visibility
     },
     directional: {
         color: 0xffffff,
-        intensity: 1.0,
+        intensity: 1.5,  // Increased for logo visibility
         position: { x: 5, y: 5, z: 5 },
     },
 } as const;

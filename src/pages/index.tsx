@@ -153,7 +153,7 @@ export default function Home() {
         */}
                 {!is3DDisabled.current && (
                     <GLTFViewer
-                        url="/models/earth.gltf"
+                        url="/models/Winspire Logo.glb"
                         onModelReady={handleModelReady}
                     />
                 )}
@@ -314,13 +314,14 @@ async function setupScrollAnimations(state: ThreeState) {
             ease: 'power2.out',
         }, 0)
         .to(model.scale, {
-            x: 0.005,  // Scale down (initial is 0.01, so 0.005 = 50% smaller)
-            y: 0.005,
-            z: 0.005,
+            x: -35.9,  // Scale down (initial is 0.01, so 0.005 = 50% smaller)
+            y: -35.9,
+            z: -35.9,
             ease: 'power2.out',
         }, 0)
         .to(model.rotation, {
-            y: Math.PI * 2.3,  // Slight rotation
+            x : Math.PI * 1.003,
+            y: Math.PI * 2,  // Slight rotation
             ease: 'none',
         }, 0);
 }

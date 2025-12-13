@@ -72,23 +72,26 @@ function initializeScene(canvas: HTMLCanvasElement, THREE: THREE): ThreeState {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = rendererSettings.outputSettings.toneMappingExposure;
 
-    // Add lighting
-    const ambientLight = new THREE.AmbientLight(
-        lightingSettings.ambient.color,
-        lightingSettings.ambient.intensity
-    );
+    // Add lighting for glossy effect
+
+    // Ambient light - soft fill
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(
-        lightingSettings.directional.color,
-        lightingSettings.directional.intensity
-    );
-    directionalLight.position.set(
-        lightingSettings.directional.position.x,
-        lightingSettings.directional.position.y,
-        lightingSettings.directional.position.z
-    );
+    // Hemisphere light - sky/ground gradient for natural look
+    const hemiLight = new THREE.HemisphereLight(0x87ceeb, 0x444444, 0.8);
+    hemiLight.position.set(0, 20, 0);
+    scene.add(hemiLight);
+
+    // Main directional light - key light
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
+
+    // Rim light from behind - for glossy edge highlight
+    const rimLight = new THREE.DirectionalLight(0x88aaff, 0.6);
+    rimLight.position.set(-5, 3, -5);
+    scene.add(rimLight);
 
     return { scene, camera, renderer, model: null };
 }
@@ -137,12 +140,33 @@ async function loadGLTFwithManager(
                 // Scale model first
                 model.scale.setScalar(modelSettings.defaultScale);
 
+                // Rotate model to stand upright + add tilt
+                model.rotation.x = -Math.PI / 2;   // Stand up
+                model.rotation.y = 0.3;            // Tilt sideways
+                model.rotation.z = -0.55;           // Slight lean
+
                 // Then center model if configured
                 if (modelSettings.centerModel) {
                     const box = new THREE.Box3().setFromObject(model);
                     const center = box.getCenter(new THREE.Vector3());
                     model.position.sub(center);
                 }
+
+                // Move model slightly to the right
+                model.position.x += 0.8;
+
+                // Apply glossy material effect
+                model.traverse((child) => {
+                    const mesh = child as import('three').Mesh;
+                    if (mesh.isMesh && mesh.material) {
+                        const material = mesh.material as import('three').MeshStandardMaterial;
+                        // Make it glossy
+                        material.metalness = 0.3;
+                        material.roughness = 0.2;
+                        material.envMapIntensity = 1.5;
+                        material.needsUpdate = true;
+                    }
+                });
 
                 resolve(model);
             },

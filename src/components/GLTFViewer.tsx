@@ -34,7 +34,7 @@ interface GLTFViewerProps {
 }
 
 export default function GLTFViewer({
-    url = '/models/earth.gltf',
+    url = '/models/Winspire Logo.glb',
     onModelReady,
     onError,
 }: GLTFViewerProps) {
