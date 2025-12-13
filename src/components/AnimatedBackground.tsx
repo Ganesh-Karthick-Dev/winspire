@@ -1,7 +1,7 @@
 /**
  * Animated Background Component
  * 
- * Soft blue gradient with gentle floating animation
+ * Soft blue gradient with color animation
  * Pure CSS, GPU-friendly, performance-optimized
  */
 
@@ -10,21 +10,15 @@ import { memo } from 'react';
 function AnimatedBackground() {
     return (
         <>
-            <div className="animated-bg" aria-hidden="true" />
+            <div className="animated-bg" aria-hidden="true">
+                {/* Two gradient layers for color morphing */}
+                <div className="gradient-layer layer-1" />
+                <div className="gradient-layer layer-2" />
+            </div>
 
             <style jsx>{`
                 /* ============================================
-                   CSS Variables for easy customization
-                   ============================================ */
-                .animated-bg {
-                    --bg-light: #a8d4f5;      /* Sky blue center */
-                    --bg-mid: #6ba3d6;        /* Mid blue */
-                    --bg-dark: #2c5282;       /* Darker blue edges */
-                    --animation-duration: 20s;
-                }
-
-                /* ============================================
-                   Main Background Layer
+                   Main Container
                    ============================================ */
                 .animated-bg {
                     position: fixed;
@@ -34,66 +28,61 @@ function AnimatedBackground() {
                     height: 100%;
                     z-index: 1;
                     pointer-events: none;
-                    
-                    /* Base gradient - darker edges, lighter center */
-                    background: 
-                        radial-gradient(
-                            ellipse 80% 60% at 50% 40%,
-                            var(--bg-light) 0%,
-                            var(--bg-mid) 50%,
-                            var(--bg-dark) 100%
-                        );
-                    
-                    /* GPU acceleration */
-                    will-change: transform;
-                    transform: translateZ(0);
+                    overflow: hidden;
                 }
 
                 /* ============================================
-                   Floating Glow Overlay (using pseudo-element)
+                   Gradient Layers - Stacked for color morph
                    ============================================ */
-                .animated-bg::before {
-                    content: '';
+                .gradient-layer {
                     position: absolute;
-                    top: -20%;
-                    left: -20%;
-                    width: 140%;
-                    height: 140%;
-                    
-                    /* Soft glow gradient */
-                    background: 
-                        radial-gradient(
-                            ellipse 50% 40% at 30% 30%,
-                            rgba(168, 212, 245, 0.4) 0%,
-                            transparent 60%
-                        ),
-                        radial-gradient(
-                            ellipse 40% 50% at 70% 60%,
-                            rgba(107, 163, 214, 0.3) 0%,
-                            transparent 50%
-                        );
-                    
-                    /* GPU-friendly animation */
-                    animation: drift var(--animation-duration) ease-in-out infinite;
-                    will-change: transform;
-                    transform: translateZ(0);
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    will-change: opacity;
+                }
+
+                /* Layer 1: Sky blue tones */
+                .layer-1 {
+                    background: radial-gradient(
+                        ellipse 90% 70% at 50% 40%,
+                        #a8d4f5 0%,
+                        #6ba3d6 45%,
+                        #2c5282 100%
+                    );
+                    animation: colorPulse1 12s ease-in-out infinite;
+                }
+
+                /* Layer 2: Warmer blue tones (shifts to purple hints) */
+                .layer-2 {
+                    background: radial-gradient(
+                        ellipse 85% 75% at 55% 45%,
+                        #b8d8f8 0%,
+                        #5a8fc4 40%,
+                        #1e3a5f 100%
+                    );
+                    animation: colorPulse2 12s ease-in-out infinite;
                 }
 
                 /* ============================================
-                   Keyframe Animation - Transform only for GPU
+                   Color Animation - Opacity crossfade (GPU-only)
                    ============================================ */
-                @keyframes drift {
+                @keyframes colorPulse1 {
                     0%, 100% {
-                        transform: translate(0%, 0%) scale(1);
-                    }
-                    25% {
-                        transform: translate(3%, 2%) scale(1.02);
+                        opacity: 1;
                     }
                     50% {
-                        transform: translate(-2%, 4%) scale(1);
+                        opacity: 0.3;
                     }
-                    75% {
-                        transform: translate(-3%, -2%) scale(1.01);
+                }
+
+                @keyframes colorPulse2 {
+                    0%, 100% {
+                        opacity: 0.3;
+                    }
+                    50% {
+                        opacity: 1;
                     }
                 }
 
@@ -101,8 +90,14 @@ function AnimatedBackground() {
                    Reduced Motion - Accessibility
                    ============================================ */
                 @media (prefers-reduced-motion: reduce) {
-                    .animated-bg::before {
+                    .layer-1, .layer-2 {
                         animation: none;
+                    }
+                    .layer-1 {
+                        opacity: 1;
+                    }
+                    .layer-2 {
+                        opacity: 0;
                     }
                 }
             `}</style>
@@ -110,5 +105,4 @@ function AnimatedBackground() {
     );
 }
 
-/* Memoize to prevent unnecessary re-renders */
 export default memo(AnimatedBackground);
