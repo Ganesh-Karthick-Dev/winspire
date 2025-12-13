@@ -10,11 +10,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-    { label: 'WHAT', href: '#features' },
-    { label: 'HOW', href: '#performance' },
-    { label: 'GAME ECOSYSTEM', href: '#technology' },
-    { label: 'ATHLETES SECTION', href: '#cta' },
-    { label: 'INVESTORS & PARTNERS', href: '#contact' },
+    { label: 'Home', href: '#home' },
+    { label: 'Neura AI', href: '#neura-ai' },
+    { label: 'Solutions', href: '#solutions' },
+    { label: 'Outcomes', href: '#outcomes' },
+    { label: 'Company', href: '#company' },
+    { label: 'Book a Demo', href: '#book-demo' },
 ];
 
 export default function Navbar() {

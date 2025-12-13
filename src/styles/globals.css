@@ -1175,26 +1175,75 @@ footer p {
 
 @media (max-width: 768px) {
   .site-footer {
-    padding: 40px 24px 0;
+    padding: 24px 16px 0;
   }
 
   .footer-main {
     flex-direction: column;
-    gap: 30px;
-    padding-bottom: 40px;
+    gap: 24px;
+    padding-bottom: 24px;
+  }
+
+  .footer-left {
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .footer-office {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .footer-right {
+    width: 100%;
+    text-align: center;
+    padding: 20px 24px;
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 12px;
   }
 
   .footer-email {
-    font-size: 18px;
+    font-size: 16px;
+    word-break: break-all;
   }
 
   .footer-bottom {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     gap: 16px;
+    padding: 20px 16px;
+    margin: 0 -16px;
+  }
+
+  .footer-bottom-left {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-copyright {
+    font-size: 12px;
   }
 
   .footer-links {
-    justify-content: flex-start;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .footer-link {
+    font-size: 12px;
+  }
+
+  .footer-divider {
+    margin: 0 4px;
+  }
+
+  .footer-social {
+    justify-content: center;
   }
 }
