@@ -267,17 +267,27 @@ async function setupScrollAnimations(state: ThreeState) {
             ease: 'power2.out',
         }, 0)
         .to(model.rotation, {
-            x : 1,
+            x: 1,
             y: Math.PI * 0.25,  // Gentle rotation
             ease: 'none',
         }, 0);
 
-    // When leaving features section, restore model
+    // Pin the features section to hold model in place while scrolling
+    ScrollTrigger.create({
+        trigger: '#features',
+        start: 'top top',
+        end: '+=100%',  // Pin for one full viewport scroll
+        pin: true,
+        pinSpacing: true,
+        anticipatePin: 1,
+    });
+
+    // When leaving features section (after pin), restore model
     gsap.timeline({
         scrollTrigger: {
             trigger: '#features',
-            start: 'bottom 80%',
-            end: 'bottom 20%',
+            start: 'bottom bottom',
+            end: '+=50%',
             scrub: true,
         },
     })
