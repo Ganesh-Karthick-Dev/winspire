@@ -1,8 +1,8 @@
 /**
  * FeaturesSection Component
  * 
- * Two-column layout with content on left and glossy box on right.
- * The 3D model smoothly moves into the glossy box on scroll.
+ * Premium two-column layout with animated content and 3D model area.
+ * Features beautiful GSAP animations with staggered reveals.
  */
 
 import { useRef, useEffect } from 'react';
@@ -10,25 +10,24 @@ import { useRef, useEffect } from 'react';
 interface FeaturesSectionProps {
     /** Section title */
     title?: string;
+    /** Section tagline */
+    tagline?: string;
     /** Section subtitle/description */
     subtitle?: string;
-    /** Feature list items */
-    features?: string[];
 }
 
 export default function FeaturesSection({
-    title = 'Why Choose Us',
-    subtitle = 'We deliver exceptional results through innovative technology and dedicated expertise.',
-    features = [
-        'AI-Powered Revenue Optimization',
-        'Real-time Analytics Dashboard',
-        'Automated Claim Processing',
-        'Compliance & Security Built-in'
-    ],
+    title = 'Welcome to the Future of Revenue Cycle.',
+    tagline = 'AI-Powered. System-Driven. Outcome-Guaranteed.',
+    subtitle = 'Winspire RCM combines intelligent automation, predictive insights, and human expertise to deliver measurable financial improvement in weeks, not years.',
 }: FeaturesSectionProps) {
     const sectionRef = useRef<HTMLElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
-    const boxRef = useRef<HTMLDivElement>(null);
+    const modelAreaRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const taglineRef = useRef<HTMLDivElement>(null);
+    const subtitleRef = useRef<HTMLParagraphElement>(null);
+    const decorRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -44,52 +43,103 @@ export default function FeaturesSection({
                 const { ScrollTrigger } = await import('gsap/ScrollTrigger');
                 gsap.registerPlugin(ScrollTrigger);
 
-                if (!sectionRef.current || !contentRef.current || !boxRef.current) return;
+                if (!sectionRef.current || !contentRef.current) return;
+
+                const titleEl = titleRef.current;
+                const taglineEl = taglineRef.current;
+                const subtitleEl = subtitleRef.current;
+                const decorEl = decorRef.current;
+
+                // Split title into words for animation
+                const titleWords = titleEl?.querySelectorAll('.word');
+                const taglineWords = taglineEl?.querySelectorAll('.tagline-word');
+                const subtitleWords = subtitleEl?.querySelectorAll('.subtitle-word');
+
+                // Early return if elements not found
+                if (!titleWords || !taglineWords || !subtitleWords || !decorEl) return;
 
                 // Set initial states
-                gsap.set(contentRef.current, {
+                gsap.set(titleWords, {
                     opacity: 0,
-                    x: -60,
+                    y: 60,
+                    rotateX: -30,
                 });
 
-                gsap.set(boxRef.current, {
+                gsap.set(taglineWords, {
                     opacity: 0,
-                    x: 60,
-                    scale: 0.95,
+                    y: 30,
+                    scale: 0.9,
                 });
 
-                // Animate content in from left
-                const contentAnim = gsap.to(contentRef.current, {
-                    opacity: 1,
-                    x: 0,
-                    duration: 1,
-                    ease: 'power3.out',
+                gsap.set(subtitleWords, {
+                    opacity: 0,
+                    y: 20,
+                    filter: 'blur(8px)',
+                });
+
+                gsap.set(decorEl, {
+                    scaleX: 0,
+                    opacity: 0,
+                });
+
+                // Create master timeline
+                const masterTl = gsap.timeline({
                     scrollTrigger: {
                         trigger: sectionRef.current,
-                        start: 'top 70%',
-                        end: 'top 30%',
+                        start: 'top 60%',
+                        end: 'top 20%',
                         toggleActions: 'play none none reverse',
                     },
                 });
 
-                // Animate box in from right
-                const boxAnim = gsap.to(boxRef.current, {
+                // Animate title words with stagger
+                masterTl.to(titleWords, {
                     opacity: 1,
-                    x: 0,
+                    y: 0,
+                    rotateX: 0,
+                    duration: 0.8,
+                    stagger: {
+                        each: 0.08,
+                        ease: 'power2.out',
+                    },
+                    ease: 'power4.out',
+                }, 0);
+
+                // Animate decorative line
+                masterTl.to(decorEl, {
+                    scaleX: 1,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power3.inOut',
+                }, 0.3);
+
+                // Animate tagline words with scale effect
+                masterTl.to(taglineWords, {
+                    opacity: 1,
+                    y: 0,
                     scale: 1,
-                    duration: 1,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top 70%',
-                        end: 'top 30%',
-                        toggleActions: 'play none none reverse',
+                    duration: 0.6,
+                    stagger: {
+                        each: 0.1,
+                        ease: 'power2.out',
                     },
-                });
+                    ease: 'back.out(1.2)',
+                }, 0.4);
+
+                // Animate subtitle words with blur reveal
+                masterTl.to(subtitleWords, {
+                    opacity: 1,
+                    y: 0,
+                    filter: 'blur(0px)',
+                    duration: 0.5,
+                    stagger: {
+                        each: 0.02,
+                        ease: 'power2.out',
+                    },
+                }, 0.8);
 
                 cleanup = () => {
-                    contentAnim.kill();
-                    boxAnim.kill();
+                    masterTl.kill();
                     ScrollTrigger.getAll().forEach(st => {
                         if (st.trigger === sectionRef.current) {
                             st.kill();
@@ -98,13 +148,9 @@ export default function FeaturesSection({
                 };
             } catch (error) {
                 console.error('Failed to load GSAP:', error);
+                // Fallback: show content immediately
                 if (contentRef.current) {
                     contentRef.current.style.opacity = '1';
-                    contentRef.current.style.transform = 'translateX(0)';
-                }
-                if (boxRef.current) {
-                    boxRef.current.style.opacity = '1';
-                    boxRef.current.style.transform = 'translateX(0)';
                 }
             }
         };
@@ -116,6 +162,11 @@ export default function FeaturesSection({
         };
     }, []);
 
+    // Split text into words for animation
+    const titleWords = title.split(' ');
+    const taglineWords = tagline.split(' ');
+    const subtitleWords = subtitle.split(' ');
+
     return (
         <section
             ref={sectionRef}
@@ -126,28 +177,46 @@ export default function FeaturesSection({
             <div className="features-container">
                 {/* Left side - Content */}
                 <div ref={contentRef} className="features-content">
-                    <h2 id="features-title" className="features-title">
-                        {title}
-                    </h2>
-                    <p className="features-subtitle">
-                        {subtitle}
-                    </p>
-                    <ul className="features-list">
-                        {features.map((feature, index) => (
-                            <li key={index} className="feature-item">
-                                <span className="feature-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </span>
-                                <span className="feature-text">{feature}</span>
-                            </li>
+                    {/* Main Title */}
+                    <h2
+                        id="features-title"
+                        className="features-title-main"
+                        ref={titleRef}
+                    >
+                        {titleWords.map((word, index) => (
+                            <span key={index} className="word-wrapper">
+                                <span className="word">{word}</span>
+                                {index < titleWords.length - 1 && ' '}
+                            </span>
                         ))}
-                    </ul>
+                    </h2>
+
+                    {/* Decorative Line */}
+                    <div ref={decorRef} className="features-decor-line" aria-hidden="true" />
+
+                    {/* Tagline */}
+                    <div ref={taglineRef} className="features-tagline">
+                        {taglineWords.map((word, index) => (
+                            <span key={index} className="tagline-word">
+                                {word}
+                                {index < taglineWords.length - 1 && ' '}
+                            </span>
+                        ))}
+                    </div>
+
+                    {/* Subtitle */}
+                    <p ref={subtitleRef} className="features-subtitle-main">
+                        {subtitleWords.map((word, index) => (
+                            <span key={index} className="subtitle-word">
+                                {word}
+                                {index < subtitleWords.length - 1 && ' '}
+                            </span>
+                        ))}
+                    </p>
                 </div>
 
                 {/* Right side - Empty space for 3D model */}
-                <div ref={boxRef} className="features-model-area" id="features-model-box" />
+                <div ref={modelAreaRef} className="features-model-area" id="features-model-box" />
             </div>
         </section>
     );

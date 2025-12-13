@@ -174,17 +174,8 @@ export default function Home() {
                 {/* Marquee Text - scroll-driven horizontal animation */}
                 <MarqueeText text="Get Results. Not Just Promise." />
 
-                {/* Features Section - Two column with glossy model box */}
-                <FeaturesSection
-                    title="Why Choose Us"
-                    subtitle="We deliver exceptional results through innovative technology and dedicated expertise."
-                    features={[
-                        'AI-Powered Revenue Optimization',
-                        'Real-time Analytics Dashboard',
-                        'Automated Claim Processing',
-                        'Compliance & Security Built-in'
-                    ]}
-                />
+                {/* Features Section - Two column with animated content */}
+                <FeaturesSection />
 
                 <Section id="performance" title="Performance">
                     <p className="section-text">

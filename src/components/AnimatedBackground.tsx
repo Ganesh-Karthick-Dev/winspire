@@ -1,107 +1,78 @@
 /**
  * Animated Background Component
  * 
- * Soft blue gradient with color animation
- * Pure CSS, GPU-friendly, performance-optimized
+ * SVG-based animated gradient background with smooth color movement.
  */
 
 import { memo } from 'react';
 
 function AnimatedBackground() {
     return (
-        <>
-            <div className="animated-bg" aria-hidden="true">
-                {/* Two gradient layers for color morphing */}
-                <div className="gradient-layer layer-1" />
-                <div className="gradient-layer layer-2" />
-            </div>
-
-            <style jsx>{`
-                /* ============================================
-                   Main Container
-                   ============================================ */
-                .animated-bg {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    z-index: 1;
-                    pointer-events: none;
-                    overflow: hidden;
-                }
-
-                /* ============================================
-                   Gradient Layers - Stacked for color morph
-                   ============================================ */
-                .gradient-layer {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    will-change: opacity;
-                }
-
-                /* Layer 1: Sky blue tones */
-                .layer-1 {
-                    background: radial-gradient(
-                        ellipse 90% 70% at 50% 40%,
-                        #a8d4f5 0%,
-                        #6ba3d6 45%,
-                        #2c5282 100%
-                    );
-                    animation: colorPulse1 12s ease-in-out infinite;
-                }
-
-                /* Layer 2: Warmer blue tones (shifts to purple hints) */
-                .layer-2 {
-                    background: radial-gradient(
-                        ellipse 85% 75% at 55% 45%,
-                        #b8d8f8 0%,
-                        #5a8fc4 40%,
-                        #1e3a5f 100%
-                    );
-                    animation: colorPulse2 12s ease-in-out infinite;
-                }
-
-                /* ============================================
-                   Color Animation - Opacity crossfade (GPU-only)
-                   ============================================ */
-                @keyframes colorPulse1 {
-                    0%, 100% {
-                        opacity: 1;
-                    }
-                    50% {
-                        opacity: 0.3;
-                    }
-                }
-
-                @keyframes colorPulse2 {
-                    0%, 100% {
-                        opacity: 0.3;
-                    }
-                    50% {
-                        opacity: 1;
-                    }
-                }
-
-                /* ============================================
-                   Reduced Motion - Accessibility
-                   ============================================ */
-                @media (prefers-reduced-motion: reduce) {
-                    .layer-1, .layer-2 {
-                        animation: none;
-                    }
-                    .layer-1 {
-                        opacity: 1;
-                    }
-                    .layer-2 {
-                        opacity: 0;
-                    }
-                }
-            `}</style>
-        </>
+        <div className="animated-bg-container" aria-hidden="true">
+            <svg
+                className="animated-gradient-svg"
+                viewBox="0 0 3000 1500"
+                preserveAspectRatio="xMidYMid slice"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <defs>
+                    <linearGradient
+                        id="animatedGradient"
+                        gradientUnits="userSpaceOnUse"
+                        x1="625"
+                        y1="1954"
+                        x2="2375"
+                        y2="-454"
+                    >
+                        <stop offset="0" stopColor="#1B75BB">
+                            <animate
+                                attributeName="stop-color"
+                                values="#1B75BB;#3C9CFF;#32FFEE;#1B75BB"
+                                dur="8s"
+                                repeatCount="indefinite"
+                            />
+                        </stop>
+                        <stop offset="0.25" stopColor="#25A5DD">
+                            <animate
+                                attributeName="stop-color"
+                                values="#25A5DD;#49ADEE;#1B75BB;#25A5DD"
+                                dur="8s"
+                                repeatCount="indefinite"
+                            />
+                        </stop>
+                        <stop offset="0.5" stopColor="#3C9CFF">
+                            <animate
+                                attributeName="stop-color"
+                                values="#3C9CFF;#32FFEE;#25A5DD;#3C9CFF"
+                                dur="8s"
+                                repeatCount="indefinite"
+                            />
+                        </stop>
+                        <stop offset="0.75" stopColor="#49ADEE">
+                            <animate
+                                attributeName="stop-color"
+                                values="#49ADEE;#1B75BB;#3C9CFF;#49ADEE"
+                                dur="8s"
+                                repeatCount="indefinite"
+                            />
+                        </stop>
+                        <stop offset="1" stopColor="#32FFEE">
+                            <animate
+                                attributeName="stop-color"
+                                values="#32FFEE;#25A5DD;#49ADEE;#32FFEE"
+                                dur="8s"
+                                repeatCount="indefinite"
+                            />
+                        </stop>
+                    </linearGradient>
+                </defs>
+                <rect
+                    width="3000"
+                    height="1500"
+                    fill="url(#animatedGradient)"
+                />
+            </svg>
+        </div>
     );
 }
 
