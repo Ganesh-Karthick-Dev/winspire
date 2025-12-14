@@ -232,9 +232,6 @@ export default function StackingCards() {
                         <div className={styles.cardInner}>
                             {/* Card Header */}
                             <div className={styles.cardHeader}>
-                                <span className={styles.badge}>
-                                    {card.subtitle}
-                                </span>
                                 <div className={`title-container ${styles.titleContainer}`}>
                                     {/* 4-pointed star at the end (stays there) */}
                                     <img
