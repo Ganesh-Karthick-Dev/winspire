@@ -1,0 +1,89 @@
+/* Book Demo Page Styles */
+
+/* Hero Content Container */
+.demoHeroContent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 2rem 3rem 2rem;
+    z-index: 10;
+    max-width: 800px;
+    margin-left: 2rem;
+}
+
+/* Glassmorphic Card */
+.demoHeroCard {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Headline */
+.demoHeroHeadline {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+/* Subheadline */
+.demoHeroSubheadline {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+/* Supporting Text */
+.demoHeroSupporting {
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 1.75rem;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+/* Button Container */
+.demoHeroButtons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .demoHeroContent {
+        max-width: 100%;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        padding: 0 1rem 2rem 1rem;
+    }
+
+    .demoHeroCard {
+        padding: 1.5rem;
+    }
+
+    .demoHeroButtons {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .demoHeroContent {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .demoHeroCard {
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
+}

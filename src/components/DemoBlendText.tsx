@@ -48,7 +48,7 @@ export default function DemoBlendText({
         // Text settings
         const fontSize = Math.min(width * 0.14, 150);
         const centerX = width / 2;
-        const centerY = height / 2;
+        const centerY = height / 3;
 
         ctx.font = `900 ${fontSize}px Outfit, sans-serif`;
         ctx.textAlign = 'center';

@@ -28,6 +28,8 @@ const DemoBlendText = dynamic(() => import('@/components/DemoBlendText'), {
 });
 
 import StackingCards from '@/components/StackingCards';
+import PremiumButton from '@/components/PremiumButton';
+import styles from '@/styles/book-demo.module.css';
 
 export default function BookDemo() {
     const is3DDisabled = useRef(false);
@@ -95,6 +97,43 @@ export default function BookDemo() {
                     text2="RCM"
                     style={{ position: 'absolute', width: '100%', height: '100%' }}
                 />
+
+                {/* Hero Content */}
+                <div className={styles.demoHeroContent}>
+                    <div className={styles.demoHeroCard}>
+                        {/* Headline */}
+                        <h1 className={styles.demoHeroHeadline}>
+                            See How AI Can Transform Your Revenue Cycle in Just 30 Minutes.
+                        </h1>
+
+                        {/* Subheadline */}
+                        <p className={styles.demoHeroSubheadline}>
+                            Experience Neura AI live. Watch how it predicts denials, automates workflows, checks live status, accelerates cash flow, and brings total visibility across your entire revenue cycle.
+                        </p>
+
+                        {/* Supporting Line */}
+                        <p className={styles.demoHeroSupporting}>
+                            No pressure. No obligations. No long presentations.<br />
+                            Just clarity, insights, and real answers to your challenges.
+                        </p>
+
+                        {/* CTA Buttons */}
+                        <div className={styles.demoHeroButtons}>
+                            {/* Primary Button with Animations */}
+                            <PremiumButton
+                                text="Book My Demo"
+                                variant="primary"
+                            />
+
+                            {/* Secondary Button with Animations */}
+                            <PremiumButton
+                                text="Talk to an RCM Expert"
+                                variant="secondary"
+                                showArrow
+                            />
+                        </div>
+                    </div>
+                </div>
             </section>
 
             {/* Stacking Cards Section */}
