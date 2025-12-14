@@ -1610,7 +1610,7 @@ footer p {
 /* Big Text Content - On top of 3D model */
 .demo-hero-text-content {
   position: relative;
-  z-index: 10;
+  z-index: 3;
   text-align: center;
   pointer-events: none;
 }
@@ -1621,15 +1621,12 @@ footer p {
   font-weight: 900;
   line-height: 0.9;
   letter-spacing: -0.04em;
-  color: #fff;
+  color: #000;
   text-transform: uppercase;
 }
 
 .demo-title-accent {
-  background: linear-gradient(135deg, #00d4ff 0%, #0099ff 50%, #0066ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #00d4ff;
 }
 
 /* Hero Section */
