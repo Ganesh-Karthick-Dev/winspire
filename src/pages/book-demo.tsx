@@ -27,6 +27,8 @@ const DemoBlendText = dynamic(() => import('@/components/DemoBlendText'), {
     loading: () => null,
 });
 
+import StackingCards from '@/components/StackingCards';
+
 export default function BookDemo() {
     const is3DDisabled = useRef(false);
 
@@ -76,19 +78,27 @@ export default function BookDemo() {
 
     return (
         <Layout title="Book a Demo" description="Schedule a personalized demo">
-            {/* Layer 2: 3D Model (fixed canvas at z-index: 2) */}
-            {!is3DDisabled.current && (
-                <GLTFViewer
-                    url="/models/Winspire Logo.glb"
-                    onModelReady={handleModelReady}
+            {/* Hero Section with Absolute Content */}
+            <section className="demo-hero-full">
+                {/* Layer 2: 3D Model (absolute inside relative section) */}
+                {!is3DDisabled.current && (
+                    <GLTFViewer
+                        url="/models/Winspire Logo.glb"
+                        onModelReady={handleModelReady}
+                        className="absolute inset-0 w-full h-full"
+                    />
+                )}
+
+                {/* Layer 3: Blending Text (absolute inside relative section) */}
+                <DemoBlendText
+                    text1="WINSPIRE"
+                    text2="RCM"
+                    style={{ position: 'absolute', width: '100%', height: '100%' }}
                 />
-            )}
+            </section>
 
-            {/* Layer 3: Blending Text (canvas at z-index: 5) */}
-            <DemoBlendText text1="WINSPIRE" text2="RCM" />
-
-            {/* Empty hero section for spacing */}
-            <section className="demo-hero-full" />
+            {/* Stacking Cards Section */}
+            <StackingCards />
         </Layout>
     );
 }

@@ -10,7 +10,19 @@
 
 import { useEffect, useRef, useCallback, useState } from 'react';
 
-export default function DemoBlendText() {
+interface DemoBlendTextProps {
+    className?: string;
+    style?: React.CSSProperties;
+    text1?: string;
+    text2?: string;
+}
+
+export default function DemoBlendText({
+    className,
+    style,
+    text1 = "Zero Risk",
+    text2 = "High Clarity"
+}: DemoBlendTextProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const frameRef = useRef<number>(0);
     const [isReady, setIsReady] = useState(false);
@@ -142,6 +154,7 @@ export default function DemoBlendText() {
     return (
         <canvas
             ref={canvasRef}
+            className={className}
             style={{
                 position: 'fixed',
                 top: 0,
@@ -152,6 +165,7 @@ export default function DemoBlendText() {
                 pointerEvents: 'none',
                 opacity: isReady ? 1 : 0,
                 transition: 'opacity 0.3s ease',
+                ...style,
             }}
         />
     );

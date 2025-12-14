@@ -37,7 +37,8 @@ export default function GLTFViewer({
     url = '/models/Winspire Logo.glb',
     onModelReady,
     onError,
-}: GLTFViewerProps) {
+    className,
+}: GLTFViewerProps & { className?: string }) {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const stateRef = useRef<ThreeState | null>(null);
     const animationRef = useRef<{ start: () => void; stop: () => void } | null>(null);
@@ -188,5 +189,5 @@ export default function GLTFViewer({
         };
     }, [handleMouseMove, checkVisionSection]);
 
-    return <WebGLCanvas onCanvasReady={handleCanvasReady} />;
+    return <WebGLCanvas onCanvasReady={handleCanvasReady} className={className} />;
 }
