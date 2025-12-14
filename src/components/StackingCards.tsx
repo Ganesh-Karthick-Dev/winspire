@@ -96,6 +96,17 @@ export default function StackingCards() {
 
                 if (!title || !starWipe || !starEnd) return;
 
+                // Query content elements
+                const intro = card.querySelector('.card-intro');
+                const headline = card.querySelector('.card-headline');
+                const listItems = card.querySelectorAll('.list-item-animate');
+                const stepCards = card.querySelectorAll('.step-card-animate');
+                const simpleListItems = card.querySelectorAll('.simple-list-item-animate');
+                const warningItems = card.querySelectorAll('.warning-item-animate');
+                const cardFooter = card.querySelector('.card-footer');
+                const warningFooter = card.querySelector('.warning-footer-animate');
+                const ctaButton = card.querySelector('.cta-button-animate');
+
                 // Create timeline for this card
                 const tl = gsap.timeline({
                     scrollTrigger: {
@@ -110,13 +121,21 @@ export default function StackingCards() {
                 const starWidth = 60;
                 const endPosition = titleWidth + 10;
 
-                // Set initial states
+                // Set initial states for title
                 gsap.set(starEnd, { opacity: 1, scale: 1 });
                 gsap.set(starWipe, { x: -starWidth, opacity: 0, scale: 0.9, rotation: 0 });
-                gsap.set(title, {
-                    clipPath: 'inset(0 100% 0 0)',
-                    opacity: 1
-                });
+                gsap.set(title, { clipPath: 'inset(0 100% 0 0)', opacity: 1 });
+
+                // Set initial states for content elements
+                if (intro) gsap.set(intro, { opacity: 0, y: 15 });
+                if (headline) gsap.set(headline, { opacity: 0, x: -20 });
+                if (listItems.length) gsap.set(listItems, { opacity: 0, y: 20, scale: 0.95 });
+                if (stepCards.length) gsap.set(stepCards, { opacity: 0, x: -20 });
+                if (simpleListItems.length) gsap.set(simpleListItems, { opacity: 0, scale: 0.9 });
+                if (warningItems.length) gsap.set(warningItems, { opacity: 0, x: -15 });
+                if (cardFooter) gsap.set(cardFooter, { opacity: 0, y: 15 });
+                if (warningFooter) gsap.set(warningFooter, { opacity: 0, y: 15 });
+                if (ctaButton) gsap.set(ctaButton, { opacity: 0, y: 10 });
 
                 // Title animation sequence
                 tl.to(starWipe, {
@@ -138,6 +157,99 @@ export default function StackingCards() {
                     duration: 1.8,
                     ease: "power1.inOut"
                 }, "-=1.8");
+
+                // Content animations (after title)
+                if (headline) {
+                    tl.to(headline, {
+                        opacity: 1,
+                        x: 0,
+                        duration: 0.5,
+                        ease: "power2.out"
+                    }, "-=1.2");
+                }
+
+                if (intro) {
+                    tl.to(intro, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    }, "-=1.0");
+                }
+
+                // List items - stagger animation
+                if (listItems.length) {
+                    tl.to(listItems, {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.4,
+                        stagger: 0.05,
+                        ease: "power2.out"
+                    }, "-=0.6");
+                }
+
+                // Step cards - slide in
+                if (stepCards.length) {
+                    tl.to(stepCards, {
+                        opacity: 1,
+                        x: 0,
+                        duration: 0.5,
+                        stagger: 0.1,
+                        ease: "power2.out"
+                    }, "-=0.6");
+                }
+
+                // Simple list items - scale in
+                if (simpleListItems.length) {
+                    tl.to(simpleListItems, {
+                        opacity: 1,
+                        scale: 1,
+                        duration: 0.4,
+                        stagger: 0.08,
+                        ease: "back.out(1.2)"
+                    }, "-=0.5");
+                }
+
+                // Warning items - slide from left
+                if (warningItems.length) {
+                    tl.to(warningItems, {
+                        opacity: 1,
+                        x: 0,
+                        duration: 0.35,
+                        stagger: 0.04,
+                        ease: "power2.out"
+                    }, "-=0.6");
+                }
+
+                // Footer animations
+                if (cardFooter) {
+                    tl.to(cardFooter, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    }, "-=0.3");
+                }
+
+                if (warningFooter) {
+                    tl.to(warningFooter, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    }, "-=0.3");
+                }
+
+                // CTA button
+                if (ctaButton) {
+                    tl.to(ctaButton, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    }, "-=0.2");
+                }
             });
         }, containerRef);
 

@@ -1,4 +1,4 @@
-/* Stacking Cards Styles - Split Layout with Glossy Effects */
+/* Stacking Cards Styles - Clean Professional Grid Layout */
 
 /* Main Section */
 .stackingSection {
@@ -41,7 +41,7 @@
     gap: 0;
 }
 
-/* Reversed layout for alternating cards (2nd, 4th, etc.) */
+/* Reversed layout for alternating cards */
 .cardInner.reversed {
     direction: rtl;
 }
@@ -50,19 +50,17 @@
     direction: ltr;
 }
 
-/* Additional styling for reversed image panel */
 .cardInner.reversed .imageSide {
     border-radius: 40px 0 0 40px;
 }
 
-/* LEFT SIDE - Content - NO SCROLLBAR */
+/* LEFT SIDE - Content */
 .contentSide {
     padding: 2.5rem 2.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     overflow: hidden;
-    /* NO SCROLLBAR */
 }
 
 /* Icon Container */
@@ -71,28 +69,25 @@
 }
 
 .cardIcon {
-    width: 3rem;
-    height: 3rem;
-    padding: 0.75rem;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.15) 100%);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 14px;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.625rem;
+    background: #f8fafc;
+    border-radius: 12px;
     color: #6366f1;
-    border: 1.5px solid rgba(99, 102, 241, 0.25);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.12);
+    border: 1px solid #e2e8f0;
 }
 
 /* Card Header */
 .cardHeader {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
 }
 
 .titleContainer {
     position: relative;
     width: fit-content;
     overflow: visible;
-    min-height: 50px;
+    min-height: 45px;
     display: flex;
     align-items: center;
 }
@@ -102,8 +97,8 @@
     top: 50%;
     right: -10px;
     transform: translateY(-50%);
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     opacity: 0.2;
     pointer-events: none;
     z-index: 0;
@@ -114,133 +109,110 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     opacity: 0;
     pointer-events: none;
     z-index: 3;
-    filter:
-        brightness(0) saturate(100%) invert(45%) sepia(98%) saturate(2477%) hue-rotate(205deg) brightness(102%) contrast(96%);
+    filter: brightness(0) saturate(100%) invert(45%) sepia(98%) saturate(2477%) hue-rotate(205deg) brightness(102%) contrast(96%);
 }
 
 .cardTitle {
     position: relative;
-    font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+    font-size: clamp(1.5rem, 2.5vw, 1.75rem);
     font-weight: 800;
     color: #0f172a;
     line-height: 1.2;
     margin-bottom: 0;
-    letter-spacing: -0.03em;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    letter-spacing: -0.02em;
     z-index: 1;
 }
 
-/* HEADLINE - Glossy Red */
+/* HEADLINE - Neutral */
 .cardHeadline {
-    font-size: 1rem;
-    color: #b91c1c;
-    font-weight: 700;
+    font-size: 0.95rem;
+    color: #334155;
+    font-weight: 600;
     margin-top: 0.75rem;
     line-height: 1.4;
-    padding: 1rem 1.25rem;
-    background: linear-gradient(135deg, rgba(254, 226, 226, 0.9) 0%, rgba(254, 202, 202, 0.9) 100%);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-left: 4px solid #dc2626;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.12);
+    padding: 0.875rem 1rem;
+    background: #f8fafc;
+    border-left: 3px solid #6366f1;
+    border-radius: 0 8px 8px 0;
 }
 
-/* Content Area - NO SCROLLBAR */
+/* Content Area */
 .contentArea {
     flex: 1;
     overflow: hidden;
-    /* NO SCROLLBAR */
 }
 
 /* Intro Text */
 .intro {
-    font-size: 1rem;
-    color: #0f172a;
-    font-weight: 600;
+    font-size: 0.95rem;
+    color: #475569;
+    font-weight: 500;
     margin-bottom: 1rem;
     line-height: 1.4;
 }
 
 /* ============================================
-   LIST TYPE - GLOSSY EMERALD GREEN
+   LIST TYPE - 3 COLUMN GRID - CLEAN CARDS
    ============================================ */
 .listGrid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.625rem;
 }
 
 .listItem {
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    background: linear-gradient(135deg, rgba(209, 250, 229, 0.95) 0%, rgba(167, 243, 208, 0.95) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #f8fafc;
     border-radius: 10px;
-    border: 1.5px solid rgba(52, 211, 153, 0.4);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow:
-        0 2px 8px rgba(16, 185, 129, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
 }
 
 .listItem:hover {
-    transform: translateX(4px);
-    box-shadow:
-        0 6px 20px rgba(16, 185, 129, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    border-color: rgba(52, 211, 153, 0.6);
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
 }
 
 .listIcon {
-    width: 1rem;
-    height: 1rem;
-    color: #059669;
+    width: 0.875rem;
+    height: 0.875rem;
+    color: #6366f1;
     flex-shrink: 0;
     margin-top: 0.125rem;
-    filter: drop-shadow(0 1px 2px rgba(5, 150, 105, 0.3));
 }
 
 .listText {
-    font-size: 0.85rem;
-    color: #064e3b;
+    font-size: 0.8rem;
+    color: #334155;
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1.35;
 }
 
 /* ============================================
-   STEPS TYPE - GLOSSY BLUE/INDIGO
+   STEPS TYPE - 2 COLUMN GRID
    ============================================ */
 .stepsGrid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.625rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
 }
 
 .stepCard {
-    background: linear-gradient(135deg, rgba(238, 242, 255, 0.95) 0%, rgba(224, 231, 255, 0.95) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 1rem 1.25rem;
+    background: #f8fafc;
+    padding: 1rem 1.125rem;
     border-radius: 12px;
-    border: 1.5px solid rgba(99, 102, 241, 0.3);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
     position: relative;
-    overflow: hidden;
-    box-shadow:
-        0 2px 10px rgba(99, 102, 241, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .stepCard::before {
@@ -248,224 +220,176 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 4px;
+    width: 3px;
     height: 100%;
-    background: linear-gradient(180deg, #6366f1 0%, #4f46e5 100%);
-    border-radius: 4px 0 0 4px;
+    background: #6366f1;
+    border-radius: 3px 0 0 3px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 
 .stepCard:hover {
-    transform: translateX(4px);
-    box-shadow:
-        0 8px 24px rgba(99, 102, 241, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    border-color: rgba(99, 102, 241, 0.5);
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.stepCard:hover::before {
+    opacity: 1;
 }
 
 .stepTitle {
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     font-weight: 700;
-    color: #312e81;
+    color: #0f172a;
     margin-bottom: 0.375rem;
     line-height: 1.3;
 }
 
 .stepDesc {
-    font-size: 0.85rem;
-    color: #4338ca;
-    line-height: 1.5;
+    font-size: 0.8rem;
+    color: #64748b;
+    line-height: 1.45;
 }
 
 /* ============================================
-   SIMPLE LIST TYPE - GLOSSY AMBER/GOLD
+   SIMPLE LIST TYPE - 3 COLUMN GRID
    ============================================ */
 .simpleListContainer {
     width: 100%;
 }
 
 .simpleList {
-    display: flex;
-    flex-direction: column;
-    gap: 0.625rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
     margin-bottom: 1rem;
 }
 
 .simpleListItem {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #78350f;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0f172a;
     text-align: center;
-    padding: 1rem 1.25rem;
-    background: linear-gradient(135deg, rgba(254, 243, 199, 0.95) 0%, rgba(253, 230, 138, 0.95) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    padding: 1rem;
+    background: #f8fafc;
     border-radius: 12px;
-    border: 2px solid rgba(245, 158, 11, 0.4);
-    box-shadow:
-        0 4px 14px rgba(245, 158, 11, 0.15),
-        inset 0 2px 0 rgba(255, 255, 255, 0.6);
-    transition: all 0.3s ease;
+    border: 1.5px solid #e2e8f0;
+    transition: all 0.2s ease;
 }
 
 .simpleListItem:hover {
+    background: #f1f5f9;
+    border-color: #6366f1;
     transform: scale(1.02);
-    box-shadow:
-        0 6px 20px rgba(245, 158, 11, 0.25),
-        inset 0 2px 0 rgba(255, 255, 255, 0.8);
-    border-color: rgba(217, 119, 6, 0.6);
 }
 
 .footer {
-    font-size: 0.9rem;
-    color: #475569;
+    font-size: 0.875rem;
+    color: #64748b;
     line-height: 1.5;
     text-align: center;
-    padding: 1rem 1.25rem;
-    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 10px;
-    border: 1.5px solid rgba(226, 232, 240, 0.6);
+    padding: 0.875rem 1rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
     font-style: italic;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 /* ============================================
-   WARNING TYPE - GLOSSY ROSE/RED
+   WARNING TYPE - 3 COLUMN GRID - NEUTRAL
    ============================================ */
 .warningContainer {
     width: 100%;
 }
 
 .warningGrid {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.625rem;
     margin-bottom: 1rem;
 }
 
 .warningItem {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    background: linear-gradient(135deg, rgba(255, 228, 230, 0.95) 0%, rgba(254, 205, 211, 0.95) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #f8fafc;
     border-radius: 10px;
-    border: 1.5px solid rgba(244, 63, 94, 0.3);
-    box-shadow:
-        0 2px 10px rgba(225, 29, 72, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.7);
-    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
 }
 
 .warningItem:hover {
-    transform: translateX(4px);
-    box-shadow:
-        0 6px 20px rgba(225, 29, 72, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    border-color: rgba(244, 63, 94, 0.5);
+    background: #f1f5f9;
+    border-color: #cbd5e1;
 }
 
 .warningIcon {
-    width: 1.125rem;
-    height: 1.125rem;
-    color: #e11d48;
+    width: 0.875rem;
+    height: 0.875rem;
+    color: #64748b;
     flex-shrink: 0;
 }
 
 .warningText {
-    font-size: 0.85rem;
-    color: #881337;
+    font-size: 0.8rem;
+    color: #334155;
     font-weight: 500;
 }
 
 .warningFooter {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #064e3b;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
     text-align: center;
     line-height: 1.4;
-    padding: 1.25rem 1.5rem;
-    background: linear-gradient(135deg, rgba(209, 250, 229, 0.95) 0%, rgba(167, 243, 208, 0.95) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 12px;
-    border: 2px solid rgba(52, 211, 153, 0.4);
-    box-shadow:
-        0 4px 16px rgba(16, 185, 129, 0.15),
-        inset 0 2px 0 rgba(255, 255, 255, 0.6);
+    padding: 1rem 1.25rem;
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1.5px solid #e2e8f0;
 }
 
 /* ============================================
-   CTA BUTTON - GLOSSY PURPLE
+   CTA BUTTON
    ============================================ */
 .ctaContainer {
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
 }
 
 .ctaButton {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 0.5rem;
-    padding: 0.875rem 2rem;
-    font-size: 0.95rem;
-    font-weight: 700;
+    padding: 0.875rem 1.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
     color: white;
     background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow:
-        0 6px 20px rgba(99, 102, 241, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-.ctaButton::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s ease;
-}
-
-.ctaButton:hover::before {
-    left: 100%;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
 }
 
 .ctaButton:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow:
-        0 10px 28px rgba(99, 102, 241, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.ctaButton:active {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
 }
 
 .ctaIcon {
     width: 1rem;
     height: 1rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .ctaButton:hover .ctaIcon {
-    transform: translateX(4px);
+    transform: translateX(3px);
 }
 
 /* ============================================
-   RIGHT SIDE - GLOSSY IMAGE PANEL
+   RIGHT SIDE - IMAGE PANEL
    ============================================ */
 .imageSide {
     position: relative;
@@ -479,29 +403,15 @@
 .glassPanel {
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.glassPanel::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
 }
 
 .imagePlaceholder {
@@ -515,6 +425,16 @@
 /* ============================================
    RESPONSIVE
    ============================================ */
+@media (max-width: 1200px) {
+    .listGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .warningGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 1024px) {
     .cardInner {
         grid-template-columns: 1fr;
@@ -531,22 +451,41 @@
     .contentSide {
         padding: 2rem 1.5rem;
     }
+
+    .listGrid,
+    .warningGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .simpleList {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
     .card {
         height: auto;
-        min-height: 80vh;
+        min-height: 70vh;
         width: 92vw;
         border-radius: 28px;
     }
 
     .contentSide {
-        padding: 1.75rem 1.25rem;
+        padding: 1.5rem 1.25rem;
     }
 
     .cardTitle {
-        font-size: 1.5rem;
+        font-size: 1.35rem;
+    }
+
+    .listGrid,
+    .stepsGrid,
+    .warningGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .simpleList {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -557,14 +496,20 @@
 
     .card {
         width: 95vw;
-        border-radius: 24px;
+        border-radius: 20px;
     }
 
     .contentSide {
-        padding: 1.5rem 1rem;
+        padding: 1.25rem 1rem;
     }
 
     .cardTitle {
-        font-size: 1.35rem;
+        font-size: 1.25rem;
+    }
+
+    .listGrid,
+    .stepsGrid,
+    .warningGrid {
+        grid-template-columns: 1fr;
     }
 }
