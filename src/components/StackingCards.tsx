@@ -154,20 +154,67 @@ export default function StackingCards() {
     //                 }, "-=0.2");
     //             }
 
-    //             // Animate CTA button
-    //             if (cta) {
-    //                 tl.from(cta, {
-    //                     scale: 0.9,
-    //                     opacity: 0,
-    //                     duration: 0.6,
-    //                     ease: "back.out(1.7)"
-    //                 }, "-=0.3");
-    //             }
-    //         });
-    //     }, containerRef);
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            cardsRef.current.forEach((card, index) => {
+                if (!card) return;
 
-    //     return () => ctx.revert();
-    // }, []);
+                const title = card.querySelector('.card-title-text');
+                const starWipe = card.querySelector('.star-wipe'); // 6-pointed (Vector.svg)
+                const starEnd = card.querySelector('.star-end'); // 4-pointed (Group.svg)
+
+                if (!title || !starWipe || !starEnd) return;
+
+                // Create timeline for this card
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top center+=100",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+
+                // Calculate the distance the star needs to travel based on TITLE width
+                const titleWidth = (title as HTMLElement).offsetWidth;
+                const starWidth = 60; // Width of the star
+                const endPosition = titleWidth + 10; // End just after the title text
+
+                // Set initial states
+                gsap.set(starEnd, { opacity: 1, scale: 1 }); // 4-pointed stays at end
+                gsap.set(starWipe, { x: -starWidth, opacity: 0, scale: 0.9, rotation: 0 }); // 6-pointed starts from left
+                gsap.set(title, {
+                    clipPath: 'inset(0 100% 0 0)', // Hide title initially (clip from right)
+                    opacity: 1
+                });
+
+                // Fade in the 6-pointed star
+                tl.to(starWipe, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+
+                // Animate 6-pointed star wiping across the TITLE with rotation
+                // AND reveal title progressively using clip-path
+                tl.to(starWipe, {
+                    x: endPosition, // Travel to the end of the title text
+                    rotation: 360, // Smooth full rotation
+                    duration: 1.8,
+                    ease: "power1.inOut"
+                }, "-=0.1");
+
+                // Reveal title progressively as star moves (clip-path animation)
+                tl.to(title, {
+                    clipPath: 'inset(0 0% 0 0)', // Reveal from left to right
+                    duration: 1.8,
+                    ease: "power1.inOut"
+                }, "-=1.8"); // Start at the same time as star movement
+            });
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, []);
 
     return (
         <section ref={containerRef} className={styles.stackingSection}>
@@ -188,9 +235,24 @@ export default function StackingCards() {
                                 <span className={styles.badge}>
                                     {card.subtitle}
                                 </span>
-                                <h2 className={styles.cardTitle}>
-                                    {card.title}
-                                </h2>
+                                <div className={`title-container ${styles.titleContainer}`}>
+                                    {/* 4-pointed star at the end (stays there) */}
+                                    <img
+                                        src="/svg/Group.svg"
+                                        alt=""
+                                        className={`star-end ${styles.starEnd}`}
+                                    />
+                                    {/* 6-pointed star that wipes from left to right */}
+                                    <img
+                                        src="/svg/Vector.svg"
+                                        alt=""
+                                        className={`star-wipe ${styles.starWipe}`}
+                                    />
+                                    {/* Title text */}
+                                    <h2 className={`card-title-text ${styles.cardTitle}`}>
+                                        {card.title}
+                                    </h2>
+                                </div>
                                 {card.type === "warning" && card.headline && (
                                     <p className={styles.cardHeadline}>
                                         {card.headline}

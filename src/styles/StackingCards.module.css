@@ -64,17 +64,54 @@
     box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
 }
 
+.titleContainer {
+    position: relative;
+    width: fit-content;
+    overflow: visible;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.starEnd {
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.starWipe {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 3;
+    filter:
+        brightness(0) saturate(100%) invert(45%) sepia(98%) saturate(2477%) hue-rotate(205deg) brightness(102%) contrast(96%);
+}
+
 .cardTitle {
+    position: relative;
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 800;
     color: #0f172a;
     line-height: 1.1;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
     letter-spacing: -0.03em;
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    z-index: 1;
 }
 
 .cardHeadline {
