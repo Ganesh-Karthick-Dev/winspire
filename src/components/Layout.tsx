@@ -11,6 +11,7 @@ import SkipToContent from './SkipToContent';
 import AnimatedBackground from './AnimatedBackground';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import FlowerCursor from './FlowerCursor';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -29,6 +30,9 @@ export default function Layout({
         <>
             <SEOHead title={title} description={description} />
             <JsonLd />
+
+            {/* Flower/Sparkle Cursor Effect - commented out for later use */}
+            {/* <FlowerCursor /> */}
 
             {/* Skip to content link for keyboard users */}
             <SkipToContent />

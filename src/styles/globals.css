@@ -2024,3 +2024,37 @@ footer p {
     padding: 32px 24px;
   }
 }
+
+/* ============================================
+   Sparkle Cursor Effect - Revolutionary Design
+   ============================================ */
+
+.sparkle-cursor-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9997;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sparkle-particle {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.sparkle-particle svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .sparkle-cursor-container {
+    display: none;
+  }
+}
