@@ -1,4 +1,4 @@
-/* Stacking Cards Styles */
+/* Stacking Cards Styles - Split Layout with Glossy Effects */
 
 /* Main Section */
 .stackingSection {
@@ -13,7 +13,7 @@
     margin: 0 auto;
 }
 
-/* Individual Card */
+/* Individual Card - WHITE BACKGROUND */
 .card {
     position: sticky;
     top: 5vh;
@@ -32,43 +32,67 @@
     margin-bottom: 0;
 }
 
+/* Card Inner - SPLIT LAYOUT */
 .cardInner {
     width: 100%;
     height: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+/* Reversed layout for alternating cards (2nd, 4th, etc.) */
+.cardInner.reversed {
+    direction: rtl;
+}
+
+.cardInner.reversed>* {
+    direction: ltr;
+}
+
+/* Additional styling for reversed image panel */
+.cardInner.reversed .imageSide {
+    border-radius: 40px 0 0 40px;
+}
+
+/* LEFT SIDE - Content - NO SCROLLBAR */
+.contentSide {
+    padding: 2.5rem 2.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
+    /* NO SCROLLBAR */
+}
+
+/* Icon Container */
+.iconContainer {
+    margin-bottom: 1rem;
+}
+
+.cardIcon {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.15) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 14px;
+    color: #6366f1;
+    border: 1.5px solid rgba(99, 102, 241, 0.25);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.12);
 }
 
 /* Card Header */
 .cardHeader {
-    text-align: left;
-    margin-bottom: 1.5rem;
-}
-
-.badge {
-    display: inline-block;
-    padding: 0.375rem 1rem;
-    border-radius: 50px;
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-    color: #ffffff;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+    margin-bottom: 1rem;
 }
 
 .titleContainer {
     position: relative;
     width: fit-content;
     overflow: visible;
-    min-height: 60px;
+    min-height: 50px;
     display: flex;
     align-items: center;
 }
@@ -78,8 +102,8 @@
     top: 50%;
     right: -10px;
     transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     opacity: 0.2;
     pointer-events: none;
     z-index: 0;
@@ -90,8 +114,8 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     opacity: 0;
     pointer-events: none;
     z-index: 3;
@@ -101,10 +125,10 @@
 
 .cardTitle {
     position: relative;
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.5rem, 2.5vw, 1.875rem);
     font-weight: 800;
     color: #0f172a;
-    line-height: 1.1;
+    line-height: 1.2;
     margin-bottom: 0;
     letter-spacing: -0.03em;
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -114,79 +138,109 @@
     z-index: 1;
 }
 
+/* HEADLINE - Glossy Red */
 .cardHeadline {
-    font-size: clamp(0.95rem, 1.5vw, 1.125rem);
-    color: #dc2626;
+    font-size: 1rem;
+    color: #b91c1c;
     font-weight: 700;
     margin-top: 0.75rem;
-    line-height: 1.3;
-    padding: 0.75rem 1rem;
-    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-    border-left: 3px solid #dc2626;
-    border-radius: 6px;
+    line-height: 1.4;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, rgba(254, 226, 226, 0.9) 0%, rgba(254, 202, 202, 0.9) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-left: 4px solid #dc2626;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.12);
 }
 
-/* List Type */
+/* Content Area - NO SCROLLBAR */
+.contentArea {
+    flex: 1;
+    overflow: hidden;
+    /* NO SCROLLBAR */
+}
+
+/* Intro Text */
+.intro {
+    font-size: 1rem;
+    color: #0f172a;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+/* ============================================
+   LIST TYPE - GLOSSY EMERALD GREEN
+   ============================================ */
 .listGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 0.625rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .listItem {
     display: flex;
     align-items: flex-start;
-    gap: 0.625rem;
-    padding: 0.75rem 0.875rem;
-    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
-    border-radius: 12px;
-    border: 2px solid #bbf7d0;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, rgba(209, 250, 229, 0.95) 0%, rgba(167, 243, 208, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 10px;
+    border: 1.5px solid rgba(52, 211, 153, 0.4);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 1;
-    visibility: visible;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    box-shadow:
+        0 2px 8px rgba(16, 185, 129, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .listItem:hover {
-    transform: translateY(-2px) translateX(2px);
-    box-shadow: 0 8px 16px rgba(34, 197, 94, 0.15);
-    border-color: #86efac;
+    transform: translateX(4px);
+    box-shadow:
+        0 6px 20px rgba(16, 185, 129, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border-color: rgba(52, 211, 153, 0.6);
 }
 
 .listIcon {
-    width: 1.125rem;
-    height: 1.125rem;
-    color: #16a34a;
+    width: 1rem;
+    height: 1rem;
+    color: #059669;
     flex-shrink: 0;
     margin-top: 0.125rem;
-    filter: drop-shadow(0 1px 2px rgba(22, 163, 74, 0.3));
+    filter: drop-shadow(0 1px 2px rgba(5, 150, 105, 0.3));
 }
 
 .listText {
-    font-size: 0.875rem;
-    color: #1e293b;
+    font-size: 0.85rem;
+    color: #064e3b;
     font-weight: 500;
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
-/* Steps Type */
+/* ============================================
+   STEPS TYPE - GLOSSY BLUE/INDIGO
+   ============================================ */
 .stepsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
 }
 
 .stepCard {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    padding: 1.25rem;
-    border-radius: 16px;
-    border: 2px solid #e2e8f0;
+    background: linear-gradient(135deg, rgba(238, 242, 255, 0.95) 0%, rgba(224, 231, 255, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    border: 1.5px solid rgba(99, 102, 241, 0.3);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 1;
-    visibility: visible;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow:
+        0 2px 10px rgba(99, 102, 241, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .stepCard::before {
@@ -194,171 +248,182 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 3px;
+    width: 4px;
     height: 100%;
-    background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.stepCard:hover::before {
-    opacity: 1;
+    background: linear-gradient(180deg, #6366f1 0%, #4f46e5 100%);
+    border-radius: 4px 0 0 4px;
 }
 
 .stepCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    border-color: #cbd5e1;
+    transform: translateX(4px);
+    box-shadow:
+        0 8px 24px rgba(99, 102, 241, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    border-color: rgba(99, 102, 241, 0.5);
 }
 
 .stepTitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 0.5rem;
+    color: #312e81;
+    margin-bottom: 0.375rem;
     line-height: 1.3;
 }
 
 .stepDesc {
-    font-size: 0.875rem;
-    color: #475569;
-    line-height: 1.6;
+    font-size: 0.85rem;
+    color: #4338ca;
+    line-height: 1.5;
 }
 
-/* Simple List Type */
+/* ============================================
+   SIMPLE LIST TYPE - GLOSSY AMBER/GOLD
+   ============================================ */
 .simpleListContainer {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.intro {
-    font-size: 1.125rem;
-    color: #0f172a;
-    font-weight: 700;
-    margin-bottom: 1.25rem;
-    text-align: center;
-    opacity: 1;
-    visibility: visible;
-    letter-spacing: -0.01em;
+    width: 100%;
 }
 
 .simpleList {
     display: flex;
     flex-direction: column;
-    gap: 0.875rem;
-    margin-bottom: 1.5rem;
+    gap: 0.625rem;
+    margin-bottom: 1rem;
 }
 
 .simpleListItem {
-    font-size: 1.375rem;
+    font-size: 1rem;
     font-weight: 700;
-    color: #0f172a;
+    color: #78350f;
     text-align: center;
     padding: 1rem 1.25rem;
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-    border-radius: 16px;
-    border: 3px solid #f59e0b;
-    opacity: 1;
-    visibility: visible;
-    box-shadow: 0 2px 12px rgba(245, 158, 11, 0.15);
+    background: linear-gradient(135deg, rgba(254, 243, 199, 0.95) 0%, rgba(253, 230, 138, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    border: 2px solid rgba(245, 158, 11, 0.4);
+    box-shadow:
+        0 4px 14px rgba(245, 158, 11, 0.15),
+        inset 0 2px 0 rgba(255, 255, 255, 0.6);
     transition: all 0.3s ease;
 }
 
 .simpleListItem:hover {
     transform: scale(1.02);
-    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.25);
+    box-shadow:
+        0 6px 20px rgba(245, 158, 11, 0.25),
+        inset 0 2px 0 rgba(255, 255, 255, 0.8);
+    border-color: rgba(217, 119, 6, 0.6);
 }
 
 .footer {
-    font-size: 0.95rem;
-    color: #64748b;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.5;
     text-align: center;
-    padding: 1.25rem 1.5rem;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    border-radius: 12px;
-    border: 2px solid #e2e8f0;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1.5px solid rgba(226, 232, 240, 0.6);
     font-style: italic;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-/* Warning Type */
+/* ============================================
+   WARNING TYPE - GLOSSY ROSE/RED
+   ============================================ */
 .warningContainer {
-    max-width: 900px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .warningGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .warningItem {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.875rem 1rem;
-    background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
-    border-radius: 12px;
-    border: 2px solid #fecaca;
-    box-shadow: 0 1px 6px rgba(220, 38, 38, 0.06);
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, rgba(255, 228, 230, 0.95) 0%, rgba(254, 205, 211, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 10px;
+    border: 1.5px solid rgba(244, 63, 94, 0.3);
+    box-shadow:
+        0 2px 10px rgba(225, 29, 72, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
     transition: all 0.3s ease;
 }
 
 .warningItem:hover {
-    transform: translateX(3px);
-    box-shadow: 0 3px 12px rgba(220, 38, 38, 0.12);
-    border-color: #fca5a5;
+    transform: translateX(4px);
+    box-shadow:
+        0 6px 20px rgba(225, 29, 72, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    border-color: rgba(244, 63, 94, 0.5);
 }
 
 .warningIcon {
-    width: 1.25rem;
-    height: 1.25rem;
-    color: #dc2626;
+    width: 1.125rem;
+    height: 1.125rem;
+    color: #e11d48;
     flex-shrink: 0;
 }
 
 .warningText {
-    font-size: 0.875rem;
-    color: #1e293b;
+    font-size: 0.85rem;
+    color: #881337;
     font-weight: 500;
 }
 
 .warningFooter {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 800;
-    color: #0f172a;
+    color: #064e3b;
     text-align: center;
-    line-height: 1.35;
-    padding: 1.5rem 2rem;
-    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-    border-radius: 16px;
-    border: 3px solid #34d399;
-    box-shadow: 0 4px 16px rgba(52, 211, 153, 0.15);
+    line-height: 1.4;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, rgba(209, 250, 229, 0.95) 0%, rgba(167, 243, 208, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    border: 2px solid rgba(52, 211, 153, 0.4);
+    box-shadow:
+        0 4px 16px rgba(16, 185, 129, 0.15),
+        inset 0 2px 0 rgba(255, 255, 255, 0.6);
 }
 
-/* CTA Button */
+/* ============================================
+   CTA BUTTON - GLOSSY PURPLE
+   ============================================ */
 .ctaContainer {
-    margin-top: 1.75rem;
-    text-align: center;
+    margin-top: 1.5rem;
 }
 
 .ctaButton {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.625rem;
-    padding: 0.875rem 2.25rem;
-    font-size: 1rem;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: white;
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: none;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+    box-shadow:
+        0 6px 20px rgba(99, 102, 241, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     position: relative;
     overflow: hidden;
 }
@@ -379,8 +444,10 @@
 }
 
 .ctaButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.4);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+        0 10px 28px rgba(99, 102, 241, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .ctaButton:active {
@@ -388,8 +455,8 @@
 }
 
 .ctaIcon {
-    width: 1.125rem;
-    height: 1.125rem;
+    width: 1rem;
+    height: 1rem;
     transition: transform 0.3s ease;
 }
 
@@ -397,60 +464,107 @@
     transform: translateX(4px);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .card {
-        height: 90vh;
-        width: 90vw;
-        border-radius: 32px;
-    }
+/* ============================================
+   RIGHT SIDE - GLOSSY IMAGE PANEL
+   ============================================ */
+.imageSide {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 0 40px 40px 0;
+}
 
+.glassPanel {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.glassPanel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+.imagePlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
     .cardInner {
-        padding: 2.5rem 2rem;
-    }
-
-    .cardTitle {
-        font-size: 2rem;
-    }
-
-    .listGrid,
-    .stepsGrid,
-    .warningGrid {
         grid-template-columns: 1fr;
     }
 
-    .simpleListItem {
+    .cardInner.reversed {
+        direction: ltr;
+    }
+
+    .imageSide {
+        display: none;
+    }
+
+    .contentSide {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        height: auto;
+        min-height: 80vh;
+        width: 92vw;
+        border-radius: 28px;
+    }
+
+    .contentSide {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .cardTitle {
         font-size: 1.5rem;
     }
 }
 
 @media (max-width: 480px) {
     .stackingSection {
-        padding: 4rem 0.5rem;
+        padding: 3rem 0.5rem;
     }
 
     .card {
-        height: 90vh;
         width: 95vw;
         border-radius: 24px;
     }
 
-    .cardInner {
-        padding: 2rem 1.5rem;
+    .contentSide {
+        padding: 1.5rem 1rem;
     }
 
     .cardTitle {
-        font-size: 1.75rem;
-    }
-
-    .listItem,
-    .stepCard,
-    .warningItem {
-        padding: 0.75rem;
-    }
-
-    .simpleListItem {
-        font-size: 1.25rem;
-        padding: 0.75rem;
+        font-size: 1.35rem;
     }
 }
