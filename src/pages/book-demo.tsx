@@ -28,48 +28,64 @@ const DemoBlendText = dynamic(() => import('@/components/DemoBlendText'), {
 });
 
 import StackingCards from '@/components/StackingCards';
+import DemoForm from '@/components/DemoForm';
 import PremiumButton from '@/components/PremiumButton';
 import styles from '@/styles/book-demo.module.css';
 
 export default function BookDemo() {
     const is3DDisabled = useRef(false);
 
-    // Smoothly center model when ready
+    // Set up model and scroll animation
     const handleModelReady = useCallback(async (state: ThreeState) => {
-        if (state.model) {
-            // Import GSAP for smooth animation
-            const { gsap } = await import('gsap');
+        if (!state.model) return;
 
-            // Animate model to left side
-            gsap.to(state.model.position, {
-                x: -1,
-                y: 0,
-                duration: 1.2,
-                ease: 'power2.out',
-            });
+        const { gsap } = await import('gsap');
+        const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+        gsap.registerPlugin(ScrollTrigger);
 
-            // Make model bigger
-            gsap.to(state.model.scale, {
-                x: 180,
-                y: 180,
-                z: 180,
-                duration: 1.2,
-                ease: 'power2.out',
-            });
-        }
+        // Smooth initial entry: animate to left side
+        gsap.to(state.model.position, {
+            x: -1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power2.out',
+        });
+
+        gsap.to(state.model.scale, {
+            x: 140,
+            y: 140,
+            z: 140,
+            duration: 1.2,
+            ease: 'power2.out',
+        });
+
+        // When form section comes into view, move model to right side and scale down
+        ScrollTrigger.create({
+            trigger: '.form-section',
+            start: 'top 80%',
+            end: 'top 30%',
+            scrub: 1,
+            onUpdate: (self) => {
+                // Move from left (-1) to right (1.2)
+                state.model!.position.x = -1 + (self.progress * 2.2);
+
+                // Scale from 140 to 100
+                const newScale = 140 - (self.progress * 40);
+                state.model!.scale.set(newScale, newScale, newScale);
+            }
+        });
     }, []);
 
     useEffect(() => {
         is3DDisabled.current = shouldDisable3D();
 
-        // Always hide loader on this page
+        // Hide loader
         const loader = document.querySelector('.loader-overlay') as HTMLElement;
         if (loader) {
             loader.style.opacity = '0';
             loader.style.visibility = 'hidden';
         }
 
-        // Hide grid transition
         const grid = document.querySelector('.grid-transition') as HTMLElement;
         if (grid) {
             grid.style.visibility = 'hidden';
@@ -138,6 +154,11 @@ export default function BookDemo() {
 
             {/* Stacking Cards Section */}
             <StackingCards />
+
+            {/* Demo Form Section */}
+            <section className={`${styles.formSection} form-section`}>
+                <DemoForm />
+            </section>
         </Layout>
     );
 }

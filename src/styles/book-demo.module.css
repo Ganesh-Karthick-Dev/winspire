@@ -87,3 +87,10 @@
         border-radius: 16px;
     }
 }
+
+/* Demo Form Section */
+.formSection {
+    padding: 4rem 1rem 6rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
