@@ -44,9 +44,9 @@ export default function DemoBlendText() {
 
         // === LAYER 1: Draw BLACK text (always visible) ===
         ctx.fillStyle = '#000000';
-        ctx.fillText('WINSPIRE', centerX, centerY - fontSize * 0.4);
+        ctx.fillText('Zero Risk High Clarity', centerX, centerY - fontSize * 0.4);
 
-        // === LAYER 2: Draw CYAN text where model exists ===
+        // === LAYER 2: Draw CYAN text where model exists === 
         if (webglCanvas && webglCanvas.width > 0) {
             ctx.save();
 
@@ -81,7 +81,7 @@ export default function DemoBlendText() {
                 tempCtx.font = `900 ${fontSize}px Outfit, sans-serif`;
                 tempCtx.textAlign = 'center';
                 tempCtx.textBaseline = 'middle';
-                tempCtx.fillText('WINSPIRE', centerX, centerY - fontSize * 0.4);
+                tempCtx.fillText('Zero Risk High Clarity', centerX, centerY - fontSize * 0.4);
 
                 // Draw temp canvas on main canvas
                 ctx.drawImage(tempCanvas, 0, 0);
