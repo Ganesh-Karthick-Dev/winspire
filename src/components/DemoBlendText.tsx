@@ -34,7 +34,7 @@ export default function DemoBlendText() {
         const height = canvas.height / dpr;
 
         // Text settings
-        const fontSize = Math.min(width * 0.14, 180);
+        const fontSize = Math.min(width * 0.14, 150);
         const centerX = width / 2;
         const centerY = height / 2;
 
