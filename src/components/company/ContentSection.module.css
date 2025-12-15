@@ -36,8 +36,10 @@
 }
 
 .descriptionContainer {
-    position: relative;
+    position: sticky;
+    top: 320px;
     min-height: 300px;
+    z-index: 2;
 }
 
 .descriptionSection {
@@ -55,8 +57,10 @@
     letter-spacing: -0.04em;
     line-height: 0.9;
     white-space: nowrap;
-    position: relative;
-    z-index: 1;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding: 2rem 0;
 }
 
 .description {
@@ -80,7 +84,7 @@
 
 
 .stackingContainer {
-    margin-top: -4rem;
+    margin-top: 5rem;
     width: 100%;
     position: relative;
     z-index: 10;
@@ -88,19 +92,22 @@
 
 .stackCard {
     position: sticky;
-    top: 100px;
+    top: 280px;
     margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(100px);
 }
 
 .stackCardContent {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    align-items: center;
+    grid-template-columns: 1fr 3fr 1fr;
+    align-items: end;
     gap: 3rem;
 }
 
 .stackTextContent {
     /* Text takes first or last column */
+    text-align: end;
 }
 
 .stackImageContent {
@@ -131,24 +138,24 @@
 }
 
 .stackCardTitle {
-    font-size: clamp(1.75rem, 2.5vw, 2.5rem);
-    font-weight: 700;
+    font-size: clamp(1.25rem, 1.75vw, 1.75rem);
+    font-weight: 600;
     color: #1a1a2e;
-    margin: 0 0 1rem;
+    margin: 0 0 0.75rem;
     line-height: 1.2;
 }
 
 .stackCardDescription {
-    font-size: clamp(1rem, 1.25vw, 1.25rem);
+    font-size: clamp(0.85rem, 1vw, 1rem);
     font-weight: 400;
     color: #4a4a5e;
-    line-height: 1.6;
+    line-height: 1.5;
     margin: 0;
 }
 
 .stackImagePlaceholder {
     width: 100%;
-    height: 450px;
+    height: 550px;
     background: #e5e5e5;
     border-radius: 16px;
 }

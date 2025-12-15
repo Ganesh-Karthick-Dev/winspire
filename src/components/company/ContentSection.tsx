@@ -86,6 +86,40 @@ export default function ContentSection() {
                         .to(desc1Ref.current, { opacity: 0, y: -50, duration: 0.5 })
                         .to(desc2Ref.current, { opacity: 1, y: 0, duration: 0.5 }, '<');
                 }
+
+                // Animate stacking cards in from bottom - AFTER swap completes
+                const stackCards = sectionRef.current?.querySelectorAll(`.${styles.stackCard}`);
+                const stackContainer = sectionRef.current?.querySelector(`.${styles.stackingContainer}`);
+
+                if (stackCards && stackCards.length > 0 && stackContainer) {
+                    gsap.set(stackCards, { opacity: 0, y: 100 }); // Set initial state
+
+                    // First card appears after swap sections
+                    gsap.to(stackCards[0], {
+                        opacity: 1,
+                        y: 0,
+                        scrollTrigger: {
+                            trigger: stackContainer,
+                            start: 'top bottom-=200px',
+                            end: 'top center',
+                            scrub: 1
+                        }
+                    });
+
+                    // Remaining cards appear sequentially
+                    for (let i = 1; i < stackCards.length; i++) {
+                        gsap.to(stackCards[i], {
+                            opacity: 1,
+                            y: 0,
+                            scrollTrigger: {
+                                trigger: stackCards[i - 1],
+                                start: 'top top+=300px',
+                                end: 'top top+=100px',
+                                scrub: 1
+                            }
+                        });
+                    }
+                }
             }, sectionRef);
         };
 
@@ -149,7 +183,7 @@ export default function ContentSection() {
                         { title: "Transparent Dashboards for Every Client", description: "Real-time visibility into performance metrics and outcomes through intuitive, customizable dashboards." }
                     ].map((card, index) => {
                         const isEven = index % 2 === 0;
-                        
+
                         return (
                             <div key={index} className={styles.stackCard}>
                                 <div className={styles.stackCardContent}>
@@ -160,12 +194,12 @@ export default function ContentSection() {
                                             <p className={styles.stackCardDescription}>{card.description}</p>
                                         </div>
                                     )}
-                                    
+
                                     {/* Image always in center */}
                                     <div className={styles.stackImageContent}>
                                         <div className={styles.stackImagePlaceholder}></div>
                                     </div>
-                                    
+
                                     {/* Text on right for odd index */}
                                     {!isEven && (
                                         <div className={styles.stackTextContent}>
