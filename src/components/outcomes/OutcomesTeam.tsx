@@ -8,6 +8,8 @@ if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
 
+import styles from '@/styles/OutcomesTeam.module.css';
+
 export default function OutcomesTeam() {
     const sectionRef = useRef<HTMLElement>(null);
     const leftColRef = useRef<HTMLDivElement>(null);
@@ -32,21 +34,24 @@ export default function OutcomesTeam() {
                 pinSpacing: false, // We want the right col to scroll naturally
             });
 
-            // Animate text opacity on scroll
-            texts.forEach((text) => {
+            // Animate text opacity on scroll - Word by Word
+            texts.forEach((text, index) => {
                 if (!text) return;
 
-                gsap.fromTo(text,
-                    { opacity: 0.2, color: '#6b7280' }, // Start gray/faint
+                const words = text.querySelectorAll(`.${styles.word}`);
+
+                gsap.fromTo(words,
+                    { opacity: 0.3, color: '#6b7280', y: 20 }, // Visible gray, slightly lower
                     {
                         opacity: 1,
-                        color: '#ffffff', // Turn white
-                        duration: 1,
+                        color: '#ffffff',
+                        y: 0, // Slide up
+                        stagger: 0.1, // Smooth ripple
                         scrollTrigger: {
                             trigger: text,
-                            start: 'top 80%', // Start animating when text enters viewport
-                            end: 'top 40%',   // Finish when it's near the middle
-                            scrub: 1,
+                            start: 'top 60%', // Start as soon as it enters viewport
+                            end: 'center 40%', // Finish near center (longer distance = smoother)
+                            scrub: 1.5, // Smoother scrubbing
                         }
                     }
                 );
@@ -67,37 +72,35 @@ export default function OutcomesTeam() {
     return (
         <section
             ref={sectionRef}
-            className="relative bg-black text-white py-20 px-4 md:px-12 mx-auto overflow-hidden"
-            style={{
-                width: '98%',
-                minHeight: '100vh',
-                marginTop: '2vh',
-                marginBottom: '1vh',
-                marginLeft: '2vh',
-                marginRight: '2vh',
-                borderRadius: '32px',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
-            }}
+            className={styles.section}
         >
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className={styles.grid}>
 
                 {/* Left Column - Sticky */}
-                <div ref={leftColRef} className="h-fit md:h-screen flex flex-col justify-center sticky top-0 pt-20 md:pt-0">
-                    <p className="text-lg md:text-xl font-sans font-medium text-gray-400 max-w-xs">
+                <div ref={leftColRef} className={styles.leftColumn}>
+                    <p className={styles.stickyLabel}>
                         Every square foot has been thoughtfully considered
                     </p>
                 </div>
 
                 {/* Right Column - Scrollable Content */}
-                <div ref={rightColRef} className="flex flex-col gap-32 pb-40 pt-20 md:pt-40">
+                <div ref={rightColRef} className={styles.rightColumn}>
                     {paragraphs.map((text, index) => (
-                        <p
+                        <div
                             key={index}
-                            ref={(el) => { textsRef.current[index] = el; }}
-                            className="text-3xl md:text-5xl lg:text-6xl font-sans font-bold leading-tight transition-colors duration-500"
+                            className={styles.paragraphContainer}
                         >
-                            {text}
-                        </p>
+                            <p
+                                ref={(el) => { textsRef.current[index] = el; }}
+                                className={styles.paragraph}
+                            >
+                                {text.split(' ').map((word, i) => (
+                                    <span key={i} className={styles.word}>
+                                        {word}
+                                    </span>
+                                ))}
+                            </p>
+                        </div>
                     ))}
                 </div>
 
