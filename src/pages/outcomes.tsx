@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout';
 import OutcomesHero from '@/components/outcomes/OutcomesHero';
+import OutcomesVision from '@/components/outcomes/OutcomesVision';
 
 export default function Outcomes() {
     return (
@@ -9,6 +10,7 @@ export default function Outcomes() {
             hideNavbar={true}
         >
             <OutcomesHero />
+            <OutcomesVision />
         </Layout>
     );
 }
