@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { HiLightBulb, HiTrendingDown, HiTrendingUp, HiHeart, HiCheckCircle } from 'react-icons/hi';
 import styles from './ContentSection.module.css';
 
 export default function ContentSection() {
@@ -169,6 +170,46 @@ export default function ContentSection() {
                         });
                     }
                 }
+
+                // Entire card color inversion on scroll
+                const missionSection = sectionRef.current?.querySelector(`.${styles.missionVisionSection}`);
+                if (missionSection && sectionRef.current) {
+                    // Background color inversion for ENTIRE card (white to dark)
+                    gsap.to(sectionRef.current, {
+                        backgroundColor: '#1B1D1C',
+                        scrollTrigger: {
+                            trigger: missionSection,
+                            start: 'top top+=200px',
+                            end: 'top top',
+                            scrub: 1
+                        }
+                    });
+
+                    // Text color inversion for mission section (dark to white)
+                    const allText = missionSection.querySelectorAll('h2, h3, p');
+                    gsap.to(allText, {
+                        color: '#ffffff',
+                        scrollTrigger: {
+                            trigger: missionSection,
+                            start: 'top top+=200px',
+                            end: 'top top',
+                            scrub: 1
+                        }
+                    });
+
+                    // Icon color inversion
+                    const icons = missionSection.querySelectorAll(`.${styles.featureIcon}`);
+                    gsap.to(icons, {
+                        color: '#ffffff',
+                        borderColor: '#ffffff',
+                        scrollTrigger: {
+                            trigger: missionSection,
+                            start: 'top top+=200px',
+                            end: 'top top',
+                            scrub: 1
+                        }
+                    });
+                }
             }, sectionRef);
         };
 
@@ -266,6 +307,57 @@ export default function ContentSection() {
                             </div>
                         );
                     })}
+                </div>
+
+                {/* Mission & Vision Section */}
+                <div className={styles.missionVisionSection}>
+                    {/* Mission Row */}
+                    <div className={styles.missionRow}>
+                        <div className={styles.missionLeft}>
+                            <h2 className={styles.missionTitle}>OUR MISSION</h2>
+                            <h3 className={styles.missionStatement}>
+                                To Build the Most <span className={styles.underline}>Intelligent</span>,
+                                <br />in Healthcare.
+                            </h3>
+                        </div>
+                        <div className={styles.missionRight}>
+                            <p className={styles.missionIntro}>
+                                Our mission is to empower healthcare organizations with an RCM model that:
+                            </p>
+                            <div className={styles.featuresGrid}>
+                                <div className={styles.featureItem}>
+                                    <div className={styles.featureIcon}><HiLightBulb /></div>
+                                    <p className={styles.featureText}>Predicts problems before they occur</p>
+                                </div>
+                                <div className={styles.featureItem}>
+                                    <div className={styles.featureIcon}><HiTrendingDown /></div>
+                                    <p className={styles.featureText}>Reduces operational waste</p>
+                                </div>
+                                <div className={styles.featureItem}>
+                                    <div className={styles.featureIcon}><HiTrendingUp /></div>
+                                    <p className={styles.featureText}>Accelerates financial performance</p>
+                                </div>
+                                <div className={styles.featureItem}>
+                                    <div className={styles.featureIcon}><HiHeart /></div>
+                                    <p className={styles.featureText}>Improves patient and provider experience</p>
+                                </div>
+                                <div className={styles.featureItem}>
+                                    <div className={styles.featureIcon}><HiCheckCircle /></div>
+                                    <p className={styles.featureText}>And delivers outcomes that can be trusted</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Vision Section */}
+                    <div className={styles.visionSection}>
+                        <h2 className={styles.visionTitle}>OUR VISION</h2>
+                        <h3 className={styles.visionStatement}>
+                            To Become the World's Most Advanced
+                            <br />AI-Enabled RCM Company and the
+                            <br />Happiest Workplace in Healthcare.
+                        </h3>
+                    </div>
                 </div>
 
             </div>
