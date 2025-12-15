@@ -73,15 +73,17 @@
     display: block;
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
     line-height: 1.15;
     letter-spacing: -0.03em;
+    opacity: 0.35;
 }
 
 /* Subheadline */
 .zeroRiskSubheadline {
     font-size: clamp(1.25rem, 3vw, 1.75rem);
-    color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    opacity: 0.35;
     margin-bottom: 2.5rem;
     line-height: 1.5;
     max-width: 900px;

@@ -75,6 +75,30 @@ export default function BookDemo() {
                 state.model!.scale.set(newScale, newScale, newScale);
             }
         });
+
+        // When ZeroRisk section comes into view, move to center with flip and scale up
+        ScrollTrigger.create({
+            trigger: '.zero-risk-section',
+            start: 'top 90%',
+            end: 'top 20%',
+            scrub: 1.5,
+            onUpdate: (self) => {
+                // Move from right (1.2) to center (0)
+                state.model!.position.x = 1.2 - (self.progress * 1.2);
+
+                // Move up slightly
+                state.model!.position.y = self.progress * 0.3;
+
+                // Side flip effect - rotate on Z axis (like tilting side to side)
+                // Use a subtle tilt + full Y rotation for a nice effect
+                state.model!.rotation.z = Math.sin(self.progress * Math.PI) * 0.3;
+                state.model!.rotation.y = self.progress * Math.PI * 2;
+
+                // Scale from 100 to 180
+                const newScale = 100 + (self.progress * 80);
+                state.model!.scale.set(newScale, newScale, newScale);
+            }
+        });
     }, []);
 
     useEffect(() => {

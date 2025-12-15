@@ -26,18 +26,17 @@ export default function ZeroRiskSection() {
                 gsap.fromTo(line,
                     {
                         opacity: 0.35,
-                        textShadow: 'none',
                     },
                     {
                         opacity: 1,
-                        textShadow: '0 0 0 rgba(0,0,0,0.3)',
-                        duration: 1.2,
-                        ease: 'power1.inOut',
+                        duration: 1,
+                        ease: 'power2.out',
                         scrollTrigger: {
                             trigger: sectionRef.current,
-                            start: `top+=${index * 80} 70%`,
-                            end: `top+=${index * 80 + 200} 30%`,
-                            scrub: 2,
+                            start: `top+=${index * 60} 75%`,
+                            end: `top+=${index * 60 + 150} 40%`,
+                            scrub: 1,
+                            toggleActions: 'play none none none',
                         }
                     }
                 );
@@ -52,9 +51,9 @@ export default function ZeroRiskSection() {
                             webkitTextStroke: '1px rgba(0,0,0,0.15)',
                             scrollTrigger: {
                                 trigger: sectionRef.current,
-                                start: `top+=${index * 80} 70%`,
-                                end: `top+=${index * 80 + 200} 30%`,
-                                scrub: 2,
+                                start: `top+=${index * 60} 75%`,
+                                end: `top+=${index * 60 + 150} 40%`,
+                                scrub: 1,
                             }
                         }
                     );
@@ -66,7 +65,7 @@ export default function ZeroRiskSection() {
     }, []);
 
     return (
-        <section ref={sectionRef} className={styles.zeroRiskSection}>
+        <section ref={sectionRef} className={`${styles.zeroRiskSection} zero-risk-section`}>
             <div className={styles.zeroRiskContent}>
                 <h2 className={styles.zeroRiskHeadline}>
                     <span ref={line1Ref} className={styles.textLine}>
