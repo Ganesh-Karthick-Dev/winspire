@@ -92,7 +92,8 @@ export default function ContentSection() {
                 const stackContainer = sectionRef.current?.querySelector(`.${styles.stackingContainer}`);
 
                 if (stackCards && stackCards.length > 0 && stackContainer) {
-                    gsap.set(stackCards, { opacity: 0, y: 100 }); // Set initial state
+                    // Set initial state - hide all cards
+                    gsap.set(stackCards, { opacity: 0, y: 100 });
 
                     // First card appears after swap sections
                     gsap.to(stackCards[0], {
@@ -108,6 +109,13 @@ export default function ContentSection() {
 
                     // Remaining cards appear sequentially
                     for (let i = 1; i < stackCards.length; i++) {
+                        const prevText = stackCards[i - 1].querySelector(`.${styles.stackTextContent}`) as HTMLElement;
+                        const currText = stackCards[i].querySelector(`.${styles.stackTextContent}`) as HTMLElement;
+
+                        // Initially hide current card's text
+                        if (currText) currText.style.opacity = '0';
+
+                        // Fade in current card
                         gsap.to(stackCards[i], {
                             opacity: 1,
                             y: 0,
@@ -115,7 +123,17 @@ export default function ContentSection() {
                                 trigger: stackCards[i - 1],
                                 start: 'top top+=300px',
                                 end: 'top top+=100px',
-                                scrub: 1
+                                scrub: 1,
+                                onEnter: () => {
+                                    // Hide previous text, show current text
+                                    if (prevText) prevText.style.opacity = '0';
+                                    if (currText) currText.style.opacity = '1';
+                                },
+                                onLeaveBack: () => {
+                                    // Show previous text, hide current text
+                                    if (prevText) prevText.style.opacity = '1';
+                                    if (currText) currText.style.opacity = '0';
+                                }
                             }
                         });
                     }

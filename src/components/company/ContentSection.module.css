@@ -101,7 +101,7 @@
 .stackCardContent {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    align-items: end;
+    align-items: start;
     gap: 3rem;
 }
 
