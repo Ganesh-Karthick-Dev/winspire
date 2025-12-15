@@ -160,6 +160,13 @@
     border-radius: 16px;
 }
 
+.stackImage {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
 @media (max-width: 768px) {
     .contentSection {
         width: 96%;

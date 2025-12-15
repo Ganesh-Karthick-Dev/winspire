@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
 import styles from './ContentSection.module.css';
 
 export default function ContentSection() {
@@ -9,6 +10,7 @@ export default function ContentSection() {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const desc1Ref = useRef<HTMLHeadingElement>(null);
     const desc2Ref = useRef<HTMLHeadingElement>(null);
+    const descContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         let ctx: gsap.Context;
@@ -137,6 +139,35 @@ export default function ContentSection() {
                             }
                         });
                     }
+
+                    // After last card stacks, scroll everything up
+                    const lastCard = stackCards[stackCards.length - 1];
+                    if (lastCard && titleRef.current && descContainerRef.current) {
+                        ScrollTrigger.create({
+                            trigger: lastCard,
+                            start: 'top top+=100px',
+                            end: 'top top-=200px',
+                            scrub: 1,
+                            onEnter: () => {
+                                // Remove sticky and let elements scroll naturally
+                                if (titleRef.current) {
+                                    titleRef.current.style.position = 'relative';
+                                }
+                                if (descContainerRef.current) {
+                                    descContainerRef.current.style.position = 'relative';
+                                }
+                            },
+                            onLeaveBack: () => {
+                                // Restore sticky positioning
+                                if (titleRef.current) {
+                                    titleRef.current.style.position = 'sticky';
+                                }
+                                if (descContainerRef.current) {
+                                    descContainerRef.current.style.position = 'sticky';
+                                }
+                            }
+                        });
+                    }
                 }
             }, sectionRef);
         };
@@ -174,7 +205,7 @@ export default function ContentSection() {
                     ))}
                 </h2>
 
-                <div className={styles.descriptionContainer}>
+                <div ref={descContainerRef} className={styles.descriptionContainer}>
                     <h3 ref={desc1Ref} className={`${styles.topHeader2} ${styles.descriptionSection}`}>
                         <span className="header-line" style={{ display: 'block' }}>is built on a simple belief — healthcare</span>
                         <span className="header-line" style={{ display: 'block' }}>organizations deserve a revenue cycle that is</span>
@@ -192,13 +223,13 @@ export default function ContentSection() {
                 {/* Stacking Cards */}
                 <div className={styles.stackingContainer}>
                     {[
-                        { title: "AI-Enabled RCM Ecosystem", description: "An intelligent revenue cycle framework that automates workflows, reduces inefficiencies, and drives smarter financial outcomes." },
-                        { title: "Zero Client Attrition", description: "Building lasting partnerships through exceptional service delivery and consistent results that exceed expectations." },
-                        { title: "Zero Employee Attrition", description: "Creating a workplace culture that values growth, innovation, and employee satisfaction for long-term success." },
-                        { title: "ISO 27001 + ISO 9001 Standards", description: "Maintaining the highest standards of information security and quality management across all operations." },
-                        { title: "100% Cloud-Based & Secure", description: "Leveraging modern cloud infrastructure to ensure scalability, reliability, and enterprise-grade security." },
-                        { title: "24-Hour TAT Culture", description: "Committed to rapid turnaround times that keep your revenue cycle moving efficiently and effectively." },
-                        { title: "Transparent Dashboards for Every Client", description: "Real-time visibility into performance metrics and outcomes through intuitive, customizable dashboards." }
+                        { title: "AI-Enabled RCM Ecosystem", description: "An intelligent revenue cycle framework that automates workflows, reduces inefficiencies, and drives smarter financial outcomes.", image: "/images/company-page/ai-assistant-ai-chatbot-generate-images-write-code-writer-bot-translate-advertising-llm.webp" },
+                        { title: "Zero Client Attrition", description: "Building lasting partnerships through exceptional service delivery and consistent results that exceed expectations.", image: "/images/company-page/business-people-shaking-hands-congratulations-work-success.webp" },
+                        { title: "Zero Employee Attrition", description: "Creating a workplace culture that values growth, innovation, and employee satisfaction for long-term success.", image: "/images/company-page/network-digit-0.webp" },
+                        { title: "ISO 27001 + ISO 9001 Standards", description: "Maintaining the highest standards of information security and quality management across all operations.", image: "/images/company-page/iso-standards-quality-control-businessman-hold-virtual-globe-with-quality-assurance-guarantee-product-iso-standard-certification-modern-iso-banner.webp" },
+                        { title: "100% Cloud-Based & Secure", description: "Leveraging modern cloud infrastructure to ensure scalability, reliability, and enterprise-grade security.", image: "/images/company-page/cloud-computing-cyber-security.webp" },
+                        { title: "24-Hour TAT Culture", description: "Committed to rapid turnaround times that keep your revenue cycle moving efficiently and effectively.", image: "/images/company-page/ai-assistant-ai-chatbot-generate-images-write-code-writer-bot-translate-advertising-llm.webp" },
+                        { title: "Transparent Dashboards for Every Client", description: "Real-time visibility into performance metrics and outcomes through intuitive, customizable dashboards.", image: "/images/company-page/business-people-shaking-hands-congratulations-work-success.webp" }
                     ].map((card, index) => {
                         const isEven = index % 2 === 0;
 
@@ -215,7 +246,13 @@ export default function ContentSection() {
 
                                     {/* Image always in center */}
                                     <div className={styles.stackImageContent}>
-                                        <div className={styles.stackImagePlaceholder}></div>
+                                        <Image
+                                            src={card.image}
+                                            alt={card.title}
+                                            width={800}
+                                            height={550}
+                                            className={styles.stackImage}
+                                        />
                                     </div>
 
                                     {/* Text on right for odd index */}
