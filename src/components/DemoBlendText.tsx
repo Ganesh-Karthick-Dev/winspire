@@ -15,13 +15,16 @@ interface DemoBlendTextProps {
     style?: React.CSSProperties;
     text1?: string;
     text2?: string;
+    /** Vertical position (0-1), default 0.33 */
+    yPosition?: number;
 }
 
 export default function DemoBlendText({
     className,
     style,
     text1 = "Zero Risk",
-    text2 = "High Clarity"
+    text2 = "High Clarity",
+    yPosition = 0.33
 }: DemoBlendTextProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const frameRef = useRef<number>(0);
@@ -48,15 +51,15 @@ export default function DemoBlendText({
         // Text settings
         const fontSize = Math.min(width * 0.14, 150);
         const centerX = width / 2;
-        const centerY = height / 3;
+        const centerY = height * yPosition;
 
         ctx.font = `900 ${fontSize}px Outfit, sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
-        // === LAYER 1: Draw BLACK text (always visible) ===
-        ctx.fillStyle = '#000000';
-        ctx.fillText('Zero Risk High Clarity', centerX, centerY - fontSize * 0.4);
+        // === LAYER 1: Draw WHITE text (always visible) ===
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText(`${text1} ${text2}`, centerX, centerY - fontSize * 0.4);
 
         // === LAYER 2: Draw CYAN text where model exists === 
         if (webglCanvas && webglCanvas.width > 0) {
@@ -93,7 +96,7 @@ export default function DemoBlendText({
                 tempCtx.font = `900 ${fontSize}px Outfit, sans-serif`;
                 tempCtx.textAlign = 'center';
                 tempCtx.textBaseline = 'middle';
-                tempCtx.fillText('Zero Risk High Clarity', centerX, centerY - fontSize * 0.4);
+                tempCtx.fillText(`${text1} ${text2}`, centerX, centerY - fontSize * 0.4);
 
                 // Draw temp canvas on main canvas
                 ctx.drawImage(tempCanvas, 0, 0);

@@ -19,12 +19,15 @@ interface LayoutProps {
     title?: string;
     /** Page description */
     description?: string;
+    /** Hide default navbar (for custom placement) */
+    hideNavbar?: boolean;
 }
 
 export default function Layout({
     children,
     title,
     description,
+    hideNavbar = false,
 }: LayoutProps) {
     return (
         <>
@@ -41,7 +44,7 @@ export default function Layout({
             <AnimatedBackground />
 
             {/* Navbar */}
-            <Navbar />
+            {!hideNavbar && <Navbar />}
 
             {/* Main content area */}
             <main id="main-content" role="main" tabIndex={-1}>
