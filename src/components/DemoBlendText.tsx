@@ -17,6 +17,8 @@ interface DemoBlendTextProps {
     text2?: string;
     /** Vertical position (0-1), default 0.33 */
     yPosition?: number;
+    /** Base text color (default: #000000) */
+    textColor?: string;
 }
 
 export default function DemoBlendText({
@@ -24,7 +26,8 @@ export default function DemoBlendText({
     style,
     text1 = "Zero Risk",
     text2 = "High Clarity",
-    yPosition = 0.33
+    yPosition = 0.33,
+    textColor = "#000000"
 }: DemoBlendTextProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const frameRef = useRef<number>(0);
@@ -57,8 +60,8 @@ export default function DemoBlendText({
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
-        // === LAYER 1: Draw WHITE text (always visible) ===
-        ctx.fillStyle = '#ffffff';
+        // === LAYER 1: Draw base text (always visible) ===
+        ctx.fillStyle = textColor;
         ctx.fillText(`${text1} ${text2}`, centerX, centerY - fontSize * 0.4);
 
         // === LAYER 2: Draw CYAN text where model exists === 

@@ -31,19 +31,19 @@ export default function OutcomesHero() {
         const visibleWidth = visibleHeight * camera.aspect;
 
         // Calculate positions for "half visible" (center at screen edge)
-        const startX = visibleWidth / 2;
-        const endX = -visibleWidth / 2;
+        const startX = -visibleWidth / 2; // Start from Left
+        const endX = visibleWidth / 2;    // End at Right
 
-        // Initial position: Start from right side (half visible)
+        // Initial position: Start from left side (half visible)
         gsap.set(state.model.position, { x: startX, y: 0 });
         gsap.set(state.model.scale, { x: 180, y: 180, z: 180 });
 
-        // Animate to left side (half visible)
+        // Animate to right side (half visible)
         gsap.to(state.model.position, {
             x: endX,
             y: 0,
-            duration: 3, // Slower duration for smoother movement
-            ease: 'power2.inOut', // Smooth start and end
+            duration: 7, // Balanced duration
+            ease: 'power1.inOut', // Smooth start and end
         });
 
         // Continuous rotation is handled by GLTFViewer internally
@@ -83,6 +83,7 @@ export default function OutcomesHero() {
                 text1="OUTCOMES"
                 text2=""
                 yPosition={0.8}
+                textColor="#ffffff"
                 style={{
                     position: 'absolute',
                     top: 0,
