@@ -94,22 +94,22 @@
 
 .topLeft {
     top: 38%;
-    right: 66%;
+    right: 62%;
 }
 
 .topRight {
     top: 38%;
-    left: 66%;
+    left: 62%;
 }
 
 .bottomLeft {
     top: 65%;
-    right: 66%;
+    right: 62%;
 }
 
 .bottomRight {
     top: 65%;
-    left: 66%;
+    left: 62%;
 }
 
 /* Responsive */
