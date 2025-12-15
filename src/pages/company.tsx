@@ -80,11 +80,11 @@ export default function Company() {
                     onUpdate: (self) => {
                         const progress = self.progress;
 
-                        // Frosty card shrink (moved down, centered)
-                        frostyCard.style.top = `${progress * 32}%`;
-                        frostyCard.style.left = `${progress * 35}%`;
-                        frostyCard.style.right = `${progress * 35}%`;
-                        frostyCard.style.bottom = `${progress * 5}%`;
+                        // Frosty card shrink to smaller centered size
+                        frostyCard.style.top = `${progress * 38}%`;
+                        frostyCard.style.left = `${progress * 40}%`;
+                        frostyCard.style.right = `${progress * 40}%`;
+                        frostyCard.style.bottom = `${progress * 10}%`;
                         frostyCard.style.borderRadius = `${progress * 28}px`;
 
                         // Text shrink and stay at bottom of card
