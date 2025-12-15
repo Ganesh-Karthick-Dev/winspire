@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { HiLightBulb, HiTrendingDown, HiTrendingUp, HiHeart, HiCheckCircle } from 'react-icons/hi';
 import styles from './ContentSection.module.css';
@@ -12,6 +12,18 @@ export default function ContentSection() {
     const desc1Ref = useRef<HTMLHeadingElement>(null);
     const desc2Ref = useRef<HTMLHeadingElement>(null);
     const descContainerRef = useRef<HTMLDivElement>(null);
+
+    // State for alternating glow images
+    const [glowImage, setGlowImage] = useState(1);
+
+    // Toggle glow images every 1 second
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setGlowImage(prev => prev === 1 ? 2 : 1);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         let ctx: gsap.Context;
@@ -357,6 +369,34 @@ export default function ContentSection() {
                             <br />AI-Enabled RCM Company and the
                             <br />Happiest Workplace in Healthcare.
                         </h3>
+                    </div>
+
+                    {/* Why We Exist Section */}
+                    <div className={styles.whyExistSection}>
+                        {/* Cross-fade background images */}
+                        <div className={styles.glowImageContainer}>
+                            <Image
+                                src="/images/company-page/Glow 1.webp"
+                                alt=""
+                                fill
+                                className={`${styles.glowImage} ${glowImage === 1 ? styles.glowImageActive : ''}`}
+                            />
+                            <Image
+                                src="/images/company-page/Glow 2.webp"
+                                alt=""
+                                fill
+                                className={`${styles.glowImage} ${glowImage === 2 ? styles.glowImageActive : ''}`}
+                            />
+                        </div>
+                        <div className={styles.whyExistContent}>
+                            <h2 className={styles.whyExistTitle}>
+                                WHY WE'RE <span className={styles.underline}>EXIST</span>
+                            </h2>
+                            <h3 className={styles.whyExistStatement}>
+                                Healthcare Revenue Is Under Pressure.
+                                <br />We Exist to Fix It.
+                            </h3>
+                        </div>
                     </div>
                 </div>
 
