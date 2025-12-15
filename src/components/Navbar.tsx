@@ -15,7 +15,7 @@ const navItems: NavItem[] = [
     { label: 'Neura AI', href: '#neura-ai' },
     { label: 'Solutions', href: '#solutions' },
     { label: 'Outcomes', href: '#outcomes' },
-    { label: 'Company', href: '#company' },
+    { label: 'Company', href: '/company' },
     { label: 'Book a Demo', href: '/book-demo' },
 ];
 
