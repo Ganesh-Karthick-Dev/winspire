@@ -137,6 +137,47 @@ export default function ContentSection() {
                     </h3>
                 </div>
 
+                {/* Stacking Cards */}
+                <div className={styles.stackingContainer}>
+                    {[
+                        { title: "AI-Enabled RCM Ecosystem", description: "An intelligent revenue cycle framework that automates workflows, reduces inefficiencies, and drives smarter financial outcomes." },
+                        { title: "Zero Client Attrition", description: "Building lasting partnerships through exceptional service delivery and consistent results that exceed expectations." },
+                        { title: "Zero Employee Attrition", description: "Creating a workplace culture that values growth, innovation, and employee satisfaction for long-term success." },
+                        { title: "ISO 27001 + ISO 9001 Standards", description: "Maintaining the highest standards of information security and quality management across all operations." },
+                        { title: "100% Cloud-Based & Secure", description: "Leveraging modern cloud infrastructure to ensure scalability, reliability, and enterprise-grade security." },
+                        { title: "24-Hour TAT Culture", description: "Committed to rapid turnaround times that keep your revenue cycle moving efficiently and effectively." },
+                        { title: "Transparent Dashboards for Every Client", description: "Real-time visibility into performance metrics and outcomes through intuitive, customizable dashboards." }
+                    ].map((card, index) => {
+                        const isEven = index % 2 === 0;
+                        
+                        return (
+                            <div key={index} className={styles.stackCard}>
+                                <div className={styles.stackCardContent}>
+                                    {/* Text on left for even index */}
+                                    {isEven && (
+                                        <div className={styles.stackTextContent}>
+                                            <h4 className={styles.stackCardTitle}>{card.title}</h4>
+                                            <p className={styles.stackCardDescription}>{card.description}</p>
+                                        </div>
+                                    )}
+                                    
+                                    {/* Image always in center */}
+                                    <div className={styles.stackImageContent}>
+                                        <div className={styles.stackImagePlaceholder}></div>
+                                    </div>
+                                    
+                                    {/* Text on right for odd index */}
+                                    {!isEven && (
+                                        <div className={styles.stackTextContent}>
+                                            <h4 className={styles.stackCardTitle}>{card.title}</h4>
+                                            <p className={styles.stackCardDescription}>{card.description}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
 
             </div>
         </section>

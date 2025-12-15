@@ -55,6 +55,8 @@
     letter-spacing: -0.04em;
     line-height: 0.9;
     white-space: nowrap;
+    position: relative;
+    z-index: 1;
 }
 
 .description {
@@ -75,6 +77,81 @@
     color: #1a1a2e;
 }
 
+
+
+.stackingContainer {
+    margin-top: -4rem;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+.stackCard {
+    position: sticky;
+    top: 100px;
+    margin-bottom: 2rem;
+}
+
+.stackCardContent {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    gap: 3rem;
+}
+
+.stackTextContent {
+    /* Text takes first or last column */
+}
+
+.stackImageContent {
+    /* Image always in middle column */
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.stackTextPreview {
+    flex: 1;
+}
+
+.stackPreviewTitle {
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    font-weight: 600;
+    color: #6a6a7e;
+    margin: 0 0 0.75rem;
+    line-height: 1.2;
+}
+
+.stackPreviewDescription {
+    font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+    font-weight: 400;
+    color: #8a8a9e;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.stackCardTitle {
+    font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 1rem;
+    line-height: 1.2;
+}
+
+.stackCardDescription {
+    font-size: clamp(1rem, 1.25vw, 1.25rem);
+    font-weight: 400;
+    color: #4a4a5e;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.stackImagePlaceholder {
+    width: 100%;
+    height: 450px;
+    background: #e5e5e5;
+    border-radius: 16px;
+}
 
 @media (max-width: 768px) {
     .contentSection {
