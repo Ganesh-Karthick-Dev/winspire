@@ -87,13 +87,13 @@ export default function Company() {
                         frostyCard.style.bottom = `${progress * 5}%`;
                         frostyCard.style.borderRadius = `${progress * 28}px`;
 
-                        // Text shrink and move up
+                        // Text shrink and stay at bottom of card
                         if (heroTextEl) {
-                            const scale = 1 - (progress * 0.65); // 1 -> 0.35
-                            const bottomPos = 3 + (progress * 30); // moves up more
+                            const scale = 1 - (progress * 0.7); // 1 -> 0.3
+                            const bottomPos = 3 + (progress * 5); // 3% -> 8% (stay near bottom)
                             heroTextEl.style.transform = `scale(${scale})`;
                             heroTextEl.style.bottom = `${bottomPos}%`;
-                            heroTextEl.style.opacity = `${1 - (progress * 0.4)}`;
+                            heroTextEl.style.opacity = `${1 - (progress * 0.3)}`;
                         }
                     }
                 });
@@ -121,6 +121,13 @@ export default function Company() {
                 { x: 200, opacity: 0, scale: 0.9 },
                 { x: 0, opacity: 1, scale: 1, duration: 0.2, ease: 'power2.out' },
                 0.7
+            );
+
+            // 4. Tagline fades in after grid forms
+            tl.fromTo('.company-tagline',
+                { y: 20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.2, ease: 'power2.out' },
+                0.8
             );
         };
 
@@ -157,6 +164,13 @@ export default function Company() {
                 // Shrink from 180 to 45 (smaller final size)
                 const newScale = 180 - (self.progress * 135);
                 state.model!.scale.set(newScale, newScale, newScale);
+
+                // Move model down to center in card (0.2 -> -0.3)
+                state.model!.position.y = 0.2 - (self.progress * 0.5);
+
+                // Adjust tilt to face forward perfectly
+                state.model!.rotation.x = 0.5 + (self.progress * 0.6); // 0.5 -> 1.1 (faces straight forward)
+                state.model!.rotation.z = -0.05 + (self.progress * 0.05); // -0.05 -> 0
             }
         });
     }, []);

@@ -45,6 +45,34 @@
     transform-origin: center bottom;
 }
 
+/* Tagline - appears inside frosty card after grid forms */
+.tagline {
+    position: absolute;
+    top: 58%;
+    left: 35%;
+    right: 35%;
+    text-align: center;
+    z-index: 15;
+    opacity: 0;
+    padding: 0 1rem;
+}
+
+.taglineHeading {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+}
+
+.taglineSubtext {
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
 /* Grid Images - Fully contained in viewport */
 .gridImage {
     position: absolute;
