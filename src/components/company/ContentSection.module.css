@@ -33,13 +33,18 @@
     color: #1a1a2e;
     margin: 0 0 4rem;
     line-height: 1.2;
-    position: absolute;
-    width: 100%;
-    left: 0;
 }
 
-.topHeader2:first-of-type {
+.descriptionContainer {
     position: relative;
+    min-height: 300px;
+}
+
+.descriptionSection {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
 .mainTitle {

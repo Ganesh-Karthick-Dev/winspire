@@ -66,56 +66,25 @@ export default function ContentSection() {
                     );
                 }
 
-                // Description 1 - Slides up from bottom, then fades out
-                if (desc1Ref.current) {
-                    gsap.fromTo(desc1Ref.current,
-                        { y: 100, opacity: 0 },
-                        {
-                            y: 0,
-                            opacity: 1,
-                            duration: 1,
-                            ease: 'power3.out',
-                            scrollTrigger: {
-                                trigger: desc1Ref.current,
-                                start: 'top 80%',
-                                end: 'top 30%',
-                                toggleActions: 'play none none reverse',
-                                scrub: 1
-                            }
-                        }
-                    );
+                // Simple swap: Show section 1, then swap to section 2 on scroll
+                if (desc1Ref.current && desc2Ref.current) {
+                    // Initially show first, hide second below
+                    gsap.set(desc1Ref.current, { opacity: 1, y: 0 });
+                    gsap.set(desc2Ref.current, { opacity: 0, y: 50 });
 
-                    // Fade out first section as second comes in
-                    gsap.to(desc1Ref.current, {
-                        opacity: 0,
-                        y: -50,
+                    // Create timeline for swap
+                    const swapTimeline = gsap.timeline({
                         scrollTrigger: {
                             trigger: desc2Ref.current,
-                            start: 'top 70%',
-                            end: 'top 40%',
+                            start: 'top bottom-=900px',
+                            end: 'top top+=600px',
                             scrub: 1
                         }
                     });
-                }
 
-                // Description 2 - Slides up from bottom to replace first
-                if (desc2Ref.current) {
-                    gsap.fromTo(desc2Ref.current,
-                        { y: 100, opacity: 0 },
-                        {
-                            y: 0,
-                            opacity: 1,
-                            duration: 1,
-                            ease: 'power3.out',
-                            scrollTrigger: {
-                                trigger: desc2Ref.current,
-                                start: 'top 80%',
-                                end: 'top 40%',
-                                toggleActions: 'play none none reverse',
-                                scrub: 1
-                            }
-                        }
-                    );
+                    swapTimeline
+                        .to(desc1Ref.current, { opacity: 0, y: -50, duration: 0.5 })
+                        .to(desc2Ref.current, { opacity: 1, y: 0, duration: 0.5 }, '<');
                 }
             }, sectionRef);
         };
@@ -153,18 +122,20 @@ export default function ContentSection() {
                     ))}
                 </h2>
 
-                <h3 ref={desc1Ref} className={styles.topHeader2}>
-                    <span className="header-line" style={{ display: 'block' }}>is built on a simple belief — healthcare</span>
-                    <span className="header-line" style={{ display: 'block' }}>organizations deserve a revenue cycle that is</span>
-                    <span className="header-line" style={{ display: 'block' }}>intelligent, predictable, transparent, and built to scale.</span>
-                </h3>
+                <div className={styles.descriptionContainer}>
+                    <h3 ref={desc1Ref} className={`${styles.topHeader2} ${styles.descriptionSection}`}>
+                        <span className="header-line" style={{ display: 'block' }}>is built on a simple belief — healthcare</span>
+                        <span className="header-line" style={{ display: 'block' }}>organizations deserve a revenue cycle that is</span>
+                        <span className="header-line" style={{ display: 'block' }}>intelligent, predictable, transparent, and built to scale.</span>
+                    </h3>
 
-                <h3 ref={desc2Ref} className={styles.topHeader2}>
-                    <span className="header-line" style={{ display: 'block' }}> combine advanced AI, automation, and</span>
-                    <span className="header-line" style={{ display: 'block' }}>ooperational expertise to create a system-driven</span>
-                    <span className="header-line" style={{ display: 'block' }}>RCM model that delivers measurable results</span>
-                    <span className="header-line" style={{ display: 'block' }}>Revery single time.</span>
-                </h3>
+                    <h3 ref={desc2Ref} className={`${styles.topHeader2} ${styles.descriptionSection}`}>
+                        <span className="header-line" style={{ display: 'block' }}> combine advanced AI, automation, and</span>
+                        <span className="header-line" style={{ display: 'block' }}>ooperational expertise to create a system-driven</span>
+                        <span className="header-line" style={{ display: 'block' }}>RCM model that delivers measurable results</span>
+                        <span className="header-line" style={{ display: 'block' }}>Revery single time.</span>
+                    </h3>
+                </div>
 
 
             </div>
