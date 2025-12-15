@@ -10,6 +10,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Layout from '@/components/Layout';
+import ContentSection from '@/components/company/ContentSection';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import type { ThreeState } from '@/lib/threeManager';
 import styles from '@/styles/company.module.css';
@@ -210,6 +211,9 @@ export default function Company() {
                     <Image src="/images/company/grid-4.png" alt="Image 4" fill style={{ objectFit: 'cover' }} />
                 </div>
             </section>
+
+            {/* Content Section */}
+            <ContentSection />
         </Layout>
     );
 }

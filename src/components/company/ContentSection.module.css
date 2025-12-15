@@ -1,0 +1,45 @@
+/* Content Section - White with rounded corners */
+.contentSection {
+    position: relative;
+    width: 98%;
+    max-width: 1800px;
+    margin: 80px auto 0;
+    padding: 80px 60px;
+    background: #ffffff;
+    border-radius: 32px;
+    box-shadow:
+        0 -20px 60px rgba(0, 0, 0, 0.08),
+        0 10px 40px rgba(0, 0, 0, 0.05);
+    z-index: 20;
+}
+
+.contentInner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.sectionTitle {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.sectionText {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    color: #4a4a5a;
+    line-height: 1.7;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .contentSection {
+        width: 96%;
+        padding: 50px 30px;
+        margin-top: 60px;
+        border-radius: 24px;
+    }
+}
