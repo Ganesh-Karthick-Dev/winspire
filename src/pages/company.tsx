@@ -53,7 +53,7 @@ export default function Company() {
             ScrollTrigger.create({
                 trigger: '.company-hero',
                 start: 'top top',
-                end: '+=15%',
+                end: '+=30%',
                 pin: true,
                 pinSpacing: true,
             });
@@ -63,7 +63,7 @@ export default function Company() {
                 scrollTrigger: {
                     trigger: '.company-hero',
                     start: 'top top',
-                    end: '+=15%',
+                    end: '+=30%',
                     scrub: 0.5,
                 }
             });
@@ -75,25 +75,25 @@ export default function Company() {
                 ScrollTrigger.create({
                     trigger: '.company-hero',
                     start: 'top top',
-                    end: '+=15%',
+                    end: '+=30%',
                     scrub: 0.5,
                     onUpdate: (self) => {
                         const progress = self.progress;
 
-                        // Frosty card shrink
-                        frostyCard.style.top = `${progress * 12}%`;
-                        frostyCard.style.left = `${progress * 30}%`;
-                        frostyCard.style.right = `${progress * 30}%`;
-                        frostyCard.style.bottom = `${progress * 12}%`;
+                        // Frosty card shrink (moved down, centered)
+                        frostyCard.style.top = `${progress * 32}%`;
+                        frostyCard.style.left = `${progress * 35}%`;
+                        frostyCard.style.right = `${progress * 35}%`;
+                        frostyCard.style.bottom = `${progress * 5}%`;
                         frostyCard.style.borderRadius = `${progress * 28}px`;
 
                         // Text shrink and move up
                         if (heroTextEl) {
-                            const scale = 1 - (progress * 0.6); // 1 -> 0.4
-                            const bottomPos = 3 + (progress * 25); // 3rem -> 28rem (moves up)
+                            const scale = 1 - (progress * 0.65); // 1 -> 0.35
+                            const bottomPos = 3 + (progress * 30); // moves up more
                             heroTextEl.style.transform = `scale(${scale})`;
                             heroTextEl.style.bottom = `${bottomPos}%`;
-                            heroTextEl.style.opacity = `${1 - (progress * 0.3)}`; // slight fade
+                            heroTextEl.style.opacity = `${1 - (progress * 0.4)}`;
                         }
                     }
                 });
@@ -151,11 +151,11 @@ export default function Company() {
         ScrollTrigger.create({
             trigger: '.company-hero',
             start: 'top top',
-            end: '+=15%',
+            end: '+=30%',
             scrub: 0.5,
             onUpdate: (self) => {
-                // Shrink from 180 to 60
-                const newScale = 180 - (self.progress * 120);
+                // Shrink from 180 to 45 (smaller final size)
+                const newScale = 180 - (self.progress * 135);
                 state.model!.scale.set(newScale, newScale, newScale);
             }
         });
