@@ -24,16 +24,26 @@ export default function OutcomesHero() {
 
         const { gsap } = await import('gsap');
 
-        // Initial position: Start from right side (off-screen or edge)
-        gsap.set(state.model.position, { x: 5, y: 0 });
-        gsap.set(state.model.scale, { x: 120, y: 120, z: 120 });
+        // Calculate visible width at z=0
+        const camera = state.camera;
+        const vFOV = (camera.fov * Math.PI) / 180;
+        const visibleHeight = 2 * Math.tan(vFOV / 2) * camera.position.z;
+        const visibleWidth = visibleHeight * camera.aspect;
 
-        // Animate to center-left
+        // Calculate positions for "half visible" (center at screen edge)
+        const startX = visibleWidth / 2;
+        const endX = -visibleWidth / 2;
+
+        // Initial position: Start from right side (half visible)
+        gsap.set(state.model.position, { x: startX, y: 0 });
+        gsap.set(state.model.scale, { x: 180, y: 180, z: 180 });
+
+        // Animate to left side (half visible)
         gsap.to(state.model.position, {
-            x: 0,
+            x: endX,
             y: 0,
-            duration: 2,
-            ease: 'power3.out',
+            duration: 3, // Slower duration for smoother movement
+            ease: 'power2.inOut', // Smooth start and end
         });
 
         // Continuous rotation is handled by GLTFViewer internally
