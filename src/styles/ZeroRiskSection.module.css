@@ -1,0 +1,115 @@
+/* Zero-Risk Section - Left Aligned, No Card */
+
+.zeroRiskSection {
+    position: relative;
+    padding: 0 2rem;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.zeroRiskContent {
+    position: relative;
+    text-align: left;
+    padding: 3rem 4rem;
+    width: 100%;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.25) 0%,
+            rgba(255, 255, 255, 0.15) 50%,
+            rgba(255, 255, 255, 0.2) 100%);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+}
+
+/* Glossy shine overlay */
+.zeroRiskContent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0.05) 40%,
+            transparent 100%);
+    border-radius: 32px 32px 0 0;
+    pointer-events: none;
+}
+
+/* Extra glossy edge highlight */
+.zeroRiskContent::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.5) 50%,
+            transparent 100%);
+    pointer-events: none;
+}
+
+/* Headline */
+.zeroRiskHeadline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Each line of text */
+.textLine {
+    display: block;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+}
+
+/* Subheadline */
+.zeroRiskSubheadline {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+    max-width: 900px;
+    font-weight: 400;
+}
+
+/* Button wrapper */
+.buttonWrapper {
+    opacity: 0.4;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .zeroRiskSection {
+        padding: 3rem 1.5rem 4rem;
+    }
+
+    .textLine {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+    }
+
+    .zeroRiskSubheadline {
+        font-size: clamp(1rem, 3vw, 1.25rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .zeroRiskSection {
+        padding: 2rem 1rem 3rem;
+    }
+}

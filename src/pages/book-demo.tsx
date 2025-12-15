@@ -29,6 +29,7 @@ const DemoBlendText = dynamic(() => import('@/components/DemoBlendText'), {
 
 import StackingCards from '@/components/StackingCards';
 import DemoForm from '@/components/DemoForm';
+import ZeroRiskSection from '@/components/ZeroRiskSection';
 import PremiumButton from '@/components/PremiumButton';
 import styles from '@/styles/book-demo.module.css';
 
@@ -159,6 +160,9 @@ export default function BookDemo() {
             <section className={`${styles.formSection} form-section`}>
                 <DemoForm />
             </section>
+
+            {/* Zero-Risk Demo Section */}
+            <ZeroRiskSection />
         </Layout>
     );
 }

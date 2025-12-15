@@ -90,7 +90,96 @@
 
 /* Demo Form Section */
 .formSection {
-    padding: 4rem 1rem 6rem;
+    padding: 2rem 1rem 0;
     max-width: 1000px;
     margin: 0 auto;
+    margin-bottom: -2rem;
+}
+
+/* Zero-Risk Demo Section */
+.zeroRiskSection {
+    position: relative;
+    /* padding: 0 2rem 2rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.zeroRiskSection::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%,
+            rgba(59, 130, 246, 0.15) 0%,
+            transparent 70%);
+    pointer-events: none;
+}
+
+.zeroRiskContent {
+    position: relative;
+    text-align: center;
+    max-width: 900px;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.zeroRiskHeadline {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.zeroRiskHighlight {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 500;
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.zeroRiskSubheadline {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive adjustments for Zero-Risk Section */
+@media (max-width: 768px) {
+    .zeroRiskSection {
+        padding: 4rem 1rem;
+    }
+
+    .zeroRiskContent {
+        padding: 2rem 1.5rem;
+        border-radius: 24px;
+    }
+
+    .zeroRiskSubheadline {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .zeroRiskContent {
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
+    }
 }
