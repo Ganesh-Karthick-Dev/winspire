@@ -130,15 +130,15 @@
     z-index: 5;
     /* Behind cards (cards have z-index 10) */
 
-    /* Bright red core */
-    background: rgba(255, 50, 50, 1);
+    /* Bright sky blue core */
+    background: rgba(6, 182, 212, 1);
 
-    /* Compact glow - just the center part */
+    /* Compact glow - sky blue */
     box-shadow:
-        0 0 8px 4px rgba(255, 40, 40, 0.8),
-        0 0 20px 12px rgba(255, 30, 30, 0.5),
-        0 0 40px 25px rgba(255, 30, 30, 0.25),
-        0 0 60px 40px rgba(255, 30, 30, 0.1);
+        0 0 8px 4px rgba(6, 182, 212, 0.8),
+        0 0 20px 12px rgba(6, 182, 212, 0.5),
+        0 0 40px 25px rgba(6, 182, 212, 0.25),
+        0 0 60px 40px rgba(6, 182, 212, 0.1);
 }
 
 /* Phase 2: Static Feature List */
@@ -258,26 +258,26 @@
     justify-content: space-between;
 }
 
-/* Red glow effect when orb passes - left side card */
+/* Sky blue glow effect when orb passes - left side card */
 .mockupCardGlowLeft {
-    border-left: 1px solid rgba(255, 50, 50, 0.8) !important;
-    border-top: 1px solid rgba(255, 50, 50, 0.6) !important;
+    border-left: 1px solid rgba(6, 182, 212, 0.8) !important;
+    border-top: 1px solid rgba(6, 182, 212, 0.6) !important;
     box-shadow:
         0 4px 24px -1px rgba(0, 0, 0, 0.3),
         inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-        -30px 0 80px -20px rgba(255, 50, 50, 0.4),
-        0 -20px 60px -20px rgba(255, 50, 50, 0.3) !important;
+        -30px 0 80px -20px rgba(6, 182, 212, 0.4),
+        0 -20px 60px -20px rgba(6, 182, 212, 0.3) !important;
 }
 
-/* Red glow effect when orb passes - right side card */
+/* Sky blue glow effect when orb passes - right side card */
 .mockupCardGlowRight {
-    border-right: 1px solid rgba(255, 50, 50, 0.8) !important;
-    border-top: 1px solid rgba(255, 50, 50, 0.6) !important;
+    border-right: 1px solid rgba(6, 182, 212, 0.8) !important;
+    border-top: 1px solid rgba(6, 182, 212, 0.6) !important;
     box-shadow:
         0 4px 24px -1px rgba(0, 0, 0, 0.3),
         inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-        30px 0 80px -20px rgba(255, 50, 50, 0.4),
-        0 -20px 60px -20px rgba(255, 50, 50, 0.3) !important;
+        30px 0 80px -20px rgba(6, 182, 212, 0.4),
+        0 -20px 60px -20px rgba(6, 182, 212, 0.3) !important;
 }
 
 /* Removed hover transform/shadow effects as requested */
@@ -337,12 +337,12 @@
     transition: background 0.5s ease;
 }
 
-/* Red gradient appears when orb touches CTA */
+/* Sky blue gradient appears when orb touches CTA */
 .ctaCardActivated {
     background:
         radial-gradient(ellipse 50% 80% at 50% 0%,
-            rgba(255, 50, 50, 0.25) 0%,
-            rgba(255, 50, 50, 0.1) 30%,
+            rgba(6, 182, 212, 0.25) 0%,
+            rgba(6, 182, 212, 0.1) 30%,
             transparent 60%),
         radial-gradient(circle at center,
             rgba(255, 255, 255, 0.03) 0%,
@@ -437,7 +437,7 @@
     background: conic-gradient(from 0deg,
             transparent 0deg,
             transparent 60deg,
-            rgba(255, 255, 255, 0.8) 120deg,
+            rgba(6, 182, 212, 0.9) 120deg,
             transparent 180deg,
             transparent 360deg);
     z-index: -2;
