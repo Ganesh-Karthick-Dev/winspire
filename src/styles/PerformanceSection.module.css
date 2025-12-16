@@ -107,6 +107,22 @@
         0 0 15px rgba(6, 182, 212, 0.5);
 }
 
+/* Center Vertical Line - connects intro to CTA */
+.centerLine {
+    position: absolute;
+    left: 50%;
+    top: 250vh;
+    /* Starts after the intro track (250vh) */
+    width: 1px;
+    height: calc(100% - 250vh - 150px);
+    /* Full height minus intro and footer padding */
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.3),
+            rgba(255, 255, 255, 0.1));
+    z-index: 5;
+    transform: translateX(-50%);
+}
+
 /* Phase 2: Static Feature List */
 .featureList {
     width: 100%;

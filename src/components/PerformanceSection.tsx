@@ -100,6 +100,9 @@ export default function PerformanceSection() {
                 </div>
             </div>
 
+            {/* Vertical Center Line - connects intro to CTA */}
+            <div className={styles.centerLine}></div>
+
             {/* Phase 2: Static Feature List */}
             <div className={styles.featureList}>
                 {features.map((feature) => (
