@@ -53,6 +53,7 @@ export default function PerformanceSection() {
     const [activeSlide, setActiveSlide] = useState(0);
     const [orbProgress, setOrbProgress] = useState(0); // 0 = start, 1 = end (top of CTA)
     const [orbPosition, setOrbPosition] = useState({ x: 50, y: 0 }); // % position along path
+    const [activeGlowCard, setActiveGlowCard] = useState(-1); // Which card (0-3) should glow, -1 = none
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -94,6 +95,19 @@ export default function PerformanceSection() {
                         x: (point.x / 400) * 100,
                         y: (point.y / 1200) * 100
                     });
+
+                    // Determine which card should glow based on orb Y position
+                    // Using Y position instead of progress for accurate detection
+                    const yPos = (point.y / 1200) * 100; // Current Y as percentage
+                    if (yPos >= 28 && yPos < 38) {
+                        setActiveGlowCard(0); // First card (PHISHING - right) - orb at y 28-38%
+                    } else if (yPos >= 52 && yPos < 62) {
+                        setActiveGlowCard(1); // Second card (CREDENTIALS - left) - orb at y 52-62%
+                    } else if (yPos >= 78 && yPos < 100) {
+                        setActiveGlowCard(2); // Third card (INTELLIGENCE - right) - orb at y 65-100%
+                    } else {
+                        setActiveGlowCard(-1); // No glow
+                    }
                 }
             } else {
                 setOrbProgress(0);
@@ -122,7 +136,7 @@ export default function PerformanceSection() {
                 fontFamily: 'monospace',
                 fontSize: '12px'
             }}>
-                orbProgress: {orbProgress.toFixed(4)} | visible: {orbProgress > 0 && orbProgress < 0.95 ? 'YES' : 'NO'}
+                orbProgress: {orbProgress.toFixed(4)} | yPos: {orbPosition.y.toFixed(2)}% | glowCard: {activeGlowCard}
             </div>
 
             {/* Phase 1: Sticky Intro Track (250vh) */}
@@ -188,7 +202,7 @@ export default function PerformanceSection() {
 
             {/* Phase 2: Static Feature List */}
             <div className={styles.featureList}>
-                {features.map((feature) => (
+                {features.map((feature, index) => (
                     <div key={feature.id} className={`${styles.featureRow} ${feature.align === 'left' ? styles.rowReverse : ''}`}>
                         {/* Text Side */}
                         <div className={styles.featureTextCol}>
@@ -202,7 +216,7 @@ export default function PerformanceSection() {
                         {/* Visual Side */}
                         <div className={styles.featureVisualCol}>
                             {/* Simple Placeholder for 3D Card */}
-                            <div className={styles.mockupCard}>
+                            <div className={`${styles.mockupCard} ${activeGlowCard === index ? (feature.align === 'left' ? styles.mockupCardGlowLeft : styles.mockupCardGlowRight) : ''}`}>
                                 <div className={styles.mockupHeader}>
                                     <span className={styles.dot}></span>
                                     <span className={styles.dot}></span>
