@@ -265,6 +265,16 @@ a {
   will-change: transform;
 }
 
+@media (max-width: 768px) {
+  .grid-transition {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .grid-column:nth-child(even) {
+    display: none;
+  }
+}
+
 
 /* ============================================
    Poster Layer (LCP Target)
