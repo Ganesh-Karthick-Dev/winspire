@@ -1,20 +1,25 @@
-/* PerformanceSection.module.css - CSS Sticky based scroll section */
+/* PerformanceSection.module.css */
 
 .section {
     position: relative !important;
     width: 100%;
-    /* Height for scroll distance - 2 slides worth of scrolling */
-    height: 200vh;
+    /* Let content dictate height now */
+    height: auto !important;
     background: #1B1D1C;
-    /* Override global section styles */
     display: block !important;
     min-height: auto !important;
     padding: 0 !important;
-    flex-direction: unset !important;
-    justify-content: unset !important;
 }
 
-/* Sticky container - stays fixed while scrolling through parent */
+/* Phase 1: Intro Track with Sticky Text */
+/* This container creates the scroll distance for the text transition */
+.introScrollTrack {
+    height: 250vh;
+    /* Adjust for desired duration */
+    position: relative;
+    width: 100%;
+}
+
 .stickyContainer {
     position: sticky;
     top: 0;
@@ -26,7 +31,7 @@
     overflow: hidden;
 }
 
-/* Radial glow effect - sea blue - large circle, quarter visible */
+/* ... (Glow and Text styles remain mostly same) ... */
 .glowBackground {
     position: absolute;
     top: 0;
@@ -34,7 +39,6 @@
     width: 100%;
     height: 100%;
     background:
-        /* Large circle - center above viewport to show bottom quarter */
         radial-gradient(circle 800px at 50% -400px,
             rgba(6, 182, 212, 1) 0%,
             rgba(8, 145, 178, 0.85) 30%,
@@ -45,7 +49,6 @@
     z-index: 1;
 }
 
-/* Text container - centered */
 .textContainer {
     position: relative;
     z-index: 10;
@@ -57,7 +60,6 @@
     justify-content: center;
 }
 
-/* Slides wrapper */
 .slidesWrapper {
     position: relative;
     width: 100%;
@@ -67,7 +69,6 @@
     justify-content: center;
 }
 
-/* Individual text slide */
 .textSlide {
     position: absolute;
     top: 50%;
@@ -85,7 +86,6 @@
     visibility: visible;
 }
 
-/* Main text styling - proper paragraph */
 .slideText {
     font-family: 'Outfit', sans-serif;
     font-size: clamp(1.5rem, 3.5vw, 2.5rem);
@@ -98,57 +98,270 @@
     padding: 0;
 }
 
-/* Glowing text for final slide - white center with sky blue glow outline */
 .slideText.glow {
     color: #ffffff;
     text-shadow:
-        /* Sky blue glow outline */
         0 0 2px rgba(6, 182, 212, 1),
         0 0 4px rgba(6, 182, 212, 0.9),
         0 0 8px rgba(6, 182, 212, 0.7),
-        /* Subtle outer glow */
-        0 0 15px rgba(6, 182, 212, 0.5),
-        0 0 30px rgba(6, 182, 212, 0.3),
-        0 0 50px rgba(6, 182, 212, 0.2);
+        0 0 15px rgba(6, 182, 212, 0.5);
 }
 
-/* Responsive - Tablet */
-@media (max-width: 768px) {
-    .textContainer {
-        padding: 0 1.5rem;
-        max-width: 100%;
-    }
-
-    .slideText {
-        font-size: clamp(1.25rem, 5vw, 1.75rem);
-    }
-
-    .slidesWrapper {
-        min-height: 180px;
-    }
-
-    .glowBackground {
-        background: radial-gradient(circle 500px at 50% -250px,
-                rgba(6, 182, 212, 1) 0%,
-                rgba(8, 145, 178, 0.85) 30%,
-                rgba(6, 182, 212, 0.5) 50%,
-                rgba(34, 211, 238, 0.2) 70%,
-                transparent 90%);
-    }
+/* Phase 2: Static Feature List */
+.featureList {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 100px;
+    /* Bottom padding */
+    display: flex;
+    flex-direction: column;
+    gap: 150px;
+    position: relative;
+    z-index: 10;
 }
 
-/* Responsive - Mobile */
-@media (max-width: 480px) {
-    .textContainer {
-        padding: 0 1rem;
+.featureRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.featureRow.rowReverse {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+/* Columns */
+.featureTextCol {
+    flex: 1;
+    max-width: 500px;
+}
+
+.rowReverse .featureTextCol {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.featureVisualCol {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+}
+
+/* Feature Typography */
+.featureIconBox {
+    width: 48px;
+    height: 48px;
+    /* Glossy dark box */
+    background: linear-gradient(135deg, rgba(30, 35, 40, 0.9), rgba(10, 10, 10, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Sharp corners */
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #22d3ee;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.featureTitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.featureDescription {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Simple Mockup Card Placeholder */
+.mockupCard {
+    width: 100%;
+    height: 300px;
+    /* Frosty Glossy Look: Semi-transparent background with blur */
+    background: radial-gradient(120% 120% at 0% 0%,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.01) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    /* Highlight top edge */
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    /* Highlight left edge */
+
+    /* Sharp corners */
+    border-radius: 0;
+
+    padding: 24px;
+    box-shadow:
+        0 4px 24px -1px rgba(0, 0, 0, 0.3),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    /* Inner border for depth */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Removed hover transform/shadow effects as requested */
+
+.mockupHeader {
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.mockupLabel {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+}
+
+/* Footer CTA */
+/* Footer CTA */
+.staticFooter {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 150px;
+    display: flex;
+    justify-content: center;
+}
+
+.ctaCard {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    padding: 60px 40px;
+    text-align: center;
+
+    /* Frosty Glass Style */
+    background: radial-gradient(circle at center,
+            rgba(6, 182, 212, 0.08) 0%,
+            rgba(255, 255, 255, 0.01) 70%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Sharp Corners */
+    border-radius: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Corner Accents */
+.corner {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8), 0 0 20px 5px rgba(6, 182, 212, 0.5);
+}
+
+.tl {
+    top: -4px;
+    left: -4px;
+}
+
+.tr {
+    top: -4px;
+    right: -4px;
+}
+
+.bl {
+    bottom: -4px;
+    left: -4px;
+}
+
+.br {
+    bottom: -4px;
+    right: -4px;
+}
+
+.footerTitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.glowText {
+    /* Blue/Cyan Glow to match theme (No Red) */
+    text-shadow: 0 0 20px rgba(6, 182, 212, 0.6);
+    color: #ffffff;
+}
+
+.footerSub {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0;
+}
+
+.ctaButton {
+    margin-top: 20px;
+    padding: 16px 32px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.ctaButton:hover {
+    background: rgba(6, 182, 212, 0.15);
+    border-color: rgba(6, 182, 212, 0.5);
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+
+    .featureRow,
+    .featureRow.rowReverse {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 40px;
     }
 
-    .slideText {
-        font-size: 1.125rem;
-        line-height: 1.6;
+    .rowReverse .featureTextCol {
+        align-items: center;
     }
 
-    .slidesWrapper {
-        min-height: 150px;
+    .featureIconBox {
+        margin: 0 auto 24px;
     }
 }
