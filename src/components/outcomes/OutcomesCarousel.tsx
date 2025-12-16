@@ -163,11 +163,13 @@ export default function OutcomesCarousel() {
 
         // Load model
         try {
-            const gltf = await loader.loadAsync('/models/Winspire Logo.glb');
+            const gltf = await loader.loadAsync('/models/Winspire glossy Logo.glb');
             const model = gltf.scene;
 
-            // Scale and position model - bigger size
-            model.scale.setScalar(600);
+            // Scale and position model - responsive size
+            const isMobile = window.innerWidth <= 1024;
+            const modelScale = isMobile ? 300 : 600;
+            model.scale.setScalar(modelScale);
             model.rotation.x = -Math.PI / 2;
 
             // Center model

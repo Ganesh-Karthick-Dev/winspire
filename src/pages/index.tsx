@@ -168,7 +168,7 @@ export default function Home() {
         */}
                 {!is3DDisabled.current && (
                     <GLTFViewer
-                        url="/models/Winspire Logo.glb"
+                        url="/models/Winspire glossy Logo.glb"
                         onModelReady={handleModelReady}
                     />
                 )}

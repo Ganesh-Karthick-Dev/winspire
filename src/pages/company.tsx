@@ -183,7 +183,7 @@ export default function Company() {
                 {/* 3D Model */}
                 {!is3DDisabled.current && (
                     <GLTFViewer
-                        url="/models/Winspire Logo.glb"
+                        url="/models/Winspire glossy Logo.glb"
                         onModelReady={handleModelReady}
                         className="absolute inset-0 w-full h-full"
                     />

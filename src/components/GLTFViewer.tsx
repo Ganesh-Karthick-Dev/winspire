@@ -34,7 +34,7 @@ interface GLTFViewerProps {
 }
 
 export default function GLTFViewer({
-    url = '/models/Winspire Logo.glb',
+    url = '/models/Winspire glossy Logo.glb',
     onModelReady,
     onError,
     className,

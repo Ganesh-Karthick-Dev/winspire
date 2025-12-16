@@ -72,7 +72,7 @@ export default function OutcomesHero() {
             {/* 3D Model Layer */}
             <div className="absolute inset-0 z-10">
                 <GLTFViewer
-                    url="/models/Winspire Logo.glb"
+                    url="/models/Winspire glossy Logo.glb"
                     onModelReady={handleModelReady}
                     className="w-full h-full"
                 />
