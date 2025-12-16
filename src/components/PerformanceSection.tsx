@@ -127,7 +127,7 @@ export default function PerformanceSection() {
     return (
         <section ref={sectionRef} id="performance" className={styles.section}>
 
-            {/* DEBUG DISPLAY */}
+            {/* DEBUG DISPLAY - commented out
             <div style={{
                 position: 'fixed',
                 top: 0,
@@ -142,6 +142,7 @@ export default function PerformanceSection() {
             }}>
                 orbProgress: {orbProgress.toFixed(4)} | yPos: {orbPosition.y.toFixed(2)}% | glowCard: {activeGlowCard}
             </div>
+            */}
 
             {/* Phase 1: Sticky Intro Track (250vh) */}
             <div className={styles.introScrollTrack}>
