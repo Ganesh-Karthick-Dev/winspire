@@ -125,30 +125,27 @@
     transform: translateX(-50%);
 }
 
-/* Traveling Orb - pure red glowing sphere */
+/* Traveling Orb - compact red glow */
 .orb {
     position: fixed;
     left: 50%;
     top: 50%;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 100;
 
-    /* Tiny bright red core */
+    /* Bright red core */
     background: rgba(255, 50, 50, 1);
 
-    /* Wide soft diffused red glow - all visual comes from box-shadow */
+    /* Compact glow - just the center part */
     box-shadow:
-        0 0 10px 5px rgba(255, 40, 40, 0.9),
-        0 0 30px 15px rgba(255, 30, 30, 0.7),
-        0 0 60px 40px rgba(255, 30, 30, 0.5),
-        0 0 100px 70px rgba(255, 30, 30, 0.35),
-        0 0 160px 110px rgba(255, 30, 30, 0.2),
-        0 0 250px 180px rgba(255, 30, 30, 0.1),
-        0 0 350px 260px rgba(255, 30, 30, 0.05);
+        0 0 8px 4px rgba(255, 40, 40, 0.8),
+        0 0 20px 12px rgba(255, 30, 30, 0.5),
+        0 0 40px 25px rgba(255, 30, 30, 0.25),
+        0 0 60px 40px rgba(255, 30, 30, 0.1);
 }
 
 /* Phase 2: Static Feature List */
