@@ -117,8 +117,10 @@ export default function GLTFViewer({
             stateRef.current = state;
 
             // Set up resize handler
-            const handleResize = createResizeHandler(state.renderer, state.camera);
+            // Set up resize handler with model for responsive positioning
+            const handleResize = createResizeHandler(state.renderer, state.camera, state.model);
             window.addEventListener('resize', handleResize);
+            handleResize(); // Trigger once to set initial mobile/desktop position
 
             // Set up mouse tracking
             window.addEventListener('mousemove', handleMouseMove);

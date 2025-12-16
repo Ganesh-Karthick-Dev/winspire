@@ -267,7 +267,8 @@ export async function initializeThreeScene(
  */
 export function createResizeHandler(
     renderer: WebGLRenderer,
-    camera: PerspectiveCamera
+    camera: PerspectiveCamera,
+    model: Group | null = null
 ): () => void {
     return () => {
         const width = window.innerWidth;
@@ -278,6 +279,21 @@ export function createResizeHandler(
 
         renderer.setSize(width, height);
         renderer.setPixelRatio(getOptimalPixelRatio());
+
+        // Responsive Model Positioning
+        if (model) {
+            if (width < 768) {
+                // Mobile: Move model UP (top) and center
+                model.position.x = 0;
+                model.position.y = 0.4;
+                model.scale.setScalar(modelSettings.defaultScale * 0.75);
+            } else {
+                // Desktop: Restore original position and scale
+                model.position.x = 0.8;
+                model.position.y = 0;
+                model.scale.setScalar(modelSettings.defaultScale);
+            }
+        }
     };
 }
 

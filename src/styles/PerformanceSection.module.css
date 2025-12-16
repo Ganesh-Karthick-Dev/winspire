@@ -492,3 +492,26 @@
         margin: 0 auto 24px;
     }
 }
+
+@media (max-width: 768px) {
+    .featureList {
+        gap: 80px;
+        padding-bottom: 60px;
+    }
+
+    .featureTitle {
+        font-size: 2rem;
+    }
+
+    .mockupCard {
+        height: 250px;
+    }
+
+    .ctaCard {
+        padding: 40px 24px;
+    }
+
+    .footerTitle {
+        font-size: 2rem;
+    }
+}
