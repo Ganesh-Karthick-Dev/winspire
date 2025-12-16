@@ -49,8 +49,10 @@ const features = [
 
 export default function PerformanceSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const pathRef = useRef<SVGPathElement>(null);
     const [activeSlide, setActiveSlide] = useState(0);
     const [orbProgress, setOrbProgress] = useState(0); // 0 = start, 1 = end (top of CTA)
+    const [orbPosition, setOrbPosition] = useState({ x: 50, y: 0 }); // % position along path
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -79,10 +81,23 @@ export default function PerformanceSection() {
             if (scrolledInto > orbStartScroll) {
                 const orbScrollRange = orbEndScroll - orbStartScroll;
                 const orbScrolled = scrolledInto - orbStartScroll;
-                const progress = Math.max(0, Math.min(1, orbScrolled / orbScrollRange));
+                const progress = Math.max(0, Math.min(1.1, orbScrolled / orbScrollRange));
                 setOrbProgress(progress);
+
+                // Calculate orb position along the curved path
+                const path = pathRef.current;
+                if (path) {
+                    const pathLength = path.getTotalLength();
+                    const point = path.getPointAtLength(progress * pathLength); // Full path length
+                    // Convert SVG coordinates (0-400 x, 0-1200 y) to percentages
+                    setOrbPosition({
+                        x: (point.x / 400) * 100,
+                        y: (point.y / 1200) * 100
+                    });
+                }
             } else {
                 setOrbProgress(0);
+                setOrbPosition({ x: 50, y: 0 }); // Reset to top center
             }
         };
 
@@ -131,14 +146,43 @@ export default function PerformanceSection() {
                 </div>
             </div>
 
-            {/* Vertical Center Line - connects intro to CTA */}
-            <div className={styles.centerLine}></div>
 
-            {/* Orb - hides at orbProgress 0.92 (line end) */}
+            {/* Snake Wave Line - subtle curves below each card */}
+            <svg
+                className={styles.snakePath}
+                viewBox="0 0 400 1200"
+                preserveAspectRatio="none"
+            >
+                <path
+                    ref={pathRef}
+                    id="snakePathLine"
+                    d="M 200 0 
+                       L 200 200
+                       C 200 250, 280 300, 280 400
+                       C 280 550, 100 600, 100 700
+                       C 100 800, 280 850, 280 950
+                       C 280 1050, 200 1100, 200 1200"
+                    fill="none"
+                    stroke="url(#lineGradient)"
+                    strokeWidth="1"
+                />
+                <defs>
+                    <linearGradient id="lineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="rgba(255,255,255,0)" />
+                        <stop offset="10%" stopColor="rgba(255,255,255,0.3)" />
+                        <stop offset="50%" stopColor="rgba(255,255,255,0.2)" />
+                        <stop offset="100%" stopColor="rgba(255,255,255,0.1)" />
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            {/* Orb - follows curved path, hides at orbProgress 0.92 */}
             <div
                 className={styles.orb}
                 style={{
-                    opacity: orbProgress > 0 && orbProgress < 0.92 ? Math.min(1, orbProgress * 3) : 0,
+                    left: `${orbPosition.x}%`,
+                    top: `calc(200vh + (100% - 200vh - 585px) * ${orbPosition.y / 100})`,
+                    opacity: orbProgress > 0 && orbProgress < 1.1 ? Math.min(1, orbProgress * 3) : 0,
                 }}
             ></div>
 

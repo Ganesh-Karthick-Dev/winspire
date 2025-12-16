@@ -107,29 +107,21 @@
         0 0 15px rgba(6, 182, 212, 0.5);
 }
 
-/* Center Vertical Line - connects intro to CTA */
-.centerLine {
+/* Snake Wave Path - curved line behind feature cards */
+.snakePath {
     position: absolute;
-    left: 50%;
+    left: 0;
     top: 200vh;
-    /* Starts closer to the text (within the last 50vh of intro) */
-    width: 1px;
+    width: 100%;
     height: calc(100% - 200vh - 585px);
-    /* Stops at top border of CTA card */
-    background: linear-gradient(to bottom,
-            transparent 0%,
-            rgba(255, 255, 255, 0.3) 10%,
-            rgba(255, 255, 255, 0.2) 50%,
-            rgba(255, 255, 255, 0.1) 100%);
-    z-index: 5;
-    transform: translateX(-50%);
+    z-index: 1;
+    /* Behind feature cards */
+    pointer-events: none;
 }
 
-/* Traveling Orb - compact red glow */
+/* Traveling Orb - follows curved path */
 .orb {
-    position: fixed;
-    left: 50%;
-    top: 50%;
+    position: absolute;
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -229,14 +221,19 @@
 
 /* Simple Mockup Card Placeholder */
 .mockupCard {
+    position: relative;
+    z-index: 10;
+    /* Above snake path */
     width: 100%;
     height: 300px;
-    /* Frosty Glossy Look: Semi-transparent background with blur */
-    background: radial-gradient(120% 120% at 0% 0%,
-            rgba(255, 255, 255, 0.08) 0%,
-            rgba(255, 255, 255, 0.01) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    /* Frosty Glossy Look: More solid dark background with slight white overlay */
+    background:
+        radial-gradient(120% 120% at 0% 0%,
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(255, 255, 255, 0.03) 100%),
+        rgba(30, 35, 45, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-top: 1px solid rgba(255, 255, 255, 0.2);
