@@ -72,10 +72,9 @@ export default function PerformanceSection() {
                 setActiveSlide(slideIndex);
             }
 
-            // Orb movement logic - starts after intro, ends at CTA top
-            // The line starts at 200vh (top) and ends ~585px before section end
-            const orbStartScroll = vh * 2; // When orb starts moving (200vh into section)
-            const orbEndScroll = section.offsetHeight - 585; // When orb stops (top of CTA)
+            // Orb movement - starts near end of text slides, ends at line end
+            const orbStartScroll = vh * 1.2; // When orb starts (near line origin)
+            const orbEndScroll = section.offsetHeight - 585 - vh * 0.3; // Smaller offset - orb travels longer
 
             if (scrolledInto > orbStartScroll) {
                 const orbScrollRange = orbEndScroll - orbStartScroll;
@@ -94,6 +93,22 @@ export default function PerformanceSection() {
 
     return (
         <section ref={sectionRef} id="performance" className={styles.section}>
+
+            {/* DEBUG DISPLAY */}
+            <div style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                background: 'rgba(0,0,0,0.9)',
+                color: '#0f0',
+                padding: '10px',
+                zIndex: 1000,
+                fontFamily: 'monospace',
+                fontSize: '12px'
+            }}>
+                orbProgress: {orbProgress.toFixed(4)} | visible: {orbProgress > 0 && orbProgress < 0.95 ? 'YES' : 'NO'}
+            </div>
 
             {/* Phase 1: Sticky Intro Track (250vh) */}
             <div className={styles.introScrollTrack}>
@@ -119,11 +134,11 @@ export default function PerformanceSection() {
             {/* Vertical Center Line - connects intro to CTA */}
             <div className={styles.centerLine}></div>
 
-            {/* Traveling Orb - fixed in viewport center, fades in/out with scroll */}
+            {/* Orb - hides at orbProgress 0.92 (line end) */}
             <div
                 className={styles.orb}
                 style={{
-                    opacity: orbProgress > 0 && orbProgress < 1 ? Math.min(1, orbProgress * 3) : 0,
+                    opacity: orbProgress > 0 && orbProgress < 0.92 ? Math.min(1, orbProgress * 3) : 0,
                 }}
             ></div>
 
