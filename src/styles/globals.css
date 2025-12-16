@@ -593,6 +593,9 @@ section {
 @media (max-width: 768px) {
   .marquee-content {
     -webkit-text-stroke: 4px rgba(128, 128, 128, 0.4);
+    white-space: normal;
+    word-spacing: 0.1em;
+    line-height: 1.1;
   }
 }
 
