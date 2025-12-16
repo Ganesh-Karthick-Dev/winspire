@@ -111,14 +111,16 @@
 .centerLine {
     position: absolute;
     left: 50%;
-    top: 250vh;
-    /* Starts after the intro track (250vh) */
+    top: 200vh;
+    /* Starts closer to the text (within the last 50vh of intro) */
     width: 1px;
-    height: calc(100% - 250vh - 150px);
-    /* Full height minus intro and footer padding */
+    height: calc(100% - 200vh - 350px);
+    /* Stops at top of CTA card (accounts for footer padding + card height) */
     background: linear-gradient(to bottom,
-            rgba(255, 255, 255, 0.3),
-            rgba(255, 255, 255, 0.1));
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 10%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0.1) 100%);
     z-index: 5;
     transform: translateX(-50%);
 }
