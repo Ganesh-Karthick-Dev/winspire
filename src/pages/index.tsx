@@ -22,6 +22,7 @@ import MarqueeText from '@/components/MarqueeText';
 import Section from '@/components/Section';
 import FeaturesSection from '@/components/FeaturesSection';
 import VisionSection from '@/components/VisionSection';
+import PerformanceSection from '@/components/PerformanceSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D, prefersReducedMotion } from '@/lib/threeUtils';
 import type { ThreeState } from '@/lib/threeManager';
@@ -191,30 +192,8 @@ export default function Home() {
                 {/* Features Section - Two column with animated content */}
                 <FeaturesSection />
 
-                <Section id="performance" title="Performance">
-                    <p className="section-text">
-                        Built with performance as a priority. The 3D model loads after
-                        initial paint, ensuring fast LCP scores. Code-splitting keeps
-                        the initial bundle lean, and reduced motion preferences are
-                        respected for accessibility.
-                    </p>
-                </Section>
-
-                <Section id="technology" title="Technology">
-                    <p className="section-text">
-                        Powered by Next.js for SEO-friendly server rendering, Three.js
-                        for WebGL graphics, GSAP for smooth animations, and Lenis for
-                        buttery smooth scrolling. All working together seamlessly.
-                    </p>
-                </Section>
-
-                <Section id="cta" title="Get Started">
-                    <p className="section-text">
-                        Ready to create your own immersive 3D experience? Check out the
-                        documentation to learn how to customize the model, animations,
-                        and styling to match your brand.
-                    </p>
-                </Section>
+                {/* Performance Section - Scroll-driven text transition */}
+                <PerformanceSection />
 
                 {/* Vision Section - before footer */}
                 <VisionSection />
@@ -306,33 +285,7 @@ async function setupScrollAnimations(state: ThreeState) {
             scrub: true,
         },
     }).to(model.rotation, {
-        y: Math.PI * 0.5,  // 90 degrees total
-        ease: 'none',
-    });
-
-    // Technology section: continue rotation
-    gsap.timeline({
-        scrollTrigger: {
-            trigger: '#technology',
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-        },
-    }).to(model.rotation, {
         y: Math.PI * 0.75,  // 135 degrees total
-        ease: 'none',
-    });
-
-    // CTA section: complete rotation
-    gsap.timeline({
-        scrollTrigger: {
-            trigger: '#cta',
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-        },
-    }).to(model.rotation, {
-        y: Math.PI,  // 180 degrees total (half rotation)
         ease: 'none',
     });
 
@@ -346,19 +299,19 @@ async function setupScrollAnimations(state: ThreeState) {
         },
     })
         .to(model.position, {
-            x: -0.9,  // Move to left side (not too far)
+            x: -0.9,
             y: 0.3,
             ease: 'power2.out',
         }, 0)
         .to(model.scale, {
-            x: -50.9,  // Scale down (initial is 0.01, so 0.005 = 50% smaller)
+            x: -50.9,
             y: -50.9,
             z: -50.9,
             ease: 'power2.out',
         }, 0)
         .to(model.rotation, {
             x: Math.PI * 1.003,
-            y: Math.PI * 2,  // Slight rotation
+            y: Math.PI * 2,
             ease: 'none',
         }, 0);
 }

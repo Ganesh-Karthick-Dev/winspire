@@ -1,0 +1,154 @@
+/* PerformanceSection.module.css - CSS Sticky based scroll section */
+
+.section {
+    position: relative !important;
+    width: 100%;
+    /* Height for scroll distance - 2 slides worth of scrolling */
+    height: 200vh;
+    background: #1B1D1C;
+    /* Override global section styles */
+    display: block !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    flex-direction: unset !important;
+    justify-content: unset !important;
+}
+
+/* Sticky container - stays fixed while scrolling through parent */
+.stickyContainer {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Radial glow effect - sea blue - large circle, quarter visible */
+.glowBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        /* Large circle - center above viewport to show bottom quarter */
+        radial-gradient(circle 800px at 50% -400px,
+            rgba(6, 182, 212, 1) 0%,
+            rgba(8, 145, 178, 0.85) 30%,
+            rgba(6, 182, 212, 0.5) 50%,
+            rgba(34, 211, 238, 0.2) 70%,
+            transparent 90%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Text container - centered */
+.textContainer {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Slides wrapper */
+.slidesWrapper {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Individual text slide */
+.textSlide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    text-align: center;
+}
+
+.textSlide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Main text styling - proper paragraph */
+.slideText {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Glowing text for final slide - white center with sky blue glow outline */
+.slideText.glow {
+    color: #ffffff;
+    text-shadow:
+        /* Sky blue glow outline */
+        0 0 2px rgba(6, 182, 212, 1),
+        0 0 4px rgba(6, 182, 212, 0.9),
+        0 0 8px rgba(6, 182, 212, 0.7),
+        /* Subtle outer glow */
+        0 0 15px rgba(6, 182, 212, 0.5),
+        0 0 30px rgba(6, 182, 212, 0.3),
+        0 0 50px rgba(6, 182, 212, 0.2);
+}
+
+/* Responsive - Tablet */
+@media (max-width: 768px) {
+    .textContainer {
+        padding: 0 1.5rem;
+        max-width: 100%;
+    }
+
+    .slideText {
+        font-size: clamp(1.25rem, 5vw, 1.75rem);
+    }
+
+    .slidesWrapper {
+        min-height: 180px;
+    }
+
+    .glowBackground {
+        background: radial-gradient(circle 500px at 50% -250px,
+                rgba(6, 182, 212, 1) 0%,
+                rgba(8, 145, 178, 0.85) 30%,
+                rgba(6, 182, 212, 0.5) 50%,
+                rgba(34, 211, 238, 0.2) 70%,
+                transparent 90%);
+    }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+    .textContainer {
+        padding: 0 1rem;
+    }
+
+    .slideText {
+        font-size: 1.125rem;
+        line-height: 1.6;
+    }
+
+    .slidesWrapper {
+        min-height: 150px;
+    }
+}
