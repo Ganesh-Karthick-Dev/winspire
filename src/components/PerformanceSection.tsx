@@ -50,6 +50,7 @@ const features = [
 export default function PerformanceSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const [activeSlide, setActiveSlide] = useState(0);
+    const [orbProgress, setOrbProgress] = useState(0); // 0 = start, 1 = end (top of CTA)
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -59,15 +60,30 @@ export default function PerformanceSection() {
             // We only care about the intro track for text switching
             // CSS defines introScrollTrack as 250vh.
             const rect = section.getBoundingClientRect();
+            const vh = window.innerHeight;
             // Intro is the first 2.5 windows
-            const introHeight = window.innerHeight * 2.5;
+            const introHeight = vh * 2.5;
             const scrolledInto = -rect.top;
 
             // Text transition logic
             if (scrolledInto >= 0 && scrolledInto < introHeight) {
-                const progress = scrolledInto / (introHeight - window.innerHeight);
+                const progress = scrolledInto / (introHeight - vh);
                 const slideIndex = Math.min(Math.floor(progress * slides.length), slides.length - 1);
                 setActiveSlide(slideIndex);
+            }
+
+            // Orb movement logic - starts after intro, ends at CTA top
+            // The line starts at 200vh (top) and ends ~585px before section end
+            const orbStartScroll = vh * 2; // When orb starts moving (200vh into section)
+            const orbEndScroll = section.offsetHeight - 585; // When orb stops (top of CTA)
+
+            if (scrolledInto > orbStartScroll) {
+                const orbScrollRange = orbEndScroll - orbStartScroll;
+                const orbScrolled = scrolledInto - orbStartScroll;
+                const progress = Math.max(0, Math.min(1, orbScrolled / orbScrollRange));
+                setOrbProgress(progress);
+            } else {
+                setOrbProgress(0);
             }
         };
 
@@ -102,6 +118,14 @@ export default function PerformanceSection() {
 
             {/* Vertical Center Line - connects intro to CTA */}
             <div className={styles.centerLine}></div>
+
+            {/* Traveling Orb - fixed in viewport center, fades in/out with scroll */}
+            <div
+                className={styles.orb}
+                style={{
+                    opacity: orbProgress > 0 && orbProgress < 1 ? Math.min(1, orbProgress * 3) : 0,
+                }}
+            ></div>
 
             {/* Phase 2: Static Feature List */}
             <div className={styles.featureList}>
