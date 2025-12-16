@@ -54,6 +54,7 @@ export default function PerformanceSection() {
     const [orbProgress, setOrbProgress] = useState(0); // 0 = start, 1 = end (top of CTA)
     const [orbPosition, setOrbPosition] = useState({ x: 50, y: 0 }); // % position along path
     const [activeGlowCard, setActiveGlowCard] = useState(-1); // Which card (0-3) should glow, -1 = none
+    const [ctaActivated, setCtaActivated] = useState(false); // True when orb reaches CTA
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -108,6 +109,9 @@ export default function PerformanceSection() {
                     } else {
                         setActiveGlowCard(-1); // No glow
                     }
+
+                    // Activate CTA effects when orb reaches end
+                    setCtaActivated(progress >= 1.0);
                 }
             } else {
                 setOrbProgress(0);
@@ -233,7 +237,7 @@ export default function PerformanceSection() {
 
             {/* 3. Footer CTA - Frosty Glass Card Layout */}
             <div className={styles.staticFooter}>
-                <div className={styles.ctaCard}>
+                <div className={`${styles.ctaCard} ${ctaActivated ? styles.ctaCardActivated : ''}`}>
                     {/* Corner Accents */}
                     <div className={`${styles.corner} ${styles.tl}`}></div>
                     <div className={`${styles.corner} ${styles.tr}`}></div>
@@ -250,7 +254,7 @@ export default function PerformanceSection() {
                         Go from zero to live detection in minutes.
                     </p>
 
-                    <button className={styles.ctaButton}>
+                    <button className={`${styles.ctaButton} ${ctaActivated ? styles.ctaButtonActivated : ''}`}>
                         Learn more about Baits
                     </button>
                 </div>
