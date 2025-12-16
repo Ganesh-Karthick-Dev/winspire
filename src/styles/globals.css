@@ -815,6 +815,14 @@ section {
   background: transparent;
 }
 
+@media (max-width: 768px) {
+  .features-section {
+    min-height: auto;
+    padding: 80px 24px;
+    display: block;
+  }
+}
+
 .features-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
