@@ -273,8 +273,43 @@ export default function Navbar() {
         }, 800);
     };
 
+    const [navTheme, setNavTheme] = useState<'light' | 'dark'>('dark'); // Default to dark (black text) for Hero
+
+    useEffect(() => {
+        const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.id === 'performance') {
+                        setNavTheme('light');
+                    } else {
+                        // Hero, Features, Vision, etc. -> Dark Theme (Black Text)
+                        setNavTheme('dark');
+                    }
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(handleIntersect, {
+            root: null,
+            rootMargin: '-10% 0px -90% 0px', // Trigger near top
+            threshold: 0
+        });
+
+        // Observe sections
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => observer.observe(section));
+
+        return () => observer.disconnect();
+    }, []);
+
+    const isDarkTheme = navTheme === 'dark';
+    // If menu is open, force white text (because background is dark).
+    // Otherwise use theme color (black for Hero, white for others).
+    const effectiveTextColor = isMenuOpen ? '#ffffff' : (isDarkTheme ? '#1a1a1a' : '#ffffff');
+    const logoFilter = isDarkTheme ? 'invert(1) brightness(0)' : 'none';
+
     return (
-        <nav className="navbar">
+        <nav className="navbar" style={{ transition: 'color 0.3s ease' }}>
             {/* Logo */}
             <a href="/" className="navbar-logo">
                 <Image
@@ -283,6 +318,10 @@ export default function Navbar() {
                     width={140}
                     height={40}
                     priority
+                    style={{
+                        filter: logoFilter,
+                        transition: 'filter 0.3s ease'
+                    }}
                 />
             </a>
 
@@ -298,17 +337,18 @@ export default function Navbar() {
                     aria-expanded={isMenuOpen}
                     aria-haspopup="true"
                     disabled={isAnimating}
+                    style={{ color: effectiveTextColor }}
                 >
                     <span className="navbar-menu-text">MENU</span>
                     {/* 4 dots or 1 dot */}
                     {showSingleDot ? (
-                        <span className="navbar-single-dot"></span>
+                        <span className="navbar-single-dot" style={{ backgroundColor: effectiveTextColor }}></span>
                     ) : (
                         <span className="navbar-menu-icon" ref={gridDotsRef}>
-                            <span className="grid-dot"></span>
-                            <span className="grid-dot"></span>
-                            <span className="grid-dot"></span>
-                            <span className="grid-dot"></span>
+                            <span className="grid-dot" style={{ backgroundColor: effectiveTextColor }}></span>
+                            <span className="grid-dot" style={{ backgroundColor: effectiveTextColor }}></span>
+                            <span className="grid-dot" style={{ backgroundColor: effectiveTextColor }}></span>
+                            <span className="grid-dot" style={{ backgroundColor: effectiveTextColor }}></span>
                         </span>
                     )}
                 </button>
@@ -316,7 +356,7 @@ export default function Navbar() {
                 {/* Menu Content - animated with GSAP */}
                 {isMenuOpen && (
                     <div className="navbar-menu-content" ref={menuContentRef}>
-                        <div className="navbar-menu-divider" ref={dividerRef}></div>
+                        <div className="navbar-menu-divider" ref={dividerRef} style={{ backgroundColor: effectiveTextColor }}></div>
                         <ul className="navbar-menu-list" ref={menuItemsRef}>
                             {navItems.map((item) => (
                                 <li key={item.label}>
@@ -327,6 +367,7 @@ export default function Navbar() {
                                             e.preventDefault();
                                             handleNavClick(item.href, item.label);
                                         }}
+                                        style={{ color: effectiveTextColor }}
                                     >
                                         {item.label}
                                     </a>

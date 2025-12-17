@@ -1187,7 +1187,7 @@ footer p {
   font-family: 'Outfit', sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: #fff;
+  color: inherit;
   letter-spacing: 0.08em;
 }
 
