@@ -410,6 +410,7 @@ section {
   justify-content: flex-end;
   z-index: 1;
   /* SVG Background replacing white card */
+  background-color: #ffffff;
   background-image: url('/svg/landing_hero/Hero Banner Bg.svg');
   background-size: cover;
   background-position: center;
