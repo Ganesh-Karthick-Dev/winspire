@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useCallback } from 'react';
+import { modelSettings } from '@/config/three-settings';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { HiCog, HiCurrencyDollar, HiShieldCheck, HiCode, HiChartBar } from 'react-icons/hi';
@@ -163,7 +164,7 @@ export default function OutcomesCarousel() {
 
         // Load model
         try {
-            const gltf = await loader.loadAsync('/models/Winspire glossy Logo.glb');
+            const gltf = await loader.loadAsync(modelSettings.defaultModelUrl);
             const model = gltf.scene;
 
             // Scale and position model - responsive size

@@ -126,7 +126,7 @@ export default function BookDemo() {
                 {/* Layer 2: 3D Model (absolute inside relative section) */}
                 {!is3DDisabled.current && (
                     <GLTFViewer
-                        url="/models/Winspire glossy Logo.glb"
+
                         onModelReady={handleModelReady}
                         className="absolute inset-0 w-full h-full"
                     />

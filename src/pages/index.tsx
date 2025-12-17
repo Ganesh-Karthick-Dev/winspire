@@ -100,7 +100,7 @@ export default function Home() {
         */}
                 {!is3DDisabled.current && (
                     <GLTFViewer
-                        url="/models/Winspire glossy Logo.glb"
+
                         onModelReady={handleModelReady}
                         className="!z-20"
                     />

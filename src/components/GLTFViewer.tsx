@@ -14,6 +14,7 @@
  */
 
 import { useEffect, useRef, useCallback } from 'react';
+import { modelSettings } from '@/config/three-settings';
 import WebGLCanvas from './WebGLCanvas';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import {
@@ -34,7 +35,7 @@ interface GLTFViewerProps {
 }
 
 export default function GLTFViewer({
-    url = '/models/Winspire glossy Logo.glb',
+    url = modelSettings.defaultModelUrl,
     onModelReady,
     onError,
     className,
