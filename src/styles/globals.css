@@ -443,6 +443,7 @@ section {
   .hero-title {
     font-size: clamp(2rem, 10vw, 3rem);
     /* Slightly larger clamp for mobile impact */
+    max-width: 100%;
   }
 }
 
@@ -450,6 +451,7 @@ section {
   margin-bottom: 20px;
   perspective: 1000px;
   color: #1a1a1a;
+  max-width: 50%;
 }
 
 /* Animated title styles */
