@@ -94,53 +94,65 @@ export default function GLTFViewer({
 
         const model = stateRef.current.model;
 
-        // Continuous smooth rotation - Y-axis (horizontal turntable spin)
-        // Controlled by settings or prop
+        // Continuous smooth rotation - Z-axis (Wheel spin)
         continuousRotation.current += rotateSpeed;
 
-        // Apply rotation: Y-axis for turntable effect
-        model.rotation.x = baseRotationX.current;
-        model.rotation.y = baseRotationY.current + continuousRotation.current;
-        model.rotation.z = baseRotationZ.current;
-    }, [rotateSpeed]);
+        if (manualTransform) {
+            // MODE A: Manual Control (Home Page)
+            // Absolute source of truth is the prop
+            const radX = toRadians(manualTransform.rotation.x);
+            const radY = toRadians(manualTransform.rotation.y);
+            // Z is Manual Bank + Continuous Spin
+            const radZ = toRadians(manualTransform.rotation.z);
+
+            model.rotation.x = radX;
+            model.rotation.y = radY;
+            model.rotation.z = radZ - continuousRotation.current;
+        } else {
+            // MODE B: Internal Control (Animation/GSAP driven)
+            // Use captured refs
+            model.rotation.x = baseRotationX.current;
+            model.rotation.y = baseRotationY.current;
+            model.rotation.z = baseRotationZ.current - continuousRotation.current;
+        }
+    }, [rotateSpeed, manualTransform]); // Re-create if props change
 
     // Store base rotation when GSAP updates it
     const captureBaseRotation = useCallback(() => {
         if (!stateRef.current?.model) return;
 
+        // If Manual Transform is active, DO NOT capture from model.
+        if (manualTransform) return;
+
         const model = stateRef.current.model;
 
-        // Capture base rotation (subtract continuous from Y)
         if (!isAtVisionSection.current) {
             baseRotationX.current = model.rotation.x;
-            baseRotationY.current = model.rotation.y - continuousRotation.current;
-            baseRotationZ.current = model.rotation.z;
+            baseRotationY.current = model.rotation.y;
+            baseRotationZ.current = model.rotation.z + continuousRotation.current;
         }
-    }, []);
+    }, [manualTransform]);
 
     // Track previous manual transform for delta updates
     const prevManualTransform = useRef(manualTransform);
 
+    // Helper: Convert degrees to radians
+    const toRadians = (deg: number) => (deg * Math.PI) / 180;
+
     // Handle Live Updates (HMR/Prop changes)
+    // Only needed for Position/Scale now, as Rotation is handled directly in animation loop
     useEffect(() => {
         if (!stateRef.current?.model || !manualTransform) return;
 
         const model = stateRef.current.model;
         const prev = prevManualTransform.current;
 
-        // 1. Update Rotation
-        // Directly update base refs so animation loop picks them up
-        baseRotationX.current = manualTransform.rotation.x;
-        // For Y, we update the base, and the continuous rotation continues on top of it
-        baseRotationY.current = manualTransform.rotation.y;
-        baseRotationZ.current = manualTransform.rotation.z;
-
-        // 2. Update Scale
+        // 1. Update Scale
         if (manualTransform.scale !== prev?.scale) {
             model.scale.setScalar(manualTransform.scale);
         }
 
-        // 3. Update Position (Delta approach to preserve centering)
+        // 2. Update Position (Delta approach)
         if (prev) {
             const dx = manualTransform.position.x - prev.position.x;
             const dy = manualTransform.position.y - prev.position.y;
@@ -163,19 +175,29 @@ export default function GLTFViewer({
 
         // ... existing initialization code ...
         try {
+            // Prepare config with converted radians
+            const finalConfig = manualTransform ? {
+                ...manualTransform,
+                rotation: {
+                    x: toRadians(manualTransform.rotation.x),
+                    y: toRadians(manualTransform.rotation.y),
+                    z: toRadians(manualTransform.rotation.z),
+                }
+            } : undefined;
+
             // Initialize Three.js and load model
-            const state = await initializeThreeScene(canvas, url, manualTransform);
+            const state = await initializeThreeScene(canvas, url, finalConfig);
             stateRef.current = state;
 
             // Initialize base rotation refs from the config immediately
             if (manualTransform) {
-                baseRotationX.current = manualTransform.rotation.x;
-                baseRotationY.current = manualTransform.rotation.y;
-                baseRotationZ.current = manualTransform.rotation.z;
+                baseRotationX.current = toRadians(manualTransform.rotation.x);
+                baseRotationY.current = toRadians(manualTransform.rotation.y);
+                baseRotationZ.current = toRadians(manualTransform.rotation.z);
             }
 
-            // Set up resize handler
-            const handleResize = createResizeHandler(state.renderer, state.camera, state.model, manualTransform);
+            // Set up resize handler with converted config
+            const handleResize = createResizeHandler(state.renderer, state.camera, state.model, finalConfig);
             window.addEventListener('resize', handleResize);
             handleResize(); // Trigger once to set initial mobile/desktop position
 

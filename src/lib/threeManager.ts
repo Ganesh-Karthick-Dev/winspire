@@ -169,32 +169,56 @@ async function loadGLTFwithManager(
             url,
             (gltf) => {
                 const model = gltf.scene;
-                const rawBox = new THREE.Box3().setFromObject(model);
-                const rawCenter = rawBox.getCenter(new THREE.Vector3());
 
-                // 3. Apply Scale and Rotation (Use Config or Defaults)
-                const { scale, rotation } = transformConfig;
-                model.scale.setScalar(scale);
-                model.rotation.set(rotation.x, rotation.y, rotation.z);
+                // --------------------------------------------------------
+                // MODEL HIERARCHY SETUP
+                // --------------------------------------------------------
+                // Wrapper: Controls Position, Scale, Manual Tilt, and Animation Spin
+                const wrapper = new THREE.Group();
+                wrapper.add(model);
 
-                // 4. Center Model in Scene
+                // Correction: Hardcoded rotation to make model stand up
+                // This is hidden from the user so they can work with 0,0,0
+                model.rotation.x = -Math.PI / 2;
+                model.rotation.y = 0;
+                model.rotation.z = 0;
+
+                // Center the Inner Model (Geometric Centering)
                 if (modelSettings.centerModel) {
                     const box = new THREE.Box3().setFromObject(model);
                     const center = box.getCenter(new THREE.Vector3());
+                    // Apply offset to inner model to center it within the wrapper
                     model.position.sub(center);
                 }
 
+                // --------------------------------------------------------
+                // APPLY USER CONFIG TO WRAPPER
+                // --------------------------------------------------------
+
+                // 3. Apply Scale and Rotation (Use Config or Defaults)
+                const { scale, rotation } = transformConfig;
+
+                // Scale applies to the wrapper
+                wrapper.scale.setScalar(scale);
+
+                // Rotation applies to the wrapper (Convert Degrees to Radians if coming from manual)
+                // Note: We assume transformConfig might be in radians (default) or degrees (manual)
+                // For safety, we will handle conversion in GLTFViewer or check here? 
+                // Let's assume standard radians for internal logic, but if manual, we convert.
+                // However, to keep this function pure, let's say transformConfig passes RADIANS.
+                // We will convert degrees->radians in index.tsx/GLTFViewer before passing here.
+                wrapper.rotation.set(rotation.x, rotation.y, rotation.z);
+
                 // Apply Position Offset (Use Config or Defaults)
                 const { position } = transformConfig;
-                model.position.x += position.x;
-                model.position.y += position.y;
-                model.position.z += position.z;
+                wrapper.position.x += position.x;
+                wrapper.position.y += position.y;
+                wrapper.position.z += position.z;
 
-                // 5. Add Axes Helper
+                // 5. Add Axes Helper (Attached to Wrapper to show effective center)
                 if (modelSettings.showAxes) {
-                    const axesHelper = new THREE.AxesHelper(0.2);
-                    axesHelper.position.copy(rawCenter);
-                    model.add(axesHelper);
+                    const axesHelper = new THREE.AxesHelper(0.5); // Larger helper
+                    wrapper.add(axesHelper);
                 }
 
                 // Apply glossy material
@@ -209,7 +233,8 @@ async function loadGLTFwithManager(
                     }
                 });
 
-                resolve(model);
+                // Return the wrapper as the "model"
+                resolve(wrapper);
             },
             undefined,
             reject

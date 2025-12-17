@@ -56,7 +56,7 @@ export const modelSettings = {
     centerModel: true,
 
     // Debug: Show Axes Helper (X:Red, Y:Green, Z:Blue)
-    showAxes: false,
+    showAxes: true,
 
     // ========================================================================
     // MANUAL CONTROLS
@@ -73,13 +73,15 @@ export const modelSettings = {
             z: 0
         },
 
-        // Initial Rotation (in radians)
-        // Math.PI = 180 degrees
-        // -Math.PI/2 = -90 degrees (standard for GLTF facing up)
+        // Initial Rotation (in DEGREES)
+        // 0, 0, 0 = Upright facing forward
+        // X: Tilt forward/backward
+        // Y: Rotate left/right (Starting angle)
+        // Z: Tilt side-to-side (Banking)
         rotation: {
-            x: -Math.PI / 2,
-            y: 0,
-            z: 0.234
+            x: 2.823,
+            y: 1,
+            z: 3
         },
     },
 
