@@ -828,6 +828,7 @@ section {
   justify-content: center;
   padding: 100px 60px;
   background: transparent;
+  z-index: 30;
 }
 
 @media (max-width: 768px) {
@@ -1281,6 +1282,7 @@ footer p {
   justify-content: center;
   padding: 80px 40px;
   overflow: hidden;
+  z-index: 30;
 }
 
 .vision-content {
@@ -1379,7 +1381,7 @@ footer p {
 
 .site-footer {
   position: relative;
-  z-index: 10;
+  z-index: 30;
   background: #0a0a0a;
   padding: 30px 40px 0;
   font-family: 'Outfit', sans-serif;

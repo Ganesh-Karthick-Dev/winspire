@@ -9,6 +9,7 @@
     display: block !important;
     min-height: auto !important;
     padding: 0 !important;
+    z-index: 30 !important;
 }
 
 /* Phase 1: Intro Track with Sticky Text */
