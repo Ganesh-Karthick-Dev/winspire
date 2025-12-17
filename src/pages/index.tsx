@@ -171,6 +171,7 @@ export default function Home() {
                     <GLTFViewer
                         url="/models/Winspire glossy Logo.glb"
                         onModelReady={handleModelReady}
+                        className="!z-20"
                     />
                 )}
 

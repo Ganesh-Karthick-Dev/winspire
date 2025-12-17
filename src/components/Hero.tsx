@@ -398,7 +398,6 @@ export default function Hero({
                                             </span>
                                         ))}
                                     </span>
-                                    {wordIndex < lineWords.length - 1 && <span className="hero-word-space">&nbsp;</span>}
                                 </span>
                             ))}
                             {lineIndex < titleLines.length - 1 && <br />}
