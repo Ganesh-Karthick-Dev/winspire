@@ -158,36 +158,46 @@ async function loadGLTFwithManager(
             (gltf) => {
                 const model = gltf.scene;
 
-                // Scale model first
+                // 1. Calculate raw center (Local space, unscaled, unrotated)
+                const rawBox = new THREE.Box3().setFromObject(model);
+                const rawCenter = rawBox.getCenter(new THREE.Vector3());
+
+
+
+                // 3. Apply Scale and Rotation
                 model.scale.setScalar(modelSettings.defaultScale);
+                model.rotation.x = -Math.PI / 2;
+                model.rotation.y = 0;
+                model.rotation.z = 0;
 
-                // Rotate model to stand upright (no extra tilt for clean spin)
-                model.rotation.x = -Math.PI / 2;   // Stand up from lying flat
-                model.rotation.y = 0;              // No sideways tilt
-                model.rotation.z = 0;              // Continuous rotation applied here
-
-                // Then center model if configured
+                // 4. Center Model in Scene (Calculate box WITHOUT axes helper)
                 if (modelSettings.centerModel) {
                     const box = new THREE.Box3().setFromObject(model);
                     const center = box.getCenter(new THREE.Vector3());
                     model.position.sub(center);
                 }
 
-                // Move model slightly to the right
-                model.position.x += 0.8;
+                // 5. Add Axes Helper (Now it moves/scales/rotates with model, but stays visual centered)
+                if (modelSettings.showAxes) {
+                    const axesHelper = new THREE.AxesHelper(0.2);
+                    axesHelper.position.copy(rawCenter);
+                    model.add(axesHelper);
+                }
 
                 // Apply glossy material effect
                 model.traverse((child) => {
                     const mesh = child as import('three').Mesh;
                     if (mesh.isMesh && mesh.material) {
                         const material = mesh.material as import('three').MeshStandardMaterial;
-                        // Make it glossy
                         material.metalness = 0.3;
                         material.roughness = 0.2;
                         material.envMapIntensity = 1.5;
                         material.needsUpdate = true;
                     }
                 });
+
+                // Move model slightly to the right (post-centering adjustment)
+                model.position.x += 0.8;
 
                 resolve(model);
             },

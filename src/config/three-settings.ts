@@ -54,6 +54,9 @@ export const modelSettings = {
 
     // Center model in scene
     centerModel: true,
+
+    // Debug: Show Axes Helper (X:Red, Y:Green, Z:Blue)
+    showAxes: true,
 } as const;
 
 /**

@@ -167,16 +167,29 @@ export default function OutcomesCarousel() {
             const gltf = await loader.loadAsync(modelSettings.defaultModelUrl);
             const model = gltf.scene;
 
-            // Scale and position model - responsive size
+            // 1. Calculate raw center (Local space, unscaled, unrotated)
+            const rawBox = new THREE.Box3().setFromObject(model);
+            const rawCenter = rawBox.getCenter(new THREE.Vector3());
+
+
+
+            // 3. Scale and Position relative to screen (responsive)
             const isMobile = window.innerWidth <= 1024;
             const modelScale = isMobile ? 300 : 600;
             model.scale.setScalar(modelScale);
             model.rotation.x = -Math.PI / 2;
 
-            // Center model
+            // 4. Center model in scene (Calculate box WITHOUT axes helper)
             const box = new THREE.Box3().setFromObject(model);
             const center = box.getCenter(new THREE.Vector3());
             model.position.sub(center);
+
+            // 5. Add Axes Helper
+            if (modelSettings.showAxes) {
+                const axesHelper = new THREE.AxesHelper(0.2);
+                axesHelper.position.copy(rawCenter);
+                model.add(axesHelper);
+            }
 
             scene.add(model);
             threeStateRef.current = { scene, camera, renderer, model };
