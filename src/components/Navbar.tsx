@@ -317,23 +317,31 @@ export default function Navbar() {
 
     const isDarkTheme = navTheme === 'dark';
     // If menu is open, force white text (because background is dark).
-    // Otherwise use theme color (black for Hero, white for others).
-    const effectiveTextColor = isMenuOpen ? '#ffffff' : (isDarkTheme ? '#1a1a1a' : '#ffffff');
-    const logoFilter = isDarkTheme ? 'invert(1) brightness(0)' : 'none';
+    // Otherwise use theme color (#083151 for Light BG, White for Dark BG).
+    // #083151 is the requested "black" replacement.
+    const effectiveTextColor = isMenuOpen ? '#ffffff' : (isDarkTheme ? '#083151' : '#ffffff');
+
+    // We use a CSS mask for the logo to ensure exact color matching
+    // Filter is harder to get exact hex.
 
     return (
         <nav className="navbar" style={{ transition: 'color 0.3s ease' }}>
             {/* Logo */}
             <a href="/" className="navbar-logo">
-                <Image
-                    src="/images/Logo-White.svg"
-                    alt="Winspire Logo"
-                    width={140}
-                    height={40}
-                    priority
+                <div
                     style={{
-                        filter: logoFilter,
-                        transition: 'filter 0.3s ease'
+                        width: '140px',
+                        height: '40px',
+                        backgroundColor: effectiveTextColor, // This controls the logo color directly
+                        maskImage: 'url("/images/Logo-White.svg")',
+                        maskSize: 'contain',
+                        maskRepeat: 'no-repeat',
+                        maskPosition: 'left center',
+                        WebkitMaskImage: 'url("/images/Logo-White.svg")',
+                        WebkitMaskSize: 'contain',
+                        WebkitMaskRepeat: 'no-repeat',
+                        WebkitMaskPosition: 'left center',
+                        transition: 'background-color 0.3s ease'
                     }}
                 />
             </a>
