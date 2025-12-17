@@ -12,7 +12,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
     { label: 'Home', href: '/' },
-    { label: 'Neura AI', href: '#neura-ai' },
+    // { label: 'Neura AI', href: '#neura-ai' },
     { label: 'Solutions', href: '#solutions' },
     { label: 'Outcomes', href: '/outcomes' },
     { label: 'Company', href: '/company' },
