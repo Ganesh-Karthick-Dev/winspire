@@ -143,7 +143,7 @@ export default function Hero({
                 gsap.to(letterEl, {
                     scale: 1,
                     y: 0,
-                    color: '#fff',
+                    color: '#1a1a1a',
                     duration: 0.4,
                     ease: 'elastic.out(1, 0.4)'
                 });
@@ -172,7 +172,7 @@ export default function Hero({
                     gsap.to(letterEl, {
                         scale: 1,
                         y: 0,
-                        color: '#fff',
+                        color: '#1a1a1a',
                         duration: 0.4,
                         ease: 'elastic.out(1, 0.4)'
                     });
@@ -185,12 +185,12 @@ export default function Hero({
             // Group letters by line (each line is a word group in the title)
             const lines: HTMLElement[][] = [];
             let currentLine: HTMLElement[] = [];
-            
+
             lettersArray.forEach((letter) => {
                 // Check if this letter starts a new line (after a break)
                 const parent = letter.closest('.hero-word');
                 const prevSibling = parent?.previousElementSibling;
-                
+
                 if (prevSibling && prevSibling.tagName === 'BR') {
                     if (currentLine.length > 0) {
                         lines.push(currentLine);
