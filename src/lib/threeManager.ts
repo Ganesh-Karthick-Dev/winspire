@@ -124,67 +124,80 @@ function initializeScene(canvas: HTMLCanvasElement, THREE: THREE): ThreeState {
  * @param GLTFLoader - GLTF loader class
  * @param DRACOLoader - Draco loader class
  */
+// Types for Transform Configuration
+export interface TransformConfig {
+    scale: number;
+    position: { x: number; y: number; z: number };
+    rotation: { x: number; y: number; z: number };
+}
+
+// Neutral default transform
+const defaultTransform: TransformConfig = {
+    scale: modelSettings.defaultScale,
+    position: { x: 0, y: 0, z: 0 },
+    rotation: { x: -Math.PI / 2, y: 0, z: 0 }
+};
+
+/**
+ * Load GLTF model with LoadingManager for progress tracking
+ */
 async function loadGLTFwithManager(
     url: string,
     THREE: THREE,
     GLTFLoader: typeof import('three/examples/jsm/loaders/GLTFLoader.js').GLTFLoader,
-    DRACOLoader: typeof import('three/examples/jsm/loaders/DRACOLoader.js').DRACOLoader
+    DRACOLoader: typeof import('three/examples/jsm/loaders/DRACOLoader.js').DRACOLoader,
+    transformConfig: TransformConfig = defaultTransform
 ): Promise<Group> {
     return new Promise((resolve, reject) => {
-        // Create LoadingManager for progress tracking
+        // ... (existing loading manager setup)
         const manager = new THREE.LoadingManager();
-
         manager.onProgress = (_url, loaded, total) => {
             const percent = Math.round((loaded / total) * 100);
             handleFastLoad(percent);
         };
-
         manager.onError = (url) => {
             console.error(`Error loading: ${url}`);
             reject(new Error(`Failed to load: ${url}`));
         };
 
-        // Setup Draco loader
         const dracoLoader = new DRACOLoader(manager);
         dracoLoader.setDecoderPath(modelSettings.dracoDecoderPath);
-
-        // Setup GLTF loader
         const loader = new GLTFLoader(manager);
         loader.setDRACOLoader(dracoLoader);
 
-        // Load the model
         loader.load(
             url,
             (gltf) => {
                 const model = gltf.scene;
-
-                // 1. Calculate raw center (Local space, unscaled, unrotated)
                 const rawBox = new THREE.Box3().setFromObject(model);
                 const rawCenter = rawBox.getCenter(new THREE.Vector3());
 
+                // 3. Apply Scale and Rotation (Use Config or Defaults)
+                const { scale, rotation } = transformConfig;
+                model.scale.setScalar(scale);
+                model.rotation.set(rotation.x, rotation.y, rotation.z);
 
-
-                // 3. Apply Scale and Rotation
-                model.scale.setScalar(modelSettings.defaultScale);
-                model.rotation.x = -Math.PI / 2;
-                model.rotation.y = 0;
-                model.rotation.z = 0;
-
-                // 4. Center Model in Scene (Calculate box WITHOUT axes helper)
+                // 4. Center Model in Scene
                 if (modelSettings.centerModel) {
                     const box = new THREE.Box3().setFromObject(model);
                     const center = box.getCenter(new THREE.Vector3());
                     model.position.sub(center);
                 }
 
-                // 5. Add Axes Helper (Now it moves/scales/rotates with model, but stays visual centered)
+                // Apply Position Offset (Use Config or Defaults)
+                const { position } = transformConfig;
+                model.position.x += position.x;
+                model.position.y += position.y;
+                model.position.z += position.z;
+
+                // 5. Add Axes Helper
                 if (modelSettings.showAxes) {
                     const axesHelper = new THREE.AxesHelper(0.2);
                     axesHelper.position.copy(rawCenter);
                     model.add(axesHelper);
                 }
 
-                // Apply glossy material effect
+                // Apply glossy material
                 model.traverse((child) => {
                     const mesh = child as import('three').Mesh;
                     if (mesh.isMesh && mesh.material) {
@@ -196,12 +209,9 @@ async function loadGLTFwithManager(
                     }
                 });
 
-                // Move model slightly to the right (post-centering adjustment)
-                model.position.x += 0.8;
-
                 resolve(model);
             },
-            undefined, // Progress is handled by LoadingManager
+            undefined,
             reject
         );
     });
@@ -238,35 +248,27 @@ async function waitForFirstFrame(): Promise<void> {
 
 /**
  * Full initialization sequence
- * @param canvas - Canvas element
- * @param modelUrl - URL of the GLTF model
- * @returns ThreeState with all initialized objects
  */
 export async function initializeThreeScene(
     canvas: HTMLCanvasElement,
-    modelUrl: string = modelSettings.defaultModelUrl
+    modelUrl: string = modelSettings.defaultModelUrl,
+    transformConfig: TransformConfig = defaultTransform
 ): Promise<ThreeState> {
-    // Dynamically load Three.js
     const { THREE, GLTFLoader, DRACOLoader } = await loadThreeDynamically();
-
-    // Initialize scene
     const state = initializeScene(canvas, THREE);
 
-    // Load model with progress tracking
     const model = await loadGLTFwithManager(
         modelUrl,
         THREE,
         GLTFLoader,
-        DRACOLoader
+        DRACOLoader,
+        transformConfig
     );
     state.model = model;
     state.scene.add(model);
 
-    // Warmup sequence
     await warmupScene(state.scene, state.renderer, state.camera);
     await waitForFirstFrame();
-
-    // Complete loading sequence (fades out loader, shows canvas)
     await finishLoader();
 
     return state;
@@ -278,7 +280,8 @@ export async function initializeThreeScene(
 export function createResizeHandler(
     renderer: WebGLRenderer,
     camera: PerspectiveCamera,
-    model: Group | null = null
+    model: Group | null = null,
+    transformConfig: TransformConfig = defaultTransform
 ): () => void {
     return () => {
         const width = window.innerWidth;
@@ -296,12 +299,15 @@ export function createResizeHandler(
                 // Mobile: Move model UP (top) and center
                 model.position.x = 0;
                 model.position.y = 0.4;
-                model.scale.setScalar(modelSettings.defaultScale * 0.75);
+                // Mobile scale is 75% of desktop scale (whether manual or default)
+                model.scale.setScalar(transformConfig.scale * 0.75);
             } else {
-                // Desktop: Restore original position and scale
-                model.position.x = 0.8;
-                model.position.y = 0;
-                model.scale.setScalar(modelSettings.defaultScale);
+                // Desktop: Restore Provided settings (Neutral or Manual)
+                const { position, scale } = transformConfig;
+                model.position.x = position.x;
+                model.position.y = position.y;
+                model.position.z = position.z;
+                model.scale.setScalar(scale);
             }
         }
     };

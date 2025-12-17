@@ -28,18 +28,29 @@ import { scheduleIdleLoad } from '@/lib/threeUtils';
 interface GLTFViewerProps {
     /** URL to the GLTF/GLB model */
     url?: string;
+    /** Optional manual transform for the model */
+    manualTransform?: {
+        scale: number;
+        position: { x: number; y: number; z: number };
+        rotation: { x: number; y: number; z: number };
+    };
+    /** Speed of idle rotation */
+    rotateSpeed?: number;
     /** Callback when model is loaded and ready */
     onModelReady?: (state: ThreeState) => void;
     /** Callback for errors */
     onError?: (error: Error) => void;
+    className?: string; // Explicitly included in interface
 }
 
 export default function GLTFViewer({
     url = modelSettings.defaultModelUrl,
+    manualTransform,
+    rotateSpeed = modelSettings.animation.rotateSpeed,
     onModelReady,
     onError,
     className,
-}: GLTFViewerProps & { className?: string }) {
+}: GLTFViewerProps) {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const stateRef = useRef<ThreeState | null>(null);
     const animationRef = useRef<{ start: () => void; stop: () => void } | null>(null);
@@ -84,14 +95,14 @@ export default function GLTFViewer({
         const model = stateRef.current.model;
 
         // Continuous smooth rotation - Y-axis (horizontal turntable spin)
-        // 0.003 radians per frame ≈ 10° per second (smooth and premium)
-        continuousRotation.current += 0.003;
+        // Controlled by settings or prop
+        continuousRotation.current += rotateSpeed;
 
         // Apply rotation: Y-axis for turntable effect
         model.rotation.x = baseRotationX.current;
         model.rotation.y = baseRotationY.current + continuousRotation.current;
         model.rotation.z = baseRotationZ.current;
-    }, []);
+    }, [rotateSpeed]);
 
     // Store base rotation when GSAP updates it
     const captureBaseRotation = useCallback(() => {
@@ -107,19 +118,64 @@ export default function GLTFViewer({
         }
     }, []);
 
+    // Track previous manual transform for delta updates
+    const prevManualTransform = useRef(manualTransform);
+
+    // Handle Live Updates (HMR/Prop changes)
+    useEffect(() => {
+        if (!stateRef.current?.model || !manualTransform) return;
+
+        const model = stateRef.current.model;
+        const prev = prevManualTransform.current;
+
+        // 1. Update Rotation
+        // Directly update base refs so animation loop picks them up
+        baseRotationX.current = manualTransform.rotation.x;
+        // For Y, we update the base, and the continuous rotation continues on top of it
+        baseRotationY.current = manualTransform.rotation.y;
+        baseRotationZ.current = manualTransform.rotation.z;
+
+        // 2. Update Scale
+        if (manualTransform.scale !== prev?.scale) {
+            model.scale.setScalar(manualTransform.scale);
+        }
+
+        // 3. Update Position (Delta approach to preserve centering)
+        if (prev) {
+            const dx = manualTransform.position.x - prev.position.x;
+            const dy = manualTransform.position.y - prev.position.y;
+            const dz = manualTransform.position.z - prev.position.z;
+
+            model.position.x += dx;
+            model.position.y += dy;
+            model.position.z += dz;
+        }
+
+        // Update ref
+        prevManualTransform.current = manualTransform;
+
+    }, [manualTransform]);
+
     // Initialize Three.js scene
     const initializeScene = useCallback(async (canvas: HTMLCanvasElement) => {
         if (isInitializedRef.current) return;
         isInitializedRef.current = true;
 
+        // ... existing initialization code ...
         try {
             // Initialize Three.js and load model
-            const state = await initializeThreeScene(canvas, url);
+            const state = await initializeThreeScene(canvas, url, manualTransform);
             stateRef.current = state;
 
+            // Initialize base rotation refs from the config immediately
+            if (manualTransform) {
+                baseRotationX.current = manualTransform.rotation.x;
+                baseRotationY.current = manualTransform.rotation.y;
+                baseRotationZ.current = manualTransform.rotation.z;
+            }
+
             // Set up resize handler
-            // Set up resize handler with model for responsive positioning
-            const handleResize = createResizeHandler(state.renderer, state.camera, state.model);
+            const handleResize = createResizeHandler(state.renderer, state.camera, state.model, manualTransform);
             window.addEventListener('resize', handleResize);
             handleResize(); // Trigger once to set initial mobile/desktop position
 
@@ -162,7 +218,7 @@ export default function GLTFViewer({
                 onError(error instanceof Error ? error : new Error('Failed to initialize 3D scene'));
             }
         }
-    }, [url, onModelReady, onError, handleMouseMove, checkVisionSection, captureBaseRotation, updateRotation]);
+    }, [url, manualTransform, onModelReady, onError, handleMouseMove, checkVisionSection, captureBaseRotation, updateRotation]);
 
     // Handle canvas ready
     const handleCanvasReady = useCallback((canvas: HTMLCanvasElement) => {

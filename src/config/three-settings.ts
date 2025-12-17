@@ -47,7 +47,7 @@ export const modelSettings = {
     dracoDecoderPath: '/draco/',
 
     // Default model URL
-    defaultModelUrl: '/models/Winspire glossy Logo.glb', 
+    defaultModelUrl: '/models/Winspire glossy Logo.glb',
 
     // Scale multiplier for the model (larger for logo visibility)
     defaultScale: 125,
@@ -57,6 +57,36 @@ export const modelSettings = {
 
     // Debug: Show Axes Helper (X:Red, Y:Green, Z:Blue)
     showAxes: false,
+
+    // ========================================================================
+    // MANUAL CONTROLS
+    // Edit these values to fine-tune the model's appearance
+    // ========================================================================
+    manualTransform: {
+        // Size of the model (Default: 125)
+        scale: 125,
+
+        // Position offset from center (x=0, y=0, z=0 is center)
+        position: {
+            x: 0,
+            y: 0,
+            z: 0
+        },
+
+        // Initial Rotation (in radians)
+        // Math.PI = 180 degrees
+        // -Math.PI/2 = -90 degrees (standard for GLTF facing up)
+        rotation: {
+            x: -Math.PI / 2,
+            y: 0,
+            z: 0.234
+        },
+    },
+
+    animation: {
+        // Speed of the idle rotation (0 = stop, 0.003 = slow, 0.01 = fast)
+        rotateSpeed: 0,
+    }
 } as const;
 
 /**
