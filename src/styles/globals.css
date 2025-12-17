@@ -409,35 +409,32 @@ section {
   align-items: flex-start;
   justify-content: flex-end;
   z-index: 1;
-  /* White rounded card background */
-  background: rgba(255, 255, 255, 0.90);
+  /* SVG Background replacing white card */
+  background-image: url('/svg/landing_hero/Hero Banner Bg.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Retain glassmorphism effects on top of SVG if needed, or remove if SVG has them */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 24px;
   padding: 60px;
+
   /* Subtle shadow for depth */
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.1),
     0 2px 8px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  /* Reduced opacity on inset */
+
   /* Subtle border */
   border: 1px solid rgba(255, 255, 255, 0.6);
   position: relative;
   overflow: hidden;
 }
 
-/* Subtle oval gradient overlay */
-.hero-content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  background: radial-gradient(ellipse at right center, rgba(8, 49, 81, 0.3) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
+/* Removed ::before pseudo-element as SVG replaces the gradient overlay */
 
 /* Ensure content sits above the gradient */
 .hero-title,
