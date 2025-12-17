@@ -410,7 +410,7 @@ section {
   justify-content: flex-end;
   z-index: 1;
   /* White rounded card background */
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.90);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 24px;
@@ -1118,14 +1118,16 @@ footer p {
 
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 94%;
+  margin: 0;
   z-index: 1000;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 20px 40px;
+  padding: 20px 0;
   background: transparent;
   font-family: 'Outfit', sans-serif;
   pointer-events: none;
