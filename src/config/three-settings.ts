@@ -47,7 +47,7 @@ export const modelSettings = {
     dracoDecoderPath: '/draco/',
 
     // Default model URL
-    defaultModelUrl: '/models/Winspire glossy Logo.glb',
+    defaultModelUrl: '/models/Winspire glossy Logo.glb', 
 
     // Scale multiplier for the model (larger for logo visibility)
     defaultScale: 125,
@@ -56,7 +56,7 @@ export const modelSettings = {
     centerModel: true,
 
     // Debug: Show Axes Helper (X:Red, Y:Green, Z:Blue)
-    showAxes: true,
+    showAxes: false,
 } as const;
 
 /**

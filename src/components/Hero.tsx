@@ -10,6 +10,7 @@
 
 import { useRef, useEffect, useMemo } from 'react';
 import gsap from 'gsap';
+import HeroParticles from './HeroParticles';
 
 interface HeroProps {
     /** Main heading (h1) */
@@ -381,6 +382,9 @@ export default function Hero({
     return (
         <section className="hero" aria-labelledby="hero-title">
             <div className="hero-content" ref={heroContentRef}>
+                {/* Background Particles */}
+                <HeroParticles />
+
                 {/* Animated H1 - letters with hover effect */}
                 <h1 id="hero-title" className="hero-title hero-title-animated" ref={titleRef}>
                     {titleLines.map((lineWords, lineIndex) => (
@@ -459,4 +463,3 @@ export default function Hero({
         </section>
     );
 }
-
