@@ -334,7 +334,7 @@ export default function OutcomesCarousel() {
     }, [rotateModel]);
 
     return (
-        <section ref={sectionRef} className={styles.section}>
+        <section id="outcomes-carousel" ref={sectionRef} className={styles.section}>
             <div className={styles.container}>
                 {/* Left Content Area */}
                 <div className={styles.contentArea}>

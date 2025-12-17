@@ -71,6 +71,7 @@ export default function OutcomesTeam() {
 
     return (
         <section
+            id="outcomes-team"
             ref={sectionRef}
             className={styles.section}
         >

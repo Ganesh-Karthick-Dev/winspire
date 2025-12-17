@@ -89,7 +89,7 @@ export default function OutcomesVision() {
     const wordList = ['workflow', 'individual', 'claim', 'dollar'];
 
     return (
-        <section ref={sectionRef} className="relative h-screen bg-[#FDFBF7] overflow-hidden">
+        <section id="outcomes-vision" ref={sectionRef} className="relative h-screen bg-[#FDFBF7] overflow-hidden">
             <div className="relative w-full h-full flex flex-col items-center justify-center">
 
                 {/* Top Left Text */}

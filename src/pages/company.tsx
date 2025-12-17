@@ -179,7 +179,7 @@ export default function Company() {
     return (
         <Layout title="Company" description="About Winspire RCM">
             {/* Hero Section */}
-            <section className={`${styles.heroSection} company-hero`}>
+            <section id="company-hero" className={`${styles.heroSection} company-hero`}>
                 {/* 3D Model */}
                 {!is3DDisabled.current && (
                     <GLTFViewer

@@ -235,94 +235,96 @@ export default function ContentSection() {
     const titleText = "Winspire RCM .";
 
     return (
-        <section ref={sectionRef} className={styles.contentSection}>
+        <section id="company-content" ref={sectionRef} className={styles.contentSection}>
             <div className={styles.contentInner}>
-                <h3 ref={headerRef} className={styles.topHeader}>
-                    <span className="header-line" style={{ display: 'block' }}>A New Kind of RCM Company.</span>
-                    <span className="header-line" style={{ display: 'block' }}>AI-Driven. People-Focused.</span>
-                    <span className="header-line" style={{ display: 'block' }}>Outcome-Obsessed.</span>
-                </h3>
-
-                <h2 ref={titleRef} className={styles.mainTitle}>
-                    {titleText.split('').map((char, index) => (
-                        <span
-                            key={index}
-                            className="title-char"
-                            style={{
-                                display: 'inline-block',
-                                whiteSpace: 'pre'
-                            }}
-                        >
-                            {char}
-                        </span>
-                    ))}
-                </h2>
-
-                <div ref={descContainerRef} className={styles.descriptionContainer}>
-                    <h3 ref={desc1Ref} className={`${styles.topHeader2} ${styles.descriptionSection}`}>
-                        <span className="header-line" style={{ display: 'block' }}>is built on a simple belief — healthcare</span>
-                        <span className="header-line" style={{ display: 'block' }}>organizations deserve a revenue cycle that is</span>
-                        <span className="header-line" style={{ display: 'block' }}>intelligent, predictable, transparent, and built to scale.</span>
+                <div id="company-intro">
+                    <h3 ref={headerRef} className={styles.topHeader}>
+                        <span className="header-line" style={{ display: 'block' }}>A New Kind of RCM Company.</span>
+                        <span className="header-line" style={{ display: 'block' }}>AI-Driven. People-Focused.</span>
+                        <span className="header-line" style={{ display: 'block' }}>Outcome-Obsessed.</span>
                     </h3>
 
-                    <h3 ref={desc2Ref} className={`${styles.topHeader2} ${styles.descriptionSection}`}>
-                        <span className="header-line" style={{ display: 'block' }}> combine advanced AI, automation, and</span>
-                        <span className="header-line" style={{ display: 'block' }}>ooperational expertise to create a system-driven</span>
-                        <span className="header-line" style={{ display: 'block' }}>RCM model that delivers measurable results</span>
-                        <span className="header-line" style={{ display: 'block' }}>Revery single time.</span>
-                    </h3>
-                </div>
+                    <h2 ref={titleRef} className={styles.mainTitle}>
+                        {titleText.split('').map((char, index) => (
+                            <span
+                                key={index}
+                                className="title-char"
+                                style={{
+                                    display: 'inline-block',
+                                    whiteSpace: 'pre'
+                                }}
+                            >
+                                {char}
+                            </span>
+                        ))}
+                    </h2>
 
-                {/* Stacking Cards */}
-                <div className={styles.stackingContainer}>
-                    {[
-                        { title: "AI-Enabled RCM Ecosystem", description: "An intelligent revenue cycle framework that automates workflows, reduces inefficiencies, and drives smarter financial outcomes.", image: "/images/company-page/ai-assistant-ai-chatbot-generate-images-write-code-writer-bot-translate-advertising-llm.webp" },
-                        { title: "Zero Client Attrition", description: "Building lasting partnerships through exceptional service delivery and consistent results that exceed expectations.", image: "/images/company-page/business-people-shaking-hands-congratulations-work-success.webp" },
-                        { title: "Zero Employee Attrition", description: "Creating a workplace culture that values growth, innovation, and employee satisfaction for long-term success.", image: "/images/company-page/network-digit-0.webp" },
-                        { title: "ISO 27001 + ISO 9001 Standards", description: "Maintaining the highest standards of information security and quality management across all operations.", image: "/images/company-page/iso-standards-quality-control-businessman-hold-virtual-globe-with-quality-assurance-guarantee-product-iso-standard-certification-modern-iso-banner.webp" },
-                        { title: "100% Cloud-Based & Secure", description: "Leveraging modern cloud infrastructure to ensure scalability, reliability, and enterprise-grade security.", image: "/images/company-page/cloud-computing-cyber-security.webp" },
-                        { title: "24-Hour TAT Culture", description: "Committed to rapid turnaround times that keep your revenue cycle moving efficiently and effectively.", image: "/images/company-page/ai-assistant-ai-chatbot-generate-images-write-code-writer-bot-translate-advertising-llm.webp" },
-                        { title: "Transparent Dashboards for Every Client", description: "Real-time visibility into performance metrics and outcomes through intuitive, customizable dashboards.", image: "/images/company-page/business-people-shaking-hands-congratulations-work-success.webp" }
-                    ].map((card, index) => {
-                        const isEven = index % 2 === 0;
+                    <div ref={descContainerRef} className={styles.descriptionContainer}>
+                        <h3 ref={desc1Ref} className={`${styles.topHeader2} ${styles.descriptionSection}`}>
+                            <span className="header-line" style={{ display: 'block' }}>is built on a simple belief — healthcare</span>
+                            <span className="header-line" style={{ display: 'block' }}>organizations deserve a revenue cycle that is</span>
+                            <span className="header-line" style={{ display: 'block' }}>intelligent, predictable, transparent, and built to scale.</span>
+                        </h3>
 
-                        return (
-                            <div key={index} className={styles.stackCard}>
-                                <div className={styles.stackCardContent}>
-                                    {/* Text on left for even index */}
-                                    {isEven && (
-                                        <div className={styles.stackTextContent}>
-                                            <h4 className={styles.stackCardTitle}>{card.title}</h4>
-                                            <p className={styles.stackCardDescription}>{card.description}</p>
+                        <h3 ref={desc2Ref} className={`${styles.topHeader2} ${styles.descriptionSection}`}>
+                            <span className="header-line" style={{ display: 'block' }}> combine advanced AI, automation, and</span>
+                            <span className="header-line" style={{ display: 'block' }}>ooperational expertise to create a system-driven</span>
+                            <span className="header-line" style={{ display: 'block' }}>RCM model that delivers measurable results</span>
+                            <span className="header-line" style={{ display: 'block' }}>Revery single time.</span>
+                        </h3>
+                    </div>
+
+                    {/* Stacking Cards */}
+                    <div className={styles.stackingContainer}>
+                        {[
+                            { title: "AI-Enabled RCM Ecosystem", description: "An intelligent revenue cycle framework that automates workflows, reduces inefficiencies, and drives smarter financial outcomes.", image: "/images/company-page/ai-assistant-ai-chatbot-generate-images-write-code-writer-bot-translate-advertising-llm.webp" },
+                            { title: "Zero Client Attrition", description: "Building lasting partnerships through exceptional service delivery and consistent results that exceed expectations.", image: "/images/company-page/business-people-shaking-hands-congratulations-work-success.webp" },
+                            { title: "Zero Employee Attrition", description: "Creating a workplace culture that values growth, innovation, and employee satisfaction for long-term success.", image: "/images/company-page/network-digit-0.webp" },
+                            { title: "ISO 27001 + ISO 9001 Standards", description: "Maintaining the highest standards of information security and quality management across all operations.", image: "/images/company-page/iso-standards-quality-control-businessman-hold-virtual-globe-with-quality-assurance-guarantee-product-iso-standard-certification-modern-iso-banner.webp" },
+                            { title: "100% Cloud-Based & Secure", description: "Leveraging modern cloud infrastructure to ensure scalability, reliability, and enterprise-grade security.", image: "/images/company-page/cloud-computing-cyber-security.webp" },
+                            { title: "24-Hour TAT Culture", description: "Committed to rapid turnaround times that keep your revenue cycle moving efficiently and effectively.", image: "/images/company-page/ai-assistant-ai-chatbot-generate-images-write-code-writer-bot-translate-advertising-llm.webp" },
+                            { title: "Transparent Dashboards for Every Client", description: "Real-time visibility into performance metrics and outcomes through intuitive, customizable dashboards.", image: "/images/company-page/business-people-shaking-hands-congratulations-work-success.webp" }
+                        ].map((card, index) => {
+                            const isEven = index % 2 === 0;
+
+                            return (
+                                <div key={index} className={styles.stackCard}>
+                                    <div className={styles.stackCardContent}>
+                                        {/* Text on left for even index */}
+                                        {isEven && (
+                                            <div className={styles.stackTextContent}>
+                                                <h4 className={styles.stackCardTitle}>{card.title}</h4>
+                                                <p className={styles.stackCardDescription}>{card.description}</p>
+                                            </div>
+                                        )}
+
+                                        {/* Image always in center */}
+                                        <div className={styles.stackImageContent}>
+                                            <Image
+                                                src={card.image}
+                                                alt={card.title}
+                                                width={800}
+                                                height={550}
+                                                className={styles.stackImage}
+                                            />
                                         </div>
-                                    )}
 
-                                    {/* Image always in center */}
-                                    <div className={styles.stackImageContent}>
-                                        <Image
-                                            src={card.image}
-                                            alt={card.title}
-                                            width={800}
-                                            height={550}
-                                            className={styles.stackImage}
-                                        />
+                                        {/* Text on right for odd index */}
+                                        {!isEven && (
+                                            <div className={styles.stackTextContent}>
+                                                <h4 className={styles.stackCardTitle}>{card.title}</h4>
+                                                <p className={styles.stackCardDescription}>{card.description}</p>
+                                            </div>
+                                        )}
                                     </div>
-
-                                    {/* Text on right for odd index */}
-                                    {!isEven && (
-                                        <div className={styles.stackTextContent}>
-                                            <h4 className={styles.stackCardTitle}>{card.title}</h4>
-                                            <p className={styles.stackCardDescription}>{card.description}</p>
-                                        </div>
-                                    )}
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
+                    </div>
                 </div>
 
                 {/* Mission & Vision Section */}
-                <div className={styles.missionVisionSection}>
+                <div id="company-mission" className={styles.missionVisionSection}>
                     {/* Mission Row */}
                     <div className={styles.missionRow}>
                         <div className={styles.missionLeft}>

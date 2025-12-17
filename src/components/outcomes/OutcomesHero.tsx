@@ -51,6 +51,7 @@ export default function OutcomesHero() {
 
     return (
         <section
+            id="outcomes-hero"
             className="relative mx-auto overflow-hidden bg-[#0F172A]"
             style={{
                 width: '98%',

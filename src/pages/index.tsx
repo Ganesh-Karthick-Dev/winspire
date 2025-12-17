@@ -84,77 +84,8 @@ export default function Home() {
         if (prefersReducedMotion()) {
             return;
         }
-
-        let lenis: import('lenis').default | undefined;
-        let rafId: number;
-
-        const setupScrolling = async () => {
-            try {
-                // Dynamically import Lenis and GSAP
-                const [LenisModule, { gsap }, { ScrollTrigger }] = await Promise.all([
-                    import('lenis'),
-                    import('gsap'),
-                    import('gsap/ScrollTrigger'),
-                ]);
-
-                gsap.registerPlugin(ScrollTrigger);
-
-                // Apply ScrollTrigger defaults for SEO-friendly animations
-                ScrollTrigger.defaults({
-                    anticipatePin: 1,
-                    markers: false,
-                    invalidateOnRefresh: true,
-                });
-
-                // Initialize Lenis smooth scroll
-                lenis = new LenisModule.default({
-                    lerp: 0.08,
-                    smoothWheel: true,
-                });
-
-                // RAF loop for Lenis
-                const raf = (time: number) => {
-                    lenis?.raf(time);
-                    rafId = requestAnimationFrame(raf);
-                };
-                rafId = requestAnimationFrame(raf);
-
-                // Sync Lenis with ScrollTrigger
-                lenis.on('scroll', ScrollTrigger.update);
-
-                // ScrollerProxy for Lenis
-                ScrollTrigger.scrollerProxy(document.body, {
-                    scrollTop(value?: number) {
-                        if (typeof value === 'number') {
-                            lenis?.scrollTo(value);
-                        }
-                        return lenis?.scroll ?? 0;
-                    },
-                    getBoundingClientRect() {
-                        return {
-                            top: 0,
-                            left: 0,
-                            width: window.innerWidth,
-                            height: window.innerHeight,
-                        };
-                    },
-                });
-
-                // Refresh ScrollTrigger after setup
-                ScrollTrigger.refresh();
-
-            } catch (error) {
-                console.error('Failed to initialize scroll system:', error);
-            }
-        };
-
-        setupScrolling();
-
-        return () => {
-            if (rafId) cancelAnimationFrame(rafId);
-            lenis?.destroy();
-        };
     }, []);
+
 
     return (
         <Layout

@@ -279,10 +279,12 @@ export default function Navbar() {
         const handleIntersect = (entries: IntersectionObserverEntry[]) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    if (entry.target.id === 'performance') {
+                    // Sections with Dark Background -> Light Theme (White Text)
+                    if (['performance', 'outcomes-hero', 'outcomes-team', 'outcomes-carousel', 'company-hero', 'company-mission'].includes(entry.target.id)) {
                         setNavTheme('light');
                     } else {
-                        // Hero, Features, Vision, etc. -> Dark Theme (Black Text)
+                        // All other sections (Hero, Features, Vision, Outcomes Vision, Company Intro) -> Dark Theme (Black Text)
+                        // This includes 'company-intro' which is the white part of the company page
                         setNavTheme('dark');
                     }
                 }
@@ -295,9 +297,20 @@ export default function Navbar() {
             threshold: 0
         });
 
-        // Observe sections
+        // Observe sections (Skip company-content as we observe its children)
         const sections = document.querySelectorAll('section');
-        sections.forEach(section => observer.observe(section));
+        sections.forEach(section => {
+            if (section.id !== 'company-content') {
+                observer.observe(section);
+            }
+        });
+
+        // Observe specific components for finer control
+        const distinctSections = ['company-intro', 'company-mission'];
+        distinctSections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
 
         return () => observer.disconnect();
     }, []);
