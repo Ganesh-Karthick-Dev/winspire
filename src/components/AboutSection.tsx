@@ -4,7 +4,7 @@
  * Matches the "Style Port" reference design:
  * - Empty transition space at the top (for 3D model focus)
  * - "About Us" label pinned top-left
- * - Large headline reveals from bottom on scroll
+ * - Large headline at CENTER CENTER
  * - All text on left side, leaving right side for 3D model
  */
 
@@ -47,7 +47,7 @@ export default function AboutSection() {
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: sectionRef.current,
-                        start: 'top 40%', // Headline appears later in scroll
+                        start: 'top 40%',
                         toggleActions: 'play none none reverse',
                     }
                 }
@@ -61,46 +61,112 @@ export default function AboutSection() {
     return (
         <>
             {/* === TRANSITION SPACER === */}
-            {/* Empty space where only the 3D model is visible (user adjusts manually) */}
             <section
                 id="transition-zone"
-                className="h-[100vh] relative"
+                className="relative"
+                style={{ height: '100vh' }}
                 aria-hidden="true"
             >
-                {/* This is intentionally empty - just scroll space for 3D animation */}
+                {/* Empty - just scroll space for 3D animation */}
             </section>
 
             {/* === ABOUT US SECTION === */}
             <section
                 id="about"
                 ref={sectionRef}
-                className="min-h-screen relative flex flex-col justify-between py-20 px-8 md:px-16 lg:px-24"
+                style={{
+                    position: 'relative',
+                    height: '100vh',
+                    width: '100%',
+                    overflow: 'hidden',
+                }}
             >
-                {/* Top Left: "About Us" Label */}
-                <div ref={labelRef} className="flex flex-col gap-1 max-w-md">
+                {/* Top Left: "About Us" Label - Absolute positioned */}
+                <div
+                    ref={labelRef}
+                    style={{
+                        position: 'absolute',
+                        top: '80px',
+                        left: '48px',
+                    }}
+                >
                     <div className="flex items-center gap-3">
-                        <span className="w-2 h-2 bg-white/60 rounded-full" />
-                        <h2 className="text-white text-lg md:text-xl font-bold tracking-[0.15em] font-[Outfit]">
+                        <span
+                            style={{
+                                width: '8px',
+                                height: '8px',
+                                backgroundColor: 'rgba(255,255,255,0.6)',
+                                borderRadius: '50%',
+                            }}
+                        />
+                        <h2
+                            style={{
+                                color: 'white',
+                                fontSize: '1.25rem',
+                                fontWeight: 700,
+                                letterSpacing: '0.15em',
+                                fontFamily: 'Outfit, sans-serif',
+                            }}
+                        >
                             About Us
                         </h2>
                     </div>
-                    <span className="text-white/50 text-xs md:text-sm font-[Outfit] tracking-wider ml-5">
+                    <span
+                        style={{
+                            color: 'rgba(255,255,255,0.5)',
+                            fontSize: '0.75rem',
+                            fontFamily: 'Outfit, sans-serif',
+                            letterSpacing: '0.1em',
+                            marginLeft: '20px',
+                            display: 'block',
+                            marginTop: '4px',
+                        }}
+                    >
                         Establish New Standards
                     </span>
                 </div>
 
-                {/* Bottom Center: Large Headline */}
-                <div ref={headlineRef} className="mt-auto w-full text-center">
-                    <h3 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-white leading-[1.15] font-[Outfit]">
+                {/* Center Center: HUGE Headline - Absolute positioned */}
+                <div
+                    ref={headlineRef}
+                    style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        textAlign: 'center',
+                        width: '100%',
+                        padding: '0 24px',
+                    }}
+                >
+                    <h3
+                        style={{
+                            color: 'white',
+                            fontSize: 'clamp(2rem, 8vw, 7rem)',
+                            fontWeight: 700,
+                            lineHeight: 1.1,
+                            fontFamily: 'Outfit, sans-serif',
+                            letterSpacing: '-0.02em',
+                            margin: 0,
+                        }}
+                    >
                         Rebuilding the Society
-                        <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-100 to-white">
-                            through Digital Twins
-                        </span>
+                    </h3>
+                    <h3
+                        style={{
+                            color: 'white',
+                            fontSize: 'clamp(2rem, 8vw, 7rem)',
+                            fontWeight: 700,
+                            lineHeight: 1.1,
+                            fontFamily: 'Outfit, sans-serif',
+                            letterSpacing: '-0.02em',
+                            margin: 0,
+                            marginTop: '0.1em',
+                        }}
+                    >
+                        through Digital Twins
                     </h3>
                 </div>
-
-                {/* Right side remains empty for 3D model space */}
             </section>
         </>
     );
