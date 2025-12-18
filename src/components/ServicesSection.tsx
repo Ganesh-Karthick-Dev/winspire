@@ -8,9 +8,20 @@
  */
 
 import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+// Register ScrollTrigger
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function ServicesSection() {
     const videoRef = useRef<HTMLVideoElement>(null);
+    const para1Ref = useRef<HTMLParagraphElement>(null);
+    const para2Ref = useRef<HTMLParagraphElement>(null);
+    const para3Ref = useRef<HTMLParagraphElement>(null);
+    const sectionRef = useRef<HTMLElement>(null);
 
     // Auto-play video when in view
     useEffect(() => {
@@ -34,9 +45,40 @@ export default function ServicesSection() {
         return () => observer.disconnect();
     }, []);
 
+    // GSAP Scroll-triggered fade animations for individual lines
+    // Only fade IN from bottom when scrolling down, no fade out when scrolling up
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Get all fade-line elements
+            const lines = document.querySelectorAll('.fade-line');
+
+            lines.forEach((line) => {
+                // Set initial state - faded and slightly below
+                gsap.set(line, { opacity: 0.15, y: 15 });
+
+                // Fade in from bottom when entering viewport
+                gsap.to(line, {
+                    opacity: 1,
+                    y: 0,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: line,
+                        start: 'top 95%',
+                        end: 'top 60%',
+                        scrub: 0.3,
+                        // Once animation is done, it stays - no reverse
+                    }
+                });
+            });
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
         <section
             id="services"
+            ref={sectionRef}
             style={{
                 position: 'relative',
                 width: '100%',
@@ -64,7 +106,8 @@ export default function ServicesSection() {
                         height: '100vh',
                         display: 'flex',
                         flexDirection: 'column',
-                        justifyContent: 'center',
+                        justifyContent: 'flex-start',
+                        paddingTop: '40px',
                         paddingRight: '60px',
                         flexShrink: 0,
                     }}
@@ -176,59 +219,63 @@ export default function ServicesSection() {
                         />
                     </div>
 
-                    {/* Text Paragraph 1 */}
-                    <p
+                    {/* Text Block 1 */}
+                    <div
+                        ref={para1Ref}
                         style={{
                             color: 'white',
-                            fontSize: '23px',
-                            lineHeight: 1.85,
+                            fontSize: '25px',
+                            lineHeight: 2,
                             fontFamily: 'Outfit, sans-serif',
-                            opacity: 0.9,
                             maxWidth: '450px',
                             textAlign: 'left',
                         }}
                     >
-                        Our platform empowers businesses to transform their digital presence
-                        through cutting-edge 3D visualization technology. We bridge the gap
-                        between imagination and reality, creating immersive experiences that
-                        captivate audiences and drive results.
-                    </p>
+                        <span className="fade-line" style={{ display: 'block' }}>Our platform empowers businesses to</span>
+                        <span className="fade-line" style={{ display: 'block' }}>transform their digital presence through</span>
+                        <span className="fade-line" style={{ display: 'block' }}>cutting-edge 3D visualization technology.</span>
+                        <span className="fade-line" style={{ display: 'block' }}>We bridge the gap between imagination</span>
+                        <span className="fade-line" style={{ display: 'block' }}>and reality, creating immersive experiences</span>
+                        <span className="fade-line" style={{ display: 'block' }}>that captivate audiences and drive results.</span>
+                    </div>
 
-                    {/* Text Paragraph 2 */}
-                    <p
+                    {/* Text Block 2 */}
+                    <div
+                        ref={para2Ref}
                         style={{
                             color: 'white',
-                            fontSize: '23px',
-                            lineHeight: 1.85,
+                            fontSize: '25px',
+                            lineHeight: 2,
                             fontFamily: 'Outfit, sans-serif',
-                            opacity: 0.9,
                             maxWidth: '450px',
                             textAlign: 'left',
                         }}
                     >
-                        For enterprises seeking operational efficiency and automation,
-                        and for individuals looking for intuitive solutions, we develop
-                        services using cutting-edge technology to realize both without
-                        compromise.
-                    </p>
+                        <span className="fade-line" style={{ display: 'block' }}>For enterprises seeking operational</span>
+                        <span className="fade-line" style={{ display: 'block' }}>efficiency and automation, and for</span>
+                        <span className="fade-line" style={{ display: 'block' }}>individuals looking for intuitive solutions,</span>
+                        <span className="fade-line" style={{ display: 'block' }}>we develop services using cutting-edge</span>
+                        <span className="fade-line" style={{ display: 'block' }}>technology to realize both without compromise.</span>
+                    </div>
 
-                    {/* Text Paragraph 3 - Last item, no extra space after */}
-                    <p
+                    {/* Text Block 3 */}
+                    <div
+                        ref={para3Ref}
                         style={{
                             color: 'white',
-                            fontSize: '23px',
-                            lineHeight: 1.85,
+                            fontSize: '25px',
+                            lineHeight: 2,
                             fontFamily: 'Outfit, sans-serif',
-                            opacity: 0.9,
                             maxWidth: '450px',
                             textAlign: 'left',
                         }}
                     >
-                        With an "overwhelmingly easy to use" approach, we create
-                        exceptional services that users will never want to go back from.
-                        We aim to expand the value we create not just domestically,
-                        but across the world.
-                    </p>
+                        <span className="fade-line" style={{ display: 'block' }}>With an "overwhelmingly easy to use"</span>
+                        <span className="fade-line" style={{ display: 'block' }}>approach, we create exceptional services</span>
+                        <span className="fade-line" style={{ display: 'block' }}>that users will never want to go back from.</span>
+                        <span className="fade-line" style={{ display: 'block' }}>We aim to expand the value we create</span>
+                        <span className="fade-line" style={{ display: 'block' }}>not just domestically, but across the world.</span>
+                    </div>
                 </div>
             </div>
         </section>
