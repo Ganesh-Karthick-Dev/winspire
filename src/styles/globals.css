@@ -605,8 +605,10 @@ section {
   0% {
     transform: translateX(0);
   }
+
   100% {
-    transform: translateX(-25%);
+    /* Moves by exactly half the total width (one full content chunk) */
+    transform: translateX(-50%);
   }
 }
 

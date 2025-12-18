@@ -162,7 +162,7 @@ export default function Home() {
                             >
                                 <MarqueeText
                                     text="Revenue Cycle • AI-Powered • Winspire • "
-                                    duration={5}
+                                    duration={45}
                                     fontSize="clamp(4rem, 14vw, 11rem)"
                                     color="#000000"
                                 />

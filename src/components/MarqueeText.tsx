@@ -28,8 +28,9 @@ export default function MarqueeText({
     color = '#000000',
     className = '',
 }: MarqueeTextProps) {
-    // Repeat text 4 times for seamless loop (matching the -25% CSS keyframe)
-    const repeatedText = `${text}${text}${text}${text}`;
+    // Repeat text 2 times per chunk, and use 2 chunks for the loop (Total 4 copies)
+    // We animate -50% (width of one chunk), so we need 2 identical chunks.
+    const chunkText = `${text}${text}`;
 
     return (
         <div
@@ -37,27 +38,52 @@ export default function MarqueeText({
             style={{
                 width: '100%',
                 overflow: 'hidden',
-                whiteSpace: 'nowrap',
                 position: 'relative',
+                display: 'flex', // Ensure clean layout
             }}
         >
             <div
-                className="marquee-text"
+                className="marquee-track"
                 style={{
-                    display: 'inline-block',
-                    whiteSpace: 'nowrap',
-                    fontSize,
-                    fontWeight: 800,
-                    color,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.03em',
-                    fontFamily: 'system-ui, -apple-system, sans-serif',
-                    userSelect: 'none',
+                    display: 'flex',
+                    width: 'fit-content',
                     animation: `marquee ${duration}s linear infinite`,
                     willChange: 'transform',
                 }}
             >
-                {repeatedText}
+                {/* Chunk 1 */}
+                <div
+                    style={{
+                        whiteSpace: 'nowrap',
+                        fontSize,
+                        fontWeight: 600,
+                        color,
+                        // textTransform: 'uppercase', // Removed to allow natural casing
+                        letterSpacing: '0.03em',
+                        fontFamily: 'Poppins, sans-serif',
+                        userSelect: 'none',
+                        paddingRight: '0', // No gap
+                    }}
+                >
+                    {chunkText}
+                </div>
+
+                {/* Chunk 2 (Identical Clone) */}
+                <div
+                    style={{
+                        whiteSpace: 'nowrap',
+                        fontSize,
+                        fontWeight: 600,
+                        color,
+                        // textTransform: 'uppercase', // Removed to allow natural casing
+                        letterSpacing: '0.03em',
+                        fontFamily: 'Poppins, sans-serif',
+                        userSelect: 'none',
+                        paddingRight: '0',
+                    }}
+                >
+                    {chunkText}
+                </div>
             </div>
         </div>
     );
