@@ -50,7 +50,7 @@ export const animationSettings = {
 export const scrollKeyframes: ScrollKeyframe[] = [
     {
         "scrollProgress": 0,
-        "label": "TODO",
+        "label": "Hero",
         "transform": {
             "position": {
                 "x": 0,
@@ -66,22 +66,38 @@ export const scrollKeyframes: ScrollKeyframe[] = [
         }
     },
     {
-        scrollProgress: 0.3,
-        label: 'features',
-        transform: {
-            position: { x: 1, y: 0.5, z: 0 },
-            rotation: { x: 10, y: 45, z: 0 },
-            scale: 120,
-        },
+        "scrollProgress": 0.33,
+        "label": "space between hero and about",
+        "transform": {
+            "position": {
+                "x": 0,
+                "y": 0.06,
+                "z": 0
+            },
+            "rotation": {
+                "x": -42.177,
+                "y": 77.456,
+                "z": 18.23
+            },
+            "scale": 158
+        }
     },
     {
-        scrollProgress: 0.6,
-        label: 'about',
-        transform: {
-            position: { x: -1, y: 0, z: 0 },
-            rotation: { x: 0, y: 90, z: 15 },
-            scale: 140,
-        },
+        "scrollProgress": 0.66,
+        "label": "about",
+        "transform": {
+            "position": {
+                "x": 0.4,
+                "y": 0.06,
+                "z": 0
+            },
+            "rotation": {
+                "x": 27.823,
+                "y": 122.456,
+                "z": 23.23
+            },
+            "scale": 158
+        }
     },
     {
         scrollProgress: 1,

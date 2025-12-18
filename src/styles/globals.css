@@ -387,9 +387,10 @@ section {
    Section-Specific Z-Index Overrides
    ============================================ */
 
-/* About section and transition zone: Content ON TOP of 3D model */
+/* Sections with content ON TOP of 3D model */
 #about,
-#transition-zone {
+#transition-zone,
+#services {
   z-index: 25 !important;
   /* Higher than canvas (20), text visible on top */
   background: transparent !important;

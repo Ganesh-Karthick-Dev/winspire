@@ -16,6 +16,7 @@ import { useEffect, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import AboutSection from '@/components/AboutSection';
+import ServicesSection from '@/components/ServicesSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -84,6 +85,19 @@ export default function Home() {
     const [manualTransform, setManualTransform] = useState(getInitialTransform);
     const [rotateSpeed, setRotateSpeed] = useState(animationSettings.rotationSpeed);
 
+    // === Scroll Progress Debug ===
+    const [scrollProgress, setScrollProgress] = useState(0);
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
+            setScrollProgress(progress);
+        };
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Initial
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     // === Scroll Animation (for Production Mode) ===
     const { transform: scrollTransform } = useScrollAnimation({
         enabled: !DEBUG_MODE, // Only enable when not in debug mode
@@ -144,6 +158,30 @@ export default function Home() {
             {/* {isDev && DEBUG_MODE && (
                 <div className="fixed bottom-4 left-4 z-50 bg-yellow-500 text-black px-4 py-2 rounded-lg font-mono text-sm">
                     🔧 DEBUG MODE - Use Leva panel to adjust model
+                </div>
+            )} */}
+
+            {/* Scroll Progress Debug - Always visible in dev */}
+            {/* {isDev && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        bottom: '20px',
+                        left: '20px',
+                        zIndex: 9999,
+                        backgroundColor: 'rgba(0,0,0,0.9)',
+                        color: '#00ff00',
+                        padding: '12px 16px',
+                        borderRadius: '8px',
+                        fontFamily: 'monospace',
+                        fontSize: '14px',
+                        pointerEvents: 'none',
+                    }}
+                >
+                    <div>📜 Scroll Progress: <strong>{(scrollProgress * 100).toFixed(1)}%</strong></div>
+                    <div style={{ marginTop: '4px', fontSize: '12px', color: '#888' }}>
+                        Raw: {scrollProgress.toFixed(3)}
+                    </div>
                 </div>
             )} */}
 
@@ -229,6 +267,9 @@ export default function Home() {
 
                 {/* About Section with Transition Zone */}
                 <AboutSection />
+
+                {/* Services Section - Sticky Left + Scrollable Right */}
+                <ServicesSection />
 
             </div>
         </Layout>
