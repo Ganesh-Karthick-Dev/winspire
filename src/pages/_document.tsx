@@ -40,7 +40,7 @@ export default function Document() {
           - updateLoaderUI() updates the percentage
           - finishLoader() fades it out after model loads
         */}
-                <div id="loader-root">
+                {/* <div id="loader-root">
                     <div className="loader-overlay">
                         <div className="loader-content">
                             <div className="loader-progress">0%</div>
@@ -49,7 +49,8 @@ export default function Document() {
                             </div>
                         </div>
                     </div>
-                    {/* Grid Transition - 12 columns for slide animation */}
+
+
                     <div className="grid-transition">
                         <div className="grid-column"></div>
                         <div className="grid-column"></div>
@@ -64,7 +65,7 @@ export default function Document() {
                         <div className="grid-column"></div>
                         <div className="grid-column"></div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* React app mounts here */}
                 <Main />

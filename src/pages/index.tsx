@@ -3,9 +3,8 @@
  * 
  * Main single-page layout integrating:
  * - GLTFViewer (dynamically imported, SSR disabled)
- * - ModelDebugGUI for live 3D controls
- * - Lenis smooth scrolling
- * - GSAP ScrollTrigger animations
+ * - GSAP ScrollTrigger for scroll-based 3D animation
+ * - Leva debug panel for coordinate export (dev mode only)
  * 
  * SEO Architecture:
  * - All text content is SSR-rendered
@@ -14,11 +13,12 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
-import { modelSettings } from '@/config/three-settings';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { scrollKeyframes, animationSettings } from '@/lib/scrollAnimations';
 
 /**
  * Dynamically import GLTFViewer with SSR disabled.
@@ -29,33 +29,64 @@ const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
 });
 
 /**
- * Dynamically import ModelDebugGUI (only in dev mode)
+ * Dynamically import ModelDebugPanel (only in dev mode)
  */
-const ModelDebugGUI = dynamic(() => import('@/components/ModelDebugGUI'), {
+const ModelDebugPanel = dynamic(() => import('@/components/ModelDebugPanel'), {
     ssr: false,
 });
+
+// Get initial transform from first keyframe (Hero)
+const getInitialTransform = () => {
+    const firstKeyframe = scrollKeyframes[0];
+    return {
+        position: { ...firstKeyframe.transform.position },
+        rotation: { ...firstKeyframe.transform.rotation },
+        scale: firstKeyframe.transform.scale,
+    };
+};
 
 export default function Home() {
     // Track if 3D should be disabled
     const is3DDisabled = useRef(false);
-
-    // === LIVE 3D MODEL CONTROLS (State-based for real-time updates) ===
-    const [modelTransform, setModelTransform] = useState<{
-        scale: number;
-        position: { x: number; y: number; z: number };
-        rotation: { x: number; y: number; z: number };
-    }>({
-        scale: modelSettings.manualTransform.scale,
-        position: { ...modelSettings.manualTransform.position },
-        rotation: { ...modelSettings.manualTransform.rotation },
-    });
-
-    const [rotateSpeed, setRotateSpeed] = useState<number>(modelSettings.animation.rotateSpeed);
-
-    // Show debug GUI only in development
     const isDev = process.env.NODE_ENV === 'development';
 
+    // ========================================
+    // DEBUG MODE TOGGLE
+    // Set to true to use Leva controls for finding coordinates
+    // Set to false to use scroll-based animation
+    // ========================================
+    const DEBUG_MODE = true; // 🎯 Toggle this to switch modes
+
+    // === Manual Transform State (for Debug Mode) ===
+    // Initial values come from first keyframe in scrollAnimations.ts
+    const [manualTransform, setManualTransform] = useState(getInitialTransform);
+    const [rotateSpeed, setRotateSpeed] = useState(animationSettings.rotationSpeed);
+
+    // === Scroll Animation (for Production Mode) ===
+    const { transform: scrollTransform } = useScrollAnimation({
+        enabled: !DEBUG_MODE, // Only enable when not in debug mode
+    });
+
+    // Choose which transform to use based on mode
+    const modelTransform = DEBUG_MODE ? manualTransform : scrollTransform;
+
+    // ========================================
+    // LOADER TOGGLE
+    // ========================================
+    const SHOW_LOADER = false; // Set to true to show loader animation
+
     useEffect(() => {
+        // Skip loader if disabled
+        if (!SHOW_LOADER) {
+            const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
+            if (loaderOverlay) {
+                loaderOverlay.style.opacity = '0';
+                loaderOverlay.style.visibility = 'hidden';
+            }
+            document.body.classList.remove('loading');
+            return;
+        }
+
         const hasInitialized = sessionStorage.getItem('3d-initialized');
 
         if (!hasInitialized) {
@@ -77,19 +108,26 @@ export default function Home() {
             title="Home"
             description="Experience stunning 3D visuals with smooth scroll animations. Built with Next.js, Three.js, and GSAP for optimal performance."
         >
-            {/* Debug GUI - Only visible in development */}
-            {isDev && (
-                <ModelDebugGUI
-                    transform={modelTransform}
-                    onTransformChange={setModelTransform}
+            {/* Leva Debug Panel - Only in dev mode AND debug mode enabled */}
+            {isDev && DEBUG_MODE && (
+                <ModelDebugPanel
+                    transform={manualTransform}
+                    onTransformChange={setManualTransform}
                     rotateSpeed={rotateSpeed}
                     onRotateSpeedChange={setRotateSpeed}
                 />
             )}
 
+            {/* Debug Mode Indicator */}
+            {isDev && DEBUG_MODE && (
+                <div className="fixed bottom-4 left-4 z-50 bg-yellow-500 text-black px-4 py-2 rounded-lg font-mono text-sm">
+                    🔧 DEBUG MODE - Use Leva panel to adjust model
+                </div>
+            )}
+
             {/* Page wrapper for z-index stacking */}
             <div className="page-wrapper">
-                {/* 3D Viewer with LIVE state-based controls */}
+                {/* 3D Viewer */}
                 {!is3DDisabled.current && (
                     <GLTFViewer
                         manualTransform={modelTransform}
@@ -105,6 +143,21 @@ export default function Home() {
                     ctaText="Explore Features"
                     ctaHref="#features"
                 />
+
+                {/* Placeholder sections for scroll testing */}
+                <section id="features" className="min-h-screen flex items-center justify-center bg-gradient-to-b from-transparent to-blue-900/20">
+                    <div className="text-center text-white">
+                        <h2 className="text-4xl font-bold mb-4">Our Services</h2>
+                        <p className="text-xl opacity-70">Scroll to see 3D animation</p>
+                    </div>
+                </section>
+
+                <section id="about" className="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-900/20 to-purple-900/20">
+                    <div className="text-center text-white">
+                        <h2 className="text-4xl font-bold mb-4">About Us</h2>
+                        <p className="text-xl opacity-70">More scroll content here</p>
+                    </div>
+                </section>
             </div>
         </Layout>
     );

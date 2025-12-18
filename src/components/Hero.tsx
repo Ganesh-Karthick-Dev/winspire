@@ -385,8 +385,12 @@ export default function Hero({
                 {/* Background Particles */}
                 <HeroParticles />
 
+                {/* 
+                 * OLD HERO CONTENT - Commented out for Santhi-Gears style redesign
+                 */}
+
                 {/* Animated H1 - letters with hover effect */}
-                <h1 id="hero-title" className="hero-title hero-title-animated" ref={titleRef}>
+                {/* <h1 id="hero-title" className="hero-title hero-title-animated" ref={titleRef}>
                     {titleLines.map((lineWords, lineIndex) => (
                         <span key={lineIndex} className="hero-line">
                             {lineWords.map((word, wordIndex) => (
@@ -407,36 +411,29 @@ export default function Hero({
                             {lineIndex < titleLines.length - 1 && <br />}
                         </span>
                     ))}
-                </h1>
+                </h1> */}
 
                 {/* Animated subtitle - blur reveal */}
-                <p className="hero-subtitle hero-subtitle-animated" ref={subtitleRef}>
+                {/* <p className="hero-subtitle hero-subtitle-animated" ref={subtitleRef}>
                     {subtitleWords.map((word, index) => (
                         <span key={index} className="subtitle-word">
                             {word}
                             {index < subtitleWords.length - 1 && ' '}
                         </span>
                     ))}
-                </p>
+                </p> */}
 
                 {/* Premium CTA with GSAP animations */}
-                <a
+                {/* <a
                     ref={buttonRef}
                     href={ctaHref}
                     className="cta-button-premium"
                     onClick={handleClick}
                     aria-label={ctaText}
                 >
-                    {/* Background glow effect */}
                     <span ref={glowRef} className="cta-glow" aria-hidden="true" />
-
-                    {/* Shimmer overlay */}
                     <span ref={shimmerRef} className="cta-shimmer" aria-hidden="true" />
-
-                    {/* Button border gradient */}
                     <span className="cta-border" aria-hidden="true" />
-
-                    {/* Button content */}
                     <span ref={contentRef} className="cta-content">
                         <span className="cta-text">{ctaText}</span>
                         <span ref={arrowRef} className="cta-arrow">
@@ -458,7 +455,7 @@ export default function Hero({
                             </svg>
                         </span>
                     </span>
-                </a>
+                </a> */}
             </div>
         </section>
     );
