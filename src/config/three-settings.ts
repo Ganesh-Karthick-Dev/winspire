@@ -56,7 +56,7 @@ export const modelSettings = {
     centerModel: true,
 
     // Debug: Show Axes Helper (X:Red, Y:Green, Z:Blue)
-    showAxes: true,
+    showAxes: false,
 
     // ========================================================================
     // MANUAL CONTROLS

@@ -12,11 +12,55 @@ import { animationTimings } from '@/config/animations';
 // Track load start time to implement minimum display duration
 let loadStartTime: number = 0;
 
+// Global flag to disable loader (for dev mode editing)
+let loaderDisabled: boolean = false;
+
+/**
+ * Disable the loader (useful during development/editing)
+ */
+export function disableLoader(): void {
+    loaderDisabled = true;
+    // Hide loader immediately if it's showing
+    const overlayEl = document.querySelector('.loader-overlay') as HTMLElement;
+    if (overlayEl) {
+        overlayEl.style.opacity = '0';
+        overlayEl.style.visibility = 'hidden';
+    }
+    document.body.classList.remove('loading');
+    // Also show canvas if hidden
+    const canvasEl = document.querySelector('.webgl-canvas');
+    if (canvasEl) {
+        canvasEl.classList.add('ready');
+    }
+    console.log('🚫 Loader DISABLED for editing');
+}
+
+/**
+ * Enable the loader
+ */
+export function enableLoader(): void {
+    loaderDisabled = false;
+    console.log('✅ Loader ENABLED');
+}
+
+/**
+ * Check if loader is disabled
+ */
+export function isLoaderDisabled(): boolean {
+    return loaderDisabled;
+}
+
 /**
  * Reset loader to 0% on every page mount
  * Should be called in useEffect on page load
  */
 export function resetLoaderToZero(): void {
+    // Skip if loader is disabled
+    if (loaderDisabled) {
+        console.log('⏭️ Loader skipped (disabled)');
+        return;
+    }
+
     loadStartTime = Date.now();
 
     // Hide scrollbar during loading

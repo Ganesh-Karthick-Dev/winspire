@@ -71,12 +71,25 @@ export default function GLTFViewer({
     const baseRotationY = useRef(0);
     const baseRotationZ = useRef(0);
 
+    // === REFS FOR LIVE UPDATES (avoids stale closures in animation loop) ===
+    const manualTransformRef = useRef(manualTransform);
+    const rotateSpeedRef = useRef(rotateSpeed);
+
+    // Keep refs in sync with props
+    useEffect(() => {
+        manualTransformRef.current = manualTransform;
+        rotateSpeedRef.current = rotateSpeed;
+    }, [manualTransform, rotateSpeed]);
+
     // Mouse move handler for interactive rotation
     const handleMouseMove = useCallback((event: MouseEvent) => {
         // Normalize mouse position to -1 to 1
         mouseX.current = (event.clientX / window.innerWidth) * 2 - 1;
         mouseY.current = (event.clientY / window.innerHeight) * 2 - 1;
     }, []);
+
+    // Helper: Convert degrees to radians
+    const toRadians = (deg: number) => (deg * Math.PI) / 180;
 
     // Check if user has scrolled to vision section
     const checkVisionSection = useCallback(() => {
@@ -89,21 +102,24 @@ export default function GLTFViewer({
     }, []);
 
     // Smooth rotation update in animation loop
+    // Uses REFS to always read the latest values (avoids stale closures)
     const updateRotation = useCallback(() => {
         if (!stateRef.current?.model) return;
 
         const model = stateRef.current.model;
+        const currentTransform = manualTransformRef.current;
+        const currentSpeed = rotateSpeedRef.current;
 
         // Continuous smooth rotation - Z-axis (Wheel spin)
-        continuousRotation.current += rotateSpeed;
+        continuousRotation.current += currentSpeed;
 
-        if (manualTransform) {
+        if (currentTransform) {
             // MODE A: Manual Control (Home Page)
-            // Absolute source of truth is the prop
-            const radX = toRadians(manualTransform.rotation.x);
-            const radY = toRadians(manualTransform.rotation.y);
+            // Absolute source of truth is the ref (synced from props)
+            const radX = toRadians(currentTransform.rotation.x);
+            const radY = toRadians(currentTransform.rotation.y);
             // Z is Manual Bank + Continuous Spin
-            const radZ = toRadians(manualTransform.rotation.z);
+            const radZ = toRadians(currentTransform.rotation.z);
 
             model.rotation.x = radX;
             model.rotation.y = radY;
@@ -115,14 +131,14 @@ export default function GLTFViewer({
             model.rotation.y = baseRotationY.current;
             model.rotation.z = baseRotationZ.current - continuousRotation.current;
         }
-    }, [rotateSpeed, manualTransform]); // Re-create if props change
+    }, []); // No dependencies - reads from refs
 
     // Store base rotation when GSAP updates it
     const captureBaseRotation = useCallback(() => {
         if (!stateRef.current?.model) return;
 
         // If Manual Transform is active, DO NOT capture from model.
-        if (manualTransform) return;
+        if (manualTransformRef.current) return;
 
         const model = stateRef.current.model;
 
@@ -131,13 +147,10 @@ export default function GLTFViewer({
             baseRotationY.current = model.rotation.y;
             baseRotationZ.current = model.rotation.z + continuousRotation.current;
         }
-    }, [manualTransform]);
+    }, []); // No dependencies - reads from ref
 
     // Track previous manual transform for delta updates
     const prevManualTransform = useRef(manualTransform);
-
-    // Helper: Convert degrees to radians
-    const toRadians = (deg: number) => (deg * Math.PI) / 180;
 
     // Handle Live Updates (HMR/Prop changes)
     // Only needed for Position/Scale now, as Rotation is handled directly in animation loop
