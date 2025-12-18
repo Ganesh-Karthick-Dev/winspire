@@ -15,6 +15,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
+import AboutSection from '@/components/AboutSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -192,7 +193,7 @@ export default function Home() {
                             <div className="absolute left-15 bottom-10 pointer-events-auto z-10 max-w-md hero-text-fade">
                                 <h3
                                     className="font-bold tracking-widest uppercase mb-2 font-[Outfit]"
-                                    style={{ color: '#083151', fontSize: '12px' , marginBottom: '1rem' }}
+                                    style={{ color: '#083151', fontSize: '12px', marginBottom: '1rem' }}
                                 >
                                     Our Mission
                                 </h3>
@@ -223,23 +224,12 @@ export default function Home() {
                     title={`Welcome to the Future of Revenue Cycle`}
                     subtitle="AI-Powered. System-Driven. Outcome-Guaranteed"
                     ctaText="Explore Features"
-                    ctaHref="#features"
+                    ctaHref="#about"
                 />
 
-                {/* Placeholder sections for scroll testing */}
-                <section id="features" className="min-h-screen flex items-center justify-center bg-gradient-to-b from-transparent to-blue-900/20">
-                    <div className="text-center text-white">
-                        <h2 className="text-4xl font-bold mb-4">Our Services</h2>
-                        <p className="text-xl opacity-70">Scroll to see 3D animation</p>
-                    </div>
-                </section>
+                {/* About Section with Transition Zone */}
+                <AboutSection />
 
-                <section id="about" className="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-900/20 to-purple-900/20">
-                    <div className="text-center text-white">
-                        <h2 className="text-4xl font-bold mb-4">About Us</h2>
-                        <p className="text-xl opacity-70">More scroll content here</p>
-                    </div>
-                </section>
             </div>
         </Layout>
     );
