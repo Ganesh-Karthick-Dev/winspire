@@ -98,16 +98,16 @@ export default function Home() {
                 />
 
                 {/* Marquee Text - scroll-driven horizontal animation */}
-                <MarqueeText text="Get Results. Not Just Promise." />
+                {/* <MarqueeText text="Get Results. Not Just Promise." /> */}
 
                 {/* Features Section - Two column with animated content */}
-                <FeaturesSection />
+                {/* <FeaturesSection /> */}
 
                 {/* Performance Section - Scroll-driven text transition */}
-                <PerformanceSection />
+                {/* <PerformanceSection /> */}
 
                 {/* Vision Section - before footer */}
-                <VisionSection />
+                {/* <VisionSection /> */}
             </div>
         </Layout>
     );

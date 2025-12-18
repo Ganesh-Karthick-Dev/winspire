@@ -64,7 +64,7 @@ export const modelSettings = {
     // ========================================================================
     manualTransform: {
         // Size of the model (Default: 125)
-        scale: 125,
+        scale: 155,
 
         // Position offset from center (x=0, y=0, z=0 is center)
         position: {
@@ -80,8 +80,8 @@ export const modelSettings = {
         // Z: Tilt side-to-side (Banking)
         rotation: {
             x: 2.823,
-            y: 1,
-            z: 3
+            y: 2.456,
+            z: 23.23
         },
     },
 
