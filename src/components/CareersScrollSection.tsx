@@ -16,6 +16,9 @@ const leftColumnImages = [
     { src: '/images/careers/colleagues-chat.png', alt: 'Colleagues chatting' },
     { src: '/images/careers/skyscraper.png', alt: 'Modern skyscraper' },
     { src: '/images/careers/brainstorm.png', alt: 'Team brainstorming' },
+    // Duplicate for infinite scroll feel
+    { src: '/images/careers/team-rooftop.png', alt: 'Team on rooftop' },
+    { src: '/images/careers/colleagues-chat.png', alt: 'Colleagues chatting' },
 ];
 
 const rightColumnImages = [
@@ -23,6 +26,9 @@ const rightColumnImages = [
     { src: '/images/careers/presentation.png', alt: 'Business presentation' },
     { src: '/images/careers/celebration.png', alt: 'Team celebration' },
     { src: '/images/careers/office-interior.png', alt: 'Office interior' },
+    // Duplicate for infinite scroll feel
+    { src: '/images/careers/office-aerial.png', alt: 'Office aerial view' },
+    { src: '/images/careers/presentation.png', alt: 'Business presentation' },
 ];
 
 export default function CareersScrollSection() {
@@ -48,22 +54,23 @@ export default function CareersScrollSection() {
                 }
             });
 
-            // Left column: scroll DOWN (starts up, moves down)
+            // Left column: scroll DOWN (starts shifted UP, moves DOWN)
+            // Start at -350 (top hidden) and move to -50 (still slightly hidden)
+            // This ensures we NEVER have positive Y, so no empty space at top
             tl.fromTo(
                 leftCol,
-                { y: -80 },
-                { y: 80, duration: 1 },
+                { y: -350 },
+                { y: -50, duration: 1 },
                 0
             );
 
-            // Right column: scroll UP (starts down, moves up)
+            // Right column: scroll UP (starts at -50, moves UP to -350)
             tl.fromTo(
                 rightCol,
-                { y: 80 },
-                { y: -80, duration: 1 },
+                { y: -50 },
+                { y: -350, duration: 1 },
                 0
             );
-
         }, section);
 
         return () => ctx.revert();
@@ -76,7 +83,8 @@ export default function CareersScrollSection() {
             style={{
                 position: 'relative',
                 width: '100%',
-                height: '200vh', // Tall container for scroll room
+                height: '300vh', // Reduced height to fix gap issue
+                marginTop: '-50vh',
             }}
         >
             {/* Sticky Card Container */}
@@ -90,7 +98,7 @@ export default function CareersScrollSection() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '20px',
+                    padding: '16px',
                     boxSizing: 'border-box',
                 }}
             >
