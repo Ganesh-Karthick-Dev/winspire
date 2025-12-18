@@ -20,6 +20,7 @@ import ServicesSection from '@/components/ServicesSection';
 import ServiceCardSection from '@/components/ServiceCardSection';
 import CenterTextSection from '@/components/CenterTextSection';
 import CareersScrollSection from '@/components/CareersScrollSection';
+import NewsSection from '@/components/NewsSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -282,6 +283,9 @@ export default function Home() {
 
                 {/* Careers Scroll Section - Frosted glass with animated image columns */}
                 <CareersScrollSection />
+
+                {/* News Section - Sticky title with scrollable news list */}
+                <NewsSection />
 
             </div>
         </Layout>
