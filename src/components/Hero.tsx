@@ -410,6 +410,7 @@ export default function Hero({
                         duration={45}
                         fontSize="clamp(4rem, 14vw, 11rem)"
                         color="#000000"
+                        gradient={true}
                     />
                 </div>
 

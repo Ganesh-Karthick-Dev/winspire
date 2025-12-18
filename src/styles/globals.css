@@ -612,6 +612,30 @@ section {
   }
 }
 
+@keyframes text-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.text-gradient-shimmer {
+  background: linear-gradient(90deg, #4D53A3, #3E8ACB, #4D53A3);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: text-shimmer 4s linear infinite;
+}
+
 .marquee-container {
   width: 100%;
   overflow: visible;

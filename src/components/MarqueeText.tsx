@@ -27,7 +27,8 @@ export default function MarqueeText({
     fontSize = 'clamp(4rem, 14vw, 11rem)',
     color = '#000000',
     className = '',
-}: MarqueeTextProps) {
+    gradient = false,
+}: MarqueeTextProps & { gradient?: boolean }) {
     // Repeat text 2 times per chunk, and use 2 chunks for the loop (Total 4 copies)
     // We animate -50% (width of one chunk), so we need 2 identical chunks.
     const chunkText = `${text}${text}`;
@@ -53,11 +54,12 @@ export default function MarqueeText({
             >
                 {/* Chunk 1 */}
                 <div
+                    className={gradient ? 'text-gradient-shimmer' : ''}
                     style={{
                         whiteSpace: 'nowrap',
                         fontSize,
                         fontWeight: 600,
-                        color,
+                        color: gradient ? 'transparent' : color,
                         // textTransform: 'uppercase', // Removed to allow natural casing
                         letterSpacing: '0.03em',
                         fontFamily: 'Poppins, sans-serif',
@@ -70,11 +72,12 @@ export default function MarqueeText({
 
                 {/* Chunk 2 (Identical Clone) */}
                 <div
+                    className={gradient ? 'text-gradient-shimmer' : ''}
                     style={{
                         whiteSpace: 'nowrap',
                         fontSize,
                         fontWeight: 600,
-                        color,
+                        color: gradient ? 'transparent' : color,
                         // textTransform: 'uppercase', // Removed to allow natural casing
                         letterSpacing: '0.03em',
                         fontFamily: 'Poppins, sans-serif',
