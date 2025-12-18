@@ -3558,3 +3558,250 @@ footer p {
     min-width: 120px;
   }
 }
+
+/* ============================================
+   Reference Footer - Precise Match
+   ============================================ */
+
+.ref-footer {
+  position: relative;
+  z-index: 30;
+  background: transparent;
+  padding: 80px 5% 40px;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Main Content - Centered */
+.ref-footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Service Card */
+.ref-service-card {
+  width: 280px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+}
+
+.ref-card-top {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.ref-card-image {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ref-card-bottom {
+  background: white;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ref-card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ref-card-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+.ref-card-label {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.ref-card-arrow {
+  color: #1a1a1a;
+}
+
+.ref-card-badge {
+  background: white;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid #eee;
+}
+
+.ref-badge-icon {
+  display: flex;
+  align-items: center;
+}
+
+.ref-badge-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ref-badge-label {
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: #999;
+  letter-spacing: 0.05em;
+}
+
+.ref-badge-year {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* Link Columns Container */
+.ref-columns-container {
+  display: flex;
+  gap: 0;
+}
+
+/* Individual Column */
+.ref-column {
+  display: flex;
+}
+
+.ref-column-divider {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin-right: 40px;
+  align-self: stretch;
+}
+
+.ref-column-content {
+  min-width: 160px;
+  padding-right: 60px;
+  text-align: left;
+}
+
+.ref-column-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ref-title-dot {
+  color: white;
+  font-size: 1.4rem;
+}
+
+.ref-column-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ref-column-links li {
+  margin-bottom: 14px;
+}
+
+.ref-column-links a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  display: inline-block;
+}
+
+.ref-column-links a:hover {
+  color: white;
+}
+
+/* Bottom Bar */
+.ref-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 80px auto 0;
+  padding-top: 30px;
+}
+
+.ref-bottom-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ref-privacy-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(59, 130, 246, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ref-privacy-link {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.ref-privacy-link:hover {
+  opacity: 0.8;
+}
+
+.ref-bottom-right {
+  display: flex;
+  align-items: center;
+}
+
+.ref-copyright {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+}
+
+/* Responsive Footer */
+@media (max-width: 1024px) {
+  .ref-footer-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .ref-columns-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .ref-column-divider {
+    display: none;
+  }
+
+  .ref-column-content {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .ref-footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+}
