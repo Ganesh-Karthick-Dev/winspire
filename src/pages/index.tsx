@@ -17,6 +17,7 @@ import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
+import ServiceCardSection from '@/components/ServiceCardSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -270,6 +271,9 @@ export default function Home() {
 
                 {/* Services Section - Sticky Left + Scrollable Right */}
                 <ServicesSection />
+
+                {/* Service Card Section - Sticky with animated sphere */}
+                <ServiceCardSection />
 
             </div>
         </Layout>

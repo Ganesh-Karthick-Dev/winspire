@@ -390,7 +390,8 @@ section {
 /* Sections with content ON TOP of 3D model */
 #about,
 #transition-zone,
-#services {
+#services,
+#service-card {
   z-index: 25 !important;
   /* Higher than canvas (20), text visible on top */
   background: transparent !important;
