@@ -21,6 +21,7 @@ import ServiceCardSection from '@/components/ServiceCardSection';
 import CenterTextSection from '@/components/CenterTextSection';
 import CareersScrollSection from '@/components/CareersScrollSection';
 import NewsSection from '@/components/NewsSection';
+import CareersContactLinks from '@/components/CareersContactLinks';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -288,6 +289,10 @@ export default function Home() {
                 <NewsSection />
 
             </div>
+
+            {/* Careers & Contact Links - Large gradient cards (outside wrapper for full-width) */}
+            <CareersContactLinks />
+
         </Layout>
     );
 }

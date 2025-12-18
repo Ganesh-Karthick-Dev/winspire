@@ -3075,3 +3075,190 @@ footer p {
     min-width: auto;
   }
 }
+
+/* Careers & Contact Links Section */
+.links-section {
+  padding: 100px 0;
+  /* Removed side padding */
+  background: #f8f9fa;
+  /* Light background for contrast */
+  position: relative;
+  z-index: 30;
+}
+
+.links-container {
+  max-width: 100%;
+  /* Full width */
+  margin: 0 auto;
+}
+
+.links-main-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  /* color: #5c4d9d; Removed to allow gradient text */
+  margin-bottom: 60px;
+  text-align: left;
+  font-family: 'Outfit', sans-serif;
+  padding: 0 40px;
+  /* Added padding for title */
+}
+
+.links-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 0;
+  width: 100%;
+  padding: 0;
+}
+
+.links-grid .link-card {
+  width: 49.5%;
+  /* Each card takes almost half, tiny gap between */
+}
+
+.link-card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  height: 600px;
+  /* Increased height */
+  text-decoration: none;
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 60px;
+  /* Increased padding */
+}
+
+/* ... (gradients remain same) ... */
+
+.link-card-image {
+  position: absolute;
+  top: 60px;
+  right: 60px;
+  width: 320px;
+  /* Reverted/Balanced size */
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s ease;
+}
+
+.link-separator {
+  width: 1px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 0 30px;
+}
+
+.link-bottom-right {
+  display: flex;
+  align-items: center;
+}
+
+.link-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.link-card-blue {
+  background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  /* Brighter Blue */
+}
+
+.link-card-purple {
+  background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+  /* Purple */
+  background: linear-gradient(135deg, #4527a0 0%, #7b1fa2 100%);
+  /* Deep Purple */
+}
+
+.link-card-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.link-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.link-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.link-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+}
+
+.link-japanese {
+  display: block;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+.link-arrow {
+  font-size: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.link-card:hover .link-arrow {
+  transform: translateX(10px);
+}
+
+.link-card-image {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: 400px;
+  /* Increased from 250px */
+  height: 260px;
+  /* Increased from 160px */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s ease;
+}
+
+.link-card:hover .link-card-image {
+  transform: scale(1.05);
+}
+
+/* Responsive Links */
+@media (max-width: 1024px) {
+  .links-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .links-main-title {
+    font-size: 2.5rem;
+  }
+
+  .link-card {
+    height: 400px;
+    padding: 30px;
+  }
+
+  .link-card-image {
+    width: 180px;
+    height: 120px;
+    top: 30px;
+    right: 30px;
+  }
+}
