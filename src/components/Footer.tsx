@@ -1,96 +1,106 @@
 /**
- * Footer Component
+ * Footer Component (Matching Reference Exactly)
  * 
- * Site footer with company info, contact, links and social icons
+ * Features:
+ * - Service card with purple gradient (left side)
+ * - Three link columns (About Us, Careers, News)
+ * - Bottom bar with Privacy Policy and Copyright
+ * - Transparent background
  */
 
 import React from 'react';
+import Image from 'next/image';
 
 export default function Footer() {
-    const currentYear = new Date().getFullYear();
-
-    const footerLinks = [
-        { label: 'terms', href: '/terms' },
-        { label: 'privacy', href: '/privacy' },
-        { label: 'imprint', href: '/imprint' },
-        { label: 'career', href: '/career' },
-        { label: 'subscribe to newsletter', href: '/newsletter' },
-    ];
-
-    const socialLinks = [
-        { label: 'LinkedIn', icon: 'in', href: 'https://linkedin.com' },
-        { label: 'Twitter', icon: '𝕏', href: 'https://twitter.com' },
-        { label: 'GitHub', icon: 'G', href: 'https://github.com' },
-        { label: 'Discord', icon: 'D', href: 'https://discord.com' },
-        { label: 'Facebook', icon: 'f', href: 'https://facebook.com' },
-    ];
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
-        <footer className="site-footer">
-            {/* Main Footer Content */}
-            <div className="footer-main">
-                <div className="footer-left">
-                    <div className="footer-office">
-                        <h4 className="footer-label">Regional Office:</h4>
-                        <address className="footer-address">
-                            Regus - UB City, Level 14 & 15,<br />
-                            Concorde Towers 1, Ashok Nagar,<br />
-                            Bangalore, India - 560001
-                        </address>
+        <footer className="new-footer">
+            {/* Main Content */}
+            <div className="footer-main-content">
+                {/* Service Card - Purple Gradient */}
+                <div className="footer-service-card">
+                    <div className="service-card-logo">
+                        <div className="logo-icon">
+                            <Image 
+                                src="/images/links/links_workspace_laptop_1766075249577.png" 
+                                alt="Winspire RCM"
+                                width={260}
+                                height={140}
+                                style={{ objectFit: 'cover', borderRadius: '8px' }}
+                            />
+                        </div>
                     </div>
-                    <div className="footer-office">
-                        <h4 className="footer-label">Headquarters:</h4>
-                        <address className="footer-address">
-                            2810 N Church St,<br />
-                            Wilmington, Delaware,<br />
-                            USA. 19802-4447
-                        </address>
+                    <div className="service-card-bottom">
+                        <div className="service-card-info">
+                            <span className="service-card-title">Winspire RCM</span>
+                            <span className="service-card-subtitle">Service Site</span>
+                        </div>
+                        <span className="service-card-arrow">↗</span>
+                    </div>
+                    <div className="service-card-badge">
+                        <div className="badge-icon">🏆</div>
+                        <div className="badge-text-wrap">
+                            <span className="badge-label">HEALTHCARE RCM</span>
+                            <span className="badge-year">2024 Excellence</span>
+                        </div>
                     </div>
                 </div>
-                <div className="footer-right">
-                    <a href="mailto:contact@winspirercm.com" className="footer-email">
-                        contact@winspirercm.com
-                    </a>
+
+                {/* Link Columns */}
+                <div className="footer-link-columns">
+                    {/* About Us Column */}
+                    <div className="footer-link-column">
+                        <h3 className="footer-column-title">About Us</h3>
+                        <ul className="footer-column-links">
+                            <li><a href="/about#mission">Mission</a></li>
+                            <li><a href="/about#vision">Vision</a></li>
+                            <li><a href="/about#values">Values</a></li>
+                            <li><a href="/about#team">Board Members</a></li>
+                            <li><a href="/about#awards">Award</a></li>
+                            <li><a href="/about#profile">Corporate Profile</a></li>
+                            <li><a href="/contact">Access</a></li>
+                        </ul>
+                    </div>
+
+                    {/* Careers Column */}
+                    <div className="footer-link-column">
+                        <h3 className="footer-column-title">Careers</h3>
+                        <ul className="footer-column-links">
+                            <li><a href="/careers#message">Message</a></li>
+                            <li><a href="/careers#jobs">Job Categories</a></li>
+                            <li><a href="/careers#people">People</a></li>
+                            <li><a href="/careers#environment">Work Environment</a></li>
+                            <li><a href="/careers#materials">Recruitment<br/>Materials</a></li>
+                            <li><a href="/careers#faq">FAQ</a></li>
+                            <li><a href="/careers#culture">Culture Note</a></li>
+                        </ul>
+                    </div>
+
+                    {/* News Column */}
+                    <div className="footer-link-column">
+                        <h3 className="footer-column-title">News</h3>
+                        <ul className="footer-column-links">
+                            <li><a href="/news#media">Media</a></li>
+                            <li><a href="/news#events">Event</a></li>
+                            <li><a href="/news#company">Company</a></li>
+                            <li><a href="/news#releases">Release</a></li>
+                            <li><a href="/news#case-studies">Case Study</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            {/* Footer Bottom Bar */}
-            <div className="footer-bottom">
+            {/* Bottom Bar */}
+            <div className="footer-bottom-bar">
                 <div className="footer-bottom-left">
-                    <div className="footer-logo-icon">
-                        <span className="play-icon">▶</span>
-                    </div>
-                    <span className="footer-copyright">
-                        © {currentYear} winspire RCM. All rights reserved.
-                    </span>
+                    <div className="privacy-icon">🔒</div>
+                    <a href="/privacy" className="privacy-link">Privacy Policy</a>
                 </div>
-
-                <nav className="footer-links">
-                    {footerLinks.map((link, index) => (
-                        <React.Fragment key={link.label}>
-                            <a href={link.href} className="footer-link">
-                                {link.label}
-                            </a>
-                            {index < footerLinks.length - 1 && (
-                                <span className="footer-divider">|</span>
-                            )}
-                        </React.Fragment>
-                    ))}
-                </nav>
-
-                <div className="footer-social">
-                    {socialLinks.map((social) => (
-                        <a
-                            key={social.label}
-                            href={social.href}
-                            className="footer-social-link"
-                            aria-label={social.label}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {social.icon}
-                        </a>
-                    ))}
+                <div className="footer-bottom-right">
+                    <span className="copyright">© Winspire RCM Inc. All Rights Reserved.</span>
                 </div>
             </div>
         </footer>
