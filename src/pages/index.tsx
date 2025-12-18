@@ -150,7 +150,16 @@ export default function Home() {
                             The .hero class handles the responsive padding around this wrapper.
                         */}
                         <div className="w-full flex-1 relative">
-                            <div className="absolute inset-0 flex items-center" style={{ clipPath: 'inset(0 0 0 50%)' }}>
+                            <div
+                                className="absolute left-0 right-0 flex items-center"
+                                style={{
+                                    top: '47%',
+                                    transform: 'translateY(-50%)',
+                                    height: 'fit-content',
+                                    maskImage: 'linear-gradient(to right, transparent 48%, black 52%)',
+                                    WebkitMaskImage: 'linear-gradient(to right, transparent 48%, black 52%)'
+                                }}
+                            >
                                 <MarqueeText
                                     text="Revenue Cycle • AI-Powered • Winspire • "
                                     duration={25}

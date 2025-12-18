@@ -394,8 +394,13 @@ export default function Hero({
                 <div style={{
                     position: 'absolute',
                     inset: 0,
+                    top: '47%', // Moved down manually
+                    height: 'fit-content',
+                    transform: 'translateY(-50%)',
                     zIndex: 5,
-                    clipPath: 'inset(0 50% 0 0)', // Show only left half
+                    // Soft fade out towards center (48% to 52%)
+                    maskImage: 'linear-gradient(to right, black 48%, transparent 52%)',
+                    WebkitMaskImage: 'linear-gradient(to right, black 48%, transparent 52%)',
                     pointerEvents: 'none',
                     display: 'flex',
                     alignItems: 'center',

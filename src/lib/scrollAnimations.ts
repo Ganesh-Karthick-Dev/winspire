@@ -49,20 +49,20 @@ export const animationSettings = {
 
 export const scrollKeyframes: ScrollKeyframe[] = [
     {
-        scrollProgress: 0,
-        label: "Hero",
-        transform: {
-            position: {
-                x: 0,
-                y: 0.04,
-                z: 0
+        "scrollProgress": 0,
+        "label": "TODO",
+        "transform": {
+            "position": {
+                "x": 0,
+                "y": 0.06,
+                "z": 0
             },
-            rotation: {
-                x: -22.177,
-                y: 37.456,
-                z: 23.23
+            "rotation": {
+                "x": -22.177,
+                "y": 37.456,
+                "z": 23.23
             },
-            scale: 150
+            "scale": 158
         }
     },
     {
