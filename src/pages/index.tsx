@@ -164,7 +164,7 @@ export default function Home() {
                                     text="Revenue Cycle • AI-Powered • Winspire • "
                                     duration={45}
                                     fontSize="clamp(4rem, 14vw, 11rem)"
-                                    color="#000000"
+                                    color="#083151"
                                 />
                             </div>
                         </div>
