@@ -2825,7 +2825,8 @@ footer p {
 
 .news-sticky-wrapper {
   position: sticky;
-  top: 100px;
+  top: 0;
+  /* Changed from 100px to 0 to align to top */
 }
 
 .news-heading {
@@ -3012,26 +3013,44 @@ footer p {
 .news-index-btn {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 15px 30px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  gap: 20px;
+  padding: 12px 12px 12px 30px;
+  /* Adjusted padding for circle */
+  background: linear-gradient(90deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+  /* Fallback */
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  /* Dark Blue Gradient */
+  background-size: 200% 200%;
   border-radius: 50px;
   color: white;
   text-decoration: none;
   font-family: 'Outfit', sans-serif;
   font-weight: 600;
-  transition: all 0.3s ease;
+  font-size: 1rem;
+  transition: background-position 0.5s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .news-index-btn:hover {
-  background: white;
-  color: #4a00e0;
+  background-position: 100% 0;
+  /* Smooth gradient shift */
 }
 
-.btn-arrow {
-  font-size: 1.2rem;
+.btn-arrow-circle {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a1a1a;
+  /* Black arrow */
+  transition: transform 0.3s ease;
+}
+
+.news-index-btn:hover .btn-arrow-circle {
+  transform: translateX(5px);
 }
 
 /* Responsive News */
