@@ -189,7 +189,7 @@ export default function Home() {
                             </div>
 
                             {/* === Bottom Left: Our Mission === */}
-                            <div className="absolute left-15 bottom-14 pointer-events-auto z-10 max-w-md hero-text-fade">
+                            <div className="absolute left-15 bottom-10 pointer-events-auto z-10 max-w-md hero-text-fade">
                                 <h3
                                     className="font-bold tracking-widest uppercase mb-2 font-[Outfit]"
                                     style={{ color: '#083151', fontSize: '12px' , marginBottom: '1rem' }}
