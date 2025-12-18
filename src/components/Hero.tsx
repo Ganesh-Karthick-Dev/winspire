@@ -391,7 +391,7 @@ export default function Hero({
                   The Right Side (Front Layer) is rendered in index.tsx 
                   to break out of the z-index stacking context 
                 */}
-                <div style={{
+                <div className="hero-text-fade" style={{
                     position: 'absolute',
                     inset: 0,
                     top: '46%', // Moved down manually

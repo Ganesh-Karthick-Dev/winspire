@@ -20,6 +20,8 @@ import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import MarqueeText from '@/components/MarqueeText';
 import { scrollKeyframes, animationSettings } from '@/lib/scrollAnimations';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 /**
  * Dynamically import GLTFViewer with SSR disabled.
@@ -50,6 +52,24 @@ export default function Home() {
     // Track if 3D should be disabled
     const is3DDisabled = useRef(false);
     const isDev = process.env.NODE_ENV === 'development';
+
+    // Add ScrollTrigger for fade effect
+    useEffect(() => {
+        gsap.registerPlugin(ScrollTrigger);
+        const ctx = gsap.context(() => {
+            gsap.to('.hero-text-fade', {
+                opacity: 0,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: '+=250', // Immediate fast fade out
+                    scrub: true,
+                }
+            });
+        });
+        return () => ctx.revert();
+    }, []);
 
     // ========================================
     // DEBUG MODE TOGGLE
@@ -120,11 +140,11 @@ export default function Home() {
             )}
 
             {/* Debug Mode Indicator */}
-            {isDev && DEBUG_MODE && (
+            {/* {isDev && DEBUG_MODE && (
                 <div className="fixed bottom-4 left-4 z-50 bg-yellow-500 text-black px-4 py-2 rounded-lg font-mono text-sm">
                     🔧 DEBUG MODE - Use Leva panel to adjust model
                 </div>
-            )}
+            )} */}
 
             {/* Page wrapper for z-index stacking */}
             <div className="page-wrapper">
@@ -151,7 +171,7 @@ export default function Home() {
                         */}
                         <div className="w-full flex-1 relative">
                             <div
-                                className="absolute left-0 right-0 flex items-center"
+                                className="absolute left-0 right-0 flex items-center hero-text-fade"
                                 style={{
                                     top: '46%',
                                     transform: 'translateY(-50%)',
