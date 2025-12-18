@@ -187,6 +187,30 @@ export default function Home() {
                                     color="#083151"
                                 />
                             </div>
+
+                            {/* === Bottom Left: Our Mission === */}
+                            <div className="absolute left-8 bottom-12 pointer-events-auto z-10 max-w-md hero-text-fade">
+                                <h3 className="text-sm font-bold tracking-widest uppercase mb-2 text-[#083151] font-[Outfit]">
+                                    Our Mission
+                                </h3>
+                                <div className="text-xl font-bold leading-tight font-[Outfit] text-gradient-shimmer">
+                                    Revolutionizing Revenue Cycle with AI-Driven Precision.
+                                </div>
+                            </div>
+
+                            {/* === Bottom Right: Scroll Indicator === */}
+                            <div className="absolute right-8 bottom-12 pointer-events-auto z-10 flex flex-row items-center gap-4 hero-text-fade">
+                                <span className="text-xs font-bold tracking-widest uppercase text-gray-500 font-[Outfit]">
+                                    Scroll
+                                </span>
+                                <div className="animate-scroll-arrow text-[#083151]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <polyline points="19 12 12 19 5 12"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 )}

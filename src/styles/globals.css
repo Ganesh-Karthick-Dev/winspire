@@ -636,6 +636,27 @@ section {
   animation: text-shimmer 4s linear infinite;
 }
 
+@keyframes scroll-down-reveal {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.animate-scroll-arrow {
+  animation: scroll-down-reveal 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
 .marquee-container {
   width: 100%;
   overflow: visible;
