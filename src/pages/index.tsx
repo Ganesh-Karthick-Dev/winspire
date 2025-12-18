@@ -19,6 +19,7 @@ import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
 import ServiceCardSection from '@/components/ServiceCardSection';
 import CenterTextSection from '@/components/CenterTextSection';
+import CareersScrollSection from '@/components/CareersScrollSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -278,6 +279,9 @@ export default function Home() {
 
                 {/* Center Text Section - Simple 100vh centered text */}
                 <CenterTextSection />
+
+                {/* Careers Scroll Section - Frosted glass with animated image columns */}
+                <CareersScrollSection />
 
             </div>
         </Layout>
