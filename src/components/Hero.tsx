@@ -394,7 +394,7 @@ export default function Hero({
                 <div style={{
                     position: 'absolute',
                     inset: 0,
-                    top: '47%', // Moved down manually
+                    top: '46%', // Moved down manually
                     height: 'fit-content',
                     transform: 'translateY(-50%)',
                     zIndex: 5,

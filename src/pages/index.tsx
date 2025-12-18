@@ -153,7 +153,7 @@ export default function Home() {
                             <div
                                 className="absolute left-0 right-0 flex items-center"
                                 style={{
-                                    top: '47%',
+                                    top: '46%',
                                     transform: 'translateY(-50%)',
                                     height: 'fit-content',
                                     maskImage: 'linear-gradient(to right, transparent 48%, black 52%)',
