@@ -189,18 +189,21 @@ export default function Home() {
                             </div>
 
                             {/* === Bottom Left: Our Mission === */}
-                            <div className="absolute left-8 bottom-12 pointer-events-auto z-10 max-w-md hero-text-fade">
-                                <h3 className="text-sm font-bold tracking-widest uppercase mb-2 text-[#083151] font-[Outfit]">
+                            <div className="absolute left-15 bottom-14 pointer-events-auto z-10 max-w-md hero-text-fade">
+                                <h3
+                                    className="font-bold tracking-widest uppercase mb-2 font-[Outfit]"
+                                    style={{ color: '#083151', fontSize: '12px' , marginBottom: '1rem' }}
+                                >
                                     Our Mission
                                 </h3>
-                                <div className="text-xl font-bold leading-tight font-[Outfit] text-gradient-shimmer">
+                                <div className="text-2xl font-bold leading-tight font-[Outfit] text-gradient-shimmer">
                                     Revolutionizing Revenue Cycle with AI-Driven Precision.
                                 </div>
                             </div>
 
                             {/* === Bottom Right: Scroll Indicator === */}
                             <div className="absolute right-8 bottom-12 pointer-events-auto z-10 flex flex-row items-center gap-4 hero-text-fade">
-                                <span className="text-xs font-bold tracking-widest uppercase text-gray-500 font-[Outfit]">
+                                <span className="text-xs right-8 font-bold tracking-widest uppercase text-gray-500 font-[Outfit]">
                                     Scroll
                                 </span>
                                 <div className="animate-scroll-arrow text-[#083151]">
