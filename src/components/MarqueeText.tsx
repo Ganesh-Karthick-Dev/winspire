@@ -61,7 +61,7 @@ export default function MarqueeText({
                         fontWeight: 600,
                         color: gradient ? 'transparent' : color,
                         // textTransform: 'uppercase', // Removed to allow natural casing
-                        letterSpacing: '0.03em',
+                        letterSpacing: '0.01em',
                         fontFamily: 'Poppins, sans-serif',
                         userSelect: 'none',
                         paddingRight: '0', // No gap
@@ -79,7 +79,7 @@ export default function MarqueeText({
                         fontWeight: 600,
                         color: gradient ? 'transparent' : color,
                         // textTransform: 'uppercase', // Removed to allow natural casing
-                        letterSpacing: '0.03em',
+                        letterSpacing: '0.01em',
                         fontFamily: 'Poppins, sans-serif',
                         userSelect: 'none',
                         paddingRight: '0',
