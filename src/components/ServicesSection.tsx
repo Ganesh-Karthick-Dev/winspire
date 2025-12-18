@@ -82,7 +82,6 @@ export default function ServicesSection() {
             style={{
                 position: 'relative',
                 width: '100%',
-                minHeight: '200vh',
                 background: 'transparent',
             }}
         >
@@ -101,15 +100,15 @@ export default function ServicesSection() {
                 <div
                     style={{
                         position: 'sticky',
-                        top: 0,
+                        top: '40px',
                         width: '45%',
-                        height: '100vh',
+                        alignSelf: 'flex-start',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'flex-start',
                         paddingTop: '40px',
                         paddingRight: '60px',
-                        flexShrink: 0,
+                        paddingBottom: '60px',
                     }}
                 >
                     {/* Large Headline - Bigger like reference */}

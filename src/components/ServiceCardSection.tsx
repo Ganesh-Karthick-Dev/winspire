@@ -105,7 +105,8 @@ export default function ServiceCardSection() {
             style={{
                 position: 'relative',
                 width: '100%',
-                height: '300vh', // Enough scroll space for animation
+                height: '250vh',
+                marginTop: '-450px', // Pull much closer to previous section
             }}
         >
             {/* Sticky Card Container - stays fixed while scrolling */}
@@ -115,7 +116,7 @@ export default function ServiceCardSection() {
                     top: 0,
                     width: '100%',
                     height: '100vh',
-                    padding: '20px',
+                    padding: '15px',
                     boxSizing: 'border-box',
                 }}
             >
