@@ -40,15 +40,16 @@ export default function ServicesSection() {
             style={{
                 position: 'relative',
                 width: '100%',
+                minHeight: '200vh',
                 background: 'transparent',
             }}
         >
             {/* Centered Container */}
             <div
                 style={{
-                    maxWidth: '1400px',
+                    maxWidth: '1500px',
                     margin: '0 auto',
-                    padding: '0 60px',
+                    padding: '0 40px',
                     display: 'flex',
                     flexDirection: 'row',
                     width: '100%',
@@ -139,20 +140,21 @@ export default function ServicesSection() {
                 <div
                     style={{
                         width: '55%',
-                        paddingTop: '120px',
+                        // paddingTop: '10px',
                         paddingBottom: '50px',
                         paddingLeft: '80px',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '48px',
-                        alignItems: 'flex-end', // Push all content to the right
+                        alignItems: 'center', // Push all content to the right
                     }}
                 >
                     {/* Video Card */}
                     <div
                         style={{
-                            width: '340px',
+                            width: '60%',
                             maxWidth: '100%',
+                            height: '580px',
                             background: 'rgba(230, 240, 255, 0.95)',
                             borderRadius: '14px',
                             overflow: 'hidden',
@@ -167,7 +169,8 @@ export default function ServicesSection() {
                             playsInline
                             style={{
                                 width: '100%',
-                                height: 'auto',
+                                height: '100%',
+                                objectFit: 'cover',
                                 display: 'block',
                             }}
                         />
@@ -177,7 +180,7 @@ export default function ServicesSection() {
                     <p
                         style={{
                             color: 'white',
-                            fontSize: '15px',
+                            fontSize: '23px',
                             lineHeight: 1.85,
                             fontFamily: 'Outfit, sans-serif',
                             opacity: 0.9,
@@ -195,7 +198,7 @@ export default function ServicesSection() {
                     <p
                         style={{
                             color: 'white',
-                            fontSize: '15px',
+                            fontSize: '23px',
                             lineHeight: 1.85,
                             fontFamily: 'Outfit, sans-serif',
                             opacity: 0.9,
@@ -213,7 +216,7 @@ export default function ServicesSection() {
                     <p
                         style={{
                             color: 'white',
-                            fontSize: '15px',
+                            fontSize: '23px',
                             lineHeight: 1.85,
                             fontFamily: 'Outfit, sans-serif',
                             opacity: 0.9,
