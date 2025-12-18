@@ -11,6 +11,7 @@
 import { useRef, useEffect, useMemo } from 'react';
 import gsap from 'gsap';
 import HeroParticles from './HeroParticles';
+import MarqueeText from './MarqueeText';
 
 interface HeroProps {
     /** Main heading (h1) */
@@ -385,8 +386,31 @@ export default function Hero({
                 {/* Background Particles */}
                 <HeroParticles />
 
+                {/* Marquee Text - BEHIND LAYER (Left Side Only) */}
                 {/* 
-                 * OLD HERO CONTENT - Commented out for Santhi-Gears style redesign
+                  The Right Side (Front Layer) is rendered in index.tsx 
+                  to break out of the z-index stacking context 
+                */}
+                <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    zIndex: 5,
+                    clipPath: 'inset(0 50% 0 0)', // Show only left half
+                    pointerEvents: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                }}>
+                    <MarqueeText
+                        text="Revenue Cycle • AI-Powered • Winspire • "
+                        duration={25}
+                        fontSize="clamp(4rem, 14vw, 11rem)"
+                        color="#000000"
+                    />
+                </div>
+
+
+                {/*
+                 * OLD HERO CONTENT - Commented out for redesign
                  */}
 
                 {/* Animated H1 - letters with hover effect */}

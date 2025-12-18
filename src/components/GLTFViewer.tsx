@@ -75,6 +75,8 @@ export default function GLTFViewer({
     const manualTransformRef = useRef(manualTransform);
     const rotateSpeedRef = useRef(rotateSpeed);
 
+
+
     // Keep refs in sync with props
     useEffect(() => {
         manualTransformRef.current = manualTransform;
@@ -226,6 +228,7 @@ export default function GLTFViewer({
                 state.scene,
                 state.camera,
                 () => {
+
                     checkVisionSection();
                     captureBaseRotation();
                     updateRotation();

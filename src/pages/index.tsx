@@ -18,6 +18,7 @@ import Hero from '@/components/Hero';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import MarqueeText from '@/components/MarqueeText';
 import { scrollKeyframes, animationSettings } from '@/lib/scrollAnimations';
 
 /**
@@ -134,6 +135,31 @@ export default function Home() {
                         rotateSpeed={rotateSpeed}
                         className="!z-20"
                     />
+                )}
+
+                {/* Front-layer Marquee Text - ON TOP of 3D model (right side only) */}
+                {/* 
+                  Must be absolute so it scrolls with the page.
+                  Uses .hero class to inherit exact same responsive padding as the real Hero section.
+                  This ensures the text aligns perfectly with the back layer.
+                */}
+                {!is3DDisabled.current && (
+                    <div className="hero !absolute !top-0 !left-0 w-full !min-h-screen z-30 pointer-events-none !bg-transparent">
+                        {/* 
+                            Inner wrapper mimics .hero-content area.
+                            The .hero class handles the responsive padding around this wrapper.
+                        */}
+                        <div className="w-full flex-1 relative">
+                            <div className="absolute inset-0 flex items-center" style={{ clipPath: 'inset(0 0 0 50%)' }}>
+                                <MarqueeText
+                                    text="Revenue Cycle • AI-Powered • Winspire • "
+                                    duration={25}
+                                    fontSize="clamp(4rem, 14vw, 11rem)"
+                                    color="#000000"
+                                />
+                            </div>
+                        </div>
+                    </div>
                 )}
 
                 {/* Hero Section */}

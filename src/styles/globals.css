@@ -600,6 +600,16 @@ section {
   }
 }
 
+/* Marquee scroll animation for hero text */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-25%);
+  }
+}
+
 .marquee-container {
   width: 100%;
   overflow: visible;

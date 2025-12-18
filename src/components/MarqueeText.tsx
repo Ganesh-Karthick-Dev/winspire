@@ -1,74 +1,64 @@
 /**
  * MarqueeText Component
  * 
- * Full-width horizontal scrolling text that animates on scroll.
- * Uses GSAP ScrollTrigger for smooth scroll-driven motion.
+ * Creates a smooth infinite scrolling text marquee using CSS animation.
+ * Positioned BEHIND the 3D canvas so the model appears on top.
+ * Uses CSS for crisp text rendering and smooth animation.
  */
 
-import { useRef, useEffect } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-// Register GSAP plugin
-if (typeof window !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-}
+import { useRef } from 'react';
 
 interface MarqueeTextProps {
-    /** Text to display */
+    /** Text to scroll (will be repeated for seamless loop) */
     text?: string;
-    /** Optional className for custom styling */
+    /** Animation duration in seconds (higher = slower) */
+    duration?: number;
+    /** Font size CSS value */
+    fontSize?: string;
+    /** Text color */
+    color?: string;
+    /** Additional className */
     className?: string;
 }
 
 export default function MarqueeText({
-    text = 'Get Results. Not Just Promise.',
+    text = 'Revenue Cycle • AI-Powered • Winspire • ',
+    duration = 40,
+    fontSize = 'clamp(4rem, 14vw, 11rem)',
+    color = '#000000',
     className = '',
 }: MarqueeTextProps) {
-    const sectionRef = useRef<HTMLElement>(null);
-    const textRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const section = sectionRef.current;
-        const textEl = textRef.current;
-
-        if (!section || !textEl) return;
-
-        // Set initial position off-screen to the right
-        gsap.set(textEl, { xPercent: 100 });
-
-        // Create scroll-triggered animation
-        const animation = gsap.to(textEl, {
-            xPercent: 0,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: section,
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: 1,
-                invalidateOnRefresh: true,
-            }
-        });
-
-        return () => {
-            animation.scrollTrigger?.kill();
-            animation.kill();
-        };
-    }, []);
+    // Repeat text 4 times for seamless loop (matching the -25% CSS keyframe)
+    const repeatedText = `${text}${text}${text}${text}`;
 
     return (
-        <section
-            ref={sectionRef}
-            className={`marquee-section ${className}`}
-            aria-label="Featured tagline"
+        <div
+            className={`marquee-container ${className}`}
+            style={{
+                width: '100%',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                position: 'relative',
+            }}
         >
-            <div className="marquee-container">
-                <div ref={textRef} className="marquee-text">
-                    <span className="marquee-content">
-                        {text}
-                    </span>
-                </div>
+            <div
+                className="marquee-text"
+                style={{
+                    display: 'inline-block',
+                    whiteSpace: 'nowrap',
+                    fontSize,
+                    fontWeight: 800,
+                    color,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.03em',
+                    fontFamily: 'system-ui, -apple-system, sans-serif',
+                    userSelect: 'none',
+                    animation: `marquee ${duration}s linear infinite`,
+                    willChange: 'transform',
+                }}
+            >
+                {repeatedText}
             </div>
-        </section>
+        </div>
     );
 }
