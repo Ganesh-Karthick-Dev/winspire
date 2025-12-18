@@ -407,7 +407,7 @@ export default function Hero({
                 }}>
                     <MarqueeText
                         text="Revenue Cycle • AI-Powered • Winspire • "
-                        duration={25}
+                        duration={5}
                         fontSize="clamp(4rem, 14vw, 11rem)"
                         color="#000000"
                     />
