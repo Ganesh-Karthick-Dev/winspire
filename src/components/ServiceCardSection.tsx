@@ -1,13 +1,12 @@
 /**
  * ServiceCardSection Component
  * 
- * Sticky card section with:
- * - Dark transparent background (like hero card)
- * - Row 1: Top-left "Service" title with subtitle
- * - Row 2: Center animated sphere (grows from small to big with video inside)
- * - Row 3: Bottom-right text content and button with divider
+ * Sticky card with THREE SCROLLABLE SECTIONS inside:
+ * - Row 1: Top-left "Service" title (fades in first, fades out as sphere grows)
+ * - Row 2: Center animated sphere (grows from small to big)
+ * - Row 3: Bottom-right content (fades in last)
  * 
- * Uses GSAP ScrollTrigger for pinning and sphere animation
+ * Uses GSAP ScrollTrigger for scroll-based animations
  */
 
 import { useRef, useEffect } from 'react';
@@ -23,8 +22,9 @@ export default function ServiceCardSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const sphereRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
-    const contentRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLDivElement>(null);
     const headlineRef = useRef<HTMLHeadingElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     // Auto-play video
     useEffect(() => {
@@ -48,17 +48,18 @@ export default function ServiceCardSection() {
         return () => observer.disconnect();
     }, []);
 
-    // GSAP ScrollTrigger for sphere animation
+    // GSAP ScrollTrigger for scroll-based animations
     useEffect(() => {
         const ctx = gsap.context(() => {
             const sphere = sphereRef.current;
-            const content = contentRef.current;
+            const title = titleRef.current;
             const headline = headlineRef.current;
+            const content = contentRef.current;
             const section = sectionRef.current;
 
             if (!sphere || !section) return;
 
-            // Timeline for scroll-based animations
+            // Create a timeline linked to scroll
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: section,
@@ -68,28 +69,49 @@ export default function ServiceCardSection() {
                 }
             });
 
-            // Sphere: starts small and below, grows and rises
-            tl.fromTo(sphere,
-                { scale: 0.2, y: 150, opacity: 0 },
-                { scale: 1, y: 0, opacity: 1, duration: 0.6 },
-                0
-            );
-
-            // Headline: fades up slightly as sphere grows
+            // === PHASE 1 (0-30%): Title and headline fade IN ===
+            if (title) {
+                tl.fromTo(title,
+                    { opacity: 0, y: 30 },
+                    { opacity: 1, y: 0, duration: 0.15 },
+                    0
+                );
+            }
             if (headline) {
                 tl.fromTo(headline,
-                    { y: 20, opacity: 0 },
-                    { y: 0, opacity: 1, duration: 0.3 },
-                    0.1
+                    { opacity: 0, y: 30 },
+                    { opacity: 1, y: 0, duration: 0.15 },
+                    0.05
                 );
             }
 
-            // Content: fades in after sphere is centered
+            // === PHASE 2 (20-60%): Sphere grows from small to big ===
+            tl.fromTo(sphere,
+                { scale: 0.15, y: 100, opacity: 0 },
+                { scale: 1, y: 0, opacity: 1, duration: 0.4 },
+                0.15
+            );
+
+            // === PHASE 3 (50-80%): Title fades OUT as content comes in ===
+            if (title) {
+                tl.to(title,
+                    { opacity: 0, y: -20, duration: 0.15 },
+                    0.5
+                );
+            }
+            if (headline) {
+                tl.to(headline,
+                    { opacity: 0, y: -20, duration: 0.15 },
+                    0.5
+                );
+            }
+
+            // === PHASE 4 (60-100%): Bottom content fades IN ===
             if (content) {
                 tl.fromTo(content,
-                    { y: 40, opacity: 0 },
-                    { y: 0, opacity: 1, duration: 0.4 },
-                    0.5
+                    { opacity: 0, y: 40 },
+                    { opacity: 1, y: 0, duration: 0.3 },
+                    0.55
                 );
             }
 
@@ -106,10 +128,10 @@ export default function ServiceCardSection() {
                 position: 'relative',
                 width: '100%',
                 height: '250vh',
-                marginTop: '-450px', // Pull much closer to previous section
+                marginTop: '-450px',
             }}
         >
-            {/* Sticky Card Container - stays fixed while scrolling */}
+            {/* Sticky Card Container */}
             <div
                 style={{
                     position: 'sticky',
@@ -129,13 +151,19 @@ export default function ServiceCardSection() {
                         borderRadius: '32px',
                         position: 'relative',
                         overflow: 'hidden',
-                        display: 'flex',
-                        flexDirection: 'column',
                         padding: '48px',
                     }}
                 >
-                    {/* === ROW 1: Top Left - Service Title === */}
-                    <div style={{ marginBottom: 'auto' }}>
+                    {/* === ROW 1: Top Left - Service Title (fades in/out) === */}
+                    <div
+                        ref={titleRef}
+                        style={{
+                            position: 'absolute',
+                            top: '48px',
+                            left: '48px',
+                            maxWidth: '400px',
+                        }}
+                    >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
                             <span
                                 style={{
@@ -163,14 +191,13 @@ export default function ServiceCardSection() {
                                 color: '#4d9fff',
                                 fontSize: '14px',
                                 fontFamily: 'Outfit, sans-serif',
-                                marginLeft: '18px',
                                 margin: '0 0 0 18px',
                             }}
                         >
                             Our Services
                         </p>
 
-                        {/* Headline below title */}
+                        {/* Headline - same block as title (top-left) */}
                         <h3
                             ref={headlineRef}
                             style={{
@@ -179,15 +206,14 @@ export default function ServiceCardSection() {
                                 fontWeight: 700,
                                 fontFamily: 'Outfit, sans-serif',
                                 lineHeight: 1.4,
-                                marginTop: '60px',
-                                maxWidth: '450px',
+                                marginTop: '40px',
                             }}
                         >
                             3D communication platform solving all spatial selection challenges.
                         </h3>
                     </div>
 
-                    {/* === ROW 2: Center - Animated Sphere with Video === */}
+                    {/* === ROW 2: Center - Animated Sphere === */}
                     <div
                         ref={sphereRef}
                         style={{
@@ -195,8 +221,8 @@ export default function ServiceCardSection() {
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            width: 'min(400px, 50vw)',
-                            height: 'min(400px, 50vw)',
+                            width: 'min(380px, 45vw)',
+                            height: 'min(380px, 45vw)',
                             borderRadius: '50%',
                             overflow: 'hidden',
                             background: 'linear-gradient(135deg, rgba(100,140,200,0.4) 0%, rgba(60,100,180,0.6) 100%)',
@@ -218,13 +244,14 @@ export default function ServiceCardSection() {
                         />
                     </div>
 
-                    {/* === ROW 3: Bottom Right - Content + Button === */}
+                    {/* === ROW 3: Bottom Right - Content (fades in last) === */}
                     <div
                         ref={contentRef}
                         style={{
-                            marginTop: 'auto',
-                            marginLeft: 'auto',
-                            maxWidth: '450px',
+                            position: 'absolute',
+                            bottom: '48px',
+                            right: '48px',
+                            maxWidth: '420px',
                             textAlign: 'right',
                         }}
                     >
@@ -236,7 +263,7 @@ export default function ServiceCardSection() {
                                 lineHeight: 1.8,
                                 fontFamily: 'Outfit, sans-serif',
                                 opacity: 0.9,
-                                marginBottom: '32px',
+                                marginBottom: '28px',
                             }}
                         >
                             Our platform provides digital twin-based 3D communication
@@ -250,7 +277,7 @@ export default function ServiceCardSection() {
                                 width: '100%',
                                 height: '1px',
                                 background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 100%)',
-                                marginBottom: '24px',
+                                marginBottom: '20px',
                             }}
                         />
 
@@ -270,8 +297,8 @@ export default function ServiceCardSection() {
                             {/* Left side - Gradient with logo */}
                             <div
                                 style={{
-                                    width: '100px',
-                                    padding: '20px',
+                                    width: '90px',
+                                    padding: '16px',
                                     background: 'linear-gradient(135deg, #00b4a0 0%, #0088cc 100%)',
                                     display: 'flex',
                                     flexDirection: 'column',
@@ -280,31 +307,31 @@ export default function ServiceCardSection() {
                                     color: 'white',
                                 }}
                             >
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                                 </svg>
-                                <span style={{ fontSize: '12px', marginTop: '8px', fontWeight: 600 }}>SERVICE</span>
+                                <span style={{ fontSize: '11px', marginTop: '6px', fontWeight: 600 }}>SERVICE</span>
                             </div>
                             {/* Right side - Text + Arrow */}
                             <div
                                 style={{
                                     flex: 1,
-                                    padding: '16px 20px',
+                                    padding: '14px 18px',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
-                                    gap: '24px',
+                                    gap: '20px',
                                 }}
                             >
                                 <div>
-                                    <p style={{ color: '#333', fontSize: '14px', fontWeight: 600, fontFamily: 'Outfit, sans-serif', margin: 0 }}>
+                                    <p style={{ color: '#333', fontSize: '13px', fontWeight: 600, fontFamily: 'Outfit, sans-serif', margin: 0 }}>
                                         Explore Services
                                     </p>
-                                    <p style={{ color: '#666', fontSize: '12px', fontFamily: 'Outfit, sans-serif', margin: '4px 0 0 0' }}>
+                                    <p style={{ color: '#666', fontSize: '11px', fontFamily: 'Outfit, sans-serif', margin: '3px 0 0 0' }}>
                                         Service Site
                                     </p>
                                 </div>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
                                     <path d="M7 17L17 7M17 7H7M17 7v10" />
                                 </svg>
                             </div>
