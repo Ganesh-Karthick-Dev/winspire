@@ -18,6 +18,7 @@ import Hero from '@/components/Hero';
 import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
 import ServiceCardSection from '@/components/ServiceCardSection';
+import CenterTextSection from '@/components/CenterTextSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -274,6 +275,9 @@ export default function Home() {
 
                 {/* Service Card Section - Sticky with animated sphere */}
                 <ServiceCardSection />
+
+                {/* Center Text Section - Simple 100vh centered text */}
+                <CenterTextSection />
 
             </div>
         </Layout>

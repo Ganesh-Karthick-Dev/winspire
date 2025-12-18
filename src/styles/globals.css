@@ -391,7 +391,8 @@ section {
 #about,
 #transition-zone,
 #services,
-#service-card {
+#service-card,
+#center-text {
   z-index: 25 !important;
   /* Higher than canvas (20), text visible on top */
   background: transparent !important;
