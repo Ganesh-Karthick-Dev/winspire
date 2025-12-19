@@ -2983,7 +2983,7 @@ footer p {
   min-height: 100vh;
   background: transparent;
   /* Transparent as requested */
-  padding: 100px 60px;
+  padding: 100px 20px;
   box-sizing: border-box;
   overflow: hidden;
   color: white;
@@ -2996,8 +2996,8 @@ footer p {
 .news-container {
   position: relative;
   z-index: 1;
-  max-width: 1400px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 60px;

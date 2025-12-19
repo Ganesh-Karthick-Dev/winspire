@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+import FrostyButton from './FrostyButton';
 
 // Register ScrollTrigger
 if (typeof window !== 'undefined') {
@@ -117,6 +118,11 @@ export default function CareersScrollSection() {
                         </h2>
 
                         <div className="careers-divider"></div>
+{/* 
+                        <FrostyButton 
+                        text="About Us"
+                        onClick={() => window.location.href = '#about-details'}
+                         /> */}
 
                         <a href="/careers" className="careers-cta-button">
                             <span>Careers</span>
