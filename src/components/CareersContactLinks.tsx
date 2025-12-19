@@ -37,6 +37,7 @@ const CareersContactLinks: React.FC = () => {
 
     return (
         <section
+            ref={sectionRef}
             className="links-section"
             style={{
                 width: '100vw',
@@ -54,7 +55,7 @@ const CareersContactLinks: React.FC = () => {
                         display: 'flex',
                         gap: '16px',
                         width: '100%',
-                        padding: '0 40px'
+                        padding: '0 70px'
                     }}
                 >
                     {/* Careers Card */}
@@ -71,7 +72,7 @@ const CareersContactLinks: React.FC = () => {
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
-                            padding: '50px',
+                            padding: '70px 50px',
                             background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)',
                             transition: 'transform 0.3s ease'
                         }}
@@ -112,6 +113,7 @@ const CareersContactLinks: React.FC = () => {
 
                     {/* Contact Card */}
                     <a
+                        ref={rightCardRef}
                         href="/contact"
                         style={{
                             flex: 1,
@@ -124,7 +126,7 @@ const CareersContactLinks: React.FC = () => {
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
-                            padding: '50px',
+                            padding: '70px 50px',
                             background: 'linear-gradient(135deg, #4527a0 0%, #7b1fa2 100%)',
                             transition: 'transform 0.3s ease'
                         }}
