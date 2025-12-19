@@ -1372,6 +1372,149 @@ footer p {
 }
 
 /* ============================================
+   Smart Navbar - Scroll-Aware
+   ============================================ */
+
+.smart-navbar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 60px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+  font-family: 'Outfit', sans-serif;
+  background: transparent;
+}
+
+/* Visible state */
+.smart-navbar.visible {
+  transform: translateY(0);
+}
+
+/* Hidden state */
+.smart-navbar.hidden {
+  transform: translateY(-100%);
+}
+
+/* When scrolled down (not at top) - white background */
+.smart-navbar.scrolled {
+  background: white;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Container - HORIZONTAL LAYOUT */
+.smart-navbar .smart-navbar-container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Logo */
+.smart-navbar .smart-navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+/* Center Links - HORIZONTAL */
+.smart-navbar .smart-navbar-links {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 80px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.smart-navbar .smart-navbar-link {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1a1a5e;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.smart-navbar .smart-navbar-link:hover {
+  color: #4527a0;
+}
+
+.smart-navbar .smart-navbar-link .link-dot {
+  color: #1a1a5e;
+  font-size: 0.7rem;
+  margin-right: 2px;
+}
+
+/* Contact Button */
+.smart-navbar .smart-navbar-contact {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border: 1.5px solid #1a1a5e;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1a1a5e;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.smart-navbar .smart-navbar-contact:hover {
+  background: #1a1a5e;
+  color: white;
+}
+
+.smart-navbar .smart-navbar-contact .contact-dot {
+  width: 8px;
+  height: 8px;
+  background: #7c3aed;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.smart-navbar .smart-navbar-contact:hover .contact-dot {
+  background: white;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .smart-navbar {
+    padding: 16px 24px;
+  }
+
+  .smart-navbar .smart-navbar-links {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .smart-navbar {
+    padding: 12px 20px;
+  }
+
+  .smart-navbar .smart-navbar-contact {
+    padding: 10px 18px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ============================================
    Vision Section
    ============================================ */
 

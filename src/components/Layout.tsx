@@ -9,7 +9,8 @@ import SEOHead from './SEOHead';
 import JsonLd from './JsonLd';
 import SkipToContent from './SkipToContent';
 import AnimatedBackground from './AnimatedBackground';
-import Navbar from './Navbar';
+// import Navbar from './Navbar'; // Old navbar - commented out
+import SmartNavbar from './SmartNavbar';
 import Footer from './Footer';
 import FlowerCursor from './FlowerCursor';
 
@@ -43,8 +44,8 @@ export default function Layout({
             {/* Animated Gradient Background */}
             <AnimatedBackground />
 
-            {/* Navbar */}
-            {!hideNavbar && <Navbar />}
+            {/* Smart Navbar - Scroll-Aware */}
+            {!hideNavbar && <SmartNavbar />}
 
             {/* Main content area */}
             <main id="main-content" role="main" tabIndex={-1}>
@@ -56,3 +57,4 @@ export default function Layout({
         </>
     );
 }
+
