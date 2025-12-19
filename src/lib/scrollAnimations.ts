@@ -36,7 +36,7 @@ export const animationSettings = {
      * Continuous rotation speed (radians per frame)
      * 0 = no rotation, 0.003 = slow, 0.01 = fast
      */
-    // rotationSpeed: 0.003,
+    rotationSpeed: 0.003,
 
     /**
      * Scroll scrub smoothness (for ScrollTrigger)
@@ -100,14 +100,22 @@ export const scrollKeyframes: ScrollKeyframe[] = [
         }
     },
     {
-        scrollProgress: 1,
-        label: 'footer',
-        transform: {
-            position: { x: 0, y: 0, z: 0 },
-            rotation: { x: 0, y: 180, z: 0 },
-            scale: 100,
+    "scrollProgress": 0.219,
+    "label": "global section",
+    "transform": {
+        "position": {
+            "x": 1,
+            "y": 0.06,
+            "z": 0
         },
-    },
+        "rotation": {
+            "x": -92.177,
+            "y": 37.456,
+            "z": 23.23
+        },
+        "scale": 175
+    }
+}
 ];
 
 /**

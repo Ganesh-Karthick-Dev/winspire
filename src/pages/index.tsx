@@ -167,7 +167,7 @@ export default function Home() {
             )} */}
 
             {/* Scroll Progress Debug - Always visible in dev */}
-            {/* {isDev && (
+             {/* {isDev && (
                 <div
                     style={{
                         position: 'fixed',
@@ -188,7 +188,7 @@ export default function Home() {
                         Raw: {scrollProgress.toFixed(3)}
                     </div>
                 </div>
-            )} */}
+            )}  */}
 
             {/* Page wrapper for z-index stacking */}
             <div className="page-wrapper">
