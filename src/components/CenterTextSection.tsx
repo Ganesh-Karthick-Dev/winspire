@@ -22,12 +22,12 @@ export default function CenterTextSection() {
             <h2
                 style={{
                     color: 'white',
-                    fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                    fontWeight: 700,
+                    fontSize: 'clamp(3.5rem, 5vw, 5rem)',
+                    fontWeight: 600,
                     fontFamily: 'Outfit, sans-serif',
                     textAlign: 'center',
                     lineHeight: 1.3,
-                    maxWidth: '900px',
+                    maxWidth: '1200px',
                     padding: '0 40px',
                 }}
             >
