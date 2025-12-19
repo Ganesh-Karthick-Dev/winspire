@@ -15,6 +15,8 @@ type Scene = import('three').Scene;
 type PerspectiveCamera = import('three').PerspectiveCamera;
 type WebGLRenderer = import('three').WebGLRenderer;
 type Group = import('three').Group;
+type DirectionalLight = import('three').DirectionalLight;
+type AmbientLight = import('three').AmbientLight;
 
 /**
  * Three.js scene state container
@@ -24,6 +26,11 @@ export interface ThreeState {
     camera: PerspectiveCamera;
     renderer: WebGLRenderer;
     model: Group | null;
+    // Lighting references for scroll-based control
+    frontLight?: DirectionalLight;
+    ambientLight?: AmbientLight;
+    // Light helper for debugging (needs update in render loop)
+    frontLightHelper?: any;
 }
 
 /**
@@ -73,46 +80,33 @@ function initializeScene(canvas: HTMLCanvasElement, THREE: THREE): ThreeState {
     renderer.toneMapping = THREE.NoToneMapping;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-    // Add lighting for glossy effect
+    // =========================================
+    // LIGHTING SETUP - EDIT VALUES HERE
+    // =========================================
 
-    // Ambient light - strong base for all surfaces
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    // Ambient light - base illumination
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2.0);  // intensity: 0-5
     scene.add(ambientLight);
 
-    // Hemisphere light - balanced sky/ground fill
-    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x888888, 0.9);
-    hemiLight.position.set(0, 20, 0);
+    // Hemisphere light - sky/ground
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xeeeeee, 1.5);
+    hemiLight.position.set(0, 50, 0);
     scene.add(hemiLight);
 
-    // Main directional light - FRONT
-    const frontLight = new THREE.DirectionalLight(0xffffff, 0.4);
-    frontLight.position.set(2, -1, 8);
-    scene.add(frontLight);
+    // MAIN FRONT LIGHT - ATTACHED TO CAMERA (always in front)
+    const frontLight = new THREE.DirectionalLight(0xffffff, 3.0);  // intensity: 0-5
+    frontLight.position.set(0, 0, 1);  // Directly in front of camera
+    camera.add(frontLight);
+    scene.add(camera);  // Camera must be in scene for attached lights to work
 
-    // Back light - for when model rotates
-    const backLight = new THREE.DirectionalLight(0xffffff, 0.4);
-    backLight.position.set(-2, 1, -8);
-    scene.add(backLight);
+    // Top fill light - also camera-relative
+    const topLight = new THREE.DirectionalLight(0xffffff, 1.0);
+    topLight.position.set(20, 10, 0.5);  // Above and slightly in front
+    camera.add(topLight);
 
-    // Left side light
-    const leftLight = new THREE.DirectionalLight(0xffffff, 0.3);
-    leftLight.position.set(-8, 0, 0);
-    scene.add(leftLight);
-
-    // Right side light  
-    const rightLight = new THREE.DirectionalLight(0xffffff, 0.3);
-    rightLight.position.set(8, 0, 0);
-    scene.add(rightLight);
-
-    // Bottom light - for lower parts when model rotates
-    const bottomLight = new THREE.DirectionalLight(0xffffff, 0.4);
-    bottomLight.position.set(0, -8, 4);
-    scene.add(bottomLight);
-
-    // Center point light - illuminates all surfaces for 3D depth effect
-    const centerLight = new THREE.PointLight(0xffffff, 0.8, 20);
-    centerLight.position.set(0, 0, 0);
-    scene.add(centerLight);
+    // DEBUG: Axes helper - remove after done testing
+    // const axesHelper = new THREE.AxesHelper(0.9);
+    // scene.add(axesHelper);
 
     return { scene, camera, renderer, model: null };
 }

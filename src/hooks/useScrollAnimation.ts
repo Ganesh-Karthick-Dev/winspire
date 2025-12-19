@@ -1,20 +1,28 @@
 /**
  * useScrollAnimation Hook
  * 
- * Connects GSAP ScrollTrigger to 3D model transforms.
- * Returns the current interpolated transform based on scroll position.
+ * Connects GSAP ScrollTrigger to 3D model transforms and lighting.
+ * Returns the current interpolated transform and lighting based on scroll position.
  * 
  * Usage:
  * ```tsx
- * const modelTransform = useScrollAnimation();
- * <GLTFViewer manualTransform={modelTransform} />
+ * const { transform, lighting } = useScrollAnimation();
+ * <GLTFViewer manualTransform={transform} lighting={lighting} />
  * ```
  */
 
 import { useEffect, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { getTransformAtProgress, ModelTransform, scrollKeyframes, animationSettings } from '@/lib/scrollAnimations';
+import {
+    getTransformAtProgress,
+    getLightingAtProgress,
+    ModelTransform,
+    LightingConfig,
+    scrollKeyframes,
+    animationSettings,
+    defaultLighting
+} from '@/lib/scrollAnimations';
 
 // Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {
@@ -35,7 +43,7 @@ export interface UseScrollAnimationOptions {
 }
 
 /**
- * Hook to animate 3D model transforms based on scroll position
+ * Hook to animate 3D model transforms and lighting based on scroll position
  */
 export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     const {
@@ -54,12 +62,18 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         scale: firstKeyframe.transform.scale,
     });
 
+    // Initialize lighting state
+    const [lighting, setLighting] = useState<LightingConfig>(
+        firstKeyframe.lighting || defaultLighting
+    );
+
     const [scrollProgress, setScrollProgress] = useState(0);
 
     // Memoized update function
     const updateTransform = useCallback((progress: number) => {
         setScrollProgress(progress);
         setTransform(getTransformAtProgress(progress));
+        setLighting(getLightingAtProgress(progress));
     }, []);
 
     useEffect(() => {
@@ -96,6 +110,8 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     return {
         /** Current interpolated transform values */
         transform,
+        /** Current interpolated lighting values */
+        lighting,
         /** Current scroll progress (0-1) */
         scrollProgress,
         /** Current keyframe label (if any) */
@@ -108,3 +124,4 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
 }
 
 export default useScrollAnimation;
+

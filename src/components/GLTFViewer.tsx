@@ -40,7 +40,7 @@ interface GLTFViewerProps {
     onModelReady?: (state: ThreeState) => void;
     /** Callback for errors */
     onError?: (error: Error) => void;
-    className?: string; // Explicitly included in interface
+    className?: string;
 }
 
 export default function GLTFViewer({

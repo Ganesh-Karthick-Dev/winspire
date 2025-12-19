@@ -103,6 +103,7 @@ export default function Home() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+
     // === Scroll Animation (for Production Mode) ===
     const { transform: scrollTransform } = useScrollAnimation({
         enabled: !DEBUG_MODE, // Only enable when not in debug mode
@@ -167,7 +168,7 @@ export default function Home() {
             )} */}
 
             {/* Scroll Progress Debug - Always visible in dev */}
-             {/* {isDev && (
+            {/* {isDev && (
                 <div
                     style={{
                         position: 'fixed',
