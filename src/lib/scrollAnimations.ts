@@ -79,7 +79,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
                 "y": 77.456,
                 "z": 23.23
             },
-            "scale": 158
+            "scale": 10
         }
     },
     {
@@ -96,7 +96,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
                 "y": 122.456,
                 "z": 23.23
             },
-            "scale": 158
+            "scale": 10
         }
     },
     {
@@ -113,7 +113,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
                 "y": 37.456,
                 "z": 23.23
             },
-            "scale": 175
+            "scale": 12.5
         }
     },
     {
@@ -130,7 +130,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "y": 2.456,
             "z": 23.23
         },
-        "scale": 158
+        "scale": 10
     }
 },
 {
@@ -147,7 +147,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "y": -92.544,
             "z": 23.23
         },
-        "scale": 158
+        "scale": 10
     }
 },
 {
@@ -164,7 +164,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "y": -2.544,
             "z": 23.23
         },
-        "scale": 158
+        "scale": 10
     }
 },
 {
@@ -181,7 +181,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "y": 87.456,
             "z": 23.23
         },
-        "scale": 158
+        "scale": 10
     }
 },
 {
@@ -198,7 +198,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "y": 162.456,
             "z": 8.23
         },
-        "scale": 100
+        "scale": 7
     }
 },
 {
@@ -215,7 +215,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "y": 260,
             "z": 8.23
         },
-        "scale": 100
+        "scale": 7
     }
 },
 {
@@ -232,7 +232,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "y": 225,
             "z": 8.23
         },
-        "scale": 100
+        "scale": 7
     }
 },
 {
@@ -249,7 +249,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "y": 180,
             "z": 8.23
         },
-        "scale": 200
+        "scale": 15
     }
 }
 ];
