@@ -105,12 +105,12 @@ export default function CareersScrollSection() {
                 {/* Frosted Glass Card */}
                 <div className="careers-card">
                     {/* Left Content - Sticky Info */}
-                    <div className="careers-left-content">
+                    <div className="careers-left-content" style={{ paddingLeft: '80px' }}>
                         <div className="careers-accent-label">
                             <span className="careers-dot"></span>
                             Careers
                         </div>
-                        <p className="careers-sublabel">採用情報</p>
+                        <p className="careers-sublabel">choose your career</p>
 
                         <h2 className="careers-headline">
                             Join the Future of Revenue Cycle Innovation

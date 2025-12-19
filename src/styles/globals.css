@@ -2809,7 +2809,7 @@ footer p {
 
 .careers-divider {
   width: 100%;
-  height: 1px;
+  height: 4px !important;
   background: linear-gradient(90deg, rgba(10, 31, 68, 0.2) 0%, transparent 100%);
   margin-bottom: 40px;
 }
