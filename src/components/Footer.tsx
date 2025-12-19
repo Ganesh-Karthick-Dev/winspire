@@ -84,7 +84,7 @@ export default function Footer() {
             }}>
                 {/* Left - Service Card */}
                 <div style={{
-                    width: '280px',
+                    width: '320px',
                     flexShrink: 0,
                     borderRadius: '16px',
                     overflow: 'hidden',
@@ -92,7 +92,7 @@ export default function Footer() {
                     boxShadow: '0 10px 40px rgba(0,0,0,0.15)'
                 }}>
                     {/* Card Image */}
-                    <div style={{ width: '100%', height: '160px', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ width: '100%', height: '180px', position: 'relative', overflow: 'hidden' }}>
                         <Image
                             src="/images/links/links_workspace_laptop_1766075249577.png"
                             alt="Winspire RCM Service"
