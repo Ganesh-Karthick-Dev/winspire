@@ -30,8 +30,8 @@ export default function SmartNavbar() {
                     const heroHeight = window.innerHeight * 0.8;
                     const scrollDelta = currentScrollY - lastScrollY.current;
 
-                    // Check if at top (hero section)
-                    setIsAtTop(currentScrollY < 50);
+                    // Check if still in hero section (for transparent bg)
+                    setIsAtTop(currentScrollY < heroHeight);
 
                     // Only change visibility if scroll delta exceeds threshold
                     if (Math.abs(scrollDelta) > SCROLL_THRESHOLD) {
