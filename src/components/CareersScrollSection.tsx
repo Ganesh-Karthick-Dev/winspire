@@ -37,6 +37,12 @@ export default function CareersScrollSection() {
     const leftColRef = useRef<HTMLDivElement>(null);
     const rightColRef = useRef<HTMLDivElement>(null);
 
+    // Frosty Button Refs
+    const btnRef = useRef<HTMLAnchorElement>(null);
+    const btnBgRef = useRef<HTMLDivElement>(null);
+    const btnCircleRef = useRef<HTMLDivElement>(null);
+    const btnArrowRef = useRef<HTMLSpanElement>(null);
+
     useEffect(() => {
         const section = sectionRef.current;
         const leftCol = leftColRef.current;
@@ -72,6 +78,27 @@ export default function CareersScrollSection() {
                 { y: -350, duration: 1 },
                 0
             );
+
+            // Button Hover Animation
+            const btn = btnRef.current;
+            const bg = btnBgRef.current;
+            const circle = btnCircleRef.current;
+            const arrow = btnArrowRef.current;
+
+            if (btn && bg && circle && arrow) {
+                btn.addEventListener('mouseenter', () => {
+                    gsap.to(bg, { opacity: 1, duration: 0.3 });
+                    gsap.to(circle, { scale: 1.1, backgroundColor: '#3b82f6', duration: 0.3 }); // Circle to Blue
+                    gsap.to(arrow, { color: '#ffffff', x: 2, duration: 0.3 }); // Arrow to White
+                });
+
+                btn.addEventListener('mouseleave', () => {
+                    gsap.to(bg, { opacity: 0.8, duration: 0.3 });
+                    gsap.to(circle, { scale: 1, backgroundColor: '#ffffff', duration: 0.3 }); // Back to White
+                    gsap.to(arrow, { color: '#000000', x: 0, duration: 0.3 }); // Back to Black
+                });
+            }
+
         }, section);
 
         return () => ctx.revert();
@@ -118,15 +145,64 @@ export default function CareersScrollSection() {
                         </h2>
 
                         <div className="careers-divider"></div>
-{/* 
+                        {/* 
                         <FrostyButton 
                         text="About Us"
                         onClick={() => window.location.href = '#about-details'}
                          /> */}
 
-                        <a href="/careers" className="careers-cta-button">
-                            <span>Careers</span>
-                            <span className="careers-cta-arrow">→</span>
+                        <a
+                            ref={btnRef}
+                            href="/careers"
+                            className="careers-cta-button"
+                            style={{
+                                position: 'relative',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                padding: '16px 24px 16px 40px',
+                                borderRadius: '50px',
+                                textDecoration: 'none',
+                                overflow: 'hidden',
+                                width: 'fit-content',
+                                minWidth: '220px',
+                                border: 'none',
+                                background: 'transparent', // Custom BG handled below
+                                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)'
+                            }}
+                        >
+                            {/* Gradient Background Layer */}
+                            <div
+                                ref={btnBgRef}
+                                style={{
+                                    position: 'absolute',
+                                    inset: 0,
+                                    background: 'linear-gradient(90deg, #083151 0%, #051e3e 100%)', // Requested Gradient
+                                    zIndex: 0,
+                                    transition: 'opacity 0.3s',
+                                    opacity: 0.9
+                                }}
+                            />
+
+                            <span style={{ position: 'relative', zIndex: 1, color: 'white', fontWeight: 600, fontSize: '1.1rem' }}>Careers</span>
+
+                            <div
+                                ref={btnCircleRef}
+                                style={{
+                                    position: 'relative',
+                                    zIndex: 1,
+                                    width: '40px',
+                                    height: '40px',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'white',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    transition: 'transform 0.3s'
+                                }}
+                            >
+                                <span ref={btnArrowRef} style={{ color: 'black', fontSize: '1.2rem', lineHeight: 1 }}>→</span>
+                            </div>
                         </a>
                     </div>
 
