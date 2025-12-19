@@ -12,8 +12,8 @@ const CareersContactLinks: React.FC = () => {
                 boxSizing: 'border-box'
             }}
         >
-            <div className="links-container" style={{ maxWidth: '100%', padding: '0 16px' }}>
-                <h2 className="links-main-title text-gradient-shimmer" style={{ paddingLeft: '16px' }}>Open The Door to The New World.</h2>
+            <div className="links-container" style={{ width: '100%', maxWidth: '100%', padding: '0 16px' }}>
+                <h2 className="links-main-title text-gradient-shimmer" style={{ paddingLeft: '16px', textAlign: 'left', width: '100%', alignSelf: 'flex-start', display: 'block' , marginBlock: '100px' }}>Open The Door to The New World.</h2>
 
                 <div
                     className="links-grid"
@@ -31,7 +31,7 @@ const CareersContactLinks: React.FC = () => {
                             <div className="link-bottom">
                                 <div>
                                     <h3 className="link-title">Careers</h3>
-                                    <span className="link-japanese">採用情報</span>
+                                    <span className="link-japanese">opportunity</span>
                                 </div>
                                 <div className="link-bottom-right">
                                     <div className="link-separator"></div>
@@ -57,7 +57,7 @@ const CareersContactLinks: React.FC = () => {
                             <div className="link-bottom">
                                 <div>
                                     <h3 className="link-title">Contact</h3>
-                                    <span className="link-japanese">お問い合わせ</span>
+                                    <span className="link-japanese">sales</span>
                                 </div>
                                 <div className="link-bottom-right">
                                     <div className="link-separator"></div>
