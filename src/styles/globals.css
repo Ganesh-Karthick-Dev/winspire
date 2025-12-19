@@ -2979,7 +2979,8 @@ footer p {
 
 .news-section {
   position: relative;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   min-height: 100vh;
   background: transparent;
   /* Transparent as requested */
@@ -3038,7 +3039,7 @@ footer p {
 .news-list {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 80px;
 }
 
 /* News Card */
@@ -3109,7 +3110,7 @@ footer p {
   flex: 1;
   background: white;
   border-radius: 20px;
-  padding: 40px;
+  padding: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
