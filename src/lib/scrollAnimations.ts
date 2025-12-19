@@ -100,20 +100,156 @@ export const scrollKeyframes: ScrollKeyframe[] = [
         }
     },
     {
-    "scrollProgress": 0.219,
-    "label": "global section",
+        "scrollProgress": 0.219,
+        "label": "global section",
+        "transform": {
+            "position": {
+                "x": 1,
+                "y": 0.06,
+                "z": 0
+            },
+            "rotation": {
+                "x": -92.177,
+                "y": 37.456,
+                "z": 23.23
+            },
+            "scale": 175
+        }
+    },
+    {
+    "scrollProgress": 0.2870,
+    "label": "global section middle",
     "transform": {
         "position": {
-            "x": 1,
+            "x": 0.8,
             "y": 0.06,
             "z": 0
         },
         "rotation": {
-            "x": -92.177,
-            "y": 37.456,
+            "x": -77.177,
+            "y": 2.456,
             "z": 23.23
         },
-        "scale": 175
+        "scale": 158
+    }
+},
+{
+    "scrollProgress": 0.430,
+    "label": "service section",
+    "transform": {
+        "position": {
+            "x": 1.2,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -52.177,
+            "y": -92.544,
+            "z": 23.23
+        },
+        "scale": 158
+    }
+},
+{
+    "scrollProgress": 0.565,
+    "label": "environment",
+    "transform": {
+        "position": {
+            "x": 0,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -2.177,
+            "y": -2.544,
+            "z": 23.23
+        },
+        "scale": 158
+    }
+},
+{
+    "scrollProgress": 0.7250,
+    "label": "carears white card",
+    "transform": {
+        "position": {
+            "x": 0,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -2.177,
+            "y": 87.456,
+            "z": 23.23
+        },
+        "scale": 158
+    }
+},
+{
+    "scrollProgress": 0.7930,
+    "label": "news before",
+    "transform": {
+        "position": {
+            "x": 0,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -47.177,
+            "y": 162.456,
+            "z": 8.23
+        },
+        "scale": 100
+    }
+},
+{
+    "scrollProgress": 0.8770,
+    "label": "after news",
+    "transform": {
+        "position": {
+            "x": 0,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -47.177,
+            "y": 260,
+            "z": 8.23
+        },
+        "scale": 100
+    }
+},
+{
+    "scrollProgress": 0.9780,
+    "label": "footer entrance",
+    "transform": {
+        "position": {
+            "x": 0,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -47.177,
+            "y": 225,
+            "z": 8.23
+        },
+        "scale": 100
+    }
+},
+{
+    "scrollProgress": 1.0,
+    "label": "final footer",
+    "transform": {
+        "position": {
+            "x": 0,
+            "y": -0.34,
+            "z": 0.6
+        },
+        "rotation": {
+            "x": -82.177,
+            "y": 180,
+            "z": 8.23
+        },
+        "scale": 200
     }
 }
 ];

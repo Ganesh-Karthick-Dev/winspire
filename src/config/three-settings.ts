@@ -50,7 +50,7 @@ export const modelSettings = {
     defaultModelUrl: '/models/Winspire Logo.glb',
 
     // Scale multiplier for the model (larger for logo visibility)
-    defaultScale: 125,
+    defaultScale: 150,
 
     // Center model in scene
     centerModel: true,
@@ -64,7 +64,7 @@ export const modelSettings = {
     // ========================================================================
     manualTransform: {
         // Size of the model (Default: 125)
-        scale: 155,
+        scale: 180,
 
         // Position offset from center (x=0, y=0, z=0 is center)
         position: {
