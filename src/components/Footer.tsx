@@ -12,8 +12,68 @@ import React from 'react';
 import Image from 'next/image';
 
 export default function Footer() {
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     return (
         <footer className="ref-footer">
+            {/* Top Row - Logo, Social Links, PageTop */}
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '40px 60px',
+                // borderBottom: '1px solid rgba(255,255,255,0.1)'
+            }}>
+                {/* Logo */}
+                <div style={{
+                    fontSize: '1.5rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.3em',
+                    color: 'white',
+                    fontFamily: '"Outfit", sans-serif'
+                }}>
+                    WINSPIRE
+                </div>
+
+                {/* Social Links */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '50px' }}>
+                    <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>Social</span>
+                    <a href="https://note.com" target="_blank" rel="noopener noreferrer"
+                        style={{ fontSize: '1rem', color: 'white' }}>
+                        Note
+                    </a>
+                    <a href="https://wantedly.com" target="_blank" rel="noopener noreferrer"
+                        style={{ fontSize: '1rem', color: 'white' }}>
+                        Wantedly
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                        style={{ fontSize: '1rem', color: 'white' }}>
+                        Twitter
+                    </a>
+                </div>
+
+                {/* PageTop Button */}
+                <button
+                    onClick={scrollToTop}
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        background: 'none',
+                        border: 'none',
+                        color: 'white',
+                        fontSize: '0.85rem',
+                        cursor: 'pointer',
+                        padding: 0
+                    }}
+                >
+                    PageTop
+                    <span style={{ fontSize: '1rem' }}>↑</span>
+                </button>
+            </div>
+
             {/* Main Content - Centered */}
             <div className="ref-footer-content">
                 {/* Service Card */}
