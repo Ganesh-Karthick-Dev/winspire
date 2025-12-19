@@ -147,12 +147,12 @@ export default function ServiceCardSection() {
                     style={{
                         width: '100%',
                         height: '100%',
-                        background: 'linear-gradient(135deg, rgba(15,25,50,0.95) 0%, rgba(10,15,35,0.98) 100%)',
-                        borderRadius: '32px',
+                        // User requested #083151 with transparency (0.7), no blur
+                        background: 'rgba(8, 49, 81, 0.7)',
+                        borderRadius: '50px',
                         position: 'relative',
                         overflow: 'hidden',
                         padding: '18px',
-                        opacity: 0.7,
                     }}
                 >
                     {/* === ROW 1: Top Left - Service Title (fades in/out) === */}
