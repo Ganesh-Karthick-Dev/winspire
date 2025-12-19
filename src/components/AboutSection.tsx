@@ -87,7 +87,7 @@ export default function AboutSection() {
                     style={{
                         position: 'absolute',
                         top: '80px',
-                        left: '48px',
+                        left: '88px',
                     }}
                 >
                     <div className="flex items-center gap-3">
@@ -102,8 +102,8 @@ export default function AboutSection() {
                         <h2
                             style={{
                                 color: 'white',
-                                fontSize: '1.25rem',
-                                fontWeight: 700,
+                                fontSize: '1.95rem',
+                                fontWeight: 600,
                                 letterSpacing: '0.15em',
                                 fontFamily: 'Outfit, sans-serif',
                             }}
