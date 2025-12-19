@@ -221,14 +221,16 @@ async function loadGLTFwithManager(
                     wrapper.add(axesHelper);
                 }
 
-                // Apply glossy material
+                // Preserve original Blender material colors
+                // Only adjust if needed for lighting compatibility
                 model.traverse((child) => {
                     const mesh = child as import('three').Mesh;
                     if (mesh.isMesh && mesh.material) {
                         const material = mesh.material as import('three').MeshStandardMaterial;
-                        material.metalness = 0.3;
-                        material.roughness = 0.2;
-                        material.envMapIntensity = 1.5;
+                        // Keep original Blender colors - don't override metalness/roughness
+                        // material.metalness = 0.3;  // Commented out - was making it too dark
+                        // material.roughness = 0.2;  // Commented out - was making it too dark
+                        material.envMapIntensity = 1.0; // Neutral environment mapping
                         material.needsUpdate = true;
                     }
                 });
