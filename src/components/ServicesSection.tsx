@@ -10,6 +10,7 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import FrostyButton from './FrostyButton';
 
 // Register ScrollTrigger
 if (typeof window !== 'undefined') {
@@ -100,7 +101,7 @@ export default function ServicesSection() {
                 <div
                     style={{
                         position: 'sticky',
-                        top: '40px',
+                        top: '90px',
                         width: '45%',
                         alignSelf: 'flex-start',
                         display: 'flex',
@@ -116,7 +117,7 @@ export default function ServicesSection() {
                         style={{
                             color: 'white',
                             fontSize: 'clamp(1.8rem, 3.2vw, 2.6rem)',
-                            fontWeight: 700,
+                            fontWeight: 600,
                             lineHeight: 1.45,
                             fontFamily: 'Outfit, sans-serif',
                             marginBottom: '48px',
@@ -132,14 +133,18 @@ export default function ServicesSection() {
                         style={{
                             width: '100%',
                             maxWidth: '450px',
-                            height: '2px',
-                            background: 'linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 100%)',
+                            height: '4px',
+                            background: 'rgba(255, 255, 255, 0.2)',
                             marginBottom: '48px',
                         }}
                     />
 
                     {/* About Us Button - Premium glossy style */}
-                    <button
+                    <FrostyButton
+                        text="About Us"
+                        onClick={() => window.location.href = '#about-details'}
+                    />
+                    {/* <button
                         style={{
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -175,7 +180,7 @@ export default function ServicesSection() {
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
                         </span>
-                    </button>
+                    </button> */}
                 </div>
 
                 {/* === RIGHT SIDE: SCROLLABLE CONTENT === */}
@@ -224,7 +229,7 @@ export default function ServicesSection() {
                         style={{
                             color: 'white',
                             fontSize: '25px',
-                            lineHeight: 2,
+                            lineHeight: 1.4,
                             fontFamily: 'Outfit, sans-serif',
                             maxWidth: '450px',
                             textAlign: 'left',
@@ -244,7 +249,7 @@ export default function ServicesSection() {
                         style={{
                             color: 'white',
                             fontSize: '25px',
-                            lineHeight: 2,
+                            lineHeight: 1.4,
                             fontFamily: 'Outfit, sans-serif',
                             maxWidth: '450px',
                             textAlign: 'left',
@@ -257,24 +262,7 @@ export default function ServicesSection() {
                         <span className="fade-line" style={{ display: 'block' }}>technology to realize both without compromise.</span>
                     </div>
 
-                    {/* Text Block 3 */}
-                    <div
-                        ref={para3Ref}
-                        style={{
-                            color: 'white',
-                            fontSize: '25px',
-                            lineHeight: 2,
-                            fontFamily: 'Outfit, sans-serif',
-                            maxWidth: '450px',
-                            textAlign: 'left',
-                        }}
-                    >
-                        <span className="fade-line" style={{ display: 'block' }}>With an "overwhelmingly easy to use"</span>
-                        <span className="fade-line" style={{ display: 'block' }}>approach, we create exceptional services</span>
-                        <span className="fade-line" style={{ display: 'block' }}>that users will never want to go back from.</span>
-                        <span className="fade-line" style={{ display: 'block' }}>We aim to expand the value we create</span>
-                        <span className="fade-line" style={{ display: 'block' }}>not just domestically, but across the world.</span>
-                    </div>
+
                 </div>
             </div>
         </section>
