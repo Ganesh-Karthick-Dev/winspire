@@ -62,7 +62,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
                 "y": 37.456,
                 "z": 23.23
             },
-            "scale": 158
+            "scale": 10
         }
     },
     {
