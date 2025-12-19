@@ -83,7 +83,7 @@ export default function Home() {
     // Set to true to use Leva controls for finding coordinates
     // Set to false to use scroll-based animation
     // ========================================
-    const DEBUG_MODE = true; // 🎯 Toggle this to switch modes
+    const DEBUG_MODE = false; // 🎯 Toggle this to switch modes
 
     // === Manual Transform State (for Debug Mode) ===
     // Initial values come from first keyframe in scrollAnimations.ts

@@ -256,7 +256,7 @@ export default function GLTFViewer({
                 onError(error instanceof Error ? error : new Error('Failed to initialize 3D scene'));
             }
         }
-    }, [url, manualTransform, onModelReady, onError, handleMouseMove, checkVisionSection, captureBaseRotation, updateRotation]);
+    }, [url, onModelReady, onError, handleMouseMove, checkVisionSection, captureBaseRotation, updateRotation]); // Removed manualTransform - using refs for live updates
 
     // Handle canvas ready
     const handleCanvasReady = useCallback((canvas: HTMLCanvasElement) => {

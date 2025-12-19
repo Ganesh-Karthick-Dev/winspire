@@ -36,7 +36,7 @@ export const animationSettings = {
      * Continuous rotation speed (radians per frame)
      * 0 = no rotation, 0.003 = slow, 0.01 = fast
      */
-    rotationSpeed: 0.003,
+    // rotationSpeed: 0.003,
 
     /**
      * Scroll scrub smoothness (for ScrollTrigger)
@@ -66,7 +66,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
         }
     },
     {
-        "scrollProgress": 0.33,
+        "scrollProgress": 0.07, // Fixed: was 7.44, should be 0-1 range
         "label": "space between hero and about",
         "transform": {
             "position": {
@@ -75,16 +75,16 @@ export const scrollKeyframes: ScrollKeyframe[] = [
                 "z": 0
             },
             "rotation": {
-                "x": -42.177,
+                "x": -22.177,
                 "y": 77.456,
-                "z": 18.23
+                "z": 23.23
             },
             "scale": 158
         }
     },
     {
-        "scrollProgress": 0.66,
-        "label": "about",
+        "scrollProgress": 0.14, // Fixed: was 14.07, should be 0-1 range
+        "label": "about us section",
         "transform": {
             "position": {
                 "x": 0.4,
