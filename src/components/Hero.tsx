@@ -398,9 +398,9 @@ export default function Hero({
                     height: 'fit-content',
                     transform: 'translateY(-50%)',
                     zIndex: 5,
-                    // Soft fade out towards center (48% to 52%)
-                    maskImage: 'linear-gradient(to right, black 48%, transparent 52%)',
-                    WebkitMaskImage: 'linear-gradient(to right, black 48%, transparent 52%)',
+                    // Soft fade out towards center (52% to 56%) - moved right
+                    maskImage: 'linear-gradient(to right, black 52%, transparent 56%)',
+                    WebkitMaskImage: 'linear-gradient(to right, black 52%, transparent 56%)',
                     pointerEvents: 'none',
                     display: 'flex',
                     alignItems: 'center',

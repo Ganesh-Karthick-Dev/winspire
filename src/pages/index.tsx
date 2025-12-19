@@ -103,6 +103,30 @@ export default function Home() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // === Mission Text Cycling ===
+    const missionMessages = [
+        "Revolutionizing Revenue Cycle with AI-Driven Precision.",
+        "Empowering Healthcare with Intelligent Automation.",
+        "Transforming Operations with Data-Driven Excellence."
+    ];
+    const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
+    const [missionFade, setMissionFade] = useState(true);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            // Fade out
+            setMissionFade(false);
+
+            // After fade out, change text and fade in
+            setTimeout(() => {
+                setCurrentMissionIndex((prev) => (prev + 1) % missionMessages.length);
+                setMissionFade(true);
+            }, 300); // 300ms for fade out
+        }, 2000); // Change every 2 seconds
+
+        return () => clearInterval(interval);
+    }, []);
+
 
     // === Scroll Animation (for Production Mode) ===
     const { transform: scrollTransform } = useScrollAnimation({
@@ -221,8 +245,8 @@ export default function Home() {
                                     top: '46%',
                                     transform: 'translateY(-50%)',
                                     height: 'fit-content',
-                                    maskImage: 'linear-gradient(to right, transparent 48%, black 52%)',
-                                    WebkitMaskImage: 'linear-gradient(to right, transparent 48%, black 52%)'
+                                    maskImage: 'linear-gradient(to right, transparent 52%, black 56%)',
+                                    WebkitMaskImage: 'linear-gradient(to right, transparent 52%, black 56%)'
                                 }}
                             >
                                 <MarqueeText
@@ -241,8 +265,14 @@ export default function Home() {
                                 >
                                     Our Mission
                                 </h3>
-                                <div className="text-2xl font-bold leading-tight font-[Outfit] text-gradient-shimmer">
-                                    Revolutionizing Revenue Cycle with AI-Driven Precision.
+                                <div
+                                    className="text-2xl font-bold leading-tight font-[Outfit] text-gradient-shimmer"
+                                    style={{
+                                        opacity: missionFade ? 1 : 0,
+                                        transition: 'opacity 0.3s ease-in-out'
+                                    }}
+                                >
+                                    {missionMessages[currentMissionIndex]}
                                 </div>
                             </div>
 
