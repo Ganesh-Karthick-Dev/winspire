@@ -3854,7 +3854,7 @@ footer p {
 /* Link Columns Container */
 .ref-columns-container {
   display: flex;
-  gap: 0;
+  gap: 0.6rem;
 }
 
 /* Individual Column */

@@ -74,123 +74,182 @@ export default function Footer() {
                 </button>
             </div>
 
-            {/* Main Content - Centered */}
-            <div className="ref-footer-content">
-                {/* Service Card */}
-                <div className="ref-service-card">
-                    {/* Top Section - Purple Gradient with Image */}
-                    <div className="ref-card-top">
-                        <div className="ref-card-image">
-                            <Image
-                                src="/images/links/links_workspace_laptop_1766075249577.png"
-                                alt="Winspire RCM Service"
-                                width={260}
-                                height={140}
-                                style={{ objectFit: 'cover' }}
-                            />
-                        </div>
+            {/* Main Content */}
+            <div style={{
+                display: 'flex',
+                gap: '60px',
+                padding: '60px',
+                alignItems: 'flex-start',
+                justifyContent: 'space-between'
+            }}>
+                {/* Left - Service Card */}
+                <div style={{
+                    width: '280px',
+                    flexShrink: 0,
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    background: 'white',
+                    boxShadow: '0 10px 40px rgba(0,0,0,0.15)'
+                }}>
+                    {/* Card Image */}
+                    <div style={{ width: '100%', height: '160px', position: 'relative', overflow: 'hidden' }}>
+                        <Image
+                            src="/images/links/links_workspace_laptop_1766075249577.png"
+                            alt="Winspire RCM Service"
+                            fill
+                            style={{ objectFit: 'cover' }}
+                        />
                     </div>
 
-                    {/* Bottom Section - White Background */}
-                    <div className="ref-card-bottom">
-                        <div className="ref-card-info">
-                            <span className="ref-card-name">Winspire RCM</span>
-                            <span className="ref-card-label">Service Site</span>
+                    {/* Card Bottom - White */}
+                    <div style={{
+                        padding: '20px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        background: 'white'
+                    }}>
+                        <div>
+                            <div style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a1a' }}>Winspire RCM</div>
+                            <div style={{ fontSize: '0.8rem', color: '#666' }}>Service Site</div>
                         </div>
-                        <span className="ref-card-arrow">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M7 17L17 7M17 7H7M17 7V17" />
-                            </svg>
-                        </span>
+                        <span style={{ fontSize: '1.2rem', color: '#333' }}>↗</span>
                     </div>
 
-                    {/* Badge */}
-                    <div className="ref-card-badge">
-                        <div className="ref-badge-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="#e53935">
-                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                            </svg>
-                        </div>
-                        <div className="ref-badge-text">
-                            <span className="ref-badge-label">HEALTHCARE EXCELLENCE</span>
-                            <span className="ref-badge-year">2024 Award</span>
+                    {/* Award Badge */}
+                    <div style={{
+                        padding: '15px 20px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '12px',
+                        borderTop: '1px solid #eee',
+                        background: 'white'
+                    }}>
+                        <div style={{
+                            width: '30px',
+                            height: '30px',
+                            borderRadius: '50%',
+                            background: '#e53935',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: 'white',
+                            fontSize: '0.7rem',
+                            fontWeight: 700
+                        }}>★</div>
+                        <div>
+                            <div style={{ fontSize: '0.65rem', color: '#666', letterSpacing: '0.05em' }}>HEALTHCARE EXCELLENCE</div>
+                            <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#e53935' }}>2024 Award</div>
                         </div>
                     </div>
                 </div>
 
-                {/* Link Columns Container */}
-                <div className="ref-columns-container">
+                {/* Right - Link Columns */}
+                <div style={{ display: 'flex', gap: '0' }}>
                     {/* About Us Column */}
-                    <div className="ref-column">
-                        <div className="ref-column-divider"></div>
-                        <div className="ref-column-content">
-                            <h3 className="ref-column-title">
-                                <span className="ref-title-dot">•</span> About Us
+                    <div style={{ display: 'flex', width: '300px' }}>
+                        {/* Vertical Divider */}
+                        <div style={{ width: '1px', background: 'rgba(255,255,255,0.3)', marginRight: '30px' }}></div>
+                        <div style={{ paddingTop: '10px' }}>
+                            <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: 'white', marginBottom: '40px' }}>
+                                <span style={{ color: 'white', marginRight: '8px' }}>•</span>About Us
                             </h3>
-                            <ul className="ref-column-links">
-                                <li><a href="/about#mission">Mission</a></li>
-                                <li><a href="/about#vision">Vision</a></li>
-                                <li><a href="/about#values">Values</a></li>
-                                <li><a href="/about#team">Board Members</a></li>
-                                <li><a href="/about#awards">Award</a></li>
-                                <li><a href="/about#profile">Corporate Profile</a></li>
-                                <li><a href="/contact">Access</a></li>
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                <li><a href="/about#mission" style={{ color: 'white', fontSize: '0.9rem' }}>Mission</a></li>
+                                <li><a href="/about#vision" style={{ color: 'white', fontSize: '0.9rem' }}>Vision</a></li>
+                                <li><a href="/about#values" style={{ color: 'white', fontSize: '0.9rem' }}>Values</a></li>
+                                <li><a href="/about#team" style={{ color: 'white', fontSize: '0.9rem' }}>Board Members</a></li>
+                                <li><a href="/about#awards" style={{ color: 'white', fontSize: '0.9rem' }}>Award</a></li>
+                                <li><a href="/about#profile" style={{ color: 'white', fontSize: '0.9rem' }}>Corporate Profile</a></li>
+                                <li><a href="/contact" style={{ color: 'white', fontSize: '0.9rem' }}>Access</a></li>
                             </ul>
                         </div>
                     </div>
 
                     {/* Careers Column */}
-                    <div className="ref-column">
-                        <div className="ref-column-divider"></div>
-                        <div className="ref-column-content">
-                            <h3 className="ref-column-title">
-                                <span className="ref-title-dot">•</span> Careers
+                    <div style={{ display: 'flex', width: '300px' }}>
+                        {/* Vertical Divider */}
+                        <div style={{ width: '1px', background: 'rgba(255,255,255,0.3)', marginRight: '30px' }}></div>
+                        <div style={{ paddingTop: '10px' }}>
+                            <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: 'white', marginBottom: '40px' }}>
+                                <span style={{ color: 'white', marginRight: '8px' }}>•</span>Careers
                             </h3>
-                            <ul className="ref-column-links">
-                                <li><a href="/careers#message">Message</a></li>
-                                <li><a href="/careers#jobs">Job Categories</a></li>
-                                <li><a href="/careers#people">People</a></li>
-                                <li><a href="/careers#environment">Work Environment</a></li>
-                                <li><a href="/careers#materials">Recruitment<br />Materials</a></li>
-                                <li><a href="/careers#faq">FAQ</a></li>
-                                <li><a href="/careers#culture">Culture Note</a></li>
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                <li><a href="/careers#message" style={{ color: 'white', fontSize: '0.9rem' }}>Message</a></li>
+                                <li><a href="/careers#jobs" style={{ color: 'white', fontSize: '0.9rem' }}>Job Categories</a></li>
+                                <li><a href="/careers#people" style={{ color: 'white', fontSize: '0.9rem' }}>People</a></li>
+                                <li><a href="/careers#environment" style={{ color: 'white', fontSize: '0.9rem' }}>Work Environment</a></li>
+                                <li><a href="/careers#materials" style={{ color: 'white', fontSize: '0.9rem' }}>Recruitment Materials</a></li>
+                                <li><a href="/careers#faq" style={{ color: 'white', fontSize: '0.9rem' }}>FAQ</a></li>
+                                <li><a href="/careers#culture" style={{ color: 'white', fontSize: '0.9rem' }}>Culture Note</a></li>
                             </ul>
                         </div>
                     </div>
 
                     {/* News Column */}
-                    <div className="ref-column">
-                        <div className="ref-column-divider"></div>
-                        <div className="ref-column-content">
-                            <h3 className="ref-column-title">
-                                <span className="ref-title-dot">•</span> News
+                    <div style={{ display: 'flex', width: '350px' }}>
+                        {/* Vertical Divider */}
+                        <div style={{ width: '1px', background: 'rgba(255,255,255,0.3)', marginRight: '30px' }}></div>
+                        <div style={{ paddingTop: '10px' }}>
+                            <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: 'white', marginBottom: '40px' }}>
+                                <span style={{ color: 'white', marginRight: '8px' }}>•</span>News
                             </h3>
-                            <ul className="ref-column-links">
-                                <li><a href="/news#media">Media</a></li>
-                                <li><a href="/news#events">Event</a></li>
-                                <li><a href="/news#company">Company</a></li>
-                                <li><a href="/news#releases">Release</a></li>
-                                <li><a href="/news#case-studies">Case Study</a></li>
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                <li><a href="/news#media" style={{ color: 'white', fontSize: '0.9rem' }}>Media</a></li>
+                                <li><a href="/news#events" style={{ color: 'white', fontSize: '0.9rem' }}>Event</a></li>
+                                <li><a href="/news#company" style={{ color: 'white', fontSize: '0.9rem' }}>Company</a></li>
+                                <li><a href="/news#releases" style={{ color: 'white', fontSize: '0.9rem' }}>Release</a></li>
+                                <li><a href="/news#case-studies" style={{ color: 'white', fontSize: '0.9rem' }}>Case Study</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Bottom Bar */}
-            <div className="ref-footer-bottom">
-                <div className="ref-bottom-left">
-                    <div className="ref-privacy-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M12 16v-4M12 8h.01" />
+            {/* Bottom Bar - Matching Reference */}
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '40px 60px',
+                borderTop: '1px solid rgba(255,255,255,0.1)',
+                marginTop: '60px'
+            }}>
+                {/* Left - Privacy Badge + Link */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                    {/* Privacy Badge - White circle with blue P */}
+                    <div style={{
+                        width: '50px',
+                        height: '50px',
+                        borderRadius: '10px',
+                        background: 'white',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+                    }}>
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="#3b82f6" strokeWidth="2" fill="none" />
+                            <text x="12" y="16" textAnchor="middle" fill="#3b82f6" fontSize="12" fontWeight="bold">P</text>
                         </svg>
                     </div>
-                    <a href="/privacy" className="ref-privacy-link">Privacy Policy</a>
+                    <a href="/privacy" style={{
+                        color: 'white',
+                        textDecoration: 'none',
+                        fontSize: '0.9rem',
+                        fontWeight: 500
+                    }}>
+                        Privacy Policy
+                    </a>
                 </div>
-                <div className="ref-bottom-right">
-                    <span className="ref-copyright">© Winspire RCM Inc. All Rights Reserved.</span>
-                </div>
+
+                {/* Right - Copyright */}
+                <span style={{
+                    color: 'rgba(255,255,255,0.6)',
+                    fontSize: '0.85rem'
+                }}>
+                    © Winspire RCM Inc. All Rights Reserved.
+                </span>
             </div>
         </footer>
     );
