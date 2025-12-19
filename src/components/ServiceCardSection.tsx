@@ -138,7 +138,7 @@ export default function ServiceCardSection() {
                     top: 0,
                     width: '100%',
                     height: '100vh',
-                    padding: '15px',
+                    // padding: '10px',
                     boxSizing: 'border-box',
                 }}
             >
@@ -151,7 +151,8 @@ export default function ServiceCardSection() {
                         borderRadius: '32px',
                         position: 'relative',
                         overflow: 'hidden',
-                        padding: '48px',
+                        padding: '18px',
+                        opacity: 0.7,
                     }}
                 >
                     {/* === ROW 1: Top Left - Service Title (fades in/out) === */}
@@ -159,16 +160,16 @@ export default function ServiceCardSection() {
                         ref={titleRef}
                         style={{
                             position: 'absolute',
-                            top: '48px',
-                            left: '48px',
-                            maxWidth: '400px',
+                            top: '120px', // Moved inside
+                            left: '120px', // Moved inside
+                            maxWidth: '500px'
                         }}
                     >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
                             <span
                                 style={{
-                                    width: '6px',
-                                    height: '6px',
+                                    width: '8px',
+                                    height: '8px',
                                     backgroundColor: 'rgba(255,255,255,0.5)',
                                     borderRadius: '50%',
                                 }}
@@ -191,7 +192,7 @@ export default function ServiceCardSection() {
                                 color: '#4d9fff',
                                 fontSize: '14px',
                                 fontFamily: 'Outfit, sans-serif',
-                                margin: '0 0 0 18px',
+                                margin: '0 0 0 20px',
                             }}
                         >
                             Our Services
@@ -203,10 +204,11 @@ export default function ServiceCardSection() {
                             style={{
                                 color: 'white',
                                 fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
-                                fontWeight: 700,
+                                fontWeight: 600,
                                 fontFamily: 'Outfit, sans-serif',
-                                lineHeight: 1.4,
-                                marginTop: '40px',
+                                lineHeight: 1.5,
+                                marginTop: '100px',
+                                wordSpacing: '10px',
                             }}
                         >
                             3D communication platform solving all spatial selection challenges.
@@ -221,8 +223,8 @@ export default function ServiceCardSection() {
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            width: 'min(380px, 45vw)',
-                            height: 'min(380px, 45vw)',
+                            width: 'min(500px, 55vw)', // Increased size
+                            height: 'min(500px, 55vw)', // Increased size
                             borderRadius: '50%',
                             overflow: 'hidden',
                             background: 'linear-gradient(135deg, rgba(100,140,200,0.4) 0%, rgba(60,100,180,0.6) 100%)',
@@ -249,9 +251,9 @@ export default function ServiceCardSection() {
                         ref={contentRef}
                         style={{
                             position: 'absolute',
-                            bottom: '48px',
-                            right: '48px',
-                            maxWidth: '420px',
+                            bottom: '120px', // Matched Row 1 spacing
+                            right: '120px', // Matched Row 1 spacing
+                            maxWidth: '490px',
                             textAlign: 'right',
                         }}
                     >
@@ -259,25 +261,27 @@ export default function ServiceCardSection() {
                         <p
                             style={{
                                 color: 'white',
-                                fontSize: '15px',
+                                fontSize: '25px',
                                 lineHeight: 1.8,
                                 fontFamily: 'Outfit, sans-serif',
-                                opacity: 0.9,
+                                // opacity: 0.9,
                                 marginBottom: '28px',
+                                wordSpacing: '10px',
+                                fontWeight: 600,
                             }}
                         >
                             Our platform provides digital twin-based 3D communication
-                            services. Anytime, anywhere, with anyone - enabling spatial
-                            image sharing for residential and housing businesses.
+                            services. Anytime, with anyone - enabling spatial
+                            image sharing for residential
                         </p>
 
                         {/* Divider line */}
                         <div
                             style={{
                                 width: '100%',
-                                height: '1px',
-                                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 100%)',
-                                marginBottom: '20px',
+                                height: '4px',
+                                background: 'rgba(255, 255, 255, 0.2)',
+                                marginBottom: '30px',
                             }}
                         />
 
@@ -298,7 +302,7 @@ export default function ServiceCardSection() {
                             <div
                                 style={{
                                     width: '90px',
-                                    padding: '16px',
+                                    padding: '20px',
                                     background: 'linear-gradient(135deg, #00b4a0 0%, #0088cc 100%)',
                                     display: 'flex',
                                     flexDirection: 'column',
@@ -310,7 +314,7 @@ export default function ServiceCardSection() {
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                                 </svg>
-                                <span style={{ fontSize: '11px', marginTop: '6px', fontWeight: 600 }}>SERVICE</span>
+                                <span style={{ fontSize: '13px', marginTop: '6px', fontWeight: 600 }}>SERVICE</span>
                             </div>
                             {/* Right side - Text + Arrow */}
                             <div
@@ -324,10 +328,10 @@ export default function ServiceCardSection() {
                                 }}
                             >
                                 <div>
-                                    <p style={{ color: '#333', fontSize: '13px', fontWeight: 600, fontFamily: 'Outfit, sans-serif', margin: 0 }}>
+                                    <p style={{ color: '#333', fontSize: '16px', fontWeight: 600, fontFamily: 'Outfit, sans-serif', margin: 0 }}>
                                         Explore Services
                                     </p>
-                                    <p style={{ color: '#666', fontSize: '11px', fontFamily: 'Outfit, sans-serif', margin: '3px 0 0 0' }}>
+                                    <p style={{ color: '#666', fontSize: '13px', fontFamily: 'Outfit, sans-serif', margin: '3px 0 0 0' }}>
                                         Service Site
                                     </p>
                                 </div>
