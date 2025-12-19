@@ -247,7 +247,15 @@ export default function Home() {
                             </div>
 
                             {/* === Bottom Right: Scroll Indicator === */}
-                            <div className="absolute right-8 bottom-12 pointer-events-auto z-10 flex flex-row items-center gap-4 hero-text-fade">
+                            <div
+                                className="absolute right-8 bottom-12 pointer-events-auto z-10 flex flex-row items-center gap-4 hero-text-fade cursor-pointer"
+                                onClick={() => {
+                                    const aboutSection = document.querySelector('#about');
+                                    if (aboutSection) {
+                                        aboutSection.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                                }}
+                            >
                                 <span className="text-xs right-8 font-bold tracking-widest uppercase text-gray-500 font-[Outfit]">
                                     Scroll
                                 </span>
