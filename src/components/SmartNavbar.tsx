@@ -21,7 +21,7 @@ export default function SmartNavbar() {
     const ticking = useRef(false);
 
     useEffect(() => {
-        const SCROLL_THRESHOLD = 10; // Minimum scroll before changing state
+        const SCROLL_THRESHOLD = 50; // Larger threshold = waits longer before showing
 
         const handleScroll = () => {
             if (!ticking.current) {
@@ -94,7 +94,7 @@ export default function SmartNavbar() {
                             href={item.href}
                             className="smart-navbar-link"
                         >
-                            <span className="link-dot">•</span>
+                            <span className="link-dot"></span>
                             {item.label}
                         </Link>
                     ))}
