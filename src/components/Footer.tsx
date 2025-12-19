@@ -154,7 +154,7 @@ export default function Footer() {
                             <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: 'white', marginBottom: '40px' }}>
                                 <span style={{ color: 'white', marginRight: '8px' }}>•</span>About Us
                             </h3>
-                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'flex-start' }}>
                                 <li><a href="/about#mission" style={{ color: 'white', fontSize: '0.9rem' }}>Mission</a></li>
                                 <li><a href="/about#vision" style={{ color: 'white', fontSize: '0.9rem' }}>Vision</a></li>
                                 <li><a href="/about#values" style={{ color: 'white', fontSize: '0.9rem' }}>Values</a></li>
@@ -174,7 +174,7 @@ export default function Footer() {
                             <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: 'white', marginBottom: '40px' }}>
                                 <span style={{ color: 'white', marginRight: '8px' }}>•</span>Careers
                             </h3>
-                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'flex-start' }}>
                                 <li><a href="/careers#message" style={{ color: 'white', fontSize: '0.9rem' }}>Message</a></li>
                                 <li><a href="/careers#jobs" style={{ color: 'white', fontSize: '0.9rem' }}>Job Categories</a></li>
                                 <li><a href="/careers#people" style={{ color: 'white', fontSize: '0.9rem' }}>People</a></li>
@@ -194,7 +194,7 @@ export default function Footer() {
                             <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: 'white', marginBottom: '40px' }}>
                                 <span style={{ color: 'white', marginRight: '8px' }}>•</span>News
                             </h3>
-                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'flex-start' }}>
                                 <li><a href="/news#media" style={{ color: 'white', fontSize: '0.9rem' }}>Media</a></li>
                                 <li><a href="/news#events" style={{ color: 'white', fontSize: '0.9rem' }}>Event</a></li>
                                 <li><a href="/news#company" style={{ color: 'white', fontSize: '0.9rem' }}>Company</a></li>
