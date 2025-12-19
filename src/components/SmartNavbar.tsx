@@ -21,27 +21,33 @@ export default function SmartNavbar() {
     const ticking = useRef(false);
 
     useEffect(() => {
+        const SCROLL_THRESHOLD = 10; // Minimum scroll before changing state
+
         const handleScroll = () => {
             if (!ticking.current) {
                 window.requestAnimationFrame(() => {
                     const currentScrollY = window.scrollY;
-                    const heroHeight = window.innerHeight * 0.8; // 80% of viewport
+                    const heroHeight = window.innerHeight * 0.8;
+                    const scrollDelta = currentScrollY - lastScrollY.current;
 
                     // Check if at top (hero section)
                     setIsAtTop(currentScrollY < 50);
 
-                    if (currentScrollY < heroHeight) {
-                        // In hero section - always visible, transparent
-                        setIsVisible(true);
-                    } else if (currentScrollY > lastScrollY.current) {
-                        // Scrolling DOWN - hide navbar
-                        setIsVisible(false);
-                    } else {
-                        // Scrolling UP - show navbar with white bg
-                        setIsVisible(true);
+                    // Only change visibility if scroll delta exceeds threshold
+                    if (Math.abs(scrollDelta) > SCROLL_THRESHOLD) {
+                        if (currentScrollY < heroHeight) {
+                            // In hero section - always visible
+                            setIsVisible(true);
+                        } else if (scrollDelta > 0) {
+                            // Scrolling DOWN - hide navbar
+                            setIsVisible(false);
+                        } else {
+                            // Scrolling UP - show navbar
+                            setIsVisible(true);
+                        }
+                        lastScrollY.current = currentScrollY;
                     }
 
-                    lastScrollY.current = currentScrollY;
                     ticking.current = false;
                 });
                 ticking.current = true;
@@ -64,9 +70,9 @@ export default function SmartNavbar() {
                 <Link href="/" className="smart-navbar-logo">
                     <div
                         style={{
-                            width: '140px',
-                            height: '40px',
-                            backgroundColor: isAtTop ? '#1a1a5e' : '#1a1a5e',
+                            width: '170px',  // Bigger logo
+                            height: '45px',
+                            backgroundColor: '#1a1a5e',
                             maskImage: 'url("/images/Logo-White.svg")',
                             maskSize: 'contain',
                             maskRepeat: 'no-repeat',

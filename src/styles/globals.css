@@ -1377,16 +1377,23 @@ footer p {
 
 .smart-navbar {
   position: fixed !important;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 30px;
+  /* Space from top of viewport like reference */
+  left: 40px;
+  /* Space from sides */
+  right: 40px;
   z-index: 1000;
-  padding: 16px 60px;
+  padding: 20px 50px;
+  border-radius: 60px;
+  /* Rounded corners for floating look */
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     background-color 0.3s ease,
-    box-shadow 0.3s ease;
+    box-shadow 0.3s ease,
+    top 0.3s ease;
   font-family: 'Outfit', sans-serif;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 /* Visible state */
@@ -1401,8 +1408,10 @@ footer p {
 
 /* When scrolled down (not at top) - white background */
 .smart-navbar.scrolled {
-  background: white;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  top: 15px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 16px 50px;
 }
 
 /* Container - HORIZONTAL LAYOUT */
@@ -1425,12 +1434,13 @@ footer p {
   flex-shrink: 0;
 }
 
-/* Center Links - HORIZONTAL */
+/* Center Links - HORIZONTAL with equal spacing */
 .smart-navbar .smart-navbar-links {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
-  gap: 80px;
+  gap: 100px;
+  /* Increased gap for more spacing like reference */
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -1439,13 +1449,14 @@ footer p {
 .smart-navbar .smart-navbar-link {
   display: inline-flex !important;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 0.95rem;
   font-weight: 500;
   color: #1a1a5e;
   text-decoration: none;
   transition: color 0.3s ease;
   white-space: nowrap;
+  letter-spacing: 0.01em;
 }
 
 .smart-navbar .smart-navbar-link:hover {
@@ -1454,16 +1465,19 @@ footer p {
 
 .smart-navbar .smart-navbar-link .link-dot {
   color: #1a1a5e;
-  font-size: 0.7rem;
-  margin-right: 2px;
+  font-size: 0.5rem;
+  /* Smaller dot */
+  margin-right: 4px;
+  opacity: 0.8;
 }
 
-/* Contact Button */
+/* Contact Button - Cleaner style like reference */
 .smart-navbar .smart-navbar-contact {
   display: inline-flex !important;
   align-items: center;
   gap: 10px;
-  padding: 12px 28px;
+  padding: 14px 32px;
+  /* Slightly increased padding */
   border: 1.5px solid #1a1a5e;
   border-radius: 50px;
   font-size: 0.95rem;
@@ -1481,9 +1495,10 @@ footer p {
 }
 
 .smart-navbar .smart-navbar-contact .contact-dot {
-  width: 8px;
-  height: 8px;
-  background: #7c3aed;
+  width: 7px;
+  height: 7px;
+  background: #3b82f6;
+  /* Blue like reference */
   border-radius: 50%;
   transition: background 0.3s ease;
 }
@@ -1495,7 +1510,7 @@ footer p {
 /* Responsive */
 @media (max-width: 1024px) {
   .smart-navbar {
-    padding: 16px 24px;
+    padding: 20px 32px;
   }
 
   .smart-navbar .smart-navbar-links {
@@ -1505,8 +1520,9 @@ footer p {
 
 @media (max-width: 768px) {
   .smart-navbar {
-    padding: 12px 20px;
+    padding: 16px 20px;
   }
+
 
   .smart-navbar .smart-navbar-contact {
     padding: 10px 18px;
