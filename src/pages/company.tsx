@@ -12,6 +12,7 @@ import { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
 import MissionSection from '@/components/company/MissionSection';
 import VisionSection from '@/components/company/VisionSection';
+import ValuesSection from '@/components/company/ValuesSection';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css';
 
@@ -172,6 +173,9 @@ With Technology.`}
                     "At the same time, we are building a comprehensive platform that connects, analyzes, and transforms healthcare financial data into actionable insights for better decision-making.",
                 ]}
             />
+
+            {/* Values Section */}
+            <ValuesSection />
 
         </Layout>
     );

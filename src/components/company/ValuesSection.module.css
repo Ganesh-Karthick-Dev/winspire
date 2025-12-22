@@ -1,0 +1,191 @@
+/* Values Section Container */
+.valuesSection {
+    position: relative;
+    width: 95%;
+    /* max-width: 1400px; */
+    margin: 2rem auto;
+    padding: 0 4rem 8rem;
+    z-index: 20;
+}
+
+/* Header with Dots */
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-bottom: 4rem;
+}
+
+.titleWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    /* Space between dots and title */
+}
+
+.dots {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dot {
+    width: 8px;
+    height: 5px;
+    background-color: #38bdf8;
+    border-radius: 50%;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    padding-left: 1.5rem;
+    /* Align visually under text */
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3.5rem;
+}
+
+/* Individual Card */
+.card {
+    background: rgba(13, 25, 48, 0.6);
+    /* Transparent dark blue */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 650px;
+    /* Reduced height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Content at bottom */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    background: rgba(13, 25, 48, 0.8);
+    border-color: rgba(56, 189, 248, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Value Number Label (Top Right) */
+.valueLabel {
+    position: absolute;
+    top: 2.5rem;
+    right: 2.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #38bdf8;
+    letter-spacing: 0.1em;
+    z-index: 5;
+}
+
+.valueLabel span {
+    opacity: 0.6;
+    margin-left: 4px;
+}
+
+/* Card Content (Bottom) */
+.cardContent {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-top: 5rem;
+    /* Applied here to space Title, Divider, Desc */
+}
+
+.cardTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.divider {
+    width: 60px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 3rem 0;
+    /* Removed margin-bottom */
+    transition: width 0.3s ease;
+}
+
+.card:hover .divider {
+    width: 100%;
+    background: #38bdf8;
+}
+
+.cardDesc {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+/* Background Icons/Patterns */
+.cardBgIcon {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140%;
+    height: 140%;
+    opacity: 0.15;
+    /* Increased from 0.06 */
+    pointer-events: none;
+    z-index: 1;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.card:hover .cardBgIcon {
+    transform: translate(-50%, -50%) scale(1.1) rotate(5deg);
+    opacity: 0.25;
+    /* Increased from 0.1 */
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .valuesSection {
+        width: 100%;
+        padding: 0 1.5rem 6rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        min-height: 400px;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+}
