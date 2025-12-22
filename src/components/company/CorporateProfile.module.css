@@ -1,0 +1,144 @@
+/* Section Container */
+.section {
+    position: relative;
+    width: 98%;
+    /* max-width: 1400px; */
+    margin: 4rem auto;
+    padding: 0 4rem 8rem;
+    z-index: 20;
+}
+
+/* Header with Dots */
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-bottom: 8rem;
+}
+
+.titleWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dots {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dot {
+    width: 8px;
+    height: 5px;
+    background-color: #38bdf8;
+    border-radius: 50%;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    padding-left: 1.5rem;
+}
+
+/* Grid Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+    row-gap: 1rem;
+}
+
+/* Profile Item */
+.item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.itemFull {
+    grid-column: 1 / -1;
+}
+
+.label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: white;
+    text-transform: capitalize;
+    letter-spacing: 0.02em;
+    padding-left: 0.5rem;
+}
+
+.valueBox {
+    background: rgba(13, 25, 48, 0.7);
+    /* Dark Blue Transparent */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    font-size: 1rem;
+    line-height: 1.6;
+    color: white;
+    font-weight: 500;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+/* Specific content styling */
+.historyList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.historyItem {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.boardList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.link {
+    color: #ffffff;
+    text-decoration: underline;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+.link:hover {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section {
+        width: 100%;
+        padding: 0 1.5rem 6rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+}
