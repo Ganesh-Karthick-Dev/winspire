@@ -1,0 +1,125 @@
+/* Award Section Container */
+.awardSection {
+    position: relative;
+    width: 98%;
+    /* max-width: 1400px; */
+    margin: 13rem auto;
+    padding: 0 4rem 8rem;
+    z-index: 20;
+    /* Transparent background as requested */
+}
+
+/* Header with Dots */
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-bottom: 6rem;
+}
+
+.titleWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dots {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dot {
+    width: 8px;
+    height: 5px;
+    background-color: #38bdf8;
+    border-radius: 50%;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    padding-left: 1.5rem;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    row-gap: 4rem;
+    /* More space between rows for text below cards */
+}
+
+/* Card Item Wrapper */
+.awardItem {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* The White Card */
+.card {
+    background: #ffffff;
+    border-radius: 24px;
+    aspect-ratio: 16/10;
+    /* Roughly matched from screenshot */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    transition: transform 0.4s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.awardItem:hover .card {
+    transform: translateY(-8px);
+}
+
+/* Logo Image Styling (used in lieu of actual images for now) */
+.logoPlaceholder {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1e293b;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Description Text Below Card */
+.description {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: white;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .awardSection {
+        width: 100%;
+        padding: 0 1.5rem 6rem;
+    }
+}
