@@ -16,6 +16,7 @@ import ValuesSection from '@/components/company/ValuesSection';
 import BoardSection from '@/components/company/BoardSection';
 import AwardSection from '@/components/company/AwardSection';
 import CorporateProfile from '@/components/company/CorporateProfile';
+import AccessSection from '@/components/company/AccessSection';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css';
 
@@ -188,6 +189,9 @@ With Technology.`}
 
             {/* Corporate Profile Section */}
             <CorporateProfile />
+
+            {/* Access Section */}
+            <AccessSection />
 
         </Layout>
     );
