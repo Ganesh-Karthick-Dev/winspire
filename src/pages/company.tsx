@@ -1,20 +1,31 @@
 /**
  * Company Page - About Us / Who We Are
  * 
- * Modern hero section with gradient background, illustration card,
+ * Modern hero section with 3D model, video card,
  * and smooth scroll animations.
  */
 
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
+import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css';
+
+// 3D Model - same as home page
+const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
+    ssr: false,
+    loading: () => null,
+});
 
 export default function Company() {
     const heroRef = useRef<HTMLElement>(null);
+    const is3DDisabled = useRef(false);
 
     useEffect(() => {
+        is3DDisabled.current = shouldDisable3D();
+
         // Hide loader
         const loader = document.querySelector('.loader-overlay') as HTMLElement;
         if (loader) {
@@ -93,14 +104,23 @@ export default function Company() {
     return (
         <Layout title="About Us" description="Learn about Winspire RCM - our mission, values, and team">
 
+            {/* 3D Model - FIXED behind everything */}
+            {!is3DDisabled.current && (
+                <div className={styles.modelContainer}>
+                    <GLTFViewer
+                        manualTransform={{
+                            scale: 10,
+                            position: { x: 0.5, y: 0.3, z: 0 },
+                            rotation: { x: 0, y: 0, z: 1 }
+                        }}
+                        rotateSpeed={0.003}
+                        className="w-full h-full"
+                    />
+                </div>
+            )}
+
             {/* Hero Section */}
             <section ref={heroRef} className={styles.heroSection}>
-                {/* Background Arc */}
-                <div className={styles.heroBackgroundArc}></div>
-
-                {/* Glowing effect */}
-                <div className={styles.heroGlow}></div>
-
                 {/* Content */}
                 <div className={styles.heroContent}>
                     {/* Label */}

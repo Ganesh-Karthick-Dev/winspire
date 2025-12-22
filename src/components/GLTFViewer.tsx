@@ -36,6 +36,8 @@ interface GLTFViewerProps {
     };
     /** Speed of idle rotation */
     rotateSpeed?: number;
+    /** Enable wobble/bobbing effect while rotating */
+    enableWobble?: boolean;
     /** Callback when model is loaded and ready */
     onModelReady?: (state: ThreeState) => void;
     /** Callback for errors */
@@ -47,6 +49,7 @@ export default function GLTFViewer({
     url = modelSettings.defaultModelUrl,
     manualTransform,
     rotateSpeed = modelSettings.animation.rotateSpeed,
+    enableWobble = true,
     onModelReady,
     onError,
     className,
@@ -74,6 +77,7 @@ export default function GLTFViewer({
     // === REFS FOR LIVE UPDATES (avoids stale closures in animation loop) ===
     const manualTransformRef = useRef(manualTransform);
     const rotateSpeedRef = useRef(rotateSpeed);
+    const enableWobbleRef = useRef(enableWobble);
 
 
 
@@ -81,7 +85,8 @@ export default function GLTFViewer({
     useEffect(() => {
         manualTransformRef.current = manualTransform;
         rotateSpeedRef.current = rotateSpeed;
-    }, [manualTransform, rotateSpeed]);
+        enableWobbleRef.current = enableWobble;
+    }, [manualTransform, rotateSpeed, enableWobble]);
 
     // Mouse move handler for interactive rotation
     const handleMouseMove = useCallback((event: MouseEvent) => {
@@ -115,6 +120,12 @@ export default function GLTFViewer({
         // Continuous smooth rotation - Z-axis (Wheel spin)
         continuousRotation.current += currentSpeed;
 
+        // Wobble/bobbing effect - only if enabled via prop
+        const wobbleAmount = enableWobbleRef.current ? 0.1 : 0; // ~6 degrees when enabled
+        const wobbleSpeed = 2.0;
+        const wobbleX = Math.sin(continuousRotation.current * wobbleSpeed) * wobbleAmount;
+        const wobbleY = Math.cos(continuousRotation.current * wobbleSpeed * 0.7) * wobbleAmount;
+
         if (currentTransform) {
             // MODE A: Manual Control (Home Page)
             // Absolute source of truth is the ref (synced from props)
@@ -123,14 +134,14 @@ export default function GLTFViewer({
             // Z is Manual Bank + Continuous Spin
             const radZ = toRadians(currentTransform.rotation.z);
 
-            model.rotation.x = radX;
-            model.rotation.y = radY;
+            model.rotation.x = radX + wobbleX;
+            model.rotation.y = radY + wobbleY;
             model.rotation.z = radZ - continuousRotation.current;
         } else {
             // MODE B: Internal Control (Animation/GSAP driven)
             // Use captured refs
-            model.rotation.x = baseRotationX.current;
-            model.rotation.y = baseRotationY.current;
+            model.rotation.x = baseRotationX.current + wobbleX;
+            model.rotation.y = baseRotationY.current + wobbleY;
             model.rotation.z = baseRotationZ.current - continuousRotation.current;
         }
     }, []); // No dependencies - reads from refs

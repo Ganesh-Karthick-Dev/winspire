@@ -222,6 +222,7 @@ export default function Home() {
                     <GLTFViewer
                         manualTransform={modelTransform}
                         rotateSpeed={rotateSpeed}
+                        enableWobble={false}
                         className="!z-20"
                     />
                 )}
