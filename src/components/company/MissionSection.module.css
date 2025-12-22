@@ -1,0 +1,107 @@
+/* Mission Section Styles */
+
+.missionSection {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    padding: 8rem 6rem;
+    background: transparent;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin-top: 6rem;
+}
+
+/* Mission header - label with dots */
+.missionHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.missionLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.missionDots {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.missionDot {
+    width: 7px;
+    height: 5px;
+    background-color: #38bdf8;
+    border-radius: 50%;
+}
+
+.missionSubtitle {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: 1.5rem;
+}
+
+/* Content area - two column layout */
+.missionContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+/* Large bold statement */
+.missionStatement {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 600;
+    line-height: 1.8;
+    color: white;
+    margin: 0;
+}
+
+/* Each line has dark blue background */
+.missionStatement span {
+    display: inline;
+    background: linear-gradient(135deg, #0c2340 0%, #1a3a5c 100%);
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+/* Description paragraph */
+.missionDescription {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 100%;
+    margin-top: 14rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .missionSection {
+        padding: 6rem 3rem;
+    }
+
+    .missionContent {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .missionSection {
+        padding: 4rem 2rem;
+    }
+
+    .missionLabel {
+        font-size: 1.2rem;
+    }
+}
