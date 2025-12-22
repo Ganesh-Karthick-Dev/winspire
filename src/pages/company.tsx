@@ -17,6 +17,7 @@ import BoardSection from '@/components/company/BoardSection';
 import AwardSection from '@/components/company/AwardSection';
 import CorporateProfile from '@/components/company/CorporateProfile';
 import AccessSection from '@/components/company/AccessSection';
+import CareersContactLinks from '@/components/CareersContactLinks';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css';
 
@@ -192,6 +193,9 @@ With Technology.`}
 
             {/* Access Section */}
             <AccessSection />
+
+            {/* Final CTA Section */}
+            <CareersContactLinks />
 
         </Layout>
     );
