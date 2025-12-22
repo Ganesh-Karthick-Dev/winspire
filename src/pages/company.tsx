@@ -83,8 +83,8 @@ export default function Company() {
                 onUpdate: (self) => {
                     const card = document.querySelector(`.${styles.heroCard}`) as HTMLElement;
                     if (card) {
-                        // Card starts at translateY(50%), parallax moves it up slightly
-                        const yMove = 50 - (self.progress * 30);
+                        // Card starts at translateY(20%), parallax moves it up slightly
+                        const yMove = 20 - (self.progress * 15);
                         card.style.transform = `translateY(${yMove}%)`;
                     }
                 }
@@ -110,7 +110,7 @@ export default function Company() {
                     <GLTFViewer
                         manualTransform={{
                             scale: 10,
-                            position: { x: 0.5, y: 0.3, z: 0 },
+                            position: { x: 0, y: 0, z: 0 },
                             rotation: { x: 0, y: 0, z: 1 }
                         }}
                         rotateSpeed={0.003}
@@ -149,39 +149,12 @@ export default function Company() {
                     </video>
                 </div>
 
-                {/* 3D Geometric Shapes at bottom left */}
-                <div className={styles.geometricShapes}>
-                    {/* Cube 1 - larger, back */}
-                    <div className={`${styles.cube} ${styles.cube1}`}>
-                        <div className={`${styles.cubeFace} ${styles.cubeFront}`}></div>
-                        <div className={`${styles.cubeFace} ${styles.cubeTop}`}></div>
-                        <div className={`${styles.cubeFace} ${styles.cubeRight}`}></div>
-                    </div>
-                    {/* Cube 2 - smaller, front */}
-                    <div className={`${styles.cube} ${styles.cube2}`}>
-                        <div className={`${styles.cubeFace} ${styles.cubeFront}`}></div>
-                        <div className={`${styles.cubeFace} ${styles.cubeTop}`}></div>
-                        <div className={`${styles.cubeFace} ${styles.cubeRight}`}></div>
-                    </div>
-                </div>
+
 
                 {/* Scroll Indicator */}
                 <div className={styles.scrollIndicator} onClick={handleScrollClick}>
                     <span>Scroll</span>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    >
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <polyline points="19 12 12 19 5 12"></polyline>
-                    </svg>
+                    <span>↓</span>
                 </div>
             </section>
 
