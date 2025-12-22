@@ -1,0 +1,230 @@
+/* Section Container */
+.section {
+    position: relative;
+    width: 98%;
+    /* max-width: 1400px; */
+    margin: 8rem auto;
+    padding: 8rem 4rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 40px;
+}
+
+/* Row 1: Header Grid */
+.headerGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: center;
+}
+
+/* Left: Title with Dots */
+.titleWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.dots {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dot {
+    width: 8px;
+    height: 5px;
+    background-color: #38bdf8;
+    border-radius: 50%;
+}
+
+.title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    line-height: 1;
+}
+
+.subtitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    color: #38bdf8;
+    font-weight: 600;
+    padding-left: 1.5rem;
+}
+
+/* Right: Description */
+.description {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #334155;
+}
+
+/* Row 2: 4 Cards Grid */
+.cardsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Individual Card */
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cardTitleGroup h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.25rem 0;
+}
+
+.cardTitleGroup p {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    color: #38bdf8;
+    font-weight: 600;
+    margin: 0;
+}
+
+.entryButton {
+    background: #38bdf8;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+}
+
+.entryButton:hover {
+    background: #0ea5e9;
+    transform: translateX(5px);
+}
+
+.cardText {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #475569;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background: #38bdf8;
+    color: white;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Row 3: Full Width Card */
+.fullWidthCard {
+    grid-column: 1 / -1;
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.fullWidthCardContent h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.25rem 0;
+}
+
+.fullWidthCardContent p:first-of-type {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    color: #38bdf8;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+}
+
+.fullWidthCardContent p:last-of-type {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #475569;
+    margin: 0;
+}
+
+/* Row 4: Center Button */
+.centerButton {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.entryPageButton {
+    background: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 1rem 3rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s;
+    box-shadow: 0 8px 20px rgba(30, 64, 175, 0.3);
+}
+
+.entryPageButton:hover {
+    background: #1e3a8a;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(30, 64, 175, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+
+    .headerGrid,
+    .cardsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        width: 90%;
+        padding: 2rem;
+    }
+}
