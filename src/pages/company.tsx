@@ -21,6 +21,9 @@ import CareersContactLinks from '@/components/CareersContactLinks';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css';
 
+import { companyScrollKeyframes } from '@/lib/companyScrollAnimations';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+
 // 3D Model - same as home page
 const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
     ssr: false,
@@ -31,10 +34,18 @@ export default function Company() {
     const heroRef = useRef<HTMLElement>(null);
     const is3DDisabled = useRef(false);
 
+    // Use custom scroll animation for Company page
+    const { transform, lighting, scrollProgress } = useScrollAnimation({
+        keyframes: companyScrollKeyframes
+    });
+
+    // Keep rotation (spin) active, but disable wobble at the very end
+    const enableWobble = scrollProgress <= 0.95;
+    const rotateSpeed = 0.003;
+
     useEffect(() => {
         is3DDisabled.current = shouldDisable3D();
-
-        // Hide loader
+        // ... (loader logic remains) ...
         const loader = document.querySelector('.loader-overlay') as HTMLElement;
         if (loader) {
             loader.style.opacity = '0';
@@ -48,34 +59,11 @@ export default function Company() {
             const { ScrollTrigger } = await import('gsap/ScrollTrigger');
             gsap.registerPlugin(ScrollTrigger);
 
-            // Hero content entry animations
             const tl = gsap.timeline({ delay: 0.2 });
+            tl.from(`.${styles.heroLabel}`, { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' });
+            tl.from(`.${styles.heroTitle}`, { y: 60, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.5');
+            tl.from(`.${styles.heroCard}`, { x: 100, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.7');
 
-            // Label fade in
-            tl.from(`.${styles.heroLabel}`, {
-                y: 20,
-                opacity: 0,
-                duration: 0.8,
-                ease: 'power3.out',
-            });
-
-            // Title reveal
-            tl.from(`.${styles.heroTitle}`, {
-                y: 60,
-                opacity: 0,
-                duration: 1,
-                ease: 'power3.out',
-            }, '-=0.5');
-
-            // Card slide in
-            tl.from(`.${styles.heroCard}`, {
-                x: 100,
-                opacity: 0,
-                duration: 1,
-                ease: 'power3.out',
-            }, '-=0.7');
-
-            // Scroll-based parallax for card
             ScrollTrigger.create({
                 trigger: heroRef.current,
                 start: 'top top',
@@ -84,7 +72,6 @@ export default function Company() {
                 onUpdate: (self) => {
                     const card = document.querySelector(`.${styles.heroCard}`) as HTMLElement;
                     if (card) {
-                        // Card starts at translateY(20%), parallax moves it up slightly
                         const yMove = 20 - (self.progress * 15);
                         card.style.transform = `translateY(${yMove}%)`;
                     }
@@ -96,25 +83,18 @@ export default function Company() {
     }, []);
 
     const handleScrollClick = () => {
-        window.scrollTo({
-            top: window.innerHeight,
-            behavior: 'smooth',
-        });
+        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
     };
 
     return (
         <Layout title="About Us" description="Learn about Winspire RCM - our mission, values, and team">
-
             {/* 3D Model - FIXED behind everything */}
             {!is3DDisabled.current && (
                 <div className={styles.modelContainer}>
                     <GLTFViewer
-                        manualTransform={{
-                            scale: 10,
-                            position: { x: 0, y: 0, z: 0 },
-                            rotation: { x: 0, y: 0, z: 1 }
-                        }}
-                        rotateSpeed={0.003}
+                        manualTransform={transform}
+                        rotateSpeed={rotateSpeed}
+                        enableWobble={enableWobble}
                         className="w-full h-full"
                     />
                 </div>

@@ -40,6 +40,8 @@ export interface UseScrollAnimationOptions {
     start?: string;
     /** End position (default: 'bottom bottom') */
     end?: string;
+    /** Custom keyframes to use instead of default (default: scrollKeyframes) */
+    keyframes?: typeof scrollKeyframes;
 }
 
 /**
@@ -52,10 +54,11 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         trigger = 'body',
         start = 'top top',
         end = 'bottom bottom',
+        keyframes = scrollKeyframes, // Default to Home page keyframes
     } = options;
 
     // Initialize with first keyframe values
-    const firstKeyframe = scrollKeyframes[0];
+    const firstKeyframe = keyframes[0];
     const [transform, setTransform] = useState<ModelTransform>({
         position: { ...firstKeyframe.transform.position },
         rotation: { ...firstKeyframe.transform.rotation },
@@ -72,9 +75,9 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     // Memoized update function
     const updateTransform = useCallback((progress: number) => {
         setScrollProgress(progress);
-        setTransform(getTransformAtProgress(progress));
-        setLighting(getLightingAtProgress(progress));
-    }, []);
+        setTransform(getTransformAtProgress(progress, keyframes));
+        setLighting(getLightingAtProgress(progress, keyframes));
+    }, [keyframes]);
 
     useEffect(() => {
         // Skip on server or if disabled
@@ -99,13 +102,13 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
             start,
             end,
             scrub,
-            keyframes: scrollKeyframes.length,
+            keyframes: keyframes.length,
         });
 
         return () => {
             scrollTrigger.kill();
         };
-    }, [enabled, scrub, trigger, start, end, updateTransform]);
+    }, [enabled, scrub, trigger, start, end, updateTransform, keyframes]);
 
     return {
         /** Current interpolated transform values */
@@ -115,7 +118,7 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         /** Current scroll progress (0-1) */
         scrollProgress,
         /** Current keyframe label (if any) */
-        currentLabel: scrollKeyframes.find(
+        currentLabel: keyframes.find(
             (kf, i, arr) =>
                 scrollProgress >= kf.scrollProgress &&
                 (i === arr.length - 1 || scrollProgress < arr[i + 1].scrollProgress)
