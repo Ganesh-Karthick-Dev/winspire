@@ -1,0 +1,306 @@
+/* Vision Section Styles */
+
+.visionSection {
+    position: relative;
+    width: calc(100% - 3rem);
+    margin: 2rem auto;
+    padding: 14rem 6rem 10rem;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 24px;
+    z-index: 20;
+}
+
+/* Vision header - label with dots */
+.visionHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-bottom: 5rem;
+}
+
+.visionLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.visionDots {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.visionDot {
+    width: 8px;
+    height: 5px;
+    background-color: #38bdf8;
+    border-radius: 50%;
+}
+
+.visionSubtitle {
+    font-size: 0.85rem;
+    color: #38bdf8;
+    margin-left: 1.5rem;
+}
+
+/* Statement with white background */
+.visionStatement {
+    margin-bottom: 4rem;
+}
+
+.visionStatement h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.8;
+    color: #0c2340;
+    margin: 0;
+}
+
+.visionStatement h2 span {
+    display: inline;
+    background: white;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+/* Dual cards container */
+.cardsContainer {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+/* Individual cards */
+/* Individual cards */
+.card {
+    flex: 1;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    height: 550px;
+    /* Much bigger height */
+    display: flex;
+}
+
+/* Ensure content stretches */
+.cardLeft {
+    background: linear-gradient(135deg, #e8ecf0 0%, #d1d9e0 100%);
+    flex-direction: row;
+}
+
+.cardRight {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    flex-direction: row;
+    /* Flip layout for right card */
+}
+
+/* Sidebar for text and divider */
+.cardSidebar {
+    width: 80px;
+    /* Wider sidebar */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+    flex-shrink: 0;
+}
+
+/* Vertical divider line */
+.cardDivider {
+    position: absolute;
+    top: 15%;
+    bottom: 15%;
+    width: 1px;
+}
+
+.cardLeft .cardDivider {
+    right: 0;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.cardRight .cardDivider {
+    left: 0;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Main content area for image or icon */
+.cardContent {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .iconWrapper {
+    transform: scale(1.1);
+}
+
+/* Card vertical label - centered in sidebar */
+.cardLabel {
+    transform: rotate(-90deg);
+    font-size: 1rem;
+    /* Bigger font */
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.cardLeft .cardLabel {
+    color: #64748b;
+}
+
+.cardRight .cardLabel {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Card images */
+.cardImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Digital Twin badge container */
+.digitalTwinBadge {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    /* Maximize */
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+}
+
+/* Circular arrows SVG wrapper for animation */
+.circularArrows {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: rotateStep 6s ease-in-out infinite;
+}
+
+/* 3s interval rotation: 0-3s (0deg), 3-6s (180deg) */
+@keyframes rotateStep {
+
+    0%,
+    45% {
+        transform: rotate(0deg);
+    }
+
+    50%,
+    95% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Badge center circle - stationary text */
+.badgeCenter {
+    width: 170px;
+    /* Big center */
+    height: 170px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    z-index: 25;
+}
+
+.badgeText {
+    font-size: 1.1rem;
+    /* Bigger text */
+    font-weight: 700;
+    color: #0891b2;
+    text-align: center;
+    line-height: 1.2;
+}
+
+
+
+/* Description section */
+.visionDescription {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: start;
+}
+
+.visionDescription p {
+    font-size: 1.4rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1.5rem;
+}
+
+.visionDescription p:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .visionSection {
+        padding: 3rem 3rem 4rem;
+    }
+
+    .cardsContainer {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .card {
+        height: 300px;
+    }
+
+    .digitalTwinBadge {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        margin: -2rem auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .visionSection {
+        width: calc(100% - 1rem);
+        padding: 2rem 1.5rem 3rem;
+    }
+
+    .visionLabel {
+        font-size: 1.2rem;
+    }
+
+    .card {
+        height: 250px;
+    }
+}

@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
 import MissionSection from '@/components/company/MissionSection';
+import VisionSection from '@/components/company/VisionSection';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css';
 
@@ -159,6 +160,17 @@ export default function Company() {
                 statement={`Transforming Healthcare
 With Technology.`}
                 description="At Winspire RCM, we believe in leveraging cutting-edge technology to revolutionize revenue cycle management. Our mission is to empower healthcare providers with AI-driven solutions that streamline operations, maximize revenue, and allow them to focus on what matters most—patient care. We are committed to delivering exceptional results through innovation, transparency, and unwavering dedication to our clients' success."
+            />
+
+            {/* Vision Section */}
+            <VisionSection
+                label="Vision"
+                subtitle="Our future outlook"
+                statementLines={['Revolutionizing healthcare', 'Through AI-powered solutions.']}
+                descriptions={[
+                    'By leveraging advanced AI and machine learning, we enable healthcare providers to optimize their revenue cycles with unprecedented accuracy and efficiency. Our solutions adapt to the evolving landscape of healthcare, ensuring our clients stay ahead.',
+                    "At the same time, we are building a comprehensive platform that connects, analyzes, and transforms healthcare financial data into actionable insights for better decision-making.",
+                ]}
             />
 
         </Layout>
