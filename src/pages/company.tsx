@@ -13,6 +13,7 @@ import Layout from '@/components/Layout';
 import MissionSection from '@/components/company/MissionSection';
 import VisionSection from '@/components/company/VisionSection';
 import ValuesSection from '@/components/company/ValuesSection';
+import BoardSection from '@/components/company/BoardSection';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css';
 
@@ -176,6 +177,9 @@ With Technology.`}
 
             {/* Values Section */}
             <ValuesSection />
+
+            {/* Board Members Section */}
+            <BoardSection />
 
         </Layout>
     );
