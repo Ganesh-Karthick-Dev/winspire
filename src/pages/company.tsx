@@ -67,13 +67,6 @@ export default function Company() {
                 ease: 'power3.out',
             }, '-=0.7');
 
-            // Scroll indicator fade in
-            tl.from(`.${styles.scrollIndicator}`, {
-                opacity: 0,
-                duration: 0.6,
-                ease: 'power2.out',
-            }, '-=0.4');
-
             // Scroll-based parallax for card
             ScrollTrigger.create({
                 trigger: heroRef.current,
@@ -129,7 +122,7 @@ export default function Company() {
                             <span className={styles.heroDot}></span>
                             <span className={styles.heroDot}></span>
                         </div>
-                        <span>About Winspire</span>
+                        <span >About Winspire</span>
                     </div>
 
                     {/* Main Title */}
