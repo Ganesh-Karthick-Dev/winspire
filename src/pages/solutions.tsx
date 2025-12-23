@@ -16,6 +16,7 @@ import CareersContactLinks from '@/components/CareersContactLinks';
 import SolutionsCarousel from '@/components/solutions/SolutionsCarousel';
 import GroupsSection from '@/components/solutions/GroupsSection';
 import PeopleSection from '@/components/solutions/PeopleSection';
+import TeamCarouselSection from '@/components/solutions/TeamCarouselSection';
 import EnvironmentSection from '@/components/solutions/EnvironmentSection';
 import MaterialsSection from '@/components/solutions/MaterialsSection';
 import FAQSection from '@/components/solutions/FAQSection';
@@ -150,6 +151,9 @@ export default function Solutions() {
 
             {/* People Section */}
             <PeopleSection />
+
+            {/* Team Carousel (Expanded View) */}
+            <TeamCarouselSection />
 
             {/* Environment / Work Style Section */}
             <EnvironmentSection />

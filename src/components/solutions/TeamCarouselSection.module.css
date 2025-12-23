@@ -1,0 +1,267 @@
+/* Section Container */
+.section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* Restrict to viewport height */
+    display: flex;
+    align-items: center;
+    /* Center content vertically in viewport */
+    justify-content: flex-start;
+    padding-left: 5%;
+    /* Left gutter */
+    overflow: hidden;
+}
+
+.carouselContainer {
+    display: flex;
+    align-items: flex-start;
+    /* Align top of active card components */
+    gap: 4rem;
+    /* Gap between Active column and Next column */
+    position: relative;
+    width: 100%;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Active Card Wrapper: Contains Image + Text below */
+.activeCardWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex-shrink: 0;
+    width: 35vw;
+    /* Relative width */
+    max-width: 500px;
+    animation: fadeSlideIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Active Image Area */
+.activeCardImage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    /* Square as per screenshot */
+    border-radius: 24px;
+    overflow: hidden;
+    /* Shadow? */
+}
+
+/* Badge inside Image */
+.badge {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    background: #0f172a;
+    /* Dark background */
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.memberImage {
+    object-fit: cover;
+}
+
+/* Active Details (Text Below) */
+.activeDetails {
+    color: white;
+    position: relative;
+    padding-right: 2rem;
+}
+
+.nameBlock {
+    margin-bottom: 1rem;
+}
+
+.roleLabel {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.8;
+    margin: 0 0 0.25rem 0;
+}
+
+.nameLabel {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Arrow Button top-right of text area */
+.arrowButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+    /* Align with name block top */
+    width: 48px;
+    height: 48px;
+    background: white;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111827;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.arrowButton svg {
+    width: 20px;
+    height: 20px;
+    transform: rotate(-45deg);
+    /* Point Top-Right */
+}
+
+.arrowButton:hover {
+    transform: scale(1.1);
+}
+
+.divider {
+    display: none;
+    /* Removed based on clean screenshot look */
+}
+
+.description {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    /* Divider moved to description top border */
+    padding-top: 1rem;
+}
+
+/* Next Button Floating between columns */
+.nextButton {
+    position: absolute;
+    left: 35vw;
+    /* match width of active wrapper */
+    top: 17.5vw;
+    /* 50% of 35vw roughly aligns with image center */
+    transform: translate(-50%, -50%);
+    /* Center it */
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s ease;
+}
+
+.nextButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Next Cards List */
+.nextCardsList {
+    flex: 1;
+    display: flex;
+    gap: 2rem;
+    align-self: flex-start;
+    padding-top: 8.75vw;
+    /* Math: (35vw - 17.5vw) / 2? No. 
+                          Active Image Height = 35vw. Center is 17.5vw.
+                          Small Image Height ~ 280px (approx 15vw). Center is 7.5vw.
+                          So offset = 17.5vw - 7.5vw = 10vw padding top roughly. 
+                          Let's use 6rem for safety. */
+    padding-top: 6rem;
+}
+
+.smallCard {
+    width: 280px;
+    /* Fixed width */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    cursor: pointer;
+    opacity: 0.5;
+    /* Fade out non-active */
+    transition: opacity 0.3s ease;
+}
+
+.smallCard:hover {
+    opacity: 1;
+}
+
+.smallCardImage {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.smallInfo {
+    color: white;
+}
+
+.smallRole {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.7;
+    margin: 0;
+}
+
+.smallName {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .section {
+        height: auto;
+        padding: 4rem 5%;
+        flex-direction: column;
+    }
+
+    .carouselContainer {
+        flex-direction: column;
+    }
+
+    .activeCardWrapper {
+        width: 100%;
+        max-width: none;
+    }
+
+    .nextButton {
+        display: none;
+    }
+
+    .nextCardsList {
+        padding-top: 0;
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 2rem;
+    }
+}
