@@ -18,6 +18,7 @@ import AwardSection from '@/components/company/AwardSection';
 import CorporateProfile from '@/components/company/CorporateProfile';
 import AccessSection from '@/components/company/AccessSection';
 import CareersContactLinks from '@/components/CareersContactLinks';
+import FloatingSectionNav from '@/components/FloatingSectionNav'; // Import added
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css';
 
@@ -178,42 +179,68 @@ export default function Company() {
             </section>
 
             {/* Mission Section */}
-            <MissionSection
-                label="Mission"
-                subtitle="Our purpose and commitment"
-                statement={`Transforming Healthcare
+            <div id="mission" style={{ scrollMarginTop: '100px' }}>
+                <MissionSection
+                    label="Mission"
+                    subtitle="Our purpose and commitment"
+                    statement={`Transforming Healthcare
 With Technology.`}
-                description="At Winspire RCM, we believe in leveraging cutting-edge technology to revolutionize revenue cycle management. Our mission is to empower healthcare providers with AI-driven solutions that streamline operations, maximize revenue, and allow them to focus on what matters most—patient care. We are committed to delivering exceptional results through innovation, transparency, and unwavering dedication to our clients' success."
-            />
+                    description="At Winspire RCM, we believe in leveraging cutting-edge technology to revolutionize revenue cycle management. Our mission is to empower healthcare providers with AI-driven solutions that streamline operations, maximize revenue, and allow them to focus on what matters most—patient care. We are committed to delivering exceptional results through innovation, transparency, and unwavering dedication to our clients' success."
+                />
+            </div>
 
             {/* Vision Section */}
-            <VisionSection
-                label="Vision"
-                subtitle="Our future outlook"
-                statementLines={['Revolutionizing healthcare', 'Through AI-powered solutions.']}
-                descriptions={[
-                    'By leveraging advanced AI and machine learning, we enable healthcare providers to optimize their revenue cycles with unprecedented accuracy and efficiency. Our solutions adapt to the evolving landscape of healthcare, ensuring our clients stay ahead.',
-                    "At the same time, we are building a comprehensive platform that connects, analyzes, and transforms healthcare financial data into actionable insights for better decision-making.",
-                ]}
-            />
+            <div id="vision" style={{ scrollMarginTop: '100px' }}>
+                <VisionSection
+                    label="Vision"
+                    subtitle="Our future outlook"
+                    statementLines={['Revolutionizing healthcare', 'Through AI-powered solutions.']}
+                    descriptions={[
+                        'By leveraging advanced AI and machine learning, we enable healthcare providers to optimize their revenue cycles with unprecedented accuracy and efficiency. Our solutions adapt to the evolving landscape of healthcare, ensuring our clients stay ahead.',
+                        "At the same time, we are building a comprehensive platform that connects, analyzes, and transforms healthcare financial data into actionable insights for better decision-making.",
+                    ]}
+                />
+            </div>
 
             {/* Values Section */}
-            <ValuesSection />
+            <div id="values" style={{ scrollMarginTop: '100px' }}>
+                <ValuesSection />
+            </div>
 
             {/* Board Members Section */}
-            <BoardSection />
+            <div id="board" style={{ scrollMarginTop: '100px' }}>
+                <BoardSection />
+            </div>
 
             {/* Award Section */}
-            <AwardSection />
+            <div id="awards" style={{ scrollMarginTop: '100px' }}>
+                <AwardSection />
+            </div>
 
             {/* Corporate Profile Section */}
-            <CorporateProfile />
+            <div id="profile" style={{ scrollMarginTop: '100px' }}>
+                <CorporateProfile />
+            </div>
 
             {/* Access Section */}
-            <AccessSection />
+            <div id="access" style={{ scrollMarginTop: '100px' }}>
+                <AccessSection />
+            </div>
 
             {/* Final CTA Section */}
-            <CareersContactLinks />
+            <div id="contact" style={{ scrollMarginTop: '100px' }}>
+                <CareersContactLinks />
+            </div>
+
+            <FloatingSectionNav sections={[
+                { id: 'mission', label: 'Mission' },
+                { id: 'vision', label: 'Vision' },
+                { id: 'values', label: 'Values' },
+                { id: 'board', label: 'Board Members' },
+                { id: 'awards', label: 'Award' },
+                { id: 'profile', label: 'Corporate Profile' },
+                { id: 'access', label: 'Access' },
+            ]} />
 
         </Layout>
     );

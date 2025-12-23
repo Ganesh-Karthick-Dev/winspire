@@ -22,6 +22,7 @@ import MaterialsSection from '@/components/solutions/MaterialsSection';
 import FAQSection from '@/components/solutions/FAQSection';
 import CultureSection from '@/components/solutions/CultureSection';
 import EntrySection from '@/components/solutions/EntrySection';
+import FloatingSectionNav from '@/components/FloatingSectionNav'; // Import added
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css'; // Reusing Company styles for identical Hero
 
@@ -184,31 +185,59 @@ export default function Solutions() {
             </section>
 
             {/* Carousel Section */}
-            <SolutionsCarousel />
+            <div id="message" style={{ scrollMarginTop: '100px' }}>
+                <SolutionsCarousel />
+            </div>
 
             {/* Groups/Career Section */}
-            <GroupsSection />
+            <div id="categories" style={{ scrollMarginTop: '100px' }}>
+                <GroupsSection />
+            </div>
 
             {/* People Section */}
-            <PeopleSection />
+            <div id="people" style={{ scrollMarginTop: '100px' }}>
+                <PeopleSection />
+            </div>
 
-            {/* Team Carousel (Expanded View) */}
+            {/* Team Carousel (Expanded View) - Part of People usually */}
             <TeamCarouselSection />
 
             {/* Environment / Work Style Section */}
-            <EnvironmentSection />
+            <div id="environment" style={{ scrollMarginTop: '100px' }}>
+                <EnvironmentSection />
+            </div>
 
             {/* Materials Section */}
-            <MaterialsSection />
+            <div id="materials" style={{ scrollMarginTop: '100px' }}>
+                <MaterialsSection />
+            </div>
 
             {/* FAQ Section */}
-            <FAQSection />
+            <div id="faq" style={{ scrollMarginTop: '100px' }}>
+                <FAQSection />
+            </div>
 
             {/* Culture Section */}
-            <CultureSection />
+            <div id="culture" style={{ scrollMarginTop: '100px' }}>
+                <CultureSection />
+            </div>
 
             {/* Final CTA Section */}
-            <EntrySection />
+            <div id="entry" style={{ scrollMarginTop: '100px' }}>
+                <EntrySection />
+            </div>
+
+            <FloatingSectionNav
+                sections={[
+                    { id: 'message', label: 'Message' },
+                    { id: 'categories', label: 'Job Categories' },
+                    { id: 'people', label: 'People' },
+                    { id: 'environment', label: 'Work Environment' },
+                    { id: 'materials', label: 'Recruitment Materials' },
+                    { id: 'faq', label: 'FAQ' },
+                    { id: 'culture', label: 'Culture Note' },
+                ]}
+            />
 
         </Layout>
     );
