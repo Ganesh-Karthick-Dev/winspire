@@ -14,6 +14,7 @@ import { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
 import CareersContactLinks from '@/components/CareersContactLinks';
 import SolutionsCarousel from '@/components/solutions/SolutionsCarousel';
+import PeopleSection from '@/components/solutions/PeopleSection';
 import GroupsSection from '@/components/solutions/GroupsSection';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css'; // Reusing Company styles for identical Hero
@@ -141,6 +142,9 @@ export default function Solutions() {
 
             {/* Groups/Career Section */}
             <GroupsSection />
+
+            {/* People Section */}
+            <PeopleSection />
 
             {/* Spacer for scroll length (Placeholder for future content) */}
             <div style={{ height: '20vh', position: 'relative', zIndex: 10 }}></div>
