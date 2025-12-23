@@ -64,9 +64,7 @@ export default function OutcomesTeam() {
 
     const paragraphs = [
         "Our team of architects, urban planners, and design thinkers came together to build something bold: a modern village where people, experiences, and convenience converge.",
-        "We believe that true innovation happens at the intersection of disciplines. By bringing together diverse experts, we create spaces that are not just functional, but transformative.",
-        "Every detail is meticulously crafted to enhance the human experience. From the flow of natural light to the texture of materials, we consider how each element impacts daily life.",
-        "This is more than just a development; it's a living ecosystem designed to foster community, creativity, and well-being for generations to come."
+        "We believe that true innovation happens at the intersection of disciplines."
     ];
 
     return (

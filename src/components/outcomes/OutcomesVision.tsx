@@ -89,17 +89,17 @@ export default function OutcomesVision() {
     const wordList = ['workflow', 'individual', 'claim', 'dollar'];
 
     return (
-        <section id="outcomes-vision" ref={sectionRef} className="relative h-screen bg-[#FDFBF7] overflow-hidden">
+        <section id="outcomes-vision" ref={sectionRef} className="relative h-screen overflow-hidden " style={{marginTop: '10rem'}}>
             <div className="relative w-full h-full flex flex-col items-center justify-center">
 
                 {/* Top Left Text */}
                 <div ref={topLeftTextRef} className="absolute top-8 left-8 z-20">
-                    <span className="text-xl md:text-2xl font-semibold tracking-wide !text-black" style={{ color: 'black' }}>Winspire RCM + Neura AI</span>
+                    <span className="text-xl md:text-2xl font-semibold tracking-wide !text-white" style={{ color: 'black' }}>Winspire RCM + Neura AI</span>
                 </div>
 
                 {/* Top Right Text */}
                 <div ref={topRightTextRef} className="absolute top-8 right-8 z-20 max-w-xl text-right">
-                    <h2 className="text-4xl md:text-6xl font-sans font-bold leading-tight !text-black" style={{ color: 'black' }}>
+                    <h2 className="text-4xl md:text-6xl font-sans font-bold leading-tight !text-white" style={{ color: 'black' }}>
                         Measurable Outcomes That <br />
                         <span className="">Redefine Revenue</span> Performance.
                     </h2>
