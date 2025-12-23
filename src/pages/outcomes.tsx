@@ -15,6 +15,10 @@ import Layout from '@/components/Layout';
 import OutcomesVision from '@/components/outcomes/OutcomesVision';
 import OutcomesCarousel from '@/components/outcomes/OutcomesCarousel';
 import OutcomesTeam from '@/components/outcomes/OutcomesTeam';
+import ValuesSection from '@/components/company/ValuesSection';
+import FAQSection from '@/components/solutions/FAQSection';
+import MaterialsSection from '@/components/solutions/MaterialsSection';
+import CareersContactLinks from '@/components/CareersContactLinks';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
 
@@ -177,6 +181,12 @@ export default function Outcomes() {
             <OutcomesVision />
             <OutcomesCarousel />
             <OutcomesTeam />
+
+            {/* Additional Sections from Other Pages */}
+            <ValuesSection />
+            <FAQSection />
+            <MaterialsSection />
+            <CareersContactLinks />
 
         </Layout>
     );
