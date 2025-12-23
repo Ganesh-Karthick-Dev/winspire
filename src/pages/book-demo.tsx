@@ -1,179 +1,175 @@
 /**
  * Book a Demo Page
  * 
- * Layers:
- * 1. Body with AnimatedBackground SVG (handled by Layout)
- * 2. 3D Model (same GLTFViewer as home page)
- * 3. Blending text (canvas-based)
+ * Features:
+ * - Same Hero section as Company/Solutions/Outcomes pages
+ * - 3D Model with scroll animation
+ * - Existing Demo sections
  */
 
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
+import StackingCards from '@/components/StackingCards';
+import DemoForm from '@/components/DemoForm';
+import ZeroRiskSection from '@/components/ZeroRiskSection';
 import { shouldDisable3D } from '@/lib/threeUtils';
-import type { ThreeState } from '@/lib/threeManager';
+import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
 
-// Same GLTFViewer as home page
+import { bookDemoScrollKeyframes } from '@/lib/bookDemoScrollAnimations';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+
+// 3D Model - same as other pages
 const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
     ssr: false,
     loading: () => null,
 });
 
-// Blend text component
-const DemoBlendText = dynamic(() => import('@/components/DemoBlendText'), {
-    ssr: false,
-    loading: () => null,
-});
-
-import StackingCards from '@/components/StackingCards';
-import DemoForm from '@/components/DemoForm';
-import ZeroRiskSection from '@/components/ZeroRiskSection';
-import PremiumButton from '@/components/PremiumButton';
-import styles from '@/styles/book-demo.module.css';
-
 export default function BookDemo() {
+    const heroRef = useRef<HTMLElement>(null);
     const is3DDisabled = useRef(false);
 
-    // Set up model and scroll animation
-    const handleModelReady = useCallback(async (state: ThreeState) => {
-        if (!state.model) return;
+    // Use custom scroll animation for Book Demo page
+    const { transform, lighting, scrollProgress } = useScrollAnimation({
+        keyframes: bookDemoScrollKeyframes
+    });
 
-        const { gsap } = await import('gsap');
-        const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Smooth initial entry: animate to left side
-        gsap.to(state.model.position, {
-            x: -1,
-            y: 0,
-            duration: 1.2,
-            ease: 'power2.out',
-        });
-
-        gsap.to(state.model.scale, {
-            x: 140,
-            y: 140,
-            z: 140,
-            duration: 1.2,
-            ease: 'power2.out',
-        });
-
-        // When form section comes into view, move model to right side and scale down
-        ScrollTrigger.create({
-            trigger: '.form-section',
-            start: 'top 80%',
-            end: 'top 30%',
-            scrub: 1,
-            onUpdate: (self) => {
-                // Move from left (-1) to right (1.2)
-                state.model!.position.x = -1 + (self.progress * 2.2);
-
-                // Scale from 140 to 100
-                const newScale = 140 - (self.progress * 40);
-                state.model!.scale.set(newScale, newScale, newScale);
-            }
-        });
-
-        // When ZeroRisk section comes into view, move to center with flip and scale up
-        ScrollTrigger.create({
-            trigger: '.zero-risk-section',
-            start: 'top 90%',
-            end: 'top 20%',
-            scrub: 1.5,
-            onUpdate: (self) => {
-                // Move from right (1.2) to center (0)
-                state.model!.position.x = 1.2 - (self.progress * 1.2);
-
-                // Move up slightly
-                state.model!.position.y = self.progress * 0.3;
-
-                // Side flip effect - rotate on Z axis (like tilting side to side)
-                // Use a subtle tilt + full Y rotation for a nice effect
-                state.model!.rotation.z = Math.sin(self.progress * Math.PI) * 0.3;
-                state.model!.rotation.y = self.progress * Math.PI * 2;
-
-                // Scale from 100 to 180
-                const newScale = 100 + (self.progress * 80);
-                state.model!.scale.set(newScale, newScale, newScale);
-            }
-        });
-    }, []);
+    // Keep rotation active, disable wobble at the end
+    const enableWobble = scrollProgress <= 0.95;
+    const rotateSpeed = 0.003;
 
     useEffect(() => {
         is3DDisabled.current = shouldDisable3D();
 
-        // Hide loader
         const loader = document.querySelector('.loader-overlay') as HTMLElement;
         if (loader) {
             loader.style.opacity = '0';
             loader.style.visibility = 'hidden';
         }
+        document.body.classList.remove('loading');
 
-        const grid = document.querySelector('.grid-transition') as HTMLElement;
-        if (grid) {
-            grid.style.visibility = 'hidden';
+        let ctx: gsap.Context;
+
+        const initAnimations = async () => {
+            const { gsap } = await import('gsap');
+            const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Force video play on navigation
+            const video = document.querySelector(`.${styles.heroCardVideo}`) as HTMLVideoElement;
+            if (video) {
+                video.muted = true;
+                video.play().catch(e => console.log('Autoplay blocked', e));
+            }
+
+            // Use gsap.context for easy cleanup
+            ctx = gsap.context(() => {
+                const tl = gsap.timeline({ delay: 0.1 });
+
+                // Initialize state immediately
+                gsap.set(`.${styles.heroLabel}`, { y: 20, opacity: 0 });
+                gsap.set(`.${styles.heroTitle}`, { y: 60, opacity: 0 });
+                gsap.set(`.${styles.heroCard}`, { x: 100, opacity: 0 });
+
+                tl.to(`.${styles.heroLabel}`, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' });
+                tl.to(`.${styles.heroTitle}`, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.5');
+                tl.to(`.${styles.heroCard}`, { x: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.7');
+
+                ScrollTrigger.create({
+                    trigger: heroRef.current,
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 0.5,
+                    onUpdate: (self) => {
+                        const card = document.querySelector(`.${styles.heroCard}`) as HTMLElement;
+                        if (card) {
+                            const yMove = 20 - (self.progress * 15);
+                            card.style.transform = `translateY(${yMove}%)`;
+                        }
+                    }
+                });
+            }, heroRef);
+
+            // Failsafe: Ensure visibility after delay
+            setTimeout(() => {
+                const elements = [
+                    document.querySelector(`.${styles.heroLabel}`),
+                    document.querySelector(`.${styles.heroTitle}`),
+                    document.querySelector(`.${styles.heroCard}`)
+                ];
+                elements.forEach(el => {
+                    if (el) {
+                        (el as HTMLElement).style.opacity = '1';
+                        (el as HTMLElement).style.visibility = 'visible';
+                    }
+                });
+                ScrollTrigger.refresh();
+            }, 1000);
+        };
+
+        if (heroRef.current) {
+            initAnimations();
         }
 
-        document.body.classList.remove('loading');
+        return () => {
+            if (ctx) ctx.revert();
+        };
     }, []);
 
+    const handleScrollClick = () => {
+        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+    };
+
     return (
-        <Layout title="Book a Demo" description="Schedule a personalized demo">
-            {/* Hero Section with Absolute Content */}
-            <section className="demo-hero-full">
-                {/* Layer 2: 3D Model (absolute inside relative section) */}
-                {!is3DDisabled.current && (
+        <Layout title="Book a Demo" description="Schedule a personalized demo with Winspire RCM">
+            {/* 3D Model - FIXED behind everything */}
+            {!is3DDisabled.current && (
+                <div className={styles.modelContainer}>
                     <GLTFViewer
-
-                        onModelReady={handleModelReady}
-                        className="absolute inset-0 w-full h-full"
+                        manualTransform={transform}
+                        rotateSpeed={rotateSpeed}
+                        enableWobble={enableWobble}
+                        className="w-full h-full"
                     />
-                )}
+                </div>
+            )}
 
-                {/* Layer 3: Blending Text (absolute inside relative section) */}
-                <DemoBlendText
-                    text1="WINSPIRE"
-                    text2="RCM"
-                    style={{ position: 'absolute', width: '100%', height: '100%' }}
-                />
-
-                {/* Hero Content */}
-                <div className={styles.demoHeroContent}>
-                    <div className={styles.demoHeroCard}>
-                        {/* Headline */}
-                        <h1 className={styles.demoHeroHeadline}>
-                            See How AI Can Transform Your Revenue Cycle in Just 30 Minutes.
-                        </h1>
-
-                        {/* Subheadline */}
-                        <p className={styles.demoHeroSubheadline}>
-                            Experience Neura AI live. Watch how it predicts denials, automates workflows, checks live status, accelerates cash flow, and brings total visibility across your entire revenue cycle.
-                        </p>
-
-                        {/* Supporting Line */}
-                        <p className={styles.demoHeroSupporting}>
-                            No pressure. No obligations. No long presentations.<br />
-                            Just clarity, insights, and real answers to your challenges.
-                        </p>
-
-                        {/* CTA Buttons */}
-                        <div className={styles.demoHeroButtons}>
-                            {/* Primary Button with Animations */}
-                            <PremiumButton
-                                text="Book My Demo"
-                                variant="primary"
-                            />
-
-                            {/* Secondary Button with Animations */}
-                            <PremiumButton
-                                text="Talk to an RCM Expert"
-                                variant="secondary"
-                                showArrow
-                            />
+            {/* Hero Section (Same as Company/Solutions/Outcomes) */}
+            <section ref={heroRef} className={styles.heroSection}>
+                {/* Content */}
+                <div className={styles.heroContent}>
+                    {/* Label */}
+                    <div className={styles.heroLabel}>
+                        <div className={styles.heroDots}>
+                            <span className={styles.heroDot}></span>
+                            <span className={styles.heroDot}></span>
                         </div>
+                        <span>Schedule a Demo</span>
                     </div>
+
+                    {/* Main Title */}
+                    <h1 className={styles.heroTitle}>Book a Demo</h1>
+                </div>
+
+                {/* Video Card - half in, half out */}
+                <div className={styles.heroCard}>
+                    <video
+                        className={styles.heroCardVideo}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                    >
+                        <source src="/video/sample/section2_video.mp4" type="video/mp4" />
+                    </video>
+                </div>
+
+                {/* Scroll Indicator */}
+                <div className={styles.scrollIndicator} onClick={handleScrollClick}>
+                    <span>Scroll</span>
+                    <span>↓</span>
                 </div>
             </section>
 
@@ -181,13 +177,11 @@ export default function BookDemo() {
             <StackingCards />
 
             {/* Demo Form Section */}
-            <section className={`${styles.formSection} form-section`}>
-                <DemoForm />
-            </section>
+            <DemoForm />
 
             {/* Zero-Risk Demo Section */}
             <ZeroRiskSection />
+
         </Layout>
     );
 }
-
