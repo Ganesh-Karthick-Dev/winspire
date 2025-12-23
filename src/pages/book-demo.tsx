@@ -15,6 +15,9 @@ import Layout from '@/components/Layout';
 import StackingCards from '@/components/StackingCards';
 import DemoForm from '@/components/DemoForm';
 import ZeroRiskSection from '@/components/ZeroRiskSection';
+import NewsSection from '@/components/NewsSection';
+import MissionSection from '@/components/company/MissionSection';
+import CareersContactLinks from '@/components/CareersContactLinks';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
 
@@ -181,6 +184,16 @@ export default function BookDemo() {
 
             {/* Zero-Risk Demo Section */}
             <ZeroRiskSection />
+
+            {/* Additional Sections */}
+            <MissionSection
+                label="Our Mission"
+                subtitle="Why Winspire RCM Exists"
+                statement={`Transforming Healthcare\nWith Technology.`}
+                description="At Winspire RCM, we believe in leveraging cutting-edge technology to revolutionize revenue cycle management. Our mission is to empower healthcare providers with AI-driven solutions that streamline operations, maximize revenue, and allow them to focus on what matters most—patient care."
+            />
+            <NewsSection />
+            <CareersContactLinks />
 
         </Layout>
     );
