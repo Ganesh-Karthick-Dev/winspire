@@ -49,9 +49,9 @@ export default function OutcomesTeam() {
                         stagger: 0.1, // Smooth ripple
                         scrollTrigger: {
                             trigger: text,
-                            start: 'top 60%', // Start as soon as it enters viewport
-                            end: 'center 40%', // Finish near center (longer distance = smoother)
-                            scrub: 1.5, // Smoother scrubbing
+                            start: 'top 95%', // Start very early when entering viewport
+                            end: 'top 50%', // Complete when at middle of screen
+                            scrub: 1, // Faster response
                         }
                     }
                 );
