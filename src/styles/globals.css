@@ -1460,7 +1460,7 @@ footer p {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
-  gap: 160px;
+  gap: 120px;
   /* More spacing between nav items */
   position: absolute;
   left: 50%;
