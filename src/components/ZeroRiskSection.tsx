@@ -25,7 +25,7 @@ export default function ZeroRiskSection() {
 
                 gsap.fromTo(line,
                     {
-                        opacity: 0.35,
+                        opacity: 1,
                     },
                     {
                         opacity: 1,
