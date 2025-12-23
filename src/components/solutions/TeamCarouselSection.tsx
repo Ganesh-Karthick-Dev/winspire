@@ -69,13 +69,27 @@ const TeamCarouselSection: React.FC = () => {
 
     const visibleMembers = getVisibleMembers();
     const activeMember = visibleMembers[0];
+    const prevMember = teamMembers[(activeIndex - 1 + teamMembers.length) % teamMembers.length];
 
     return (
         <section className={styles.section}>
             <div className={styles.carouselContainer}>
 
+                {/* Previous Card (Partially Visible) */}
+                <div className={styles.prevCard} key={`prev-${prevMember.id}`}>
+                    <div className={styles.smallCardImage}>
+                        <Image
+                            src={prevMember.image}
+                            alt={prevMember.name}
+                            fill
+                            className={styles.memberImage}
+                            sizes="25vw"
+                        />
+                    </div>
+                </div>
+
                 {/* Active Card (Expanded Key Visual) */}
-                <div className={styles.activeCardWrapper}>
+                <div className={styles.activeCardWrapper} key={activeMember.id}>
                     <div className={styles.activeCardImage}>
                         <Image
                             src={activeMember.image}

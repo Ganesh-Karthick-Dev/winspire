@@ -2,7 +2,7 @@
 .section {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 80vh;
     /* Restrict to viewport height */
     display: flex;
     align-items: center;
@@ -16,11 +16,11 @@
 .carouselContainer {
     display: flex;
     align-items: flex-start;
-    /* Align top of active card components */
     gap: 4rem;
-    /* Gap between Active column and Next column */
     position: relative;
     width: 100%;
+    padding-left: 6vw;
+    /* Push Active and Next cards to the right */
 }
 
 @keyframes fadeSlideIn {
@@ -179,18 +179,16 @@
 }
 
 /* Next Cards List */
+/* Next Cards List */
 .nextCardsList {
     flex: 1;
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
+    /* Increased gap */
     align-self: flex-start;
-    padding-top: 8.75vw;
-    /* Math: (35vw - 17.5vw) / 2? No. 
-                          Active Image Height = 35vw. Center is 17.5vw.
-                          Small Image Height ~ 280px (approx 15vw). Center is 7.5vw.
-                          So offset = 17.5vw - 7.5vw = 10vw padding top roughly. 
-                          Let's use 6rem for safety. */
     padding-top: 6rem;
+    padding-right: 20vw;
+    /* Lots of empty space at the right end */
 }
 
 .smallCard {
@@ -235,6 +233,32 @@
     font-size: 1.25rem;
     font-weight: 700;
     margin: 0;
+}
+
+.prevCard {
+    position: absolute;
+    left: 0;
+    top: 6rem;
+    /* Align with same top offset as next cards */
+    width: 280px;
+    height: auto;
+    z-index: 1;
+    opacity: 0.5;
+    transform: translateX(-90%);
+    /* Show only 10% on the left */
+    pointer-events: none;
+    /* Don't block clicks if it overlaps anything interactive (though it shouldn't) */
+}
+
+/* Make sure prevCard image behaves like smallCardImage */
+.prevCard .smallCardImage {
+    /* Reuse styles from smallCardImage but ensure it applies correctly */
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 /* Responsive */
