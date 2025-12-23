@@ -8,10 +8,13 @@ interface NavItem {
     href: string;
 }
 
+// Updated menu items
 const navItems: NavItem[] = [
-    { label: 'About Us', href: '/about' },
-    { label: 'Careers', href: '/careers' },
-    { label: 'News', href: '/news' },
+    { label: 'Company', href: '/company' },
+    { label: 'Outcomes', href: '/outcomes' },
+    { label: 'Solutions', href: '/solutions' },
+    { label: 'Neura AI', href: '/neura-ai' },
+    { label: 'Book a Demo', href: '/book-demo' },
 ];
 
 export default function SmartNavbar() {
