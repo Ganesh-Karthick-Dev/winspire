@@ -43,7 +43,8 @@ const CareersContactLinks: React.FC = () => {
                 width: '100vw',
                 marginLeft: 'calc(-50vw + 50%)',
                 padding: '100px 0',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                fontFamily: "'Outfit', sans-serif"
             }}
         >
             <div className="links-container" style={{ width: '100%', maxWidth: '100%', padding: '0 16px' }}>

@@ -1,0 +1,268 @@
+/* Section Container */
+.section {
+    position: relative;
+    width: 98%;
+    margin: 3rem auto 8rem;
+    padding: 6rem;
+    background: rgba(255, 255, 255, 0.9);
+    /* Light Background as requested */
+    backdrop-filter: blur(10px);
+    border-radius: 40px;
+    color: #111827;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+/* Header (Left Side) */
+.header {
+    flex: 0.3;
+    position: sticky;
+    top: 2rem;
+}
+
+.titleWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dots {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dot {
+    width: 8px;
+    height: 5px;
+    background-color: #4F75FF;
+    /* Blue dots */
+    border-radius: 50%;
+}
+
+.title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #083151;
+    /* Dark Blue Title */
+    margin: 0;
+    line-height: 1;
+}
+
+.subtitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    color: #4F75FF;
+    /* Blue subtitle */
+    font-weight: 600;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+/* FAQ List (Right Side) */
+.faqList {
+    flex: 0.7;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.faqItem {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    /* Subtle shadow */
+    display: flex;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.faqItem:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.contentArea {
+    flex: 1;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    /* Gap between Q and A */
+}
+
+.row {
+    display: flex;
+    gap: 2rem;
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-width: 60px;
+    /* Fixed width for alignment */
+}
+
+.qIcon,
+.aIcon {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.qIcon {
+    color: #3B82F6;
+    /* Blue Q */
+}
+
+.aIcon {
+    color: #F87171;
+    /* Red/Pink A, or check reference... Screenshot shows Blue A? */
+    color: #3B82F6;
+    /* Let's stick to Blue A as per typical branding, unless reference says otherwise. Reference 3 shows 'A' in Blue/Purple? Actually in image 3 it looks dark blue? Let's use same blue or slightly darker */
+    color: #4F46E5;
+}
+
+.divider {
+    width: 2px;
+    height: 1.5rem;
+    background-color: #E5E7EB;
+    /* Light grey divider */
+}
+
+.questionText {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+    line-height: 1.5;
+    padding-top: 2px;
+}
+
+.answerWrapper {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+}
+
+.showAnswer {
+    max-height: 200px;
+    /* Estimate max height */
+    opacity: 1;
+}
+
+.answerText {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #374151;
+    line-height: 1.6;
+    padding-top: 2px;
+}
+
+.link {
+    color: #3B82F6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/* Toggle Button */
+.toggleButton {
+    width: 70px;
+    background-color: #0F253E;
+    /* Dark Blue from screenshot */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.toggleButton:hover {
+    background-color: #1a3b5e;
+}
+
+.plusIcon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+.barHorizontal,
+.barVertical {
+    position: absolute;
+    background-color: white;
+    border-radius: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+}
+
+.barHorizontal {
+    width: 16px;
+    height: 2px;
+}
+
+.barVertical {
+    width: 2px;
+    height: 16px;
+}
+
+.rotate {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .section {
+        padding: 4rem 2rem;
+        width: 95%;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .header {
+        position: static;
+        flex: auto;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .faqList {
+        width: 100%;
+    }
+
+    .row {
+        gap: 1rem;
+    }
+
+    .contentArea {
+        padding: 1.5rem;
+    }
+
+    .toggleButton {
+        width: 50px;
+    }
+}

@@ -18,6 +18,7 @@ import GroupsSection from '@/components/solutions/GroupsSection';
 import PeopleSection from '@/components/solutions/PeopleSection';
 import EnvironmentSection from '@/components/solutions/EnvironmentSection';
 import MaterialsSection from '@/components/solutions/MaterialsSection';
+import FAQSection from '@/components/solutions/FAQSection';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css'; // Reusing Company styles for identical Hero
 
@@ -153,6 +154,9 @@ export default function Solutions() {
 
             {/* Materials Section */}
             <MaterialsSection />
+
+            {/* FAQ Section */}
+            <FAQSection />
 
             {/* Spacer for scroll length (Placeholder for future content) */}
             <div style={{ height: '20vh', position: 'relative', zIndex: 10 }}></div>
