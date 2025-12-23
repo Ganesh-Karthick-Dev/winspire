@@ -82,7 +82,7 @@
 .linkActive::after {
     content: '';
     position: absolute;
-    top: -12px;
+    top: -20px;
     /* Position above the pill */
     left: 50%;
     transform: translateX(-50%);
