@@ -19,9 +19,8 @@ const pickupItems: CultureItem[] = [
     },
     {
         id: 2,
-        title: "What Styleport values during the recruitment process",
-        image: "/images/culture/culture_pickup_2.jpg",
-        isTextOnly: true
+        title: "What Winspire values during the recruitment process",
+        image: "/images/news/news_vr_meeting_1766073638780.png"
     },
     {
         id: 3,

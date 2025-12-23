@@ -20,6 +20,7 @@ import EnvironmentSection from '@/components/solutions/EnvironmentSection';
 import MaterialsSection from '@/components/solutions/MaterialsSection';
 import FAQSection from '@/components/solutions/FAQSection';
 import CultureSection from '@/components/solutions/CultureSection';
+import EntrySection from '@/components/solutions/EntrySection';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css'; // Reusing Company styles for identical Hero
 
@@ -162,11 +163,8 @@ export default function Solutions() {
             {/* Culture Section */}
             <CultureSection />
 
-            {/* Spacer for scroll length (Placeholder for future content) */}
-            <div style={{ height: '10vh', position: 'relative', zIndex: 10 }}></div>
-
             {/* Final CTA Section */}
-            <CareersContactLinks />
+            <EntrySection />
 
         </Layout>
     );
