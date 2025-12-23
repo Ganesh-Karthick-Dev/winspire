@@ -1,6 +1,6 @@
 .section {
     position: relative;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: transparent;
     color: #ffffff;
     padding: 5rem 3rem;
     margin: 5rem auto;

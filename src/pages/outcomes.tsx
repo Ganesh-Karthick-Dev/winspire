@@ -175,8 +175,8 @@ export default function Outcomes() {
 
             {/* Existing Outcomes Content Sections */}
             <OutcomesVision />
-            <OutcomesTeam />
             <OutcomesCarousel />
+            <OutcomesTeam />
 
         </Layout>
     );
