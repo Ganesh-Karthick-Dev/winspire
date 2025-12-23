@@ -58,33 +58,73 @@ export default function Solutions() {
         }
         document.body.classList.remove('loading');
 
+        let ctx: gsap.Context;
+
         // Initialize GSAP animations for Hero
         const initAnimations = async () => {
             const { gsap } = await import('gsap');
             const { ScrollTrigger } = await import('gsap/ScrollTrigger');
             gsap.registerPlugin(ScrollTrigger);
 
-            const tl = gsap.timeline({ delay: 0.2 });
-            tl.from(`.${styles.heroLabel}`, { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' });
-            tl.from(`.${styles.heroTitle}`, { y: 60, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.5');
-            tl.from(`.${styles.heroCard}`, { x: 100, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.7');
+            // Force video play on navigation
+            const video = document.querySelector(`.${styles.heroCardVideo}`) as HTMLVideoElement;
+            if (video) {
+                video.muted = true;
+                video.play().catch(e => console.log('Autoplay blocked', e));
+            }
 
-            ScrollTrigger.create({
-                trigger: heroRef.current,
-                start: 'top top',
-                end: 'bottom top',
-                scrub: 0.5,
-                onUpdate: (self) => {
-                    const card = document.querySelector(`.${styles.heroCard}`) as HTMLElement;
-                    if (card) {
-                        const yMove = 20 - (self.progress * 15);
-                        card.style.transform = `translateY(${yMove}%)`;
+            // Use gsap.context for easy cleanup
+            ctx = gsap.context(() => {
+                const tl = gsap.timeline({ delay: 0.1 });
+
+                // Initialize state immediately
+                gsap.set(`.${styles.heroLabel}`, { y: 20, opacity: 0 });
+                gsap.set(`.${styles.heroTitle}`, { y: 60, opacity: 0 });
+                gsap.set(`.${styles.heroCard}`, { x: 100, opacity: 0 });
+
+                tl.to(`.${styles.heroLabel}`, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' });
+                tl.to(`.${styles.heroTitle}`, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.5');
+                tl.to(`.${styles.heroCard}`, { x: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.7');
+
+                ScrollTrigger.create({
+                    trigger: heroRef.current,
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 0.5,
+                    onUpdate: (self) => {
+                        const card = document.querySelector(`.${styles.heroCard}`) as HTMLElement;
+                        if (card) {
+                            const yMove = 20 - (self.progress * 15);
+                            card.style.transform = `translateY(${yMove}%)`;
+                        }
                     }
-                }
-            });
+                });
+            }, heroRef);
+
+            // Failsafe: Ensure visibility after delay
+            setTimeout(() => {
+                const elements = [
+                    document.querySelector(`.${styles.heroLabel}`),
+                    document.querySelector(`.${styles.heroTitle}`),
+                    document.querySelector(`.${styles.heroCard}`)
+                ];
+                elements.forEach(el => {
+                    if (el) {
+                        (el as HTMLElement).style.opacity = '1';
+                        (el as HTMLElement).style.visibility = 'visible';
+                    }
+                });
+                ScrollTrigger.refresh();
+            }, 1000);
         };
 
-        initAnimations();
+        if (heroRef.current) {
+            initAnimations();
+        }
+
+        return () => {
+            if (ctx) ctx.revert();
+        };
     }, []);
 
     const handleScrollClick = () => {

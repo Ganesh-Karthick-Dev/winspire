@@ -6,6 +6,7 @@
  */
 
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import '@/styles/globals.css';
 import 'lenis/dist/lenis.css';
 
@@ -13,10 +14,13 @@ import ScrollManager from '@/components/ScrollManager';
 import SmoothScroll from '@/components/SmoothScroll';
 
 export default function App({ Component, pageProps }: AppProps) {
+    const router = useRouter();
+
     return (
         <SmoothScroll>
             <ScrollManager />
-            <Component {...pageProps} />
+            {/* Key forces complete remount on route change, ensuring animations re-init */}
+            <Component {...pageProps} key={router.asPath} />
         </SmoothScroll>
     );
 }
