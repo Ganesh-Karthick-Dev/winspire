@@ -6,8 +6,11 @@
     padding: 8rem 4rem;
     background: transparent;
     border-radius: 40px;
-    min-height: 600px;
-    overflow: hidden;
+    border-radius: 40px;
+    min-height: 800px;
+    display: flex;
+    align-items: center;
+    /* overflow: hidden; Removed to prevent card clipping */
 }
 
 /* Container for Grid Layout */
@@ -44,8 +47,8 @@
 
 .dot {
     width: 8px;
-    height: 8px;
-    background-color: rgba(255, 255, 255, 0.8);
+    height: 5px;
+    background-color: rgba(104, 159, 221, 0.8);
     border-radius: 50%;
 }
 
@@ -60,7 +63,7 @@
 
 .subtitle {
     font-family: 'Outfit', sans-serif;
-    font-size: 1rem;
+    font-size: 1.25rem;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
     padding-left: 1.5rem;
@@ -69,30 +72,27 @@
 
 /* Description */
 .description {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.25rem;
-    line-height: 1.8;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.6;
     color: white;
     font-weight: 500;
     margin: 1rem 0;
 }
 
 .additionalText {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.8;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
 }
 
 /* Right Side: Stacked Cards */
 .cardsContainer {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
     height: 700px;
-    width: 50vw;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -115,7 +115,6 @@
     transform-origin: center right;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     background: white;
 }
