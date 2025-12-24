@@ -293,20 +293,15 @@ export default function StackingCards() {
                                 )}
                             </div>
 
-                            {/* Right Side - Glossy Image Panel */}
-                            <div
-                                className={styles.imageSide}
-                                style={{
-                                    background: card.panelGradient,
-                                }}
-                            >
+                            {/* Right Side - Full Image Panel */}
+                            <div className={styles.imageSide}>
                                 <div className={styles.glassPanel}>
                                     <div className={styles.imagePlaceholder}>
                                         <Image
                                             src={card.image}
                                             alt={card.title}
                                             fill
-                                            style={{ objectFit: 'cover', borderRadius: '16px' }}
+                                            style={{ objectFit: 'cover' }}
                                         />
                                     </div>
                                 </div>
