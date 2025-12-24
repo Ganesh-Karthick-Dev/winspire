@@ -18,6 +18,7 @@ import ZeroRiskSection from '@/components/ZeroRiskSection';
 import NewsSection from '@/components/NewsSection';
 import MissionSection from '@/components/company/MissionSection';
 import CareersContactLinks from '@/components/CareersContactLinks';
+import FloatingSectionNav from '@/components/FloatingSectionNav';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
 
@@ -177,23 +178,43 @@ export default function BookDemo() {
             </section>
 
             {/* Stacking Cards Section */}
-            <StackingCards />
+            <div id="features" style={{ scrollMarginTop: '100px' }}>
+                <StackingCards />
+            </div>
 
             {/* Demo Form Section */}
-            <DemoForm />
+            <div id="form" style={{ scrollMarginTop: '100px' }}>
+                <DemoForm />
+            </div>
 
             {/* Zero-Risk Demo Section */}
-            <ZeroRiskSection />
+            <div id="guarantee" style={{ scrollMarginTop: '100px' }}>
+                <ZeroRiskSection />
+            </div>
 
             {/* Additional Sections */}
-            <MissionSection
-                label="Our Mission"
-                subtitle="Why Winspire RCM Exists"
-                statement={`Transforming Healthcare\nWith Technology.`}
-                description="At Winspire RCM, we believe in leveraging cutting-edge technology to revolutionize revenue cycle management. Our mission is to empower healthcare providers with AI-driven solutions that streamline operations, maximize revenue, and allow them to focus on what matters most—patient care."
-            />
-            <NewsSection />
+            <div id="mission" style={{ scrollMarginTop: '100px' }}>
+                <MissionSection
+                    label="Our Mission"
+                    subtitle="Why Winspire RCM Exists"
+                    statement={`Transforming Healthcare\nWith Technology.`}
+                    description="At Winspire RCM, we believe in leveraging cutting-edge technology to revolutionize revenue cycle management. Our mission is to empower healthcare providers with AI-driven solutions that streamline operations, maximize revenue, and allow them to focus on what matters most—patient care."
+                />
+            </div>
+
+            <div id="news" style={{ scrollMarginTop: '100px' }}>
+                <NewsSection />
+            </div>
+
             <CareersContactLinks />
+
+            <FloatingSectionNav sections={[
+                { id: 'features', label: 'Features' },
+                { id: 'form', label: 'Book Demo' },
+                { id: 'guarantee', label: 'Guarantee' },
+                { id: 'mission', label: 'Mission' },
+                { id: 'news', label: 'News' },
+            ]} />
 
         </Layout>
     );

@@ -1,10 +1,10 @@
 /**
- * Outcomes Page
+ * Neura AI Page
  * 
  * Features:
- * - Same Hero section as Company/Solutions pages
+ * - Same Hero section as Company/Solutions/Outcomes pages
  * - 3D Model with scroll animation
- * - Existing Outcomes content sections
+ * - Neura AI specific content sections
  */
 
 'use client';
@@ -12,18 +12,19 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
-import OutcomesVision from '@/components/outcomes/OutcomesVision';
-import OutcomesCarousel from '@/components/outcomes/OutcomesCarousel';
-import OutcomesTeam from '@/components/outcomes/OutcomesTeam';
-import ValuesSection from '@/components/company/ValuesSection';
-import FAQSection from '@/components/solutions/FAQSection';
-import MaterialsSection from '@/components/solutions/MaterialsSection';
 import CareersContactLinks from '@/components/CareersContactLinks';
 import FloatingSectionNav from '@/components/FloatingSectionNav';
 import { shouldDisable3D } from '@/lib/threeUtils';
-import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
+import styles from '@/styles/company.module.css';
 
-import { outcomesScrollKeyframes } from '@/lib/outcomesScrollAnimations';
+// Sections from different pages
+import ServicesSection from '@/components/ServicesSection';         // From Home
+import CultureSection from '@/components/solutions/CultureSection'; // From Solutions
+import MissionSection from '@/components/company/MissionSection';   // From Company
+import FAQSection from '@/components/solutions/FAQSection';         // From Solutions
+import EnvironmentSection from '@/components/solutions/EnvironmentSection'; // From Solutions
+
+import { neuraScrollKeyframes } from '@/lib/neuraScrollAnimations';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 // 3D Model - same as other pages
@@ -32,13 +33,13 @@ const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
     loading: () => null,
 });
 
-export default function Outcomes() {
+export default function NeuraAI() {
     const heroRef = useRef<HTMLElement>(null);
     const is3DDisabled = useRef(false);
 
-    // Use custom scroll animation for Outcomes page
+    // Use custom scroll animation for Neura AI page
     const { transform, lighting, scrollProgress } = useScrollAnimation({
-        keyframes: outcomesScrollKeyframes
+        keyframes: neuraScrollKeyframes
     });
 
     // Keep rotation active, disable wobble at the end
@@ -128,7 +129,7 @@ export default function Outcomes() {
     };
 
     return (
-        <Layout title="Outcomes" description="Measurable results with Winspire RCM">
+        <Layout title="Neura AI" description="Discover Winspire's Neura AI - intelligent automation for healthcare">
             {/* 3D Model - FIXED behind everything */}
             {!is3DDisabled.current && (
                 <div className={styles.modelContainer}>
@@ -141,7 +142,7 @@ export default function Outcomes() {
                 </div>
             )}
 
-            {/* Hero Section (Same as Company/Solutions) */}
+            {/* Hero Section */}
             <section ref={heroRef} className={styles.heroSection}>
                 {/* Content */}
                 <div className={styles.heroContent}>
@@ -151,11 +152,11 @@ export default function Outcomes() {
                             <span className={styles.heroDot}></span>
                             <span className={styles.heroDot}></span>
                         </div>
-                        <span>Our Impact</span>
+                        <span>AI Intelligence</span>
                     </div>
 
                     {/* Main Title */}
-                    <h1 className={styles.heroTitle}>Outcomes</h1>
+                    <h1 className={styles.heroTitle}>Neura AI</h1>
                 </div>
 
                 {/* Video Card - half in, half out */}
@@ -178,41 +179,47 @@ export default function Outcomes() {
                 </div>
             </section>
 
-            {/* Existing Outcomes Content Sections */}
-            <div id="vision" style={{ scrollMarginTop: '100px' }}>
-                <OutcomesVision />
+            {/* Mission Section - From Company */}
+            <div id="mission" style={{ scrollMarginTop: '100px' }}>
+                <MissionSection
+                    label="Our Mission"
+                    subtitle="AI-Powered Healthcare"
+                    statement="Transforming Revenue Cycle With Intelligent Automation."
+                    description="Neura AI leverages cutting-edge machine learning and natural language processing to automate complex healthcare workflows. Our mission is to reduce errors, improve efficiency, and maximize revenue for healthcare providers."
+                />
             </div>
 
-            <div id="results" style={{ scrollMarginTop: '100px' }}>
-                <OutcomesCarousel />
+            {/* Culture Section - From Solutions */}
+            <div id="culture" style={{ scrollMarginTop: '100px' }}>
+                <CultureSection />
             </div>
 
-            <div id="team" style={{ scrollMarginTop: '100px' }}>
-                <OutcomesTeam />
+            {/* Services Section - From Home */}
+            <div id="services" style={{ scrollMarginTop: '100px' }}>
+                <ServicesSection />
             </div>
 
-            {/* Additional Sections from Other Pages */}
-            <div id="values" style={{ scrollMarginTop: '100px' }}>
-                <ValuesSection />
+            {/* Environment Section - From Solutions */}
+            <div id="environment" style={{ scrollMarginTop: '100px' }}>
+                <EnvironmentSection />
             </div>
 
+            {/* FAQ Section - From Solutions */}
             <div id="faq" style={{ scrollMarginTop: '100px' }}>
                 <FAQSection />
             </div>
 
-            <div id="materials" style={{ scrollMarginTop: '100px' }}>
-                <MaterialsSection />
+            {/* Final CTA Section */}
+            <div id="contact" style={{ scrollMarginTop: '100px' }}>
+                <CareersContactLinks />
             </div>
 
-            <CareersContactLinks />
-
             <FloatingSectionNav sections={[
-                { id: 'vision', label: 'Vision' },
-                { id: 'results', label: 'Results' },
-                { id: 'team', label: 'Team' },
-                { id: 'values', label: 'Values' },
+                { id: 'mission', label: 'Mission' },
+                { id: 'culture', label: 'Culture' },
+                { id: 'services', label: 'Services' },
+                { id: 'environment', label: 'Environment' },
                 { id: 'faq', label: 'FAQ' },
-                { id: 'materials', label: 'Materials' },
             ]} />
 
         </Layout>
