@@ -29,6 +29,21 @@ if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
 
+/**
+ * Get mobile scale factor based on window width
+ */
+function getMobileScaleFactor(): number {
+    if (typeof window === 'undefined') return 1.0;
+
+    if (window.innerWidth < 480) {
+        return 0.25; // 25% scale on very small mobile
+    }
+    if (window.innerWidth < 768) {
+        return 0.35; // 35% scale on mobile
+    }
+    return 1.0; // Full scale on desktop
+}
+
 export interface UseScrollAnimationOptions {
     /** Enable/disable the scroll animation (default: true) */
     enabled?: boolean;
@@ -57,12 +72,18 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         keyframes = scrollKeyframes, // Default to Home page keyframes
     } = options;
 
-    // Initialize with first keyframe values
+    // Initialize with first keyframe values (with mobile scale applied)
     const firstKeyframe = keyframes[0];
+    const initialMobileFactor = getMobileScaleFactor();
+
     const [transform, setTransform] = useState<ModelTransform>({
-        position: { ...firstKeyframe.transform.position },
+        position: {
+            x: initialMobileFactor < 1 ? 0 : firstKeyframe.transform.position.x,
+            y: firstKeyframe.transform.position.y + (initialMobileFactor < 1 ? 0.3 : 0),
+            z: firstKeyframe.transform.position.z
+        },
         rotation: { ...firstKeyframe.transform.rotation },
-        scale: firstKeyframe.transform.scale,
+        scale: firstKeyframe.transform.scale * initialMobileFactor,
     });
 
     // Initialize lighting state
@@ -72,10 +93,24 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
 
     const [scrollProgress, setScrollProgress] = useState(0);
 
-    // Memoized update function
+    // Memoized update function - applies mobile scale factor on every update
     const updateTransform = useCallback((progress: number) => {
         setScrollProgress(progress);
-        setTransform(getTransformAtProgress(progress, keyframes));
+
+        const baseTransform = getTransformAtProgress(progress, keyframes);
+        const mobileFactor = getMobileScaleFactor();
+
+        // Apply mobile adjustments
+        setTransform({
+            position: {
+                x: mobileFactor < 1 ? 0 : baseTransform.position.x, // Center on mobile
+                y: baseTransform.position.y + (mobileFactor < 1 ? 0.3 : 0), // Move up on mobile
+                z: baseTransform.position.z,
+            },
+            rotation: baseTransform.rotation,
+            scale: baseTransform.scale * mobileFactor, // Apply mobile scale factor
+        });
+
         setLighting(getLightingAtProgress(progress, keyframes));
     }, [keyframes]);
 
@@ -96,6 +131,14 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
             },
         });
 
+        // Also listen for resize to update mobile factor
+        const handleResize = () => {
+            // Re-calculate with current scroll progress
+            const currentProgress = scrollTrigger.progress || 0;
+            updateTransform(currentProgress);
+        };
+        window.addEventListener('resize', handleResize);
+
         // Debug log
         console.log('🎬 ScrollAnimation initialized', {
             trigger,
@@ -103,10 +146,12 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
             end,
             scrub,
             keyframes: keyframes.length,
+            mobileFactor: getMobileScaleFactor(),
         });
 
         return () => {
             scrollTrigger.kill();
+            window.removeEventListener('resize', handleResize);
         };
     }, [enabled, scrub, trigger, start, end, updateTransform, keyframes]);
 

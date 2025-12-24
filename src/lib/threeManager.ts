@@ -192,22 +192,35 @@ async function loadGLTFwithManager(
                 // 3. Apply Scale and Rotation (Use Config or Defaults)
                 const { scale, rotation } = transformConfig;
 
-                // Scale applies to the wrapper
-                wrapper.scale.setScalar(scale);
+                // Get mobile scale factor for initial load
+                let mobileScaleFactor = 1.0;
+                if (typeof window !== 'undefined') {
+                    if (window.innerWidth < 480) {
+                        mobileScaleFactor = 0.3; // 30% scale on very small mobile
+                    } else if (window.innerWidth < 768) {
+                        mobileScaleFactor = 0.4; // 40% scale on mobile
+                    }
+                }
 
-                // Rotation applies to the wrapper (Convert Degrees to Radians if coming from manual)
-                // Note: We assume transformConfig might be in radians (default) or degrees (manual)
-                // For safety, we will handle conversion in GLTFViewer or check here? 
-                // Let's assume standard radians for internal logic, but if manual, we convert.
-                // However, to keep this function pure, let's say transformConfig passes RADIANS.
-                // We will convert degrees->radians in index.tsx/GLTFViewer before passing here.
+                // Scale applies to the wrapper with mobile factor
+                wrapper.scale.setScalar(scale * mobileScaleFactor);
+
+                // Rotation applies to the wrapper
                 wrapper.rotation.set(rotation.x, rotation.y, rotation.z);
 
                 // Apply Position Offset (Use Config or Defaults)
                 const { position } = transformConfig;
-                wrapper.position.x += position.x;
-                wrapper.position.y += position.y;
-                wrapper.position.z += position.z;
+
+                // On mobile, center the model
+                if (mobileScaleFactor < 1) {
+                    wrapper.position.x = 0;
+                    wrapper.position.y = position.y + 0.4;
+                    wrapper.position.z = position.z;
+                } else {
+                    wrapper.position.x += position.x;
+                    wrapper.position.y += position.y;
+                    wrapper.position.z += position.z;
+                }
 
                 // 5. Add Axes Helper (Attached to Wrapper to show effective center)
                 if (modelSettings.showAxes) {
@@ -314,16 +327,20 @@ export function createResizeHandler(
         renderer.setSize(width, height);
         renderer.setPixelRatio(getOptimalPixelRatio());
 
-        // Responsive Model Positioning
+        // Responsive Model Positioning & Scaling
         if (model) {
-            if (width < 768) {
-                // Mobile: Move model UP (top) and center
+            if (width < 480) {
+                // Very small mobile: 30% scale, centered, moved up
+                model.position.x = 0;
+                model.position.y = 0.5;
+                model.scale.setScalar(transformConfig.scale * 0.3);
+            } else if (width < 768) {
+                // Mobile: 40% scale, centered, moved up
                 model.position.x = 0;
                 model.position.y = 0.4;
-                // Mobile scale is 75% of desktop scale (whether manual or default)
-                model.scale.setScalar(transformConfig.scale * 0.75);
+                model.scale.setScalar(transformConfig.scale * 0.4);
             } else {
-                // Desktop: Restore Provided settings (Neutral or Manual)
+                // Desktop: Restore Provided settings
                 const { position, scale } = transformConfig;
                 model.position.x = position.x;
                 model.position.y = position.y;
