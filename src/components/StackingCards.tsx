@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from 'next/image';
 import styles from '@/styles/StackingCards.module.css';
 import { FaChartLine, FaRobot, FaClock, FaExclamationTriangle } from 'react-icons/fa';
 import { MdDashboard, MdAutorenew, MdSpeed, MdWarning } from 'react-icons/md';
@@ -30,7 +31,8 @@ const cards = [
             "Scale your organization without scaling your team"
         ],
         cta: "Schedule Your Session Now",
-        panelGradient: "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)"
+        panelGradient: "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)",
+        image: "/images/careers/presentation.png"
     },
     {
         id: 2,
@@ -44,7 +46,8 @@ const cards = [
             { title: "Step 4 — Customized Outcome Roadmap", desc: "You get a tailored 30–90 day improvement plan at no cost." }
         ],
         cta: "Schedule Your Demo",
-        panelGradient: "linear-gradient(135deg, #fecaca 0%, #fca5a5 100%)"
+        panelGradient: "linear-gradient(135deg, #fecaca 0%, #fca5a5 100%)",
+        image: "/images/careers/brainstorm.png"
     },
     {
         id: 3,
@@ -59,7 +62,8 @@ const cards = [
         ],
         footer: "That's it. No heavy preparation. No reports needed. No contracts or commitments.",
         cta: "Book Now",
-        panelGradient: "linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%)"
+        panelGradient: "linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%)",
+        image: "/images/careers/team-rooftop.png"
     },
     {
         id: 4,
@@ -77,7 +81,8 @@ const cards = [
         ],
         footer: "Your revenue cycle deserves intelligence today — not someday.",
         cta: "Take Action Now",
-        panelGradient: "linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)"
+        panelGradient: "linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)",
+        image: "/images/careers/skyscraper.png"
     },
 ];
 
@@ -96,7 +101,7 @@ export default function StackingCards() {
 
                 if (!title || !starWipe || !starEnd) return;
 
-                // Query content elements
+                // Query content elements - no longer animated, just visible by default
                 const intro = card.querySelector('.card-intro');
                 const headline = card.querySelector('.card-headline');
                 const listItems = card.querySelectorAll('.list-item-animate');
@@ -121,23 +126,12 @@ export default function StackingCards() {
                 const starWidth = 60;
                 const endPosition = titleWidth + 10;
 
-                // Set initial states for title
+                // Set initial states for title only
                 gsap.set(starEnd, { opacity: 1, scale: 1 });
                 gsap.set(starWipe, { x: -starWidth, opacity: 0, scale: 0.9, rotation: 0 });
                 gsap.set(title, { clipPath: 'inset(0 100% 0 0)', opacity: 1 });
 
-                // Set initial states for content elements
-                if (intro) gsap.set(intro, { opacity: 0, y: 15 });
-                if (headline) gsap.set(headline, { opacity: 0, x: -20 });
-                if (listItems.length) gsap.set(listItems, { opacity: 0, y: 20, scale: 0.95 });
-                if (stepCards.length) gsap.set(stepCards, { opacity: 0, x: -20 });
-                if (simpleListItems.length) gsap.set(simpleListItems, { opacity: 0, scale: 0.9 });
-                if (warningItems.length) gsap.set(warningItems, { opacity: 0, x: -15 });
-                if (cardFooter) gsap.set(cardFooter, { opacity: 0, y: 15 });
-                if (warningFooter) gsap.set(warningFooter, { opacity: 0, y: 15 });
-                if (ctaButton) gsap.set(ctaButton, { opacity: 0, y: 10 });
-
-                // Title animation sequence
+                // Title animation sequence (KEEP THIS - DO NOT TOUCH)
                 tl.to(starWipe, {
                     opacity: 1,
                     scale: 1,
@@ -157,99 +151,6 @@ export default function StackingCards() {
                     duration: 1.8,
                     ease: "power1.inOut"
                 }, "-=1.8");
-
-                // Content animations (after title)
-                if (headline) {
-                    tl.to(headline, {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.5,
-                        ease: "power2.out"
-                    }, "-=1.2");
-                }
-
-                if (intro) {
-                    tl.to(intro, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.4,
-                        ease: "power2.out"
-                    }, "-=1.0");
-                }
-
-                // List items - stagger animation
-                if (listItems.length) {
-                    tl.to(listItems, {
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                        duration: 0.4,
-                        stagger: 0.05,
-                        ease: "power2.out"
-                    }, "-=0.6");
-                }
-
-                // Step cards - slide in
-                if (stepCards.length) {
-                    tl.to(stepCards, {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.5,
-                        stagger: 0.1,
-                        ease: "power2.out"
-                    }, "-=0.6");
-                }
-
-                // Simple list items - scale in
-                if (simpleListItems.length) {
-                    tl.to(simpleListItems, {
-                        opacity: 1,
-                        scale: 1,
-                        duration: 0.4,
-                        stagger: 0.08,
-                        ease: "back.out(1.2)"
-                    }, "-=0.5");
-                }
-
-                // Warning items - slide from left
-                if (warningItems.length) {
-                    tl.to(warningItems, {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.35,
-                        stagger: 0.04,
-                        ease: "power2.out"
-                    }, "-=0.6");
-                }
-
-                // Footer animations
-                if (cardFooter) {
-                    tl.to(cardFooter, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.4,
-                        ease: "power2.out"
-                    }, "-=0.3");
-                }
-
-                if (warningFooter) {
-                    tl.to(warningFooter, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.4,
-                        ease: "power2.out"
-                    }, "-=0.3");
-                }
-
-                // CTA button
-                if (ctaButton) {
-                    tl.to(ctaButton, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.4,
-                        ease: "power2.out"
-                    }, "-=0.2");
-                }
             });
         }, containerRef);
 
@@ -400,9 +301,13 @@ export default function StackingCards() {
                                 }}
                             >
                                 <div className={styles.glassPanel}>
-                                    {/* Placeholder for images/illustrations */}
                                     <div className={styles.imagePlaceholder}>
-                                        {/* Will add images here */}
+                                        <Image
+                                            src={card.image}
+                                            alt={card.title}
+                                            fill
+                                            style={{ objectFit: 'cover', borderRadius: '16px' }}
+                                        />
                                     </div>
                                 </div>
                             </div>
