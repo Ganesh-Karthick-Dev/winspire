@@ -195,7 +195,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     z-index: 20;
 }
 
@@ -302,7 +302,52 @@
         font-size: 1.2rem;
     }
 
+    /* Stack cards vertically with no gap */
+    .cardsContainer {
+        flex-direction: column;
+        gap: 0;
+        position: relative;
+        /* Context for absolute badge */
+        border-radius: 20px;
+        overflow: hidden;
+        /* Round aligned corners */
+    }
+
     .card {
-        height: 250px;
+        height: 360px;
+        /* Taller cards as requested */
+        border-radius: 0;
+        /* Remove individual radius for stacked look */
+        flex: none;
+        /* Don't shrink */
+        width: 100%;
+    }
+
+    /* Top Card rounded top */
+    .cardLeft {
+        border-radius: 20px 20px 0 0;
+    }
+
+    /* Bottom Card rounded bottom */
+    .cardRight {
+        border-radius: 0 0 20px 20px;
+    }
+
+    /* Center Badge overlapping both cards */
+    .digitalTwinBadge {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        z-index: 30;
+        width: 220px;
+        /* Slightly smaller on mobile if needed, or keep 280 */
+        height: 220px;
+    }
+
+    .badgeCenter {
+        width: 140px;
+        height: 140px;
     }
 }
