@@ -115,7 +115,7 @@ export const mobileScrollKeyframes: ScrollKeyframe[] = [
         scrollProgress: 1.0,
         label: "final footer",
         transform: {
-            position: { x: 0, y: -0.2, z: 0.4 },
+            position: { x: 0, y: -0.66, z: 0.4 },
             rotation: { x: -82.177, y: 180, z: 8.23 },
             scale: 12 * MOBILE_SCALE_FACTOR
         }

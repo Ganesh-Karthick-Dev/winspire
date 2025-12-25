@@ -5118,3 +5118,227 @@ footer p {
     background: rgba(255, 255, 255, 0.4);
   }
 }
+
+/* ============================================
+   Mobile Footer Styles
+   ============================================ */
+/* Default Visibility */
+.footer-desktop-view {
+  display: block;
+}
+
+.footer-mobile-view {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .footer-desktop-view {
+    display: none !important;
+  }
+
+  .footer-mobile-view {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    padding: 60px 20px 40px;
+    box-sizing: border-box;
+    /* Continuous gradient background matching previous section if needed, 
+       otherwise footer usually has its own dark bg */
+    background: transparent;
+  }
+
+  /* Logo */
+  .footer-mobile-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .footer-mobile-logo {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+  }
+
+  /* Links Grid */
+  .footer-mobile-links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 60px;
+    padding: 0 10px;
+  }
+
+  .footer-links-left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-link-item {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer-link-item .bullet {
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+
+  .footer-links-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+    padding-top: 10px;
+  }
+
+  .social-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 8px;
+  }
+
+  .social-link {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+  }
+
+  /* Service Card Horizontal */
+  .footer-mobile-card {
+    display: flex;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 60px;
+    height: 140px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .footer-card-image {
+    width: 35%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-card-content {
+    width: 65%;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .footer-card-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .service-title {
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .card-arrow-icon {
+    font-size: 1.2rem;
+    color: #1a1a1a;
+  }
+
+  .footer-award-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-top: 1px solid #eee;
+    padding-top: 8px;
+  }
+
+  .award-icon-red {
+    width: 24px;
+    height: 24px;
+    background: #e53935;
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    /* Polygon shape in ref, circle proxy */
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .award-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .award-year {
+    font-size: 0.6rem;
+    color: #666;
+  }
+
+  .award-name {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #e53935;
+  }
+
+  /* Bottom Area */
+  .footer-mobile-bottom {
+    position: relative;
+  }
+
+  .footer-divider-line {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 24px;
+  }
+
+  .footer-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer-policy-copyright {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-privacy {
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .footer-copyright {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .footer-p-mark {
+    background: white;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
