@@ -221,8 +221,8 @@ export default function Home() {
 
             {/* Page wrapper for z-index stacking */}
             <div className="page-wrapper">
-                {/* 3D Viewer - Hidden on mobile for performance */}
-                {!is3DDisabled.current && !isMobile && (
+                {/* 3D Viewer - Now shown on all devices with mobile-optimized keyframes */}
+                {!is3DDisabled.current && (
                     <GLTFViewer
                         manualTransform={modelTransform}
                         rotateSpeed={rotateSpeed}
