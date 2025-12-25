@@ -231,14 +231,13 @@ export default function Home() {
                     />
                 )}
 
-                {/* Front-layer Marquee Text - ON TOP of 3D model (right side only) */}
                 {/* 
+                  Front-layer Marquee Text - ON TOP of 3D model (right side only)
                   Must be absolute so it scrolls with the page.
                   Uses .hero class to inherit exact same responsive padding as the real Hero section.
                   This ensures the text aligns perfectly with the back layer.
-                  Hidden on mobile since 3D model is hidden.
                 */}
-                {!is3DDisabled.current && !isMobile && (
+                {!is3DDisabled.current && (
                     <div className="hero !absolute !top-0 !left-0 w-full !min-h-screen z-30 pointer-events-none !bg-transparent">
                         {/* 
                             Inner wrapper mimics .hero-content area.
@@ -263,45 +262,49 @@ export default function Home() {
                                 />
                             </div>
 
-                            {/* === Bottom Left: Our Mission === */}
-                            <div className="absolute left-15 bottom-10 pointer-events-auto z-10 max-w-md hero-text-fade">
-                                <h3
-                                    className="font-bold tracking-widest uppercase mb-2 font-[Outfit]"
-                                    style={{ color: '#083151', fontSize: '12px', marginBottom: '1rem' }}
-                                >
-                                    Our Mission
-                                </h3>
+                            {/* === Bottom Left: Our Mission (Desktop only) === */}
+                            {!isMobile && (
+                                <div className="absolute left-15 bottom-10 pointer-events-auto z-10 max-w-md hero-text-fade">
+                                    <h3
+                                        className="font-bold tracking-widest uppercase mb-2 font-[Outfit]"
+                                        style={{ color: '#083151', fontSize: '12px', marginBottom: '1rem' }}
+                                    >
+                                        Our Mission
+                                    </h3>
+                                    <div
+                                        className="text-2xl font-bold leading-tight font-[Outfit] text-gradient-shimmer"
+                                        style={{
+                                            opacity: missionFade ? 1 : 0,
+                                            transition: 'opacity 0.3s ease-in-out'
+                                        }}
+                                    >
+                                        {missionMessages[currentMissionIndex]}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* === Bottom Right: Scroll Indicator (Desktop only) === */}
+                            {!isMobile && (
                                 <div
-                                    className="text-2xl font-bold leading-tight font-[Outfit] text-gradient-shimmer"
-                                    style={{
-                                        opacity: missionFade ? 1 : 0,
-                                        transition: 'opacity 0.3s ease-in-out'
+                                    className="absolute right-8 bottom-12 pointer-events-auto z-10 flex flex-row items-center gap-4 hero-text-fade cursor-pointer"
+                                    onClick={() => {
+                                        const aboutSection = document.querySelector('#about');
+                                        if (aboutSection) {
+                                            aboutSection.scrollIntoView({ behavior: 'smooth' });
+                                        }
                                     }}
                                 >
-                                    {missionMessages[currentMissionIndex]}
+                                    <span className="text-xs right-8 font-bold tracking-widest uppercase text-gray-500 font-[Outfit]">
+                                        Scroll
+                                    </span>
+                                    <div className="animate-scroll-arrow text-[#083151]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                                            <polyline points="19 12 12 19 5 12"></polyline>
+                                        </svg>
+                                    </div>
                                 </div>
-                            </div>
-
-                            {/* === Bottom Right: Scroll Indicator === */}
-                            <div
-                                className="absolute right-8 bottom-12 pointer-events-auto z-10 flex flex-row items-center gap-4 hero-text-fade cursor-pointer"
-                                onClick={() => {
-                                    const aboutSection = document.querySelector('#about');
-                                    if (aboutSection) {
-                                        aboutSection.scrollIntoView({ behavior: 'smooth' });
-                                    }
-                                }}
-                            >
-                                <span className="text-xs right-8 font-bold tracking-widest uppercase text-gray-500 font-[Outfit]">
-                                    Scroll
-                                </span>
-                                <div className="animate-scroll-arrow text-[#083151]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                                        <polyline points="19 12 12 19 5 12"></polyline>
-                                    </svg>
-                                </div>
-                            </div>
+                            )}
 
                         </div>
                     </div>
@@ -314,6 +317,44 @@ export default function Home() {
                     ctaText="Explore Features"
                     ctaHref="#about"
                 />
+
+                {/* Mobile Hero Overlay - Mission & Scroll Indicator */}
+                {isMobile && (
+                    <div className="mobile-hero-overlay">
+                        {/* Our Mission */}
+                        <div className="mobile-mission">
+                            <h3 className="mobile-mission-label">Our Mission</h3>
+                            <div
+                                className="mobile-mission-text text-gradient-shimmer"
+                                style={{
+                                    opacity: missionFade ? 1 : 0,
+                                    transition: 'opacity 0.3s ease-in-out'
+                                }}
+                            >
+                                {missionMessages[currentMissionIndex]}
+                            </div>
+                        </div>
+
+                        {/* Scroll Indicator */}
+                        <div
+                            className="mobile-scroll-indicator"
+                            onClick={() => {
+                                const aboutSection = document.querySelector('#about');
+                                if (aboutSection) {
+                                    aboutSection.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
+                        >
+                            <span className="mobile-scroll-text">Scroll</span>
+                            <div className="animate-scroll-arrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <polyline points="19 12 12 19 5 12"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* About Section with Transition Zone */}
                 <AboutSection />

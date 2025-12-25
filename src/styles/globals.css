@@ -471,11 +471,18 @@ section {
 @media (max-width: 768px) {
   .hero {
     padding: 8px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    /* Dynamic viewport height for mobile browsers */
   }
 
   .hero-content {
     padding: 24px 20px;
     border-radius: 18px;
+    justify-content: center;
+    /* Center content on mobile */
+    align-items: center;
+    text-align: center;
   }
 
   .hero-title {
@@ -489,6 +496,8 @@ section {
     margin-bottom: 24px;
     max-width: 100%;
   }
+
+  /* Marquee text visible on mobile with smaller font - handled by clamp() in component */
 }
 
 @media (max-width: 480px) {
@@ -500,6 +509,8 @@ section {
     padding: 20px 16px;
     border-radius: 16px;
     background-size: cover;
+    min-height: calc(100vh - 12px);
+    min-height: calc(100dvh - 12px);
   }
 
   .hero-title {
@@ -513,6 +524,77 @@ section {
     line-height: 1.5;
     margin-bottom: 20px;
   }
+}
+
+/* ============================================
+   Mobile Hero Overlay - Mission & Scroll
+   ============================================ */
+
+.mobile-hero-overlay {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  z-index: 25;
+  padding: 20px;
+  pointer-events: none;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-hero-overlay {
+    display: block;
+  }
+}
+
+.mobile-mission {
+  position: absolute;
+  left: 20px;
+  bottom: 80px;
+  max-width: 280px;
+  pointer-events: auto;
+}
+
+.mobile-mission-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #083151;
+  margin-bottom: 8px;
+  font-family: 'Outfit', sans-serif;
+}
+
+.mobile-mission-text {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  font-family: 'Outfit', sans-serif;
+}
+
+.mobile-scroll-indicator {
+  position: absolute;
+  right: 20px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.mobile-scroll-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6b7280;
+  font-family: 'Outfit', sans-serif;
+}
+
+.mobile-scroll-indicator .animate-scroll-arrow {
+  color: #083151;
 }
 
 .hero-title {
