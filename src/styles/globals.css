@@ -577,9 +577,9 @@ section {
   right: 20px;
   bottom: 80px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   pointer-events: auto;
   cursor: pointer;
 }
@@ -591,6 +591,8 @@ section {
   text-transform: uppercase;
   color: #6b7280;
   font-family: 'Outfit', sans-serif;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
 }
 
 .mobile-scroll-indicator .animate-scroll-arrow {
@@ -5340,5 +5342,88 @@ footer p {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+/* ============================================
+   About Section Styles
+   ============================================ */
+
+.about-label-container {
+  position: absolute;
+  top: 80px;
+  left: 88px;
+  z-index: 10;
+}
+
+.about-label-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.about-dot {
+  width: 8px;
+  height: 5px;
+  background-color: #38bdf8;
+  border-radius: 50%;
+}
+
+.about-label-text {
+  color: white;
+  font-size: 1.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  font-family: 'Outfit', sans-serif;
+  margin: 0;
+}
+
+.about-sublabel {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 0.1em;
+  margin-left: 24px;
+  display: block;
+  margin-top: 4px;
+}
+
+.about-headline-container {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  padding: 0 24px;
+  z-index: 5;
+}
+
+.about-headline-text {
+  color: white;
+  font-size: clamp(2.5rem, 12vw, 7rem);
+  font-weight: 700;
+  line-height: 1.1;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* Mobile Overrides for About Section */
+@media (max-width: 768px) {
+  .about-label-container {
+    left: 24px;
+    /* Tighter spacing on mobile */
+    top: 60px;
+  }
+
+  .about-label-text {
+    font-size: 1.5rem;
+    /* Smaller title on mobile */
+  }
+
+  /* Ensure headline fits on portrait screens */
+  .about-headline-text {
+    font-size: clamp(2rem, 10vw, 4rem);
   }
 }
