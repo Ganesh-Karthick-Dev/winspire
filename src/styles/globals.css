@@ -357,6 +357,17 @@ a {
   opacity: 1;
 }
 
+/* Mobile: Hide 3D model - CSS media queries work correctly in DevTools device emulation */
+@media (max-width: 768px) {
+
+  .webgl-canvas,
+  .webgl-canvas.ready {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+}
+
 /* ============================================
    Main Content
    ============================================ */

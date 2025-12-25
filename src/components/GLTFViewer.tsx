@@ -165,55 +165,34 @@ export default function GLTFViewer({
     // Track previous manual transform for delta updates
     const prevManualTransform = useRef(manualTransform);
 
-    // Helper: Get mobile scale factor - more aggressive for small screens
-    const getMobileScaleFactor = useCallback(() => {
-        if (typeof window !== 'undefined') {
-            if (window.innerWidth < 480) {
-                return 0.3; // 30% scale on very small mobile
-            }
-            if (window.innerWidth < 768) {
-                return 0.4; // 40% scale on mobile
-            }
-        }
-        return 1.0; // Full scale on desktop
-    }, []);
-
     // Handle Live Updates (HMR/Prop changes)
-    // Apply mobile scaling on EVERY update, not just when scale changes
+    // Mobile scaling is now handled in useScrollAnimation with dedicated keyframes
     useEffect(() => {
         if (!stateRef.current?.model || !manualTransform) return;
 
         const model = stateRef.current.model;
-        const mobileScaleFactor = getMobileScaleFactor();
-
-        // ALWAYS apply scale with mobile factor on every update
-        model.scale.setScalar(manualTransform.scale * mobileScaleFactor);
-
-        // Update Position
         const prev = prevManualTransform.current;
-        if (prev) {
-            // On mobile, center the model
-            if (mobileScaleFactor < 1) {
-                // Mobile: center horizontally, adjust vertical position
-                model.position.x = 0;
-                model.position.y = manualTransform.position.y + 0.2;
-                model.position.z = manualTransform.position.z;
-            } else {
-                // Desktop: Delta approach for smooth updates
-                const dx = manualTransform.position.x - prev.position.x;
-                const dy = manualTransform.position.y - prev.position.y;
-                const dz = manualTransform.position.z - prev.position.z;
 
-                model.position.x += dx;
-                model.position.y += dy;
-                model.position.z += dz;
-            }
+        // Update Scale directly from transform (mobile scale is built into keyframes)
+        if (manualTransform.scale !== prev?.scale) {
+            model.scale.setScalar(manualTransform.scale);
+        }
+
+        // Update Position (Delta approach for smooth transitions)
+        if (prev) {
+            const dx = manualTransform.position.x - prev.position.x;
+            const dy = manualTransform.position.y - prev.position.y;
+            const dz = manualTransform.position.z - prev.position.z;
+
+            model.position.x += dx;
+            model.position.y += dy;
+            model.position.z += dz;
         }
 
         // Update ref
         prevManualTransform.current = manualTransform;
 
-    }, [manualTransform, getMobileScaleFactor]);
+    }, [manualTransform]);
 
     // Initialize Three.js scene
     const initializeScene = useCallback(async (canvas: HTMLCanvasElement) => {

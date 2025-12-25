@@ -25,6 +25,7 @@ import CareersContactLinks from '@/components/CareersContactLinks';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import MarqueeText from '@/components/MarqueeText';
 import { scrollKeyframes, animationSettings } from '@/lib/scrollAnimations';
 import gsap from 'gsap';
@@ -59,6 +60,9 @@ export default function Home() {
     // Track if 3D should be disabled
     const is3DDisabled = useRef(false);
     const isDev = process.env.NODE_ENV === 'development';
+
+    // Mobile detection - uses window.matchMedia which works with DevTools
+    const isMobile = useIsMobile();
 
     // Add ScrollTrigger for fade effect
     useEffect(() => {
@@ -217,8 +221,8 @@ export default function Home() {
 
             {/* Page wrapper for z-index stacking */}
             <div className="page-wrapper">
-                {/* 3D Viewer */}
-                {!is3DDisabled.current && (
+                {/* 3D Viewer - Hidden on mobile for performance */}
+                {!is3DDisabled.current && !isMobile && (
                     <GLTFViewer
                         manualTransform={modelTransform}
                         rotateSpeed={rotateSpeed}
@@ -232,8 +236,9 @@ export default function Home() {
                   Must be absolute so it scrolls with the page.
                   Uses .hero class to inherit exact same responsive padding as the real Hero section.
                   This ensures the text aligns perfectly with the back layer.
+                  Hidden on mobile since 3D model is hidden.
                 */}
-                {!is3DDisabled.current && (
+                {!is3DDisabled.current && !isMobile && (
                     <div className="hero !absolute !top-0 !left-0 w-full !min-h-screen z-30 pointer-events-none !bg-transparent">
                         {/* 
                             Inner wrapper mimics .hero-content area.

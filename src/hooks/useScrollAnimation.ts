@@ -4,11 +4,7 @@
  * Connects GSAP ScrollTrigger to 3D model transforms and lighting.
  * Returns the current interpolated transform and lighting based on scroll position.
  * 
- * Usage:
- * ```tsx
- * const { transform, lighting } = useScrollAnimation();
- * <GLTFViewer manualTransform={transform} lighting={lighting} />
- * ```
+ * Automatically uses mobile-optimized keyframes on small screens.
  */
 
 import { useEffect, useState, useCallback } from 'react';
@@ -23,6 +19,7 @@ import {
     animationSettings,
     defaultLighting
 } from '@/lib/scrollAnimations';
+import { mobileScrollKeyframes } from '@/lib/mobileScrollAnimations';
 
 // Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {
@@ -30,18 +27,11 @@ if (typeof window !== 'undefined') {
 }
 
 /**
- * Get mobile scale factor based on window width
+ * Check if we're on a mobile device
  */
-function getMobileScaleFactor(): number {
-    if (typeof window === 'undefined') return 1.0;
-
-    if (window.innerWidth < 480) {
-        return 0.25; // 25% scale on very small mobile
-    }
-    if (window.innerWidth < 768) {
-        return 0.35; // 35% scale on mobile
-    }
-    return 1.0; // Full scale on desktop
+function isMobileDevice(): boolean {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 768;
 }
 
 export interface UseScrollAnimationOptions {
@@ -55,7 +45,7 @@ export interface UseScrollAnimationOptions {
     start?: string;
     /** End position (default: 'bottom bottom') */
     end?: string;
-    /** Custom keyframes to use instead of default (default: scrollKeyframes) */
+    /** Custom keyframes to use instead of default */
     keyframes?: typeof scrollKeyframes;
 }
 
@@ -69,21 +59,25 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         trigger = 'body',
         start = 'top top',
         end = 'bottom bottom',
-        keyframes = scrollKeyframes, // Default to Home page keyframes
+        keyframes: customKeyframes,
     } = options;
 
-    // Initialize with first keyframe values (with mobile scale applied)
-    const firstKeyframe = keyframes[0];
-    const initialMobileFactor = getMobileScaleFactor();
+    // Determine which keyframes to use - mobile or desktop
+    const [isMobile, setIsMobile] = useState(false);
 
+    useEffect(() => {
+        setIsMobile(isMobileDevice());
+    }, []);
+
+    // Use custom keyframes if provided, otherwise auto-select based on device
+    const activeKeyframes = customKeyframes || (isMobile ? mobileScrollKeyframes : scrollKeyframes);
+
+    // Initialize with first keyframe values
+    const firstKeyframe = activeKeyframes[0];
     const [transform, setTransform] = useState<ModelTransform>({
-        position: {
-            x: initialMobileFactor < 1 ? 0 : firstKeyframe.transform.position.x,
-            y: firstKeyframe.transform.position.y + (initialMobileFactor < 1 ? 0.3 : 0),
-            z: firstKeyframe.transform.position.z
-        },
+        position: { ...firstKeyframe.transform.position },
         rotation: { ...firstKeyframe.transform.rotation },
-        scale: firstKeyframe.transform.scale * initialMobileFactor,
+        scale: firstKeyframe.transform.scale,
     });
 
     // Initialize lighting state
@@ -93,26 +87,12 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
 
     const [scrollProgress, setScrollProgress] = useState(0);
 
-    // Memoized update function - applies mobile scale factor on every update
+    // Memoized update function
     const updateTransform = useCallback((progress: number) => {
         setScrollProgress(progress);
-
-        const baseTransform = getTransformAtProgress(progress, keyframes);
-        const mobileFactor = getMobileScaleFactor();
-
-        // Apply mobile adjustments
-        setTransform({
-            position: {
-                x: mobileFactor < 1 ? 0 : baseTransform.position.x, // Center on mobile
-                y: baseTransform.position.y + (mobileFactor < 1 ? 0.3 : 0), // Move up on mobile
-                z: baseTransform.position.z,
-            },
-            rotation: baseTransform.rotation,
-            scale: baseTransform.scale * mobileFactor, // Apply mobile scale factor
-        });
-
-        setLighting(getLightingAtProgress(progress, keyframes));
-    }, [keyframes]);
+        setTransform(getTransformAtProgress(progress, activeKeyframes));
+        setLighting(getLightingAtProgress(progress, activeKeyframes));
+    }, [activeKeyframes]);
 
     useEffect(() => {
         // Skip on server or if disabled
@@ -131,29 +111,29 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
             },
         });
 
-        // Also listen for resize to update mobile factor
+        // Handle resize - switch between mobile/desktop keyframes
         const handleResize = () => {
-            // Re-calculate with current scroll progress
-            const currentProgress = scrollTrigger.progress || 0;
-            updateTransform(currentProgress);
+            const nowMobile = isMobileDevice();
+            if (nowMobile !== isMobile) {
+                setIsMobile(nowMobile);
+            }
+            // Re-update transform with current progress
+            updateTransform(scrollTrigger.progress || 0);
         };
         window.addEventListener('resize', handleResize);
 
         // Debug log
         console.log('🎬 ScrollAnimation initialized', {
-            trigger,
-            start,
-            end,
-            scrub,
-            keyframes: keyframes.length,
-            mobileFactor: getMobileScaleFactor(),
+            isMobile,
+            keyframesCount: activeKeyframes.length,
+            firstScale: activeKeyframes[0].transform.scale,
         });
 
         return () => {
             scrollTrigger.kill();
             window.removeEventListener('resize', handleResize);
         };
-    }, [enabled, scrub, trigger, start, end, updateTransform, keyframes]);
+    }, [enabled, scrub, trigger, start, end, updateTransform, isMobile, activeKeyframes]);
 
     return {
         /** Current interpolated transform values */
@@ -162,8 +142,10 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         lighting,
         /** Current scroll progress (0-1) */
         scrollProgress,
+        /** Whether mobile keyframes are being used */
+        isMobile,
         /** Current keyframe label (if any) */
-        currentLabel: keyframes.find(
+        currentLabel: activeKeyframes.find(
             (kf, i, arr) =>
                 scrollProgress >= kf.scrollProgress &&
                 (i === arr.length - 1 || scrollProgress < arr[i + 1].scrollProgress)
@@ -172,4 +154,3 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
 }
 
 export default useScrollAnimation;
-
