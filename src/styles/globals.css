@@ -3598,9 +3598,15 @@ footer p {
   z-index: 1;
   max-width: 100%;
   margin: 0;
+  display: block;
+  /* Was grid, changed to block */
+}
+
+.news-desktop-view {
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 60px;
+  width: 100%;
 }
 
 .news-left-col {
@@ -4793,9 +4799,7 @@ footer p {
    ============================================ */
 
 /* Default Visibility (Desktop) */
-.news-desktop-view {
-  display: block;
-}
+/* .news-desktop-view is defined earlier with grid/block specific logic */
 
 .news-mobile-view {
   display: none;
