@@ -12,6 +12,7 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 // Register ScrollTrigger
 if (typeof window !== 'undefined') {
@@ -25,6 +26,7 @@ export default function ServiceCardSection() {
     const titleRef = useRef<HTMLDivElement>(null);
     const headlineRef = useRef<HTMLHeadingElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const isMobile = useIsMobile();
 
     // Auto-play video
     useEffect(() => {
@@ -48,8 +50,10 @@ export default function ServiceCardSection() {
         return () => observer.disconnect();
     }, []);
 
-    // GSAP ScrollTrigger for scroll-based animations
+    // GSAP ScrollTrigger for scroll-based animations (desktop only)
     useEffect(() => {
+        if (isMobile) return;
+
         const ctx = gsap.context(() => {
             const sphere = sphereRef.current;
             const title = titleRef.current;
@@ -59,7 +63,6 @@ export default function ServiceCardSection() {
 
             if (!sphere || !section) return;
 
-            // Create a timeline linked to scroll
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: section,
@@ -69,7 +72,6 @@ export default function ServiceCardSection() {
                 }
             });
 
-            // === PHASE 1 (0-30%): Title and headline fade IN ===
             if (title) {
                 tl.fromTo(title,
                     { opacity: 0, y: 30 },
@@ -85,14 +87,12 @@ export default function ServiceCardSection() {
                 );
             }
 
-            // === PHASE 2 (20-60%): Sphere grows from small to big ===
             tl.fromTo(sphere,
                 { scale: 0.15, y: 100, opacity: 0 },
                 { scale: 1, y: 0, opacity: 1, duration: 0.4 },
                 0.15
             );
 
-            // === PHASE 3 (50-80%): Title fades OUT as content comes in ===
             if (title) {
                 tl.to(title,
                     { opacity: 0, y: -20, duration: 0.15 },
@@ -106,7 +106,6 @@ export default function ServiceCardSection() {
                 );
             }
 
-            // === PHASE 4 (60-100%): Bottom content fades IN ===
             if (content) {
                 tl.fromTo(content,
                     { opacity: 0, y: 40 },
@@ -118,8 +117,240 @@ export default function ServiceCardSection() {
         }, sectionRef);
 
         return () => ctx.revert();
-    }, []);
+    }, [isMobile]);
 
+    // Mobile sphere scroll animation
+    const mobileSphereRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!isMobile) return;
+
+        const sphere = mobileSphereRef.current;
+        if (!sphere) return;
+
+        const ctx = gsap.context(() => {
+            gsap.fromTo(sphere,
+                { scale: 0.3, opacity: 0 },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: sphere,
+                        start: 'top 90%',
+                        end: 'top 40%',
+                        scrub: 0.5,
+                    }
+                }
+            );
+        });
+
+        return () => ctx.revert();
+    }, [isMobile]);
+
+    // ==================== MOBILE LAYOUT ====================
+    if (isMobile) {
+        return (
+            <section id="service-card" className="service-card-mobile">
+                <div className="service-mobile-card">
+                    {/* Service Title */}
+                    <div className="service-mobile-header">
+                        <div className="service-mobile-title-row">
+                            <div className="service-mobile-dots">
+                                <span className="service-dot" />
+                                <span className="service-dot" />
+                            </div>
+                            <h2 className="service-mobile-title">Service</h2>
+                        </div>
+                        <p className="service-mobile-subtitle">Our Services</p>
+                    </div>
+
+                    {/* Headline */}
+                    <h3 className="service-mobile-headline">
+                        3D communication platform solving all spatial selection challenges.
+                    </h3>
+
+                    {/* Circular Video/Image */}
+                    <div ref={mobileSphereRef} className="service-mobile-sphere">
+                        <video
+                            ref={videoRef}
+                            src="/video/sample/section2_video.mp4"
+                            muted
+                            loop
+                            playsInline
+                            className="service-mobile-video"
+                        />
+                    </div>
+
+                    {/* Description */}
+                    <p className="service-mobile-description">
+                        Our platform provides digital twin-based 3D communication services.
+                        Anytime, anywhere, with anyone - enabling spatial image sharing
+                        for residential properties and beyond.
+                    </p>
+
+                    {/* Service Button Card */}
+                    <div className="service-mobile-button-card">
+                        <div className="service-button-left">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            </svg>
+                            <span>SERVICE</span>
+                        </div>
+                        <div className="service-button-right">
+                            <div>
+                                <p className="service-button-title">Explore Services</p>
+                                <p className="service-button-sub">Service Site</p>
+                            </div>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <style jsx>{`
+                    .service-card-mobile {
+                        position: relative;
+                        width: 100%;
+                        padding: 20px 16px;
+                    }
+
+                    .service-mobile-card {
+                        background: rgba(8, 49, 81, 0.85);
+                        border-radius: 24px;
+                        padding: 40px 24px;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 24px;
+                    }
+
+                    .service-mobile-header {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 4px;
+                    }
+
+                    .service-mobile-title-row {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                    }
+
+                    .service-mobile-dots {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 4px;
+                    }
+
+                    .service-dot {
+                        width: 8px;
+                        height: 5px;
+                        background-color: #38bdf8;
+                        border-radius: 50%;
+                    }
+
+                    .service-mobile-title {
+                        color: white;
+                        font-size: 2rem;
+                        font-weight: 700;
+                        font-family: 'Outfit', sans-serif;
+                        margin: 0;
+                    }
+
+                    .service-mobile-subtitle {
+                        color: #4d9fff;
+                        font-size: 14px;
+                        font-family: 'Outfit', sans-serif;
+                        margin: 0 0 0 24px;
+                    }
+
+                    .service-mobile-headline {
+                        color: white;
+                        font-size: clamp(1.5rem, 6vw, 2rem);
+                        font-weight: 600;
+                        font-family: 'Outfit', sans-serif;
+                        line-height: 1.4;
+                        margin: 16px 0;
+                    }
+
+                    .service-mobile-sphere {
+                        width: 70%;
+                        aspect-ratio: 1;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        margin: 20px auto;
+                        background: linear-gradient(135deg, rgba(100,140,200,0.4) 0%, rgba(60,100,180,0.6) 100%);
+                        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                    }
+
+                    .service-mobile-video {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    .service-mobile-description {
+                        color: white;
+                        font-size: 18px;
+                        line-height: 1.7;
+                        font-family: 'Outfit', sans-serif;
+                        margin: 0;
+                    }
+
+                    .service-mobile-button-card {
+                        display: flex;
+                        align-items: stretch;
+                        background: white;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+                        margin-top: 16px;
+                    }
+
+                    .service-button-left {
+                        width: 80px;
+                        padding: 16px;
+                        background: linear-gradient(135deg, #00b4a0 0%, #0088cc 100%);
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        gap: 6px;
+                        font-size: 11px;
+                        font-weight: 600;
+                    }
+
+                    .service-button-right {
+                        flex: 1;
+                        padding: 12px 16px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+
+                    .service-button-title {
+                        color: #333;
+                        font-size: 14px;
+                        font-weight: 600;
+                        font-family: 'Outfit', sans-serif;
+                        margin: 0;
+                    }
+
+                    .service-button-sub {
+                        color: #666;
+                        font-size: 12px;
+                        font-family: 'Outfit', sans-serif;
+                        margin: 2px 0 0 0;
+                    }
+                `}</style>
+            </section>
+        );
+    }
+
+    // ==================== DESKTOP LAYOUT ====================
     return (
         <section
             id="service-card"
@@ -131,23 +362,19 @@ export default function ServiceCardSection() {
                 marginTop: '-450px',
             }}
         >
-            {/* Sticky Card Container */}
             <div
                 style={{
                     position: 'sticky',
                     top: 0,
                     width: '100%',
                     height: '100vh',
-                    // padding: '10px',
                     boxSizing: 'border-box',
                 }}
             >
-                {/* Dark Transparent Card */}
                 <div
                     style={{
                         width: '100%',
                         height: '100%',
-                        // User requested #083151 with transparency (0.7), no blur
                         background: 'rgba(8, 49, 81, 0.7)',
                         borderRadius: '50px',
                         position: 'relative',
@@ -155,13 +382,13 @@ export default function ServiceCardSection() {
                         padding: '18px',
                     }}
                 >
-                    {/* === ROW 1: Top Left - Service Title (fades in/out) === */}
+                    {/* ROW 1: Top Left - Service Title */}
                     <div
                         ref={titleRef}
                         style={{
                             position: 'absolute',
-                            top: '120px', // Moved inside
-                            left: '120px', // Moved inside
+                            top: '120px',
+                            left: '120px',
                             maxWidth: '500px'
                         }}
                     >
@@ -198,7 +425,6 @@ export default function ServiceCardSection() {
                             Our Services
                         </p>
 
-                        {/* Headline - same block as title (top-left) */}
                         <h3
                             ref={headlineRef}
                             style={{
@@ -215,7 +441,7 @@ export default function ServiceCardSection() {
                         </h3>
                     </div>
 
-                    {/* === ROW 2: Center - Animated Sphere === */}
+                    {/* ROW 2: Center - Animated Sphere */}
                     <div
                         ref={sphereRef}
                         style={{
@@ -223,8 +449,8 @@ export default function ServiceCardSection() {
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            width: 'min(500px, 55vw)', // Increased size
-                            height: 'min(500px, 55vw)', // Increased size
+                            width: 'min(500px, 55vw)',
+                            height: 'min(500px, 55vw)',
                             borderRadius: '50%',
                             overflow: 'hidden',
                             background: 'linear-gradient(135deg, rgba(100,140,200,0.4) 0%, rgba(60,100,180,0.6) 100%)',
@@ -246,25 +472,23 @@ export default function ServiceCardSection() {
                         />
                     </div>
 
-                    {/* === ROW 3: Bottom Right - Content (fades in last) === */}
+                    {/* ROW 3: Bottom Right - Content */}
                     <div
                         ref={contentRef}
                         style={{
                             position: 'absolute',
-                            bottom: '120px', // Matched Row 1 spacing
-                            right: '120px', // Matched Row 1 spacing
+                            bottom: '120px',
+                            right: '120px',
                             maxWidth: '490px',
                             textAlign: 'right',
                         }}
                     >
-                        {/* Description text */}
                         <p
                             style={{
                                 color: 'white',
                                 fontSize: '25px',
                                 lineHeight: 1.8,
                                 fontFamily: 'Outfit, sans-serif',
-                                // opacity: 0.9,
                                 marginBottom: '28px',
                                 wordSpacing: '10px',
                                 fontWeight: 600,
@@ -275,7 +499,6 @@ export default function ServiceCardSection() {
                             image sharing for residential
                         </p>
 
-                        {/* Divider line */}
                         <div
                             style={{
                                 width: '100%',
@@ -285,7 +508,6 @@ export default function ServiceCardSection() {
                             }}
                         />
 
-                        {/* Button Card */}
                         <div
                             style={{
                                 display: 'flex',
@@ -298,7 +520,6 @@ export default function ServiceCardSection() {
                                 width: 'fit-content',
                             }}
                         >
-                            {/* Left side - Gradient with logo */}
                             <div
                                 style={{
                                     width: '90px',
@@ -316,7 +537,6 @@ export default function ServiceCardSection() {
                                 </svg>
                                 <span style={{ fontSize: '13px', marginTop: '6px', fontWeight: 600 }}>SERVICE</span>
                             </div>
-                            {/* Right side - Text + Arrow */}
                             <div
                                 style={{
                                     flex: 1,
