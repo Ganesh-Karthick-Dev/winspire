@@ -43,6 +43,12 @@ export default function CareersScrollSection() {
     const btnCircleRef = useRef<HTMLDivElement>(null);
     const btnArrowRef = useRef<HTMLSpanElement>(null);
 
+    // Mobile Button Refs (Duplicate)
+    const mobileBtnRef = useRef<HTMLAnchorElement>(null);
+    const mobileBtnBgRef = useRef<HTMLDivElement>(null);
+    const mobileBtnCircleRef = useRef<HTMLDivElement>(null);
+    const mobileBtnArrowRef = useRef<HTMLSpanElement>(null);
+
     useEffect(() => {
         const section = sectionRef.current;
         const leftCol = leftColRef.current;
@@ -50,165 +56,185 @@ export default function CareersScrollSection() {
 
         if (!section || !leftCol || !rightCol) return;
 
+        const mm = gsap.matchMedia();
+
         const ctx = gsap.context(() => {
-            // Create a timeline linked to scroll for image column animations
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top top',
-                    end: 'bottom bottom',
-                    scrub: 1,
-                }
+            // GSAP Match Media
+            mm.add("(max-width: 768px)", () => {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top bottom', // Start earlier to ensure movement is visible
+                        end: 'bottom top',   // Continue until fully out of view
+                        scrub: 1,
+                        invalidateOnRefresh: true, // Recalculate on resize
+                    }
+                });
+
+                // Increased scroll range significantly for wider cards (240px)
+                // Total width approx 800px+
+                tl.fromTo(leftCol,
+                    { x: 100 },
+                    { x: -500, ease: "none" },
+                    0
+                );
+
+                tl.fromTo(rightCol,
+                    { x: -500 },
+                    { x: 100, ease: "none" },
+                    0
+                );
             });
 
-            // Left column: scroll DOWN (starts shifted UP, moves DOWN)
-            // Start at -350 (top hidden) and move to -50 (still slightly hidden)
-            // This ensures we NEVER have positive Y, so no empty space at top
-            tl.fromTo(
-                leftCol,
-                { y: -350 },
-                { y: -50, duration: 1 },
-                0
-            );
-
-            // Right column: scroll UP (starts at -50, moves UP to -350)
-            tl.fromTo(
-                rightCol,
-                { y: -50 },
-                { y: -350, duration: 1 },
-                0
-            );
-
-            // Button Hover Animation
-            const btn = btnRef.current;
-            const bg = btnBgRef.current;
-            const circle = btnCircleRef.current;
-            const arrow = btnArrowRef.current;
-
-            if (btn && bg && circle && arrow) {
-                btn.addEventListener('mouseenter', () => {
-                    gsap.to(bg, { opacity: 1, duration: 0.3 });
-                    gsap.to(circle, { scale: 1.1, backgroundColor: '#3b82f6', duration: 0.3 }); // Circle to Blue
-                    gsap.to(arrow, { color: '#ffffff', x: 2, duration: 0.3 }); // Arrow to White
+            mm.add("(min-width: 769px)", () => {
+                // Desktop: Vertical scroll (Y axis)
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 1,
+                    }
                 });
 
-                btn.addEventListener('mouseleave', () => {
-                    gsap.to(bg, { opacity: 0.8, duration: 0.3 });
-                    gsap.to(circle, { scale: 1, backgroundColor: '#ffffff', duration: 0.3 }); // Back to White
-                    gsap.to(arrow, { color: '#000000', x: 0, duration: 0.3 }); // Back to Black
-                });
-            }
+                // Left column: scroll DOWN
+                tl.fromTo(leftCol, { y: -350 }, { y: -50, duration: 1 }, 0);
+                // Right column: scroll UP
+                tl.fromTo(rightCol, { y: -50 }, { y: -350, duration: 1 }, 0);
+            });
+
+            // Button Hover Animation (Helper function)
+            const setupBtnHover = (btn: HTMLElement | null, bg: HTMLElement | null, circle: HTMLElement | null, arrow: HTMLElement | null) => {
+                if (btn && bg && circle && arrow) {
+                    btn.addEventListener('mouseenter', () => {
+                        gsap.to(bg, { opacity: 1, duration: 0.3 });
+                        gsap.to(circle, { scale: 1.1, backgroundColor: '#3b82f6', duration: 0.3 });
+                        gsap.to(arrow, { color: '#ffffff', x: 2, duration: 0.3 });
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        gsap.to(bg, { opacity: 0.8, duration: 0.3 });
+                        gsap.to(circle, { scale: 1, backgroundColor: '#ffffff', duration: 0.3 });
+                        gsap.to(arrow, { color: '#000000', x: 0, duration: 0.3 });
+                    });
+                }
+            };
+
+            // Setup listeners for both buttons
+            setupBtnHover(btnRef.current, btnBgRef.current, btnCircleRef.current, btnArrowRef.current);
+            setupBtnHover(mobileBtnRef.current, mobileBtnBgRef.current, mobileBtnCircleRef.current, mobileBtnArrowRef.current);
 
         }, section);
 
         return () => ctx.revert();
     }, []);
 
+    // Button Component JSX (Reusable render function not possible inside component easily without sub-component, so duplicating JSX for simplicity)
+    const renderButton = (refs: any) => (
+        <a
+            ref={refs.btn}
+            href="/careers"
+            className="careers-cta-button"
+            style={{
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '16px 24px 16px 40px',
+                borderRadius: '50px',
+                textDecoration: 'none',
+                overflow: 'hidden',
+                width: 'fit-content',
+                minWidth: '220px',
+                border: 'none',
+                background: 'transparent',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)'
+            }}
+        >
+            <div
+                ref={refs.bg}
+                style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(90deg, #083151 0%, #051e3e 100%)',
+                    zIndex: 0,
+                    transition: 'opacity 0.3s',
+                    opacity: 0.9
+                }}
+            />
+            <span style={{ position: 'relative', zIndex: 1, color: 'white', fontWeight: 600, fontSize: '1.1rem' }}>Careers</span>
+            <div
+                ref={refs.circle}
+                style={{
+                    position: 'relative',
+                    zIndex: 1,
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'transform 0.3s'
+                }}
+            >
+                <span ref={refs.arrow} style={{ color: 'black', fontSize: '1.2rem', lineHeight: 1 }}>→</span>
+            </div>
+        </a>
+    );
+
     return (
         <section
             ref={sectionRef}
             className="careers-scroll-section-wrapper"
-            style={{
-                position: 'relative',
-                width: '100%',
-                height: '300vh', // Reduced height to fix gap issue
-                marginTop: '-50vh',
-            }}
         >
             {/* Sticky Card Container */}
-            <div
-                className="careers-sticky-container"
-                style={{
-                    position: 'sticky',
-                    top: 0,
-                    width: '100%',
-                    height: '100vh',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '16px',
-                    boxSizing: 'border-box',
-                }}
-            >
+            <div className="careers-sticky-container">
                 {/* Frosted Glass Card */}
                 <div className="careers-card">
                     {/* Left Content - Sticky Info */}
-                    <div className="careers-left-content" style={{ paddingLeft: '80px' }}>
-                        <div className="careers-accent-label">
-                            <span className="careers-dot"></span>
-                            Careers
+                    <div className="careers-left-content">
+                        <div className="careers-title-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
+                            <div className="careers-accent-label" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                                {/* Two dots stacked vertically */}
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                    <span
+                                        className="careers-dot-rect"
+                                        style={{
+                                            width: '8px',
+                                            height: '5px',
+                                            backgroundColor: '#38bdf8', // Light blue like About Us
+                                            borderRadius: '50%',
+                                        }}
+                                    />
+                                    <span
+                                        className="careers-dot-rect"
+                                        style={{
+                                            width: '8px',
+                                            height: '5px',
+                                            backgroundColor: '#38bdf8',
+                                            borderRadius: '50%',
+                                        }}
+                                    />
+                                </div>
+                                <h2 style={{ margin: 0, lineHeight: 1 , color : 'black'}}>Careers</h2>
+                            </div>
+                            <p className="careers-sublabel" style={{ margin: 0, paddingLeft: '24px', color: '#38bdf8' }}>Recruitment Information</p>
                         </div>
-                        <p className="careers-sublabel">choose your career</p>
 
                         <h2 className="careers-headline">
-                            Join the Future of Revenue Cycle Innovation
+                            Join the Future of Revenue Cycle Innovation. Build platforms that empower teams and redefine possibilities.
                         </h2>
 
-                        <div className="careers-divider"></div>
-                        {/* 
-                        <FrostyButton 
-                        text="About Us"
-                        onClick={() => window.location.href = '#about-details'}
-                         /> */}
-
-                        <a
-                            ref={btnRef}
-                            href="/careers"
-                            className="careers-cta-button"
-                            style={{
-                                position: 'relative',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
-                                padding: '16px 24px 16px 40px',
-                                borderRadius: '50px',
-                                textDecoration: 'none',
-                                overflow: 'hidden',
-                                width: 'fit-content',
-                                minWidth: '220px',
-                                border: 'none',
-                                background: 'transparent', // Custom BG handled below
-                                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)'
-                            }}
-                        >
-                            {/* Gradient Background Layer */}
-                            <div
-                                ref={btnBgRef}
-                                style={{
-                                    position: 'absolute',
-                                    inset: 0,
-                                    background: 'linear-gradient(90deg, #083151 0%, #051e3e 100%)', // Requested Gradient
-                                    zIndex: 0,
-                                    transition: 'opacity 0.3s',
-                                    opacity: 0.9
-                                }}
-                            />
-
-                            <span style={{ position: 'relative', zIndex: 1, color: 'white', fontWeight: 600, fontSize: '1.1rem' }}>Careers</span>
-
-                            <div
-                                ref={btnCircleRef}
-                                style={{
-                                    position: 'relative',
-                                    zIndex: 1,
-                                    width: '40px',
-                                    height: '40px',
-                                    borderRadius: '50%',
-                                    backgroundColor: 'white',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    transition: 'transform 0.3s'
-                                }}
-                            >
-                                <span ref={btnArrowRef} style={{ color: 'black', fontSize: '1.2rem', lineHeight: 1 }}>→</span>
-                            </div>
-                        </a>
+                        {/* DESKTOP ONLY: Divider and Button */}
+                        <div className="careers-desktop-elements">
+                            <div className="careers-divider"></div>
+                            {renderButton({ btn: btnRef, bg: btnBgRef, circle: btnCircleRef, arrow: btnArrowRef })}
+                        </div>
                     </div>
 
                     {/* Right Content - Image Columns */}
                     <div className="careers-images-wrapper">
-                        {/* Left Image Column - Scrolls DOWN */}
+                        {/* Left/Top Image Column */}
                         <div ref={leftColRef} className="careers-image-column careers-col-left">
                             {leftColumnImages.map((img, index) => (
                                 <div key={index} className="careers-image-card">
@@ -223,7 +249,7 @@ export default function CareersScrollSection() {
                             ))}
                         </div>
 
-                        {/* Right Image Column - Scrolls UP */}
+                        {/* Right/Bottom Image Column */}
                         <div ref={rightColRef} className="careers-image-column careers-col-right">
                             {rightColumnImages.map((img, index) => (
                                 <div key={index} className="careers-image-card">
@@ -238,8 +264,14 @@ export default function CareersScrollSection() {
                             ))}
                         </div>
                     </div>
+
+                    {/* MOBILE ONLY: Divider and Button (Placed AFTER images) */}
+                    <div className="careers-mobile-elements">
+                        <div className="careers-divider"></div>
+                        {renderButton({ btn: mobileBtnRef, bg: mobileBtnBgRef, circle: mobileBtnCircleRef, arrow: mobileBtnArrowRef })}
+                    </div>
                 </div>
             </div>
-        </section>
+        </section >
     );
 }
