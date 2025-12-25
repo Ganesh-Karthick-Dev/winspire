@@ -310,51 +310,53 @@ export default function Home() {
                     </div>
                 )}
 
-                {/* Hero Section */}
-                <Hero
-                    title={`Welcome to the Future of Revenue Cycle`}
-                    subtitle="AI-Powered. System-Driven. Outcome-Guaranteed"
-                    ctaText="Explore Features"
-                    ctaHref="#about"
-                />
+                {/* Hero Section with Mobile Overlay Container */}
+                <div className="hero-section-container" style={{ position: 'relative' }}>
+                    <Hero
+                        title={`Welcome to the Future of Revenue Cycle`}
+                        subtitle="AI-Powered. System-Driven. Outcome-Guaranteed"
+                        ctaText="Explore Features"
+                        ctaHref="#about"
+                    />
 
-                {/* Mobile Hero Overlay - Mission & Scroll Indicator */}
-                {isMobile && (
-                    <div className="mobile-hero-overlay">
-                        {/* Our Mission */}
-                        <div className="mobile-mission">
-                            <h3 className="mobile-mission-label">Our Mission</h3>
+                    {/* Mobile Hero Overlay - Mission & Scroll Indicator */}
+                    {isMobile && (
+                        <div className="mobile-hero-overlay">
+                            {/* Our Mission */}
+                            <div className="mobile-mission">
+                                <h3 className="mobile-mission-label">Our Mission</h3>
+                                <div
+                                    className="mobile-mission-text text-gradient-shimmer"
+                                    style={{
+                                        opacity: missionFade ? 1 : 0,
+                                        transition: 'opacity 0.3s ease-in-out'
+                                    }}
+                                >
+                                    {missionMessages[currentMissionIndex]}
+                                </div>
+                            </div>
+
+                            {/* Scroll Indicator */}
                             <div
-                                className="mobile-mission-text text-gradient-shimmer"
-                                style={{
-                                    opacity: missionFade ? 1 : 0,
-                                    transition: 'opacity 0.3s ease-in-out'
+                                className="mobile-scroll-indicator"
+                                onClick={() => {
+                                    const aboutSection = document.querySelector('#about');
+                                    if (aboutSection) {
+                                        aboutSection.scrollIntoView({ behavior: 'smooth' });
+                                    }
                                 }}
                             >
-                                {missionMessages[currentMissionIndex]}
+                                <span className="mobile-scroll-text">Scroll</span>
+                                <div className="animate-scroll-arrow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <polyline points="19 12 12 19 5 12"></polyline>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
-
-                        {/* Scroll Indicator */}
-                        <div
-                            className="mobile-scroll-indicator"
-                            onClick={() => {
-                                const aboutSection = document.querySelector('#about');
-                                if (aboutSection) {
-                                    aboutSection.scrollIntoView({ behavior: 'smooth' });
-                                }
-                            }}
-                        >
-                            <span className="mobile-scroll-text">Scroll</span>
-                            <div className="animate-scroll-arrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <polyline points="19 12 12 19 5 12"></polyline>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                )}
+                    )}
+                </div>
 
                 {/* About Section with Transition Zone */}
                 <AboutSection />
