@@ -4963,3 +4963,154 @@ footer p {
     margin-bottom: 32px;
   }
 }
+
+/* ============================================
+   Careers & Contact Links Mobile Styles
+   ============================================ */
+
+/* Default Visibility */
+.links-desktop-view {
+  display: block;
+}
+
+.links-mobile-view {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  /* Toggle Views */
+  .links-desktop-view {
+    display: none !important;
+  }
+
+  .links-mobile-view {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 20px 60px;
+    box-sizing: border-box;
+  }
+
+  /* Header */
+  .links-mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .links-header-line {
+    position: absolute;
+    top: 20px;
+    left: -20px;
+    width: 40px;
+    height: 2px;
+    background: #e0f2fe;
+    /* Light blue accent line */
+  }
+
+  .links-mobile-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    /* Color removed to allow text-gradient-shimmer to work */
+    margin: 0;
+    padding-left: 20px;
+    width: 100%;
+    /* Ensure full width for effect */
+  }
+
+  .links-mobile-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Card Base Styles */
+  .links-mobile-card {
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Specific Gradients */
+  .card-blue {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  }
+
+  .card-purple {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  }
+
+  /* Top Row */
+  .card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+
+  .card-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
+    opacity: 0.9;
+  }
+
+  .card-image-thumb {
+    width: 100px;
+    height: 60px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+  }
+
+  .card-image-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Bottom Row */
+  .card-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .card-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .card-subtitle {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: 6px;
+    display: block;
+  }
+
+  .card-arrow-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .card-divider-v {
+    width: 1px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+}
