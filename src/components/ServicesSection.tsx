@@ -11,6 +11,7 @@ import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import FrostyButton from './FrostyButton';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 // Register ScrollTrigger
 if (typeof window !== 'undefined') {
@@ -23,6 +24,7 @@ export default function ServicesSection() {
     const para2Ref = useRef<HTMLParagraphElement>(null);
     const para3Ref = useRef<HTMLParagraphElement>(null);
     const sectionRef = useRef<HTMLElement>(null);
+    const isMobile = useIsMobile();
 
     // Auto-play video when in view
     useEffect(() => {
@@ -91,14 +93,16 @@ export default function ServicesSection() {
                         Building a globally recognized 3D communication platform for transformation.
                     </h2>
 
-                    {/* Glossy Divider - Thicker with gradient */}
+                    {/* Glossy Divider - Hidden on mobile via CSS */}
                     <div className="services-divider" />
 
-                    {/* About Us Button - Premium glossy style */}
-                    <FrostyButton
-                        text="About Us"
-                        onClick={() => window.location.href = '#about-details'}
-                    />
+                    {/* About Us Button - Hidden on mobile */}
+                    {!isMobile && (
+                        <FrostyButton
+                            text="About Us"
+                            onClick={() => window.location.href = '#about-details'}
+                        />
+                    )}
                 </div>
 
                 {/* === RIGHT SIDE: SCROLLABLE CONTENT === */}
@@ -133,6 +137,17 @@ export default function ServicesSection() {
                         <span className="fade-line" style={{ display: 'block' }}>we develop services using cutting-edge</span>
                         <span className="fade-line" style={{ display: 'block' }}>technology to realize both without compromise.</span>
                     </div>
+
+                    {/* Mobile Bottom CTA - Divider + Button */}
+                    {isMobile && (
+                        <div className="services-mobile-cta">
+                            <div className="services-mobile-divider" />
+                            <FrostyButton
+                                text="About Us"
+                                onClick={() => window.location.href = '#about-details'}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -244,41 +259,62 @@ export default function ServicesSection() {
                 @media (max-width: 768px) {
                     .services-container {
                         flex-direction: column;
-                        padding: 0 16px;
+                        padding: 0 24px;
                     }
 
                     .services-left {
                         position: relative;
                         top: 0;
                         width: 100%;
-                        padding: 40px 0 32px 0;
+                        padding: 40px 0 24px 0;
                     }
 
                     .services-headline {
                         font-size: clamp(1.4rem, 6vw, 1.8rem);
-                        margin-bottom: 24px;
+                        margin-bottom: 0;
                         max-width: 100%;
+                        text-align: left;
                     }
 
+                    /* Hide divider on mobile */
                     .services-divider {
-                        margin-bottom: 24px;
-                        max-width: 100%;
+                        display: none;
                     }
 
                     .services-right {
                         width: 100%;
                         padding: 0 0 40px 0;
                         gap: 32px;
+                        align-items: flex-start;
                     }
 
                     .services-video-card {
                         width: 100%;
-                        height: 280px;
+                        height: 450px;
                     }
 
                     .services-text-block {
-                        font-size: 18px;
+                        font-size: 28px;
                         max-width: 100%;
+                        text-align: left;
+                        line-height: 1.6;
+                        width: 100%;
+                    }
+
+                    /* Mobile CTA at bottom */
+                    .services-mobile-cta {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        margin-top: 32px;
+                    }
+
+                    .services-mobile-divider {
+                        width: 100%;
+                        height: 3px;
+                        background: rgba(255, 255, 255, 0.25);
+                        margin-bottom: 32px;
                     }
                 }
 
@@ -295,7 +331,7 @@ export default function ServicesSection() {
                     }
 
                     .services-video-card {
-                        height: 220px;
+                        height: 380px;
                         border-radius: 12px;
                     }
 
