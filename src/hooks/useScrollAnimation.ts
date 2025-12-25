@@ -63,14 +63,19 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     } = options;
 
     // Determine which keyframes to use - mobile or desktop
+    // Start with false to match SSR, will update after hydration
     const [isMobile, setIsMobile] = useState(false);
+    const [isHydrated, setIsHydrated] = useState(false);
 
     useEffect(() => {
-        setIsMobile(isMobileDevice());
+        const mobile = isMobileDevice();
+        setIsMobile(mobile);
+        setIsHydrated(true);
     }, []);
 
     // Use custom keyframes if provided, otherwise auto-select based on device
-    const activeKeyframes = customKeyframes || (isMobile ? mobileScrollKeyframes : scrollKeyframes);
+    // After hydration, use the correct keyframes
+    const activeKeyframes = customKeyframes || (isHydrated && isMobile ? mobileScrollKeyframes : scrollKeyframes);
 
     // Initialize with first keyframe values
     const firstKeyframe = activeKeyframes[0];
@@ -93,6 +98,14 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         setTransform(getTransformAtProgress(progress, activeKeyframes));
         setLighting(getLightingAtProgress(progress, activeKeyframes));
     }, [activeKeyframes]);
+
+    // Update transform immediately when keyframes change (e.g., mobile/desktop switch)
+    useEffect(() => {
+        if (isHydrated) {
+            // Apply the current scroll position with new keyframes
+            updateTransform(scrollProgress);
+        }
+    }, [activeKeyframes, isHydrated]);
 
     useEffect(() => {
         // Skip on server or if disabled
@@ -125,15 +138,17 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         // Debug log
         console.log('🎬 ScrollAnimation initialized', {
             isMobile,
+            isHydrated,
             keyframesCount: activeKeyframes.length,
             firstScale: activeKeyframes[0].transform.scale,
+            firstY: activeKeyframes[0].transform.position.y,
         });
 
         return () => {
             scrollTrigger.kill();
             window.removeEventListener('resize', handleResize);
         };
-    }, [enabled, scrub, trigger, start, end, updateTransform, isMobile, activeKeyframes]);
+    }, [enabled, scrub, trigger, start, end, updateTransform, isMobile, isHydrated, activeKeyframes]);
 
     return {
         /** Current interpolated transform values */

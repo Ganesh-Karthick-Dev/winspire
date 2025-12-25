@@ -171,23 +171,15 @@ export default function GLTFViewer({
         if (!stateRef.current?.model || !manualTransform) return;
 
         const model = stateRef.current.model;
-        const prev = prevManualTransform.current;
 
-        // Update Scale directly from transform (mobile scale is built into keyframes)
-        if (manualTransform.scale !== prev?.scale) {
-            model.scale.setScalar(manualTransform.scale);
-        }
+        // Update Scale directly from transform
+        model.scale.setScalar(manualTransform.scale);
 
-        // Update Position (Delta approach for smooth transitions)
-        if (prev) {
-            const dx = manualTransform.position.x - prev.position.x;
-            const dy = manualTransform.position.y - prev.position.y;
-            const dz = manualTransform.position.z - prev.position.z;
-
-            model.position.x += dx;
-            model.position.y += dy;
-            model.position.z += dz;
-        }
+        // Update Position (Absolute approach for reliable positioning)
+        // Use the keyframe position values directly
+        model.position.x = manualTransform.position.x;
+        model.position.y = manualTransform.position.y;
+        model.position.z = manualTransform.position.z;
 
         // Update ref
         prevManualTransform.current = manualTransform;

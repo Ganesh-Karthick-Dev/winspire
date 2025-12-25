@@ -211,10 +211,10 @@ async function loadGLTFwithManager(
                 // Apply Position Offset (Use Config or Defaults)
                 const { position } = transformConfig;
 
-                // On mobile, center the model
+                // On mobile, apply position with proper centering
                 if (mobileScaleFactor < 1) {
                     wrapper.position.x = 0;
-                    wrapper.position.y = position.y + 0.4;
+                    wrapper.position.y = position.y; // Use keyframe position (negative = lower)
                     wrapper.position.z = position.z;
                 } else {
                     wrapper.position.x += position.x;
@@ -328,24 +328,17 @@ export function createResizeHandler(
         renderer.setPixelRatio(getOptimalPixelRatio());
 
         // Responsive Model Positioning & Scaling
+        // Note: Position is now controlled by scroll keyframes, only scale needs adjustment
         if (model) {
             if (width < 480) {
-                // Very small mobile: 30% scale, centered, moved up
-                model.position.x = 0;
-                model.position.y = 0.5;
-                model.scale.setScalar(transformConfig.scale * 0.3);
+                // Very small mobile: 35% scale
+                model.scale.setScalar(transformConfig.scale * 0.35);
             } else if (width < 768) {
-                // Mobile: 40% scale, centered, moved up
-                model.position.x = 0;
-                model.position.y = 0.4;
+                // Mobile: 40% scale
                 model.scale.setScalar(transformConfig.scale * 0.4);
             } else {
-                // Desktop: Restore Provided settings
-                const { position, scale } = transformConfig;
-                model.position.x = position.x;
-                model.position.y = position.y;
-                model.position.z = position.z;
-                model.scale.setScalar(scale);
+                // Desktop: Restore provided scale
+                model.scale.setScalar(transformConfig.scale);
             }
         }
     };
