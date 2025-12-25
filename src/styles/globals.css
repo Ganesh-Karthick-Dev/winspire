@@ -597,6 +597,65 @@ section {
   color: #083151;
 }
 
+/* ============================================
+   Transition Zone Spacer (Hero to About)
+   ============================================ */
+
+.transition-zone-spacer {
+  position: relative;
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .transition-zone-spacer {
+    height: 4px !important;
+    min-height: 4px !important;
+    max-height: 4px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+/* ============================================
+   About Section Mobile Styles
+   ============================================ */
+
+.about-section {
+  background: transparent;
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    background: linear-gradient(135deg, #1a365d 0%, #2d3748 50%, #1a202c 100%) !important;
+    min-height: auto !important;
+    height: auto !important;
+    padding: 40px 24px 40px !important;
+    margin-top: 6rem;
+    margin-bottom: 0;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px;
+  }
+
+  /* About Us label - relative positioning on mobile */
+  .about-label-container {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    margin-bottom: 40px;
+  }
+
+  /* Headline - relative positioning on mobile */
+  .about-headline-container {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    padding: 0 !important;
+    text-align: center;
+  }
+}
+
 .hero-title {
   margin-bottom: 20px;
   perspective: 1000px;
