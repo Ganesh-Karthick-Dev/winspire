@@ -139,22 +139,6 @@
 
 @media (max-width: 768px) {
     .container {
-        bottom: 1.5rem;
-        flex-direction: column;
-        gap: 0.75rem;
-        width: 100%;
-    }
-
-    .nav {
-        max-width: 90vw;
-        overflow-x: auto;
-        justify-content: flex-start;
-        /* Hide scrollbar */
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-
-    .nav::-webkit-scrollbar {
-        display: none;
+        display: none !important;
     }
 }

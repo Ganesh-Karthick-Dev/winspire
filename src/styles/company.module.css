@@ -385,8 +385,10 @@
         margin: 0.5rem;
         width: calc(100% - 1rem);
         border-radius: 20px;
-        background: white;
-        /* Ensure white background */
+        background: rgba(255, 255, 255, 0.85);
+        /* Match desktop transparency */
+        backdrop-filter: blur(10px);
+        /* Optional: adds nice glass effect */
     }
 
     .heroContent {
