@@ -5427,3 +5427,232 @@ footer p {
     font-size: clamp(2rem, 10vw, 4rem);
   }
 }
+
+/* ============================================
+   Mobile About View (Separate Implementation)
+   ============================================ */
+.about-desktop-view {
+  display: block;
+}
+
+.about-mobile-view {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .about-desktop-view {
+    display: none !important;
+  }
+
+  .about-mobile-view {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    /* Ensure it covers the area */
+    min-height: 100vh;
+    background: linear-gradient(180deg, #dbeafe 0%, #172554 100%);
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 0;
+    overflow: hidden;
+  }
+
+  /* 1. Top White Card */
+  .about-mobile-card {
+    background: white;
+    border-radius: 24px;
+    padding: 30px 24px;
+    position: relative;
+    z-index: 5;
+    margin: 0 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    height: 55vh;
+    /* Half screen height as requested */
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .about-mobile-logo {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: #1a1a1a;
+  }
+
+  .about-mobile-menu-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 44px;
+    height: 44px;
+    background: #f1f5f9;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-mobile-menu-icon span {
+    width: 4px;
+    height: 4px;
+    background: #3b82f6;
+    border-radius: 50%;
+  }
+
+  .about-mobile-sublabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    font-family: 'Outfit', sans-serif;
+    justify-content: flex-start;
+    /* Ensure left align */
+  }
+
+  .about-mobile-sublabel-icon {
+    font-weight: 900;
+    font-size: 1rem;
+    line-height: 0;
+    padding-bottom: 4px;
+  }
+
+  .about-mobile-title {
+    font-size: 3.8rem;
+    font-weight: 700;
+    color: #2563eb;
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.1;
+    margin-bottom: 0;
+    text-align: left;
+    /* Explicit left align */
+    width: 100%;
+  }
+
+  /* Floating Blue Card - Half In / Half Out */
+  .about-mobile-float-card {
+    position: absolute;
+    height: 200px;
+    /* Taller card */
+    width: 160px;
+    bottom: -100px;
+    /* Half of height = 100px overlap */
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 40px rgba(37, 99, 235, 0.3);
+    z-index: 10;
+  }
+
+  .about-mobile-float-card span {
+    color: white;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+
+  /* Vertical Scroll Indicator - Bottom Right of White Card */
+  .about-mobile-scroll {
+    position: absolute;
+    right: 24px;
+    bottom: 30px;
+    /* Position inside white card */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .about-mobile-scroll-text {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #1a1a1a;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-weight: 700;
+  }
+
+  .about-mobile-scroll-arrow {
+    color: #1a1a1a;
+    width: 16px;
+    height: 16px;
+  }
+
+  /* 2. Bottom Content Section */
+  .about-mobile-content {
+    background: transparent;
+    padding: 140px 20px 60px;
+    /* Increased padding top for card overlap (100px overlap + 40px gap) */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .about-mobile-mission-header {
+    display: flex;
+    gap: 16px;
+  }
+
+  .about-mobile-mission-dots {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 8px;
+  }
+
+  .about-mobile-mission-dots span {
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+  }
+
+  .about-mobile-mission-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .about-mobile-mission-subtitle {
+    font-size: 0.9rem;
+    color: white;
+    opacity: 0.8;
+  }
+
+  .about-mobile-bubbles {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .about-mobile-bubble {
+    background: rgba(23, 37, 84, 0.8);
+    /* Dark Blue Bubble */
+    color: white;
+    padding: 16px 24px;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    width: fit-content;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}

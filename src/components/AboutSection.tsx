@@ -85,37 +85,103 @@ export default function AboutSection() {
                     overflow: 'hidden',
                 }}
             >
-                {/* Top Left: "About Us" Label with two-dot pattern */}
-                <div
-                    ref={labelRef}
-                    className="about-label-container"
-                >
-                    <div className="flex items-center gap-4">
-                        {/* Two dots stacked vertically */}
-                        <div className="about-label-dots">
-                            <span className="about-dot" />
-                            <span className="about-dot" />
+                {/* === DESKTOP VIEW === */}
+                <div className="about-desktop-view">
+                    {/* Top Left: "About Us" Label with two-dot pattern */}
+                    <div
+                        ref={labelRef}
+                        className="about-label-container"
+                    >
+                        <div className="flex items-center gap-4">
+                            {/* Two dots stacked vertically */}
+                            <div className="about-label-dots">
+                                <span className="about-dot" />
+                                <span className="about-dot" />
+                            </div>
+                            <h2 className="about-label-text">
+                                About Us
+                            </h2>
                         </div>
-                        <h2 className="about-label-text">
-                            About Us
-                        </h2>
+                        <span className="about-sublabel">
+                            Establish New Standards
+                        </span>
                     </div>
-                    <span className="about-sublabel">
-                        Establish New Standards
-                    </span>
+
+                    {/* Headline - Centered */}
+                    <div
+                        ref={headlineRef}
+                        className="about-headline-container"
+                    >
+                        <h3 className="about-headline-text">
+                            Rebuilding the Society
+                        </h3>
+                        <h3 className="about-headline-text mt-2">
+                            through Digital Twins
+                        </h3>
+                    </div>
                 </div>
 
-                {/* Headline - Centered */}
-                <div
-                    ref={headlineRef}
-                    className="about-headline-container"
-                >
-                    <h3 className="about-headline-text">
-                        Rebuilding the Society
-                    </h3>
-                    <h3 className="about-headline-text mt-2">
-                        through Digital Twins
-                    </h3>
+                {/* === MOBILE VIEW === */}
+                <div className="about-mobile-view">
+                    {/* White Card Section */}
+                    <div className="about-mobile-card">
+                        {/* Header Row */}
+                        <div className="about-mobile-header">
+                            <span className="about-mobile-logo">WINSPIRE</span>
+                            <div className="about-mobile-menu-icon">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </div>
+
+                        {/* Blue Label */}
+                        <div className="about-mobile-sublabel">
+                            <span className="about-mobile-sublabel-icon">:</span>
+                            <span>About Winspire</span>
+                        </div>
+
+                        {/* Big Title */}
+                        <h2 className="about-mobile-title">About Us</h2>
+
+                        {/* Floating Blue Card */}
+                        <div className="about-mobile-float-card">
+                            <span>WINSPIRE</span>
+                        </div>
+
+                        {/* Scroll Indicator (Blue Vertical) */}
+                        <div className="about-mobile-scroll">
+                            <span className="about-mobile-scroll-text">Scroll</span>
+                            <div className="about-mobile-scroll-arrow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <polyline points="19 12 12 19 5 12"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Bottom Content Section (Blue Gradient) */}
+                    <div className="about-mobile-content">
+                        {/* Mission Header */}
+                        <div className="about-mobile-mission-header">
+                            <div className="about-mobile-mission-dots">
+                                <span></span><span></span>
+                            </div>
+                            <div>
+                                <h3 className="about-mobile-mission-title">Mission</h3>
+                                <p className="about-mobile-mission-subtitle">Mission to be fulfilled</p>
+                            </div>
+                        </div>
+
+                        {/* Message Bubbles */}
+                        <div className="about-mobile-bubbles">
+                            <div className="about-mobile-bubble">
+                                Rebuilding the Society
+                            </div>
+                            <div className="about-mobile-bubble">
+                                through Digital Twins.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </>

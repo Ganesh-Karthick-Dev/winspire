@@ -373,14 +373,96 @@
 
 @media (max-width: 768px) {
     .heroSection {
-        padding: 0 1.5rem 2rem;
+        height: 60vh;
+        /* Half screen height */
+        min-height: 400px;
+        padding: 2rem 1.5rem 0 1.5rem;
+        /* Top padding, no bottom padding needed */
+        justify-content: flex-start;
+        /* Align content to top */
+        overflow: visible;
+        /* Allow card to overflow */
+        margin: 0.5rem;
+        width: calc(100% - 1rem);
+        border-radius: 20px;
+        background: white;
+        /* Ensure white background */
+    }
+
+    .heroContent {
+        align-items: flex-start !important;
+        /* Force left align */
+        text-align: left !important;
+        /* Force left align */
+        margin-top: 8rem;
+        /* Space from top */
+        width: 100%;
+        max-width: none;
+    }
+
+    .heroLabel {
+        justify-content: flex-start !important;
+        /* Force left align */
     }
 
     .heroTitle {
-        font-size: clamp(3rem, 12vw, 6rem);
+        font-size: 3.5rem;
+        line-height: 1.1;
+        margin-top: 0.5rem;
+        background: none;
+        /* Remove gradient for solid color if needed, or keep */
+        color: #2563eb;
+        /* Match blue from design */
+        -webkit-text-fill-color: #2563eb;
     }
 
+    /* Floating Blue Card - Half In / Half Out */
     .heroCard {
-        height: 250px;
+        position: absolute !important;
+        right: auto !important;
+        top: auto !important;
+        left: 50% !important;
+        bottom: -100px !important;
+        /* Overlap by 100px */
+        transform: translateX(-50%) !important;
+        /* Center horizontally */
+        width: 200px !important;
+        height: 260px !important;
+        margin: 0 !important;
+        box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+        z-index: 50;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    }
+
+    .heroCardVideo {
+        opacity: 0.9;
+        /* Blend slightly if needed */
+    }
+
+    /* Vertical Scroll Indicator */
+    .scrollIndicator {
+        position: absolute;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+        width: auto;
+    }
+
+    .scrollIndicator span:first-child {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-size: 0.7rem;
+        font-weight: 700;
+    }
+
+    .scrollIndicator span:last-child {
+        transform: none !important;
+        /* Disable bounce transform if conflict */
+        animation: none;
+        /* simplify or keep if works */
     }
 }
