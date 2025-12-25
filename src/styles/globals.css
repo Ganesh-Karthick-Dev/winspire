@@ -4784,4 +4784,175 @@ footer p {
     gap: 20px;
     text-align: center;
   }
+
+  /* End of Footer Styles */
+}
+
+/* ============================================
+   News Section Mobile Styles
+   ============================================ */
+
+/* Default Visibility (Desktop) */
+.news-desktop-view {
+  display: block;
+}
+
+.news-mobile-view {
+  display: none;
+}
+
+/* Mobile Media Query */
+@media (max-width: 768px) {
+
+  /* Override Section Container */
+  .news-section {
+    width: 100%;
+    padding: 10px 0 100px 0;
+    /* Reduced top, Added bottom (100px) */
+    margin-top: -20vh;
+    /* Pull up to cover empty space */
+    min-height: auto;
+  }
+
+  /* Toggle Views */
+  .news-desktop-view {
+    display: none !important;
+  }
+
+  .news-mobile-view {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    padding-bottom: 40px;
+  }
+
+  /* Header */
+  .news-mobile-header {
+    padding: 24px 20px 16px;
+    margin-bottom: 10px;
+  }
+
+  /* Horizontal Scroll Container */
+  .news-mobile-scroll-container {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 10px 20px 40px;
+    /* Padding for shadows */
+    scroll-snap-type: x mandatory;
+    width: 100vw;
+    /* Hide scrollbar */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .news-mobile-scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Mobile Card */
+  .news-mobile-card {
+    min-width: 280px;
+    width: 80vw;
+    /* Responsive width */
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    /* Drop shadow for the whole assembly */
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.12));
+  }
+
+  .news-mobile-image-wrapper {
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 8px;
+    /* Space for the notch visual */
+  }
+
+  .news-mobile-content {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 200px;
+    /* Consistent height */
+  }
+
+  /* The Notch (Triangle connecting card to image) */
+  .news-mobile-notch {
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid white;
+  }
+
+  /* Meta Row */
+  .news-mobile-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .news-mobile-category {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #0a1f44;
+  }
+
+  .news-mobile-date {
+    font-size: 0.85rem;
+    color: #4f9cf9;
+    font-weight: 500;
+  }
+
+  .news-mobile-arrow {
+    width: 32px;
+    height: 32px;
+    background: #e0f2fe;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0284c7;
+    margin-left: auto;
+    /* Push to right */
+  }
+
+  .news-mobile-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #0a1f44;
+    margin: 0;
+  }
+
+  /* Footer Button Area */
+  .news-mobile-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Prevents button from stretching to full width */
+    margin-top: 20px;
+    padding: 0 20px 40px;
+    width: 100%;
+  }
+
+  .news-mobile-divider {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 32px;
+  }
 }
