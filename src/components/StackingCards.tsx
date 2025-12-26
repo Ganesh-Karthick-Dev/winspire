@@ -91,6 +91,10 @@ export default function StackingCards() {
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
     useEffect(() => {
+        // Check if mobile - skip complex animations
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) return;
+
         const ctx = gsap.context(() => {
             cardsRef.current.forEach((card, index) => {
                 if (!card) return;
@@ -101,18 +105,6 @@ export default function StackingCards() {
 
                 if (!title || !starWipe || !starEnd) return;
 
-                // Query content elements - no longer animated, just visible by default
-                const intro = card.querySelector('.card-intro');
-                const headline = card.querySelector('.card-headline');
-                const listItems = card.querySelectorAll('.list-item-animate');
-                const stepCards = card.querySelectorAll('.step-card-animate');
-                const simpleListItems = card.querySelectorAll('.simple-list-item-animate');
-                const warningItems = card.querySelectorAll('.warning-item-animate');
-                const cardFooter = card.querySelector('.card-footer');
-                const warningFooter = card.querySelector('.warning-footer-animate');
-                const ctaButton = card.querySelector('.cta-button-animate');
-
-                // Create timeline for this card
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: card,
@@ -121,17 +113,14 @@ export default function StackingCards() {
                     }
                 });
 
-                // Calculate title animation
                 const titleWidth = (title as HTMLElement).offsetWidth;
                 const starWidth = 60;
                 const endPosition = titleWidth + 10;
 
-                // Set initial states for title only
                 gsap.set(starEnd, { opacity: 1, scale: 1 });
                 gsap.set(starWipe, { x: -starWidth, opacity: 0, scale: 0.9, rotation: 0 });
                 gsap.set(title, { clipPath: 'inset(0 100% 0 0)', opacity: 1 });
 
-                // Title animation sequence (KEEP THIS - DO NOT TOUCH)
                 tl.to(starWipe, {
                     opacity: 1,
                     scale: 1,
@@ -159,157 +148,185 @@ export default function StackingCards() {
 
     return (
         <section ref={containerRef} className={styles.stackingSection}>
-            <div className={styles.cardsContainer}>
-                {cards.map((card, index) => (
-                    <div
-                        key={card.id}
-                        ref={(el) => { cardsRef.current[index] = el }}
-                        className={styles.card}
-                        style={{
-                            zIndex: index + 1,
-                            transformOrigin: 'center top',
-                        }}
-                    >
-                        <div className={`${styles.cardInner} ${index % 2 === 1 ? styles.reversed : ''}`}>
-                            {/* Left Side - Content */}
-                            <div className={styles.contentSide}>
-                                {/* Icon */}
-                                <div className={styles.iconContainer}>
-                                    <card.icon className={styles.cardIcon} />
-                                </div>
 
-                                {/* Title with Animation - DO NOT TOUCH */}
-                                <div className={styles.cardHeader}>
-                                    <div className={`title-container ${styles.titleContainer}`}>
-                                        <img
-                                            src="/svg/Group.svg"
-                                            alt=""
-                                            className={`star-end ${styles.starEnd}`}
-                                        />
-                                        <img
-                                            src="/svg/Vector.svg"
-                                            alt=""
-                                            className={`star-wipe ${styles.starWipe}`}
-                                        />
-                                        <h2 className={`card-title-text ${styles.cardTitle}`}>
-                                            {card.title}
-                                        </h2>
+            {/* ===== DESKTOP VIEW ===== */}
+            <div className={styles.desktopView}>
+                <div className={styles.cardsContainer}>
+                    {cards.map((card, index) => (
+                        <div
+                            key={card.id}
+                            ref={(el) => { cardsRef.current[index] = el }}
+                            className={styles.card}
+                            style={{
+                                zIndex: index + 1,
+                                transformOrigin: 'center top',
+                            }}
+                        >
+                            <div className={`${styles.cardInner} ${index % 2 === 1 ? styles.reversed : ''}`}>
+                                {/* Left Side - Content */}
+                                <div className={styles.contentSide}>
+                                    <div className={styles.iconContainer}>
+                                        <card.icon className={styles.cardIcon} />
                                     </div>
-                                    {card.type === "warning" && card.headline && (
-                                        <p className={`card-headline ${styles.cardHeadline}`}>
-                                            {card.headline}
-                                        </p>
-                                    )}
-                                </div>
 
-                                {/* Content based on type */}
-                                <div className={styles.contentArea}>
-                                    {/* List Type */}
-                                    {card.type === "list" && (
-                                        <div>
-                                            {card.intro && (
-                                                <p className={`card-intro ${styles.intro}`}>
-                                                    {card.intro}
-                                                </p>
-                                            )}
-                                            <div className={styles.listGrid}>
-                                                {(card.items as string[]).map((item, i) => (
-                                                    <div key={i} className={`list-item-animate ${styles.listItem}`}>
-                                                        <svg className={styles.listIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        <span className={styles.listText}>{item}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
+                                    <div className={styles.cardHeader}>
+                                        <div className={`title-container ${styles.titleContainer}`}>
+                                            <img src="/svg/Group.svg" alt="" className={`star-end ${styles.starEnd}`} />
+                                            <img src="/svg/Vector.svg" alt="" className={`star-wipe ${styles.starWipe}`} />
+                                            <h2 className={`card-title-text ${styles.cardTitle}`}>{card.title}</h2>
                                         </div>
-                                    )}
+                                        {card.type === "warning" && card.headline && (
+                                            <p className={`card-headline ${styles.cardHeadline}`}>{card.headline}</p>
+                                        )}
+                                    </div>
 
-                                    {/* Steps Type */}
-                                    {card.type === "steps" && (
-                                        <div className={styles.stepsGrid}>
-                                            {(card.items as { title: string, desc: string }[]).map((item, i) => (
-                                                <div key={i} className={`step-card-animate ${styles.stepCard}`}>
-                                                    <h3 className={styles.stepTitle}>{item.title}</h3>
-                                                    <p className={styles.stepDesc}>{item.desc}</p>
+                                    <div className={styles.contentArea}>
+                                        {card.type === "list" && (
+                                            <div>
+                                                {card.intro && <p className={`card-intro ${styles.intro}`}>{card.intro}</p>}
+                                                <div className={styles.listGrid}>
+                                                    {(card.items as string[]).map((item, i) => (
+                                                        <div key={i} className={`list-item-animate ${styles.listItem}`}>
+                                                            <svg className={styles.listIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                            </svg>
+                                                            <span className={styles.listText}>{item}</span>
+                                                        </div>
+                                                    ))}
                                                 </div>
-                                            ))}
-                                        </div>
-                                    )}
+                                            </div>
+                                        )}
 
-                                    {/* Simple List Type */}
-                                    {card.type === "simple-list" && (
-                                        <div className={styles.simpleListContainer}>
-                                            {card.intro && (
-                                                <p className={`card-intro ${styles.intro}`}>{card.intro}</p>
-                                            )}
-                                            <div className={styles.simpleList}>
-                                                {(card.items as string[]).map((item, i) => (
-                                                    <div key={i} className={`simple-list-item-animate ${styles.simpleListItem}`}>
-                                                        {item}
+                                        {card.type === "steps" && (
+                                            <div className={styles.stepsGrid}>
+                                                {(card.items as { title: string, desc: string }[]).map((item, i) => (
+                                                    <div key={i} className={`step-card-animate ${styles.stepCard}`}>
+                                                        <h3 className={styles.stepTitle}>{item.title}</h3>
+                                                        <p className={styles.stepDesc}>{item.desc}</p>
                                                     </div>
                                                 ))}
                                             </div>
-                                            {card.footer && (
-                                                <p className={`card-footer ${styles.footer}`}>
-                                                    {card.footer}
-                                                </p>
-                                            )}
-                                        </div>
-                                    )}
+                                        )}
 
-                                    {/* Warning Type */}
-                                    {card.type === "warning" && (
-                                        <div className={styles.warningContainer}>
-                                            <div className={styles.warningGrid}>
-                                                {(card.items as string[]).map((item, i) => (
-                                                    <div key={i} className={`warning-item-animate ${styles.warningItem}`}>
-                                                        <svg className={styles.warningIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                                        </svg>
-                                                        <span className={styles.warningText}>{item}</span>
-                                                    </div>
-                                                ))}
+                                        {card.type === "simple-list" && (
+                                            <div className={styles.simpleListContainer}>
+                                                {card.intro && <p className={`card-intro ${styles.intro}`}>{card.intro}</p>}
+                                                <div className={styles.simpleList}>
+                                                    {(card.items as string[]).map((item, i) => (
+                                                        <div key={i} className={`simple-list-item-animate ${styles.simpleListItem}`}>{item}</div>
+                                                    ))}
+                                                </div>
+                                                {card.footer && <p className={`card-footer ${styles.footer}`}>{card.footer}</p>}
                                             </div>
-                                            {card.footer && (
-                                                <p className={`warning-footer-animate ${styles.warningFooter}`}>
-                                                    {card.footer}
-                                                </p>
-                                            )}
+                                        )}
+
+                                        {card.type === "warning" && (
+                                            <div className={styles.warningContainer}>
+                                                <div className={styles.warningGrid}>
+                                                    {(card.items as string[]).map((item, i) => (
+                                                        <div key={i} className={`warning-item-animate ${styles.warningItem}`}>
+                                                            <svg className={styles.warningIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                                            </svg>
+                                                            <span className={styles.warningText}>{item}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                                {card.footer && <p className={`warning-footer-animate ${styles.warningFooter}`}>{card.footer}</p>}
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {card.cta && (
+                                        <div className={styles.ctaContainer}>
+                                            <button className={`cta-button-animate ${styles.ctaButton}`}>
+                                                {card.cta}
+                                                <svg className={styles.ctaIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                                </svg>
+                                            </button>
                                         </div>
                                     )}
                                 </div>
 
-                                {/* CTA Button */}
-                                {card.cta && (
-                                    <div className={styles.ctaContainer}>
-                                        <button className={`cta-button-animate ${styles.ctaButton}`}>
-                                            {card.cta}
-                                            <svg className={styles.ctaIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-
-                            {/* Right Side - Full Image Panel */}
-                            <div className={styles.imageSide}>
-                                <div className={styles.glassPanel}>
-                                    <div className={styles.imagePlaceholder}>
-                                        <Image
-                                            src={card.image}
-                                            alt={card.title}
-                                            fill
-                                            style={{ objectFit: 'cover' }}
-                                        />
+                                {/* Right Side - Image */}
+                                <div className={styles.imageSide}>
+                                    <div className={styles.glassPanel}>
+                                        <div className={styles.imagePlaceholder}>
+                                            <Image src={card.image} alt={card.title} fill style={{ objectFit: 'cover' }} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
+
+            {/* ===== MOBILE VIEW ===== */}
+            <div className={styles.mobileView}>
+                <div className={styles.mobileCardsContainer}>
+                    {cards.map((card) => (
+                        <div key={card.id} className={styles.mobileCard}>
+                            {/* Mobile Image */}
+                            <div className={styles.mobileCardImage}>
+                                <Image src={card.image} alt={card.title} fill style={{ objectFit: 'cover' }} />
+                            </div>
+
+                            {/* Mobile Content */}
+                            <div className={styles.mobileCardContent}>
+                                <div className={styles.mobileIconTitle}>
+                                    <card.icon className={styles.mobileIcon} />
+                                    <h3 className={styles.mobileTitle}>{card.title}</h3>
+                                </div>
+
+                                {card.type === "warning" && card.headline && (
+                                    <p className={styles.mobileHeadline}>{card.headline}</p>
+                                )}
+
+                                {card.intro && <p className={styles.mobileIntro}>{card.intro}</p>}
+
+                                {/* List Items */}
+                                {(card.type === "list" || card.type === "simple-list" || card.type === "warning") && (
+                                    <ul className={styles.mobileList}>
+                                        {(card.items as string[]).slice(0, 5).map((item, i) => (
+                                            <li key={i} className={styles.mobileListItem}>
+                                                <span className={card.type === "warning" ? styles.mobileWarningDot : styles.mobileDot}></span>
+                                                {item}
+                                            </li>
+                                        ))}
+                                        {(card.items as string[]).length > 5 && (
+                                            <li className={styles.mobileListMore}>+{(card.items as string[]).length - 5} more...</li>
+                                        )}
+                                    </ul>
+                                )}
+
+                                {/* Steps */}
+                                {card.type === "steps" && (
+                                    <div className={styles.mobileSteps}>
+                                        {(card.items as { title: string, desc: string }[]).map((item, i) => (
+                                            <div key={i} className={styles.mobileStep}>
+                                                <span className={styles.mobileStepNumber}>{i + 1}</span>
+                                                <div>
+                                                    <h4 className={styles.mobileStepTitle}>{item.title}</h4>
+                                                    <p className={styles.mobileStepDesc}>{item.desc}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {card.footer && <p className={styles.mobileFooter}>{card.footer}</p>}
+
+                                {card.cta && (
+                                    <button className={styles.mobileCta}>{card.cta}</button>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
         </section>
     );
 }
