@@ -3,14 +3,19 @@
     position: relative;
     width: 100%;
     height: 80vh;
-    /* Restrict to viewport height */
     display: flex;
     align-items: center;
-    /* Center content vertically in viewport */
     justify-content: flex-start;
     padding-left: 5%;
-    /* Left gutter */
     overflow: hidden;
+}
+
+/* ============================================
+   DESKTOP VIEW
+   ============================================ */
+.desktopView {
+    display: block;
+    width: 100%;
 }
 
 .carouselContainer {
@@ -20,7 +25,6 @@
     position: relative;
     width: 100%;
     padding-left: 6vw;
-    /* Push Active and Next cards to the right */
 }
 
 @keyframes fadeSlideIn {
@@ -35,14 +39,13 @@
     }
 }
 
-/* Active Card Wrapper: Contains Image + Text below */
+/* Active Card Wrapper */
 .activeCardWrapper {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     flex-shrink: 0;
     width: 35vw;
-    /* Relative width */
     max-width: 500px;
     animation: fadeSlideIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -52,10 +55,8 @@
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
-    /* Square as per screenshot */
     border-radius: 24px;
     overflow: hidden;
-    /* Shadow? */
 }
 
 /* Badge inside Image */
@@ -64,7 +65,6 @@
     bottom: 1.5rem;
     left: 1.5rem;
     background: #0f172a;
-    /* Dark background */
     color: white;
     padding: 0.5rem 1.25rem;
     border-radius: 100px;
@@ -78,7 +78,7 @@
     object-fit: cover;
 }
 
-/* Active Details (Text Below) */
+/* Active Details */
 .activeDetails {
     color: white;
     position: relative;
@@ -105,12 +105,11 @@
     line-height: 1.2;
 }
 
-/* Arrow Button top-right of text area */
+/* Arrow Button */
 .arrowButton {
     position: absolute;
     right: 0;
     top: 0;
-    /* Align with name block top */
     width: 48px;
     height: 48px;
     background: white;
@@ -128,7 +127,6 @@
     width: 20px;
     height: 20px;
     transform: rotate(-45deg);
-    /* Point Top-Right */
 }
 
 .arrowButton:hover {
@@ -137,7 +135,6 @@
 
 .divider {
     display: none;
-    /* Removed based on clean screenshot look */
 }
 
 .description {
@@ -147,19 +144,15 @@
     color: rgba(255, 255, 255, 0.8);
     margin-top: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
-    /* Divider moved to description top border */
     padding-top: 1rem;
 }
 
-/* Next Button Floating between columns */
+/* Next Button */
 .nextButton {
     position: absolute;
     left: 35vw;
-    /* match width of active wrapper */
     top: 17.5vw;
-    /* 50% of 35vw roughly aligns with image center */
     transform: translate(-50%, -50%);
-    /* Center it */
     width: 80px;
     height: 80px;
     background: rgba(255, 255, 255, 0.1);
@@ -179,27 +172,22 @@
 }
 
 /* Next Cards List */
-/* Next Cards List */
 .nextCardsList {
     flex: 1;
     display: flex;
     gap: 3rem;
-    /* Increased gap */
     align-self: flex-start;
     padding-top: 6rem;
     padding-right: 20vw;
-    /* Lots of empty space at the right end */
 }
 
 .smallCard {
     width: 280px;
-    /* Fixed width */
     display: flex;
     flex-direction: column;
     gap: 1rem;
     cursor: pointer;
     opacity: 0.5;
-    /* Fade out non-active */
     transition: opacity 0.3s ease;
 }
 
@@ -239,20 +227,15 @@
     position: absolute;
     left: 0;
     top: 6rem;
-    /* Align with same top offset as next cards */
     width: 280px;
     height: auto;
     z-index: 1;
     opacity: 0.5;
     transform: translateX(-90%);
-    /* Show only 10% on the left */
     pointer-events: none;
-    /* Don't block clicks if it overlaps anything interactive (though it shouldn't) */
 }
 
-/* Make sure prevCard image behaves like smallCardImage */
 .prevCard .smallCardImage {
-    /* Reuse styles from smallCardImage but ensure it applies correctly */
     width: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 20px;
@@ -261,7 +244,14 @@
     background: rgba(255, 255, 255, 0.05);
 }
 
-/* Responsive */
+/* ============================================
+   MOBILE VIEW - Hidden on Desktop
+   ============================================ */
+.mobileView {
+    display: none;
+}
+
+/* Responsive - Tablet */
 @media (max-width: 1024px) {
     .section {
         height: auto;
@@ -287,5 +277,158 @@
         width: 100%;
         overflow-x: auto;
         padding-bottom: 2rem;
+    }
+}
+
+/* ============================================
+   MOBILE - Completely Separate Layout
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* Hide Desktop, Show Mobile */
+    .desktopView {
+        display: none !important;
+    }
+
+    .mobileView {
+        display: block !important;
+        width: 100%;
+    }
+
+    .section {
+        width: 100%;
+        height: auto;
+        padding: 40px 0 60px;
+        display: block;
+        overflow: hidden;
+    }
+
+    /* Mobile Carousel Container */
+    .mobileCarousel {
+        width: 100%;
+        overflow: hidden;
+        touch-action: pan-x;
+    }
+
+    .mobileCardsTrack {
+        display: flex;
+        width: 100%;
+    }
+
+    /* Mobile Card */
+    .mobileCard {
+        flex: 0 0 100%;
+        width: 100%;
+        padding: 0 24px;
+        box-sizing: border-box;
+    }
+
+    .mobileCardActive {
+        opacity: 1;
+    }
+
+    /* Mobile Card Image */
+    .mobileCardImage {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1.1;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .mobileBadge {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        background: #0f172a;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 100px;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        z-index: 2;
+    }
+
+    /* Mobile Card Info */
+    .mobileCardInfo {
+        color: white;
+    }
+
+    .mobileNameRow {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 16px;
+    }
+
+    .mobileRole {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0 0 4px 0;
+    }
+
+    .mobileName {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .mobileArrowBtn {
+        width: 44px;
+        height: 44px;
+        background: white;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #111827;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .mobileArrowBtn svg {
+        transform: rotate(-45deg);
+    }
+
+    .mobileDescription {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.85);
+        margin: 0;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    /* Navigation Dots */
+    .mobileDots {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 32px;
+        padding: 0 24px;
+    }
+
+    .mobileDot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0;
+    }
+
+    .mobileDotActive {
+        background: #38bdf8;
+        transform: scale(1.2);
     }
 }
