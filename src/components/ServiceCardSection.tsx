@@ -168,7 +168,7 @@ export default function ServiceCardSection() {
 
                     {/* Headline */}
                     <h3 className="service-mobile-headline">
-                        3D communication platform solving all spatial selection challenges.
+                        3D Communication Services Powered by Digital Twins
                     </h3>
 
                     {/* Circular Video/Image */}
@@ -185,9 +185,7 @@ export default function ServiceCardSection() {
 
                     {/* Description */}
                     <p className="service-mobile-description">
-                        Our platform provides digital twin-based 3D communication services.
-                        Anytime, anywhere, with anyone - enabling spatial image sharing
-                        for residential properties and beyond.
+                        Providing real-time spatial interaction and visualization services for seamless collaboration across digital and physical environments.
                     </p>
 
                     {/* Service Button Card */}
@@ -437,7 +435,7 @@ export default function ServiceCardSection() {
                                 wordSpacing: '10px',
                             }}
                         >
-                            3D communication platform solving all spatial selection challenges.
+                            3D Communication Services Powered by Digital Twins
                         </h3>
                     </div>
 
@@ -494,9 +492,7 @@ export default function ServiceCardSection() {
                                 fontWeight: 600,
                             }}
                         >
-                            Our platform provides digital twin-based 3D communication
-                            services. Anytime, with anyone - enabling spatial
-                            image sharing for residential
+                            Providing real-time spatial interaction and visualization services for seamless collaboration across digital and physical environments.
                         </p>
 
                         <div

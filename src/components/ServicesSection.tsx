@@ -90,7 +90,7 @@ export default function ServicesSection() {
                 <div className="services-left">
                     {/* Large Headline - Bigger like reference */}
                     <h2 className="services-headline">
-                        Building a globally recognized 3D communication platform for transformation.
+                        Building a globally recognized AI-driven healthcare platform for revenue cycle transformation.
                     </h2>
 
                     {/* Glossy Divider - Hidden on mobile via CSS */}
@@ -121,21 +121,26 @@ export default function ServicesSection() {
 
                     {/* Text Block 1 */}
                     <div ref={para1Ref} className="services-text-block">
-                        <span className="fade-line" style={{ display: 'block' }}>Our platform empowers businesses to</span>
-                        <span className="fade-line" style={{ display: 'block' }}>transform their digital presence through</span>
-                        <span className="fade-line" style={{ display: 'block' }}>cutting-edge 3D visualization technology.</span>
-                        <span className="fade-line" style={{ display: 'block' }}>We bridge the gap between imagination</span>
-                        <span className="fade-line" style={{ display: 'block' }}>and reality, creating immersive experiences</span>
-                        <span className="fade-line" style={{ display: 'block' }}>that captivate audiences and drive results.</span>
+                        <span className="fade-line" style={{ display: 'block' }}>Digital twins create intelligent virtual</span>
+                        <span className="fade-line" style={{ display: 'block' }}>replicas of physical systems, infrastructure,</span>
+                        <span className="fade-line" style={{ display: 'block' }}>and environments, enabling organizations</span>
+                        <span className="fade-line" style={{ display: 'block' }}>to understand, monitor, and manage</span>
+                        <span className="fade-line" style={{ display: 'block' }}>real-world operations digitally.</span>
+                        <span className="fade-line" style={{ display: 'block' }}>At our core, we design these systems</span>
+                        <span className="fade-line" style={{ display: 'block' }}>to give businesses complete visibility</span>
+                        <span className="fade-line" style={{ display: 'block' }}>and control over complex environments.</span>
                     </div>
 
                     {/* Text Block 2 */}
                     <div ref={para2Ref} className="services-text-block">
-                        <span className="fade-line" style={{ display: 'block' }}>For enterprises seeking operational</span>
-                        <span className="fade-line" style={{ display: 'block' }}>efficiency and automation, and for</span>
-                        <span className="fade-line" style={{ display: 'block' }}>individuals looking for intuitive solutions,</span>
-                        <span className="fade-line" style={{ display: 'block' }}>we develop services using cutting-edge</span>
-                        <span className="fade-line" style={{ display: 'block' }}>technology to realize both without compromise.</span>
+                        <span className="fade-line" style={{ display: 'block' }}>Powered by artificial intelligence and</span>
+                        <span className="fade-line" style={{ display: 'block' }}>real-time data, our digital twin technology</span>
+                        <span className="fade-line" style={{ display: 'block' }}>supports smarter planning, accurate</span>
+                        <span className="fade-line" style={{ display: 'block' }}>simulation, and continuous optimization.</span>
+                        <span className="fade-line" style={{ display: 'block' }}>This approach helps organizations reduce</span>
+                        <span className="fade-line" style={{ display: 'block' }}>risk, improve efficiency, and build</span>
+                        <span className="fade-line" style={{ display: 'block' }}>sustainable, resilient systems</span>
+                        <span className="fade-line" style={{ display: 'block' }}>that perform at scale.</span>
                     </div>
 
                     {/* Mobile Bottom CTA - Divider + Button */}
