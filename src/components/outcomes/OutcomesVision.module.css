@@ -1,0 +1,152 @@
+/* ============================================
+   DESKTOP VIEW - Visible by default
+   ============================================ */
+.desktopView {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================
+   MOBILE VIEW - Hidden by default
+   ============================================ */
+.mobileView {
+    display: none;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE - Show Mobile, Hide Desktop
+   ============================================ */
+@media (max-width: 768px) {
+    .desktopView {
+        display: none !important;
+    }
+
+    .mobileView {
+        display: block !important;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Mobile Container */
+    .mobileContainer {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Mobile Header */
+    .mobileHeader {
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        width: 90%;
+        text-align: center;
+    }
+
+    .mobileTitle {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1.3;
+        color: white;
+        margin: 0;
+    }
+
+    /* Mobile Image Container */
+    .mobileImageContainer {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 70vw;
+        height: 40vh;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+    }
+
+    .mobileImage {
+        object-fit: cover;
+    }
+
+    .mobileImageOverlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    /* Mobile Changing Text - Centered */
+    .mobileTextContainer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 30;
+        text-align: center;
+        color: white;
+        mix-blend-mode: difference;
+    }
+
+    .mobileChangingText {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .mobileWordWrapper {
+        position: relative;
+        display: block;
+        min-height: 2.5rem;
+        width: 100%;
+    }
+
+    .mobileWord {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        font-family: 'Outfit', sans-serif;
+        white-space: nowrap;
+    }
+
+    .mobileWordVisible {
+        opacity: 1;
+    }
+
+    /* Mobile Final Text */
+    .mobileFinalText {
+        position: absolute;
+        z-index: 30;
+        text-align: center;
+        color: white;
+        opacity: 0;
+        padding: 0 24px;
+        max-width: 100%;
+    }
+
+    .mobileFinalText h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin: 0 0 0.75rem 0;
+        line-height: 1.2;
+    }
+
+    .mobileFinalText p {
+        font-size: 0.95rem;
+        font-weight: 300;
+        color: #93c5fd;
+        margin: 0;
+    }
+}
