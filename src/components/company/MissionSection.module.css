@@ -98,7 +98,9 @@
 
 @media (max-width: 768px) {
     .missionSection {
-        padding: 4rem 2rem;
+        padding: 1rem;
+        margin-top: 0;
+        min-height: auto;
     }
 
     .missionLabel {
