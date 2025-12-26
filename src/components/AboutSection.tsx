@@ -85,103 +85,105 @@ export default function AboutSection() {
                     overflow: 'hidden',
                 }}
             >
-                {/* === DESKTOP VIEW === */}
-                <div className="about-desktop-view">
-                    {/* Top Left: "About Us" Label with two-dot pattern */}
-                    <div
-                        ref={labelRef}
-                        className="about-label-container"
-                    >
-                        <div className="flex items-center gap-4">
-                            {/* Two dots stacked vertically */}
-                            <div className="about-label-dots">
-                                <span className="about-dot" />
-                                <span className="about-dot" />
-                            </div>
-                            <h2 className="about-label-text">
-                                About Us
-                            </h2>
+                {/* Top Left: "About Us" Label with two-dot pattern */}
+                <div
+                    ref={labelRef}
+                    style={{
+                        position: 'absolute',
+                        top: '80px',
+                        left: '88px',
+                    }}
+                    className="about-label-container"
+                >
+                    <div className="flex items-center gap-4">
+                        {/* Two dots stacked vertically */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                            <span
+                                style={{
+                                    width: '8px',
+                                    height: '5px',
+                                    backgroundColor: '#38bdf8',
+                                    borderRadius: '50%',
+                                }}
+                            />
+                            <span
+                                style={{
+                                    width: '8px',
+                                    height: '5px',
+                                    backgroundColor: '#38bdf8',
+                                    borderRadius: '50%',
+                                }}
+                            />
                         </div>
-                        <span className="about-sublabel">
-                            Establish New Standards
-                        </span>
+                        <h2
+                            style={{
+                                color: 'white',
+                                fontSize: '1.95rem',
+                                fontWeight: 700,
+                                letterSpacing: '0.05em',
+                                fontFamily: 'Outfit, sans-serif',
+                                margin: 0,
+                            }}
+                        >
+                            About Us
+                        </h2>
                     </div>
-
-                    {/* Headline - Centered */}
-                    <div
-                        ref={headlineRef}
-                        className="about-headline-container"
+                    <span
+                        style={{
+                            color: 'rgba(255,255,255,0.5)',
+                            fontSize: '0.75rem',
+                            fontFamily: 'Outfit, sans-serif',
+                            letterSpacing: '0.1em',
+                            marginLeft: '24px',
+                            display: 'block',
+                            marginTop: '4px',
+                        }}
                     >
-                        <h3 className="about-headline-text">
-                            Rebuilding the Society
-                        </h3>
-                        <h3 className="about-headline-text mt-2">
-                            through Digital Twins
-                        </h3>
-                    </div>
+                        Establish New Standards
+                    </span>
                 </div>
 
-                {/* === MOBILE VIEW === */}
-                <div className="about-mobile-view">
-                    {/* White Card Section */}
-                    <div className="about-mobile-card">
-                        {/* Header Row */}
-                        <div className="about-mobile-header">
-                            <span className="about-mobile-logo">WINSPIRE</span>
-                            <div className="about-mobile-menu-icon">
-                                <span></span><span></span><span></span>
-                            </div>
-                        </div>
-
-                        {/* Blue Label */}
-                        <div className="about-mobile-sublabel">
-                            <span className="about-mobile-sublabel-icon">:</span>
-                            <span>About Winspire</span>
-                        </div>
-
-                        {/* Big Title */}
-                        <h2 className="about-mobile-title">About Us</h2>
-
-                        {/* Floating Blue Card */}
-                        <div className="about-mobile-float-card">
-                            <span>WINSPIRE</span>
-                        </div>
-
-                        {/* Scroll Indicator (Blue Vertical) */}
-                        <div className="about-mobile-scroll">
-                            <span className="about-mobile-scroll-text">Scroll</span>
-                            <div className="about-mobile-scroll-arrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <polyline points="19 12 12 19 5 12"></polyline>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Bottom Content Section (Blue Gradient) */}
-                    <div className="about-mobile-content">
-                        {/* Mission Header */}
-                        <div className="about-mobile-mission-header">
-                            <div className="about-mobile-mission-dots">
-                                <span></span><span></span>
-                            </div>
-                            <div>
-                                <h3 className="about-mobile-mission-title">Mission</h3>
-                                <p className="about-mobile-mission-subtitle">Mission to be fulfilled</p>
-                            </div>
-                        </div>
-
-                        {/* Message Bubbles */}
-                        <div className="about-mobile-bubbles">
-                            <div className="about-mobile-bubble">
-                                Rebuilding the Society
-                            </div>
-                            <div className="about-mobile-bubble">
-                                through Digital Twins.
-                            </div>
-                        </div>
-                    </div>
+                {/* Headline - Centered */}
+                <div
+                    ref={headlineRef}
+                    style={{
+                        position: 'absolute',
+                        top: '45%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        textAlign: 'center',
+                        width: '100%',
+                        padding: '0 24px',
+                    }}
+                    className="about-headline-container"
+                >
+                    <h3
+                        style={{
+                            color: 'white',
+                            fontSize: 'clamp(2.5rem, 12vw, 7rem)',
+                            fontWeight: 700,
+                            lineHeight: 1.1,
+                            fontFamily: 'Outfit, sans-serif',
+                            letterSpacing: '-0.02em',
+                            margin: 0,
+                        }}
+                    >
+                        Rebuilding the Society
+                    </h3>
+                    <h3
+                        style={{
+                            color: 'white',
+                            fontSize: 'clamp(2.5rem, 12vw, 7rem)',
+                            fontWeight: 700,
+                            lineHeight: 1.1,
+                            fontFamily: 'Outfit, sans-serif',
+                            letterSpacing: '-0.02em',
+                            margin: 0,
+                            marginTop: '0.1em',
+                        }}
+                    >
+                        through Digital Twins
+                    </h3>
                 </div>
             </section>
         </>
