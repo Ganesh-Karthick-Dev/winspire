@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, TouchEvent } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { HiCog, HiCurrencyDollar, HiShieldCheck, HiCode, HiChartBar } from 'react-icons/hi';
@@ -98,7 +98,36 @@ export default function OutcomesCarousel() {
     const imageCardsRef = useRef<(HTMLDivElement | null)[]>([]);
     const [currentSlide, setCurrentSlide] = useState(0);
 
-    // Setup scroll animations
+    // Mobile touch swipe
+    const [touchStart, setTouchStart] = useState<number | null>(null);
+    const [touchEnd, setTouchEnd] = useState<number | null>(null);
+    const minSwipeDistance = 50;
+
+    const handleMobileNext = () => {
+        setCurrentSlide((prev) => Math.min(prev + 1, slides.length - 1));
+    };
+
+    const handleMobilePrev = () => {
+        setCurrentSlide((prev) => Math.max(prev - 1, 0));
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+        setTouchEnd(e.targetTouches[0].clientX);
+    };
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        const distance = touchStart - touchEnd;
+        if (distance > minSwipeDistance) handleMobileNext();
+        if (distance < -minSwipeDistance) handleMobilePrev();
+    };
+
+    // Setup scroll animations (Desktop only)
     useEffect(() => {
         const section = sectionRef.current;
         const slideElements = slidesRef.current;
@@ -108,13 +137,16 @@ export default function OutcomesCarousel() {
 
         if (!section) return;
 
+        // Check if mobile - skip GSAP scroll animation on mobile
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) return;
+
         const ctx = gsap.context(() => {
-            // Main timeline with pinning
             gsap.timeline({
                 scrollTrigger: {
                     trigger: section,
                     start: 'top top',
-                    end: '+=500%', // 5 slides worth of scroll
+                    end: '+=500%',
                     pin: true,
                     scrub: 1,
                     anticipatePin: 1,
@@ -125,10 +157,8 @@ export default function OutcomesCarousel() {
                         const activeSlide = Math.min(Math.floor(slideProgress), totalSlides - 1);
                         const withinSlideProgress = slideProgress - activeSlide;
 
-                        // Update current slide state for image switching
                         setCurrentSlide(activeSlide);
 
-                        // Update slides visibility
                         slideElements.forEach((slide, index) => {
                             if (!slide) return;
                             if (index === activeSlide) {
@@ -138,7 +168,6 @@ export default function OutcomesCarousel() {
                             }
                         });
 
-                        // Update image cards visibility
                         imageCards.forEach((card, index) => {
                             if (!card) return;
                             if (index === activeSlide) {
@@ -148,7 +177,6 @@ export default function OutcomesCarousel() {
                             }
                         });
 
-                        // Update progress bar fills
                         progressFills.forEach((fill, index) => {
                             if (!fill) return;
                             if (index < activeSlide) {
@@ -160,7 +188,6 @@ export default function OutcomesCarousel() {
                             }
                         });
 
-                        // Update icon buttons
                         iconButtons.forEach((button, index) => {
                             if (!button) return;
                             button.classList.remove(styles.active, styles.completed);
@@ -174,100 +201,155 @@ export default function OutcomesCarousel() {
                 },
             });
 
-            // Ensure first slide is visible initially
-            if (slideElements[0]) {
-                slideElements[0].classList.add(styles.active);
-            }
-            if (imageCards[0]) {
-                imageCards[0].classList.add(styles.active);
-            }
-            if (iconButtons[0]) {
-                iconButtons[0].classList.add(styles.active);
-            }
+            if (slideElements[0]) slideElements[0].classList.add(styles.active);
+            if (imageCards[0]) imageCards[0].classList.add(styles.active);
+            if (iconButtons[0]) iconButtons[0].classList.add(styles.active);
 
         }, sectionRef);
 
         return () => ctx.revert();
     }, []);
 
+    const currentSlideData = slides[currentSlide];
+
     return (
         <section id="outcomes-carousel" ref={sectionRef} className={styles.section}>
-            <div className={styles.container}>
-                {/* Left Content Area */}
-                <div className={styles.contentArea}>
-                    <div className={styles.slidesWrapper}>
-                        {slides.map((slide, index) => (
-                            <div
-                                key={slide.id}
-                                ref={(el) => { slidesRef.current[index] = el; }}
-                                className={styles.slide}
-                            >
-                                <h2 className={styles.slideTitle}>
-                                    {slide.title} <span>{slide.titleHighlight}</span>
-                                </h2>
-                                <p className={styles.slideDescription}>
-                                    {slide.description}
-                                </p>
-                                <p className={styles.resultsHeading}>
-                                    {slide.resultsHeading}
-                                </p>
-                                <ul className={styles.bulletList}>
-                                    {slide.bullets.map((bullet, bulletIndex) => (
-                                        <li key={bulletIndex} className={styles.bulletItem}>
-                                            {bullet}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
+
+            {/* ===== DESKTOP VIEW ===== */}
+            <div className={styles.desktopView}>
+                <div className={styles.container}>
+                    {/* Left Content Area */}
+                    <div className={styles.contentArea}>
+                        <div className={styles.slidesWrapper}>
+                            {slides.map((slide, index) => (
+                                <div
+                                    key={slide.id}
+                                    ref={(el) => { slidesRef.current[index] = el; }}
+                                    className={styles.slide}
+                                >
+                                    <h2 className={styles.slideTitle}>
+                                        {slide.title} <span>{slide.titleHighlight}</span>
+                                    </h2>
+                                    <p className={styles.slideDescription}>
+                                        {slide.description}
+                                    </p>
+                                    <p className={styles.resultsHeading}>
+                                        {slide.resultsHeading}
+                                    </p>
+                                    <ul className={styles.bulletList}>
+                                        {slide.bullets.map((bullet, bulletIndex) => (
+                                            <li key={bulletIndex} className={styles.bulletItem}>
+                                                {bullet}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Right Image Area */}
+                    <div className={styles.modelArea}>
+                        <div className={styles.modelContainer}>
+                            {slides.map((slide, index) => (
+                                <div
+                                    key={slide.id}
+                                    ref={(el) => { imageCardsRef.current[index] = el; }}
+                                    className={styles.imageCard}
+                                >
+                                    <img
+                                        src={slide.image}
+                                        alt={`${slide.title} ${slide.titleHighlight}`}
+                                        className={styles.cardImage}
+                                    />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
-                {/* Right Image Area - Vertical Photo Cards */}
-                <div className={styles.modelArea}>
-                    <div className={styles.modelContainer}>
-                        {slides.map((slide, index) => (
-                            <div
-                                key={slide.id}
-                                ref={(el) => { imageCardsRef.current[index] = el; }}
-                                className={styles.imageCard}
-                            >
-                                <img
-                                    src={slide.image}
-                                    alt={`${slide.title} ${slide.titleHighlight}`}
-                                    className={styles.cardImage}
-                                />
-                            </div>
-                        ))}
+                {/* Progress Bar */}
+                <div className={styles.progressSection}>
+                    <div className={styles.progressBar}>
+                        {slides.map((slide, index) => {
+                            const IconComponent = slide.icon;
+                            return (
+                                <div key={slide.id} className={styles.progressSegment}>
+                                    <button
+                                        ref={(el) => { iconButtonsRef.current[index] = el; }}
+                                        className={styles.iconButton}
+                                        aria-label={`${slide.title} ${slide.titleHighlight}`}
+                                    >
+                                        <IconComponent />
+                                    </button>
+                                    <div className={styles.progressLine}>
+                                        <div
+                                            ref={(el) => { progressFillsRef.current[index] = el; }}
+                                            className={styles.progressFill}
+                                        />
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
 
-            {/* Progress Bar */}
-            <div className={styles.progressSection}>
-                <div className={styles.progressBar}>
+            {/* ===== MOBILE VIEW ===== */}
+            <div
+                className={styles.mobileView}
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+            >
+                {/* Mobile Image */}
+                <div className={styles.mobileImageSection}>
+                    <img
+                        src={currentSlideData.image}
+                        alt={`${currentSlideData.title} ${currentSlideData.titleHighlight}`}
+                        className={styles.mobileImage}
+                    />
+                    <div className={styles.mobileImageOverlay} />
+                </div>
+
+                {/* Mobile Content */}
+                <div className={styles.mobileContent}>
+                    <h2 className={styles.mobileTitle}>
+                        {currentSlideData.title} <span>{currentSlideData.titleHighlight}</span>
+                    </h2>
+                    <p className={styles.mobileDescription}>
+                        {currentSlideData.description}
+                    </p>
+                    <p className={styles.mobileResultsHeading}>
+                        {currentSlideData.resultsHeading}
+                    </p>
+                    <ul className={styles.mobileBulletList}>
+                        {currentSlideData.bullets.map((bullet, index) => (
+                            <li key={index} className={styles.mobileBulletItem}>
+                                {bullet}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Mobile Progress Dots */}
+                <div className={styles.mobileProgress}>
                     {slides.map((slide, index) => {
                         const IconComponent = slide.icon;
                         return (
-                            <div key={slide.id} className={styles.progressSegment}>
-                                <button
-                                    ref={(el) => { iconButtonsRef.current[index] = el; }}
-                                    className={styles.iconButton}
-                                    aria-label={`${slide.title} ${slide.titleHighlight}`}
-                                >
-                                    <IconComponent />
-                                </button>
-                                <div className={styles.progressLine}>
-                                    <div
-                                        ref={(el) => { progressFillsRef.current[index] = el; }}
-                                        className={styles.progressFill}
-                                    />
-                                </div>
-                            </div>
+                            <button
+                                key={slide.id}
+                                className={`${styles.mobileProgressDot} ${index === currentSlide ? styles.mobileProgressDotActive : ''} ${index < currentSlide ? styles.mobileProgressDotCompleted : ''}`}
+                                onClick={() => setCurrentSlide(index)}
+                                aria-label={`Go to slide ${index + 1}`}
+                            >
+                                <IconComponent />
+                            </button>
                         );
                     })}
                 </div>
             </div>
+
         </section>
     );
 }
