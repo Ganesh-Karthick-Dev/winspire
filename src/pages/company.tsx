@@ -194,10 +194,10 @@ With Technology.`}
                 <VisionSection
                     label="Vision"
                     subtitle="Our future outlook"
-                    statementLines={['Revolutionizing healthcare', 'Through AI-powered solutions.']}
+                    statementLines={['Bridging Healthcare With', 'Intelligent Technology']}
                     descriptions={[
-                        'By leveraging advanced AI and machine learning, we enable healthcare providers to optimize their revenue cycles with unprecedented accuracy and efficiency. Our solutions adapt to the evolving landscape of healthcare, ensuring our clients stay ahead.',
-                        "At the same time, we are building a comprehensive platform that connects, analyzes, and transforms healthcare financial data into actionable insights for better decision-making.",
+                        'Our vision is to create a future where healthcare operations are intelligent, connected, and continuously optimized through AI-driven systems. By bridging real-world processes with digital intelligence, we aim to transform how healthcare organizations understand, manage, and improve their financial performance.',
+                        "We envision a unified platform that acts as a digital twin of the healthcare revenue ecosystem, connecting data, workflows, and insights in real time. This approach enables proactive decision-making, adaptive operations, and sustainable growth, helping healthcare providers stay resilient in an ever-evolving industry.",
                     ]}
                 />
             </div>

@@ -36,7 +36,7 @@ const ValuesSection: React.FC = () => {
                         </h3>
                         <div className={styles.divider}></div>
                         <p className={styles.cardDesc}>
-                            Create new value that does not yet exist in the world
+                            We constantly explore new ideas, technologies, and approaches to solve complex healthcare challenges. Innovation drives how we improve efficiency, accuracy, and long-term value for our clients.
                         </p>
                     </div>
                 </div>
@@ -68,7 +68,7 @@ const ValuesSection: React.FC = () => {
                         </h3>
                         <div className={styles.divider}></div>
                         <p className={styles.cardDesc}>
-                            Let's maximize our team's strength and take on the challenge of achieving big goals.
+                            We believe strong collaboration creates meaningful outcomes. By working as one team—with our clients and within our organization—we combine expertise, accountability, and shared purpose to achieve ambitious goals.
                         </p>
                     </div>
                 </div>
@@ -93,7 +93,7 @@ const ValuesSection: React.FC = () => {
                         </h3>
                         <div className={styles.divider}></div>
                         <p className={styles.cardDesc}>
-                            Be open and honest and uphold fairness
+                           Integrity and transparency guide every decision we make. We act honestly, respect ethical standards, and build trust through fairness, responsibility, and clear communication.
                         </p>
                     </div>
                 </div>

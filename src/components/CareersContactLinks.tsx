@@ -51,7 +51,7 @@ const CareersContactLinks: React.FC = () => {
                 {/* DESKTOP VIEW */}
                 <div className="links-desktop-view">
                     <h2 className="links-main-title text-gradient-shimmer" style={{ paddingLeft: '16px', textAlign: 'left', width: '100%', alignSelf: 'flex-start', display: 'block', marginBlock: '100px' }}>Step Into What’s Next
-</h2>
+                    </h2>
 
                     <div
                         className="links-grid"
@@ -175,7 +175,7 @@ const CareersContactLinks: React.FC = () => {
                 <div className="links-mobile-view">
                     <div className="links-mobile-header">
                         <div className="links-header-line"></div>
-                        <h2 className="links-mobile-title text-gradient-shimmer">Open The Door<br />to The New World.</h2>
+                        <h2 className="links-mobile-title text-gradient-shimmer">Step Into What’s Next</h2>
                     </div>
 
                     <div className="links-mobile-cards">
