@@ -50,7 +50,8 @@ const CareersContactLinks: React.FC = () => {
             <div className="links-container" style={{ width: '100%', maxWidth: '100%', padding: '0 16px' }}>
                 {/* DESKTOP VIEW */}
                 <div className="links-desktop-view">
-                    <h2 className="links-main-title text-gradient-shimmer" style={{ paddingLeft: '16px', textAlign: 'left', width: '100%', alignSelf: 'flex-start', display: 'block', marginBlock: '100px' }}>Open The Door to The New World.</h2>
+                    <h2 className="links-main-title text-gradient-shimmer" style={{ paddingLeft: '16px', textAlign: 'left', width: '100%', alignSelf: 'flex-start', display: 'block', marginBlock: '100px' }}>Step Into What’s Next
+</h2>
 
                     <div
                         className="links-grid"

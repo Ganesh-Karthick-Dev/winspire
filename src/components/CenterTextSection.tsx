@@ -19,6 +19,7 @@ export default function CenterTextSection() {
                 height: isMobile ? 'auto' : '100vh',
                 minHeight: isMobile ? '50vh' : '100vh',
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 background: 'transparent',
@@ -37,10 +38,20 @@ export default function CenterTextSection() {
                     maxWidth: '1200px',
                 }}
             >
-                An Environment That Creates
-                <br />
-                A New World
+                Where Intelligence Shapes What’s Possible
             </h2>
+            <p
+                style={{
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    fontSize: isMobile ? '1.1rem' : '1.5rem',
+                    fontFamily: 'Outfit, sans-serif',
+                    textAlign: 'center',
+                    marginTop: '24px',
+                    fontWeight: 400,
+                }}
+            >
+                The Future, Built Intelligently
+            </p>
         </section>
     );
 }
