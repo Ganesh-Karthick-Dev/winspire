@@ -143,17 +143,17 @@ export default function AboutSection() {
                     </span>
                 </div>
 
-                {/* Headline - Centered */}
+                {/* Headline - Centered Desktop, Left Mobile */}
                 <div
                     ref={headlineRef}
                     style={{
                         position: 'absolute',
-                        top: '45%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        textAlign: 'center',
+                        top: '50%',
+                        left: isMobile ? '0' : '50%',
+                        transform: isMobile ? 'translate(0, -50%)' : 'translate(-50%, -50%)',
+                        textAlign: isMobile ? 'left' : 'center',
                         width: '100%',
-                        padding: '0 24px',
+                        padding: isMobile ? '0 24px' : '0 24px',
                     }}
                     className="about-headline-container"
                 >
@@ -168,7 +168,7 @@ export default function AboutSection() {
                             margin: 0,
                         }}
                     >
-                        Rebuilding the Society
+                        Intelligent Digital Twins for
                     </h3>
                     <h3
                         style={{
@@ -182,8 +182,21 @@ export default function AboutSection() {
                             marginTop: '0.1em',
                         }}
                     >
-                        through Digital Twins
+                        Real-World Impact
                     </h3>
+                    <p
+                        style={{
+                            color: 'rgba(255, 255, 255, 0.8)',
+                            fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+                            fontFamily: 'Outfit, sans-serif',
+                            fontWeight: 400,
+                            lineHeight: 1.6,
+                            maxWidth: '800px',
+                            margin: '2.5rem auto 0',
+                        }}
+                    >
+                        We create AI-driven digital twin solutions that mirror real-world systems, enabling data-led planning, predictive insights, and scalable transformation across society.
+                    </p>
                 </div>
             </section>
         </>

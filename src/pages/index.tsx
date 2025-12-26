@@ -109,9 +109,9 @@ export default function Home() {
 
     // === Mission Text Cycling ===
     const missionMessages = [
-        "Revolutionizing Revenue Cycle with AI-Driven Precision.",
-        "Empowering Healthcare with Intelligent Automation.",
-        "Transforming Operations with Data-Driven Excellence."
+        "Healthcare revenue cycle management AI",
+        "Intelligent healthcare revenue cycle management",
+        "Smarter revenue cycles for healthcare"
     ];
     const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
     const [missionFade, setMissionFade] = useState(true);
