@@ -15,7 +15,7 @@ const GroupsSection: React.FC = () => {
                             <span className={styles.dot}></span>
                             <span className={styles.dot}></span>
                         </div>
-                        <h2 className={styles.title}>Jtheb Catandgtheriands</h2>
+                        <h2 className={styles.title}>Job Categories</h2>
                     </div>
                     <div className={styles.subtitle}>Job Openings</div>
                 </div>
@@ -56,6 +56,13 @@ const GroupsSection: React.FC = () => {
                         <span className={styles.tag}>Platform Engineer</span>
                         <span className={styles.tag}>UI/Engineer</span>
                     </div>
+                    {/* Mobile Entry Button */}
+                    <button className={styles.entryButtonMobile}>
+                        Entry
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </button>
                 </div>
 
                 {/* Card 2: Marketing Group */}
@@ -84,6 +91,13 @@ const GroupsSection: React.FC = () => {
                         <span className={styles.tag}>Customer Success (Member)</span>
                         <span className={styles.tag}>Sales Assistant</span>
                     </div>
+                    {/* Mobile Entry Button */}
+                    <button className={styles.entryButtonMobile}>
+                        Entry
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </button>
                 </div>
 
                 {/* Card 3: Modeling Group */}
@@ -113,6 +127,13 @@ const GroupsSection: React.FC = () => {
                         <span className={styles.tag}>Technical Artist</span>
                         <span className={styles.tag}>VR Interior Coordinator</span>
                     </div>
+                    {/* Mobile Entry Button */}
+                    <button className={styles.entryButtonMobile}>
+                        Entry
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </button>
                 </div>
 
                 {/* Card 4: Administration Group */}
@@ -140,6 +161,13 @@ const GroupsSection: React.FC = () => {
                         <span className={styles.tag}>Legal Affairs</span>
                         <span className={styles.tag}>Backoffice IT Architect</span>
                     </div>
+                    {/* Mobile Entry Button */}
+                    <button className={styles.entryButtonMobile}>
+                        Entry
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                    </button>
                 </div>
 
                 {/* Row 3: Full Width Card */}
