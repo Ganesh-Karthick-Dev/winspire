@@ -7,6 +7,13 @@
     color: white;
 }
 
+/* ============================================
+   DESKTOP VIEW
+   ============================================ */
+.desktopView {
+    display: block;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -32,14 +39,12 @@
     flex-direction: column;
     gap: 6px;
     padding-top: 10px;
-    /* Align with top of title */
 }
 
 .dot {
     width: 8px;
     height: 5px;
     background-color: #689FDD;
-    /* Light blue accent */
     border-radius: 50%;
 }
 
@@ -64,10 +69,9 @@
     margin: 0.5rem 0 0;
 }
 
-/* View All Button (Matches GroupsSection) */
+/* View All Button */
 .viewAllBtn {
     background: linear-gradient(135deg, #1f4287 0%, #2a5298 100%);
-    /* Dark Blue Gradient matching GroupsSection */
     color: white;
     border: none;
     border-radius: 50px;
@@ -101,29 +105,25 @@
     font-size: 1.2rem;
     font-weight: 700;
     transition: all 0.4s ease;
-    /* Removed rotate(-45deg) so it points Right (3 o'clock) */
 }
 
 .viewAllBtn:hover .arrowIcon {
     background: rgba(255, 255, 255, 0.3);
-    /* Removed hover rotation */
 }
 
 /* Rows Layout */
 .contentRow {
     display: grid;
     grid-template-columns: 200px 1fr;
-    /* Label fixed width, Content fluid */
     gap: 2rem;
     align-items: flex-start;
+    position: relative;
+    padding-top: 2rem;
+    border-top: 3px solid rgba(255, 255, 255, 0.2);
 }
 
 .rowLabel {
     padding-top: 1rem;
-    border-top: 2px solid rgba(255, 255, 255, 0.3);
-    /* Top border for label? Screenshot shows line above label maybe? */
-    /* Actually reference shows line spanning full width, and label is below it */
-    /* Let's adjust: contentRow structure */
     border-top: none;
     position: relative;
 }
@@ -132,14 +132,6 @@
     font-family: 'Outfit', sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
-}
-
-/* Specific Divider for whole row? */
-/* Screenshot shows a long line above 'Pickup' and above 'Recent'. */
-.contentRow {
-    position: relative;
-    padding-top: 2rem;
-    border-top: 3px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Grid for Cards */
@@ -169,7 +161,6 @@
     overflow: hidden;
     position: relative;
     background-color: #333;
-    /* Fallback */
 }
 
 .placeholderImg {
@@ -227,7 +218,14 @@
     opacity: 0.8;
 }
 
-/* Responsive */
+/* ============================================
+   MOBILE VIEW - Hidden on Desktop
+   ============================================ */
+.mobileView {
+    display: none;
+}
+
+/* Responsive - Tablet */
 @media (max-width: 1024px) {
     .section {
         width: 95%;
@@ -246,16 +244,185 @@
 
     .contentRow {
         grid-template-columns: 1fr;
-        /* Stack label and cards */
         gap: 1rem;
     }
 
     .cardsGrid {
         grid-template-columns: 1fr;
-        /* 1 card per row on mobile, or 2? */
     }
 
     .rowLabel {
         padding-top: 1rem;
+    }
+}
+
+/* ============================================
+   MOBILE - Completely Separate Layout
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* Hide Desktop, Show Mobile */
+    .desktopView {
+        display: none !important;
+    }
+
+    .mobileView {
+        display: flex !important;
+        flex-direction: column;
+        gap: 32px;
+        width: 100%;
+    }
+
+    .section {
+        width: 100%;
+        margin: 60px 0;
+        padding: 0;
+    }
+
+    /* Mobile Header */
+    .mobileHeader {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 0 24px;
+    }
+
+    .mobileDots {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding-top: 8px;
+    }
+
+    .mobileDots span {
+        width: 6px;
+        height: 6px;
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+    }
+
+    .mobileTitleBlock {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .mobileTitle {
+        font-family: 'Outfit', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin: 0;
+        line-height: 1.1;
+    }
+
+    .mobileSubtitle {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0;
+    }
+
+    /* Mobile Section */
+    .mobileSection {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .mobileSectionLabel {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding: 16px 24px 0;
+        border-top: 2px solid rgba(255, 255, 255, 0.15);
+    }
+
+    /* Mobile Horizontal Scroll Container */
+    .mobileScrollContainer {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .mobileScrollContainer::-webkit-scrollbar {
+        display: none;
+    }
+
+    .mobileCardsTrack {
+        display: flex;
+        gap: 16px;
+        padding: 0 24px;
+    }
+
+    /* Mobile Card */
+    .mobileCard {
+        flex: 0 0 70%;
+        max-width: 280px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .mobileCardImage {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        background-color: #333;
+    }
+
+    .mobileCardTitle {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        font-weight: 500;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.9);
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Mobile View All Button */
+    .mobileButtonWrapper {
+        display: flex;
+        justify-content: center;
+        padding: 16px 24px 0;
+    }
+
+    .mobileViewAllBtn {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: linear-gradient(135deg, #1f4287 0%, #2a5298 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 12px 12px 12px 28px;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 8px 24px rgba(31, 66, 135, 0.3);
+    }
+
+    .mobileArrowCircle {
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mobileArrowCircle svg {
+        width: 16px;
+        height: 16px;
     }
 }
