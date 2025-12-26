@@ -15,7 +15,7 @@ import Layout from '@/components/Layout';
 import CareersContactLinks from '@/components/CareersContactLinks';
 import FloatingSectionNav from '@/components/FloatingSectionNav';
 import { shouldDisable3D } from '@/lib/threeUtils';
-import styles from '@/styles/company.module.css';
+import styles from '@/styles/neura.module.css';
 
 // Sections from different pages
 import ServicesSection from '@/components/ServicesSection';         // From Home

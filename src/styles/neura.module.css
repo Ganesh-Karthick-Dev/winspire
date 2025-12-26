@@ -1,0 +1,452 @@
+/* Neura AI Page Styles - Based on Company Page */
+
+/* ===== Hero Section ===== */
+.heroSection {
+    position: relative;
+    height: 80vh;
+    min-height: 500px;
+    width: calc(100% - 1.5rem);
+    margin: 0.6rem auto;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 4rem 4rem;
+    /* White semi-transparent background */
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 24px;
+    z-index: 30;
+}
+
+/* 3D Model container - FIXED behind everything */
+.modelContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Content wrapper */
+.heroContent {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1400px;
+    width: 100%;
+}
+
+/* About label with decorative dots */
+.heroLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #1a1a2e;
+    letter-spacing: 0.02em;
+}
+
+.heroDots {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.heroDot {
+    width: 8px;
+    height: 5px;
+    background-color: #3b82f6;
+    border-radius: 50%;
+}
+
+/* Scroll indicator - bottom right inside hero */
+.scrollIndicator {
+    position: absolute;
+    right: 6rem;
+    bottom: 3.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1a1a2e;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    z-index: 25;
+}
+
+.scrollIndicator:hover {
+    opacity: 0.7;
+}
+
+/* Arrow animation - smooth bounce loop */
+.scrollIndicator span:last-child {
+    display: inline-block;
+    animation: scrollArrowBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollArrowBounce {
+    0% {
+        transform: translateY(-6px);
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(6px);
+        opacity: 0;
+    }
+}
+
+/* Main title - large gradient text with transparency */
+.heroTitle {
+    font-size: clamp(5rem, 15vw, 7rem);
+    font-weight: 500;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin: 0;
+    background: linear-gradient(90deg,
+            rgba(56, 189, 248, 0.85) 0%,
+            rgba(14, 116, 144, 0.9) 50%,
+            rgba(8, 51, 68, 0.95) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Video card - positioned half in, half out at bottom */
+.heroCard {
+    position: absolute;
+    right: 25%;
+    bottom: 0;
+    transform: translateY(20%);
+    width: 350px;
+    height: 420px;
+    background: linear-gradient(160deg,
+            #5aa5e8 0%,
+            #3d8bd4 40%,
+            #2a6eb8 100%);
+    border-radius: 20px;
+    box-shadow:
+        0 30px 60px rgba(26, 90, 140, 0.3),
+        0 15px 30px rgba(26, 90, 140, 0.2);
+    z-index: 20;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Video inside the card */
+.heroCardVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+}
+
+/* Laptop illustration inside card */
+.heroCardLaptop {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Laptop screen */
+.laptopScreen {
+    width: 90%;
+    height: 180px;
+    background: #ffffff;
+    border-radius: 8px 8px 0 0;
+    border: 2px solid #e0e8f0;
+    padding: 1rem;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+/* Floor plan grid inside screen */
+.floorPlanGrid {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Laptop base/keyboard */
+.laptopBase {
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(180deg,
+            #d8e0e8 0%,
+            #c8d4e0 100%);
+    border-radius: 0 0 4px 4px;
+    margin-top: -1px;
+}
+
+/* 3D Geometric shapes at bottom */
+.geometricShapes {
+    position: absolute;
+    left: 0;
+    bottom: -30px;
+    width: 300px;
+    height: 200px;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Individual 3D cubes */
+.cube {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    transform-style: preserve-3d;
+    transform: rotateX(-20deg) rotateY(45deg);
+}
+
+.cube1 {
+    left: 5%;
+    bottom: 20%;
+    width: 100px;
+    height: 100px;
+}
+
+.cube2 {
+    left: 15%;
+    bottom: 5%;
+    width: 70px;
+    height: 70px;
+}
+
+.cubeFace {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.cubeFront {
+    background: linear-gradient(135deg, #4a9ee8 0%, #2d7bc9 100%);
+    transform: translateZ(40px);
+}
+
+.cubeTop {
+    background: linear-gradient(135deg, #6ab5f5 0%, #4a9ee8 100%);
+    transform: rotateX(90deg) translateZ(40px);
+}
+
+.cubeRight {
+    background: linear-gradient(135deg, #2d7bc9 0%, #1a5a8c 100%);
+    transform: rotateY(90deg) translateZ(40px);
+}
+
+/* Hide pattern for this version */
+.heroCardPattern {
+    display: none;
+}
+
+/* Base/platform underneath the card */
+.heroPlatform {
+    position: absolute;
+    right: 5%;
+    top: 65%;
+    width: 500px;
+    height: 200px;
+    background: linear-gradient(180deg,
+            #3a8bc9 0%,
+            #1a5a8c 50%,
+            #083151 100%);
+    border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+    z-index: 2;
+    opacity: 0.8;
+    transform: rotateX(60deg) translateZ(-50px);
+    transform-style: preserve-3d;
+}
+
+/* Glowing orb/sphere effect */
+.heroGlow {
+    position: absolute;
+    right: 15%;
+    top: 40%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle,
+            rgba(74, 158, 232, 0.4) 0%,
+            rgba(74, 158, 232, 0.1) 40%,
+            transparent 70%);
+    border-radius: 50%;
+    z-index: 1;
+    filter: blur(40px);
+    pointer-events: none;
+}
+
+/* ===== Content Sections ===== */
+.contentSection {
+    min-height: 100vh;
+    padding: 8rem 4rem;
+    background: #ffffff;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1200px) {
+    .heroCard {
+        width: 280px;
+        height: 340px;
+        right: 5%;
+    }
+
+    .heroGlow {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 992px) {
+    .heroSection {
+        padding: 0 2rem 3rem;
+    }
+
+    .heroCard {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        max-width: 400px;
+        height: 300px;
+        margin-top: 3rem;
+    }
+
+    .heroContent {
+        align-items: center;
+        text-align: center;
+    }
+
+    .heroLabel {
+        justify-content: center;
+    }
+
+    .scrollIndicator {
+        right: 2rem;
+        bottom: 2rem;
+    }
+
+    .heroGlow,
+    .heroPlatform {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroSection {
+        height: 60vh;
+        /* Half screen height */
+        min-height: 400px;
+        padding: 2rem 1.5rem 0 1.5rem;
+        /* Top padding, no bottom padding needed */
+        justify-content: flex-start;
+        /* Align content to top */
+        overflow: visible;
+        /* Allow card to overflow */
+        margin: 0.5rem;
+        margin-bottom: 20rem;
+        /* Increased margin specifically for Neura AI if needed, kept 15rem + extra buffer just in case */
+        width: calc(100% - 1rem);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.85);
+        /* Match desktop transparency */
+        backdrop-filter: blur(10px);
+        /* Optional: adds nice glass effect */
+    }
+
+    .heroContent {
+        align-items: flex-start !important;
+        /* Force left align */
+        text-align: left !important;
+        /* Force left align */
+        margin-top: 8rem;
+        /* Space from top */
+        width: 100%;
+        max-width: none;
+    }
+
+    .heroLabel {
+        justify-content: flex-start !important;
+        /* Force left align */
+    }
+
+    .heroTitle {
+        font-size: 3.5rem;
+        line-height: 1.1;
+        margin-top: 0.5rem;
+        background: none;
+        /* Remove gradient for solid color if needed, or keep */
+        color: #2563eb;
+        /* Match blue from design */
+        -webkit-text-fill-color: #2563eb;
+    }
+
+    /* Floating Blue Card - Half In / Half Out */
+    .heroCard {
+        position: absolute !important;
+        right: auto !important;
+        top: auto !important;
+        left: 50% !important;
+        bottom: -100px !important;
+        /* Overlap by 100px */
+        transform: translateX(-50%) !important;
+        /* Center horizontally */
+        width: 200px !important;
+        height: 260px !important;
+        margin: 0 !important;
+        box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+        z-index: 50;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    }
+
+    .heroCardVideo {
+        opacity: 0.9;
+        /* Blend slightly if needed */
+    }
+
+    /* Vertical Scroll Indicator */
+    .scrollIndicator {
+        position: absolute;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+        width: auto;
+    }
+
+    .scrollIndicator span:first-child {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-size: 0.7rem;
+        font-weight: 700;
+    }
+
+    .scrollIndicator span:last-child {
+        transform: none !important;
+        /* Disable bounce transform if conflict */
+        animation: none;
+        /* simplify or keep if works */
+    }
+}
