@@ -106,25 +106,23 @@
     font-weight: 600;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
+/* Responsive - Tablet */
+@media (max-width: 900px) {
     .grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+/* Mobile - Matching Reference Design */
 @media (max-width: 768px) {
-
-    /* Mobile Award Section - Matching Reference Design */
     .awardSection {
         width: 100%;
+        padding: 80px 24px 100px;
         margin: 0;
-        padding: 100px 20px 80px;
-        /* Background inherited from parent - no override */
         border-radius: 0;
     }
 
-    /* Mobile Header - Centered with proper styling */
+    /* Mobile Header */
     .header {
         display: flex;
         flex-direction: column;

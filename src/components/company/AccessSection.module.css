@@ -139,24 +139,158 @@
     opacity: 0.8;
 }
 
-/* Responsive */
+/* Responsive - Tablet */
 @media (max-width: 900px) {
     .content {
-        flex-direction: column;
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
     .imageCard {
         width: 100%;
+        max-width: 400px;
+        justify-self: center;
     }
 
     .infoBox {
         width: 100%;
+        padding-left: 0;
+        text-align: center;
     }
 }
 
+/* Mobile - Matching Reference Design */
 @media (max-width: 768px) {
     .section {
         width: 100%;
-        padding: 0 1.5rem 6rem;
+        padding: 80px 24px 100px;
+        margin: 0;
+    }
+
+    /* Mobile Header */
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        margin-bottom: 40px;
+    }
+
+    .titleWrapper {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .dots {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .dot {
+        width: 6px;
+        height: 6px;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0.8;
+    }
+
+    .title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        margin: 0;
+        line-height: 1;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 500;
+        padding-left: 20px;
+        margin-top: 4px;
+    }
+
+    /* Mobile Content - Vertical Stack */
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        align-items: flex-start;
+    }
+
+    /* Mobile White Card */
+    .imageCard {
+        width: 100%;
+        max-width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 16px;
+        aspect-ratio: 16/10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+    }
+
+    .logoText {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #64748b;
+        letter-spacing: 0.15em;
+        background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Mobile Info Box */
+    .infoBox {
+        width: 100%;
+        padding: 0;
+        text-align: left;
+    }
+
+    .officeName {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 24px;
+    }
+
+    .details {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 0;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .walkNote {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.85);
+        margin-top: 32px;
+        margin-bottom: 16px;
+        line-height: 1.5;
+    }
+
+    .mapLink {
+        display: inline-block;
+        color: white;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        font-weight: 700;
+        font-size: 1rem;
+        margin-top: 8px;
+    }
+
+    .mapLink:hover {
+        opacity: 0.9;
     }
 }
