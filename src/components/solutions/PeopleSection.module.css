@@ -6,11 +6,17 @@
     padding: 8rem 4rem;
     background: transparent;
     border-radius: 40px;
-    border-radius: 40px;
     min-height: 800px;
     display: flex;
     align-items: center;
-    /* overflow: hidden; Removed to prevent card clipping */
+}
+
+/* ============================================
+   DESKTOP VIEW
+   ============================================ */
+.desktopView {
+    display: block;
+    width: 100%;
 }
 
 /* Container for Grid Layout */
@@ -136,9 +142,14 @@
     transform: translateX(-150%) translateY(-50%) !important;
 }
 
+/* ============================================
+   MOBILE VIEW - Hidden on Desktop
+   ============================================ */
+.mobileView {
+    display: none;
+}
 
-
-/* Responsive */
+/* Responsive - Tablet */
 @media (max-width: 1024px) {
     .section {
         width: 90%;
@@ -164,5 +175,119 @@
 
     .description {
         font-size: 1.1rem;
+    }
+}
+
+/* ============================================
+   MOBILE - Completely Separate Layout
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* Hide Desktop, Show Mobile */
+    .desktopView {
+        display: none !important;
+    }
+
+    .mobileView {
+        display: flex !important;
+        flex-direction: column;
+        width: 100%;
+        gap: 24px;
+    }
+
+    .section {
+        width: 100%;
+        margin: 0;
+        padding: 100px 24px 80px;
+        min-height: auto;
+        border-radius: 0;
+        display: block;
+    }
+
+    /* Mobile Header */
+    .mobileHeader {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .mobileDots {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .mobileDots span {
+        width: 6px;
+        height: 6px;
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+    }
+
+    .mobileTitle {
+        font-family: 'Outfit', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: white;
+        margin: 0;
+        line-height: 1.1;
+        text-align: left;
+    }
+
+    .mobileSubtitle {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 500;
+        padding-left: 20px;
+        margin-top: -8px;
+    }
+
+    /* Mobile Cards Container */
+    .mobileCardsContainer {
+        position: relative;
+        height: 280px;
+        width: 100%;
+        margin: 24px 0;
+    }
+
+    .mobileStackedCards {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        perspective: 1000px;
+    }
+
+    .mobileCard {
+        position: absolute;
+        width: 85%;
+        max-width: 320px;
+        height: 220px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transform-origin: center center;
+        border-radius: 16px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobileCard img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Mobile Description */
+    .mobileDescription {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.3rem;
+        line-height: 1.5;
+        color: white;
+        font-weight: 600;
+        margin: 16px 0 0;
+        text-align: left;
     }
 }
