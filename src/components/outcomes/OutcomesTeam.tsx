@@ -24,6 +24,10 @@ export default function OutcomesTeam() {
 
         if (!section || !leftCol || !rightCol) return;
 
+        // Check if mobile - skip complex animations
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) return;
+
         const ctx = gsap.context(() => {
             // Pin the left column while scrolling through the right column
             ScrollTrigger.create({
@@ -31,7 +35,7 @@ export default function OutcomesTeam() {
                 start: 'top top',
                 end: 'bottom bottom',
                 pin: leftCol,
-                pinSpacing: false, // We want the right col to scroll naturally
+                pinSpacing: false,
             });
 
             // Animate text opacity on scroll - Word by Word
@@ -41,17 +45,17 @@ export default function OutcomesTeam() {
                 const words = text.querySelectorAll(`.${styles.word}`);
 
                 gsap.fromTo(words,
-                    { opacity: 0.3, color: '#6b7280', y: 20 }, // Visible gray, slightly lower
+                    { opacity: 0.3, color: '#6b7280', y: 20 },
                     {
                         opacity: 1,
                         color: '#ffffff',
-                        y: 0, // Slide up
-                        stagger: 0.1, // Smooth ripple
+                        y: 0,
+                        stagger: 0.1,
                         scrollTrigger: {
                             trigger: text,
-                            start: 'top 95%', // Start very early when entering viewport
-                            end: 'top 50%', // Complete when at middle of screen
-                            scrub: 1, // Faster response
+                            start: 'top 95%',
+                            end: 'top 50%',
+                            scrub: 1,
                         }
                     }
                 );
@@ -73,37 +77,58 @@ export default function OutcomesTeam() {
             ref={sectionRef}
             className={styles.section}
         >
-            <div className={styles.grid}>
+            {/* ===== DESKTOP VIEW ===== */}
+            <div className={styles.desktopView}>
+                <div className={styles.grid}>
 
-                {/* Left Column - Sticky */}
-                <div ref={leftColRef} className={styles.leftColumn}>
-                    <p className={styles.stickyLabel}>
-                        Every square foot has been thoughtfully considered
-                    </p>
-                </div>
+                    {/* Left Column - Sticky */}
+                    <div ref={leftColRef} className={styles.leftColumn}>
+                        <p className={styles.stickyLabel}>
+                            Every square foot has been thoughtfully considered
+                        </p>
+                    </div>
 
-                {/* Right Column - Scrollable Content */}
-                <div ref={rightColRef} className={styles.rightColumn}>
-                    {paragraphs.map((text, index) => (
-                        <div
-                            key={index}
-                            className={styles.paragraphContainer}
-                        >
-                            <p
-                                ref={(el) => { textsRef.current[index] = el; }}
-                                className={styles.paragraph}
+                    {/* Right Column - Scrollable Content */}
+                    <div ref={rightColRef} className={styles.rightColumn}>
+                        {paragraphs.map((text, index) => (
+                            <div
+                                key={index}
+                                className={styles.paragraphContainer}
                             >
-                                {text.split(' ').map((word, i) => (
-                                    <span key={i} className={styles.word}>
-                                        {word}
-                                    </span>
-                                ))}
-                            </p>
-                        </div>
+                                <p
+                                    ref={(el) => { textsRef.current[index] = el; }}
+                                    className={styles.paragraph}
+                                >
+                                    {text.split(' ').map((word, i) => (
+                                        <span key={i} className={styles.word}>
+                                            {word}
+                                        </span>
+                                    ))}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+
+                </div>
+            </div>
+
+            {/* ===== MOBILE VIEW ===== */}
+            <div className={styles.mobileView}>
+                {/* Mobile Label */}
+                <p className={styles.mobileLabel}>
+                    Every square foot has been thoughtfully considered
+                </p>
+
+                {/* Mobile Paragraphs - Static */}
+                <div className={styles.mobileParagraphs}>
+                    {paragraphs.map((text, index) => (
+                        <p key={index} className={styles.mobileParagraph}>
+                            {text}
+                        </p>
                     ))}
                 </div>
-
             </div>
+
         </section>
     );
 }

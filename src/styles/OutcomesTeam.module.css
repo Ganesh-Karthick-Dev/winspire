@@ -9,36 +9,29 @@
     overflow: hidden;
 }
 
+/* ============================================
+   DESKTOP VIEW
+   ============================================ */
+.desktopView {
+    display: block;
+}
+
 .grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 3rem;
     max-width: 90rem;
-    /* 7xl equivalent */
     margin: 0 auto;
 }
 
-@media (min-width: 768px) {
-    .grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
 .leftColumn {
-    height: fit-content;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     position: sticky;
     top: 0;
-    padding-top: 5rem;
-}
-
-@media (min-width: 768px) {
-    .leftColumn {
-        height: 100vh;
-        padding-top: 10rem;
-    }
+    padding-top: 10rem;
 }
 
 .stickyLabel {
@@ -46,26 +39,17 @@
     font-size: clamp(1.125rem, 2vw, 1.5rem);
     font-weight: 500;
     color: #ffffff;
-    /* Always white */
     max-width: 20rem;
 }
 
 .rightColumn {
     display: flex;
     flex-direction: column;
-    /* padding-bottom: 3rem; */
-    padding-top: 5rem;
-}
-
-@media (min-width: 768px) {
-    .rightColumn {
-        padding-top: 10rem;
-    }
+    padding-top: 10rem;
 }
 
 .paragraphContainer {
     min-height: 90vh;
-    /* Full screen height for scroll animation */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,7 +57,6 @@
 
 .paragraph {
     font-family: var(--font-outfit), sans-serif;
-    /* Reduced font size for better readability */
     font-size: clamp(2rem, 4vw, 4rem);
     font-weight: 500;
     line-height: 1.2;
@@ -87,6 +70,66 @@
     margin-right: 0.3em;
     opacity: 0.2;
     color: #ffffff;
-    /* Always white */
     transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================
+   MOBILE VIEW - Hidden by default
+   ============================================ */
+.mobileView {
+    display: none;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* Toggle views */
+    .desktopView {
+        display: none !important;
+    }
+
+    .mobileView {
+        display: flex !important;
+        flex-direction: column;
+        gap: 32px;
+        padding: 0;
+    }
+
+    .section {
+        width: calc(100% - 32px);
+        margin: 40px 16px;
+        padding: 40px 24px;
+        min-height: auto;
+        border-radius: 24px;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    /* Mobile Label */
+    .mobileLabel {
+        font-family: var(--font-outfit), sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0 0 24px 0;
+        max-width: 100%;
+        line-height: 1.5;
+    }
+
+    /* Mobile Paragraphs */
+    .mobileParagraphs {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .mobileParagraph {
+        font-family: var(--font-outfit), sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1.3;
+        color: #ffffff;
+        margin: 0;
+    }
 }
