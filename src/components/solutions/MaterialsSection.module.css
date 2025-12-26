@@ -183,7 +183,7 @@
 }
 
 
-/* Responsive */
+/* Responsive - Tablet */
 @media (max-width: 1024px) {
     .section {
         width: 95%;
@@ -198,17 +198,162 @@
 
     .mainDescription {
         max-width: 100%;
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     .splitCard {
-        flex-direction: column;
-        height: auto;
+        width: 80%;
+    }
+}
+
+/* Mobile - Specific Styles */
+@media (max-width: 768px) {
+    .section {
+        width: calc(100% - 32px);
+        margin: 40px 16px;
+        padding: 40px 24px 50px;
+        background: transparent;
     }
 
-    .cardLeft,
+    /* Mobile Header */
+    .header {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-bottom: 40px;
+    }
+
+    .titleBlock {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 8px;
+    }
+
+    .titleWrapper {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .dots {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .dot {
+        width: 6px;
+        height: 6px;
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+    }
+
+    .title {
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        padding-left: 20px;
+        margin-top: 4px;
+        margin-bottom: 16px;
+    }
+
+    /* Mobile Description - Smaller like reference */
+    .mainDescription {
+        font-size: 0.95rem;
+        font-weight: 500;
+        line-height: 1.6;
+        max-width: 100%;
+        margin-bottom: 32px;
+    }
+
+    /* Mobile Card Container */
+    .cardContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Mobile Split Card - Horizontal Layout */
+    .splitCard {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: auto;
+        min-height: 100px;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .splitCard:hover {
+        transform: none;
+    }
+
+    /* Mobile Left Side - Semi-transparent like desktop */
+    .cardLeft {
+        flex: 0 0 90px;
+        background-color: rgba(79, 117, 255, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 12px;
+    }
+
+    .stylePortText {
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 1.3;
+    }
+
+    /* Mobile Right Side */
     .cardRight {
-        padding: 3rem;
         flex: 1;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px 16px;
+        gap: 8px;
+        position: relative;
+    }
+
+    .cardLabel {
+        color: #111827;
+        font-size: 0.85rem;
+        font-weight: 600;
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    .logoWrapper {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .logoMask {
+        width: 120px;
+        height: 30px;
+        background-color: #111827;
+        mask-position: left center;
+        -webkit-mask-position: left center;
+    }
+
+    /* Arrow icon for mobile - positioned top right */
+    .cardRight::after {
+        content: "↗";
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        font-size: 14px;
+        color: #111827;
     }
 }
