@@ -7,13 +7,6 @@
     color: white;
 }
 
-/* ============================================
-   DESKTOP VIEW
-   ============================================ */
-.desktopView {
-    display: block;
-}
-
 .container {
     display: flex;
     flex-direction: column;
@@ -39,12 +32,14 @@
     flex-direction: column;
     gap: 6px;
     padding-top: 10px;
+    /* Align with top of title */
 }
 
 .dot {
     width: 8px;
     height: 5px;
     background-color: #689FDD;
+    /* Light blue accent */
     border-radius: 50%;
 }
 
@@ -69,9 +64,10 @@
     margin: 0.5rem 0 0;
 }
 
-/* View All Button */
+/* View All Button (Matches GroupsSection) */
 .viewAllBtn {
     background: linear-gradient(135deg, #1f4287 0%, #2a5298 100%);
+    /* Dark Blue Gradient matching GroupsSection */
     color: white;
     border: none;
     border-radius: 50px;
@@ -105,25 +101,29 @@
     font-size: 1.2rem;
     font-weight: 700;
     transition: all 0.4s ease;
+    /* Removed rotate(-45deg) so it points Right (3 o'clock) */
 }
 
 .viewAllBtn:hover .arrowIcon {
     background: rgba(255, 255, 255, 0.3);
+    /* Removed hover rotation */
 }
 
 /* Rows Layout */
 .contentRow {
     display: grid;
     grid-template-columns: 200px 1fr;
+    /* Label fixed width, Content fluid */
     gap: 2rem;
     align-items: flex-start;
-    position: relative;
-    padding-top: 2rem;
-    border-top: 3px solid rgba(255, 255, 255, 0.2);
 }
 
 .rowLabel {
     padding-top: 1rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    /* Top border for label? Screenshot shows line above label maybe? */
+    /* Actually reference shows line spanning full width, and label is below it */
+    /* Let's adjust: contentRow structure */
     border-top: none;
     position: relative;
 }
@@ -132,6 +132,14 @@
     font-family: 'Outfit', sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
+}
+
+/* Specific Divider for whole row? */
+/* Screenshot shows a long line above 'Pickup' and above 'Recent'. */
+.contentRow {
+    position: relative;
+    padding-top: 2rem;
+    border-top: 3px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Grid for Cards */
@@ -161,6 +169,7 @@
     overflow: hidden;
     position: relative;
     background-color: #333;
+    /* Fallback */
 }
 
 .placeholderImg {
@@ -223,6 +232,13 @@
    ============================================ */
 .mobileView {
     display: none;
+}
+
+/* ============================================
+   DESKTOP VIEW
+   ============================================ */
+.desktopView {
+    display: block;
 }
 
 /* Responsive - Tablet */

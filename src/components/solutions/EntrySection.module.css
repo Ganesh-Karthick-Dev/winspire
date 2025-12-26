@@ -189,8 +189,18 @@
 }
 
 @media (max-width: 768px) {
+    .section {
+        margin: 8px auto;
+        padding: 12px;
+    }
+
+    .container {
+        gap: 10px;
+    }
+
     .gridRow {
         grid-template-columns: 1fr;
+        gap: 12px;
     }
 
     .actionArea {
@@ -199,6 +209,9 @@
 
     .divider {
         display: none;
-        /* Hide divider on mobile if space is tight? Or keep it? keeping it looks better if space allows. */
+    }
+
+    .entryCard {
+        margin-top: 4px;
     }
 }
