@@ -2,6 +2,7 @@
  * Smooth Scroll Provider
  * 
  * Uses Lenis for buttery smooth scrolling with GSAP ScrollTrigger integration.
+ * DISABLED on touch devices to allow native scrolling.
  */
 
 'use client';
@@ -17,19 +18,32 @@ interface SmoothScrollProps {
     children: React.ReactNode;
 }
 
+/**
+ * Check if device is touch-enabled (mobile/tablet)
+ */
+function isTouchDevice(): boolean {
+    if (typeof window === 'undefined') return false;
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+}
+
 export default function SmoothScroll({ children }: SmoothScrollProps) {
     const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
-        // Initialize Lenis with smooth settings
+        // Skip Lenis on touch devices - use native scrolling instead
+        if (isTouchDevice()) {
+            console.log('📱 Touch device detected - using native scroll');
+            return;
+        }
+
+        // Initialize Lenis with smooth settings (desktop only)
         const lenis = new Lenis({
-            duration: 1.2,           // Scroll animation duration (higher = smoother)
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing function
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: 'vertical',
             gestureOrientation: 'vertical',
             smoothWheel: true,
             wheelMultiplier: 1,
-            touchMultiplier: 2,
         });
 
         lenisRef.current = lenis;
@@ -54,3 +68,4 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
 
     return <>{children}</>;
 }
+
