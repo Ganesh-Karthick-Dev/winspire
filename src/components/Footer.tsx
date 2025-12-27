@@ -1,15 +1,16 @@
 /**
- * Footer Component - Precise Match to Reference
+ * Footer Component - Updated to Match Site Structure
  * 
  * Layout:
  * - Center aligned container
  * - Service card (purple gradient top + white bottom)
- * - Three link columns with vertical dividers
+ * - Four link columns with vertical dividers (Company, Outcomes, Solutions, Neura AI)
  * - Bottom bar with privacy policy and copyright
  */
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Footer() {
     const scrollToTop = () => {
@@ -42,13 +43,9 @@ export default function Footer() {
                     {/* Social Links */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '50px' }}>
                         <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>Social</span>
-                        <a href="https://note.com" target="_blank" rel="noopener noreferrer"
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
                             style={{ fontSize: '1rem', color: 'white' }}>
-                            Note
-                        </a>
-                        <a href="https://wantedly.com" target="_blank" rel="noopener noreferrer"
-                            style={{ fontSize: '1rem', color: 'white' }}>
-                            Wantedly
+                            LinkedIn
                         </a>
                         <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
                             style={{ fontSize: '1rem', color: 'white' }}>
@@ -79,14 +76,15 @@ export default function Footer() {
                 {/* Main Content */}
                 <div style={{
                     display: 'flex',
-                    gap: '60px',
-                    padding: '60px',
+                    gap: '40px',
+                    padding: '40px 60px',
                     alignItems: 'flex-start',
-                    justifyContent: 'space-between'
+                    justifyContent: 'space-between',
+                    flexWrap: 'wrap'
                 }}>
                     {/* Left - Service Card */}
                     <div style={{
-                        width: '320px',
+                        width: '300px',
                         flexShrink: 0,
                         borderRadius: '16px',
                         overflow: 'hidden',
@@ -94,7 +92,7 @@ export default function Footer() {
                         boxShadow: '0 10px 40px rgba(0,0,0,0.15)'
                     }}>
                         {/* Card Image */}
-                        <div style={{ width: '100%', height: '180px', position: 'relative', overflow: 'hidden' }}>
+                        <div style={{ width: '100%', height: '160px', position: 'relative', overflow: 'hidden' }}>
                             <Image
                                 src="/images/links/links_workspace_laptop_1766075249577.png"
                                 alt="Winspire RCM Service"
@@ -147,64 +145,80 @@ export default function Footer() {
                     </div>
 
                     {/* Right - Link Columns */}
-                    <div style={{ display: 'flex', gap: '0' }}>
-                        {/* About Us Column */}
-                        <div style={{ display: 'flex', width: '300px' }}>
-                            {/* Vertical Divider */}
-                            <div style={{ width: '1px', background: 'rgba(255,255,255,0.3)', marginRight: '30px' }}></div>
+                    <div style={{ display: 'flex', gap: '0', flex: 1, justifyContent: 'flex-end' }}>
+
+                        {/* Company Column */}
+                        <div style={{ display: 'flex', width: '200px' }}>
+                            <div style={{ width: '1px', background: 'rgba(255,255,255,0.3)', marginRight: '20px' }}></div>
                             <div style={{ paddingTop: '10px' }}>
-                                <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: 'white', marginBottom: '40px' }}>
-                                    <span style={{ color: 'white', marginRight: '8px' }}>•</span>About Us
-                                </h3>
-                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'flex-start' }}>
-                                    <li><a href="/about#mission" style={{ color: 'white', fontSize: '0.9rem' }}>Mission</a></li>
-                                    <li><a href="/about#vision" style={{ color: 'white', fontSize: '0.9rem' }}>Vision</a></li>
-                                    <li><a href="/about#values" style={{ color: 'white', fontSize: '0.9rem' }}>Values</a></li>
-                                    <li><a href="/about#team" style={{ color: 'white', fontSize: '0.9rem' }}>Board Members</a></li>
-                                    <li><a href="/about#awards" style={{ color: 'white', fontSize: '0.9rem' }}>Award</a></li>
-                                    <li><a href="/about#profile" style={{ color: 'white', fontSize: '0.9rem' }}>Corporate Profile</a></li>
-                                    <li><a href="/contact" style={{ color: 'white', fontSize: '0.9rem' }}>Access</a></li>
+                                <Link href="/company" style={{ textDecoration: 'none' }}>
+                                    <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'white', marginBottom: '24px', cursor: 'pointer' }}>
+                                        <span style={{ color: 'white', marginRight: '8px' }}>•</span>Company
+                                    </h3>
+                                </Link>
+                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}>
+                                    <li><Link href="/company#mission" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Mission</Link></li>
+                                    <li><Link href="/company#vision" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Vision</Link></li>
+                                    <li><Link href="/company#values" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Values</Link></li>
+                                    <li><Link href="/company#board" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Board Members</Link></li>
+                                    <li><Link href="/company#profile" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Profile</Link></li>
+                                    <li><Link href="/company#access" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Access</Link></li>
                                 </ul>
                             </div>
                         </div>
 
-                        {/* Careers Column */}
-                        <div style={{ display: 'flex', width: '300px' }}>
-                            {/* Vertical Divider */}
-                            <div style={{ width: '1px', background: 'rgba(255,255,255,0.3)', marginRight: '30px' }}></div>
+                        {/* Outcomes Column */}
+                        <div style={{ display: 'flex', width: '200px' }}>
+                            <div style={{ width: '1px', background: 'rgba(255,255,255,0.3)', marginRight: '20px' }}></div>
                             <div style={{ paddingTop: '10px' }}>
-                                <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: 'white', marginBottom: '40px' }}>
-                                    <span style={{ color: 'white', marginRight: '8px' }}>•</span>Careers
-                                </h3>
-                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'flex-start' }}>
-                                    <li><a href="/careers#message" style={{ color: 'white', fontSize: '0.9rem' }}>Message</a></li>
-                                    <li><a href="/careers#jobs" style={{ color: 'white', fontSize: '0.9rem' }}>Job Categories</a></li>
-                                    <li><a href="/careers#people" style={{ color: 'white', fontSize: '0.9rem' }}>People</a></li>
-                                    <li><a href="/careers#environment" style={{ color: 'white', fontSize: '0.9rem' }}>Work Environment</a></li>
-                                    <li><a href="/careers#materials" style={{ color: 'white', fontSize: '0.9rem' }}>Recruitment Materials</a></li>
-                                    <li><a href="/careers#faq" style={{ color: 'white', fontSize: '0.9rem' }}>FAQ</a></li>
-                                    <li><a href="/careers#culture" style={{ color: 'white', fontSize: '0.9rem' }}>Culture Note</a></li>
+                                <Link href="/outcomes" style={{ textDecoration: 'none' }}>
+                                    <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'white', marginBottom: '24px', cursor: 'pointer' }}>
+                                        <span style={{ color: 'white', marginRight: '8px' }}>•</span>Outcomes
+                                    </h3>
+                                </Link>
+                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}>
+                                    <li><Link href="/outcomes#vision" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Vision</Link></li>
+                                    <li><Link href="/outcomes#team" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Team</Link></li>
+                                    <li><Link href="/outcomes#cases" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Case Studies</Link></li>
                                 </ul>
                             </div>
                         </div>
 
-                        {/* News Column */}
-                        <div style={{ display: 'flex', width: '350px' }}>
-                            {/* Vertical Divider */}
-                            <div style={{ width: '1px', background: 'rgba(255,255,255,0.3)', marginRight: '30px' }}></div>
+                        {/* Solutions Column */}
+                        <div style={{ display: 'flex', width: '200px' }}>
+                            <div style={{ width: '1px', background: 'rgba(255,255,255,0.3)', marginRight: '20px' }}></div>
                             <div style={{ paddingTop: '10px' }}>
-                                <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: 'white', marginBottom: '40px' }}>
-                                    <span style={{ color: 'white', marginRight: '8px' }}>•</span>News
-                                </h3>
-                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'flex-start' }}>
-                                    <li><a href="/news#media" style={{ color: 'white', fontSize: '0.9rem' }}>Media</a></li>
-                                    <li><a href="/news#events" style={{ color: 'white', fontSize: '0.9rem' }}>Event</a></li>
-                                    <li><a href="/news#company" style={{ color: 'white', fontSize: '0.9rem' }}>Company</a></li>
-                                    <li><a href="/news#releases" style={{ color: 'white', fontSize: '0.9rem' }}>Release</a></li>
-                                    <li><a href="/news#case-studies" style={{ color: 'white', fontSize: '0.9rem' }}>Case Study</a></li>
+                                <Link href="/solutions" style={{ textDecoration: 'none' }}>
+                                    <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'white', marginBottom: '24px', cursor: 'pointer' }}>
+                                        <span style={{ color: 'white', marginRight: '8px' }}>•</span>Solutions
+                                    </h3>
+                                </Link>
+                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}>
+                                    <li><Link href="/solutions#culture" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Culture</Link></li>
+                                    <li><Link href="/solutions#people" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>People</Link></li>
+                                    <li><Link href="/solutions#environment" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Environment</Link></li>
+                                    <li><Link href="/solutions#faq" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>FAQ</Link></li>
                                 </ul>
                             </div>
                         </div>
+
+                        {/* Neura AI Column */}
+                        <div style={{ display: 'flex', width: '200px' }}>
+                            <div style={{ width: '1px', background: 'rgba(255,255,255,0.3)', marginRight: '20px' }}></div>
+                            <div style={{ paddingTop: '10px' }}>
+                                <Link href="/neura-ai" style={{ textDecoration: 'none' }}>
+                                    <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'white', marginBottom: '24px', cursor: 'pointer' }}>
+                                        <span style={{ color: 'white', marginRight: '8px' }}>•</span>Neura AI
+                                    </h3>
+                                </Link>
+                                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'flex-start' }}>
+                                    <li><Link href="/neura-ai#mission" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Mission</Link></li>
+                                    <li><Link href="/neura-ai#services" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Services</Link></li>
+                                    <li><Link href="/neura-ai#technology" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem' }}>Technology</Link></li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -235,14 +249,14 @@ export default function Footer() {
                                 <text x="12" y="16" textAnchor="middle" fill="#3b82f6" fontSize="12" fontWeight="bold">P</text>
                             </svg>
                         </div>
-                        <a href="/privacy" style={{
+                        <Link href="/privacy" style={{
                             color: 'white',
                             textDecoration: 'none',
                             fontSize: '0.9rem',
                             fontWeight: 500
                         }}>
                             Privacy Policy
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Right - Copyright */}
@@ -266,17 +280,18 @@ export default function Footer() {
                 <div className="footer-mobile-links">
                     {/* Left Col: Main Links */}
                     <div className="footer-links-left">
-                        <div className="footer-link-item"><span className="bullet">•</span> About Us</div>
-                        <div className="footer-link-item"><span className="bullet">•</span> Careers</div>
-                        <div className="footer-link-item"><span className="bullet">•</span> News</div>
+                        <Link href="/company" className="footer-link-item"><span className="bullet">•</span> Company</Link>
+                        <Link href="/outcomes" className="footer-link-item"><span className="bullet">•</span> Outcomes</Link>
+                        <Link href="/solutions" className="footer-link-item"><span className="bullet">•</span> Solutions</Link>
+                        <Link href="/neura-ai" className="footer-link-item"><span className="bullet">•</span> Neura AI</Link>
+                        <Link href="/book-demo" className="footer-link-item"><span className="bullet">•</span> Book a Demo</Link>
                     </div>
 
                     {/* Right Col: Social (Smaller) */}
                     <div className="footer-links-right">
                         <div className="social-label">Social</div>
-                        <a href="#" className="social-link">Note</a>
-                        <a href="#" className="social-link">Wantedly</a>
-                        <a href="#" className="social-link">Twitter</a>
+                        <a href="https://linkedin.com" className="social-link">LinkedIn</a>
+                        <a href="https://twitter.com" className="social-link">Twitter</a>
                     </div>
                 </div>
 
@@ -292,14 +307,14 @@ export default function Footer() {
                     </div>
                     <div className="footer-card-content">
                         <div className="footer-card-text">
-                            <div className="service-title">ROOV<br />Service<br />Site</div>
+                            <div className="service-title">Winspire<br />Service<br />Site</div>
                             <span className="card-arrow-icon">↗</span>
                         </div>
                         <div className="footer-award-badge">
-                            <span className="award-icon-red">G</span>
+                            <span className="award-icon-red">★</span>
                             <div className="award-text">
-                                <span className="award-year">2023年度受賞</span>
-                                <span className="award-name">GOOD DESIGN AWARD</span>
+                                <span className="award-year">2024 Award</span>
+                                <span className="award-name">HEALTHCARE EXCELLENCE</span>
                             </div>
                         </div>
                     </div>
@@ -310,8 +325,8 @@ export default function Footer() {
                     <div className="footer-divider-line"></div>
                     <div className="footer-bottom-row">
                         <div className="footer-policy-copyright">
-                            <a href="/privacy" className="footer-privacy">Privacy Policy</a>
-                            <span className="footer-copyright">© STYLE PORT Inc.<br />All Rights Reserved.</span>
+                            <Link href="/privacy" className="footer-privacy">Privacy Policy</Link>
+                            <span className="footer-copyright">© Winspire RCM Inc.<br />All Rights Reserved.</span>
                         </div>
                         {/* P-Mark Logo */}
                         <div className="footer-p-mark">
