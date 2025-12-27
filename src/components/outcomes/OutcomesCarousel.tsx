@@ -180,11 +180,11 @@ export default function OutcomesCarousel() {
                         progressFills.forEach((fill, index) => {
                             if (!fill) return;
                             if (index < activeSlide) {
-                                fill.style.width = '100%';
+                                fill.style.height = '100%';
                             } else if (index === activeSlide) {
-                                fill.style.width = `${withinSlideProgress * 100}%`;
+                                fill.style.height = `${withinSlideProgress * 100}%`;
                             } else {
-                                fill.style.width = '0%';
+                                fill.style.height = '0%';
                             }
                         });
 
