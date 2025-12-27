@@ -48,15 +48,42 @@ export default function ScrollManager() {
     // Handle route changes for smooth scroll to top
     useEffect(() => {
         const handleRouteChange = (url: string) => {
-            if (lenisRef.current) {
-                // Smooth scroll to top
-                lenisRef.current.scrollTo(0, {
-                    immediate: false,
-                    duration: 1.5, // Slower duration for smooth effect
-                    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Expo ease out
-                });
+            // Check for hash in URL
+            if (url.includes('#')) {
+                const hash = url.split('#')[1];
+                // Small timeout to ensure DOM is ready if page changed
+                setTimeout(() => {
+                    const element = document.getElementById(hash);
+                    if (element) {
+                        if (lenisRef.current) {
+                            lenisRef.current.scrollTo(element, {
+                                offset: -100, // Header offset
+                                immediate: false,
+                                duration: 1.5,
+                                easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                            });
+                        } else {
+                            const headerOffset = 100;
+                            const elementPosition = element.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                }, 100);
             } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Default: Scroll to top ONLY if no hash
+                if (lenisRef.current) {
+                    lenisRef.current.scrollTo(0, {
+                        immediate: false,
+                        duration: 1.5,
+                        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
             }
         };
 

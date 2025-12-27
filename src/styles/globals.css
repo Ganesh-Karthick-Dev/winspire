@@ -5309,6 +5309,7 @@ footer p {
   display: none;
 }
 
+/* Mobile Footer Styles */
 @media (max-width: 768px) {
   .footer-desktop-view {
     display: none !important;
@@ -5320,15 +5321,13 @@ footer p {
     width: 100%;
     padding: 60px 20px 40px;
     box-sizing: border-box;
-    /* Continuous gradient background matching previous section if needed, 
-       otherwise footer usually has its own dark bg */
     background: transparent;
   }
 
   /* Logo */
   .footer-mobile-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   }
 
   .footer-mobile-logo {
@@ -5345,26 +5344,30 @@ footer p {
     display: flex;
     justify-content: space-between;
     margin-bottom: 60px;
-    padding: 0 10px;
+    padding: 0;
+    gap: 20px;
   }
 
   .footer-links-left {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
+    flex: 1;
   }
 
   .footer-link-item {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: white;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    text-decoration: none;
   }
 
   .footer-link-item .bullet {
     font-size: 0.8rem;
+    color: white;
     opacity: 0.8;
   }
 
@@ -5373,14 +5376,15 @@ footer p {
     flex-direction: column;
     gap: 16px;
     text-align: left;
-    padding-top: 10px;
+    padding-top: 8px;
+    min-width: 100px;
   }
 
   .social-label {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 
   .social-link {
@@ -5396,7 +5400,7 @@ footer p {
     background: white;
     border-radius: 16px;
     overflow: hidden;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     height: 140px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   }
@@ -5437,9 +5441,9 @@ footer p {
   .footer-award-badge {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     border-top: 1px solid #eee;
-    padding-top: 8px;
+    padding-top: 10px;
   }
 
   .award-icon-red {
@@ -5453,17 +5457,16 @@ footer p {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    /* Polygon shape in ref, circle proxy */
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   }
 
   .award-text {
     display: flex;
     flex-direction: column;
+    line-height: 1.2;
   }
 
   .award-year {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     color: #666;
   }
 
@@ -5476,6 +5479,7 @@ footer p {
   /* Bottom Area */
   .footer-mobile-bottom {
     position: relative;
+    width: 100%;
   }
 
   .footer-divider-line {
@@ -5518,6 +5522,26 @@ footer p {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+  }
+}
+
+/* Tablet Adjustments (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .ref-footer {
+    padding: 60px 40px;
+  }
+
+  .ref-footer-content {
+    gap: 40px;
+  }
+
+  .footer-link-columns {
+    gap: 40px;
+  }
+
+  .footer-link-column {
+    min-width: 140px;
   }
 }
 

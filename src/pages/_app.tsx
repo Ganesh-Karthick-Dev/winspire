@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <SmoothScroll>
             <ScrollManager />
             {/* Key forces complete remount on route change, ensuring animations re-init */}
-            <Component {...pageProps} key={router.asPath} />
+            <Component {...pageProps} key={router.pathname} />
         </SmoothScroll>
     );
 }
