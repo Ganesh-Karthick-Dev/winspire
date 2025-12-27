@@ -7,19 +7,19 @@
 
 export const seoConfig = {
     // Site identity
-    siteName: 'Your 3D Site',
+    siteName: 'Winspire RCM',
     siteUrl: 'https://your-domain.com',
 
     // Default page metadata
-    defaultTitle: 'Immersive 3D Experience',
-    titleTemplate: '%s | Your 3D Site',
+    defaultTitle: 'AI-Powered Healthcare Revenue Cycle Management',
+    titleTemplate: '%s | Winspire RCM',
     defaultDescription: 'Experience stunning 3D visuals with smooth scroll animations. Built with Next.js, Three.js, and GSAP for optimal performance.',
 
     // OpenGraph defaults
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        siteName: 'Your 3D Site',
+        siteName: 'Winspire RCM',
         defaultImage: '/poster/hero-poster.webp',
         imageWidth: 1200,
         imageHeight: 630,
@@ -34,7 +34,7 @@ export const seoConfig = {
 
     // Organization structured data (JSON-LD)
     organization: {
-        name: 'Your Company Name',
+        name: 'Winspire RCM',
         url: 'https://your-domain.com',
         logo: 'https://your-domain.com/logo.png',
         sameAs: [

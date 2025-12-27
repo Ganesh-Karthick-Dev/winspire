@@ -5,7 +5,7 @@ const awards = [
     {
         id: 1,
         title: "Selected as one of Nikkei Cross Trend's \"100 Companies Creating the Market of the Future\"",
-        logoText: "日経 XTREND"
+        logoText: "New Text"
     },
     {
         id: 2,

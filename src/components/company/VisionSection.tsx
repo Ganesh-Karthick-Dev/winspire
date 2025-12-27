@@ -28,8 +28,8 @@ export default function VisionSection({
     label = 'Vision',
     subtitle = 'Vision',
     statementLines = ['Used globally', 'Build a 3D communication platform.'],
-    leftImage = '/images/company/real-space.png',
-    rightImage = '/images/company/virtual-space.png',
+    leftImage = '/images/company/left-side.webp',
+    rightImage = '/images/company/rigth-side.webp',
     descriptions = [
         'By recreating a digital twin in a virtual space, users can easily share their spatial image with anyone, anywhere, anytime, expanding communication. This frees users from the constraints of time, place, and experience that previously hindered spatial understanding.',
         'At the same time, we will visualize communication and build an information platform that correlates and records information on the digital twin.',
@@ -73,21 +73,14 @@ export default function VisionSection({
 
                     {/* Main Content Area */}
                     <div className={styles.cardContent}>
-                        {/* Real Space Icon (Building/Architecture) */}
-                        <div className={styles.iconWrapper}>
-                            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(100, 116, 139, 0.4)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-                                <path d="M9 22v-4h6v4"></path>
-                                <path d="M8 6h.01"></path>
-                                <path d="M16 6h.01"></path>
-                                <path d="M12 6h.01"></path>
-                                <path d="M12 10h.01"></path>
-                                <path d="M12 14h.01"></path>
-                                <path d="M16 10h.01"></path>
-                                <path d="M16 14h.01"></path>
-                                <path d="M8 10h.01"></path>
-                                <path d="M8 14h.01"></path>
-                            </svg>
+                        {/* Real Space Image */}
+                        <div className={styles.imageWrapper}>
+                            <Image
+                                src={leftImage}
+                                alt="Real Space"
+                                fill
+                                style={{ objectFit: 'cover' }}
+                            />
                         </div>
                     </div>
                 </div>
@@ -136,13 +129,14 @@ export default function VisionSection({
                 <div className={`${styles.card} ${styles.cardRight}`}>
                     {/* Main Content Area */}
                     <div className={styles.cardContent}>
-                        {/* Virtual Space Icon (Digital Cube/Wireframe) */}
-                        <div className={styles.iconWrapper}>
-                            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="rgba(255, 255, 255, 0.6)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                            </svg>
+                        {/* Virtual Space Image */}
+                        <div className={styles.imageWrapper}>
+                            <Image
+                                src={rightImage}
+                                alt="Virtual Space"
+                                fill
+                                style={{ objectFit: 'cover' }}
+                            />
                         </div>
                     </div>
 
