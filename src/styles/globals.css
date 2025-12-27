@@ -1643,19 +1643,75 @@ footer p {
 .smart-navbar .smart-navbar-link {
   display: inline-flex !important;
   align-items: center;
-  gap: 6px;
-  font-size: 1.15rem;
-  /* Bigger text */
-  font-weight: 600;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: 500;
   color: #1a1a5e;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   white-space: nowrap;
   letter-spacing: 0.01em;
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .smart-navbar .smart-navbar-link:hover {
-  color: #4527a0;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  color: #0f0f3e;
+  transform: translateY(-1px);
+}
+
+/* Scrolled State - "Soft Blue Mist" for visibility on white */
+.smart-navbar.scrolled .smart-navbar-link:hover {
+  background: rgba(26, 26, 94, 0.06);
+  /* Brand blue tint */
+  border: 1px solid rgba(26, 26, 94, 0.12);
+  /* Subtle contrast border */
+  box-shadow:
+    0 4px 12px rgba(26, 26, 94, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  /* Inner white highlight */
+  color: #080829;
+  /* Deepest blue for text */
+}
+
+/* Shine effect */
+.smart-navbar .smart-navbar-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent);
+  transition: left 0.6s ease;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Scrolled State Shine - White flash over blue tint */
+.smart-navbar.scrolled .smart-navbar-link::before {
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.8),
+      transparent);
+}
+
+.smart-navbar .smart-navbar-link:hover::before {
+  left: 100%;
 }
 
 .smart-navbar .smart-navbar-link .link-dot {
