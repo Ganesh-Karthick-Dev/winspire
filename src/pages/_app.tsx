@@ -9,6 +9,7 @@ import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import '@/styles/globals.css';
 import 'lenis/dist/lenis.css';
+import 'flatpickr/dist/themes/airbnb.css';
 
 import ScrollManager from '@/components/ScrollManager';
 import SmoothScroll from '@/components/SmoothScroll';
