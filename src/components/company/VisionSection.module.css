@@ -338,6 +338,18 @@
         width: 100%;
     }
 
+    /* Mobile: Remove padding so images fill the card */
+    .cardContent {
+        padding: 0;
+    }
+
+    /* Mobile: Make images fill the entire card */
+    .imageWrapper {
+        width: 70%;
+        height: 70%;
+        border-radius: 0;
+    }
+
     /* Top Card rounded top */
     .cardLeft {
         border-radius: 20px 20px 0 0;
@@ -356,13 +368,16 @@
         transform: translate(-50%, -50%);
         margin: 0;
         z-index: 30;
-        width: 220px;
-        /* Slightly smaller on mobile if needed, or keep 280 */
-        height: 220px;
+        width: 160px;
+        height: 160px;
     }
 
     .badgeCenter {
-        width: 140px;
-        height: 140px;
+        width: 100px;
+        height: 100px;
+    }
+
+    .badgeText {
+        font-size: 0.75rem;
     }
 }
