@@ -30,15 +30,20 @@ export default function Footer() {
                     // borderBottom: '1px solid rgba(255,255,255,0.1)'
                 }}>
                     {/* Logo */}
+                    {/* Logo */}
                     <div style={{
-                        fontSize: '1.5rem',
-                        fontWeight: 700,
-                        letterSpacing: '0.3em',
-                        color: 'white',
-                        fontFamily: '"Outfit", sans-serif'
-                    }}>
-                        WINSPIRE
-                    </div>
+                        width: '180px',
+                        height: '50px',
+                        backgroundColor: 'white',
+                        maskImage: 'url("/images/Logo-White.svg")',
+                        maskSize: 'contain',
+                        maskRepeat: 'no-repeat',
+                        maskPosition: 'left center',
+                        WebkitMaskImage: 'url("/images/Logo-White.svg")',
+                        WebkitMaskSize: 'contain',
+                        WebkitMaskRepeat: 'no-repeat',
+                        WebkitMaskPosition: 'left center'
+                    }} />
 
                     {/* Social Links */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '50px' }}>
@@ -109,11 +114,11 @@ export default function Footer() {
                             alignItems: 'center',
                             background: 'white'
                         }}>
-                            <div>
+                            <div style={{ textAlign: 'left' }}>
                                 <div style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a1a' }}>Winspire RCM</div>
                                 <div style={{ fontSize: '0.8rem', color: '#666' }}>Service Site</div>
                             </div>
-                            <span style={{ fontSize: '1.2rem', color: '#333' }}>↗</span>
+                            <span style={{ fontSize: '1.2rem', color: '#333', fontWeight: 'bold' }}>↗</span>
                         </div>
 
                         {/* Award Badge */}
@@ -137,7 +142,7 @@ export default function Footer() {
                                 fontSize: '0.7rem',
                                 fontWeight: 700
                             }}>★</div>
-                            <div>
+                            <div style={{ textAlign: 'left' }}>
                                 <div style={{ fontSize: '0.65rem', color: '#666', letterSpacing: '0.05em' }}>HEALTHCARE EXCELLENCE</div>
                                 <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#e53935' }}>2024 Award</div>
                             </div>
@@ -284,7 +289,7 @@ export default function Footer() {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     padding: '40px 60px',
-                    borderTop: '1px solid rgba(255,255,255,0.1)',
+                    borderTop: '2px solid rgba(255,255,255,0.3)',
                     marginTop: '60px'
                 }}>
                     {/* Left - Privacy Badge + Link */}
