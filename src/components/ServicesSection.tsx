@@ -183,6 +183,7 @@ export default function ServicesSection() {
                     padding-top: 40px;
                     padding-right: 60px;
                     padding-bottom: 60px;
+                    padding-left: 80px; /* Increased to move more to center */
                 }
 
                 .services-headline {
