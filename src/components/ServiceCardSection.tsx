@@ -383,6 +383,7 @@ export default function ServiceCardSection() {
                     {/* ROW 1: Top Left - Service Title */}
                     <div
                         ref={titleRef}
+                        className="service-left-panel"
                         style={{
                             position: 'absolute',
                             top: '120px',
@@ -425,6 +426,7 @@ export default function ServiceCardSection() {
 
                         <h3
                             ref={headlineRef}
+                            className="service-headline-text"
                             style={{
                                 color: 'white',
                                 fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
@@ -442,6 +444,7 @@ export default function ServiceCardSection() {
                     {/* ROW 2: Center - Animated Sphere */}
                     <div
                         ref={sphereRef}
+                        className="service-center-sphere"
                         style={{
                             position: 'absolute',
                             top: '50%',
@@ -473,6 +476,7 @@ export default function ServiceCardSection() {
                     {/* ROW 3: Bottom Right - Content */}
                     <div
                         ref={contentRef}
+                        className="service-right-panel"
                         style={{
                             position: 'absolute',
                             bottom: '120px',
@@ -482,6 +486,7 @@ export default function ServiceCardSection() {
                         }}
                     >
                         <p
+                            className="service-description-text"
                             style={{
                                 color: 'white',
                                 fontSize: '25px',

@@ -2064,10 +2064,92 @@ footer p {
   }
 
   .smart-navbar .smart-navbar-logo div {
-    width: 110px !important;
     height: 30px !important;
   }
+}
 
+/* Laptop / Small Desktop Adjustments - BALANCED OVERRIDES */
+@media (max-width: 1440px),
+(max-height: 900px) {
+  .service-left-panel {
+    top: 80px !important;
+    left: 80px !important;
+    max-width: 420px !important;
+  }
+
+  .service-right-panel {
+    bottom: 80px !important;
+    right: 80px !important;
+    max-width: 420px !important;
+  }
+
+  .service-center-sphere {
+    width: 380px !important;
+    height: 380px !important;
+  }
+
+  .service-headline-text {
+    font-size: 2rem !important;
+    margin-top: 40px !important;
+    word-spacing: normal !important;
+  }
+
+  .service-description-text {
+    font-size: 20px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 24px !important;
+    word-spacing: normal !important;
+  }
+}
+
+@media (max-width: 1280px) {
+  .service-center-sphere {
+    width: 340px !important;
+    height: 340px !important;
+  }
+
+  .service-left-panel {
+    top: 50px !important;
+    left: 50px !important;
+    max-width: 350px !important;
+  }
+
+  .service-right-panel {
+    bottom: 50px !important;
+    right: 50px !important;
+    max-width: 350px !important;
+  }
+
+  .service-headline-text {
+    font-size: 1.6rem !important;
+    margin-top: 30px !important;
+  }
+
+  .service-description-text {
+    font-size: 17px !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .service-center-sphere {
+    width: 250px !important;
+    height: 250px !important;
+  }
+
+  .service-left-panel {
+    top: 20px !important;
+    left: 20px !important;
+    max-width: 220px !important;
+  }
+
+  .service-right-panel {
+    bottom: 20px !important;
+    right: 20px !important;
+    max-width: 220px !important;
+  }
+}
+
+@media (max-width: 480px) {
   .smart-navbar .smart-navbar-contact {
     padding: 8px 12px;
     font-size: 0.75rem;
