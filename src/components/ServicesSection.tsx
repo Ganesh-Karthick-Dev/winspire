@@ -19,34 +19,13 @@ if (typeof window !== 'undefined') {
 }
 
 export default function ServicesSection() {
-    const videoRef = useRef<HTMLVideoElement>(null);
     const para1Ref = useRef<HTMLParagraphElement>(null);
     const para2Ref = useRef<HTMLParagraphElement>(null);
     const para3Ref = useRef<HTMLParagraphElement>(null);
     const sectionRef = useRef<HTMLElement>(null);
     const isMobile = useIsMobile();
 
-    // Auto-play video when in view
-    useEffect(() => {
-        const video = videoRef.current;
-        if (!video) return;
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        video.play();
-                    } else {
-                        video.pause();
-                    }
-                });
-            },
-            { threshold: 0.3 }
-        );
-
-        observer.observe(video);
-        return () => observer.disconnect();
-    }, []);
 
     // GSAP Scroll-triggered fade animations for individual lines
     // Only fade IN from bottom when scrolling down, no fade out when scrolling up
@@ -107,14 +86,11 @@ export default function ServicesSection() {
 
                 {/* === RIGHT SIDE: SCROLLABLE CONTENT === */}
                 <div className="services-right">
-                    {/* Video Card */}
+                    {/* Image Card */}
                     <div className="services-video-card">
-                        <video
-                            ref={videoRef}
-                            src="/video/sample/section2_video.mp4"
-                            muted
-                            loop
-                            playsInline
+                        <img
+                            src="/poster/qefqe.webp"
+                            alt="Winspire Healthcare"
                             className="services-video"
                         />
                     </div>

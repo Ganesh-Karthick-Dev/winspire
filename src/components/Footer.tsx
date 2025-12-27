@@ -99,7 +99,7 @@ export default function Footer() {
                         {/* Card Image */}
                         <div style={{ width: '100%', height: '160px', position: 'relative', overflow: 'hidden' }}>
                             <Image
-                                src="/images/links/links_workspace_laptop_1766075249577.png"
+                                src="/poster/qefqe.webp"
                                 alt="Winspire RCM Service"
                                 fill
                                 style={{ objectFit: 'cover' }}
@@ -360,7 +360,7 @@ export default function Footer() {
                 <div className="footer-mobile-card">
                     <div className="footer-card-image">
                         <Image
-                            src="/images/links/links_workspace_laptop_1766075249577.png"
+                            src="/poster/qefqe.webp"
                             alt="Service"
                             fill
                             style={{ objectFit: 'cover' }}

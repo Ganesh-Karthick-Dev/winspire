@@ -107,8 +107,8 @@ const CareersContactLinks: React.FC = () => {
                                 zIndex: 1
                             }}>
                                 <Image
-                                    src="/images/links/links_team_meeting_1766075227437.png"
-                                    alt="Team Meeting"
+                                    src="/images/home/careers.webp"
+                                    alt="Careers"
                                     fill
                                     style={{ objectFit: 'cover' }}
                                 />
@@ -161,8 +161,8 @@ const CareersContactLinks: React.FC = () => {
                                 zIndex: 1
                             }}>
                                 <Image
-                                    src="/images/links/links_workspace_laptop_1766075249577.png"
-                                    alt="Workspace"
+                                    src="/images/home/contact.webp"
+                                    alt="Contact"
                                     fill
                                     style={{ objectFit: 'cover' }}
                                 />
@@ -184,7 +184,7 @@ const CareersContactLinks: React.FC = () => {
                             <div className="card-top-row">
                                 <span className="card-label">Generate<br />New Values</span>
                                 <div className="card-image-thumb">
-                                    <img src="/images/links/links_team_meeting_1766075227437.png" alt="Careers" />
+                                    <img src="/images/home/careers.webp" alt="Careers" />
                                 </div>
                             </div>
                             <div className="card-bottom-row">
@@ -206,7 +206,7 @@ const CareersContactLinks: React.FC = () => {
                             <div className="card-top-row">
                                 <span className="card-label">Feel Free<br />to Connect</span>
                                 <div className="card-image-thumb">
-                                    <img src="/images/links/links_workspace_laptop_1766075249577.png" alt="Contact" />
+                                    <img src="/images/home/contact.webp" alt="Contact" />
                                 </div>
                             </div>
                             <div className="card-bottom-row">

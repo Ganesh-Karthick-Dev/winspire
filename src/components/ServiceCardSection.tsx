@@ -22,33 +22,12 @@ if (typeof window !== 'undefined') {
 export default function ServiceCardSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const sphereRef = useRef<HTMLDivElement>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
     const titleRef = useRef<HTMLDivElement>(null);
     const headlineRef = useRef<HTMLHeadingElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const isMobile = useIsMobile();
 
-    // Auto-play video
-    useEffect(() => {
-        const video = videoRef.current;
-        if (!video) return;
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        video.play();
-                    } else {
-                        video.pause();
-                    }
-                });
-            },
-            { threshold: 0.3 }
-        );
-
-        observer.observe(video);
-        return () => observer.disconnect();
-    }, []);
 
     // GSAP ScrollTrigger for scroll-based animations (desktop only)
     useEffect(() => {
@@ -171,14 +150,11 @@ export default function ServiceCardSection() {
                         3D Communication Services Powered by Digital Twins
                     </h3>
 
-                    {/* Circular Video/Image */}
+                    {/* Circular Image */}
                     <div ref={mobileSphereRef} className="service-mobile-sphere">
-                        <video
-                            ref={videoRef}
-                            src="/video/sample/section2_video.mp4"
-                            muted
-                            loop
-                            playsInline
+                        <img
+                            src="/poster/qefqe.webp"
+                            alt="Winspire Service"
                             className="service-mobile-video"
                         />
                     </div>
@@ -458,12 +434,9 @@ export default function ServiceCardSection() {
                             boxShadow: '0 20px 60px rgba(0,0,0,0.3), inset 0 0 60px rgba(100,150,255,0.2)',
                         }}
                     >
-                        <video
-                            ref={videoRef}
-                            src="/video/sample/section2_video.mp4"
-                            muted
-                            loop
-                            playsInline
+                        <img
+                            src="/poster/qefqe.webp"
+                            alt="Winspire Service"
                             style={{
                                 width: '100%',
                                 height: '100%',
