@@ -176,7 +176,7 @@ export default function Company() {
                     subtitle="Our purpose and commitment"
                     statement={`Transforming Healthcare
 With Technology.`}
-                    description="At Winspire RCM, we believe in leveraging cutting-edge technology to revolutionize revenue cycle management. Our mission is to empower healthcare providers with AI-driven solutions that streamline operations, maximize revenue, and allow them to focus on what matters most—patient care. We are committed to delivering exceptional results through innovation, transparency, and unwavering dedication to our clients' success."
+                    description="Our mission is to enable healthcare organizations to operate with clarity, control, and confidence in their revenue cycle. By combining advanced technology, intelligent automation, and deep domain expertise, we simplify complex financial workflows and improve operational efficiency."
                 />
             </div>
 
