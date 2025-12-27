@@ -67,12 +67,7 @@ export default function Solutions() {
             const { ScrollTrigger } = await import('gsap/ScrollTrigger');
             gsap.registerPlugin(ScrollTrigger);
 
-            // Force video play on navigation
-            const video = document.querySelector(`.${styles.heroCardVideo}`) as HTMLVideoElement;
-            if (video) {
-                video.muted = true;
-                video.play().catch(e => console.log('Autoplay blocked', e));
-            }
+
 
             // Use gsap.context for easy cleanup
             ctx = gsap.context(() => {
@@ -164,17 +159,13 @@ export default function Solutions() {
                     <h1 className={styles.heroTitle}>Solutions</h1>
                 </div>
 
-                {/* Video Card - half in, half out */}
+                {/* Image Card - half in, half out */}
                 <div className={styles.heroCard}>
-                    <video
+                    <img
                         className={styles.heroCardVideo}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                    >
-                        <source src="/video/sample/section2_video.mp4" type="video/mp4" />
-                    </video>
+                        src="/poster/qefqe.webp"
+                        alt="Solutions"
+                    />
                 </div>
 
                 {/* Scroll Indicator */}
