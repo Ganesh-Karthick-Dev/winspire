@@ -88,11 +88,6 @@ export default function AboutSection() {
                 {/* Top Left: "About Us" Label with two-dot pattern */}
                 <div
                     ref={labelRef}
-                    style={{
-                        position: 'absolute',
-                        top: '80px',
-                        left: '88px',
-                    }}
                     className="about-label-container"
                 >
                     <div className="flex items-center gap-4">
@@ -146,15 +141,6 @@ export default function AboutSection() {
                 {/* Headline - Centered Desktop, Left Mobile */}
                 <div
                     ref={headlineRef}
-                    style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: isMobile ? '0' : '50%',
-                        transform: isMobile ? 'translate(0, -50%)' : 'translate(-50%, -50%)',
-                        textAlign: isMobile ? 'left' : 'center',
-                        width: '100%',
-                        padding: isMobile ? '0 24px' : '0 24px',
-                    }}
                     className="about-headline-container"
                 >
                     <h3

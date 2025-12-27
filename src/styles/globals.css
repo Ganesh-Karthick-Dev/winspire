@@ -619,8 +619,46 @@ section {
 }
 
 /* ============================================
-   About Section Mobile Styles
+   About Section - Desktop Styles
    ============================================ */
+
+.about-label-container {
+  position: absolute;
+  top: 80px;
+  left: 88px;
+  z-index: 10;
+}
+
+.about-headline-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  padding: 0 24px;
+  z-index: 10;
+}
+
+/* Laptop/Small Desktop Adjustment - Reduce vertical gap */
+@media (min-width: 1025px) and (max-height: 900px) {
+  .about-headline-container {
+    top: 45%;
+    /* Move up closer to label on shorter screens */
+  }
+}
+
+/* Tablet Adjustment */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .about-label-container {
+    left: 40px;
+    top: 60px;
+  }
+
+  .about-headline-container {
+    top: 45%;
+  }
+}
 
 .about-section {
   background: transparent;
@@ -654,7 +692,7 @@ section {
     left: auto !important;
     transform: none !important;
     padding: 0 !important;
-    text-align: center;
+    text-align: left;
   }
 }
 
