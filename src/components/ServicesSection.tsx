@@ -27,30 +27,32 @@ export default function ServicesSection() {
 
 
 
-    // GSAP Scroll-triggered fade animations for individual lines
-    // Only fade IN from bottom when scrolling down, no fade out when scrolling up
+    // GSAP Scroll-triggered fade animations - OPTIMIZED: using batch instead of individual triggers
+    // This reduces 16+ ScrollTrigger instances to a single batch handler
     useEffect(() => {
         const ctx = gsap.context(() => {
             // Get all fade-line elements
-            const lines = document.querySelectorAll('.fade-line');
+            const lines = gsap.utils.toArray('.fade-line') as Element[];
 
-            lines.forEach((line) => {
-                // Set initial state - faded and slightly below
-                gsap.set(line, { opacity: 0.15, y: 15 });
+            if (lines.length === 0) return;
 
-                // Fade in from bottom when entering viewport
-                gsap.to(line, {
-                    opacity: 1,
-                    y: 0,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: line,
-                        start: 'top 95%',
-                        end: 'top 60%',
-                        scrub: 0.3,
-                        // Once animation is done, it stays - no reverse
-                    }
-                });
+            // Set initial state for all lines
+            gsap.set(lines, { opacity: 0.15, y: 15 });
+
+            // Use ScrollTrigger.batch for efficient batch animations
+            ScrollTrigger.batch(lines, {
+                start: 'top 95%',
+                end: 'top 60%',
+                onEnter: (batch) => {
+                    gsap.to(batch, {
+                        opacity: 1,
+                        y: 0,
+                        ease: 'power2.out',
+                        stagger: 0.08,
+                        duration: 0.4,
+                    });
+                },
+                // Once animated in, they stay visible (no onLeave/onLeaveBack)
             });
         }, sectionRef);
 

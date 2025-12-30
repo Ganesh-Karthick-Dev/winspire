@@ -7,7 +7,7 @@
  * Automatically uses mobile-optimized keyframes on small screens.
  */
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -77,35 +77,40 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     // After hydration, use the correct keyframes
     const activeKeyframes = customKeyframes || (isHydrated && isMobile ? mobileScrollKeyframes : scrollKeyframes);
 
-    // Initialize with first keyframe values
+    // Initialize with first keyframe values - USE REFS to avoid re-renders on scroll
     const firstKeyframe = activeKeyframes[0];
-    const [transform, setTransform] = useState<ModelTransform>({
+    const transformRef = useRef<ModelTransform>({
         position: { ...firstKeyframe.transform.position },
         rotation: { ...firstKeyframe.transform.rotation },
         scale: firstKeyframe.transform.scale,
     });
 
-    // Initialize lighting state
-    const [lighting, setLighting] = useState<LightingConfig>(
+    // Initialize lighting ref
+    const lightingRef = useRef<LightingConfig>(
         firstKeyframe.lighting || defaultLighting
     );
 
-    const [scrollProgress, setScrollProgress] = useState(0);
+    const scrollProgressRef = useRef(0);
 
-    // Memoized update function
+    // Minimal re-render trigger - only updates when explicitly needed (e.g., keyframe switch)
+    const [, setTick] = useState(0);
+
+    // Memoized update function - updates refs directly, no React re-renders
     const updateTransform = useCallback((progress: number) => {
-        setScrollProgress(progress);
-        setTransform(getTransformAtProgress(progress, activeKeyframes));
-        setLighting(getLightingAtProgress(progress, activeKeyframes));
+        scrollProgressRef.current = progress;
+        transformRef.current = getTransformAtProgress(progress, activeKeyframes);
+        lightingRef.current = getLightingAtProgress(progress, activeKeyframes);
     }, [activeKeyframes]);
 
     // Update transform immediately when keyframes change (e.g., mobile/desktop switch)
     useEffect(() => {
         if (isHydrated) {
             // Apply the current scroll position with new keyframes
-            updateTransform(scrollProgress);
+            updateTransform(scrollProgressRef.current);
+            // Trigger a re-render to update consumers with new ref values
+            setTick(t => t + 1);
         }
-    }, [activeKeyframes, isHydrated]);
+    }, [activeKeyframes, isHydrated, updateTransform]);
 
     useEffect(() => {
         // Skip on server or if disabled
@@ -124,18 +129,22 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
             },
         });
 
-        // Handle resize - switch between mobile/desktop keyframes
+        // Debounced resize handler - prevents excessive calls during resize
+        let resizeTimeout: ReturnType<typeof setTimeout>;
         const handleResize = () => {
-            const nowMobile = isMobileDevice();
-            if (nowMobile !== isMobile) {
-                setIsMobile(nowMobile);
-            }
-            // Re-update transform with current progress
-            updateTransform(scrollTrigger.progress || 0);
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const nowMobile = isMobileDevice();
+                if (nowMobile !== isMobile) {
+                    setIsMobile(nowMobile);
+                }
+                // Re-update transform with current progress
+                updateTransform(scrollTrigger.progress || 0);
+            }, 100); // 100ms debounce
         };
         window.addEventListener('resize', handleResize);
 
-        // Debug log
+        // Debug log (can be removed in production)
         console.log('🎬 ScrollAnimation initialized', {
             isMobile,
             isHydrated,
@@ -145,25 +154,26 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         });
 
         return () => {
+            clearTimeout(resizeTimeout);
             scrollTrigger.kill();
             window.removeEventListener('resize', handleResize);
         };
     }, [enabled, scrub, trigger, start, end, updateTransform, isMobile, isHydrated, activeKeyframes]);
 
     return {
-        /** Current interpolated transform values */
-        transform,
-        /** Current interpolated lighting values */
-        lighting,
+        /** Current interpolated transform values (read from ref) */
+        transform: transformRef.current,
+        /** Current interpolated lighting values (read from ref) */
+        lighting: lightingRef.current,
         /** Current scroll progress (0-1) */
-        scrollProgress,
+        scrollProgress: scrollProgressRef.current,
         /** Whether mobile keyframes are being used */
         isMobile,
         /** Current keyframe label (if any) */
         currentLabel: activeKeyframes.find(
             (kf, i, arr) =>
-                scrollProgress >= kf.scrollProgress &&
-                (i === arr.length - 1 || scrollProgress < arr[i + 1].scrollProgress)
+                scrollProgressRef.current >= kf.scrollProgress &&
+                (i === arr.length - 1 || scrollProgressRef.current < arr[i + 1].scrollProgress)
         )?.label,
     };
 }

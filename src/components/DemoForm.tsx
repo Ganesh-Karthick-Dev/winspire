@@ -25,8 +25,8 @@ export default function DemoForm() {
         challenge: '',
         demoType: 'live'
     });
-    const [preferredDate, setPreferredDate] = useState<Date | null>(null);
-    const [preferredTime, setPreferredTime] = useState<Date | null>(null);
+    const [preferredDate, setPreferredDate] = useState<Date | undefined>(undefined);
+    const [preferredTime, setPreferredTime] = useState<Date | undefined>(undefined);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -250,7 +250,7 @@ export default function DemoForm() {
                                 options={{
                                     minDate: "today",
                                     dateFormat: "F j, Y",
-                                    disableMobile: "true"
+                                    disableMobile: true
                                 }}
                                 placeholder="Select Date"
                                 className={`${styles.input} ${errors.preferredDate ? styles.inputError : ''}`}
@@ -270,7 +270,7 @@ export default function DemoForm() {
                                     noCalendar: true,
                                     dateFormat: "h:i K",
                                     time_24hr: false,
-                                    disableMobile: "true"
+                                    disableMobile: true
                                 }}
                                 placeholder="Select Time"
                                 className={`${styles.input} ${errors.preferredTime ? styles.inputError : ''}`}

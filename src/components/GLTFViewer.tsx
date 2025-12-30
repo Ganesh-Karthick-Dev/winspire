@@ -67,6 +67,7 @@ export default function GLTFViewer({
     // Continuous rotation ref
     const continuousRotation = useRef(0);
     const isAtVisionSection = useRef(false);
+    const visionObserverRef = useRef<IntersectionObserver | null>(null);
 
     // Store base rotation from GSAP
     const baseRotationX = useRef(0);
@@ -97,14 +98,21 @@ export default function GLTFViewer({
     // Helper: Convert degrees to radians
     const toRadians = (deg: number) => (deg * Math.PI) / 180;
 
-    // Check if user has scrolled to vision section
-    const checkVisionSection = useCallback(() => {
+    // Setup IntersectionObserver for vision section detection (replaces expensive per-frame DOM queries)
+    const setupVisionObserver = useCallback(() => {
+        if (visionObserverRef.current) return; // Already setup
+
         const visionSection = document.getElementById('vision');
-        if (visionSection) {
-            const rect = visionSection.getBoundingClientRect();
-            // Consider "at vision" when section is 50% visible
-            isAtVisionSection.current = rect.top < window.innerHeight * 0.5 && rect.bottom > 0;
-        }
+        if (!visionSection) return;
+
+        visionObserverRef.current = new IntersectionObserver(
+            (entries) => {
+                // Consider "at vision" when section is 50% visible
+                isAtVisionSection.current = entries[0].isIntersecting;
+            },
+            { threshold: 0.5 }
+        );
+        visionObserverRef.current.observe(visionSection);
     }, []);
 
     // Smooth rotation update in animation loop
@@ -221,8 +229,8 @@ export default function GLTFViewer({
             // Set up mouse tracking
             window.addEventListener('mousemove', handleMouseMove);
 
-            // Set up scroll tracking for vision section
-            window.addEventListener('scroll', checkVisionSection);
+            // Set up IntersectionObserver for vision section (replaces scroll listener)
+            setupVisionObserver();
 
             // Start animation loop with rotation updates
             const animation = createAnimationLoop(
@@ -230,8 +238,7 @@ export default function GLTFViewer({
                 state.scene,
                 state.camera,
                 () => {
-
-                    checkVisionSection();
+                    // Removed checkVisionSection() - now using IntersectionObserver
                     captureBaseRotation();
                     updateRotation();
                 }
@@ -244,11 +251,12 @@ export default function GLTFViewer({
                 onModelReady(state);
             }
 
-            // Return cleanup function
             return () => {
                 window.removeEventListener('resize', handleResize);
                 window.removeEventListener('mousemove', handleMouseMove);
-                window.removeEventListener('scroll', checkVisionSection);
+                if (visionObserverRef.current) {
+                    visionObserverRef.current.disconnect();
+                }
                 animation.stop();
                 state.renderer.dispose();
             };
@@ -258,7 +266,7 @@ export default function GLTFViewer({
                 onError(error instanceof Error ? error : new Error('Failed to initialize 3D scene'));
             }
         }
-    }, [url, onModelReady, onError, handleMouseMove, checkVisionSection, captureBaseRotation, updateRotation]); // Removed manualTransform - using refs for live updates
+    }, [url, onModelReady, onError, handleMouseMove, setupVisionObserver, captureBaseRotation, updateRotation]); // Removed manualTransform - using refs for live updates
 
     // Handle canvas ready
     const handleCanvasReady = useCallback((canvas: HTMLCanvasElement) => {
@@ -273,11 +281,12 @@ export default function GLTFViewer({
         });
     }, [initializeScene]);
 
-    // Cleanup on unmount
     useEffect(() => {
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('scroll', checkVisionSection);
+            if (visionObserverRef.current) {
+                visionObserverRef.current.disconnect();
+            }
             if (animationRef.current) {
                 animationRef.current.stop();
             }
@@ -285,7 +294,7 @@ export default function GLTFViewer({
                 stateRef.current.renderer.dispose();
             }
         };
-    }, [handleMouseMove, checkVisionSection]);
+    }, [handleMouseMove]);
 
     return <WebGLCanvas onCanvasReady={handleCanvasReady} className={className} />;
 }
