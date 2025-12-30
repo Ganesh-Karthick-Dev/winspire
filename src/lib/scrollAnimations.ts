@@ -62,196 +62,518 @@ export const animationSettings = {
      * Lower = smoother but more lag, Higher = more responsive
      * Recommended: 0.08-0.15 for buttery smooth
      */
-    dampingFactor: 0.1,
+    dampingFactor: 0.10,
 };
 
 
+// ============================================================================
+// SCROLL KEYFRAMES - Extra smooth with many intermediate keyframes
+// ============================================================================
 export const scrollKeyframes: ScrollKeyframe[] = [
+    // ============ HERO SECTION ============
     {
-        "scrollProgress": 0,
-        "label": "Hero",
-        "transform": {
-            "position": {
-                "x": 0,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -22.177,
-                "y": 37.456,
-                "z": 23.23
-            },
-            "scale": 10
+        scrollProgress: 0,
+        label: "Hero",
+        transform: {
+            position: { x: 0, y: 0.06, z: 0 },
+            rotation: { x: -22.177, y: 37.456, z: 23.23 },
+            scale: 10
         }
     },
     {
-        "scrollProgress": 0.054,
-        "label": "Hero end",
-        "transform": {
-            "position": {
-                "x": 0,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -22.177,
-                "y": 52.456,
-                "z": 23.23
-            },
-            "scale": 10
+        scrollProgress: 0.027,
+        label: "Hero mid",
+        transform: {
+            position: { x: 0, y: 0.06, z: 0 },
+            rotation: { x: -22.177, y: 45, z: 23.23 },
+            scale: 10
         }
     },
     {
-        "scrollProgress": 0.091,
-        "label": "hero and about mid",
-        "transform": {
-            "position": {
-                "x": 0,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -22.177,
-                "y": 62.456,
-                "z": 23.23
-            },
-            "scale": 13
+        scrollProgress: 0.054,
+        label: "Hero end",
+        transform: {
+            position: { x: 0, y: 0.06, z: 0 },
+            rotation: { x: -22.177, y: 52.456, z: 23.23 },
+            scale: 10
         }
     },
     {
-        "scrollProgress": 0.178,
-        "label": "aboutus center",
-        "transform": {
-            "position": {
-                "x": 1,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -112.177,
-                "y": 57.456,
-                "z": 23.23
-            },
-            "scale": 15
+        scrollProgress: 0.072,
+        label: "Hero to about 1",
+        transform: {
+            position: { x: 0, y: 0.06, z: 0 },
+            rotation: { x: -22.177, y: 57, z: 23.23 },
+            scale: 11.5
         }
     },
     {
-        "scrollProgress": 0.245,
-        "label": "second part of aboutus",
-        "transform": {
-            "position": {
-                "x": 0.8,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -112.177,
-                "y": 17.456,
-                "z": 23.23
-            },
-            "scale": 15
+        scrollProgress: 0.091,
+        label: "Hero about mid",
+        transform: {
+            position: { x: 0, y: 0.06, z: 0 },
+            rotation: { x: -22.177, y: 62.456, z: 23.23 },
+            scale: 13
+        }
+    },
+
+    // ============ ABOUT SECTION TRANSITION (extra smooth) ============
+    {
+        scrollProgress: 0.105,
+        label: "About trans 1",
+        transform: {
+            position: { x: 0.15, y: 0.06, z: 0 },
+            rotation: { x: -37, y: 61, z: 23.23 },
+            scale: 13.5
         }
     },
     {
-        "scrollProgress": 0.358,
-        "label": "about end",
-        "transform": {
-            "position": {
-                "x": 0.8,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -112.177,
-                "y": -17.544,
-                "z": 23.23
-            },
-            "scale": 15
+        scrollProgress: 0.12,
+        label: "About trans 2",
+        transform: {
+            position: { x: 0.3, y: 0.06, z: 0 },
+            rotation: { x: -52, y: 60, z: 23.23 },
+            scale: 14
         }
     },
     {
-        "scrollProgress": 0.396,
-        "label": "service start",
-        "transform": {
-            "position": {
-                "x": 0.8,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -112.177,
-                "y": -52.544,
-                "z": 23.23
-            },
-            "scale": 15
+        scrollProgress: 0.135,
+        label: "About trans 3",
+        transform: {
+            position: { x: 0.48, y: 0.06, z: 0 },
+            rotation: { x: -67, y: 59, z: 23.23 },
+            scale: 14.25
         }
     },
     {
-        "scrollProgress": 0.452,
-        "label": "service mid",
-        "transform": {
-            "position": {
-                "x": 1,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -172.177,
-                "y": -82.544,
-                "z": 23.23
-            },
-            "scale": 15
+        scrollProgress: 0.15,
+        label: "About trans 4",
+        transform: {
+            position: { x: 0.65, y: 0.06, z: 0 },
+            rotation: { x: -82, y: 58, z: 23.23 },
+            scale: 14.5
         }
     },
     {
-        "scrollProgress": 0.546,
-        "label": "service end",
-        "transform": {
-            "position": {
-                "x": 0.4,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -172.177,
-                "y": -127.544,
-                "z": 23.23
-            },
-            "scale": 10
+        scrollProgress: 0.164,
+        label: "About trans 5",
+        transform: {
+            position: { x: 0.82, y: 0.06, z: 0 },
+            rotation: { x: -97, y: 57.7, z: 23.23 },
+            scale: 14.75
         }
     },
     {
-        "scrollProgress": 0.603,
-        "label": "intelligent center",
-        "transform": {
-            "position": {
-                "x": 0,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -180,
-                "y": -177.544,
-                "z": 23.23
-            },
-            "scale": 10
+        scrollProgress: 0.178,
+        label: "Aboutus center",
+        transform: {
+            position: { x: 1, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: 57.456, z: 23.23 },
+            scale: 15
+        }
+    },
+
+    // ============ ABOUT SECTION CONTENT ============
+    {
+        scrollProgress: 0.195,
+        label: "About content 1",
+        transform: {
+            position: { x: 0.95, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: 47, z: 23.23 },
+            scale: 15
         }
     },
     {
-        "scrollProgress": 0.641,
-        "label": "carear start",
-        "transform": {
-            "position": {
-                "x": -0.2,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -205,
-                "y": -207.544,
-                "z": 23.23
-            },
-            "scale": 7
+        scrollProgress: 0.21,
+        label: "About mid 1",
+        transform: {
+            position: { x: 0.9, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: 37, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.228,
+        label: "About mid 1b",
+        transform: {
+            position: { x: 0.85, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: 27, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.245,
+        label: "About part 2",
+        transform: {
+            position: { x: 0.8, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: 17.456, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.265,
+        label: "About mid 2a",
+        transform: {
+            position: { x: 0.8, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: 11, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.28,
+        label: "About mid 2",
+        transform: {
+            position: { x: 0.8, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: 5, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.30,
+        label: "About mid 2b",
+        transform: {
+            position: { x: 0.8, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: -0.5, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.32,
+        label: "About mid 3",
+        transform: {
+            position: { x: 0.8, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: -6, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.34,
+        label: "About mid 3b",
+        transform: {
+            position: { x: 0.8, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: -12, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.358,
+        label: "About end",
+        transform: {
+            position: { x: 0.8, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: -17.544, z: 23.23 },
+            scale: 15
+        }
+    },
+
+    // ============ SERVICE SECTION (extra smooth) ============
+    {
+        scrollProgress: 0.368,
+        label: "Service pre 1",
+        transform: {
+            position: { x: 0.8, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: -26, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.377,
+        label: "Service trans 1",
+        transform: {
+            position: { x: 0.8, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: -35, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.386,
+        label: "Service trans 1b",
+        transform: {
+            position: { x: 0.8, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: -44, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.396,
+        label: "Service start",
+        transform: {
+            position: { x: 0.8, y: 0.06, z: 0 },
+            rotation: { x: -112.177, y: -52.544, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.403,
+        label: "Service trans 2a",
+        transform: {
+            position: { x: 0.82, y: 0.06, z: 0 },
+            rotation: { x: -120, y: -56, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.41,
+        label: "Service trans 2",
+        transform: {
+            position: { x: 0.85, y: 0.06, z: 0 },
+            rotation: { x: -127, y: -60, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.417,
+        label: "Service trans 2b",
+        transform: {
+            position: { x: 0.87, y: 0.06, z: 0 },
+            rotation: { x: -135, y: -63, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.424,
+        label: "Service trans 3",
+        transform: {
+            position: { x: 0.9, y: 0.06, z: 0 },
+            rotation: { x: -142, y: -67, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.431,
+        label: "Service trans 3b",
+        transform: {
+            position: { x: 0.92, y: 0.06, z: 0 },
+            rotation: { x: -150, y: -71, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.438,
+        label: "Service trans 4",
+        transform: {
+            position: { x: 0.95, y: 0.06, z: 0 },
+            rotation: { x: -157, y: -75, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.445,
+        label: "Service trans 4b",
+        transform: {
+            position: { x: 0.97, y: 0.06, z: 0 },
+            rotation: { x: -165, y: -79, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.452,
+        label: "Service mid",
+        transform: {
+            position: { x: 1, y: 0.06, z: 0 },
+            rotation: { x: -172.177, y: -82.544, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.464,
+        label: "Service end trans 0",
+        transform: {
+            position: { x: 0.92, y: 0.06, z: 0 },
+            rotation: { x: -172.177, y: -88, z: 23.23 },
+            scale: 14.4
+        }
+    },
+    {
+        scrollProgress: 0.476,
+        label: "Service end trans 1",
+        transform: {
+            position: { x: 0.85, y: 0.06, z: 0 },
+            rotation: { x: -172.177, y: -93, z: 23.23 },
+            scale: 13.75
+        }
+    },
+    {
+        scrollProgress: 0.488,
+        label: "Service end trans 1b",
+        transform: {
+            position: { x: 0.77, y: 0.06, z: 0 },
+            rotation: { x: -172.177, y: -99, z: 23.23 },
+            scale: 13.1
+        }
+    },
+    {
+        scrollProgress: 0.50,
+        label: "Service end trans 2",
+        transform: {
+            position: { x: 0.7, y: 0.06, z: 0 },
+            rotation: { x: -172.177, y: -105, z: 23.23 },
+            scale: 12.5
+        }
+    },
+    {
+        scrollProgress: 0.512,
+        label: "Service end trans 2b",
+        transform: {
+            position: { x: 0.62, y: 0.06, z: 0 },
+            rotation: { x: -172.177, y: -111, z: 23.23 },
+            scale: 11.85
+        }
+    },
+    {
+        scrollProgress: 0.523,
+        label: "Service end trans 3",
+        transform: {
+            position: { x: 0.55, y: 0.06, z: 0 },
+            rotation: { x: -172.177, y: -116, z: 23.23 },
+            scale: 11.25
+        }
+    },
+    {
+        scrollProgress: 0.535,
+        label: "Service end trans 3b",
+        transform: {
+            position: { x: 0.47, y: 0.06, z: 0 },
+            rotation: { x: -172.177, y: -122, z: 23.23 },
+            scale: 10.6
+        }
+    },
+    {
+        scrollProgress: 0.546,
+        label: "Service end",
+        transform: {
+            position: { x: 0.4, y: 0.06, z: 0 },
+            rotation: { x: -172.177, y: -127.544, z: 23.23 },
+            scale: 10
+        }
+    },
+
+    // ============ INTELLIGENT/CENTER SECTION (extra smooth) ============
+    {
+        scrollProgress: 0.553,
+        label: "Intel trans 0",
+        transform: {
+            position: { x: 0.35, y: 0.06, z: 0 },
+            rotation: { x: -173, y: -133, z: 23.23 },
+            scale: 10
+        }
+    },
+    {
+        scrollProgress: 0.56,
+        label: "Intel trans 1",
+        transform: {
+            position: { x: 0.3, y: 0.06, z: 0 },
+            rotation: { x: -174, y: -140, z: 23.23 },
+            scale: 10
+        }
+    },
+    {
+        scrollProgress: 0.567,
+        label: "Intel trans 1b",
+        transform: {
+            position: { x: 0.25, y: 0.06, z: 0 },
+            rotation: { x: -175, y: -146, z: 23.23 },
+            scale: 10
+        }
+    },
+    {
+        scrollProgress: 0.575,
+        label: "Intel trans 2",
+        transform: {
+            position: { x: 0.2, y: 0.06, z: 0 },
+            rotation: { x: -176, y: -152, z: 23.23 },
+            scale: 10
+        }
+    },
+    {
+        scrollProgress: 0.582,
+        label: "Intel trans 2b",
+        transform: {
+            position: { x: 0.15, y: 0.06, z: 0 },
+            rotation: { x: -177, y: -158, z: 23.23 },
+            scale: 10
+        }
+    },
+    {
+        scrollProgress: 0.589,
+        label: "Intel trans 3",
+        transform: {
+            position: { x: 0.1, y: 0.06, z: 0 },
+            rotation: { x: -178, y: -165, z: 23.23 },
+            scale: 10
+        }
+    },
+    {
+        scrollProgress: 0.596,
+        label: "Intel trans 3b",
+        transform: {
+            position: { x: 0.05, y: 0.06, z: 0 },
+            rotation: { x: -179, y: -171, z: 23.23 },
+            scale: 10
+        }
+    },
+    {
+        scrollProgress: 0.603,
+        label: "Intelligent center",
+        transform: {
+            position: { x: 0, y: 0.06, z: 0 },
+            rotation: { x: -180, y: -177.544, z: 23.23 },
+            scale: 10
+        }
+    },
+
+    // ============ CAREER SECTION (extra smooth) ============
+    {
+        scrollProgress: 0.609,
+        label: "Career trans 0",
+        transform: {
+            position: { x: -0.025, y: 0.06, z: 0 },
+            rotation: { x: -183, y: -181, z: 23.23 },
+            scale: 9.6
+        }
+    },
+    {
+        scrollProgress: 0.615,
+        label: "Career trans 1",
+        transform: {
+            position: { x: -0.05, y: 0.06, z: 0 },
+            rotation: { x: -186, y: -185, z: 23.23 },
+            scale: 9.25
+        }
+    },
+    {
+        scrollProgress: 0.622,
+        label: "Career trans 2",
+        transform: {
+            position: { x: -0.1, y: 0.06, z: 0 },
+            rotation: { x: -192, y: -192, z: 23.23 },
+            scale: 8.5
+        }
+    },
+    {
+        scrollProgress: 0.628,
+        label: "Career trans 2b",
+        transform: {
+            position: { x: -0.125, y: 0.06, z: 0 },
+            rotation: { x: -195, y: -196, z: 23.23 },
+            scale: 8.1
+        }
+    },
+    {
+        scrollProgress: 0.634,
+        label: "Career trans 3",
+        transform: {
+            position: { x: -0.15, y: 0.06, z: 0 },
+            rotation: { x: -198, y: -200, z: 23.23 },
+            scale: 7.75
+        }
+    },
+    {
+        scrollProgress: 0.641,
+        label: "Career start",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -205, y: -207.544, z: 23.23 },
+            scale: 7
         }
     }
 ];
@@ -414,4 +736,3 @@ export function getLightingAtProgress(
     // Use smooth easing for buttery transitions
     return lerpLighting(startLighting, endLighting, localProgress, true);
 }
-
