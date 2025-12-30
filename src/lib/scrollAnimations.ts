@@ -55,7 +55,7 @@ export const animationSettings = {
      * Higher = smoother but more lag
      * Recommended: 1 - 2
      */
-    scrubSmoothness: 4.5,
+    scrubSmoothness: 6.0,
 };
 
 
@@ -112,6 +112,23 @@ export const scrollKeyframes: ScrollKeyframe[] = [
         }
     },
     {
+        "scrollProgress": 0.18,
+        "label": "about to global transition",
+        "transform": {
+            "position": {
+                "x": 0.7,
+                "y": 0.06,
+                "z": 0
+            },
+            "rotation": {
+                "x": -32.177,
+                "y": 79.956,
+                "z": 23.23
+            },
+            "scale": 11.25
+        }
+    },
+    {
         "scrollProgress": 0.219,
         "label": "global section",
         "transform": {
@@ -146,6 +163,23 @@ export const scrollKeyframes: ScrollKeyframe[] = [
         }
     },
     {
+        "scrollProgress": 0.36,
+        "label": "global to service transition",
+        "transform": {
+            "position": {
+                "x": 1.0,
+                "y": 0.06,
+                "z": 0
+            },
+            "rotation": {
+                "x": -64.677,
+                "y": -45.044,
+                "z": 23.23
+            },
+            "scale": 10
+        }
+    },
+    {
         "scrollProgress": 0.430,
         "label": "service section",
         "transform": {
@@ -157,6 +191,23 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "rotation": {
                 "x": -52.177,
                 "y": -92.544,
+                "z": 23.23
+            },
+            "scale": 10
+        }
+    },
+    {
+        "scrollProgress": 0.50,
+        "label": "service to environment transition",
+        "transform": {
+            "position": {
+                "x": 0.6,
+                "y": 0.06,
+                "z": 0
+            },
+            "rotation": {
+                "x": -27.177,
+                "y": -47.544,
                 "z": 23.23
             },
             "scale": 10
@@ -194,6 +245,23 @@ export const scrollKeyframes: ScrollKeyframe[] = [
                 "z": 23.23
             },
             "scale": 10
+        }
+    },
+    {
+        "scrollProgress": 0.76,
+        "label": "careers to news transition",
+        "transform": {
+            "position": {
+                "x": 0,
+                "y": 0.06,
+                "z": 0
+            },
+            "rotation": {
+                "x": -24.677,
+                "y": 124.956,
+                "z": 15.73
+            },
+            "scale": 8.5
         }
     },
     {
