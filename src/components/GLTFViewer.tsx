@@ -16,7 +16,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { modelSettings } from '@/config/three-settings';
 import WebGLCanvas from './WebGLCanvas';
-import { resetLoaderToZero } from '@/lib/loaderManager';
 import {
     initializeThreeScene,
     createResizeHandler,
@@ -265,9 +264,8 @@ export default function GLTFViewer({
     const handleCanvasReady = useCallback((canvas: HTMLCanvasElement) => {
         canvasRef.current = canvas;
 
-        // Reset loader and schedule initialization during idle time
-        resetLoaderToZero();
-
+        // Schedule initialization during idle time
+        // Note: Loader is now controlled by the page, not the component
         scheduleIdleLoad(() => {
             if (canvasRef.current) {
                 initializeScene(canvasRef.current);

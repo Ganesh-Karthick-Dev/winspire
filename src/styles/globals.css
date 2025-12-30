@@ -251,23 +251,24 @@ a {
   position: fixed;
   inset: 0;
   z-index: 9998;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  display: flex;
   pointer-events: none;
   visibility: hidden;
 }
 
 .grid-column {
-  width: 100%;
+  flex: 1;
   height: 100%;
   background: #fff;
   transform: translateY(100%);
   will-change: transform;
+  /* Use box-shadow to fill any sub-pixel gaps */
+  box-shadow: -1px 0 0 0 #fff, 1px 0 0 0 #fff;
 }
 
 @media (max-width: 768px) {
   .grid-transition {
-    grid-template-columns: repeat(6, 1fr);
+    /* Use 6 columns on mobile */
   }
 
   .grid-column:nth-child(even) {

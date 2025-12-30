@@ -143,7 +143,7 @@ export default function Home() {
     // ========================================
     // LOADER TOGGLE
     // ========================================
-    const SHOW_LOADER = false; // Set to true to show loader animation
+    const SHOW_LOADER = true; // Set to true to show loader animation
 
     useEffect(() => {
         // Skip loader if disabled
@@ -157,18 +157,8 @@ export default function Home() {
             return;
         }
 
-        const hasInitialized = sessionStorage.getItem('3d-initialized');
-
-        if (!hasInitialized) {
-            resetLoaderToZero();
-        } else {
-            const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
-            if (loaderOverlay) {
-                loaderOverlay.style.opacity = '0';
-                loaderOverlay.style.visibility = 'hidden';
-            }
-            document.body.classList.remove('loading');
-        }
+        // Always show loader on page load - let the 3D model loading control progress
+        resetLoaderToZero();
 
         is3DDisabled.current = shouldDisable3D();
     }, []);
