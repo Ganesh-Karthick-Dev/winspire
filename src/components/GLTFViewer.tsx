@@ -128,17 +128,15 @@ export default function GLTFViewer({
         continuousRotation.current += currentSpeed;
 
         // Wobble/bobbing effect - only if enabled via prop
-        const wobbleAmount = enableWobbleRef.current ? 0.3 : 0; // ~17 degrees when enabled
+        const wobbleAmount = enableWobbleRef.current ? 0.3 : 0;
         const wobbleSpeed = 2.0;
         const wobbleX = Math.sin(continuousRotation.current * wobbleSpeed) * wobbleAmount;
         const wobbleY = Math.cos(continuousRotation.current * wobbleSpeed * 0.7) * wobbleAmount;
 
         if (currentTransform) {
             // MODE A: Manual Control (Home Page)
-            // Absolute source of truth is the ref (synced from props)
             const radX = toRadians(currentTransform.rotation.x);
             const radY = toRadians(currentTransform.rotation.y);
-            // Z is Manual Bank + Continuous Spin
             const radZ = toRadians(currentTransform.rotation.z);
 
             model.rotation.x = radX + wobbleX;
@@ -146,7 +144,6 @@ export default function GLTFViewer({
             model.rotation.z = radZ - continuousRotation.current;
         } else {
             // MODE B: Internal Control (Animation/GSAP driven)
-            // Use captured refs
             model.rotation.x = baseRotationX.current + wobbleX;
             model.rotation.y = baseRotationY.current + wobbleY;
             model.rotation.z = baseRotationZ.current - continuousRotation.current;
@@ -173,7 +170,6 @@ export default function GLTFViewer({
     const prevManualTransform = useRef(manualTransform);
 
     // Handle Live Updates (HMR/Prop changes)
-    // Mobile scaling is now handled in useScrollAnimation with dedicated keyframes
     useEffect(() => {
         if (!stateRef.current?.model || !manualTransform) return;
 
@@ -182,15 +178,13 @@ export default function GLTFViewer({
         // Update Scale directly from transform
         model.scale.setScalar(manualTransform.scale);
 
-        // Update Position (Absolute approach for reliable positioning)
-        // Use the keyframe position values directly
+        // Update Position
         model.position.x = manualTransform.position.x;
         model.position.y = manualTransform.position.y;
         model.position.z = manualTransform.position.z;
 
         // Update ref
         prevManualTransform.current = manualTransform;
-
     }, [manualTransform]);
 
     // Initialize Three.js scene
@@ -266,7 +260,7 @@ export default function GLTFViewer({
                 onError(error instanceof Error ? error : new Error('Failed to initialize 3D scene'));
             }
         }
-    }, [url, onModelReady, onError, handleMouseMove, setupVisionObserver, captureBaseRotation, updateRotation]); // Removed manualTransform - using refs for live updates
+    }, [url, onModelReady, onError, handleMouseMove, setupVisionObserver, captureBaseRotation, updateRotation]);
 
     // Handle canvas ready
     const handleCanvasReady = useCallback((canvas: HTMLCanvasElement) => {

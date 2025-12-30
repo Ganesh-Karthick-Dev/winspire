@@ -77,40 +77,35 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     // After hydration, use the correct keyframes
     const activeKeyframes = customKeyframes || (isHydrated && isMobile ? mobileScrollKeyframes : scrollKeyframes);
 
-    // Initialize with first keyframe values - USE REFS to avoid re-renders on scroll
+    // Initialize with first keyframe values
     const firstKeyframe = activeKeyframes[0];
-    const transformRef = useRef<ModelTransform>({
+    const [transform, setTransform] = useState<ModelTransform>({
         position: { ...firstKeyframe.transform.position },
         rotation: { ...firstKeyframe.transform.rotation },
         scale: firstKeyframe.transform.scale,
     });
 
-    // Initialize lighting ref
-    const lightingRef = useRef<LightingConfig>(
+    // Initialize lighting state
+    const [lighting, setLighting] = useState<LightingConfig>(
         firstKeyframe.lighting || defaultLighting
     );
 
-    const scrollProgressRef = useRef(0);
+    const [scrollProgress, setScrollProgress] = useState(0);
 
-    // Minimal re-render trigger - only updates when explicitly needed (e.g., keyframe switch)
-    const [, setTick] = useState(0);
-
-    // Memoized update function - updates refs directly, no React re-renders
+    // Memoized update function
     const updateTransform = useCallback((progress: number) => {
-        scrollProgressRef.current = progress;
-        transformRef.current = getTransformAtProgress(progress, activeKeyframes);
-        lightingRef.current = getLightingAtProgress(progress, activeKeyframes);
+        setScrollProgress(progress);
+        setTransform(getTransformAtProgress(progress, activeKeyframes));
+        setLighting(getLightingAtProgress(progress, activeKeyframes));
     }, [activeKeyframes]);
 
     // Update transform immediately when keyframes change (e.g., mobile/desktop switch)
     useEffect(() => {
         if (isHydrated) {
             // Apply the current scroll position with new keyframes
-            updateTransform(scrollProgressRef.current);
-            // Trigger a re-render to update consumers with new ref values
-            setTick(t => t + 1);
+            updateTransform(scrollProgress);
         }
-    }, [activeKeyframes, isHydrated, updateTransform]);
+    }, [activeKeyframes, isHydrated]);
 
     useEffect(() => {
         // Skip on server or if disabled
@@ -161,19 +156,19 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     }, [enabled, scrub, trigger, start, end, updateTransform, isMobile, isHydrated, activeKeyframes]);
 
     return {
-        /** Current interpolated transform values (read from ref) */
-        transform: transformRef.current,
-        /** Current interpolated lighting values (read from ref) */
-        lighting: lightingRef.current,
+        /** Current interpolated transform values */
+        transform,
+        /** Current interpolated lighting values */
+        lighting,
         /** Current scroll progress (0-1) */
-        scrollProgress: scrollProgressRef.current,
+        scrollProgress,
         /** Whether mobile keyframes are being used */
         isMobile,
         /** Current keyframe label (if any) */
         currentLabel: activeKeyframes.find(
             (kf, i, arr) =>
-                scrollProgressRef.current >= kf.scrollProgress &&
-                (i === arr.length - 1 || scrollProgressRef.current < arr[i + 1].scrollProgress)
+                scrollProgress >= kf.scrollProgress &&
+                (i === arr.length - 1 || scrollProgress < arr[i + 1].scrollProgress)
         )?.label,
     };
 }
