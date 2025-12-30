@@ -7,7 +7,7 @@
  * Automatically uses mobile-optimized keyframes on small screens.
  */
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -124,22 +124,18 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
             },
         });
 
-        // Debounced resize handler - prevents excessive calls during resize
-        let resizeTimeout: ReturnType<typeof setTimeout>;
+        // Handle resize - switch between mobile/desktop keyframes
         const handleResize = () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                const nowMobile = isMobileDevice();
-                if (nowMobile !== isMobile) {
-                    setIsMobile(nowMobile);
-                }
-                // Re-update transform with current progress
-                updateTransform(scrollTrigger.progress || 0);
-            }, 100); // 100ms debounce
+            const nowMobile = isMobileDevice();
+            if (nowMobile !== isMobile) {
+                setIsMobile(nowMobile);
+            }
+            // Re-update transform with current progress
+            updateTransform(scrollTrigger.progress || 0);
         };
         window.addEventListener('resize', handleResize);
 
-        // Debug log (can be removed in production)
+        // Debug log
         console.log('🎬 ScrollAnimation initialized', {
             isMobile,
             isHydrated,
@@ -149,7 +145,6 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         });
 
         return () => {
-            clearTimeout(resizeTimeout);
             scrollTrigger.kill();
             window.removeEventListener('resize', handleResize);
         };

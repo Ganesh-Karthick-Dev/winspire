@@ -94,7 +94,18 @@ export default function Home() {
     const [manualTransform, setManualTransform] = useState(getInitialTransform);
     const [rotateSpeed, setRotateSpeed] = useState(animationSettings.rotationSpeed);
 
-    // Scroll progress debug removed for performance - was causing React re-renders on every scroll frame
+    // === Scroll Progress Debug ===
+    const [scrollProgress, setScrollProgress] = useState(0);
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
+            setScrollProgress(progress);
+        };
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Initial
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     // === Mission Text Cycling ===
     const missionMessages = [

@@ -67,7 +67,6 @@ export default function GLTFViewer({
     // Continuous rotation ref
     const continuousRotation = useRef(0);
     const isAtVisionSection = useRef(false);
-    const visionObserverRef = useRef<IntersectionObserver | null>(null);
 
     // Store base rotation from GSAP
     const baseRotationX = useRef(0);
@@ -98,21 +97,14 @@ export default function GLTFViewer({
     // Helper: Convert degrees to radians
     const toRadians = (deg: number) => (deg * Math.PI) / 180;
 
-    // Setup IntersectionObserver for vision section detection (replaces expensive per-frame DOM queries)
-    const setupVisionObserver = useCallback(() => {
-        if (visionObserverRef.current) return; // Already setup
-
+    // Check if user has scrolled to vision section
+    const checkVisionSection = useCallback(() => {
         const visionSection = document.getElementById('vision');
-        if (!visionSection) return;
-
-        visionObserverRef.current = new IntersectionObserver(
-            (entries) => {
-                // Consider "at vision" when section is 50% visible
-                isAtVisionSection.current = entries[0].isIntersecting;
-            },
-            { threshold: 0.5 }
-        );
-        visionObserverRef.current.observe(visionSection);
+        if (visionSection) {
+            const rect = visionSection.getBoundingClientRect();
+            // Consider "at vision" when section is 50% visible
+            isAtVisionSection.current = rect.top < window.innerHeight * 0.5 && rect.bottom > 0;
+        }
     }, []);
 
     // Smooth rotation update in animation loop
@@ -128,15 +120,17 @@ export default function GLTFViewer({
         continuousRotation.current += currentSpeed;
 
         // Wobble/bobbing effect - only if enabled via prop
-        const wobbleAmount = enableWobbleRef.current ? 0.3 : 0;
+        const wobbleAmount = enableWobbleRef.current ? 0.3 : 0; // ~17 degrees when enabled
         const wobbleSpeed = 2.0;
         const wobbleX = Math.sin(continuousRotation.current * wobbleSpeed) * wobbleAmount;
         const wobbleY = Math.cos(continuousRotation.current * wobbleSpeed * 0.7) * wobbleAmount;
 
         if (currentTransform) {
             // MODE A: Manual Control (Home Page)
+            // Absolute source of truth is the ref (synced from props)
             const radX = toRadians(currentTransform.rotation.x);
             const radY = toRadians(currentTransform.rotation.y);
+            // Z is Manual Bank + Continuous Spin
             const radZ = toRadians(currentTransform.rotation.z);
 
             model.rotation.x = radX + wobbleX;
@@ -144,6 +138,7 @@ export default function GLTFViewer({
             model.rotation.z = radZ - continuousRotation.current;
         } else {
             // MODE B: Internal Control (Animation/GSAP driven)
+            // Use captured refs
             model.rotation.x = baseRotationX.current + wobbleX;
             model.rotation.y = baseRotationY.current + wobbleY;
             model.rotation.z = baseRotationZ.current - continuousRotation.current;
@@ -170,6 +165,7 @@ export default function GLTFViewer({
     const prevManualTransform = useRef(manualTransform);
 
     // Handle Live Updates (HMR/Prop changes)
+    // Mobile scaling is now handled in useScrollAnimation with dedicated keyframes
     useEffect(() => {
         if (!stateRef.current?.model || !manualTransform) return;
 
@@ -178,13 +174,15 @@ export default function GLTFViewer({
         // Update Scale directly from transform
         model.scale.setScalar(manualTransform.scale);
 
-        // Update Position
+        // Update Position (Absolute approach for reliable positioning)
+        // Use the keyframe position values directly
         model.position.x = manualTransform.position.x;
         model.position.y = manualTransform.position.y;
         model.position.z = manualTransform.position.z;
 
         // Update ref
         prevManualTransform.current = manualTransform;
+
     }, [manualTransform]);
 
     // Initialize Three.js scene
@@ -223,8 +221,8 @@ export default function GLTFViewer({
             // Set up mouse tracking
             window.addEventListener('mousemove', handleMouseMove);
 
-            // Set up IntersectionObserver for vision section (replaces scroll listener)
-            setupVisionObserver();
+            // Set up scroll tracking for vision section
+            window.addEventListener('scroll', checkVisionSection);
 
             // Start animation loop with rotation updates
             const animation = createAnimationLoop(
@@ -232,7 +230,8 @@ export default function GLTFViewer({
                 state.scene,
                 state.camera,
                 () => {
-                    // Removed checkVisionSection() - now using IntersectionObserver
+
+                    checkVisionSection();
                     captureBaseRotation();
                     updateRotation();
                 }
@@ -245,12 +244,11 @@ export default function GLTFViewer({
                 onModelReady(state);
             }
 
+            // Return cleanup function
             return () => {
                 window.removeEventListener('resize', handleResize);
                 window.removeEventListener('mousemove', handleMouseMove);
-                if (visionObserverRef.current) {
-                    visionObserverRef.current.disconnect();
-                }
+                window.removeEventListener('scroll', checkVisionSection);
                 animation.stop();
                 state.renderer.dispose();
             };
@@ -260,7 +258,7 @@ export default function GLTFViewer({
                 onError(error instanceof Error ? error : new Error('Failed to initialize 3D scene'));
             }
         }
-    }, [url, onModelReady, onError, handleMouseMove, setupVisionObserver, captureBaseRotation, updateRotation]);
+    }, [url, onModelReady, onError, handleMouseMove, checkVisionSection, captureBaseRotation, updateRotation]); // Removed manualTransform - using refs for live updates
 
     // Handle canvas ready
     const handleCanvasReady = useCallback((canvas: HTMLCanvasElement) => {
@@ -275,12 +273,11 @@ export default function GLTFViewer({
         });
     }, [initializeScene]);
 
+    // Cleanup on unmount
     useEffect(() => {
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
-            if (visionObserverRef.current) {
-                visionObserverRef.current.disconnect();
-            }
+            window.removeEventListener('scroll', checkVisionSection);
             if (animationRef.current) {
                 animationRef.current.stop();
             }
@@ -288,7 +285,7 @@ export default function GLTFViewer({
                 stateRef.current.renderer.dispose();
             }
         };
-    }, [handleMouseMove]);
+    }, [handleMouseMove, checkVisionSection]);
 
     return <WebGLCanvas onCanvasReady={handleCanvasReady} className={className} />;
 }
