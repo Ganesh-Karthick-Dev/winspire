@@ -48,7 +48,7 @@ export const animationSettings = {
      * Continuous rotation speed (radians per frame)
      * 0 = no rotation, 0.003 = slow, 0.01 = fast
      */
-    rotationSpeed: 0.003,
+    rotationSpeed: 0.004,
 
     /**
      * Scroll scrub smoothness (for ScrollTrigger)
@@ -259,7 +259,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "rotation": {
                 "x": -24.677,
                 "y": 124.956,
-                "z": 15.73
+                "z": 23.23
             },
             "scale": 8.5
         }
@@ -276,7 +276,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "rotation": {
                 "x": -47.177,
                 "y": 162.456,
-                "z": 8.23
+                "z": 23.23
             },
             "scale": 7
         }
@@ -293,7 +293,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "rotation": {
                 "x": -47.177,
                 "y": 260,
-                "z": 8.23
+                "z": 23.23
             },
             "scale": 7
         }
@@ -310,7 +310,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "rotation": {
                 "x": -47.177,
                 "y": 225,
-                "z": 8.23
+                "z": 23.23
             },
             "scale": 7
         }
@@ -327,7 +327,7 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             "rotation": {
                 "x": -82.177,
                 "y": 180,
-                "z": 8.23
+                "z": 23.23
             },
             "scale": 15
         }
