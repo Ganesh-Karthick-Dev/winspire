@@ -34,6 +34,7 @@ export default function ModelDebugPanel({
     const transformRef = useRef(transform);
     const animationRef = useRef<gsap.core.Tween | null>(null);
     const isInternalUpdate = useRef(false);
+    const isAnimating = useRef(false);
 
     useEffect(() => {
         transformRef.current = transform;
@@ -46,6 +47,7 @@ export default function ModelDebugPanel({
     const syncSlidersToTransform = useCallback((t: ModelTransformValues) => {
         if (!store) return;
 
+        // Mark as internal update so the listening useEffect doesn't fire back
         isInternalUpdate.current = true;
 
         // Update all slider values in Leva store
@@ -57,9 +59,11 @@ export default function ModelDebugPanel({
         store.setValueAtPath('Rotation (Fine).z', t.rotation.z, false);
         store.setValueAtPath('Scale (Fine).scale', t.scale, false);
 
-        setTimeout(() => {
-            isInternalUpdate.current = false;
-        }, 50);
+        // We do NOT reset isInternalUpdate here synchronously or with timeout.
+        // It will be reset in the useEffect dependency check or if we are not animating.
+        // Actually, safer pattern: Reset it immediately after? No, Leva updates are sync but React effects are async.
+        // Instead, we rely on isAnimating for animations.
+        // For static updates (slider sync), we rely on check inside useEffect.
     }, [store]);
 
     // Smooth animated transition to a target transform
@@ -67,6 +71,9 @@ export default function ModelDebugPanel({
         if (animationRef.current) {
             animationRef.current.kill();
         }
+
+        isAnimating.current = true;
+        isInternalUpdate.current = true; // Block manual feedback
 
         const proxy = {
             px: transformRef.current.position.x,
@@ -97,11 +104,22 @@ export default function ModelDebugPanel({
                 onTransformChange(newTransform);
                 syncSlidersToTransform(newTransform);
             },
+            onComplete: () => {
+                isAnimating.current = false;
+                // Reset internal update flag after a delay to allow final React render to settle
+                setTimeout(() => { isInternalUpdate.current = false; }, 100);
+            },
+            onInterrupt: () => {
+                isAnimating.current = false;
+                setTimeout(() => { isInternalUpdate.current = false; }, 100);
+            }
         });
     }, [onTransformChange, syncSlidersToTransform]);
 
-    // Instant update with slider sync
+    // Instant update with slider sync (for Helper Buttons)
     const updateTransform = useCallback((updates: Partial<ModelTransformValues>) => {
+        isInternalUpdate.current = true; // Prevent feedback loop
+
         const current = transformRef.current;
         const newTransform = {
             position: { ...current.position, ...updates.position },
@@ -110,6 +128,9 @@ export default function ModelDebugPanel({
         };
         onTransformChange(newTransform);
         syncSlidersToTransform(newTransform);
+
+        // Reset flag after delay
+        setTimeout(() => { isInternalUpdate.current = false; }, 100);
     }, [onTransformChange, syncSlidersToTransform]);
 
     // ========================================
@@ -229,7 +250,8 @@ export default function ModelDebugPanel({
 
     // Sync sliders → parent (when user moves sliders directly)
     useEffect(() => {
-        if (isInternalUpdate.current) return;
+        // Safe guard: Do not update state if we are animating or if explicit internal update
+        if (isAnimating.current || isInternalUpdate.current) return;
 
         onTransformChange({
             position: { x: positionControls.x, y: positionControls.y, z: positionControls.z },

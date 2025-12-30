@@ -219,8 +219,8 @@ export default function GLTFViewer({
                 baseRotationZ.current = toRadians(manualTransform.rotation.z);
             }
 
-            // Set up resize handler with converted config
-            const handleResize = createResizeHandler(state.renderer, state.camera, state.model, finalConfig);
+            // Set up resize handler (pass null for model to prevent it from overriding our manual scale/position)
+            const handleResize = createResizeHandler(state.renderer, state.camera, null, finalConfig);
             window.addEventListener('resize', handleResize);
             handleResize(); // Trigger once to set initial mobile/desktop position
 

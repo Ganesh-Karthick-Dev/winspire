@@ -42,13 +42,13 @@ export const animationSettings = {
      * Higher = slower/smoother, Lower = faster/snappier
      * Recommended: 0.5 - 1.5
      */
-    smoothTime: 0.8,
+    smoothTime: 2.5,
 
     /**
      * Continuous rotation speed (radians per frame)
      * 0 = no rotation, 0.003 = slow, 0.01 = fast
      */
-    rotationSpeed: 0.004,
+    rotationSpeed: 0.005,
 
     /**
      * Scroll scrub smoothness (for ScrollTrigger)
@@ -78,260 +78,175 @@ export const scrollKeyframes: ScrollKeyframe[] = [
         }
     },
     {
-        "scrollProgress": 0.07, // Fixed: was 7.44, should be 0-1 range
-        "label": "space between hero and about",
-        "transform": {
-            "position": {
-                "x": 0,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -22.177,
-                "y": 77.456,
-                "z": 23.23
-            },
-            "scale": 10
-        }
-    },
-    {
-        "scrollProgress": 0.14, // Fixed: was 14.07, should be 0-1 range
-        "label": "about us section",
-        "transform": {
-            "position": {
-                "x": 0.4,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": 27.823,
-                "y": 122.456,
-                "z": 23.23
-            },
-            "scale": 10
-        }
-    },
-    {
-        "scrollProgress": 0.18,
-        "label": "about to global transition",
-        "transform": {
-            "position": {
-                "x": 0.7,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -32.177,
-                "y": 79.956,
-                "z": 23.23
-            },
-            "scale": 11.25
-        }
-    },
-    {
-        "scrollProgress": 0.219,
-        "label": "global section",
-        "transform": {
-            "position": {
-                "x": 1,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -92.177,
-                "y": 37.456,
-                "z": 23.23
-            },
-            "scale": 12.5
-        }
-    },
-    {
-        "scrollProgress": 0.2870,
-        "label": "global section middle",
-        "transform": {
-            "position": {
-                "x": 0.8,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -77.177,
-                "y": 2.456,
-                "z": 23.23
-            },
-            "scale": 10
-        }
-    },
-    {
-        "scrollProgress": 0.36,
-        "label": "global to service transition",
-        "transform": {
-            "position": {
-                "x": 1.0,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -64.677,
-                "y": -45.044,
-                "z": 23.23
-            },
-            "scale": 10
-        }
-    },
-    {
-        "scrollProgress": 0.430,
-        "label": "service section",
-        "transform": {
-            "position": {
-                "x": 1.2,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -52.177,
-                "y": -92.544,
-                "z": 23.23
-            },
-            "scale": 10
-        }
-    },
-    {
-        "scrollProgress": 0.50,
-        "label": "service to environment transition",
-        "transform": {
-            "position": {
-                "x": 0.6,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -27.177,
-                "y": -47.544,
-                "z": 23.23
-            },
-            "scale": 10
-        }
-    },
-    {
-        "scrollProgress": 0.565,
-        "label": "environment",
-        "transform": {
-            "position": {
-                "x": 0,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -2.177,
-                "y": -2.544,
-                "z": 23.23
-            },
-            "scale": 10
-        }
-    },
-    {
-        "scrollProgress": 0.7250,
-        "label": "carears white card",
-        "transform": {
-            "position": {
-                "x": 0,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -2.177,
-                "y": 87.456,
-                "z": 23.23
-            },
-            "scale": 10
-        }
-    },
-    {
-        "scrollProgress": 0.76,
-        "label": "careers to news transition",
-        "transform": {
-            "position": {
-                "x": 0,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -24.677,
-                "y": 124.956,
-                "z": 23.23
-            },
-            "scale": 8.5
-        }
-    },
-    {
-        "scrollProgress": 0.7930,
-        "label": "news before",
-        "transform": {
-            "position": {
-                "x": 0,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -47.177,
-                "y": 162.456,
-                "z": 23.23
-            },
-            "scale": 7
-        }
-    },
-    {
-        "scrollProgress": 0.8770,
-        "label": "after news",
-        "transform": {
-            "position": {
-                "x": 0,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -47.177,
-                "y": 260,
-                "z": 23.23
-            },
-            "scale": 7
-        }
-    },
-    {
-        "scrollProgress": 0.9780,
-        "label": "footer entrance",
-        "transform": {
-            "position": {
-                "x": 0,
-                "y": 0.06,
-                "z": 0
-            },
-            "rotation": {
-                "x": -47.177,
-                "y": 225,
-                "z": 23.23
-            },
-            "scale": 7
-        }
-    },
-    {
-        "scrollProgress": 1.0,
-        "label": "final footer",
-        "transform": {
-            "position": {
-                "x": 0,
-                "y": -0.34,
-                "z": 0.6
-            },
-            "rotation": {
-                "x": -82.177,
-                "y": 180,
-                "z": 23.23
-            },
-            "scale": 15
-        }
+    "scrollProgress": 0.054,
+    "label": "Hero end",
+    "transform": {
+        "position": {
+            "x": 0,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -22.177,
+            "y": 52.456,
+            "z": 23.23
+        },
+        "scale": 10
     }
+},
+{
+    "scrollProgress": 0.091,
+    "label": "hero and about mid",
+    "transform": {
+        "position": {
+            "x": 0,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -22.177,
+            "y": 62.456,
+            "z": 23.23
+        },
+        "scale": 13
+    }
+},
+{
+    "scrollProgress": 0.178,
+    "label": "aboutus center",
+    "transform": {
+        "position": {
+            "x": 1,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -112.177,
+            "y": 57.456,
+            "z": 23.23
+        },
+        "scale": 15
+    }
+},
+{
+    "scrollProgress": 0.245,
+    "label": "second part of aboutus",
+    "transform": {
+        "position": {
+            "x": 0.8,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -112.177,
+            "y": 17.456,
+            "z": 23.23
+        },
+        "scale": 15
+    }
+},
+{
+    "scrollProgress": 0.358,
+    "label": "about end",
+    "transform": {
+        "position": {
+            "x": 0.8,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -112.177,
+            "y": -17.544,
+            "z": 23.23
+        },
+        "scale": 15
+    }
+},
+{
+    "scrollProgress": 0.396,
+    "label": "service start",
+    "transform": {
+        "position": {
+            "x": 0.8,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -112.177,
+            "y": -52.544,
+            "z": 23.23
+        },
+        "scale": 15
+    }
+},
+{
+    "scrollProgress": 0.452,
+    "label": "service mid",
+    "transform": {
+        "position": {
+            "x": 1,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -172.177,
+            "y": -82.544,
+            "z": 23.23
+        },
+        "scale": 15
+    }
+},
+{
+    "scrollProgress": 0.546,
+    "label": "service end",
+    "transform": {
+        "position": {
+            "x": 0.4,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -172.177,
+            "y": -127.544,
+            "z": 23.23
+        },
+        "scale": 10
+    }
+},
+{
+    "scrollProgress": 0.603,
+    "label": "intelligent center",
+    "transform": {
+        "position": {
+            "x": 0,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -180,
+            "y": -177.544,
+            "z": 23.23
+        },
+        "scale": 10
+    }
+},
+{
+    "scrollProgress": 0.641,
+    "label": "carear start",
+    "transform": {
+        "position": {
+            "x": -0.2,
+            "y": 0.06,
+            "z": 0
+        },
+        "rotation": {
+            "x": -205,
+            "y": -207.544,
+            "z": 23.23
+        },
+        "scale": 7
+    }
+}
 ];
 
 /**
