@@ -38,7 +38,7 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
 
         // Initialize Lenis with smooth settings (desktop only)
         const lenis = new Lenis({
-            duration: 1.8, // Increased for extra smoothness
+            duration: 2.2, // Ultra smooth
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: 'vertical',
             gestureOrientation: 'vertical',

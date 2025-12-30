@@ -240,8 +240,8 @@ export default function Home() {
                                     top: '46%',
                                     transform: 'translateY(-50%)',
                                     height: 'fit-content',
-                                    maskImage: 'linear-gradient(to right, transparent 52%, black 56%)',
-                                    WebkitMaskImage: 'linear-gradient(to right, transparent 52%, black 56%)'
+                                    maskImage: 'linear-gradient(to right, transparent 55%, black 59%)',
+                                    WebkitMaskImage: 'linear-gradient(to right, transparent 55%, black 59%)'
                                 }}
                             >
                                 <MarqueeText

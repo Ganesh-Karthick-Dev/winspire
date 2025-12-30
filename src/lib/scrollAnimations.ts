@@ -48,14 +48,14 @@ export const animationSettings = {
      * Continuous rotation speed (radians per frame)
      * 0 = no rotation, 0.003 = slow, 0.01 = fast
      */
-    rotationSpeed: 0.005,
+    rotationSpeed: 0.003,
 
     /**
      * Scroll scrub smoothness (for ScrollTrigger)
      * Higher = smoother but more lag
      * Recommended: 1 - 2
      */
-    scrubSmoothness: 6.0,
+    scrubSmoothness: 8.0,
 };
 
 
