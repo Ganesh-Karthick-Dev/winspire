@@ -11,15 +11,12 @@ if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
 
-// Image data for the two columns
+// Image data for the two columns (4 images each)
 const leftColumnImages = [
     { src: '/images/careers/team-rooftop.png', alt: 'Team on rooftop' },
     { src: '/images/careers/colleagues-chat.png', alt: 'Colleagues chatting' },
     { src: '/images/careers/skyscraper.png', alt: 'Modern skyscraper' },
     { src: '/images/careers/brainstorm.png', alt: 'Team brainstorming' },
-    // Duplicate for infinite scroll feel
-    { src: '/images/careers/team-rooftop.png', alt: 'Team on rooftop' },
-    { src: '/images/careers/colleagues-chat.png', alt: 'Colleagues chatting' },
 ];
 
 const rightColumnImages = [
@@ -27,13 +24,11 @@ const rightColumnImages = [
     { src: '/images/careers/presentation.png', alt: 'Business presentation' },
     { src: '/images/careers/celebration.png', alt: 'Team celebration' },
     { src: '/images/careers/office-interior.png', alt: 'Office interior' },
-    // Duplicate for infinite scroll feel
-    { src: '/images/careers/office-aerial.png', alt: 'Office aerial view' },
-    { src: '/images/careers/presentation.png', alt: 'Business presentation' },
 ];
 
 export default function CareersScrollSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const stickyContainerRef = useRef<HTMLDivElement>(null);
     const leftColRef = useRef<HTMLDivElement>(null);
     const rightColRef = useRef<HTMLDivElement>(null);
 
@@ -51,10 +46,11 @@ export default function CareersScrollSection() {
 
     useEffect(() => {
         const section = sectionRef.current;
+        const stickyContainer = stickyContainerRef.current;
         const leftCol = leftColRef.current;
         const rightCol = rightColRef.current;
 
-        if (!section || !leftCol || !rightCol) return;
+        if (!section || !stickyContainer || !leftCol || !rightCol) return;
 
         const mm = gsap.matchMedia();
 
@@ -64,15 +60,14 @@ export default function CareersScrollSection() {
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: section,
-                        start: 'top bottom', // Start earlier to ensure movement is visible
-                        end: 'bottom top',   // Continue until fully out of view
+                        start: 'top bottom',
+                        end: 'bottom top',
                         scrub: 1,
-                        invalidateOnRefresh: true, // Recalculate on resize
+                        invalidateOnRefresh: true,
                     }
                 });
 
-                // Increased scroll range significantly for wider cards (240px)
-                // Total width approx 800px+
+                // Horizontal scroll for mobile
                 tl.fromTo(leftCol,
                     { x: 100 },
                     { x: -500, ease: "none" },
@@ -87,20 +82,37 @@ export default function CareersScrollSection() {
             });
 
             mm.add("(min-width: 769px)", () => {
-                // Desktop: Vertical scroll (Y axis)
+                // Column offset - how much the columns scroll
+                const columnOffset = 550;
+
+                // Desktop: Scroll-driven column animation (no GSAP pin - using CSS sticky)
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: section,
                         start: 'top top',
                         end: 'bottom bottom',
-                        scrub: 1,
+                        scrub: 0.5,
+                        invalidateOnRefresh: true,
                     }
                 });
 
-                // Left column: scroll DOWN
-                tl.fromTo(leftCol, { y: -350 }, { y: -50, duration: 1 }, 0);
-                // Right column: scroll UP
-                tl.fromTo(rightCol, { y: -50 }, { y: -350, duration: 1 }, 0);
+                // LEFT COLUMN: 
+                // - Starts at y: 0 (top images visible, no gap)
+                // - Scrolls UP (negative Y) to reveal bottom images
+                tl.fromTo(leftCol,
+                    { y: 0 }, // Start: natural position, top images visible
+                    { y: -columnOffset, ease: "none" }, // End: pulled up, bottom images visible
+                    0
+                );
+
+                // RIGHT COLUMN:
+                // - Starts at y: -offset (already pulled up, bottom images visible, NO empty gap at top)
+                // - Scrolls DOWN (toward 0) to reveal top images  
+                tl.fromTo(rightCol,
+                    { y: -columnOffset }, // Start: pulled up, bottom images visible (NO empty space)
+                    { y: 0, ease: "none" }, // End: natural position, top images visible
+                    0
+                );
             });
 
             // Button Hover Animation (Helper function)
@@ -188,7 +200,7 @@ export default function CareersScrollSection() {
             className="careers-scroll-section-wrapper"
         >
             {/* Sticky Card Container */}
-            <div className="careers-sticky-container">
+            <div ref={stickyContainerRef} className="careers-sticky-container">
                 {/* Frosted Glass Card */}
                 <div className="careers-card">
                     {/* Left Content - Sticky Info */}
@@ -216,7 +228,7 @@ export default function CareersScrollSection() {
                                         }}
                                     />
                                 </div>
-                                <h2 style={{ margin: 0, lineHeight: 1 , color : 'black'}}>Careers</h2>
+                                <h2 style={{ margin: 0, lineHeight: 1, color: 'black' }}>Careers</h2>
                             </div>
                             <p className="careers-sublabel" style={{ margin: 0, paddingLeft: '24px', color: '#38bdf8' }}>Recruitment Information</p>
                         </div>

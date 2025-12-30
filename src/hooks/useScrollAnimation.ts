@@ -79,32 +79,102 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
 
     // Initialize with first keyframe values - USE REFS to avoid re-renders
     const firstKeyframe = activeKeyframes[0];
+
+    // Current (displayed) transform - smoothly interpolates toward target
     const transformRef = useRef<ModelTransform>({
         position: { ...firstKeyframe.transform.position },
         rotation: { ...firstKeyframe.transform.rotation },
         scale: firstKeyframe.transform.scale,
     });
 
-    // Initialize lighting ref
+    // Target transform - set directly by scroll position
+    const targetTransformRef = useRef<ModelTransform>({
+        position: { ...firstKeyframe.transform.position },
+        rotation: { ...firstKeyframe.transform.rotation },
+        scale: firstKeyframe.transform.scale,
+    });
+
+    // Initialize lighting refs
     const lightingRef = useRef<LightingConfig>(
+        firstKeyframe.lighting || defaultLighting
+    );
+    const targetLightingRef = useRef<LightingConfig>(
         firstKeyframe.lighting || defaultLighting
     );
 
     const scrollProgressRef = useRef(0);
+    const rafIdRef = useRef<number>(0);
 
-    // Memoized update function - updates refs directly, NO React re-renders
-    const updateTransform = useCallback((progress: number) => {
+    // Damping factor for ultra smooth interpolation
+    const dampingFactor = animationSettings.dampingFactor;
+
+    // Smooth lerp helper
+    const lerpValue = (current: number, target: number, factor: number) =>
+        current + (target - current) * factor;
+
+    // Smooth interpolation loop - runs every frame
+    const smoothUpdate = useCallback(() => {
+        const current = transformRef.current;
+        const target = targetTransformRef.current;
+        const currentLighting = lightingRef.current;
+        const targetLighting = targetLightingRef.current;
+
+        // Smoothly interpolate toward target
+        transformRef.current = {
+            position: {
+                x: lerpValue(current.position.x, target.position.x, dampingFactor),
+                y: lerpValue(current.position.y, target.position.y, dampingFactor),
+                z: lerpValue(current.position.z, target.position.z, dampingFactor),
+            },
+            rotation: {
+                x: lerpValue(current.rotation.x, target.rotation.x, dampingFactor),
+                y: lerpValue(current.rotation.y, target.rotation.y, dampingFactor),
+                z: lerpValue(current.rotation.z, target.rotation.z, dampingFactor),
+            },
+            scale: lerpValue(current.scale, target.scale, dampingFactor),
+        };
+
+        // Smoothly interpolate lighting
+        lightingRef.current = {
+            frontIntensity: lerpValue(currentLighting.frontIntensity, targetLighting.frontIntensity, dampingFactor),
+            ambientIntensity: lerpValue(currentLighting.ambientIntensity, targetLighting.ambientIntensity, dampingFactor),
+            frontPosition: {
+                x: lerpValue(currentLighting.frontPosition.x, targetLighting.frontPosition.x, dampingFactor),
+                y: lerpValue(currentLighting.frontPosition.y, targetLighting.frontPosition.y, dampingFactor),
+                z: lerpValue(currentLighting.frontPosition.z, targetLighting.frontPosition.z, dampingFactor),
+            },
+        };
+
+        // Continue the animation loop
+        rafIdRef.current = requestAnimationFrame(smoothUpdate);
+    }, [dampingFactor]);
+
+    // Update TARGET transform (called by ScrollTrigger)
+    const updateTargetTransform = useCallback((progress: number) => {
         scrollProgressRef.current = progress;
-        transformRef.current = getTransformAtProgress(progress, activeKeyframes);
-        lightingRef.current = getLightingAtProgress(progress, activeKeyframes);
+        targetTransformRef.current = getTransformAtProgress(progress, activeKeyframes);
+        targetLightingRef.current = getLightingAtProgress(progress, activeKeyframes);
     }, [activeKeyframes]);
 
     // Update transform immediately when keyframes change (e.g., mobile/desktop switch)
     useEffect(() => {
         if (isHydrated) {
-            updateTransform(scrollProgressRef.current);
+            updateTargetTransform(scrollProgressRef.current);
         }
-    }, [activeKeyframes, isHydrated, updateTransform]);
+    }, [activeKeyframes, isHydrated, updateTargetTransform]);
+
+    // Start the smooth animation loop
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        rafIdRef.current = requestAnimationFrame(smoothUpdate);
+
+        return () => {
+            if (rafIdRef.current) {
+                cancelAnimationFrame(rafIdRef.current);
+            }
+        };
+    }, [smoothUpdate]);
 
     useEffect(() => {
         // Skip on server or if disabled
@@ -112,14 +182,14 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
             return;
         }
 
-        // Create ScrollTrigger
+        // Create ScrollTrigger - updates TARGET, not displayed values
         const scrollTrigger = ScrollTrigger.create({
             trigger,
             start,
             end,
             scrub,
             onUpdate: (self) => {
-                updateTransform(self.progress);
+                updateTargetTransform(self.progress);
             },
         });
 
@@ -130,24 +200,23 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
                 setIsMobile(nowMobile);
             }
             // Re-update transform with current progress
-            updateTransform(scrollTrigger.progress || 0);
+            updateTargetTransform(scrollTrigger.progress || 0);
         };
         window.addEventListener('resize', handleResize);
 
         // Debug log
-        console.log('🎬 ScrollAnimation initialized', {
+        console.log('🎬 ScrollAnimation initialized with damping', {
             isMobile,
             isHydrated,
             keyframesCount: activeKeyframes.length,
-            firstScale: activeKeyframes[0].transform.scale,
-            firstY: activeKeyframes[0].transform.position.y,
+            dampingFactor,
         });
 
         return () => {
             scrollTrigger.kill();
             window.removeEventListener('resize', handleResize);
         };
-    }, [enabled, scrub, trigger, start, end, updateTransform, isMobile, isHydrated, activeKeyframes]);
+    }, [enabled, scrub, trigger, start, end, updateTargetTransform, isMobile, isHydrated, activeKeyframes, dampingFactor]);
 
     // Return a stable object with refs - GLTFViewer reads from refs directly
     return useMemo(() => ({

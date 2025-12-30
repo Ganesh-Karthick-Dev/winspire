@@ -3373,7 +3373,22 @@ footer p {
    ============================================ */
 
 .careers-scroll-section-wrapper {
+  position: relative;
   z-index: 30;
+  /* Height provides scroll space - sticky container stays pinned while scrolling through this */
+  height: 200vh;
+}
+
+.careers-sticky-container {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 8px 16px;
+  box-sizing: border-box;
 }
 
 .careers-card {
@@ -3381,7 +3396,7 @@ footer p {
   grid-template-columns: 0.8fr 1.2fr;
   gap: 40px;
   width: 100%;
-  height: calc(100vh - 32px);
+  height: calc(100vh - 16px);
   padding: 48px;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(40px);
@@ -3504,7 +3519,8 @@ footer p {
 .careers-image-card {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 5;
+  min-height: 220px;
   border-radius: 20px;
   overflow: hidden;
   box-shadow:
