@@ -55,7 +55,7 @@ export const animationSettings = {
      * Higher = smoother but more lag
      * Recommended: 1 - 2
      */
-    scrubSmoothness: 2.5,
+    scrubSmoothness: 4.5,
 };
 
 

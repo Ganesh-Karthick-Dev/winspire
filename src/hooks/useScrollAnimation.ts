@@ -7,7 +7,7 @@
  * Automatically uses mobile-optimized keyframes on small screens.
  */
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -77,35 +77,34 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     // After hydration, use the correct keyframes
     const activeKeyframes = customKeyframes || (isHydrated && isMobile ? mobileScrollKeyframes : scrollKeyframes);
 
-    // Initialize with first keyframe values
+    // Initialize with first keyframe values - USE REFS to avoid re-renders
     const firstKeyframe = activeKeyframes[0];
-    const [transform, setTransform] = useState<ModelTransform>({
+    const transformRef = useRef<ModelTransform>({
         position: { ...firstKeyframe.transform.position },
         rotation: { ...firstKeyframe.transform.rotation },
         scale: firstKeyframe.transform.scale,
     });
 
-    // Initialize lighting state
-    const [lighting, setLighting] = useState<LightingConfig>(
+    // Initialize lighting ref
+    const lightingRef = useRef<LightingConfig>(
         firstKeyframe.lighting || defaultLighting
     );
 
-    const [scrollProgress, setScrollProgress] = useState(0);
+    const scrollProgressRef = useRef(0);
 
-    // Memoized update function
+    // Memoized update function - updates refs directly, NO React re-renders
     const updateTransform = useCallback((progress: number) => {
-        setScrollProgress(progress);
-        setTransform(getTransformAtProgress(progress, activeKeyframes));
-        setLighting(getLightingAtProgress(progress, activeKeyframes));
+        scrollProgressRef.current = progress;
+        transformRef.current = getTransformAtProgress(progress, activeKeyframes);
+        lightingRef.current = getLightingAtProgress(progress, activeKeyframes);
     }, [activeKeyframes]);
 
     // Update transform immediately when keyframes change (e.g., mobile/desktop switch)
     useEffect(() => {
         if (isHydrated) {
-            // Apply the current scroll position with new keyframes
-            updateTransform(scrollProgress);
+            updateTransform(scrollProgressRef.current);
         }
-    }, [activeKeyframes, isHydrated]);
+    }, [activeKeyframes, isHydrated, updateTransform]);
 
     useEffect(() => {
         // Skip on server or if disabled
@@ -150,22 +149,25 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         };
     }, [enabled, scrub, trigger, start, end, updateTransform, isMobile, isHydrated, activeKeyframes]);
 
-    return {
-        /** Current interpolated transform values */
-        transform,
-        /** Current interpolated lighting values */
-        lighting,
+    // Return a stable object with refs - GLTFViewer reads from refs directly
+    return useMemo(() => ({
+        /** Current interpolated transform values (read from ref) */
+        get transform() { return transformRef.current; },
+        /** Current interpolated lighting values (read from ref) */
+        get lighting() { return lightingRef.current; },
         /** Current scroll progress (0-1) */
-        scrollProgress,
+        get scrollProgress() { return scrollProgressRef.current; },
         /** Whether mobile keyframes are being used */
         isMobile,
         /** Current keyframe label (if any) */
-        currentLabel: activeKeyframes.find(
-            (kf, i, arr) =>
-                scrollProgress >= kf.scrollProgress &&
-                (i === arr.length - 1 || scrollProgress < arr[i + 1].scrollProgress)
-        )?.label,
-    };
+        get currentLabel() {
+            return activeKeyframes.find(
+                (kf, i, arr) =>
+                    scrollProgressRef.current >= kf.scrollProgress &&
+                    (i === arr.length - 1 || scrollProgressRef.current < arr[i + 1].scrollProgress)
+            )?.label;
+        },
+    }), [isMobile, activeKeyframes]);
 }
 
 export default useScrollAnimation;
