@@ -10,44 +10,55 @@ const ValuesSection: React.FC = () => {
                         <span className={styles.dot}></span>
                         <span className={styles.dot}></span>
                     </div>
-                    <h2 className={styles.title}>Values</h2>
+                    <h2 className={styles.title}>Case Studies</h2>
                 </div>
-                <div className={styles.subtitle}>Values we hold dear</div>
+                <div className={styles.subtitle}>Real results from real clients</div>
             </div>
 
             <div className={styles.grid}>
-                {/* Card 01 - Be Innovative */}
+                {/* Card 01 - Multispecialty Group */}
                 <div className={styles.card}>
                     <div className={styles.valueLabel}>
-                        Value <span>01</span>
+                        Case Study <span>01</span>
                     </div>
 
-                    {/* Background Icon - Spiral/Galaxy shape for Innovation */}
+                    {/* Background Icon - Medical/Healthcare */}
                     <div className={styles.cardBgIcon}>
                         <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M100 0C44.77 0 0 44.77 0 100s44.77 100 100 100 100-44.77 100-100S155.23 0 100 0zm0 180c-44.18 0-80-35.82-80-80s35.82-80 80-80 80 35.82 80 80-35.82 80-80 80z" fill="currentColor" />
-                            <path d="M100 40c-33.14 0-60 26.86-60 60s26.86 60 60 60 60-26.86 60-60-26.86-60-60-60zm0 100c-22.09 0-40-17.91-40-40s17.91-40 40-40 40 17.91 40 40-17.91 40-40 40z" fill="currentColor" />
+                            <path d="M100 20L20 60v60c0 55.23 35.82 105.13 80 120 44.18-14.87 80-64.77 80-120V60l-80-40z" stroke="currentColor" strokeWidth="10" />
+                            <path d="M100 70v60M70 100h60" stroke="currentColor" strokeWidth="12" strokeLinecap="round" />
                         </svg>
                     </div>
 
                     <div className={styles.cardContent}>
                         <h3 className={styles.cardTitle}>
-                            Be<br />Innovative
+                            Multispecialty<br />Group
                         </h3>
+                        <p className={styles.cardSubtitle}>18 Locations</p>
                         <div className={styles.divider}></div>
-                        <p className={styles.cardDesc}>
-                            We constantly explore new ideas, technologies, and approaches to solve complex healthcare challenges. Innovation drives how we improve efficiency, accuracy, and long-term value for our clients.
-                        </p>
+                        <div className={styles.cardDesc}>
+                            <p className={styles.challengeLabel}>Challenge:</p>
+                            <p>High denial rates, unstructured AR, unpredictable revenue.</p>
+                            <p className={styles.solutionLabel}>Solution:</p>
+                            <p>Neura Predict + Neura AR + full RCM integration.</p>
+                            <p className={styles.outcomeLabel}>Outcome:</p>
+                            <ul className={styles.outcomeList}>
+                                <li>Denials dropped from 18% to under 1%</li>
+                                <li>AR days reduced by 32% in 120 days</li>
+                                <li>TAT across all departments under 24 hours</li>
+                                <li>Provider satisfaction increased dramatically</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                {/* Card 02 - All For One */}
+                {/* Card 02 - Behavioral Health Network */}
                 <div className={styles.card}>
                     <div className={styles.valueLabel}>
-                        Value <span>02</span>
+                        Case Study <span>02</span>
                     </div>
 
-                    {/* Background Icon - Connected circles/Nodes */}
+                    {/* Background Icon - Network/Brain */}
                     <div className={styles.cardBgIcon}>
                         <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="100" cy="100" r="30" stroke="currentColor" strokeWidth="20" />
@@ -64,37 +75,59 @@ const ValuesSection: React.FC = () => {
 
                     <div className={styles.cardContent}>
                         <h3 className={styles.cardTitle}>
-                            All For<br />One
+                            Behavioral<br />Health Network
                         </h3>
+                        <p className={styles.cardSubtitle}>60+ Therapists</p>
                         <div className={styles.divider}></div>
-                        <p className={styles.cardDesc}>
-                            We believe strong collaboration creates meaningful outcomes. By working as one team—with our clients and within our organization—we combine expertise, accountability, and shared purpose to achieve ambitious goals.
-                        </p>
+                        <div className={styles.cardDesc}>
+                            <p className={styles.challengeLabel}>Challenge:</p>
+                            <p>Fragmented documentation, persistent coding errors, payer delays.</p>
+                            <p className={styles.solutionLabel}>Solution:</p>
+                            <p>Neura Code + Neura Flow + Denial automation.</p>
+                            <p className={styles.outcomeLabel}>Outcome:</p>
+                            <ul className={styles.outcomeList}>
+                                <li>E&M coding accuracy improved by 28%</li>
+                                <li>Appeals turnaround cut by 70%</li>
+                                <li>100% visibility across multiple locations</li>
+                                <li>Cash flow stabilized within seven weeks</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                {/* Card 03 - Play Fair */}
+                {/* Card 03 - Urgent Care System */}
                 <div className={styles.card}>
                     <div className={styles.valueLabel}>
-                        Value <span>03</span>
+                        Case Study <span>03</span>
                     </div>
 
-                    {/* Background Icon - Shield/Checkmark/Scale */}
+                    {/* Background Icon - Multi-location/Map */}
                     <div className={styles.cardBgIcon}>
                         <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M100 20L20 60v60c0 55.23 35.82 105.13 80 120 44.18-14.87 80-64.77 80-120V60l-80-40z" stroke="currentColor" strokeWidth="10" />
-                            <path d="M60 100l30 30 50-50" stroke="currentColor" strokeWidth="15" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M100 20c-33.14 0-60 26.86-60 60 0 45 60 100 60 100s60-55 60-100c0-33.14-26.86-60-60-60z" stroke="currentColor" strokeWidth="12" />
+                            <circle cx="100" cy="80" r="20" stroke="currentColor" strokeWidth="10" />
                         </svg>
                     </div>
 
                     <div className={styles.cardContent}>
                         <h3 className={styles.cardTitle}>
-                            Play<br />Fair
+                            Urgent Care<br />System
                         </h3>
+                        <p className={styles.cardSubtitle}>Multi-State</p>
                         <div className={styles.divider}></div>
-                        <p className={styles.cardDesc}>
-                           Integrity and transparency guide every decision we make. We act honestly, respect ethical standards, and build trust through fairness, responsibility, and clear communication.
-                        </p>
+                        <div className={styles.cardDesc}>
+                            <p className={styles.challengeLabel}>Challenge:</p>
+                            <p>Missing charges, manual verification, inconsistent credentialing.</p>
+                            <p className={styles.solutionLabel}>Solution:</p>
+                            <p>Neura Charge + Neura Eligibility + Credentialing workflows.</p>
+                            <p className={styles.outcomeLabel}>Outcome:</p>
+                            <ul className={styles.outcomeList}>
+                                <li>Charge capture increased by 22%</li>
+                                <li>Prior auth compliance improved by 40%</li>
+                                <li>Zero missed credentialing renewals</li>
+                                <li>First pass rate increased to 98.7%</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

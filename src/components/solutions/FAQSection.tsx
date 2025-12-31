@@ -13,24 +13,24 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
     {
-        question: "What is the selection process?",
-        answer: "The selection process involves document screening, a casual interview (online), a technical assignment (for some positions), and final interviews."
+        question: "Can AI actually reduce claim denials before they occur?",
+        answer: "Yes. Neura AI uses historical payer behavior, coding patterns, and workflow signals to predict denial risk before submission. This allows Winspire RCM teams to intervene early, preventing avoidable denials rather than reacting after revenue is lost."
     },
     {
-        question: "I'm not sure which job category to apply for. Can I apply for multiple jobs?",
-        answer: "Yes, you can apply for multiple positions. If you are unsure, please select 'Open Position' or the most relevant role, and we will consider your aptitude during the screening."
+        question: "Is this model suitable for multi-location or multi-specialty organizations?",
+        answer: "Yes. Winspire RCM is designed to scale across locations, specialties, and volumes. Neura AI standardizes workflows while adapting to payer, specialty, and regional variations without sacrificing performance or visibility."
     },
     {
-        question: "I have been selected for Styleport in the past. Can I apply again?",
-        answer: "Yes, it is. We are constantly updating the job types and job descriptions available, so please check them and then apply using the application form."
+        question: "How does AI improve coding accuracy and compliance?",
+        answer: "Neura AI continuously analyzes documentation quality, coding trends, and payer responses. When combined with Winspire RCM's expert coding oversight, this results in higher E&M accuracy, better risk adjustment capture, and reduced compliance exposure."
     },
     {
-        question: "Before applying, I would like to know more about the working conditions and working style.",
-        answer: (
-            <span>
-                Please contact our recruitment team ( <a href="mailto:career@styleport.co.jp" className={styles.link}>career@styleport.co.jp</a> ).
-            </span>
-        )
+        question: "How secure is AI-driven revenue cycle management?",
+        answer: "Security and compliance are foundational. Winspire RCM operates within strict healthcare data protection standards, and Neura AI is designed to support HIPAA-aligned workflows while maintaining auditability and system integrity."
+    },
+    {
+        question: "What differentiates Winspire RCM from traditional RCM vendors?",
+        answer: "Traditional RCM reacts to problems after revenue is impacted. Winspire RCM, powered by Neura AI, predicts, prevents, and continuously optimizes performance — delivering measurable outcomes rather than manual effort or fragmented reporting."
     }
 ];
 
@@ -55,9 +55,9 @@ const FAQSection: React.FC = () => {
                             <span className={styles.dot}></span>
                             <span className={styles.dot}></span>
                         </div>
-                        <h2 className={styles.title}>FAQ</h2>
+                        <h2 className={styles.title}>Frequently Asked Questions</h2>
                     </div>
-                    <div className={styles.subtitle}>Frequently asked questions</div>
+                    <div className={styles.subtitle}>Everything you need to know about Winspire RCM</div>
                 </div>
 
                 {/* Right Side: FAQ List */}

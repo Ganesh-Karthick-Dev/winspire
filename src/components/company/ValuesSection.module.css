@@ -137,10 +137,56 @@
 }
 
 .cardDesc {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+}
+
+.cardDesc p {
+    margin: 0 0 0.5rem 0;
+}
+
+.cardSubtitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #38bdf8;
+    margin: 0;
+    letter-spacing: 0.05em;
+}
+
+.challengeLabel,
+.solutionLabel,
+.outcomeLabel {
+    font-weight: 700;
+    color: #38bdf8;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 1rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.outcomeList {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+}
+
+.outcomeList li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
+}
+
+.outcomeList li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #10b981;
+    font-weight: 700;
 }
 
 /* Background Icons/Patterns */

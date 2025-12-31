@@ -211,7 +211,7 @@ export default function Outcomes() {
             </div>
 
             {/* Additional Sections from Other Pages */}
-            <div id="values" style={{ scrollMarginTop: '100px' }}>
+            <div id="case-studies" style={{ scrollMarginTop: '100px' }}>
                 <ValuesSection />
             </div>
 
@@ -229,7 +229,7 @@ export default function Outcomes() {
                 { id: 'vision', label: 'Vision' },
                 { id: 'results', label: 'Results' },
                 { id: 'team', label: 'Team' },
-                { id: 'values', label: 'Values' },
+                { id: 'case-studies', label: 'Case Studies' },
                 { id: 'faq', label: 'FAQ' },
                 { id: 'materials', label: 'Materials' },
             ]} />
