@@ -174,6 +174,34 @@ export default function Outcomes() {
                 <OutcomesVision />
             </div>
 
+            {/* Title Section - Introduces the Five Dimensions */}
+            <div
+                style={{
+                    position: 'relative',
+                    zIndex: 30,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    paddingTop: '200px',
+                    paddingBottom: '200px',
+                    paddingLeft: '24px',
+                    paddingRight: '24px',
+                    textAlign: 'center',
+                }}
+            >
+                <h2
+                    style={{
+                        fontSize: 'clamp(2rem, 5vw, 3.75rem)',
+                        fontWeight: 700,
+                        color: 'white',
+                        maxWidth: '56rem',
+                        lineHeight: 1.2,
+                    }}
+                >
+                    The Five Dimensions of Revenue Performance We Transform.
+                </h2>
+            </div>
+
             <div id="results" style={{ scrollMarginTop: '100px' }}>
                 <OutcomesCarousel />
             </div>
