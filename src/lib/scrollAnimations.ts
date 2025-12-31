@@ -722,21 +722,66 @@ export const scrollKeyframes: ScrollKeyframe[] = [
         }
     },
     {
-        scrollProgress: 0.968,
-        label: "footer trans 1",
+        scrollProgress: 0.958,
+        label: "footer trans 0a",
         transform: {
-            position: { x: 0, y: -0.073, z: 0 },
-            rotation: { x: -206.6, y: -303.3, z: 23.23 },
-            scale: 14.66
+            position: { x: 0, y: 0.01, z: 0 },
+            rotation: { x: -190, y: -285.6, z: 23.23 },
+            scale: 13
         }
     },
     {
-        scrollProgress: 0.984,
+        scrollProgress: 0.964,
+        label: "footer trans 0b",
+        transform: {
+            position: { x: 0, y: -0.04, z: 0 },
+            rotation: { x: -200, y: -296.2, z: 23.23 },
+            scale: 14
+        }
+    },
+    {
+        scrollProgress: 0.970,
+        label: "footer trans 1",
+        transform: {
+            position: { x: 0, y: -0.09, z: 0 },
+            rotation: { x: -210, y: -306.9, z: 23.23 },
+            scale: 15
+        }
+    },
+    {
+        scrollProgress: 0.976,
+        label: "footer trans 1b",
+        transform: {
+            position: { x: 0, y: -0.14, z: 0 },
+            rotation: { x: -220, y: -317.5, z: 23.23 },
+            scale: 16
+        }
+    },
+    {
+        scrollProgress: 0.982,
         label: "footer trans 2",
         transform: {
-            position: { x: 0, y: -0.206, z: 0 },
-            rotation: { x: -233.3, y: -331.6, z: 23.23 },
-            scale: 17.33
+            position: { x: 0, y: -0.19, z: 0 },
+            rotation: { x: -230, y: -328.1, z: 23.23 },
+            scale: 17
+        }
+    },
+    {
+        scrollProgress: 0.988,
+        label: "footer trans 2b",
+        transform: {
+            position: { x: 0, y: -0.24, z: 0 },
+            rotation: { x: -240, y: -338.8, z: 23.23 },
+            scale: 18
+        }
+    },
+    {
+        scrollProgress: 0.994,
+        label: "footer trans 3",
+        transform: {
+            position: { x: 0, y: -0.29, z: 0 },
+            rotation: { x: -250, y: -349.4, z: 23.23 },
+            scale: 19
         }
     },
     {
