@@ -67,8 +67,9 @@ export default function OutcomesTeam() {
     }, []);
 
     const paragraphs = [
-        "Our team of architects, urban planners, and design thinkers came together to build something bold: a modern village where people, experiences, and convenience converge.",
-        "We believe that true innovation happens at the intersection of disciplines."
+        "Winspire RCM is engineered to deliver predictable, repeatable, and measurable results. Our approach combines analyst expertise, rich experience, AI intelligence, automation, and clean system-driven workflows to eliminate variability and remove operational blind spots.",
+        "Every interaction, every task, every payer behavior, and every process feeds into Neura AI, creating a continuously improving cycle that accelerates revenue and minimizes waste.",
+        "This is why our outcomes stay consistent across providers, specialties, and volumes."
     ];
 
     return (
@@ -84,7 +85,8 @@ export default function OutcomesTeam() {
                     {/* Left Column - Sticky */}
                     <div ref={leftColRef} className={styles.leftColumn}>
                         <p className={styles.stickyLabel}>
-                            Every square foot has been thoughtfully considered
+                            Outcomes Are Not an Afterthought.<br />
+                            They Are the Core of Our Model.
                         </p>
                     </div>
 
@@ -116,7 +118,8 @@ export default function OutcomesTeam() {
             <div className={styles.mobileView}>
                 {/* Mobile Label */}
                 <p className={styles.mobileLabel}>
-                    Every square foot has been thoughtfully considered
+                    Outcomes Are Not an Afterthought.<br />
+                    They Are the Core of Our Model.
                 </p>
 
                 {/* Mobile Paragraphs - Static */}
