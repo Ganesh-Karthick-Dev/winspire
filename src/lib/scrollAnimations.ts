@@ -55,14 +55,14 @@ export const animationSettings = {
      * Higher = smoother but more lag
      * Values: 1-2 (snappy), 3-5 (smooth), 6-10 (buttery), 10+ (ultra smooth)
      */
-    scrubSmoothness: 7,
+    scrubSmoothness: 7.9,
 
     /**
      * Damping factor for extra smoothness (0-1)
      * Lower = smoother but more lag, Higher = more responsive
      * Recommended: 0.08-0.15 for buttery smooth
      */
-    dampingFactor: 0.08,
+    dampingFactor: 0.30,
 };
 
 
