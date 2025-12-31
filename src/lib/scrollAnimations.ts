@@ -42,27 +42,27 @@ export const animationSettings = {
      * Higher = slower/smoother, Lower = faster/snappier
      * Recommended: 0.5 - 1.5
      */
-    smoothTime: 2.5,
+    smoothTime: 1.0,
 
     /**
      * Continuous rotation speed (radians per frame)
      * 0 = no rotation, 0.003 = slow, 0.01 = fast
      */
-    rotationSpeed: 0.005,
+    rotationSpeed: 0.000,
 
     /**
      * Scroll scrub smoothness (for ScrollTrigger)
      * Higher = smoother but more lag
      * Values: 1-2 (snappy), 3-5 (smooth), 6-10 (buttery), 10+ (ultra smooth)
      */
-    scrubSmoothness: 6,
+    scrubSmoothness: 7,
 
     /**
      * Damping factor for extra smoothness (0-1)
      * Lower = smoother but more lag, Higher = more responsive
      * Recommended: 0.08-0.15 for buttery smooth
      */
-    dampingFactor: 0.10,
+    dampingFactor: 0.08,
 };
 
 
@@ -782,6 +782,25 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             position: { x: 0, y: -0.29, z: 0 },
             rotation: { x: -250, y: -349.4, z: 23.23 },
             scale: 19
+        }
+    },
+    // Manual ease-out for the final frames to prevent hard stop wobble
+    {
+        scrollProgress: 0.997,
+        label: "footer ease 1",
+        transform: {
+            position: { x: 0, y: -0.315, z: 0 },
+            rotation: { x: -255, y: -355, z: 23.23 },
+            scale: 19.5
+        }
+    },
+    {
+        scrollProgress: 0.999,
+        label: "footer ease 2",
+        transform: {
+            position: { x: 0, y: -0.33, z: 0 },
+            rotation: { x: -258, y: -358.5, z: 23.23 },
+            scale: 19.8
         }
     },
     {
