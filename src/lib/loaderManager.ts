@@ -235,86 +235,115 @@ export async function finishLoader(): Promise<void> {
     // Ensure progress shows 100%
     updateLoaderUI(100);
 
-    // Wait a frame for the 100% to render, then pause so user sees 100%
-    await new Promise(resolve => requestAnimationFrame(resolve));
-    await new Promise(resolve => setTimeout(resolve, 300));
-
-    const { gsap } = await import('gsap');
-
-    // Get elements
-    const overlayEl = document.querySelector('.loader-overlay');
-    const gridContainer = document.querySelector('.grid-transition');
-    const columns = document.querySelectorAll('.grid-column');
-
-    if (!gridContainer || columns.length === 0) {
-        // Fallback if no grid - just fade out loader normally
-        await animateLoaderOut();
-        showCanvas();
-        sessionStorage.setItem('3d-initialized', 'true');
+    // Safety timeout: If animation hangs for any reason, force hide loader after 3 seconds
+    const safetyTimer = setTimeout(() => {
+        console.warn('⚠️ Loader animation timed out - forcing hide');
+        const overlayEl = document.querySelector('.loader-overlay');
+        if (overlayEl instanceof HTMLElement) {
+            overlayEl.style.opacity = '0';
+            overlayEl.style.visibility = 'hidden';
+        }
         document.body.classList.remove('loading');
-        return;
-    }
+        showCanvas();
+    }, 3000);
 
-    // Make grid visible
-    if (gridContainer instanceof HTMLElement) {
-        gridContainer.style.visibility = 'visible';
-    }
+    try {
+        // Wait a frame for the 100% to render, then pause so user sees 100%
+        // Use setTimeout instead of requestAnimationFrame for better reliability across browsers
+        await new Promise(resolve => setTimeout(resolve, 50));
+        await new Promise(resolve => setTimeout(resolve, 300));
 
-    // Reset columns to starting position (below screen)
-    gsap.set(columns, { y: '100%' });
+        const { gsap } = await import('gsap');
 
-    await new Promise<void>(resolve => {
-        const tl = gsap.timeline({
-            onComplete: () => {
-                // Hide grid after animation
-                if (gridContainer instanceof HTMLElement) {
-                    gridContainer.style.visibility = 'hidden';
-                }
-                resolve();
-            }
-        });
+        // Get elements
+        const overlayEl = document.querySelector('.loader-overlay');
+        const gridContainer = document.querySelector('.grid-transition');
+        const columns = document.querySelectorAll('.grid-column');
 
-        // Phase 1: Columns slide UP from bottom to cover the screen
-        tl.to(columns, {
-            y: '0%',
-            duration: 0.6,
-            stagger: {
-                each: 0.04,
-                from: 'start'
-            },
-            ease: 'power2.inOut'
-        });
-
-        // NOW hide the loader overlay (grid is fully covering, so it's invisible)
-        tl.add(() => {
-            if (overlayEl instanceof HTMLElement) {
-                overlayEl.style.opacity = '0';
-                overlayEl.style.visibility = 'hidden';
-            }
-            // Show the canvas underneath (still hidden by grid)
+        if (!gridContainer || columns.length === 0) {
+            // Fallback if no grid - just fade out loader normally
+            await animateLoaderOut();
             showCanvas();
+            sessionStorage.setItem('3d-initialized', 'true');
+            document.body.classList.remove('loading');
+            clearTimeout(safetyTimer);
+            return;
+        }
+
+        // Make grid visible
+        if (gridContainer instanceof HTMLElement) {
+            gridContainer.style.visibility = 'visible';
+        }
+
+        // Reset columns to starting position (below screen)
+        gsap.set(columns, { y: '100%' });
+
+        await new Promise<void>(resolve => {
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    // Hide grid after animation
+                    if (gridContainer instanceof HTMLElement) {
+                        gridContainer.style.visibility = 'hidden';
+                    }
+                    resolve();
+                }
+            });
+
+            // Phase 1: Columns slide UP from bottom to cover the screen
+            tl.to(columns, {
+                y: '0%',
+                duration: 0.6,
+                stagger: {
+                    each: 0.04,
+                    from: 'start'
+                },
+                ease: 'power2.inOut'
+            });
+
+            // NOW hide the loader overlay (grid is fully covering, so it's invisible)
+            tl.add(() => {
+                if (overlayEl instanceof HTMLElement) {
+                    overlayEl.style.opacity = '0';
+                    overlayEl.style.visibility = 'hidden';
+                }
+                // Show the canvas underneath (still hidden by grid)
+                showCanvas();
+            });
+
+            // Short pause while fully covered
+            tl.to({}, { duration: 0.15 });
+
+            // Phase 2: Columns slide DOWN to exit (reveal landing page)
+            tl.to(columns, {
+                y: '-100%',
+                duration: 0.6,
+                stagger: {
+                    each: 0.04,
+                    from: 'start'
+                },
+                ease: 'power2.inOut'
+            });
         });
 
-        // Short pause while fully covered
-        tl.to({}, { duration: 0.15 });
+        // Mark 3D as initialized for this session
+        sessionStorage.setItem('3d-initialized', 'true');
 
-        // Phase 2: Columns slide DOWN to exit (reveal landing page)
-        tl.to(columns, {
-            y: '-100%',
-            duration: 0.6,
-            stagger: {
-                each: 0.04,
-                from: 'start'
-            },
-            ease: 'power2.inOut'
-        });
-    });
+        // Show scrollbar after loading complete
+        document.body.classList.remove('loading');
 
-    // Mark 3D as initialized for this session (prevents loader on client-side navigation)
-    sessionStorage.setItem('3d-initialized', 'true');
-
-    // Show scrollbar after loading complete
-    document.body.classList.remove('loading');
+    } catch (error) {
+        console.error('❌ Error in finishLoader:', error);
+        // Force hide on error
+        const overlayEl = document.querySelector('.loader-overlay');
+        if (overlayEl instanceof HTMLElement) {
+            overlayEl.style.opacity = '0';
+            overlayEl.style.visibility = 'hidden';
+        }
+        document.body.classList.remove('loading');
+        showCanvas();
+    } finally {
+        clearTimeout(safetyTimer);
+    }
 }
 
 /**
