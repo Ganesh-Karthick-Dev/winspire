@@ -126,7 +126,7 @@ export default function GLTFViewer({
         continuousRotation.current += currentSpeed;
 
         // Wobble/bobbing effect - only if enabled via prop
-        const wobbleAmount = enableWobbleRef.current ? 0.3 : 0; // ~17 degrees when enabled
+        const wobbleAmount = enableWobbleRef.current ? 0 : 0; // DISABLED WOBBLE to fix shaking
         const wobbleSpeed = 2.0;
         const wobbleX = Math.sin(continuousRotation.current * wobbleSpeed) * wobbleAmount;
         const wobbleY = Math.cos(continuousRotation.current * wobbleSpeed * 0.7) * wobbleAmount;

@@ -749,61 +749,6 @@ export const scrollKeyframes: ScrollKeyframe[] = [
         }
     },
     {
-        scrollProgress: 0.976,
-        label: "footer trans 1b",
-        transform: {
-            position: { x: 0, y: -0.14, z: 0 },
-            rotation: { x: -220, y: -317.5, z: 23.23 },
-            scale: 16
-        }
-    },
-    {
-        scrollProgress: 0.982,
-        label: "footer trans 2",
-        transform: {
-            position: { x: 0, y: -0.19, z: 0 },
-            rotation: { x: -230, y: -328.1, z: 23.23 },
-            scale: 17
-        }
-    },
-    {
-        scrollProgress: 0.988,
-        label: "footer trans 2b",
-        transform: {
-            position: { x: 0, y: -0.24, z: 0 },
-            rotation: { x: -240, y: -338.8, z: 23.23 },
-            scale: 18
-        }
-    },
-    {
-        scrollProgress: 0.994,
-        label: "footer trans 3",
-        transform: {
-            position: { x: 0, y: -0.29, z: 0 },
-            rotation: { x: -250, y: -349.4, z: 23.23 },
-            scale: 19
-        }
-    },
-    // Manual ease-out for the final frames to prevent hard stop wobble
-    {
-        scrollProgress: 0.997,
-        label: "footer ease 1",
-        transform: {
-            position: { x: 0, y: -0.315, z: 0 },
-            rotation: { x: -255, y: -355, z: 23.23 },
-            scale: 19.5
-        }
-    },
-    {
-        scrollProgress: 0.999,
-        label: "footer ease 2",
-        transform: {
-            position: { x: 0, y: -0.33, z: 0 },
-            rotation: { x: -258, y: -358.5, z: 23.23 },
-            scale: 19.8
-        }
-    },
-    {
         scrollProgress: 1.0,
         label: "footer end",
         transform: {
@@ -898,8 +843,9 @@ export function getTransformAtProgress(
         ? (clampedProgress - startFrame.scrollProgress) / range
         : 0;
 
-    // Use smooth easing for buttery transitions
-    return lerpTransform(startFrame.transform, endFrame.transform, localProgress, true);
+    // Use linear interpolation for buttery transitions with dense keyframes
+    // (Easing between close keyframes causes "wobble" due to start/stop velocity)
+    return lerpTransform(startFrame.transform, endFrame.transform, localProgress, false);
 }
 
 // ============================================================================
