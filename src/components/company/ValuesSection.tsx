@@ -10,7 +10,7 @@ const ValuesSection: React.FC = () => {
                         <span className={styles.dot}></span>
                         <span className={styles.dot}></span>
                     </div>
-                    <h2 className={styles.title}>Values</h2>
+                    <h2 className={styles.title}>Case studies</h2>
                 </div>
                 <div className={styles.subtitle}>Values we hold dear</div>
             </div>
@@ -19,7 +19,7 @@ const ValuesSection: React.FC = () => {
                 {/* Card 01 - Be Innovative */}
                 <div className={styles.card}>
                     <div className={styles.valueLabel}>
-                        Value <span>01</span>
+                        Case Study <span>01</span>
                     </div>
 
                     {/* Background Icon - Spiral/Galaxy shape for Innovation */}
@@ -32,11 +32,19 @@ const ValuesSection: React.FC = () => {
 
                     <div className={styles.cardContent}>
                         <h3 className={styles.cardTitle}>
-                            Be<br />Innovative
+                            Multispecialty Group <br />– 18 Locations
                         </h3>
                         <div className={styles.divider}></div>
                         <p className={styles.cardDesc}>
-                            We constantly explore new ideas, technologies, and approaches to solve complex healthcare challenges. Innovation drives how we improve efficiency, accuracy, and long-term value for our clients.
+                            <strong>Challenge:</strong><br />
+                            High denial rates, unstructured AR, unpredictable revenue.<br /><br />
+                            <strong>Solution:</strong><br />
+                            Neura Predict + Neura AR + full RCM integration.<br /><br />
+                            <strong>Outcome:</strong><br />
+                            • Denials dropped from 18% to under 1%<br />
+                            • AR days reduced by 32% in 120 days<br />
+                            • TAT across all departments moved under 24 hours<br />
+                            • Visibility increased provider satisfaction dramatically
                         </p>
                     </div>
                 </div>
@@ -44,7 +52,7 @@ const ValuesSection: React.FC = () => {
                 {/* Card 02 - All For One */}
                 <div className={styles.card}>
                     <div className={styles.valueLabel}>
-                        Value <span>02</span>
+                        Case Study <span>02</span>
                     </div>
 
                     {/* Background Icon - Connected circles/Nodes */}
@@ -64,11 +72,19 @@ const ValuesSection: React.FC = () => {
 
                     <div className={styles.cardContent}>
                         <h3 className={styles.cardTitle}>
-                            All For<br />One
+                            Behavioral Health Network<br />– 60+ Therapists
                         </h3>
                         <div className={styles.divider}></div>
                         <p className={styles.cardDesc}>
-                            We believe strong collaboration creates meaningful outcomes. By working as one team—with our clients and within our organization—we combine expertise, accountability, and shared purpose to achieve ambitious goals.
+                            <strong>Challenge:</strong><br />
+                            Fragmented documentation, persistent coding errors, payer delays.<br /><br />
+                            <strong>Solution:</strong><br />
+                            Neura Code + Neura Flow + Denial automation.<br /><br />
+                            <strong>Outcome:</strong><br />
+                            • E&M coding accuracy improved by 28%<br />
+                            • Appeals turnaround cut by 70%<br />
+                            • 100% visibility across multiple locations<br />
+                            • Cash flow stabilized within seven weeks
                         </p>
                     </div>
                 </div>
@@ -76,7 +92,7 @@ const ValuesSection: React.FC = () => {
                 {/* Card 03 - Play Fair */}
                 <div className={styles.card}>
                     <div className={styles.valueLabel}>
-                        Value <span>03</span>
+                        Case Study <span>03</span>
                     </div>
 
                     {/* Background Icon - Shield/Checkmark/Scale */}
@@ -89,11 +105,19 @@ const ValuesSection: React.FC = () => {
 
                     <div className={styles.cardContent}>
                         <h3 className={styles.cardTitle}>
-                            Play<br />Fair
+                            Urgent Care System<br />– Multi-State
                         </h3>
                         <div className={styles.divider}></div>
                         <p className={styles.cardDesc}>
-                           Integrity and transparency guide every decision we make. We act honestly, respect ethical standards, and build trust through fairness, responsibility, and clear communication.
+                            <strong>Challenge:</strong><br />
+                            Missing charges, manual verification, inconsistent credentialing.<br /><br />
+                            <strong>Solution:</strong><br />
+                            Neura Charge + Neura Eligibility + Credentialing workflows.<br /><br />
+                            <strong>Outcome:</strong><br />
+                            • Charge capture increased by 22%<br />
+                            • Prior auth compliance improved by 40%<br />
+                            • Zero missed credentialing renewals<br />
+                            • First pass rate increased to 98.7%
                         </p>
                     </div>
                 </div>
