@@ -123,19 +123,17 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         const targetLighting = targetLightingRef.current;
 
         // Smoothly interpolate toward target
-        transformRef.current = {
-            position: {
-                x: lerpValue(current.position.x, target.position.x, dampingFactor),
-                y: lerpValue(current.position.y, target.position.y, dampingFactor),
-                z: lerpValue(current.position.z, target.position.z, dampingFactor),
-            },
-            rotation: {
-                x: lerpValue(current.rotation.x, target.rotation.x, dampingFactor),
-                y: lerpValue(current.rotation.y, target.rotation.y, dampingFactor),
-                z: lerpValue(current.rotation.z, target.rotation.z, dampingFactor),
-            },
-            scale: lerpValue(current.scale, target.scale, dampingFactor),
-        };
+        // PERFORMANCE: Mutate object in place so consumers (GLTFViewer) see updates without React re-renders
+        const t = transformRef.current;
+        t.position.x = lerpValue(current.position.x, target.position.x, dampingFactor);
+        t.position.y = lerpValue(current.position.y, target.position.y, dampingFactor);
+        t.position.z = lerpValue(current.position.z, target.position.z, dampingFactor);
+
+        t.rotation.x = lerpValue(current.rotation.x, target.rotation.x, dampingFactor);
+        t.rotation.y = lerpValue(current.rotation.y, target.rotation.y, dampingFactor);
+        t.rotation.z = lerpValue(current.rotation.z, target.rotation.z, dampingFactor);
+
+        t.scale = lerpValue(current.scale, target.scale, dampingFactor);
 
         // Smoothly interpolate lighting
         lightingRef.current = {

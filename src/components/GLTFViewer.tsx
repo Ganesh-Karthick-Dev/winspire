@@ -142,6 +142,12 @@ export default function GLTFViewer({
             model.rotation.x = radX + wobbleX;
             model.rotation.y = radY + wobbleY;
             model.rotation.z = radZ - continuousRotation.current;
+
+            // 2. Update Position & Scale (Performance: Update in loop to avoid React render overhead)
+            model.position.x = currentTransform.position.x;
+            model.position.y = currentTransform.position.y;
+            model.position.z = currentTransform.position.z;
+            model.scale.setScalar(currentTransform.scale);
         } else {
             // MODE B: Internal Control (Animation/GSAP driven)
             // Use captured refs
