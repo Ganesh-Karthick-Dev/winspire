@@ -575,7 +575,180 @@ export const scrollKeyframes: ScrollKeyframe[] = [
             rotation: { x: -205, y: -207.544, z: 23.23 },
             scale: 7
         }
+    },
+    // ============ CAREER SECTION MIDDLE ============
+    {
+        scrollProgress: 0.660,
+        label: "carear mid",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -205, y: -262.544, z: 23.23 },
+            scale: 7
+        }
+    },
+    {
+        scrollProgress: 0.682,
+        label: "carear mid trans 1",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -205, y: -271.294, z: 23.23 },
+            scale: 6.75
+        }
+    },
+    {
+        scrollProgress: 0.704,
+        label: "carear mid trans 2",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -205, y: -280.044, z: 23.23 },
+            scale: 6.5
+        }
+    },
+    {
+        scrollProgress: 0.726,
+        label: "carear mid trans 3",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -205, y: -288.794, z: 23.23 },
+            scale: 6.25
+        }
+    },
+    {
+        scrollProgress: 0.748,
+        label: "news start",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -205, y: -297.544, z: 23.23 },
+            scale: 6
+        }
+    },
+    {
+        scrollProgress: 0.766,
+        label: "news start trans 1",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -217.5, y: -310.044, z: 23.23 },
+            scale: 6
+        }
+    },
+    {
+        scrollProgress: 0.784,
+        label: "news mid",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -230, y: -322.544, z: 23.23 },
+            scale: 6
+        }
+    },
+    {
+        scrollProgress: 0.804,
+        label: "news mid trans 1",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -230, y: -335.87, z: 23.23 },
+            scale: 6
+        }
+    },
+    {
+        scrollProgress: 0.824,
+        label: "news mid trans 2",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -230, y: -349.21, z: 23.23 },
+            scale: 6
+        }
+    },
+    {
+        scrollProgress: 0.844,
+        label: "news end",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -230, y: -362.544, z: 23.23 },
+            scale: 6
+        }
+    },
+    {
+        scrollProgress: 0.856,
+        label: "news end trans 1",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -230, y: -370.044, z: 23.23 },
+            scale: 7.5
+        }
+    },
+    {
+        scrollProgress: 0.868,
+        label: "contact start",
+        transform: {
+            position: { x: -0.2, y: 0.06, z: 0 },
+            rotation: { x: -230, y: -377.544, z: 23.23 },
+            scale: 9
+        }
+    },
+    {
+        scrollProgress: 0.889,
+        label: "contact trans 1",
+        transform: {
+            position: { x: -0.15, y: 0.06, z: 0 },
+            rotation: { x: -217.5, y: -351.908, z: 23.23 },
+            scale: 9.75
+        }
+    },
+    {
+        scrollProgress: 0.910,
+        label: "contact trans 2",
+        transform: {
+            position: { x: -0.10, y: 0.06, z: 0 },
+            rotation: { x: -205, y: -326.272, z: 23.23 },
+            scale: 10.5
+        }
+    },
+    {
+        scrollProgress: 0.931,
+        label: "contact trans 3",
+        transform: {
+            position: { x: -0.05, y: 0.06, z: 0 },
+            rotation: { x: -192.5, y: -300.636, z: 23.23 },
+            scale: 11.25
+        }
+    },
+    {
+        scrollProgress: 0.952,
+        label: "contact end",
+        transform: {
+            position: { x: 0, y: 0.06, z: 0 },
+            rotation: { x: -180, y: -275, z: 23.23 },
+            scale: 12
+        }
+    },
+    {
+        scrollProgress: 0.968,
+        label: "footer trans 1",
+        transform: {
+            position: { x: 0, y: -0.073, z: 0 },
+            rotation: { x: -206.6, y: -303.3, z: 23.23 },
+            scale: 14.66
+        }
+    },
+    {
+        scrollProgress: 0.984,
+        label: "footer trans 2",
+        transform: {
+            position: { x: 0, y: -0.206, z: 0 },
+            rotation: { x: -233.3, y: -331.6, z: 23.23 },
+            scale: 17.33
+        }
+    },
+    {
+        scrollProgress: 1.0,
+        label: "footer end",
+        transform: {
+            position: { x: 0, y: -0.34, z: 0 },
+            rotation: { x: -260, y: -360, z: 23.23 },
+            scale: 20
+        }
     }
+
 ];
 
 /**
