@@ -819,7 +819,8 @@ export function lerpTransform(
  */
 export function getTransformAtProgress(
     progress: number,
-    keyframes: ScrollKeyframe[] = scrollKeyframes
+    keyframes: ScrollKeyframe[] = scrollKeyframes,
+    useEasing: boolean = false
 ): ModelTransform {
     // Clamp progress to 0-1
     const clampedProgress = Math.max(0, Math.min(1, progress));
@@ -843,9 +844,8 @@ export function getTransformAtProgress(
         ? (clampedProgress - startFrame.scrollProgress) / range
         : 0;
 
-    // Use linear interpolation for buttery transitions with dense keyframes
-    // (Easing between close keyframes causes "wobble" due to start/stop velocity)
-    return lerpTransform(startFrame.transform, endFrame.transform, localProgress, false);
+    // Use dynamic easing setting
+    return lerpTransform(startFrame.transform, endFrame.transform, localProgress, useEasing);
 }
 
 // ============================================================================

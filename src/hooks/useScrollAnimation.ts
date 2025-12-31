@@ -47,6 +47,10 @@ export interface UseScrollAnimationOptions {
     end?: string;
     /** Custom keyframes to use instead of default */
     keyframes?: typeof scrollKeyframes;
+    /** Damping factor for smooth interpolation (0-1) */
+    dampingFactor?: number;
+    /** Use easing function for interpolation */
+    useEasing?: boolean;
 }
 
 /**
@@ -60,6 +64,8 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         start = 'top top',
         end = 'bottom bottom',
         keyframes: customKeyframes,
+        dampingFactor = animationSettings.dampingFactor,
+        useEasing = false,
     } = options;
 
     // Determine which keyframes to use - mobile or desktop
@@ -105,9 +111,6 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     const scrollProgressRef = useRef(0);
     const rafIdRef = useRef<number>(0);
 
-    // Damping factor for ultra smooth interpolation
-    const dampingFactor = animationSettings.dampingFactor;
-
     // Smooth lerp helper
     const lerpValue = (current: number, target: number, factor: number) =>
         current + (target - current) * factor;
@@ -152,9 +155,9 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     // Update TARGET transform (called by ScrollTrigger)
     const updateTargetTransform = useCallback((progress: number) => {
         scrollProgressRef.current = progress;
-        targetTransformRef.current = getTransformAtProgress(progress, activeKeyframes);
+        targetTransformRef.current = getTransformAtProgress(progress, activeKeyframes, useEasing);
         targetLightingRef.current = getLightingAtProgress(progress, activeKeyframes);
-    }, [activeKeyframes]);
+    }, [activeKeyframes, useEasing]);
 
     // Update transform immediately when keyframes change (e.g., mobile/desktop switch)
     useEffect(() => {
@@ -210,13 +213,14 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
             isHydrated,
             keyframesCount: activeKeyframes.length,
             dampingFactor,
+            useEasing,
         });
 
         return () => {
             scrollTrigger.kill();
             window.removeEventListener('resize', handleResize);
         };
-    }, [enabled, scrub, trigger, start, end, updateTargetTransform, isMobile, isHydrated, activeKeyframes, dampingFactor]);
+    }, [enabled, scrub, trigger, start, end, updateTargetTransform, isMobile, isHydrated, activeKeyframes, dampingFactor, useEasing]);
 
     // Return a stable object with refs - GLTFViewer reads from refs directly
     return useMemo(() => ({

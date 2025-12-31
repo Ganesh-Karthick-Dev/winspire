@@ -56,6 +56,42 @@ const getInitialTransform = () => {
     };
 };
 
+/**
+ * Animation Tuner Component
+ * Only renders in Dev mode to tweak animation settings live.
+ */
+function AnimationTuner({ onSettingsChange }: { onSettingsChange: (key: string, value: any) => void }) {
+    // We dynamically import useControls to avoid SSR issues if Leva isn't SSR friendly (it usually is but safe side)
+    // Actually Leva hooks must be used at top level. We'll assume Leva is safe or this component is only mounted client-side.
+    // Since Home is a page, we might need to be careful. But let's try standard usage.
+    const { useControls } = require('leva');
+
+    useControls('Animation Tuner', {
+        dampingFactor: {
+            value: animationSettings.dampingFactor,
+            min: 0.01,
+            max: 0.3,
+            step: 0.01,
+            label: 'Damping (Lower=Smoother)',
+            onChange: (v: number) => onSettingsChange('dampingFactor', v)
+        },
+        scrubSmoothness: {
+            value: animationSettings.scrubSmoothness,
+            min: 0,
+            max: 10,
+            step: 0.1,
+            label: 'Scrub Lag (Higher=Smoother)',
+            onChange: (v: number) => onSettingsChange('scrubSmoothness', v)
+        },
+        useEasing: {
+            value: false,
+            label: 'Use Easing (Smoothstep)',
+            onChange: (v: boolean) => onSettingsChange('useEasing', v)
+        },
+    });
+    return null;
+}
+
 export default function Home() {
     // Track if 3D should be disabled
     const is3DDisabled = useRef(false);
@@ -63,6 +99,17 @@ export default function Home() {
 
     // Mobile detection - uses window.matchMedia which works with DevTools
     const isMobile = useIsMobile();
+
+    // === Animation Tuning State ===
+    const [animSettings, setAnimSettings] = useState({
+        dampingFactor: animationSettings.dampingFactor,
+        scrubSmoothness: animationSettings.scrubSmoothness,
+        useEasing: false, // Default to Linear as per latest fix
+    });
+
+    const handleAnimSettingChange = (key: string, value: any) => {
+        setAnimSettings(prev => ({ ...prev, [key]: value }));
+    };
 
     // Add ScrollTrigger for fade effect
     useEffect(() => {
@@ -135,6 +182,9 @@ export default function Home() {
     // === Scroll Animation (for Production Mode) ===
     const { transform: scrollTransform } = useScrollAnimation({
         enabled: !DEBUG_MODE, // Only enable when not in debug mode
+        dampingFactor: animSettings.dampingFactor,
+        scrub: animSettings.scrubSmoothness,
+        useEasing: animSettings.useEasing,
     });
 
     // Choose which transform to use based on mode
@@ -168,6 +218,11 @@ export default function Home() {
             title="Home"
             description="Experience stunning 3D visuals with smooth scroll animations. Built with Next.js, Three.js, and GSAP for optimal performance."
         >
+            {/* Animation Tuner - Only in Dev Mode */}
+            {isDev && !DEBUG_MODE && (
+                <AnimationTuner onSettingsChange={handleAnimSettingChange} />
+            )}
+
             {/* Leva Debug Panel - Only in dev mode AND debug mode enabled */}
             {isDev && DEBUG_MODE && (
                 <ModelDebugPanel
@@ -206,8 +261,13 @@ export default function Home() {
                     <div style={{ marginTop: '4px', fontSize: '12px', color: '#888' }}>
                         Raw: {scrollProgress.toFixed(3)}
                     </div>
+                    <div style={{ marginTop: '4px', fontSize: '12px', color: '#aaa' }}>
+                        Damping: {animSettings.dampingFactor} | Scrub: {animSettings.scrubSmoothness} | Easing: {animSettings.useEasing ? 'ON' : 'OFF'}
+                    </div>
                 </div>
-            )} 
+            )}
+
+            {/* ... rest of the component ... */}
 
             {/* Page wrapper for z-index stacking */}
             <div className="page-wrapper">
