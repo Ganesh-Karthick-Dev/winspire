@@ -1,0 +1,169 @@
+/* Privacy Policy Page Styles */
+
+.container {
+    background: #ffffff;
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+    padding: 120px 24px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.title {
+    font-size: clamp(2.25rem, 5vw, 3rem);
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+}
+
+.tagline {
+    font-size: 1.15rem;
+    color: #6b7280;
+    font-style: italic;
+    margin: 0 0 4px 0;
+}
+
+.taglineStrong {
+    font-size: 1.15rem;
+    color: #111827;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Content */
+.content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    color: #4b5563;
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.content>p {
+    margin: 0 0 12px 0;
+}
+
+.introLast {
+    margin-bottom: 32px !important;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Sections */
+.section {
+    margin-bottom: 28px;
+}
+
+.section h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #3b82f6;
+}
+
+.section h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 16px 0 8px 0;
+}
+
+.section p {
+    margin: 0 0 8px 0;
+}
+
+.section ul {
+    padding-left: 0;
+    margin: 0 0 12px 0;
+    list-style: none;
+}
+
+.section ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 4px;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+.section ul li::before {
+    content: '•';
+    position: absolute;
+    left: 4px;
+    color: #3b82f6;
+    font-weight: bold;
+}
+
+/* Strong text */
+.strong {
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Email link */
+.email {
+    color: #3b82f6;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.email:hover {
+    text-decoration: underline;
+}
+
+/* Last updated */
+.lastUpdated {
+    color: #9ca3af;
+    font-size: 0.85rem;
+    margin-top: 16px !important;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        padding: 100px 20px 32px;
+    }
+
+    .title {
+        font-size: 1.75rem;
+        margin-bottom: 16px;
+    }
+
+    .tagline,
+    .taglineStrong {
+        font-size: 1rem;
+    }
+
+    .content {
+        padding: 0 20px 60px;
+        font-size: 0.95rem;
+    }
+
+    .introLast {
+        margin-bottom: 24px !important;
+    }
+
+    .section {
+        margin-bottom: 24px;
+    }
+
+    .section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+
+    .section h4 {
+        font-size: 0.95rem;
+        margin: 12px 0 6px 0;
+    }
+}
