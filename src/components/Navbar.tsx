@@ -4,7 +4,6 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import gsap from 'gsap';
-import ContactModal from './ContactModal';
 
 interface NavItem {
     label: string;
@@ -26,7 +25,6 @@ export default function Navbar() {
     const [showSingleDot, setShowSingleDot] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
     const [activeItem, setActiveItem] = useState<string | null>(null);
-    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
     const menuBoxRef = useRef<HTMLDivElement>(null);
     const menuContentRef = useRef<HTMLDivElement>(null);
@@ -354,7 +352,7 @@ export default function Navbar() {
                     {/* Contact Button */}
                     <button
                         className="navbar-contact-btn"
-                        onClick={() => setIsContactModalOpen(true)}
+                        onClick={() => router.push('/book-demo')}
                         style={{
                             color: effectiveTextColor,
                             borderColor: effectiveTextColor
@@ -417,12 +415,6 @@ export default function Navbar() {
                     </div>
                 </div>
             </nav>
-
-            {/* Contact Modal */}
-            <ContactModal
-                isOpen={isContactModalOpen}
-                onClose={() => setIsContactModalOpen(false)}
-            />
         </>
     );
 }

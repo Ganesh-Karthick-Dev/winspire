@@ -358,6 +358,14 @@ a {
   opacity: 1;
 }
 
+/* Hide canvas when modal is open */
+body.modal-open .webgl-canvas,
+body.modal-open .webgl-canvas.ready {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
 /* ============================================
    Main Content
    ============================================ */

@@ -1,46 +1,33 @@
 /* Contact Modal Overlay */
 .overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
-    padding: 2rem;
-    overflow: hidden;
+    z-index: 99999;
+    padding: 1.5rem;
+    overflow-y: auto;
+    isolation: isolate;
 }
 
 /* Modal Container */
 .modal {
     position: relative;
-    max-width: 1200px;
+    max-width: 600px;
     width: 100%;
-    max-height: calc(100vh - 4rem);
-    overflow: visible;
-    border-radius: 32px;
-    background: transparent;
+    margin: auto;
+    z-index: 1;
 }
 
-/* Form Wrapper - adjusts DemoForm styling for modal context */
+/* Form Wrapper */
 .formWrapper {
     width: 100%;
-    max-height: calc(100vh - 6rem);
-    overflow-y: auto;
-    scrollbar-width: none;
-    /* Firefox */
-    -ms-overflow-style: none;
-    /* IE and Edge */
-}
-
-.formWrapper::-webkit-scrollbar {
-    display: none;
-    /* Chrome, Safari, Opera */
+    position: relative;
+    z-index: 1;
 }
 
 /* Override DemoForm card width inside modal */
@@ -49,60 +36,93 @@
     margin: 0 !important;
 }
 
-/* Close Button - Highly visible */
+
+/* Custom scrollbar for the overlay */
+.overlay::-webkit-scrollbar {
+    width: 8px;
+}
+
+.overlay::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.overlay::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+.overlay::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Close Button */
 .closeBtn {
     position: absolute;
-    top: -12px;
-    right: -12px;
-    width: 48px;
-    height: 48px;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ffffff;
+    background: #f3f4f6;
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    color: #1e293b;
-    transition: all 0.25s ease;
-    z-index: 100;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    color: #6b7280;
+    transition: all 0.2s ease;
+    z-index: 10;
 }
 
 .closeBtn:hover {
-    background: #ef4444;
+    background: #111827;
     color: #ffffff;
-    transform: scale(1.1) rotate(90deg);
-    box-shadow: 0 6px 24px rgba(239, 68, 68, 0.4);
 }
 
 .closeBtn svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
 
-/* Mobile Responsive */
+/* ============================================
+   TABLET RESPONSIVE
+   ============================================ */
 @media (max-width: 768px) {
     .overlay {
         padding: 1rem;
         align-items: flex-start;
-        padding-top: 4rem;
+        padding-top: 2rem;
     }
 
     .modal {
-        max-height: none;
-        border-radius: 24px;
+        max-width: 100%;
     }
 
     .closeBtn {
-        top: 1rem;
-        right: 1rem;
-        width: 40px;
-        height: 40px;
+        top: 16px;
+        right: 16px;
+        width: 32px;
+        height: 32px;
     }
 
     .closeBtn svg {
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* ============================================
+   SMALL MOBILE
+   ============================================ */
+@media (max-width: 400px) {
+    .overlay {
+        padding: 0.75rem;
+        padding-top: 1rem;
+    }
+
+    .closeBtn {
+        top: 12px;
+        right: 12px;
     }
 }

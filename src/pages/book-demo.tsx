@@ -174,7 +174,7 @@ export default function BookDemo() {
             </div>
 
             {/* Demo Form Section */}
-            <div id="form" style={{ scrollMarginTop: '100px' }}>
+            <div id="form" style={{ scrollMarginTop: '100px', position: 'relative', zIndex: 30 }}>
                 <DemoForm />
             </div>
 
