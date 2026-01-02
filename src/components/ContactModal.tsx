@@ -73,7 +73,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     </svg>
                 </button>
                 <div className={styles.formWrapper}>
-                    <DemoForm />
+                    <DemoForm isModal={true} />
                 </div>
             </div>
         </div>,
