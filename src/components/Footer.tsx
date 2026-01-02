@@ -48,13 +48,9 @@ export default function Footer() {
                     {/* Social Links */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '50px' }}>
                         <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>Social</span>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+                        <a href="https://www.linkedin.com/company/winspire-rcm-private-limited/" target="_blank" rel="noopener noreferrer"
                             style={{ fontSize: '1rem', color: 'white' }}>
                             LinkedIn
-                        </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-                            style={{ fontSize: '1rem', color: 'white' }}>
-                            Twitter
                         </a>
                     </div>
 
@@ -351,8 +347,7 @@ export default function Footer() {
                     {/* Right Col: Social (Smaller) */}
                     <div className="footer-links-right">
                         <div className="social-label">Social</div>
-                        <a href="https://linkedin.com" className="social-link">LinkedIn</a>
-                        <a href="https://twitter.com" className="social-link">Twitter</a>
+                        <a href="https://www.linkedin.com/company/winspire-rcm-private-limited/" className="social-link">LinkedIn</a>
                     </div>
                 </div>
 
