@@ -89,13 +89,6 @@ export default function SEOHead({
             <meta name="twitter:description" content={description} />
             <meta name="twitter:image" content={fullOgImage} />
 
-            {/* Preload LCP image (hero poster) */}
-            <link
-                rel="preload"
-                as="image"
-                href="/poster/hero-poster.webp"
-                type="image/webp"
-            />
 
             {/* Preconnect to external resources */}
             <link rel="preconnect" href="https://fonts.googleapis.com" />

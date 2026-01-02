@@ -1441,8 +1441,43 @@ footer p {
 }
 
 .navbar-logo,
-.navbar-menu-box {
+.navbar-menu-box,
+.navbar-contact-btn {
   pointer-events: auto;
+}
+
+/* Right side container - Contact + Menu */
+.navbar-right {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  pointer-events: auto;
+}
+
+/* Contact Button */
+.navbar-contact-btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 24px;
+  background: transparent;
+  border: 1.5px solid currentColor;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.navbar-contact-btn:hover {
+  background: currentColor;
+  transform: translateY(-2px);
+}
+
+/* When text color is #083151 (dark), hover should have white text */
+.navbar-contact-btn:hover {
+  color: white !important;
 }
 
 .navbar-logo {
@@ -1469,6 +1504,15 @@ footer p {
 
   .navbar-logo img {
     height: 28px;
+  }
+
+  .navbar-right {
+    gap: 12px;
+  }
+
+  .navbar-contact-btn {
+    font-size: 12px;
+    padding: 10px 16px;
   }
 }
 

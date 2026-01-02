@@ -161,6 +161,20 @@ export default function Home() {
         resetLoaderToZero();
 
         is3DDisabled.current = shouldDisable3D();
+
+        // Safety timeout: If loader is still stuck after 5 seconds, hide it (Safari/Mac fix)
+        const safetyTimeout = setTimeout(() => {
+            const progressEl = document.querySelector('.loader-progress');
+            const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
+            if (progressEl && progressEl.textContent === '0%' && loaderOverlay) {
+                console.warn('Loader stuck at 0% - forcing hide');
+                loaderOverlay.style.opacity = '0';
+                loaderOverlay.style.visibility = 'hidden';
+                document.body.classList.remove('loading');
+            }
+        }, 5000);
+
+        return () => clearTimeout(safetyTimeout);
     }, []);
 
     return (

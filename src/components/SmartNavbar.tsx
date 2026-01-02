@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import ContactModal from './ContactModal';
 
 interface NavItem {
     label: string;
@@ -21,6 +22,7 @@ export default function SmartNavbar() {
     const [isVisible, setIsVisible] = useState(true);
     const [isAtTop, setIsAtTop] = useState(true);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
     const lastScrollY = useRef(0);
     const ticking = useRef(false);
 
@@ -138,11 +140,14 @@ export default function SmartNavbar() {
 
                     {/* Right side: Contact button + Mobile Hamburger */}
                     <div className="smart-navbar-right">
-                        {/* Contact Button - visible on all sizes */}
-                        <Link href="/contact" className="smart-navbar-contact">
+                        {/* Contact Button - opens modal instead of navigating */}
+                        <button
+                            className="smart-navbar-contact"
+                            onClick={() => setIsContactModalOpen(true)}
+                        >
                             <span className="contact-dot"></span>
                             Contact
-                        </Link>
+                        </button>
 
                         {/* Mobile Menu Button - only visible on mobile */}
                         <button
@@ -181,6 +186,12 @@ export default function SmartNavbar() {
                     </ul>
                 </div>
             </div>
+
+            {/* Contact Modal Popup */}
+            <ContactModal
+                isOpen={isContactModalOpen}
+                onClose={() => setIsContactModalOpen(false)}
+            />
         </>
     );
 }

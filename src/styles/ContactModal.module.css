@@ -1,0 +1,108 @@
+/* Contact Modal Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+/* Modal Container */
+.modal {
+    position: relative;
+    max-width: 1200px;
+    width: 100%;
+    max-height: calc(100vh - 4rem);
+    overflow: visible;
+    border-radius: 32px;
+    background: transparent;
+}
+
+/* Form Wrapper - adjusts DemoForm styling for modal context */
+.formWrapper {
+    width: 100%;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+.formWrapper::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+/* Override DemoForm card width inside modal */
+.formWrapper>div {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+/* Close Button - Highly visible */
+.closeBtn {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #1e293b;
+    transition: all 0.25s ease;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.closeBtn:hover {
+    background: #ef4444;
+    color: #ffffff;
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 6px 24px rgba(239, 68, 68, 0.4);
+}
+
+.closeBtn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .overlay {
+        padding: 1rem;
+        align-items: flex-start;
+        padding-top: 4rem;
+    }
+
+    .modal {
+        max-height: none;
+        border-radius: 24px;
+    }
+
+    .closeBtn {
+        top: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+    }
+
+    .closeBtn svg {
+        width: 18px;
+        height: 18px;
+    }
+}

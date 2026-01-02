@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import gsap from 'gsap';
+import ContactModal from './ContactModal';
 
 interface NavItem {
     label: string;
@@ -25,6 +26,7 @@ export default function Navbar() {
     const [showSingleDot, setShowSingleDot] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
     const [activeItem, setActiveItem] = useState<string | null>(null);
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
     const menuBoxRef = useRef<HTMLDivElement>(null);
     const menuContentRef = useRef<HTMLDivElement>(null);
@@ -325,79 +327,103 @@ export default function Navbar() {
     // Filter is harder to get exact hex.
 
     return (
-        <nav className="navbar" style={{ transition: 'color 0.3s ease' }}>
-            {/* Logo */}
-            <a href="/" className="navbar-logo">
-                <div
-                    style={{
-                        width: '140px',
-                        height: '40px',
-                        backgroundColor: effectiveTextColor, // This controls the logo color directly
-                        maskImage: 'url("/images/Logo-White.svg")',
-                        maskSize: 'contain',
-                        maskRepeat: 'no-repeat',
-                        maskPosition: 'left center',
-                        WebkitMaskImage: 'url("/images/Logo-White.svg")',
-                        WebkitMaskSize: 'contain',
-                        WebkitMaskRepeat: 'no-repeat',
-                        WebkitMaskPosition: 'left center',
-                        transition: 'background-color 0.3s ease'
-                    }}
-                />
-            </a>
+        <>
+            <nav className="navbar" style={{ transition: 'color 0.3s ease' }}>
+                {/* Logo */}
+                <a href="/" className="navbar-logo">
+                    <div
+                        style={{
+                            width: '140px',
+                            height: '40px',
+                            backgroundColor: effectiveTextColor, // This controls the logo color directly
+                            maskImage: 'url("/images/Logo-White.svg")',
+                            maskSize: 'contain',
+                            maskRepeat: 'no-repeat',
+                            maskPosition: 'left center',
+                            WebkitMaskImage: 'url("/images/Logo-White.svg")',
+                            WebkitMaskSize: 'contain',
+                            WebkitMaskRepeat: 'no-repeat',
+                            WebkitMaskPosition: 'left center',
+                            transition: 'background-color 0.3s ease'
+                        }}
+                    />
+                </a>
 
-            {/* Menu Box */}
-            <div
-                className={`navbar-menu-box ${isMenuOpen ? 'open' : ''}`}
-                ref={menuBoxRef}
-            >
-                {/* Menu Button - MENU text + dots */}
-                <button
-                    className="navbar-menu-btn"
-                    onClick={handleMenuToggle}
-                    aria-expanded={isMenuOpen}
-                    aria-haspopup="true"
-                    disabled={isAnimating}
-                    style={{ color: effectiveTextColor }}
-                >
-                    <span className="navbar-menu-text">MENU</span>
-                    {/* 4 dots or 1 dot */}
-                    {showSingleDot ? (
-                        <span className="navbar-single-dot" style={{ backgroundColor: effectiveTextColor }}></span>
-                    ) : (
-                        <span className="navbar-menu-icon" ref={gridDotsRef}>
-                            <span className="grid-dot" style={{ backgroundColor: effectiveTextColor }}></span>
-                            <span className="grid-dot" style={{ backgroundColor: effectiveTextColor }}></span>
-                            <span className="grid-dot" style={{ backgroundColor: effectiveTextColor }}></span>
-                            <span className="grid-dot" style={{ backgroundColor: effectiveTextColor }}></span>
-                        </span>
-                    )}
-                </button>
+                {/* Right Side - Contact Button + Menu Box */}
+                <div className="navbar-right">
+                    {/* Contact Button */}
+                    <button
+                        className="navbar-contact-btn"
+                        onClick={() => setIsContactModalOpen(true)}
+                        style={{
+                            color: effectiveTextColor,
+                            borderColor: effectiveTextColor
+                        }}
+                    >
+                        Contact
+                    </button>
 
-                {/* Menu Content - animated with GSAP */}
-                {isMenuOpen && (
-                    <div className="navbar-menu-content" ref={menuContentRef}>
-                        <div className="navbar-menu-divider" ref={dividerRef} style={{ backgroundColor: effectiveTextColor }}></div>
-                        <ul className="navbar-menu-list" ref={menuItemsRef}>
-                            {navItems.map((item) => (
-                                <li key={item.label}>
-                                    <a
-                                        href={item.href}
-                                        className={`navbar-menu-link ${activeItem === item.label ? 'active' : ''}`}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            handleNavClick(item.href, item.label);
-                                        }}
-                                        style={{ color: effectiveTextColor }}
-                                    >
-                                        {item.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
+                    {/* Menu Box */}
+                    <div
+                        className={`navbar-menu-box ${isMenuOpen ? 'open' : ''}`}
+                        ref={menuBoxRef}
+                    >
+                        {/* Menu Button - MENU text + dots */}
+                        <button
+                            className="navbar-menu-btn"
+                            onClick={handleMenuToggle}
+                            aria-expanded={isMenuOpen}
+                            aria-haspopup="true"
+                            disabled={isAnimating}
+                            style={{ color: effectiveTextColor }}
+                        >
+                            <span className="navbar-menu-text">MENU</span>
+                            {/* 4 dots or 1 dot */}
+                            {showSingleDot ? (
+                                <span className="navbar-single-dot" style={{ backgroundColor: effectiveTextColor }}></span>
+                            ) : (
+                                <span className="navbar-menu-icon" ref={gridDotsRef}>
+                                    <span className="grid-dot" style={{ backgroundColor: effectiveTextColor }}></span>
+                                    <span className="grid-dot" style={{ backgroundColor: effectiveTextColor }}></span>
+                                    <span className="grid-dot" style={{ backgroundColor: effectiveTextColor }}></span>
+                                    <span className="grid-dot" style={{ backgroundColor: effectiveTextColor }}></span>
+                                </span>
+                            )}
+                        </button>
+
+                        {/* Menu Content - animated with GSAP */}
+                        {isMenuOpen && (
+                            <div className="navbar-menu-content" ref={menuContentRef}>
+                                <div className="navbar-menu-divider" ref={dividerRef} style={{ backgroundColor: effectiveTextColor }}></div>
+                                <ul className="navbar-menu-list" ref={menuItemsRef}>
+                                    {navItems.map((item) => (
+                                        <li key={item.label}>
+                                            <a
+                                                href={item.href}
+                                                className={`navbar-menu-link ${activeItem === item.label ? 'active' : ''}`}
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    handleNavClick(item.href, item.label);
+                                                }}
+                                                style={{ color: effectiveTextColor }}
+                                            >
+                                                {item.label}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
-        </nav>
+                </div>
+            </nav>
+
+            {/* Contact Modal */}
+            <ContactModal
+                isOpen={isContactModalOpen}
+                onClose={() => setIsContactModalOpen(false)}
+            />
+        </>
     );
 }
+
