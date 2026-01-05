@@ -265,13 +265,6 @@ const DepartmentsSection: React.FC = () => {
         <section ref={sectionRef} className={styles.section}>
             {/* Section Header */}
             <div className={styles.sectionHeader}>
-                <div className={styles.labelWrapper}>
-                    <div className={styles.dots}>
-                        <span className={styles.dot}></span>
-                        <span className={styles.dot}></span>
-                    </div>
-                    <span className={styles.label}>Comprehensive Coverage</span>
-                </div>
                 <h2 className={styles.title}>Winspire RCM Covers Every Department</h2>
                 <p className={styles.subtitle}>
                     End-to-end revenue cycle optimization powered by Neura AI intelligence
