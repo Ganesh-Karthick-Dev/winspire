@@ -20,78 +20,89 @@ const CorporateProfile: React.FC = () => {
                 <div className={styles.item}>
                     <div className={styles.label}>Company Name</div>
                     <div className={styles.valueBox}>
-                        Winspire Co., Ltd.
+                        Winspire RCM
                     </div>
                 </div>
 
                 <div className={styles.item}>
-                    <div className={styles.label}>Establishment</div>
+                    <div className={styles.label}>Industry</div>
                     <div className={styles.valueBox}>
-                        October 11, 2017
+                        Healthcare Revenue Cycle Management
                     </div>
                 </div>
 
                 {/* Row 2 */}
                 <div className={styles.item}>
-                    <div className={styles.label}>Capital</div>
+                    <div className={styles.label}>Headquarters</div>
                     <div className={styles.valueBox}>
-                        1,784,195,888 yen (including capital surplus)
+                        United States | Delaware
                     </div>
                 </div>
 
                 <div className={styles.item}>
-                    <div className={styles.label}>Location</div>
-                    <div className={styles.valueBox} style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center' }}>
-                        <div>Tokyo Office (Head Office)</div>
-                        <div style={{ fontSize: '0.9em', opacity: 0.8, marginTop: '4px' }}>
-                            Room 322, Tokyo Central Omotesando, 4-3-15 Jingumae, Shibuya-ku, Tokyo
-                        </div>
-                        <a href="#" className={styles.link}>Google Maps</a>
-                    </div>
-                </div>
-
-                {/* Row 3 - Full Width? Or split? Reference shows Representative left, Board right (tall) */}
-                <div className={styles.item}>
-                    <div className={styles.label}>Representative</div>
+                    <div className={styles.label}>Core Offering</div>
                     <div className={styles.valueBox}>
-                        Representative Director Akihiko Madokoro
+                        Intelligence-Led RCM Services
                     </div>
                 </div>
 
-                {/* Board Member - Spans vertically in grid usually, but here likely just next cell */}
-                <div className={styles.item} style={{ gridRow: 'span 2' }}>
-                    <div className={styles.label}>Board Member</div>
+                {/* Row 3 */}
+                <div className={styles.item}>
+                    <div className={styles.label}>Platform</div>
+                    <div className={styles.valueBox}>
+                        Neura AI – RCM Operating System
+                    </div>
+                </div>
+
+                <div className={styles.item}>
+                    <div className={styles.label}>Primary Markets</div>
+                    <div className={styles.valueBox}>
+                        Hospitals, Physician Groups, PE-Backed Healthcare
+                    </div>
+                </div>
+
+                {/* Row 4 - Full Width */}
+                <div className={styles.item} style={{ gridColumn: 'span 2' }}>
+                    <div className={styles.label}>Positioning</div>
+                    <div className={styles.valueBox}>
+                        Outcome-Focused. Intelligence-Driven. Transparent by Design.
+                    </div>
+                </div>
+
+                {/* What We Do - Full Width */}
+                <div className={styles.item} style={{ gridColumn: 'span 2' }}>
+                    <div className={styles.label}>What We Do</div>
                     <div className={styles.valueBox} style={{ alignItems: 'flex-start' }}>
                         <div className={styles.boardList}>
-                            <div>Director: Osamu Chujo</div>
-                            <div>Nakajo Director: Hideo Horii</div>
-                            <div>Director: Yukihiro Nakamura</div>
-                            <div>Director: Ryohei Shimada</div>
-                            <div>Director (Full-time Audit and Supervisory Committee Member): Yorihiro Ueno</div>
-                            <div>Director (Audit and Supervisory Committee Member): Katsunori Ura</div>
-                            <div>Director (Audit and Supervisory Committee Member): Tatsuto Kuramoto</div>
+                            <div>• Registration, Eligibility & Benefits Verification, Pre-Authorization</div>
+                            <div>• Coding and charge integrity</div>
+                            <div>• Billing, Claim submission, and Payer management</div>
+                            <div>• Denials and Appeals optimization</div>
+                            <div>• AR follow-up and liquidation intelligence</div>
+                            <div>• Reports, Revenue analytics and executive visibility</div>
                         </div>
                     </div>
                 </div>
 
-                {/* History - Left side under Representative */}
-                <div className={styles.item}>
-                    <div className={styles.label}>History</div>
+                {/* Our Philosophy - Full Width */}
+                <div className={styles.item} style={{ gridColumn: 'span 2' }}>
+                    <div className={styles.label}>Our Philosophy</div>
                     <div className={styles.valueBox} style={{ alignItems: 'flex-start' }}>
-                        <div className={styles.historyList}>
-                            <div>July 2011: Established Style Link (real estate consulting business)</div>
-                            <div>January 2016: Established Style Port (real estate VR business)</div>
-                            <div>November 2016: Merged with Senkaku Banrai Real Estate (real estate business)</div>
-                            <div>December 2017: Acquired business from the company</div>
+                        <div className={styles.boardList}>
+                            <div>• Revenue problems are predictable</div>
+                            <div>• Prevention beats correction</div>
+                            <div>• Transparency builds trust</div>
+                            <div>• Systems scale better than heroics</div>
+                            <div>• Outcomes matter more than effort</div>
                         </div>
                     </div>
                 </div>
 
-                {/* Last Row - Default Half Width */}
-                <div className={styles.item}>
-                    <div className={styles.label}>Main Business Overview</div>
+                {/* Compliance */}
+                <div className={styles.item} style={{ gridColumn: 'span 2' }}>
+                    <div className={styles.label}>Compliance & Security</div>
                     <div className={styles.valueBox}>
-                        Development and provision of IT solutions in the construction and real estate markets
+                        HIPAA compliant operations on Azure Cloud with industry best practices for security, access control, and data protection.
                     </div>
                 </div>
 
