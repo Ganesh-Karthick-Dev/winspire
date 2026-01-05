@@ -39,46 +39,18 @@ const SolutionsCarousel: React.FC = () => {
 
     return (
         <section className={styles.section}>
-            {/* Section Header */}
-            <div className={styles.sectionHeader}>
-                <div className={styles.titleWrapper}>
-                    <div className={styles.dots}>
-                        <span className={styles.dot}></span>
-                        <span className={styles.dot}></span>
-                    </div>
-                    <h2 className={styles.sectionTitle}>Mandssagand</h2>
-                </div>
-                <div className={styles.sectionSubtitle}>Recruitment Message</div>
-            </div>
-
             {/* Static Header Pills */}
             <div className={styles.headerPills}>
-                <div className={styles.pill}>In the construction and real estate industries</div>
-                <div className={styles.pill}>Innovative services</div>
-                <div className={styles.pill}>Be part of the creative team.</div>
+                <div className={styles.pill}>AI-Driven RCM Solutions</div>
+                <div className={styles.pill}>Built for the Challenges</div>
+                <div className={styles.pill}>of 2026 and Beyond</div>
             </div>
 
-            {/* Full-Width Carousel */}
+            {/* Description */}
             <div className={styles.carouselWrapper}>
-                {/* Counter - Fixed position, doesn't move with slides */}
-                <div className={styles.counter}>
-                    {activeIndex + 1} - {carouselData.length}
-                </div>
-
-                <div className={styles.carouselTrack}>
-                    {carouselData.map((item, index) => (
-                        <div key={item.id} className={getSlideClass(index)}>
-                            <p className={styles.description}>{item.description}</p>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Navigation Button */}
-                <button className={styles.navButton} onClick={handleNext} aria-label="Next">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 18L15 12L9 6" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </button>
+                <p className={styles.description}>
+                    Winspire RCM delivers end-to-end revenue cycle management powered by top 1% talents, Neura AI's predictive intelligence, automated workflows, and real-time visibility. Every department becomes faster, cleaner, more accurate, and completely system-driven.
+                </p>
             </div>
         </section>
     );
