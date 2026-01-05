@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import styles from './AccessSection.module.css';
 
 const AccessSection: React.FC = () => {
@@ -12,33 +13,37 @@ const AccessSection: React.FC = () => {
                     </div>
                     <h2 className={styles.title}>Access</h2>
                 </div>
-                <div className={styles.subtitle}>location</div>
+                <div className={styles.subtitle}>Headquarters</div>
             </div>
 
             <div className={styles.content}>
-                {/* Left Side: White Logo Card */}
+                {/* Left Side: Hero Image Card */}
                 <div className={styles.imageCard}>
-                    {/* Placeholder for Style Port / Winspire Logo */}
-                    <div className={styles.logoText}>WINSPIRE</div>
+                    <Image
+                        src="/poster/qefqe.webp"
+                        alt="Winspire RCM"
+                        fill
+                        style={{ objectFit: 'cover' }}
+                    />
                 </div>
 
                 {/* Right Side: Details */}
                 <div className={styles.infoBox}>
-                    <div className={styles.officeName}>Tokyo Office (Head Office)</div>
+                    <div className={styles.officeName}>Winspire RCM Headquarters</div>
 
                     <div className={styles.details}>
-                        <div>Address: 4-3-15 Jingumae, Shibuya-ku, Tokyo 150-0001, Room 322, Tokyo Central Omotesando</div>
-                        <div>Tel: 03-6812-9555 (main number)</div>
+                        <div>Location: United States | Delaware</div>
+                        <div>Industry: Healthcare Revenue Cycle Management</div>
                     </div>
 
                     <div className={styles.divider}></div>
 
                     <div className={styles.walkNote}>
-                        3 minutes walk from Omotesando Station on the Ginza Line, Hanzomon Line, and Chiyoda Line
+                        Intelligence-Led RCM Services powered by Neura AI
                     </div>
 
-                    <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className={styles.mapLink}>
-                        Google Maps
+                    <a href="/contact" className={styles.mapLink}>
+                        Contact Us
                     </a>
                 </div>
             </div>
