@@ -42,27 +42,28 @@ export const animationSettings = {
      * Higher = slower/smoother, Lower = faster/snappier
      * Recommended: 0.5 - 1.5
      */
-    smoothTime: 1.0,
+    smoothTime: 1.5,
 
     /**
      * Continuous rotation speed (radians per frame)
      * 0 = no rotation, 0.003 = slow, 0.01 = fast
      */
-    rotationSpeed: 0.004,
+    rotationSpeed: 0.005,
 
     /**
      * Scroll scrub smoothness (for ScrollTrigger)
      * Higher = smoother but more lag
      * Values: 1-2 (snappy), 3-5 (smooth), 6-10 (buttery), 10+ (ultra smooth)
+     * Styleport feel: High scrub (lag) + Low damping (inertia)
      */
-    scrubSmoothness: 7.9,
+    scrubSmoothness: 2.5,
 
     /**
      * Damping factor for extra smoothness (0-1)
      * Lower = smoother but more lag, Higher = more responsive
-     * Recommended: 0.08-0.15 for buttery smooth
+     * Recommended: 0.05-0.10 for "heavy" feel
      */
-    dampingFactor: 0.30,
+    dampingFactor: 0.12,
 };
 
 

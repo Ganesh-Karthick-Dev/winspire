@@ -109,6 +109,7 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     );
 
     const scrollProgressRef = useRef(0);
+    const velocityRef = useRef(0); // Track scroll velocity
     const rafIdRef = useRef<number>(0);
 
     // Smooth lerp helper
@@ -122,6 +123,12 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         const currentLighting = lightingRef.current;
         const targetLighting = targetLightingRef.current;
 
+        // Calculate velocity-based tilt (Asteroid Effect)
+        // Velocity is usually pixels/sec. Scale it down to radians.
+        // Negative velocity (scrolling up) -> Tilt back
+        // Positive velocity (scrolling down) -> Tilt forward
+        const velocityTilt = velocityRef.current * 0.0005;
+
         // Smoothly interpolate toward target
         // PERFORMANCE: Mutate object in place so consumers (GLTFViewer) see updates without React re-renders
         const t = transformRef.current;
@@ -129,7 +136,11 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         t.position.y = lerpValue(current.position.y, target.position.y, dampingFactor);
         t.position.z = lerpValue(current.position.z, target.position.z, dampingFactor);
 
-        t.rotation.x = lerpValue(current.rotation.x, target.rotation.x, dampingFactor);
+        // Apply rotation with velocity tilt added to X axis (Pitch)
+        // We lerp the base rotation, then add the tilt dynamically
+        const targetRotationX = target.rotation.x + velocityTilt;
+
+        t.rotation.x = lerpValue(current.rotation.x, targetRotationX, dampingFactor);
         t.rotation.y = lerpValue(current.rotation.y, target.rotation.y, dampingFactor);
         t.rotation.z = lerpValue(current.rotation.z, target.rotation.z, dampingFactor);
 
@@ -146,13 +157,17 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
             },
         };
 
+        // Decay velocity for smooth return to neutral
+        velocityRef.current = lerpValue(velocityRef.current, 0, 0.1);
+
         // Continue the animation loop
         rafIdRef.current = requestAnimationFrame(smoothUpdate);
     }, [dampingFactor]);
 
     // Update TARGET transform (called by ScrollTrigger)
-    const updateTargetTransform = useCallback((progress: number) => {
+    const updateTargetTransform = useCallback((progress: number, velocity: number = 0) => {
         scrollProgressRef.current = progress;
+        velocityRef.current = velocity; // Update velocity from ScrollTrigger
         targetTransformRef.current = getTransformAtProgress(progress, activeKeyframes, useEasing);
         targetLightingRef.current = getLightingAtProgress(progress, activeKeyframes);
     }, [activeKeyframes, useEasing]);
@@ -160,7 +175,7 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     // Update transform immediately when keyframes change (e.g., mobile/desktop switch)
     useEffect(() => {
         if (isHydrated) {
-            updateTargetTransform(scrollProgressRef.current);
+            updateTargetTransform(scrollProgressRef.current, 0);
         }
     }, [activeKeyframes, isHydrated, updateTargetTransform]);
 
@@ -190,7 +205,7 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
             end,
             scrub,
             onUpdate: (self) => {
-                updateTargetTransform(self.progress);
+                updateTargetTransform(self.progress, self.getVelocity());
             },
         });
 

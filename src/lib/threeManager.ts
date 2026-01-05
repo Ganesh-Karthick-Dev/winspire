@@ -92,28 +92,30 @@ function initializeScene(canvas: HTMLCanvasElement, THREE: THREE): ThreeState {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     // =========================================
-    // LIGHTING SETUP - EDIT VALUES HERE
+    // LIGHTING SETUP - OPTIMIZED STYLEPORT LOOK
     // =========================================
 
-    // Ambient light - base illumination
-    const ambientLight = new THREE.AmbientLight(0xffffff, 2.0);  // intensity: 0-5
+    // 1. Global Illumination (High brightness, low cost)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2.8);
     scene.add(ambientLight);
 
-    // Hemisphere light - sky/ground
-    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xeeeeee, 1.5);
+    // 2. Hemisphere Light (Efficient Gradient)
+    // Sky (White/Blue) -> Ground (Soft Purple)
+    const hemiLight = new THREE.HemisphereLight(0xf8fafc, 0xc4b5fd, 1.5);
     hemiLight.position.set(0, 50, 0);
     scene.add(hemiLight);
 
-    // MAIN FRONT LIGHT - ATTACHED TO CAMERA (always in front)
-    const frontLight = new THREE.DirectionalLight(0xffffff, 3.0);  // intensity: 0-5
-    frontLight.position.set(0, 0, 1);  // Directly in front of camera
-    camera.add(frontLight);
-    scene.add(camera);  // Camera must be in scene for attached lights to work
+    // 3. KEY LIGHT - Top-Left Highlight (Directional = Efficient)
+    const keyLight = new THREE.DirectionalLight(0xffffff, 3.5);
+    keyLight.position.set(-5, 10, 10);
+    camera.add(keyLight);
+    scene.add(camera);
 
-    // Top fill light - also camera-relative
-    const topLight = new THREE.DirectionalLight(0xffffff, 1.0);
-    topLight.position.set(20, 10, 0.5);  // Above and slightly in front
-    camera.add(topLight);
+    // 4. RIM/FILL LIGHT - Combined (Directional = Efficient)
+    // Positioned to give both side fill and edge rim
+    const rimFillLight = new THREE.DirectionalLight(0x38bdf8, 2.5);
+    rimFillLight.position.set(10, 5, -5); // Back-Right
+    scene.add(rimFillLight);
 
     // DEBUG: Axes helper - remove after done testing
     // const axesHelper = new THREE.AxesHelper(0.9);

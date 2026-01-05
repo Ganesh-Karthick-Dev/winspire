@@ -20,10 +20,19 @@ export const neuraScrollKeyframes: ScrollKeyframe[] = [
         }
     },
     {
+        scrollProgress: 0.35,
+        label: "Drift Right",
+        transform: {
+            position: { x: 0.5, y: 0.1, z: 0.5 }, // Slight move right & up
+            rotation: { x: -15, y: 45, z: 20 },   // Gentle tilt change
+            scale: 10.5
+        }
+    },
+    {
         scrollProgress: 0.75,
         label: "Hold Position",
         transform: {
-            position: { x: 0, y: 0.06, z: 0 },
+            position: { x: 0, y: 0.06, z: 0 },    // Return to center
             rotation: { x: -22.177, y: 37.456, z: 23.23 },
             scale: 10
         }

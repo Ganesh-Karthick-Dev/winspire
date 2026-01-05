@@ -125,35 +125,46 @@ export default function GLTFViewer({
         // Continuous smooth rotation - Z-axis (Wheel spin)
         continuousRotation.current += currentSpeed;
 
-        // Wobble/bobbing effect - only if enabled via prop
-        const wobbleAmount = enableWobbleRef.current ? 0 : 0; // DISABLED WOBBLE to fix shaking
-        const wobbleSpeed = 2.0;
+        // Wobble/bobbing effect - Floating sensation
+        // Enable wobble if prop is true (default)
+        const wobbleAmount = enableWobbleRef.current ? 0.05 : 0;
+        const wobbleSpeed = 1.5;
+
+        // Rotation wobble
         const wobbleX = Math.sin(continuousRotation.current * wobbleSpeed) * wobbleAmount;
-        const wobbleY = Math.cos(continuousRotation.current * wobbleSpeed * 0.7) * wobbleAmount;
+        const wobbleY = Math.cos(continuousRotation.current * wobbleSpeed * 0.8) * wobbleAmount;
+
+        // Position bobbing (Floating up and down)
+        const bobbingAmount = enableWobbleRef.current ? 0.2 : 0;
+        const bobbingY = Math.sin(continuousRotation.current * wobbleSpeed * 0.5) * bobbingAmount;
 
         if (currentTransform) {
             // MODE A: Manual Control (Home Page)
-            // Absolute source of truth is the ref (synced from props)
             const radX = toRadians(currentTransform.rotation.x);
             const radY = toRadians(currentTransform.rotation.y);
-            // Z is Manual Bank + Continuous Spin
             const radZ = toRadians(currentTransform.rotation.z);
 
             model.rotation.x = radX + wobbleX;
             model.rotation.y = radY + wobbleY;
             model.rotation.z = radZ - continuousRotation.current;
 
-            // 2. Update Position & Scale (Performance: Update in loop to avoid React render overhead)
+            // Update Position & Scale
             model.position.x = currentTransform.position.x;
-            model.position.y = currentTransform.position.y;
+            model.position.y = currentTransform.position.y + bobbingY; // Add bobbing
             model.position.z = currentTransform.position.z;
             model.scale.setScalar(currentTransform.scale);
         } else {
             // MODE B: Internal Control (Animation/GSAP driven)
-            // Use captured refs
             model.rotation.x = baseRotationX.current + wobbleX;
             model.rotation.y = baseRotationY.current + wobbleY;
             model.rotation.z = baseRotationZ.current - continuousRotation.current;
+
+            // Note: For Mode B, position is usually handled by GSAP/ScrollTrigger directly on the group
+            // But if we want floating here too, we might need to apply it to the model inside the wrapper
+            // However, `baseRotation` logic only handles rotation. 
+            // Position is handled by `useScrollAnimation` updating the wrapper.
+            // To add bobbing here for Mode B, we would need basePosition refs which we don't track yet.
+            // For now, let's stick to rotation wobble for Mode B to avoid fighting GSAP.
         }
     }, []); // No dependencies - reads from refs
 
