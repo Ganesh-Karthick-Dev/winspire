@@ -6,31 +6,52 @@ import styles from './BoardSection.module.css';
 const boardMembers = [
     {
         id: 1,
-        name: 'Akihiko Madokoro',
-        role: 'Representative Director',
-        image: '/images/team/member1.jpg', // Placeholder
-        bio: 'In 1991, he joined Yahagi Construction Co., Ltd. After working there for 13 years, mainly in real estate planning and sales, he was involved in listing investment corporations. Founded Style Link Co., Ltd. in 2011 and Style Port Co., Ltd. in 2017.'
+        name: 'Shravan Kumar',
+        role: 'Vice President of Operations',
+        image: '/images/team/shravan-kumar.png',
+        bio: 'Shravan Kumar leads operations at Winspire RCM with a single focus: building systems, teams, and workflows that perform reliably in the real world. He has led end-to-end RCM delivery across complex client environments, large multi-layered operational teams, and high-volume, high-precision workflows. At Winspire, he shapes how Neura AI translates into clear work prioritization, fewer handoffs, faster decision cycles, and measurable productivity gains.'
     },
     {
         id: 2,
-        name: 'Osamu Chujo',
-        role: 'Director',
-        image: '/images/team/member2.jpg', // Placeholder
-        bio: 'In 1988, he joined Recruit Co., Ltd., involved in planning human resources businesses. In 2003, joined So-net M3, Inc. (now M3, Inc.) as site producer. Served as director at M3 Career, Inc. Joined Style Port as director in 2017.'
+        name: 'Steve Kang',
+        role: 'Strategic Technology Advisor',
+        image: '/images/team/steve-kang.png',
+        bio: 'Steve Kang is a strategic technology advisor with over two decades of experience helping leaders translate technology into measurable business outcomes. His work spans healthcare, government, and regulated environments where security and compliance are critical. At Winspire RCM, Steve supports infrastructure strategy, security posture, and technology alignment as the platform scales.'
     },
     {
         id: 3,
-        name: 'Hideo Horii',
-        role: 'Director',
-        image: '/images/team/member3.jpg', // Placeholder
-        bio: 'In 1995, joined Nomura Real Estate Commerce Co., Ltd. In development consulting department, involved in planning and tenant leasing. Joined Styleport Co., Ltd. in 2017, became director in May 2020.'
+        name: 'John Kostic, CFP®, CEPA',
+        role: 'Strategic Growth Advisor',
+        image: '/images/team/john-kostic.png',
+        bio: 'John Kostic is a seasoned strategic advisor with over 25 years of experience guiding business owners, executives, and high-net-worth families through complex growth and transition decisions. A Certified Financial Planner™ and Certified Exit Planning Advisor, he supports Winspire RCM with executive relationships, market entry, and long-term partnership development.'
     },
     {
         id: 4,
-        name: 'Yukihiro Nakamura',
-        role: 'Director',
-        image: '/images/team/member4.jpg', // Placeholder
-        bio: 'In 1996, joined Noguchi Architects. Worked on design and supervision of condominiums for 10 years. In 2008, joined Mitsubishi Jisho Sekkei. Joined Styleport, Inc. in 2017, became a director in October 2021.'
+        name: 'Curtis Cates',
+        role: 'Chief Marketing & Sales Officer',
+        image: '/images/team/curtis-cates.png',
+        bio: 'Curtis Cates leads growth at Winspire RCM with strategic depth, healthcare domain expertise, and modern AI-driven go-to-market execution. He has spent his career at the intersection of healthcare transformation and enterprise growth, advising Fortune 500 executives and driving multi-million-dollar client relationships. Curtis ensures Neura AI\'s value is communicated with clarity and credibility.'
+    },
+    {
+        id: 5,
+        name: 'Philip Leone',
+        role: 'Chief Advisor',
+        image: '/images/team/philip-leone.png',
+        bio: 'Philip Leone is a seasoned healthcare executive with over two decades of experience guiding organizations through growth, reimbursement complexity, and market expansion. He has secured CPT codes, structured payer contracting strategies, and supported FDA-cleared technology launches. As Chief Advisor, he brings critical perspective on reimbursement strategy, regulatory risk, and sustainable commercialization.'
+    },
+    {
+        id: 6,
+        name: 'Dan Schulte, MBA, CHFP',
+        role: 'Principal Consultant',
+        image: '/images/team/dan-schulte.png',
+        bio: 'Dan Schulte has worked in healthcare provider and RCM vendor arena for over 40 years. He has helped large and small organizations find weak spots, change processes, and realize immediate returns. Previously held senior RCM positions at HGS, The Outsource Group, Parallon, Apollo Health Street, and Siemens Health Services. Dan holds an MBA from Southern Illinois University and CHFP certification from HFMA.'
+    },
+    {
+        id: 7,
+        name: 'Suresh H. Nish',
+        role: 'Founder & Chief Executive Officer',
+        image: '', // No photo provided
+        bio: 'Suresh built Winspire RCM on the belief that revenue outcomes improve when intelligence enters the cycle early. With over two decades of experience in healthcare revenue cycle operations, he has led and scaled large RCM operations. Under his leadership, Winspire focuses on sustainable revenue improvement, transparent performance measurement, and responsible automation.'
     }
 ];
 
@@ -53,16 +74,18 @@ const BoardSection: React.FC = () => {
                     <div key={member.id} className={styles.card}>
                         {/* Image Side */}
                         <div className={styles.imageWrapper}>
-                            {/* Using a colored placeholder div if image fails, or just a placeholder source */}
-                            <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%)' }}></div>
-                            {/* 
-                            <Image 
-                                src={member.image} 
-                                alt={member.name}
-                                fill
-                                className={styles.memberImage}
-                            />
-                            */}
+                            {member.image ? (
+                                <Image
+                                    src={member.image}
+                                    alt={member.name}
+                                    fill
+                                    className={styles.memberImage}
+                                />
+                            ) : (
+                                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #083151 0%, #0a4a7a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <span style={{ fontSize: '3rem', color: 'rgba(255,255,255,0.3)', fontWeight: 700 }}>{member.name.charAt(0)}</span>
+                                </div>
+                            )}
                         </div>
 
                         {/* Text Side */}
