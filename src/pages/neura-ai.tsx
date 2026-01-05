@@ -171,46 +171,46 @@ export default function NeuraAI() {
             </section>
 
             {/* Mission Section - From Company */}
-            <div id="mission" style={{ scrollMarginTop: '100px' }}>
+            {/* <div id="mission" style={{ scrollMarginTop: '100px' }}>
                 <MissionSection
                     label="Our Mission"
                     subtitle="AI-Powered Healthcare"
                     statement="Transforming Revenue Cycle With Intelligent Automation."
                     description="Neura AI leverages cutting-edge machine learning and natural language processing to automate complex healthcare workflows. Our mission is to reduce errors, improve efficiency, and maximize revenue for healthcare providers."
                 />
-            </div>
+            </div> */}
 
             {/* Culture Section - From Solutions */}
-            <div id="culture" style={{ scrollMarginTop: '100px' }}>
+            {/* <div id="culture" style={{ scrollMarginTop: '100px' }}>
                 <CultureSection />
-            </div>
+            </div> */}
 
             {/* Services Section - From Home */}
-            <div id="services" style={{ scrollMarginTop: '100px' }}>
+            {/* <div id="services" style={{ scrollMarginTop: '100px' }}>
                 <ServicesSection />
-            </div>
+            </div> */}
 
             {/* Environment Section - From Solutions */}
-            <div id="environment" style={{ scrollMarginTop: '100px' }}>
+            {/* <div id="environment" style={{ scrollMarginTop: '100px' }}>
                 <EnvironmentSection />
-            </div>
+            </div> */}
 
             {/* FAQ Section - From Solutions */}
-            <div id="faq" style={{ scrollMarginTop: '100px' }}>
+            {/* <div id="faq" style={{ scrollMarginTop: '100px' }}>
                 <FAQSection />
-            </div>
+            </div> */}
 
             {/* Final CTA Section */}
-            <div id="contact" style={{ scrollMarginTop: '100px' }}>
+            {/* <div id="contact" style={{ scrollMarginTop: '100px' }}>
                 <CareersContactLinks />
-            </div>
+            </div> */}
 
             <FloatingSectionNav sections={[
-                { id: 'mission', label: 'Mission' },
-                { id: 'culture', label: 'Culture' },
-                { id: 'services', label: 'Services' },
-                { id: 'environment', label: 'Environment' },
-                { id: 'faq', label: 'FAQ' },
+                // { id: 'mission', label: 'Mission' },
+                // { id: 'culture', label: 'Culture' },
+                // { id: 'services', label: 'Services' },
+                // { id: 'environment', label: 'Environment' },
+                // { id: 'faq', label: 'FAQ' },
             ]} />
 
         </Layout>
