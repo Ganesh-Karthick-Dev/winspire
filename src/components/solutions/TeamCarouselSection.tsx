@@ -16,35 +16,59 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
     {
         id: 1,
-        name: "Takumi Yoshida",
-        role: "Product Manager / Group Manager",
-        group: "Product Group",
-        description: "As a senior interaction designer at Experientia srl (Italy), he worked on design solutions for web, apps, services, etc. In 2015, he joined BULB Inc. as a front-end developer and designer, responsible for the UI design and implementation of web services and smartphone apps. In December 2017, he joined Styleport.",
-        image: "/images/company/grid-1.png"
+        name: "Shravan Kumar",
+        role: "Vice President of Operations",
+        group: "Operations",
+        description: "Shravan Kumar leads operations at Winspire RCM with a single focus: building systems, teams, and workflows that perform reliably in the real world. He shapes how Neura AI translates into clear work prioritization, fewer handoffs, faster decision cycles, and measurable productivity gains.",
+        image: "/images/team/shravan-kumar.png"
     },
     {
         id: 2,
-        name: "Masaru Kimura",
-        role: "CTO",
-        group: "Engineering Group",
-        description: "Leading the technical strategy and development of our core 3D engine. Passionate about bringing immersive experiences to the web.",
-        image: "/images/company/grid-2.png"
+        name: "Steve Kang",
+        role: "Strategic Technology Advisor",
+        group: "Technology",
+        description: "Steve Kang is a strategic technology advisor with over two decades of experience helping leaders translate technology into measurable business outcomes. At Winspire RCM, Steve supports infrastructure strategy, security posture, and technology alignment as the platform scales.",
+        image: "/images/team/steve-kang.png"
     },
     {
         id: 3,
-        name: "Kyohei Ueda",
-        role: "UI/UX Designer",
-        group: "Design Group",
-        description: "Focusing on creating intuitive and beautiful user interfaces that bridge the gap between complex technology and user needs.",
-        image: "/images/company/grid-3.png"
+        name: "John Kostic, CFP®, CEPA",
+        role: "Strategic Growth Advisor",
+        group: "Growth",
+        description: "John Kostic is a seasoned strategic advisor with over 25 years of experience guiding business owners, executives, and high-net-worth families through complex growth and transition decisions. He supports Winspire RCM with executive relationships, market entry, and long-term partnership development.",
+        image: "/images/team/john-kostic.png"
     },
     {
         id: 4,
-        name: "Shigeto Miura",
-        role: "Group Manager",
-        group: "Sales Group",
-        description: "Driving business growth through strategic partnerships and client success initiatives across the real estate sector.",
-        image: "/images/company/grid-4.png"
+        name: "Curtis Cates",
+        role: "Chief Marketing & Sales Officer",
+        group: "Growth",
+        description: "Curtis Cates leads growth at Winspire RCM with strategic depth, healthcare domain expertise, and modern AI-driven go-to-market execution. He ensures Neura AI's value is communicated with clarity and credibility to healthcare leaders.",
+        image: "/images/team/curtis-cates.png"
+    },
+    {
+        id: 5,
+        name: "Philip Leone",
+        role: "Chief Advisor",
+        group: "Advisory",
+        description: "Philip Leone is a seasoned healthcare executive with over two decades of experience guiding organizations through growth, reimbursement complexity, and market expansion. As Chief Advisor, he brings critical perspective on reimbursement strategy and sustainable commercialization.",
+        image: "/images/team/philip-leone.png"
+    },
+    {
+        id: 6,
+        name: "Dan Schulte, MBA, CHFP",
+        role: "Principal Consultant",
+        group: "Consulting",
+        description: "Dan Schulte has worked in healthcare provider and RCM vendor arena for over 40 years. He has helped large and small organizations find weak spots, change processes, and realize immediate returns in bottom-line cash.",
+        image: "/images/team/dan-schulte.png"
+    },
+    {
+        id: 7,
+        name: "Suresh H. Nish",
+        role: "Founder & Chief Executive Officer",
+        group: "Leadership",
+        description: "Suresh built Winspire RCM on the belief that revenue outcomes improve when intelligence enters the cycle early. Under his leadership, Winspire focuses on sustainable revenue improvement, transparent performance measurement, and responsible automation.",
+        image: ""
     },
 ];
 
@@ -122,26 +146,38 @@ const TeamCarouselSection: React.FC = () => {
                     {/* Previous Card (Partially Visible) */}
                     <div className={styles.prevCard} key={`prev-${prevMember.id}`}>
                         <div className={styles.smallCardImage}>
-                            <Image
-                                src={prevMember.image}
-                                alt={prevMember.name}
-                                fill
-                                className={styles.memberImage}
-                                sizes="25vw"
-                            />
+                            {prevMember.image ? (
+                                <Image
+                                    src={prevMember.image}
+                                    alt={prevMember.name}
+                                    fill
+                                    className={styles.memberImage}
+                                    sizes="25vw"
+                                />
+                            ) : (
+                                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #083151 0%, #0a4a7a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <span style={{ fontSize: '4rem', color: 'rgba(255,255,255,0.3)', fontWeight: 700 }}>{prevMember.name.charAt(0)}</span>
+                                </div>
+                            )}
                         </div>
                     </div>
 
                     {/* Active Card (Expanded Key Visual) */}
                     <div className={styles.activeCardWrapper} key={activeMember.id}>
                         <div className={styles.activeCardImage}>
-                            <Image
-                                src={activeMember.image}
-                                alt={activeMember.name}
-                                fill
-                                className={styles.memberImage}
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                            />
+                            {activeMember.image ? (
+                                <Image
+                                    src={activeMember.image}
+                                    alt={activeMember.name}
+                                    fill
+                                    className={styles.memberImage}
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                />
+                            ) : (
+                                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #083151 0%, #0a4a7a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <span style={{ fontSize: '6rem', color: 'rgba(255,255,255,0.3)', fontWeight: 700 }}>{activeMember.name.charAt(0)}</span>
+                                </div>
+                            )}
                             <div className={styles.badge}>{activeMember.group}</div>
                         </div>
 
@@ -178,13 +214,19 @@ const TeamCarouselSection: React.FC = () => {
                         {visibleMembers.slice(1, 4).map((member) => (
                             <div key={member.id} className={styles.smallCard}>
                                 <div className={styles.smallCardImage}>
-                                    <Image
-                                        src={member.image}
-                                        alt={member.name}
-                                        fill
-                                        className={styles.memberImage}
-                                        sizes="25vw"
-                                    />
+                                    {member.image ? (
+                                        <Image
+                                            src={member.image}
+                                            alt={member.name}
+                                            fill
+                                            className={styles.memberImage}
+                                            sizes="25vw"
+                                        />
+                                    ) : (
+                                        <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #083151 0%, #0a4a7a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <span style={{ fontSize: '4rem', color: 'rgba(255,255,255,0.3)', fontWeight: 700 }}>{member.name.charAt(0)}</span>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className={styles.smallInfo}>
                                     <p className={styles.smallRole}>{member.role}</p>
@@ -219,13 +261,19 @@ const TeamCarouselSection: React.FC = () => {
                             >
                                 {/* Profile Image with Badge */}
                                 <div className={styles.mobileCardImage}>
-                                    <Image
-                                        src={member.image}
-                                        alt={member.name}
-                                        fill
-                                        className={styles.memberImage}
-                                        sizes="80vw"
-                                    />
+                                    {member.image ? (
+                                        <Image
+                                            src={member.image}
+                                            alt={member.name}
+                                            fill
+                                            className={styles.memberImage}
+                                            sizes="80vw"
+                                        />
+                                    ) : (
+                                        <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #083151 0%, #0a4a7a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <span style={{ fontSize: '5rem', color: 'rgba(255,255,255,0.3)', fontWeight: 700 }}>{member.name.charAt(0)}</span>
+                                        </div>
+                                    )}
                                     <div className={styles.mobileBadge}>{member.group}</div>
                                 </div>
 

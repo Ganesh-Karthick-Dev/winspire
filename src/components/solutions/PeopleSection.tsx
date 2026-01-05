@@ -110,16 +110,16 @@ const PeopleSection: React.FC = () => {
                             </div>
                             <h2 className={styles.title}>People</h2>
                         </div>
-                        <div className={styles.subtitle}>Our Team Members</div>
+                        <div className={styles.subtitle}>Leadership & Culture</div>
 
                         {/* Main Description */}
                         <p className={styles.description}>
-                            Winspire brings together talented members from diverse backgrounds, combining their knowledge, experience, and ideas to create an organization where everyone can contribute their unique value.
+                            Winspire RCM is led by seasoned healthcare operators and advisors with decades of experience across provider, payer, and vendor environments. Our team combines deep RCM expertise with technology-driven innovation.
                         </p>
 
                         {/* Additional Description */}
                         <p className={styles.additionalText}>
-                            Our team members work as experts in their respective domains, focusing on research, implementation, and validation in a balanced environment of stability and flexibility. We respect each person's diversity and leverage our collective intelligence as our greatest strength to drive company growth together.
+                            Our culture emphasizes ownership and accountability, transparency and real-time visibility, continuous improvement, and calm execution under complexity. We build teams and systems designed for consistency, not dependence on individuals.
                         </p>
                     </div>
 
@@ -142,7 +142,7 @@ const PeopleSection: React.FC = () => {
                     </div>
                     <h2 className={styles.mobileTitle}>People</h2>
                 </div>
-                <div className={styles.mobileSubtitle}>Members working at Winspire</div>
+                <div className={styles.mobileSubtitle}>Leadership & Culture</div>
 
                 {/* Stacked Cards */}
                 <div className={styles.mobileCardsContainer}>
@@ -153,7 +153,7 @@ const PeopleSection: React.FC = () => {
 
                 {/* Description */}
                 <p className={styles.mobileDescription}>
-                    Winspire brings together talented members from diverse backgrounds, combining their knowledge, experience, and ideas to create an organization where everyone can contribute their unique value.
+                    Winspire RCM is led by seasoned healthcare operators and advisors with decades of experience across provider, payer, and vendor environments. Our culture emphasizes ownership, transparency, and calm execution.
                 </p>
             </div>
         </section>
