@@ -180,28 +180,29 @@ export default function Solutions() {
                 <SolutionsCarousel />
             </div>
 
+            {/* COMMENTED OUT - Will be replaced with new sections */}
             {/* Groups/Career Section */}
-            <div id="categories" style={{ scrollMarginTop: '100px' }}>
+            {/* <div id="categories" style={{ scrollMarginTop: '100px' }}>
                 <GroupsSection />
-            </div>
+            </div> */}
 
             {/* People Section */}
-            <div id="people" style={{ scrollMarginTop: '100px' }}>
+            {/* <div id="people" style={{ scrollMarginTop: '100px' }}>
                 <PeopleSection />
-            </div>
+            </div> */}
 
             {/* Team Carousel (Expanded View) - Part of People usually */}
-            <TeamCarouselSection />
+            {/* <TeamCarouselSection /> */}
 
             {/* Environment / Work Style Section */}
-            <div id="environment" style={{ scrollMarginTop: '100px' }}>
+            {/* <div id="environment" style={{ scrollMarginTop: '100px' }}>
                 <EnvironmentSection />
-            </div>
+            </div> */}
 
             {/* Materials Section */}
-            <div id="materials" style={{ scrollMarginTop: '100px' }}>
+            {/* <div id="materials" style={{ scrollMarginTop: '100px' }}>
                 <MaterialsSection />
-            </div>
+            </div> */}
 
             {/* FAQ Section */}
             <div id="faq" style={{ scrollMarginTop: '100px' }}>
@@ -209,14 +210,14 @@ export default function Solutions() {
             </div>
 
             {/* Culture Section */}
-            <div id="culture" style={{ scrollMarginTop: '100px' }}>
+            {/* <div id="culture" style={{ scrollMarginTop: '100px' }}>
                 <CultureSection />
-            </div>
+            </div> */}
 
             {/* Final CTA Section */}
-            <div id="entry" style={{ scrollMarginTop: '100px' }}>
+            {/* <div id="entry" style={{ scrollMarginTop: '100px' }}>
                 <EntrySection />
-            </div>
+            </div> */}
 
             <FloatingSectionNav
                 sections={[
