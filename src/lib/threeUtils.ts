@@ -20,7 +20,7 @@ export function clampDevicePixelRatio(max: number = rendererSettings.maxPixelRat
 /**
  * Check if the device is low-end based on hardware specs
  * Uses navigator.hardwareConcurrency and navigator.deviceMemory
- * @returns true if device appears to be low-end
+ * @returns true if device appears to be low-end (should disable 3D completely)
  */
 export function isLowEndDevice(): boolean {
     if (typeof navigator === 'undefined') return false;
@@ -30,6 +30,21 @@ export function isLowEndDevice(): boolean {
     const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory || 4;
 
     return cores <= performanceThresholds.lowEndCores || memory <= performanceThresholds.lowEndMemory;
+}
+
+/**
+ * Check if the device needs performance optimizations (but can still run 3D)
+ * More aggressive threshold than isLowEndDevice - catches mid-tier devices
+ * @returns true if device should use reduced quality rendering
+ */
+export function isLowPerformanceDevice(): boolean {
+    if (typeof navigator === 'undefined') return false;
+
+    const cores = navigator.hardwareConcurrency || 4;
+    const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory || 4;
+
+    // Trigger for devices with ≤4 cores or ≤4GB RAM (catches more mid-tier devices)
+    return cores <= performanceThresholds.minCores || memory <= performanceThresholds.minMemory;
 }
 
 /**

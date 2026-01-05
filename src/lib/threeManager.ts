@@ -6,7 +6,7 @@
  */
 
 import { updateLoaderUI, finishLoader, handleFastLoad } from './loaderManager';
-import { getOptimalPixelRatio } from './threeUtils';
+import { getOptimalPixelRatio, isLowPerformanceDevice } from './threeUtils';
 import { rendererSettings, cameraSettings, lightingSettings, modelSettings } from '@/config/three-settings';
 
 // Types for Three.js objects (imported dynamically)
@@ -53,6 +53,9 @@ async function loadThreeDynamically() {
  * @param THREE - The Three.js module
  */
 function initializeScene(canvas: HTMLCanvasElement, THREE: THREE): ThreeState {
+    // Check if device needs performance optimizations
+    const lowPerformance = isLowPerformanceDevice();
+
     // Create scene
     const scene = new THREE.Scene();
 
@@ -69,12 +72,20 @@ function initializeScene(canvas: HTMLCanvasElement, THREE: THREE): ThreeState {
         cameraSettings.initialPosition.z
     );
 
-    // Create renderer
+    // Create renderer with performance-aware settings
     const renderer = new THREE.WebGLRenderer({
         canvas,
-        ...rendererSettings.contextAttributes,
+        // Low-performance devices get reduced quality
+        antialias: lowPerformance ? false : rendererSettings.contextAttributes.antialias,
+        alpha: rendererSettings.contextAttributes.alpha,
+        powerPreference: lowPerformance ? 'low-power' : rendererSettings.contextAttributes.powerPreference,
+        stencil: rendererSettings.contextAttributes.stencil,
+        depth: rendererSettings.contextAttributes.depth,
     });
-    renderer.setPixelRatio(getOptimalPixelRatio());
+
+    // Low-performance devices get even lower pixel ratio to reduce GPU load
+    const pixelRatio = lowPerformance ? Math.min(getOptimalPixelRatio(), 0.75) : getOptimalPixelRatio();
+    renderer.setPixelRatio(pixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     // Use neutral tone mapping for accurate Blender colors
     renderer.toneMapping = THREE.NoToneMapping;
