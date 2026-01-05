@@ -20,6 +20,7 @@ import TeamCarouselSection from '@/components/solutions/TeamCarouselSection';
 import EnvironmentSection from '@/components/solutions/EnvironmentSection';
 import MaterialsSection from '@/components/solutions/MaterialsSection';
 import FAQSection from '@/components/solutions/FAQSection';
+import DepartmentsSection from '@/components/solutions/DepartmentsSection';
 import CultureSection from '@/components/solutions/CultureSection';
 import EntrySection from '@/components/solutions/EntrySection';
 import FloatingSectionNav from '@/components/FloatingSectionNav'; // Import added
@@ -203,6 +204,11 @@ export default function Solutions() {
             {/* <div id="materials" style={{ scrollMarginTop: '100px' }}>
                 <MaterialsSection />
             </div> */}
+
+            {/* Departments Section - NEW */}
+            <div id="departments" style={{ scrollMarginTop: '100px' }}>
+                <DepartmentsSection />
+            </div>
 
             {/* FAQ Section */}
             <div id="faq" style={{ scrollMarginTop: '100px' }}>

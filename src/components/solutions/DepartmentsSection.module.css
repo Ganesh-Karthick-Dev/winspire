@@ -1,0 +1,266 @@
+/* DepartmentsSection - Premium RCM Department Cards */
+
+.section {
+    position: relative;
+    width: 100%;
+    padding: 6rem 5%;
+    color: white;
+    overflow: hidden;
+}
+
+/* Section Header */
+.sectionHeader {
+    text-align: center;
+    margin-bottom: 5rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.labelWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.dots {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dot {
+    width: 8px;
+    height: 5px;
+    background: #38bdf8;
+    border-radius: 50%;
+}
+
+.label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    color: white;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Cards Container - Grid Layout */
+.cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Individual Card - White Transparent Glassmorphism */
+.card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    padding: 2.5rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Number Badge */
+.cardNumber {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: rgba(0, 0, 0, 0.05);
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* Card Header */
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+    padding-right: 40px;
+}
+
+.cardIcon {
+    width: 50px;
+    height: 50px;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #0284c7;
+    flex-shrink: 0;
+}
+
+.cardTitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Section Labels */
+.sectionLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+    color: #64748b;
+}
+
+.problemIcon,
+.neuraIcon,
+.outcomeIcon {
+    font-size: 1rem;
+    color: #64748b;
+}
+
+/* Problem Section */
+.problemSection {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.problemText {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #334155;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Neura Optimization Section */
+.neuraSection {
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.neuraSection .sectionLabel {
+    color: #0284c7;
+}
+
+.neuraSection .neuraIcon {
+    color: #0284c7;
+}
+
+.neuraList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.neuraItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #334155;
+    line-height: 1.5;
+}
+
+.checkIcon {
+    color: #0284c7;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    margin-top: 4px;
+    opacity: 1;
+}
+
+/* Outcome Section */
+.outcomeSection {
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-top: auto;
+}
+
+.outcomeSection .sectionLabel {
+    color: #059669;
+    margin-bottom: 0.5rem;
+}
+
+.outcomeSection .outcomeIcon {
+    color: #059669;
+}
+
+.outcomeText {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #0f172a;
+    margin: 0;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .cardsContainer {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .section {
+        padding: 4rem 4%;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .card {
+        padding: 2rem;
+    }
+}
