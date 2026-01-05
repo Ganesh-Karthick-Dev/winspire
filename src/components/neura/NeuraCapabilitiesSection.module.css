@@ -1,0 +1,241 @@
+/* NeuraCapabilitiesSection - Sticky Layout */
+
+.section {
+    position: relative;
+    width: 100%;
+    padding: 8rem 5%;
+    color: white;
+    overflow: visible;
+}
+
+/* Section Header */
+.sectionHeader {
+    text-align: left;
+    margin-bottom: 6rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 800;
+    color: white;
+    margin: 0;
+    line-height: 1.1;
+}
+
+/* Capabilities Container */
+.capabilitiesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Individual Layer Row */
+.layerRow {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 4rem;
+}
+
+/* Left Column - Sticky */
+.leftColumn {
+    position: sticky;
+    top: 150px;
+    height: fit-content;
+    padding-right: 2rem;
+}
+
+.layerNumber {
+    font-family: 'Outfit', sans-serif;
+    font-size: 4rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1;
+    margin-bottom: 1rem;
+    display: block;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.layerTitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.2;
+}
+
+.layerDescription {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    max-width: 400px;
+}
+
+/* Right Column - Scrolling Features */
+.rightColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* Feature Block */
+.featureBlock {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 2.5rem;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.featureBlock:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateX(10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.featureHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.featureIcon {
+    width: 40px;
+    height: 40px;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0284c7;
+    /* Darker blue for better contrast on white */
+    font-size: 1.2rem;
+}
+
+.featureTitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    /* Dark slate for title */
+    margin: 0;
+}
+
+.featureList {
+    list-style: none;
+    margin: 0 0 2rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.featureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #334155;
+    /* Dark grey for text */
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.checkIcon {
+    color: #0284c7;
+    /* Darker blue */
+    margin-top: 4px;
+    font-size: 0.9rem;
+}
+
+/* Impact Box */
+.impactBox {
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, rgba(56, 189, 248, 0.05) 100%);
+    border-left: 3px solid #0284c7;
+    padding: 1.5rem;
+    border-radius: 0 12px 12px 0;
+}
+
+.impactLabel {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #0284c7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.impactText {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: #1e293b;
+    /* Dark slate */
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .layerRow {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .leftColumn {
+        position: relative;
+        top: 0;
+        padding-right: 0;
+    }
+
+    .layerTitle {
+        font-size: 2rem;
+    }
+
+    .section {
+        padding: 6rem 5%;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .featureBlock {
+        padding: 1.5rem;
+    }
+
+    .featureTitle {
+        font-size: 1.25rem;
+    }
+}

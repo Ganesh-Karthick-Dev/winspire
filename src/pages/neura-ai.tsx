@@ -23,6 +23,7 @@ import CultureSection from '@/components/solutions/CultureSection'; // From Solu
 import MissionSection from '@/components/company/MissionSection';   // From Company
 import FAQSection from '@/components/solutions/FAQSection';         // From Solutions
 import EnvironmentSection from '@/components/solutions/EnvironmentSection'; // From Solutions
+import NeuraCapabilitiesSection from '@/components/neura/NeuraCapabilitiesSection'; // New Component
 
 import { neuraScrollKeyframes } from '@/lib/neuraScrollAnimations';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -170,6 +171,11 @@ export default function NeuraAI() {
                 </div>
             </section>
 
+            {/* Neura Capabilities Section - NEW */}
+            <div id="capabilities" style={{ scrollMarginTop: '100px' }}>
+                <NeuraCapabilitiesSection />
+            </div>
+
             {/* Mission Section - From Company */}
             {/* <div id="mission" style={{ scrollMarginTop: '100px' }}>
                 <MissionSection
@@ -206,6 +212,7 @@ export default function NeuraAI() {
             </div> */}
 
             <FloatingSectionNav sections={[
+                { id: 'capabilities', label: 'Capabilities' },
                 // { id: 'mission', label: 'Mission' },
                 // { id: 'culture', label: 'Culture' },
                 // { id: 'services', label: 'Services' },
