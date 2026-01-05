@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import ContactModal from './ContactModal';
 
 interface NavItem {
@@ -25,6 +26,7 @@ export default function SmartNavbar() {
     const [isContactModalOpen, setIsContactModalOpen] = useState(false);
     const lastScrollY = useRef(0);
     const ticking = useRef(false);
+    const pathname = usePathname();
 
     // Close mobile menu on resize to desktop
     useEffect(() => {
@@ -97,6 +99,12 @@ export default function SmartNavbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Check if a nav item is active
+    const isActiveLink = (href: string) => {
+        if (href === '/') return pathname === '/';
+        return pathname.startsWith(href);
+    };
+
     // Determine navbar style based on state
     const navbarClasses = `smart-navbar ${isVisible ? 'visible' : 'hidden'} ${!isAtTop ? 'scrolled' : ''}`;
 
@@ -130,7 +138,7 @@ export default function SmartNavbar() {
                             <Link
                                 key={item.label}
                                 href={item.href}
-                                className="smart-navbar-link"
+                                className={`smart-navbar-link ${isActiveLink(item.href) ? 'active' : ''}`}
                             >
                                 <span className="link-dot"></span>
                                 {item.label}
@@ -175,7 +183,7 @@ export default function SmartNavbar() {
                             >
                                 <Link
                                     href={item.href}
-                                    className="smart-mobile-nav-link"
+                                    className={`smart-mobile-nav-link ${isActiveLink(item.href) ? 'active' : ''}`}
                                     onClick={closeMobileMenu}
                                 >
                                     <span className="mobile-link-dot"></span>

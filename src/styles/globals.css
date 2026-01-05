@@ -1814,6 +1814,21 @@ footer p {
   flex-shrink: 0;
 }
 
+/* Active State - Highlighted Current Page */
+.smart-navbar .smart-navbar-link.active {
+  background: rgba(26, 26, 94, 0.08);
+  border: 1px solid rgba(26, 26, 94, 0.15);
+}
+
+.smart-navbar .smart-navbar-link.active .link-dot {
+  background: #3b82f6;
+}
+
+.smart-navbar.scrolled .smart-navbar-link.active {
+  background: rgba(26, 26, 94, 0.1);
+  border: 1px solid rgba(26, 26, 94, 0.2);
+}
+
 /* Contact Button - Cleaner style like reference */
 .smart-navbar .smart-navbar-contact {
   display: inline-flex !important;
@@ -2010,6 +2025,16 @@ footer p {
   height: 8px;
   background: #3b82f6;
   border-radius: 50%;
+}
+
+/* Mobile Active State */
+.smart-mobile-nav-link.active {
+  color: #3b82f6;
+}
+
+.smart-mobile-nav-link.active .mobile-link-dot {
+  background: #3b82f6;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
 }
 
 /* Responsive - Smaller Desktop */
