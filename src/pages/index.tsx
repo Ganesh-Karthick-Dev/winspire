@@ -253,7 +253,7 @@ export default function Home() {
                             <div
                                 className="absolute left-0 right-0 flex items-center hero-text-fade"
                                 style={{
-                                    top: '46%',
+                                    top: '46vh',
                                     transform: 'translateY(-50%)',
                                     height: 'fit-content',
                                     maskImage: 'linear-gradient(to right, transparent 55%, black 59%)',

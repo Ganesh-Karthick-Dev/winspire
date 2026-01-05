@@ -394,7 +394,7 @@ export default function Hero({
                 <div className="hero-text-fade" style={{
                     position: 'absolute',
                     inset: 0,
-                    top: '46%', // Moved down manually
+                    top: '46vh', // Viewport-relative for consistent alignment
                     height: 'fit-content',
                     transform: 'translateY(-50%)',
                     zIndex: 5,
