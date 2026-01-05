@@ -79,7 +79,7 @@ export default function VisionSection({
                                 src={leftImage}
                                 alt="Before Neura AI"
                                 fill
-                                style={{ objectFit: 'contain' }}
+                                style={{ objectFit: 'contain', objectPosition: 'center' }}
                             />
                         </div>
                     </div>
@@ -135,7 +135,7 @@ export default function VisionSection({
                                 src={rightImage}
                                 alt="After Neura AI"
                                 fill
-                                style={{ objectFit: 'contain' }}
+                                style={{ objectFit: 'contain', objectPosition: 'center' }}
                             />
                         </div>
                     </div>
