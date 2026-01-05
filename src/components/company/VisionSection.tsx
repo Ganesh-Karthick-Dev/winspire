@@ -67,7 +67,7 @@ export default function VisionSection({
                 <div className={`${styles.card} ${styles.cardLeft}`}>
                     {/* Sidebar with Label and Divider */}
                     <div className={styles.cardSidebar}>
-                        <span className={styles.cardLabel}>Real Space</span>
+                        <span className={styles.cardLabel}>Before</span>
                         <div className={styles.cardDivider}></div>
                     </div>
 
@@ -77,9 +77,9 @@ export default function VisionSection({
                         <div className={styles.imageWrapper}>
                             <Image
                                 src={leftImage}
-                                alt="Real Space"
+                                alt="Before Neura AI"
                                 fill
-                                style={{ objectFit: 'cover' }}
+                                style={{ objectFit: 'contain' }}
                             />
                         </div>
                     </div>
@@ -121,7 +121,7 @@ export default function VisionSection({
 
                     {/* Badge center */}
                     <div className={styles.badgeCenter}>
-                        <span className={styles.badgeText}>Digital<br />Twin</span>
+                        <span className={styles.badgeText}>Neura<br />AI</span>
                     </div>
                 </div>
 
@@ -133,9 +133,9 @@ export default function VisionSection({
                         <div className={styles.imageWrapper}>
                             <Image
                                 src={rightImage}
-                                alt="Virtual Space"
+                                alt="After Neura AI"
                                 fill
-                                style={{ objectFit: 'cover' }}
+                                style={{ objectFit: 'contain' }}
                             />
                         </div>
                     </div>
@@ -143,7 +143,7 @@ export default function VisionSection({
                     {/* Sidebar with Label and Divider */}
                     <div className={styles.cardSidebar}>
                         <div className={styles.cardDivider}></div>
-                        <span className={styles.cardLabel}>Virtual Space</span>
+                        <span className={styles.cardLabel}>After</span>
                     </div>
                 </div>
             </div>
