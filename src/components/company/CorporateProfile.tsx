@@ -69,35 +69,6 @@ const CorporateProfile: React.FC = () => {
                     </div>
                 </div>
 
-                {/* What We Do - Full Width */}
-                <div className={styles.item} style={{ gridColumn: 'span 2' }}>
-                    <div className={styles.label}>What We Do</div>
-                    <div className={styles.valueBox} style={{ alignItems: 'flex-start' }}>
-                        <div className={styles.boardList}>
-                            <div>• Registration, Eligibility & Benefits Verification, Pre-Authorization</div>
-                            <div>• Coding and charge integrity</div>
-                            <div>• Billing, Claim submission, and Payer management</div>
-                            <div>• Denials and Appeals optimization</div>
-                            <div>• AR follow-up and liquidation intelligence</div>
-                            <div>• Reports, Revenue analytics and executive visibility</div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Our Philosophy - Full Width */}
-                <div className={styles.item} style={{ gridColumn: 'span 2' }}>
-                    <div className={styles.label}>Our Philosophy</div>
-                    <div className={styles.valueBox} style={{ alignItems: 'flex-start' }}>
-                        <div className={styles.boardList}>
-                            <div>• Revenue problems are predictable</div>
-                            <div>• Prevention beats correction</div>
-                            <div>• Transparency builds trust</div>
-                            <div>• Systems scale better than heroics</div>
-                            <div>• Outcomes matter more than effort</div>
-                        </div>
-                    </div>
-                </div>
-
                 {/* Compliance */}
                 <div className={styles.item} style={{ gridColumn: 'span 2' }}>
                     <div className={styles.label}>Compliance & Security</div>
