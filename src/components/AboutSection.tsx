@@ -12,6 +12,7 @@ import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import PulseButton from './ui/PulseButton';
 
 export default function AboutSection() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -146,30 +147,36 @@ export default function AboutSection() {
                     <h3
                         style={{
                             color: 'white',
-                            fontSize: 'clamp(2.5rem, 12vw, 7rem)',
+                            fontSize: 'clamp(2rem, 6vw, 4.5rem)',
                             fontWeight: 700,
-                            lineHeight: 1.1,
+                            lineHeight: 1.15,
                             fontFamily: 'Outfit, sans-serif',
                             letterSpacing: '-0.02em',
-                            margin: 0,
+                            marginTop: '2rem',
+                            marginBottom: '1.5rem',
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+                            maxWidth: '900px',
+                            textAlign: 'center',
                         }}
                     >
-                        Intelligent Digital Twins for
+                        Welcome to the Future of Revenue Cycle.
                     </h3>
                     <h3
                         style={{
-                            color: 'white',
-                            fontSize: 'clamp(2.5rem, 12vw, 7rem)',
-                            fontWeight: 700,
-                            lineHeight: 1.1,
+                            color: 'rgba(255, 255, 255, 0.85)',
+                            fontSize: 'clamp(1.25rem, 3vw, 2.25rem)',
+                            fontWeight: 500,
+                            lineHeight: 1.3,
                             fontFamily: 'Outfit, sans-serif',
-                            letterSpacing: '-0.02em',
+                            letterSpacing: '0.02em',
                             margin: 0,
-                            marginTop: '0.1em',
+                            marginTop: '1.5rem',
                         }}
                     >
-                        Real-World Impact
+                        AI-Powered. System-Driven. Outcome-Guaranteed.
                     </h3>
+
                     <p
                         style={{
                             color: 'rgba(255, 255, 255, 0.8)',
@@ -181,8 +188,22 @@ export default function AboutSection() {
                             margin: '2.5rem auto 0',
                         }}
                     >
-                        We create AI-driven digital twin solutions that mirror real-world systems, enabling data-led planning, predictive insights, and scalable transformation across society.
+                        Winspire RCM combines intelligent automation, predictive insights, and human expertise to deliver measurable financial improvement in weeks, not years.
                     </p>
+
+                    {/* CTA Button */}
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            marginTop: '2.5rem',
+                        }}
+                    >
+                        <PulseButton
+                            text="Book a Zero-Risk AI RCM Demo"
+                            href="/demo"
+                        />
+                    </div>
                 </div>
             </section>
         </>

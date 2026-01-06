@@ -5952,3 +5952,60 @@ footer p {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 }
+
+/* ============================================
+   Pulse Button Component
+   ============================================ */
+
+.pulse-button {
+  transform: translateY(0);
+}
+
+.pulse-button:hover {
+  transform: translateY(-2px);
+}
+
+.pulse-button:hover .pulse-button-highlight {
+  opacity: 1 !important;
+}
+
+.pulse-button:hover .pulse-button-arrow {
+  transform: translateX(4px);
+}
+
+.pulse-button:hover .pulse-button-shimmer {
+  animation: pulse-shimmer 1.5s ease-in-out;
+}
+
+@keyframes pulse-shimmer {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* Continuous subtle glow animation */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .pulse-button span:last-child {
+    padding: 14px 28px !important;
+    font-size: 0.9rem !important;
+  }
+}
