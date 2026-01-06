@@ -69,7 +69,8 @@ export default function ServicesSection() {
                 <div className="services-left">
                     {/* Large Headline - Bigger like reference */}
                     <h2 className="services-headline">
-                        Building a globally recognized AI-driven healthcare platform for revenue cycle transformation.
+                        Your Extended Revenue Team.
+                        Always On. Always Intelligent. Always Reliable.
                     </h2>
 
                     {/* Glossy Divider - Hidden on mobile via CSS */}
@@ -78,7 +79,7 @@ export default function ServicesSection() {
                     {/* About Us Button - Hidden on mobile */}
                     {!isMobile && (
                         <FrostyButton
-                            text="About Us"
+                            text="Explore Our AI-Driven RCM Model"
                             onClick={() => window.location.href = '#about-details'}
                         />
                     )}
@@ -97,26 +98,46 @@ export default function ServicesSection() {
 
                     {/* Text Block 1 */}
                     <div ref={para1Ref} className="services-text-block">
-                        <span className="fade-line" style={{ display: 'block' }}>Digital twins create intelligent virtual</span>
-                        <span className="fade-line" style={{ display: 'block' }}>replicas of physical systems, infrastructure,</span>
-                        <span className="fade-line" style={{ display: 'block' }}>and environments, enabling organizations</span>
-                        <span className="fade-line" style={{ display: 'block' }}>to understand, monitor, and manage</span>
-                        <span className="fade-line" style={{ display: 'block' }}>real-world operations digitally.</span>
-                        <span className="fade-line" style={{ display: 'block' }}>At our core, we design these systems</span>
-                        <span className="fade-line" style={{ display: 'block' }}>to give businesses complete visibility</span>
-                        <span className="fade-line" style={{ display: 'block' }}>and control over complex environments.</span>
+                        <span className="fade-line" style={{ display: 'block' }}>Your clinicians lead the care.</span>
+                        <span className="fade-line" style={{ display: 'block' }}>Your leadership drives the vision.</span>
+                        <span className="fade-line" style={{ display: 'block' }}>And we run your entire revenue cycle</span>
+                        <span className="fade-line" style={{ display: 'block' }}>quietly in the background so you can</span>
+                        <span className="fade-line" style={{ display: 'block' }}>focus on strategy, expansion,</span>
+                        <span className="fade-line" style={{ display: 'block' }}>and patient experience.</span>
                     </div>
 
                     {/* Text Block 2 */}
                     <div ref={para2Ref} className="services-text-block">
-                        <span className="fade-line" style={{ display: 'block' }}>Powered by artificial intelligence and</span>
-                        <span className="fade-line" style={{ display: 'block' }}>real-time data, our digital twin technology</span>
-                        <span className="fade-line" style={{ display: 'block' }}>supports smarter planning, accurate</span>
-                        <span className="fade-line" style={{ display: 'block' }}>simulation, and continuous optimization.</span>
-                        <span className="fade-line" style={{ display: 'block' }}>This approach helps organizations reduce</span>
-                        <span className="fade-line" style={{ display: 'block' }}>risk, improve efficiency, and build</span>
-                        <span className="fade-line" style={{ display: 'block' }}>sustainable, resilient systems</span>
-                        <span className="fade-line" style={{ display: 'block' }}>that perform at scale.</span>
+                        <span className="fade-line" style={{ display: 'block' }}>Winspire RCM operates like an internal</span>
+                        <span className="fade-line" style={{ display: 'block' }}>revenue engine powered by top 1% RCM</span>
+                        <span className="fade-line" style={{ display: 'block' }}>Experts in the country, AI, automation,</span>
+                        <span className="fade-line" style={{ display: 'block' }}>and real-time intelligence.</span>
+                        <span className="fade-line" style={{ display: 'block' }}>The results are predictable, measurable,</span>
+                        <span className="fade-line" style={{ display: 'block' }}>and repeatable.</span>
+                    </div>
+
+                    {/* Performance Highlights */}
+                    <div ref={para3Ref} className="services-text-block services-highlights">
+                        <span className="fade-line highlights-title" style={{ display: 'block', fontWeight: 600, marginBottom: '16px' }}>
+                            Performance Highlights:
+                        </span>
+                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                            <li className="fade-line" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                                <span style={{ color: '#38bdf8' }}>•</span> Revenue collected faster
+                            </li>
+                            <li className="fade-line" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                                <span style={{ color: '#38bdf8' }}>•</span> Fewer denials
+                            </li>
+                            <li className="fade-line" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                                <span style={{ color: '#38bdf8' }}>•</span> Lower cost-to-collect
+                            </li>
+                            <li className="fade-line" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                                <span style={{ color: '#38bdf8' }}>•</span> Real-time visibility into every department
+                            </li>
+                            <li className="fade-line" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                <span style={{ color: '#38bdf8' }}>•</span> No workflows left to chance
+                            </li>
+                        </ul>
                     </div>
 
                     {/* Mobile Bottom CTA - Divider + Button */}
@@ -124,7 +145,7 @@ export default function ServicesSection() {
                         <div className="services-mobile-cta">
                             <div className="services-mobile-divider" />
                             <FrostyButton
-                                text="About Us"
+                                text="Explore Our AI-Driven RCM Model"
                                 onClick={() => window.location.href = '#about-details'}
                             />
                         </div>
@@ -215,6 +236,7 @@ export default function ServicesSection() {
                     font-family: 'Outfit', sans-serif;
                     max-width: 450px;
                     text-align: left;
+                    width: 450px;
                 }
 
                 /* Tablet */
