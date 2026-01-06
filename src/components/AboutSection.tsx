@@ -8,17 +8,19 @@
  * - All text on left side, leaving right side for 3D model
  */
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useIsMobile } from '@/hooks/useIsMobile';
-import PulseButton from './ui/PulseButton';
+import FrostyButton from './FrostyButton';
+import ContactModal from './ContactModal';
 
 export default function AboutSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const labelRef = useRef<HTMLDivElement>(null);
     const headlineRef = useRef<HTMLDivElement>(null);
     const isMobile = useIsMobile();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -152,7 +154,7 @@ export default function AboutSection() {
                             lineHeight: 1.15,
                             fontFamily: 'Outfit, sans-serif',
                             letterSpacing: '-0.02em',
-                            marginTop: '2rem',
+                            margin: 0,
                             marginBottom: '1.5rem',
                             marginLeft: 'auto',
                             marginRight: 'auto',
@@ -191,7 +193,7 @@ export default function AboutSection() {
                         Winspire RCM combines intelligent automation, predictive insights, and human expertise to deliver measurable financial improvement in weeks, not years.
                     </p>
 
-                    {/* CTA Button */}
+                    {/* CTA Button - Opens Contact Modal */}
                     <div
                         style={{
                             display: 'flex',
@@ -199,13 +201,17 @@ export default function AboutSection() {
                             marginTop: '2.5rem',
                         }}
                     >
-                        <PulseButton
+                        <FrostyButton
                             text="Book a Zero-Risk AI RCM Demo"
-                            href="/demo"
+                            onClick={() => setIsModalOpen(true)}
                         />
                     </div>
                 </div>
             </section>
+
+            {/* Contact Modal */}
+            <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </>
     );
 }
+
