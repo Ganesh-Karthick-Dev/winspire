@@ -38,7 +38,8 @@ export default function CenterTextSection() {
                     maxWidth: '1200px',
                 }}
             >
-                Where Intelligence Shapes What’s Possible
+                Meet Neura AI.
+                Your Intelligent Revenue Operating System.
             </h2>
             <p
                 style={{
@@ -50,7 +51,19 @@ export default function CenterTextSection() {
                     fontWeight: 400,
                 }}
             >
-                The Future, Built Intelligently
+                Neura AI transforms your revenue cycle into a self-learning, self-optimizing, system-driven operation.
+            </p>
+            <p
+                style={{
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    fontSize: isMobile ? '1.1rem' : '1.5rem',
+                    fontFamily: 'Outfit, sans-serif',
+                    textAlign: 'center',
+                    marginTop: '16px',
+                    fontWeight: 400,
+                }}
+            >
+                It understands patterns, predicts denials, accelerates cash, automates repetitive work, and provides real-time visibility across every department.
             </p>
         </section>
     );
