@@ -312,5 +312,12 @@ export default function GLTFViewer({
         };
     }, [handleMouseMove]);
 
-    return <WebGLCanvas onCanvasReady={handleCanvasReady} className={className} />;
+    return (
+        <div
+            className={`gltf-viewer-container fixed top-0 left-0 w-full h-full pointer-events-none ${className || ''}`}
+            style={{ zIndex: 0 }}
+        >
+            <WebGLCanvas onCanvasReady={handleCanvasReady} className="w-full h-full" />
+        </div>
+    );
 }
