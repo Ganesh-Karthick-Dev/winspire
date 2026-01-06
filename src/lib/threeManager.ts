@@ -92,30 +92,39 @@ function initializeScene(canvas: HTMLCanvasElement, THREE: THREE): ThreeState {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     // =========================================
-    // LIGHTING SETUP - OPTIMIZED STYLEPORT LOOK
+    // LIGHTING SETUP - FRONT-FACING ILLUMINATION
     // =========================================
 
-    // 1. Global Illumination (High brightness, low cost)
-    const ambientLight = new THREE.AmbientLight(0xffffff, 2.8);
+    // 1. Global Illumination (Strong base lighting)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 3.5);
     scene.add(ambientLight);
 
-    // 2. Hemisphere Light (Efficient Gradient)
-    // Sky (White/Blue) -> Ground (Soft Purple)
-    const hemiLight = new THREE.HemisphereLight(0xf8fafc, 0xc4b5fd, 1.5);
+    // 2. Hemisphere Light (Sky to Ground gradient)
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xe0e7ff, 2.0);
     hemiLight.position.set(0, 50, 0);
     scene.add(hemiLight);
 
-    // 3. KEY LIGHT - Top-Left Highlight (Directional = Efficient)
-    const keyLight = new THREE.DirectionalLight(0xffffff, 3.5);
-    keyLight.position.set(-5, 10, 10);
-    camera.add(keyLight);
+    // 3. MAIN FRONT LIGHT - Directly in front of model (Camera-attached)
+    // This ensures the model is always lit from the viewer's perspective
+    const frontLight = new THREE.DirectionalLight(0xffffff, 4.0);
+    frontLight.position.set(0, 2, 15); // Directly in front, slightly above
+    camera.add(frontLight);
     scene.add(camera);
 
-    // 4. RIM/FILL LIGHT - Combined (Directional = Efficient)
-    // Positioned to give both side fill and edge rim
-    const rimFillLight = new THREE.DirectionalLight(0x38bdf8, 2.5);
-    rimFillLight.position.set(10, 5, -5); // Back-Right
-    scene.add(rimFillLight);
+    // 4. KEY LIGHT - Top-Left accent for depth
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
+    keyLight.position.set(-8, 8, 12); // Front-left, above
+    scene.add(keyLight);
+
+    // 5. FILL LIGHT - Right side to reduce shadows
+    const fillLight = new THREE.DirectionalLight(0xf0f9ff, 2.0);
+    fillLight.position.set(8, 5, 10); // Front-right
+    scene.add(fillLight);
+
+    // 6. RIM/ACCENT LIGHT - Subtle blue edge highlight
+    const rimLight = new THREE.DirectionalLight(0x60a5fa, 1.5);
+    rimLight.position.set(5, 3, -3); // Back-right for edge definition
+    scene.add(rimLight);
 
     // DEBUG: Axes helper - remove after done testing
     // const axesHelper = new THREE.AxesHelper(0.9);
