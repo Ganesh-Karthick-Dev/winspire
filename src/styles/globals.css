@@ -2173,8 +2173,8 @@ footer p {
   }
 
   .service-description-text {
-    font-size: 20px !important;
-    line-height: 1.6 !important;
+    font-size: 2rem !important;
+    line-height: 1.5 !important;
     margin-bottom: 24px !important;
     word-spacing: normal !important;
   }
@@ -2204,7 +2204,7 @@ footer p {
   }
 
   .service-description-text {
-    font-size: 17px !important;
+    font-size: 1.6rem !important;
   }
 }
 

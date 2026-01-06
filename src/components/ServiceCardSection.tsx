@@ -147,7 +147,7 @@ export default function ServiceCardSection() {
 
                     {/* Headline */}
                     <h3 className="service-mobile-headline">
-                        3D Communication Services Powered by Digital Twins
+                        2026 Has Changed the Rules. Your RCM Cannot Operate the Old Way.
                     </h3>
 
                     {/* Circular Image */}
@@ -161,7 +161,7 @@ export default function ServiceCardSection() {
 
                     {/* Description */}
                     <p className="service-mobile-description">
-                        Providing real-time spatial interaction and visualization services for seamless collaboration across digital and physical environments.
+                        Neura AI was engineered for this exact moment in healthcare.
                     </p>
 
                     {/* Service Button Card */}
@@ -413,7 +413,7 @@ export default function ServiceCardSection() {
                                 wordSpacing: '10px',
                             }}
                         >
-                            3D Communication Services Powered by Digital Twins
+                            2026 Has Changed the Rules. Your RCM Cannot Operate the Old Way.
                         </h3>
                     </div>
 
@@ -462,15 +462,15 @@ export default function ServiceCardSection() {
                             className="service-description-text"
                             style={{
                                 color: 'white',
-                                fontSize: '25px',
-                                lineHeight: 1.8,
+                                fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
+                                fontWeight: 600,
                                 fontFamily: 'Outfit, sans-serif',
+                                lineHeight: 1.5,
                                 marginBottom: '28px',
                                 wordSpacing: '10px',
-                                fontWeight: 600,
                             }}
                         >
-                            Providing real-time spatial interaction and visualization services for seamless collaboration across digital and physical environments.
+                            Neura AI was engineered for this exact moment in healthcare.
                         </p>
 
                         <div
