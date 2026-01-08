@@ -7,9 +7,10 @@ import styles from '@/styles/DemoForm.module.css';
 
 interface DemoFormProps {
     isModal?: boolean;
+    closeButton?: React.ReactNode;
 }
 
-export default function DemoForm({ isModal = false }: DemoFormProps) {
+export default function DemoForm({ isModal = false, closeButton }: DemoFormProps) {
     const formRef = useRef<HTMLDivElement>(null);
     const [formData, setFormData] = useState({
         name: '',
@@ -110,6 +111,7 @@ export default function DemoForm({ isModal = false }: DemoFormProps) {
 
     const formContent = (
         <div ref={formRef} className={styles.card}>
+            {closeButton}
             <div className={styles.header}>
                 <h2>Schedule a Demo</h2>
                 <p>See how we can transform your revenue cycle</p>

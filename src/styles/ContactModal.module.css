@@ -30,6 +30,14 @@
     z-index: 1;
 }
 
+/* Close button inside formWrapper - positioned over the card */
+.formWrapper .closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
 /* Override DemoForm card width inside modal */
 .formWrapper>div {
     width: 100% !important;
