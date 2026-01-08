@@ -9,7 +9,6 @@ import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import '@/styles/globals.css';
 import 'lenis/dist/lenis.css';
-import 'flatpickr/dist/themes/airbnb.css';
 
 import ScrollManager from '@/components/ScrollManager';
 import SmoothScroll from '@/components/SmoothScroll';
@@ -22,6 +21,8 @@ export default function App({ Component, pageProps }: AppProps) {
             <ScrollManager />
             {/* Key forces complete remount on route change, ensuring animations re-init */}
             <Component {...pageProps} key={router.pathname} />
+            {/* Portal for date picker to render above modals */}
+            <div id="datepicker-portal" />
         </SmoothScroll>
     );
 }

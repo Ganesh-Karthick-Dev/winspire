@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import Flatpickr from 'react-flatpickr';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import styles from '@/styles/DemoForm.module.css';
 
 interface DemoFormProps {
@@ -227,29 +228,38 @@ export default function DemoForm({ isModal = false, closeButton }: DemoFormProps
                 <div className={styles.row}>
                     <div className={styles.field}>
                         <label>Preferred Date</label>
-                        <Flatpickr
-                            value={preferredDate}
-                            onChange={([date]) => {
-                                setPreferredDate(date);
+                        <DatePicker
+                            selected={preferredDate}
+                            onChange={(date: Date | null) => {
+                                setPreferredDate(date || undefined);
                                 if (errors.preferredDate) setErrors({ ...errors, preferredDate: '' });
                             }}
-                            options={{ minDate: "today", dateFormat: "M j, Y", disableMobile: true }}
-                            placeholder="Select date"
+                            minDate={new Date()}
+                            dateFormat="MMM d, yyyy"
+                            placeholderText="Select date"
                             className={errors.preferredDate ? styles.error : ''}
+                            popperProps={{ strategy: 'fixed' }}
+                            portalId="datepicker-portal"
                         />
                         {errors.preferredDate && <span className={styles.errorMsg}>{errors.preferredDate}</span>}
                     </div>
                     <div className={styles.field}>
                         <label>Preferred Time</label>
-                        <Flatpickr
-                            value={preferredTime}
-                            onChange={([date]) => {
-                                setPreferredTime(date);
+                        <DatePicker
+                            selected={preferredTime}
+                            onChange={(date: Date | null) => {
+                                setPreferredTime(date || undefined);
                                 if (errors.preferredTime) setErrors({ ...errors, preferredTime: '' });
                             }}
-                            options={{ enableTime: true, noCalendar: true, dateFormat: "h:i K", time_24hr: false, disableMobile: true }}
-                            placeholder="Select time"
+                            showTimeSelect
+                            showTimeSelectOnly
+                            timeIntervals={30}
+                            timeCaption="Time"
+                            dateFormat="h:mm aa"
+                            placeholderText="Select time"
                             className={errors.preferredTime ? styles.error : ''}
+                            popperProps={{ strategy: 'fixed' }}
+                            portalId="datepicker-portal"
                         />
                         {errors.preferredTime && <span className={styles.errorMsg}>{errors.preferredTime}</span>}
                     </div>

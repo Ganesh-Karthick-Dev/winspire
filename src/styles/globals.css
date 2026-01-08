@@ -6010,3 +6010,45 @@ footer p {
     font-size: 0.9rem !important;
   }
 }
+
+/* ============================================
+   React DatePicker Portal Z-Index Fix
+   Ensure date picker appears above modal overlays
+   ============================================ */
+#datepicker-portal {
+  position: relative;
+  z-index: 999999;
+}
+
+#datepicker-portal .react-datepicker-popper {
+  z-index: 999999 !important;
+}
+
+.react-datepicker-popper {
+  z-index: 999999 !important;
+}
+
+/* Style react-datepicker to match our design */
+.react-datepicker {
+  font-family: 'Outfit', sans-serif !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.react-datepicker__header {
+  background: #f9fafb !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  border-radius: 12px 12px 0 0 !important;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+  background-color: #111827 !important;
+  color: #ffffff !important;
+}
+
+.react-datepicker__day:hover {
+  background-color: #f3f4f6 !important;
+}
