@@ -1847,6 +1847,7 @@ footer p {
   transition: all 0.3s ease;
   flex-shrink: 0;
   background: transparent;
+  cursor: pointer;
 }
 
 .smart-navbar .smart-navbar-contact:hover {
