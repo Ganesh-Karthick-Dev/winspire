@@ -98,12 +98,20 @@ export default function ServicesSection() {
 
                     {/* Text Block 1 */}
                     <div ref={para1Ref} className="services-text-block">
-                        <span className="fade-line" style={{ display: 'block' }}>Your clinicians lead the care.</span>
-                        <span className="fade-line" style={{ display: 'block' }}>Your leadership drives the vision.</span>
-                        <span className="fade-line" style={{ display: 'block' }}>And we run your entire revenue cycle</span>
-                        <span className="fade-line" style={{ display: 'block' }}>quietly in the background so you can</span>
-                        <span className="fade-line" style={{ display: 'block' }}>focus on strategy, expansion,</span>
-                        <span className="fade-line" style={{ display: 'block' }}>and patient experience.</span>
+                        <span className="fade-line" style={{ display: 'block', marginBottom: '24px' }}>
+                            We serve as your <strong>extended revenue capability</strong>, working silently to power your growth. By leveraging deep <strong>healthcare revenue cycle expertise</strong>, we transform complex billing challenges into <strong>predictable financial outcomes</strong>.
+                        </span>
+                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                            <li className="fade-line" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px', fontSize: '0.9em' }}>
+                                <span style={{ color: '#38bdf8' }}>•</span> Consistent Cash Flow
+                            </li>
+                            <li className="fade-line" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px', fontSize: '0.9em' }}>
+                                <span style={{ color: '#38bdf8' }}>•</span> Operational Efficiency
+                            </li>
+                            <li className="fade-line" style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9em' }}>
+                                <span style={{ color: '#38bdf8' }}>•</span> Strategic Scalability
+                            </li>
+                        </ul>
                     </div>
 
                     {/* Text Block 2 */}
