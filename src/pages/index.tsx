@@ -19,6 +19,7 @@ import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
 import ServiceCardSection from '@/components/ServiceCardSection';
 import CenterTextSection from '@/components/CenterTextSection';
+import ValuePropsSection from '@/components/ValuePropsSection';
 import CareersScrollSection from '@/components/CareersScrollSection';
 import NewsSection from '@/components/NewsSection';
 import CareersContactLinks from '@/components/CareersContactLinks';
@@ -429,6 +430,9 @@ export default function Home() {
                         </div>
                     )}
                 </div>
+
+                {/* Value Props Section - 3 Interactive Cards */}
+                <ValuePropsSection />
 
                 {/* About Section with Transition Zone */}
                 <AboutSection />

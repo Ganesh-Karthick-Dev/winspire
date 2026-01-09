@@ -614,7 +614,8 @@ section {
 
 .transition-zone-spacer {
   position: relative;
-  height: 100vh;
+  height: 0;
+  display: none;
 }
 
 @media (max-width: 768px) {
