@@ -12,6 +12,7 @@ import { useRef, useEffect, useMemo } from 'react';
 import gsap from 'gsap';
 import HeroParticles from './HeroParticles';
 import MarqueeText from './MarqueeText';
+import GradientButton from './ui/GradientButton';
 
 interface HeroProps {
     /** Main heading (h1) */

@@ -27,6 +27,7 @@ import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import MarqueeText from '@/components/MarqueeText';
+import GradientButton from '@/components/ui/GradientButton';
 import { scrollKeyframes, animationSettings } from '@/lib/scrollAnimations';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -328,6 +329,29 @@ export default function Home() {
                                 </div>
                             )}
 
+                            {/* === CTA Button - Front Layer (Desktop only) === */}
+                            {!isMobile && (
+                                <div
+                                    className="absolute bottom-10 left-1/2 -translate-x-1/2 pointer-events-auto hero-text-fade"
+                                    style={{ zIndex: 50 }}
+                                >
+                                    <GradientButton
+                                        onClick={() => {
+                                            const contactBtn = document.querySelector('[data-contact-modal]') as HTMLElement;
+                                            if (contactBtn) {
+                                                contactBtn.click();
+                                            } else {
+                                                window.location.href = '#contact';
+                                            }
+                                        }}
+                                        width="340px"
+                                        height="56px"
+                                    >
+                                        Book a Strategic Conversation
+                                    </GradientButton>
+                                </div>
+                            )}
+
                         </div>
                     </div>
                 )}
@@ -364,6 +388,24 @@ export default function Home() {
                                 >
                                     {missionMessages[currentMissionIndex].content}
                                 </div>
+                            </div>
+
+                            {/* Mobile CTA Button */}
+                            <div className="mobile-cta-container">
+                                <GradientButton
+                                    onClick={() => {
+                                        const contactBtn = document.querySelector('[data-contact-modal]') as HTMLElement;
+                                        if (contactBtn) {
+                                            contactBtn.click();
+                                        } else {
+                                            window.location.href = '#contact';
+                                        }
+                                    }}
+                                    width="280px"
+                                    height="50px"
+                                >
+                                    Book a Strategic Conversation
+                                </GradientButton>
                             </div>
 
                             {/* Scroll Indicator */}
