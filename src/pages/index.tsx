@@ -261,7 +261,7 @@ export default function Home() {
                                 }}
                             >
                                 <MarqueeText
-                                    text="Revenue Cycle • AI-Powered • Winspire • "
+                                    text="Designing Revenue Cycles That Actually Work • "
                                     duration={45}
                                     fontSize="clamp(4rem, 14vw, 11rem)"
                                     color="#083151"
@@ -319,7 +319,7 @@ export default function Home() {
                 {/* Hero Section with Mobile Overlay Container */}
                 <div className="hero-section-container" style={{ position: 'relative' }}>
                     <Hero
-                        title={`Welcome to the Future of Revenue Cycle`}
+                        title={`Designing Revenue Cycles That Actually Work`}
                         subtitle="AI-Powered. System-Driven. Outcome-Guaranteed"
                         ctaText="Explore Features"
                         ctaHref="#about"
