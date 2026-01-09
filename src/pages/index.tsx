@@ -109,9 +109,19 @@ export default function Home() {
 
     // === Mission Text Cycling ===
     const missionMessages = [
-        "Healthcare revenue cycle management AI",
-        "Intelligent healthcare revenue cycle management",
-        "Smarter revenue cycles for healthcare"
+        {
+            title: "Our Mission",
+            content: (
+                <>
+                    <span style={{ fontSize: '1.3em', fontWeight: 700 }}>Winspire RCM is a human-centric</span>
+                    , AI-enabled partner that helps healthcare organizations engineer predictable financial outcomes.
+                </>
+            )
+        },
+        {
+            title: "Authority Thought",
+            content: "RCM doesn't fail at the bottom. It fails at the top."
+        }
     ];
     const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
     const [missionFade, setMissionFade] = useState(true);
@@ -126,7 +136,7 @@ export default function Home() {
                 setCurrentMissionIndex((prev) => (prev + 1) % missionMessages.length);
                 setMissionFade(true);
             }, 300); // 300ms for fade out
-        }, 2000); // Change every 2 seconds
+        }, 8000); // Change every 8 seconds (much slower)
 
         return () => clearInterval(interval);
     }, []);
@@ -273,9 +283,15 @@ export default function Home() {
                                 <div className="absolute left-15 bottom-10 pointer-events-auto z-10 max-w-md hero-text-fade">
                                     <h3
                                         className="font-bold tracking-widest uppercase mb-2 font-[Outfit]"
-                                        style={{ color: '#083151', fontSize: '12px', marginBottom: '1rem' }}
+                                        style={{
+                                            color: '#083151',
+                                            fontSize: '12px',
+                                            marginBottom: '1rem',
+                                            opacity: missionFade ? 1 : 0,
+                                            transition: 'opacity 0.3s ease-in-out'
+                                        }}
                                     >
-                                        Our Mission
+                                        {missionMessages[currentMissionIndex].title}
                                     </h3>
                                     <div
                                         className="text-2xl font-bold leading-tight font-[Outfit] text-gradient-shimmer"
@@ -284,7 +300,7 @@ export default function Home() {
                                             transition: 'opacity 0.3s ease-in-out'
                                         }}
                                     >
-                                        {missionMessages[currentMissionIndex]}
+                                        {missionMessages[currentMissionIndex].content}
                                     </div>
                                 </div>
                             )}
@@ -330,7 +346,15 @@ export default function Home() {
                         <div className="mobile-hero-overlay">
                             {/* Our Mission */}
                             <div className="mobile-mission">
-                                <h3 className="mobile-mission-label">Our Mission</h3>
+                                <h3
+                                    className="mobile-mission-label"
+                                    style={{
+                                        opacity: missionFade ? 1 : 0,
+                                        transition: 'opacity 0.3s ease-in-out'
+                                    }}
+                                >
+                                    {missionMessages[currentMissionIndex].title}
+                                </h3>
                                 <div
                                     className="mobile-mission-text text-gradient-shimmer"
                                     style={{
@@ -338,7 +362,7 @@ export default function Home() {
                                         transition: 'opacity 0.3s ease-in-out'
                                     }}
                                 >
-                                    {missionMessages[currentMissionIndex]}
+                                    {missionMessages[currentMissionIndex].content}
                                 </div>
                             </div>
 
