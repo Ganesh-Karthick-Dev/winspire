@@ -20,6 +20,7 @@ import ServicesSection from '@/components/ServicesSection';
 import ServiceCardSection from '@/components/ServiceCardSection';
 import CenterTextSection from '@/components/CenterTextSection';
 import { SpecialtySection } from '@/components/ui/specialty-section';
+import { EngagementModelsSection } from '@/components/ui/engagement-models-section';
 import ValuePropsSection from '@/components/ValuePropsSection';
 import CareersScrollSection from '@/components/CareersScrollSection';
 import NewsSection from '@/components/NewsSection';
@@ -449,6 +450,9 @@ export default function Home() {
 
                 {/* Built for Every Specialty Section */}
                 <SpecialtySection />
+
+                {/* Engagement Models Section - Parallax Cards */}
+                <EngagementModelsSection />
 
                 {/* Careers Scroll Section - Frosted glass with animated image columns */}
                 <CareersScrollSection />

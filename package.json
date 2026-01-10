@@ -12,6 +12,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@tabler/icons-react": "^3.36.1",
     "@types/nodemailer": "^7.0.4",
     "clsx": "^2.1.1",
     "flatpickr": "^4.6.13",
@@ -20,6 +21,7 @@
     "lenis": "^1.3.17",
     "leva": "^0.10.1",
     "lucide-react": "^0.562.0",
+    "motion": "^12.25.0",
     "next": "^16.0.10",
     "nodemailer": "^7.0.12",
     "react": "^19.2.3",
