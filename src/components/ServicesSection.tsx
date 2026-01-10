@@ -67,6 +67,18 @@ export default function ServicesSection() {
             <div className="services-container">
                 {/* === LEFT SIDE: STICKY CONTENT === */}
                 <div className="services-left">
+                    {/* Section Label with Double Ellipse */}
+                    <div className="services-label-container">
+                        <div className="flex items-center gap-4">
+                            {/* Two dots stacked vertically with animated gradient */}
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                <span className="services-ellipse services-ellipse-1" />
+                                <span className="services-ellipse services-ellipse-2" />
+                            </div>
+                            <span className="services-label-text">Services</span>
+                        </div>
+                    </div>
+
                     {/* Large Headline - Bigger like reference */}
                     <h2 className="services-headline">
                         Your Extended Revenue Team.
@@ -202,6 +214,43 @@ export default function ServicesSection() {
                     letter-spacing: -0.01em;
                 }
 
+                /* Services Label Container */
+                .services-label-container {
+                    margin-bottom: 24px;
+                }
+
+                .services-label-text {
+                    color: white;
+                    font-size: 1.95rem;
+                    font-weight: 700;
+                    letter-spacing: 0.05em;
+                    font-family: 'Outfit', sans-serif;
+                }
+
+                /* Pill Badge with Cloudy Color Effect */
+                .services-ellipse {
+                    width: 9px;
+                    height: 4px;
+                    border-radius: 2px;
+                    position: relative;
+                    background: linear-gradient(135deg, 
+                        rgba(96, 165, 250, 0.95) 0%, 
+                        rgba(96, 165, 250, 0.85) 30%,
+                        rgba(129, 140, 248, 0.7) 55%, 
+                        rgba(167, 139, 250, 0.65) 100%
+                    );
+                    animation: cloudyGlow 3s linear infinite;
+                }
+
+                @keyframes cloudyGlow {
+                    0% {
+                        filter: hue-rotate(0deg);
+                    }
+                    100% {
+                        filter: hue-rotate(25deg);
+                    }
+                }
+
                 .services-divider {
                     width: 100%;
                     max-width: 450px;
@@ -286,6 +335,14 @@ export default function ServicesSection() {
                         margin-bottom: 0;
                         max-width: 100%;
                         text-align: left;
+                    }
+
+                    .services-label-container {
+                        margin-bottom: 16px;
+                    }
+
+                    .services-label-text {
+                        font-size: 1.5rem;
                     }
 
                     /* Hide divider on mobile */

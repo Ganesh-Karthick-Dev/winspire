@@ -220,9 +220,24 @@ export default function ServiceCardSection() {
 
                     .service-dot {
                         width: 8px;
-                        height: 5px;
-                        background-color: #38bdf8;
-                        border-radius: 50%;
+                        height: 3px;
+                        border-radius: 2px;
+                        background: linear-gradient(135deg, 
+                            rgba(96, 165, 250, 0.95) 0%, 
+                            rgba(96, 165, 250, 0.85) 30%,
+                            rgba(129, 140, 248, 0.7) 55%, 
+                            rgba(167, 139, 250, 0.65) 100%
+                        );
+                        animation: cloudyGlowMobile 3s linear infinite;
+                    }
+
+                    @keyframes cloudyGlowMobile {
+                        0% {
+                            filter: hue-rotate(0deg);
+                        }
+                        100% {
+                            filter: hue-rotate(25deg);
+                        }
                     }
 
                     .service-mobile-title {
@@ -368,14 +383,11 @@ export default function ServiceCardSection() {
                         }}
                     >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-                            <span
-                                style={{
-                                    width: '8px',
-                                    height: '8px',
-                                    backgroundColor: 'rgba(255,255,255,0.5)',
-                                    borderRadius: '50%',
-                                }}
-                            />
+                            {/* Double ellipses with frosty glossy animated gradient */}
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                <span className="service-title-ellipse service-ellipse-1" />
+                                <span className="service-title-ellipse service-ellipse-2" />
+                            </div>
                             <h2
                                 style={{
                                     color: 'white',
@@ -537,6 +549,32 @@ export default function ServiceCardSection() {
                     </div>
                 </div>
             </div>
+
+            {/* Pill Badge with Cloudy Color Effect */}
+            <style jsx>{`
+                .service-title-ellipse {
+                    width: 8px;
+                    height: 3px;
+                    border-radius: 2px;
+                    position: relative;
+                    background: linear-gradient(135deg, 
+                        rgba(96, 165, 250, 0.95) 0%, 
+                        rgba(96, 165, 250, 0.85) 30%,
+                        rgba(129, 140, 248, 0.7) 55%, 
+                        rgba(167, 139, 250, 0.65) 100%
+                    );
+                    animation: cloudyGlowDesktop 3s linear infinite;
+                }
+
+                @keyframes cloudyGlowDesktop {
+                    0% {
+                        filter: hue-rotate(0deg);
+                    }
+                    100% {
+                        filter: hue-rotate(25deg);
+                    }
+                }
+            `}</style>
         </section>
     );
 }
