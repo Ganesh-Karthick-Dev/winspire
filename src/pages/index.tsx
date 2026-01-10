@@ -19,6 +19,7 @@ import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
 import ServiceCardSection from '@/components/ServiceCardSection';
 import CenterTextSection from '@/components/CenterTextSection';
+import { SpecialtySection } from '@/components/ui/specialty-section';
 import ValuePropsSection from '@/components/ValuePropsSection';
 import CareersScrollSection from '@/components/CareersScrollSection';
 import NewsSection from '@/components/NewsSection';
@@ -445,6 +446,9 @@ export default function Home() {
 
                 {/* Center Text Section - Simple 100vh centered text */}
                 <CenterTextSection />
+
+                {/* Built for Every Specialty Section */}
+                <SpecialtySection />
 
                 {/* Careers Scroll Section - Frosted glass with animated image columns */}
                 <CareersScrollSection />
