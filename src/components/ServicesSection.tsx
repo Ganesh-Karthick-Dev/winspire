@@ -67,18 +67,6 @@ export default function ServicesSection() {
             <div className="services-container">
                 {/* === LEFT SIDE: STICKY CONTENT === */}
                 <div className="services-left">
-                    {/* Section Label with Double Ellipse */}
-                    <div className="services-label-container">
-                        <div className="flex items-center gap-4">
-                            {/* Two dots stacked vertically with animated gradient */}
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                <span className="services-ellipse services-ellipse-1" />
-                                <span className="services-ellipse services-ellipse-2" />
-                            </div>
-                            <span className="services-label-text">Services</span>
-                        </div>
-                    </div>
-
                     {/* Large Headline - Bigger like reference */}
                     <h2 className="services-headline">
                         Your Extended Revenue Team.
