@@ -38,7 +38,7 @@ export default function CenterTextSection() {
                 padding: isMobile ? '60px 24px' : '80px 60px',
             }}
         >
-            <div style={{ maxWidth: '900px', width: '100%' }}>
+            <div style={{ maxWidth: '1400px', width: '100%' }}>
                 {/* Main Title */}
                 <h2
                     style={{
