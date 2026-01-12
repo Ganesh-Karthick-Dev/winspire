@@ -21,214 +21,66 @@ export function ParallaxContentSection() {
             const rightCards = sectionRef.current?.querySelectorAll('.right-cards .parallax-card');
 
             // DRAMATIC PARALLAX CONFIGURATIONS
-            // Each card has unique, eye-catching animations
+            // Unifying left and right cards into a single config approach for easier randomness control
 
-            // Left cards - dramatic animations
-            leftCards?.forEach((card, index) => {
-                let config;
+            // Define custom animations for all 6 cards (3 left, 3 right)
+            // We'll target them by specific class names or indices
+            const allCards = [
+                ...Array.from(sectionRef.current?.querySelectorAll('.left-cards .parallax-card') || []),
+                ...Array.from(sectionRef.current?.querySelectorAll('.right-cards .parallax-card') || [])
+            ];
 
-                if (index === 0) {
-                    // First card: Float in from far left with spin
-                    config = {
-                        from: {
-                            y: 300,
-                            x: -150,
-                            opacity: 0,
-                            rotateZ: -25,
-                            rotateY: 45,
-                            rotateX: 20,
-                            scale: 0.6
-                        },
-                        to: {
-                            y: -100,
-                            x: 60,
-                            opacity: 1,
-                            rotateZ: 5,
-                            rotateY: -8,
-                            rotateX: -3,
-                            scale: 1
-                        },
-                        start: 'top 110%',
-                        end: 'top 10%',
-                        scrub: 1.5
-                    };
-                } else if (index === 1) {
-                    // Second card: Dramatic flip and rush
-                    config = {
-                        from: {
-                            y: 400,
-                            x: 50,
-                            opacity: 0,
-                            rotateZ: 30,
-                            rotateY: -60,
-                            rotateX: -25,
-                            scale: 0.7
-                        },
-                        to: {
-                            y: -150,
-                            x: -20,
-                            opacity: 1,
-                            rotateZ: -4,
-                            rotateY: 6,
-                            rotateX: 2,
-                            scale: 1.02
-                        },
-                        start: 'top 120%',
-                        end: 'top 5%',
-                        scrub: 0.3
-                    };
-                } else {
-                    // Third card: Spiral entrance from bottom
-                    config = {
-                        from: {
-                            y: 500,
-                            x: -100,
-                            opacity: 0,
-                            rotateZ: -40,
-                            rotateX: 50,
-                            rotateY: 30,
-                            scale: 0.5
-                        },
-                        to: {
-                            y: -200,
-                            x: 80,
-                            opacity: 1,
-                            rotateZ: 8,
-                            rotateX: -5,
-                            rotateY: -6,
-                            scale: 1.05
-                        },
-                        start: 'top 130%',
-                        end: 'top 0%',
-                        scrub: 0.8
-                    };
-                }
+            allCards.forEach((card, i) => {
+                // Generate deterministic "random" values based on index
+                // Scrub Lag: How "floaty" or heavy the card feels (latency)
+                const scrubLags = [1.5, 0.5, 2.0, 0.8, 1.2, 0.4];
 
-                gsap.fromTo(card, config.from, {
-                    ...config.to,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: card,
-                        start: config.start,
-                        end: config.end,
-                        scrub: config.scrub,
+                // Parallax Speed: How FAR it moves relative to scroll (velocity)
+                // Values > 1 move faster than scroll, < 1 move slower
+                const parallaxSpeeds = [0.4, 2.5, 0.6, 1.8, 0.5, 2.2];
+
+                const yOffsets = [-50, 50, -150, 80, -100, 40]; // Base offsets
+                const rotations = [5, -5, 8, -6, 10, -4];
+
+                const scrub = scrubLags[i % scrubLags.length];
+                const speed = parallaxSpeeds[i % parallaxSpeeds.length];
+                const rotation = rotations[i % rotations.length];
+                const baseOffset = yOffsets[i % yOffsets.length];
+
+                gsap.fromTo(card,
+                    {
+                        // Start point: Multiplied by speed for varying entrance distances
+                        y: (300 * speed) + baseOffset,
+                        rotation: rotation * -1,
+                    },
+                    {
+                        // End point: Multiplied by speed for varying exit distances
+                        y: (-300 * speed) + baseOffset,
+                        rotation: rotation,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: sectionRef.current, // Use section as trigger for continuous flow
+                            start: 'top bottom', // Start when section hits bottom of viewport
+                            end: 'bottom top',   // End when section leaves top of viewport
+                            scrub: scrub // Variable "weight" feel
+                        }
                     }
-                });
+                );
             });
 
-            // Right cards - mirror dramatic animations
-            rightCards?.forEach((card, index) => {
-                let config;
-
-                if (index === 0) {
-                    // First card: Float in from far right with spin
-                    config = {
-                        from: {
-                            y: 300,
-                            x: 150,
-                            opacity: 0,
-                            rotateZ: 25,
-                            rotateY: -45,
-                            rotateX: 20,
-                            scale: 0.6
-                        },
-                        to: {
-                            y: -100,
-                            x: -60,
-                            opacity: 1,
-                            rotateZ: -5,
-                            rotateY: 8,
-                            rotateX: -3,
-                            scale: 1
-                        },
-                        start: 'top 110%',
-                        end: 'top 10%',
-                        scrub: 1.5
-                    };
-                } else if (index === 1) {
-                    // Second card: Dramatic flip and rush
-                    config = {
-                        from: {
-                            y: 400,
-                            x: -50,
-                            opacity: 0,
-                            rotateZ: -30,
-                            rotateY: 60,
-                            rotateX: -25,
-                            scale: 0.7
-                        },
-                        to: {
-                            y: -150,
-                            x: 20,
-                            opacity: 1,
-                            rotateZ: 4,
-                            rotateY: -6,
-                            rotateX: 2,
-                            scale: 1.02
-                        },
-                        start: 'top 120%',
-                        end: 'top 5%',
-                        scrub: 0.3
-                    };
-                } else {
-                    // Third card: Spiral entrance from bottom
-                    config = {
-                        from: {
-                            y: 500,
-                            x: 100,
-                            opacity: 0,
-                            rotateZ: 40,
-                            rotateX: -50,
-                            rotateY: -30,
-                            scale: 0.5
-                        },
-                        to: {
-                            y: -200,
-                            x: -80,
-                            opacity: 1,
-                            rotateZ: -8,
-                            rotateX: 5,
-                            rotateY: 6,
-                            scale: 1.05
-                        },
-                        start: 'top 130%',
-                        end: 'top 0%',
-                        scrub: 0.8
-                    };
-                }
-
-                gsap.fromTo(card, config.from, {
-                    ...config.to,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: card,
-                        start: config.start,
-                        end: config.end,
-                        scrub: config.scrub,
-                    }
-                });
-            });
-
-            // Title animation - dramatic entrance
+            // Title animation
             const title = sectionRef.current?.querySelector('.section-title');
             if (title) {
                 gsap.fromTo(title,
-                    {
-                        y: 100,
-                        opacity: 0,
-                        scale: 0.8,
-                        rotateX: 30
-                    },
+                    { y: 100, opacity: 0, scale: 0.9 },
                     {
                         y: 0,
                         opacity: 1,
                         scale: 1,
-                        rotateX: 0,
-                        duration: 1.2,
-                        ease: 'power3.out',
+                        duration: 1,
                         scrollTrigger: {
                             trigger: title,
-                            start: 'top 95%',
+                            start: 'top 85%',
                             toggleActions: 'play none none reverse',
                         }
                     }
@@ -264,14 +116,14 @@ export function ParallaxContentSection() {
                         {leftCards.map((text, index) => (
                             <div
                                 key={index}
-                                className={`parallax-card ${index === 0 || index === 2 ? 'card-small' : ''}`}
+                                className={`parallax-card card-left-${index}`}
                             >
                                 <p>{text}</p>
                             </div>
                         ))}
                     </div>
 
-                    {/* Center Space for 3D Model (fixed at page level) */}
+                    {/* Center Space for 3D Model */}
                     <div className="center-space"></div>
 
                     {/* Right Cards */}
@@ -279,7 +131,7 @@ export function ParallaxContentSection() {
                         {rightCards.map((text, index) => (
                             <div
                                 key={index}
-                                className={`parallax-card ${index === 0 || index === 2 ? 'card-small' : ''}`}
+                                className={`parallax-card card-right-${index}`}
                             >
                                 <p>{text}</p>
                             </div>
@@ -292,9 +144,12 @@ export function ParallaxContentSection() {
                 .parallax-content-section {
                     position: relative;
                     min-height: 100vh;
-                    padding: 80px 40px 120px;
+                    /* Increased bottom padding significantly to prevent card cutoff */
+                    padding: 80px 40px 250px;
                     background: transparent;
                     z-index: 25;
+                    /* overflow: hidden;  <-- REMOVED to stop clipping */
+                    overflow: visible; 
                 }
 
                 .content-wrapper {
@@ -307,27 +162,31 @@ export function ParallaxContentSection() {
 
                 .section-title {
                     font-family: 'Outfit', sans-serif;
-                    font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+                    font-size: clamp(2rem, 4vw, 3.5rem);
                     font-weight: 700;
                     color: white;
-                    line-height: 1.2;
+                    line-height: 1.1;
                     margin-bottom: 60px;
                     text-align: center;
+                    max-width: 900px;
+                    margin-left: auto;
+                    margin-right: auto;
                 }
 
                 .cards-layout {
                     display: grid;
-                    grid-template-columns: 1fr 1.5fr 1fr;
-                    gap: 40px;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    /* Reduced main gap */
+                    gap: 20px; 
                     align-items: start;
-                    perspective: 1000px;
                 }
 
                 .left-cards,
                 .right-cards {
                     display: flex;
                     flex-direction: column;
-                    gap: 24px;
+                    /* Reduced vertical gap between cards */
+                    gap: 60px; 
                 }
 
                 .center-space {
@@ -335,53 +194,83 @@ export function ParallaxContentSection() {
                 }
 
                 .parallax-card {
-                    /* Square aspect ratio */
-                    aspect-ratio: 1 / 1;
-                    
-                    /* White semi-transparent bg like careers section */
-                    background: rgba(255, 255, 255, 0.85);
+                    /* White semi-transparent bg */
+                    background: rgba(255, 255, 255, 0.9);
                     backdrop-filter: blur(20px);
                     -webkit-backdrop-filter: blur(20px);
                     
                     border: 1px solid rgba(255, 255, 255, 0.6);
-                    border-radius: 20px;
-                    padding: 24px;
+                    box-shadow: 
+                        0 8px 32px rgba(0, 0, 0, 0.15),
+                        0 2px 8px rgba(0, 0, 0, 0.05);
+                    
+                    border-radius: 24px;
+                    padding: 32px; /* More padding for big text */
                     
                     transform-style: preserve-3d;
-                    will-change: transform, opacity;
-                    
-                    box-shadow: 
-                        0 8px 32px rgba(0, 0, 0, 0.1),
-                        0 2px 8px rgba(0, 0, 0, 0.05),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+                    will-change: transform;
                     
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    
+                    /* Variable widths for random look */
+                    width: 100%; 
+                    min-height: 200px;
                 }
 
                 .parallax-card p {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1rem;
-                    line-height: 1.5;
+                    /* BIG TEXT REQUEST */
+                    font-size: 1.8rem; 
+                    line-height: 1.25;
                     margin: 0;
-                    color: #1a1a2e;
-                    text-align: center;
-                    font-weight: 500;
+                    color: #0d1b2a; /* deeply dark blue/black */
+                    text-align: left;
+                    font-weight: 700; 
                 }
 
-                /* Smaller cards for first and last pairs */
-                .parallax-card.card-small {
-                    width: 70%;
-                    align-self: center;
+                /* =========================================
+                   DETERMINISTIC RANDOM POSITIONS & SIZES
+                   ========================================= */
+
+                /* Left 0 - Top Left */
+                .card-left-0 {
+                    transform: translateX(10%) rotate(-2deg) scale(0.95);
+                    margin-bottom: 40px;
                 }
 
-                .left-cards .parallax-card.card-small {
-                    align-self: flex-end; /* Move toward center */
+                /* Left 1 - Middle Left (pushed out) */
+                .card-left-1 {
+                    transform: translateX(-15%) rotate(3deg) scale(1.1);
+                    margin-left: -40px;
                 }
 
-                .right-cards .parallax-card.card-small {
-                    align-self: flex-start; /* Move toward center */
+                /* Left 2 - Bottom Left (Pull closer to avoid gap) */
+                .card-left-2 {
+                    transform: translateX(20%) rotate(-4deg) scale(1.0);
+                    margin-top: -80px; /* Reduce space before last card */
+                    max-width: 90%;
+                }
+
+
+                /* Right 0 - Top Right */
+                .card-right-0 {
+                    transform: translateX(-5%) rotate(2deg) scale(1.05);
+                    margin-top: 60px; /* Stagger start */
+                }
+
+                /* Right 1 - Middle Right (pushed in) */
+                .card-right-1 {
+                    transform: translateX(-20%) rotate(-3deg) scale(0.9);
+                    margin-left: -60px;
+                }
+
+                /* Right 2 - Bottom Right (Pull closer) */
+                .card-right-2 {
+                    transform: translateX(10%) rotate(5deg) scale(1.15);
+                    margin-top: -100px; /* Reduce space before last card significantly */
+                    margin-right: -20px;
                 }
 
                 @media (max-width: 1024px) {
@@ -389,34 +278,30 @@ export function ParallaxContentSection() {
                         grid-template-columns: 1fr 1fr;
                         gap: 24px;
                     }
-
-                    .center-space {
-                        display: none;
-                    }
+                    .center-space { display: none; }
+                    
+                    .parallax-card p { font-size: 1.5rem; }
                 }
 
                 @media (max-width: 768px) {
-                    .parallax-content-section {
-                        padding: 60px 20px 80px;
-                    }
-
-                    .section-title {
-                        font-size: clamp(1.3rem, 5vw, 1.8rem);
-                        margin-bottom: 40px;
-                    }
-
                     .cards-layout {
-                        grid-template-columns: 1fr 1fr;
-                        gap: 16px;
+                        grid-template-columns: 1fr;
+                        gap: 40px;
+                    }
+
+                    .left-cards, .right-cards {
+                        gap: 40px;
                     }
 
                     .parallax-card {
-                        padding: 16px;
-                        border-radius: 16px;
+                        transform: none !important; /* Reset random transforms on mobile */
+                        margin: 0 !important;
+                        width: 100%;
                     }
 
                     .parallax-card p {
-                        font-size: 0.85rem;
+                        font-size: 1.4rem;
+                        text-align: center;
                     }
                 }
             `}</style>
