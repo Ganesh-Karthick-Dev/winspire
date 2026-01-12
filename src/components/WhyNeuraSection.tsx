@@ -67,9 +67,6 @@ const FlowComponent: React.FC = () => {
         // Authorization server (bottom - separate from FHIR)
         { id: 'auth', type: 'custom', position: { x: 1050, y: 650 }, data: { label: 'Authorization server' } },
 
-        // ===== JUNCTION NODES (for line separation) =====
-        { id: 'ext-junction', type: 'custom', position: { x: 2000, y: 170 }, data: { label: '' } },
-        { id: 'icd-junction', type: 'custom', position: { x: 2000, y: 450 }, data: { label: '' } },
 
         // ===== EXTERNAL SYSTEMS (far right) =====
         { id: 'clearing', type: 'custom', position: { x: 2200, y: 50 }, data: { label: 'Claim clearinghouse' } },
