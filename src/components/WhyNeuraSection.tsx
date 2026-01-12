@@ -40,19 +40,32 @@ const nodeTypes = { custom: CustomNode };
 const FlowComponent: React.FC = () => {
     const nodes: Node[] = useMemo(() => [
         // Healthcare staff (left side)
-        { id: 'staff', type: 'custom', position: { x: 50, y: 200 }, data: { label: 'Healthcare staff' } },
+        { id: 'staff', type: 'custom', position: { x: 50, y: 300 }, data: { label: 'Healthcare staff' } },
         // Web front-end (above, to the right)
-        { id: 'web', type: 'custom', position: { x: 300, y: 100 }, data: { label: 'Web front-end' } },
+        { id: 'web', type: 'custom', position: { x: 300, y: 200 }, data: { label: 'Web front-end' } },
         // Mobile app (below, to the right)
-        { id: 'mobile', type: 'custom', position: { x: 300, y: 300 }, data: { label: 'Mobile app' } },
-        // API gateway (both Web and Mobile connect here)
-        { id: 'apigateway', type: 'custom', position: { x: 550, y: 200 }, data: { label: 'API gateway' } },
-        // GraphQL API (child of API gateway)
-        { id: 'graphql', type: 'custom', position: { x: 800, y: 200 }, data: { label: 'GraphQL API' } },
-        // FHIR server (child of GraphQL - above)
-        { id: 'fhir', type: 'custom', position: { x: 1050, y: 100 }, data: { label: 'FHIR server (HAPI FHIR)' } },
-        // Authorization server (child of GraphQL - bottom)
-        { id: 'auth', type: 'custom', position: { x: 1050, y: 600 }, data: { label: 'Authorization server' } },
+        { id: 'mobile', type: 'custom', position: { x: 300, y: 400 }, data: { label: 'Mobile app' } },
+        // API gateway
+        { id: 'apigateway', type: 'custom', position: { x: 550, y: 300 }, data: { label: 'API gateway' } },
+        // GraphQL API
+        { id: 'graphql', type: 'custom', position: { x: 800, y: 300 }, data: { label: 'GraphQL API' } },
+        // FHIR server
+        { id: 'fhir', type: 'custom', position: { x: 1050, y: 300 }, data: { label: 'FHIR server (HAPI FHIR)' } },
+
+        // ===== 10 RCM MODULES (children of FHIR) =====
+        { id: 'appointment', type: 'custom', position: { x: 1300, y: 0 }, data: { label: 'Appointment module' } },
+        { id: 'patient', type: 'custom', position: { x: 1300, y: 50 }, data: { label: 'Patient module' } },
+        { id: 'ehr', type: 'custom', position: { x: 1300, y: 100 }, data: { label: 'EHR module' } },
+        { id: 'billing', type: 'custom', position: { x: 1300, y: 150 }, data: { label: 'Billing system' } },
+        // Gap for Billing's infrastructure children (Kafka, Prometheus, etc.)
+        { id: 'charge', type: 'custom', position: { x: 1300, y: 350 }, data: { label: 'Charge capture' } },
+        { id: 'coding', type: 'custom', position: { x: 1300, y: 400 }, data: { label: 'Coding engine' } },
+        { id: 'claims', type: 'custom', position: { x: 1300, y: 450 }, data: { label: 'Claims processor' } },
+        { id: 'reporting', type: 'custom', position: { x: 1300, y: 500 }, data: { label: 'Reporting module' } },
+        { id: 'audit', type: 'custom', position: { x: 1300, y: 550 }, data: { label: 'Audit tracker' } },
+
+        // Authorization server (bottom - separate from FHIR)
+        { id: 'auth', type: 'custom', position: { x: 1050, y: 650 }, data: { label: 'Authorization server' } },
     ], []);
 
     const edges: Edge[] = useMemo(() => [
@@ -70,6 +83,16 @@ const FlowComponent: React.FC = () => {
         { id: 'e6', source: 'graphql', target: 'fhir', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
         // GraphQL API → Authorization server
         { id: 'e7', source: 'graphql', target: 'auth', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        // FHIR → All 9 RCM modules
+        { id: 'e8', source: 'fhir', target: 'appointment', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e9', source: 'fhir', target: 'patient', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e10', source: 'fhir', target: 'ehr', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e11', source: 'fhir', target: 'billing', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e12', source: 'fhir', target: 'charge', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e13', source: 'fhir', target: 'coding', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e14', source: 'fhir', target: 'claims', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e15', source: 'fhir', target: 'reporting', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e16', source: 'fhir', target: 'audit', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
     ], []);
 
     return (
