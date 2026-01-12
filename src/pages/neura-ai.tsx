@@ -1,7 +1,7 @@
 /**
  * Neura AI Page
  * 
- * Clean page with only navbar and footer.
+ * Clean page with parallax hero section.
  * Old content available at: /old-neura-ai
  */
 
@@ -9,10 +9,11 @@
 
 import { useEffect } from 'react';
 import Layout from '@/components/Layout';
+import { ParallaxComponent } from '@/components/ui/parallax-scrolling';
 
 export default function NeuraAI() {
     useEffect(() => {
-        // Hide the loader immediately since this is a simple page
+        // Hide the loader immediately
         const loader = document.querySelector('.loader-overlay') as HTMLElement;
         if (loader) {
             loader.style.opacity = '0';
@@ -23,7 +24,10 @@ export default function NeuraAI() {
 
     return (
         <Layout title="Neura AI" description="Discover Winspire's Neura AI - intelligent automation for healthcare">
-            {/* Add new sections here */}
+            {/* Parallax Hero Section - position absolute to overlay from top */}
+            <ParallaxComponent title="Neura AI" />
+
+            {/* Add more sections below */}
         </Layout>
     );
 }
