@@ -54,20 +54,20 @@ const FlowComponent: React.FC = () => {
 
         // ===== 10 RCM MODULES (children of FHIR) =====
         { id: 'appointment', type: 'custom', position: { x: 1300, y: 0 }, data: { label: 'Appointment module' } },
-        { id: 'patient', type: 'custom', position: { x: 1300, y: 50 }, data: { label: 'Patient module' } },
-        { id: 'ehr', type: 'custom', position: { x: 1300, y: 100 }, data: { label: 'EHR module' } },
-        { id: 'postgres', type: 'custom', position: { x: 1550, y: 100 }, data: { label: 'PostgreSQL' } },
-        { id: 'billing', type: 'custom', position: { x: 1300, y: 150 }, data: { label: 'Billing system' } },
-        { id: 'storage', type: 'custom', position: { x: 1550, y: 150 }, data: { label: 'Object storage' } },
+        { id: 'patient', type: 'custom', position: { x: 1300, y: 70 }, data: { label: 'Patient module' } },
+        { id: 'ehr', type: 'custom', position: { x: 1300, y: 140 }, data: { label: 'EHR module' } },
+        { id: 'postgres', type: 'custom', position: { x: 1550, y: 140 }, data: { label: 'PostgreSQL' } },
+        { id: 'billing', type: 'custom', position: { x: 1300, y: 210 }, data: { label: 'Billing system' } },
+        { id: 'storage', type: 'custom', position: { x: 1550, y: 210 }, data: { label: 'Object storage' } },
         // Gap for Billing's infrastructure children (Kafka, Prometheus, etc.)
-        { id: 'charge', type: 'custom', position: { x: 1300, y: 350 }, data: { label: 'Charge capture' } },
-        { id: 'coding', type: 'custom', position: { x: 1300, y: 400 }, data: { label: 'Coding engine' } },
-        { id: 'claims', type: 'custom', position: { x: 1300, y: 450 }, data: { label: 'Claims processor' } },
-        { id: 'reporting', type: 'custom', position: { x: 1300, y: 500 }, data: { label: 'Reporting module' } },
-        { id: 'audit', type: 'custom', position: { x: 1300, y: 550 }, data: { label: 'Audit tracker' } },
+        { id: 'charge', type: 'custom', position: { x: 1300, y: 420 }, data: { label: 'Charge capture' } },
+        { id: 'coding', type: 'custom', position: { x: 1300, y: 490 }, data: { label: 'Coding engine' } },
+        { id: 'claims', type: 'custom', position: { x: 1300, y: 560 }, data: { label: 'Claims processor' } },
+        { id: 'reporting', type: 'custom', position: { x: 1300, y: 630 }, data: { label: 'Reporting module' } },
+        { id: 'audit', type: 'custom', position: { x: 1300, y: 700 }, data: { label: 'Audit tracker' } },
 
         // Authorization server (bottom - separate from FHIR)
-        { id: 'auth', type: 'custom', position: { x: 1050, y: 650 }, data: { label: 'Authorization server' } },
+        { id: 'auth', type: 'custom', position: { x: 1050, y: 800 }, data: { label: 'Authorization server' } },
 
 
         // ===== EXTERNAL SYSTEMS (far right) =====
