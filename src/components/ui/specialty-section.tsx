@@ -123,17 +123,17 @@ export function SpecialtySection() {
                 {/* Left Content - Text Info */}
                 <div style={{ flex: '1', minWidth: '320px' }}>
                     {/* Accent Label */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                            <span style={{ width: '10px', height: '6px', backgroundColor: '#38bdf8', borderRadius: '50%' }} />
-                            <span style={{ width: '10px', height: '6px', backgroundColor: '#38bdf8', borderRadius: '50%' }} />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                            <span className="specialty-title-ellipse" />
+                            <span className="specialty-title-ellipse" />
                         </div>
                         <h3 style={{
                             margin: 0,
                             fontFamily: 'Outfit, sans-serif',
                             fontSize: '1.1rem',
                             fontWeight: 600,
-                            color: '#1a1a2e',
+                            color: 'white',
                             textTransform: 'uppercase',
                             letterSpacing: '0.1em'
                         }}>
@@ -147,7 +147,7 @@ export function SpecialtySection() {
                             fontFamily: 'Outfit, sans-serif',
                             fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)',
                             fontWeight: 700,
-                            color: '#0a0a1a',
+                            color: 'white',
                             lineHeight: 1.15,
                             marginBottom: '28px',
                         }}
@@ -160,7 +160,7 @@ export function SpecialtySection() {
                         style={{
                             fontFamily: 'Outfit, sans-serif',
                             fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
-                            color: '#1a1a2e',
+                            color: 'rgba(255, 255, 255, 0.9)',
                             lineHeight: 1.6,
                             marginBottom: '28px',
                         }}
@@ -174,7 +174,7 @@ export function SpecialtySection() {
                         style={{
                             fontFamily: 'Outfit, sans-serif',
                             fontSize: 'clamp(1rem, 1.6vw, 1.2rem)',
-                            color: 'rgba(10, 10, 30, 0.7)',
+                            color: 'rgba(255, 255, 255, 0.75)',
                             marginBottom: '36px',
                         }}
                     >
@@ -183,10 +183,9 @@ export function SpecialtySection() {
 
                     {/* Divider */}
                     <div style={{
-                        width: '70px',
-                        height: '4px',
-                        background: '#38bdf8',
-                        borderRadius: '2px',
+                        width: '100%',
+                        height: '1px',
+                        background: 'rgba(255, 255, 255, 0.25)',
                         marginBottom: '36px'
                     }} />
 
@@ -195,7 +194,7 @@ export function SpecialtySection() {
                         style={{
                             fontFamily: 'Outfit, sans-serif',
                             fontSize: 'clamp(1rem, 1.6vw, 1.15rem)',
-                            color: 'rgba(10, 10, 30, 0.75)',
+                            color: 'rgba(255, 255, 255, 0.8)',
                             lineHeight: 1.6,
                             marginBottom: '18px',
                         }}
@@ -203,12 +202,12 @@ export function SpecialtySection() {
                         Each specialty brings different denial patterns, payer behavior, and operational risk.
                     </p>
 
-                    {/* Bold Statement - No gradient, professional dark text */}
+                    {/* Bold Statement */}
                     <p
                         style={{
                             fontFamily: 'Outfit, sans-serif',
                             fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
-                            color: '#0a0a1a',
+                            color: 'white',
                             fontWeight: 600,
                             marginBottom: '44px',
                         }}
@@ -342,7 +341,7 @@ export function SpecialtySection() {
                                 style={{
                                     position: 'relative',
                                     padding: '20px 18px',
-                                    borderTop: '1px solid rgba(10, 10, 30, 0.1)',
+                                    borderTop: '1px solid rgba(255, 255, 255, 0.15)',
                                     cursor: 'pointer',
                                     transition: 'all 0.3s ease',
                                 }}
@@ -375,7 +374,7 @@ export function SpecialtySection() {
                                     {/* Icon */}
                                     <span
                                         style={{
-                                            color: hoveredIndex === index ? '#0284c7' : 'rgba(10, 10, 30, 0.5)',
+                                            color: hoveredIndex === index ? '#38bdf8' : 'rgba(255, 255, 255, 0.6)',
                                             transform: hoveredIndex === index ? 'scale(1.15)' : 'scale(1)',
                                             transition: 'all 0.3s ease-out',
                                             display: 'flex',
@@ -390,7 +389,7 @@ export function SpecialtySection() {
                                             fontFamily: 'Outfit, sans-serif',
                                             fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
                                             fontWeight: 500,
-                                            color: hoveredIndex === index ? '#0a0a1a' : 'rgba(10, 10, 30, 0.75)',
+                                            color: hoveredIndex === index ? 'white' : 'rgba(255, 255, 255, 0.85)',
                                             transition: 'all 0.3s ease-out',
                                         }}
                                     >
@@ -403,7 +402,7 @@ export function SpecialtySection() {
                                             width: 18,
                                             height: 18,
                                             marginLeft: 'auto',
-                                            color: '#0284c7',
+                                            color: '#38bdf8',
                                             opacity: hoveredIndex === index ? 1 : 0,
                                             transform: hoveredIndex === index ? 'translateX(0)' : 'translateX(-8px)',
                                             transition: 'all 0.3s ease-out',
@@ -413,20 +412,42 @@ export function SpecialtySection() {
                             </div>
                         ))}
                         {/* Bottom border */}
-                        <div style={{ borderTop: '1px solid rgba(10, 10, 30, 0.1)' }} />
+                        <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.15)' }} />
                     </div>
                 </div>
             </div>
 
-            {/* Responsive Styles */}
+            {/* Responsive Styles + Animated Dots */}
             <style jsx>{`
-        @media (max-width: 900px) {
-          section > div:first-child {
-            flex-direction: column !important;
-            padding: 50px 40px !important;
-          }
-        }
-      `}</style>
+                .specialty-title-ellipse {
+                    width: 8px;
+                    height: 3px;
+                    border-radius: 2px;
+                    background: linear-gradient(135deg, 
+                        rgba(96, 165, 250, 0.95) 0%, 
+                        rgba(96, 165, 250, 0.85) 30%,
+                        rgba(129, 140, 248, 0.7) 55%, 
+                        rgba(167, 139, 250, 0.65) 100%
+                    );
+                    animation: cloudyGlow 3s linear infinite;
+                }
+
+                @keyframes cloudyGlow {
+                    0% {
+                        filter: hue-rotate(0deg);
+                    }
+                    100% {
+                        filter: hue-rotate(25deg);
+                    }
+                }
+
+                @media (max-width: 900px) {
+                    section > div:first-child {
+                        flex-direction: column !important;
+                        padding: 50px 40px !important;
+                    }
+                }
+            `}</style>
         </section>
     )
 }

@@ -58,7 +58,7 @@ export default function CenterTextSection() {
                 <p
                     style={{
                         color: 'rgba(255, 255, 255, 0.85)',
-                        fontSize: isMobile ? '1rem' : '1.2rem',
+                        fontSize: isMobile ? '1.1rem' : '1.35rem',
                         fontFamily: 'Outfit, sans-serif',
                         textAlign: 'left',
                         lineHeight: 1.6,
@@ -70,7 +70,7 @@ export default function CenterTextSection() {
                 <p
                     style={{
                         color: 'rgba(255, 255, 255, 0.85)',
-                        fontSize: isMobile ? '1rem' : '1.2rem',
+                        fontSize: isMobile ? '1.1rem' : '1.35rem',
                         fontFamily: 'Outfit, sans-serif',
                         textAlign: 'left',
                         lineHeight: 1.6,
@@ -92,7 +92,7 @@ export default function CenterTextSection() {
                         <p
                             style={{
                                 color: 'white',
-                                fontSize: isMobile ? '1rem' : '1.1rem',
+                                fontSize: isMobile ? '1.1rem' : '1.25rem',
                                 fontFamily: 'Outfit, sans-serif',
                                 fontWeight: 600,
                                 marginBottom: '16px',
@@ -114,7 +114,7 @@ export default function CenterTextSection() {
                         <p
                             style={{
                                 color: 'white',
-                                fontSize: isMobile ? '1rem' : '1.1rem',
+                                fontSize: isMobile ? '1.1rem' : '1.25rem',
                                 fontFamily: 'Outfit, sans-serif',
                                 fontWeight: 600,
                                 marginBottom: '16px',
@@ -136,7 +136,7 @@ export default function CenterTextSection() {
                 <p
                     style={{
                         color: 'rgba(255, 255, 255, 0.85)',
-                        fontSize: isMobile ? '1rem' : '1.2rem',
+                        fontSize: isMobile ? '1.1rem' : '1.35rem',
                         fontFamily: 'Outfit, sans-serif',
                         textAlign: 'left',
                         lineHeight: 1.6,
@@ -148,7 +148,7 @@ export default function CenterTextSection() {
                 <p
                     style={{
                         color: 'white',
-                        fontSize: isMobile ? '1.1rem' : '1.3rem',
+                        fontSize: isMobile ? '1.2rem' : '1.45rem',
                         fontFamily: 'Outfit, sans-serif',
                         fontWeight: 600,
                         textAlign: 'left',
@@ -208,7 +208,7 @@ export default function CenterTextSection() {
             <style jsx>{`
                 ul li {
                     color: rgba(255, 255, 255, 0.85);
-                    font-size: ${isMobile ? '0.95rem' : '1.1rem'};
+                    font-size: ${isMobile ? '1.05rem' : '1.25rem'};
                     font-family: 'Outfit', sans-serif;
                 }
             `}</style>
