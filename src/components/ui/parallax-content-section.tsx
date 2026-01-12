@@ -20,73 +20,86 @@ export function ParallaxContentSection() {
             const leftCards = sectionRef.current?.querySelectorAll('.left-cards .parallax-card');
             const rightCards = sectionRef.current?.querySelectorAll('.right-cards .parallax-card');
 
-            // Animation configs for each card type
-            // First pair (index 0): Smaller, slower
-            // Second pair (index 1): Opposite tilt, faster
-            // Third pair (index 2): Random/varied effects
+            // DRAMATIC PARALLAX CONFIGURATIONS
+            // Each card has unique, eye-catching animations
 
-            // Left cards animation
+            // Left cards - dramatic animations
             leftCards?.forEach((card, index) => {
                 let config;
 
                 if (index === 0) {
-                    // First card: Smaller movement, slower scrub
+                    // First card: Float in from far left with spin
                     config = {
-                        from: { y: 80, opacity: 0, rotateZ: -3, rotateY: 5, scale: 0.9 },
-                        to: { y: -20, opacity: 1, rotateZ: 0, rotateY: 0, scale: 1 },
-                        scrub: 2 // Slower
+                        from: {
+                            y: 300,
+                            x: -150,
+                            opacity: 0,
+                            rotateZ: -25,
+                            rotateY: 45,
+                            rotateX: 20,
+                            scale: 0.6
+                        },
+                        to: {
+                            y: -100,
+                            x: 60,
+                            opacity: 1,
+                            rotateZ: 5,
+                            rotateY: -8,
+                            rotateX: -3,
+                            scale: 1
+                        },
+                        start: 'top 110%',
+                        end: 'top 10%',
+                        scrub: 1.5
                     };
                 } else if (index === 1) {
-                    // Second card: Opposite tilt, faster
+                    // Second card: Dramatic flip and rush
                     config = {
-                        from: { y: 150, opacity: 0, rotateZ: 8, rotateY: -15, scale: 1 },
-                        to: { y: -60, opacity: 1, rotateZ: 0, rotateY: 0, scale: 1 },
-                        scrub: 0.5 // Faster
+                        from: {
+                            y: 400,
+                            x: 50,
+                            opacity: 0,
+                            rotateZ: 30,
+                            rotateY: -60,
+                            rotateX: -25,
+                            scale: 0.7
+                        },
+                        to: {
+                            y: -150,
+                            x: -20,
+                            opacity: 1,
+                            rotateZ: -4,
+                            rotateY: 6,
+                            rotateX: 2,
+                            scale: 1.02
+                        },
+                        start: 'top 120%',
+                        end: 'top 5%',
+                        scrub: 0.3
                     };
                 } else {
-                    // Third card: Random effects
+                    // Third card: Spiral entrance from bottom
                     config = {
-                        from: { y: 200, opacity: 0, rotateZ: -10, rotateX: 20, scale: 0.85 },
-                        to: { y: -80, opacity: 1, rotateZ: 2, rotateX: 0, scale: 1.02 },
-                        scrub: 1
-                    };
-                }
-
-                gsap.fromTo(card, config.from, {
-                    ...config.to,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 100%',
-                        end: 'top 20%',
-                        scrub: config.scrub,
-                    }
-                });
-            });
-
-            // Right cards animation
-            rightCards?.forEach((card, index) => {
-                let config;
-
-                if (index === 0) {
-                    // First card: Smaller movement, slower scrub
-                    config = {
-                        from: { y: 80, opacity: 0, rotateZ: 3, rotateY: -5, scale: 0.9 },
-                        to: { y: -20, opacity: 1, rotateZ: 0, rotateY: 0, scale: 1 },
-                        scrub: 2 // Slower
-                    };
-                } else if (index === 1) {
-                    // Second card: Opposite tilt, faster
-                    config = {
-                        from: { y: 150, opacity: 0, rotateZ: -8, rotateY: 15, scale: 1 },
-                        to: { y: -60, opacity: 1, rotateZ: 0, rotateY: 0, scale: 1 },
-                        scrub: 0.5 // Faster
-                    };
-                } else {
-                    // Third card: Random effects
-                    config = {
-                        from: { y: 180, opacity: 0, rotateZ: 12, rotateX: -15, scale: 0.9 },
-                        to: { y: -70, opacity: 1, rotateZ: -3, rotateX: 0, scale: 1.05 },
+                        from: {
+                            y: 500,
+                            x: -100,
+                            opacity: 0,
+                            rotateZ: -40,
+                            rotateX: 50,
+                            rotateY: 30,
+                            scale: 0.5
+                        },
+                        to: {
+                            y: -200,
+                            x: 80,
+                            opacity: 1,
+                            rotateZ: 8,
+                            rotateX: -5,
+                            rotateY: -6,
+                            scale: 1.05
+                        },
+                        start: 'top 130%',
+                        end: 'top 0%',
                         scrub: 0.8
                     };
                 }
@@ -96,26 +109,126 @@ export function ParallaxContentSection() {
                     ease: 'none',
                     scrollTrigger: {
                         trigger: card,
-                        start: 'top 100%',
-                        end: 'top 20%',
+                        start: config.start,
+                        end: config.end,
                         scrub: config.scrub,
                     }
                 });
             });
 
-            // Title animation
+            // Right cards - mirror dramatic animations
+            rightCards?.forEach((card, index) => {
+                let config;
+
+                if (index === 0) {
+                    // First card: Float in from far right with spin
+                    config = {
+                        from: {
+                            y: 300,
+                            x: 150,
+                            opacity: 0,
+                            rotateZ: 25,
+                            rotateY: -45,
+                            rotateX: 20,
+                            scale: 0.6
+                        },
+                        to: {
+                            y: -100,
+                            x: -60,
+                            opacity: 1,
+                            rotateZ: -5,
+                            rotateY: 8,
+                            rotateX: -3,
+                            scale: 1
+                        },
+                        start: 'top 110%',
+                        end: 'top 10%',
+                        scrub: 1.5
+                    };
+                } else if (index === 1) {
+                    // Second card: Dramatic flip and rush
+                    config = {
+                        from: {
+                            y: 400,
+                            x: -50,
+                            opacity: 0,
+                            rotateZ: -30,
+                            rotateY: 60,
+                            rotateX: -25,
+                            scale: 0.7
+                        },
+                        to: {
+                            y: -150,
+                            x: 20,
+                            opacity: 1,
+                            rotateZ: 4,
+                            rotateY: -6,
+                            rotateX: 2,
+                            scale: 1.02
+                        },
+                        start: 'top 120%',
+                        end: 'top 5%',
+                        scrub: 0.3
+                    };
+                } else {
+                    // Third card: Spiral entrance from bottom
+                    config = {
+                        from: {
+                            y: 500,
+                            x: 100,
+                            opacity: 0,
+                            rotateZ: 40,
+                            rotateX: -50,
+                            rotateY: -30,
+                            scale: 0.5
+                        },
+                        to: {
+                            y: -200,
+                            x: -80,
+                            opacity: 1,
+                            rotateZ: -8,
+                            rotateX: 5,
+                            rotateY: 6,
+                            scale: 1.05
+                        },
+                        start: 'top 130%',
+                        end: 'top 0%',
+                        scrub: 0.8
+                    };
+                }
+
+                gsap.fromTo(card, config.from, {
+                    ...config.to,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: config.start,
+                        end: config.end,
+                        scrub: config.scrub,
+                    }
+                });
+            });
+
+            // Title animation - dramatic entrance
             const title = sectionRef.current?.querySelector('.section-title');
             if (title) {
                 gsap.fromTo(title,
-                    { y: 40, opacity: 0 },
+                    {
+                        y: 100,
+                        opacity: 0,
+                        scale: 0.8,
+                        rotateX: 30
+                    },
                     {
                         y: 0,
                         opacity: 1,
-                        duration: 1,
+                        scale: 1,
+                        rotateX: 0,
+                        duration: 1.2,
                         ease: 'power3.out',
                         scrollTrigger: {
                             trigger: title,
-                            start: 'top 90%',
+                            start: 'top 95%',
                             toggleActions: 'play none none reverse',
                         }
                     }
@@ -149,7 +262,10 @@ export function ParallaxContentSection() {
                     {/* Left Cards */}
                     <div className="left-cards">
                         {leftCards.map((text, index) => (
-                            <div key={index} className="parallax-card">
+                            <div
+                                key={index}
+                                className={`parallax-card ${index === 0 || index === 2 ? 'card-small' : ''}`}
+                            >
                                 <p>{text}</p>
                             </div>
                         ))}
@@ -161,7 +277,10 @@ export function ParallaxContentSection() {
                     {/* Right Cards */}
                     <div className="right-cards">
                         {rightCards.map((text, index) => (
-                            <div key={index} className="parallax-card">
+                            <div
+                                key={index}
+                                className={`parallax-card ${index === 0 || index === 2 ? 'card-small' : ''}`}
+                            >
                                 <p>{text}</p>
                             </div>
                         ))}
@@ -249,6 +368,20 @@ export function ParallaxContentSection() {
                     color: #1a1a2e;
                     text-align: center;
                     font-weight: 500;
+                }
+
+                /* Smaller cards for first and last pairs */
+                .parallax-card.card-small {
+                    width: 70%;
+                    align-self: center;
+                }
+
+                .left-cards .parallax-card.card-small {
+                    align-self: flex-end; /* Move toward center */
+                }
+
+                .right-cards .parallax-card.card-small {
+                    align-self: flex-start; /* Move toward center */
                 }
 
                 @media (max-width: 1024px) {
