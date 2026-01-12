@@ -36,10 +36,11 @@ export function ParallaxContentSection() {
                 const scrubLags = [1.5, 0.5, 2.0, 0.8, 1.2, 0.4];
 
                 // Parallax Speed: How FAR it moves relative to scroll (velocity)
-                // Values > 1 move faster than scroll, < 1 move slower
-                const parallaxSpeeds = [0.4, 2.5, 0.6, 1.8, 0.5, 2.2];
+                // MODERATED speeds to prevent collision (max 2.0 instead of 3.5)
+                // Still varied enough to feel random
+                const parallaxSpeeds = [0.6, 1.8, 1.1, 1.3, 0.5, 2.0];
 
-                const yOffsets = [-50, 50, -150, 80, -100, 40]; // Base offsets
+                const yOffsets = [0, 100, -50, 50, -80, 20]; // Simpler offsets
                 const rotations = [5, -5, 8, -6, 10, -4];
 
                 const scrub = scrubLags[i % scrubLags.length];
@@ -50,12 +51,12 @@ export function ParallaxContentSection() {
                 gsap.fromTo(card,
                     {
                         // Start point: Multiplied by speed for varying entrance distances
-                        y: (300 * speed) + baseOffset,
+                        y: (250 * speed) + baseOffset, // Reduced multiplier slightly from 300
                         rotation: rotation * -1,
                     },
                     {
                         // End point: Multiplied by speed for varying exit distances
-                        y: (-300 * speed) + baseOffset,
+                        y: (-250 * speed) + baseOffset,
                         rotation: rotation,
                         ease: 'none',
                         scrollTrigger: {
@@ -92,15 +93,15 @@ export function ParallaxContentSection() {
     }, []);
 
     const leftCards = [
-        "Revenue cycles don't break because teams lack effort.",
-        "They break because the system lacks intelligence.",
-        "It is not software you manage."
+        <span>Revenue cycles don’t break because teams lack effort.</span>,
+        <span>They break because the system lacks intelligence.</span>,
+        <span>It is not software you manage.</span>
     ];
 
     const rightCards = [
-        "Neura AI replaces fragmented RCM activity with a single, intelligent operating structure.",
-        "It is the structure that governs how revenue cycles actually perform.",
-        "Neura works ahead of outcomes, continuously guiding execution."
+        <span>Neura AI replaces fragmented RCM activity with a <strong>single, intelligent operating structure</strong>.</span>,
+        <span>It is the structure that governs how revenue cycles actually perform.</span>,
+        <span>Where traditional systems tell you what happened after the damage is done, Neura works <strong>ahead of outcomes</strong>, continuously guiding execution across people, processes, and payers.</span>
     ];
 
     return (
@@ -144,12 +145,12 @@ export function ParallaxContentSection() {
                 .parallax-content-section {
                     position: relative;
                     min-height: 100vh;
-                    /* Increased bottom padding significantly to prevent card cutoff */
-                    padding: 80px 40px 250px;
+                    /* Increased bottom padding significantly */
+                    padding: 80px 40px 300px;
                     background: transparent;
                     z-index: 25;
                     /* overflow: hidden;  <-- REMOVED to stop clipping */
-                    overflow: visible; 
+                    overflow: visible;
                 }
 
                 .content-wrapper {
@@ -176,8 +177,7 @@ export function ParallaxContentSection() {
                 .cards-layout {
                     display: grid;
                     grid-template-columns: 1fr 1fr 1fr;
-                    /* Reduced main gap */
-                    gap: 20px; 
+                    gap: 40px;
                     align-items: start;
                 }
 
@@ -185,8 +185,8 @@ export function ParallaxContentSection() {
                 .right-cards {
                     display: flex;
                     flex-direction: column;
-                    /* Reduced vertical gap between cards */
-                    gap: 60px; 
+                    /* MASSIVELY increased vertical gap to prevent overlap */
+                    gap: 160px;
                 }
 
                 .center-space {
@@ -195,39 +195,44 @@ export function ParallaxContentSection() {
 
                 .parallax-card {
                     /* White semi-transparent bg */
-                    background: rgba(255, 255, 255, 0.9);
+                    background: rgba(255, 255, 255, 0.95); /* More opaque to ensure readability if overlap happens */
                     backdrop-filter: blur(20px);
                     -webkit-backdrop-filter: blur(20px);
-                    
-                    border: 1px solid rgba(255, 255, 255, 0.6);
-                    box-shadow: 
+
+                    border: 1px solid rgba(255, 255, 255, 0.8);
+                    box-shadow:
                         0 8px 32px rgba(0, 0, 0, 0.15),
                         0 2px 8px rgba(0, 0, 0, 0.05);
-                    
+
                     border-radius: 24px;
                     padding: 32px; /* More padding for big text */
-                    
+
                     transform-style: preserve-3d;
                     will-change: transform;
-                    
+
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    
+
                     /* Variable widths for random look */
-                    width: 100%; 
+                    width: 100%;
                     min-height: 200px;
                 }
 
                 .parallax-card p {
                     font-family: 'Outfit', sans-serif;
                     /* BIG TEXT REQUEST */
-                    font-size: 1.8rem; 
+                    font-size: 1.8rem;
                     line-height: 1.25;
                     margin: 0;
                     color: #0d1b2a; /* deeply dark blue/black */
                     text-align: left;
-                    font-weight: 700; 
+                    font-weight: 500; /* Reduced to 500 so bold stands out */
+                }
+
+                .parallax-card p strong {
+                    font-weight: 800;
+                    color: #000;
                 }
 
                 /* =========================================
@@ -237,40 +242,44 @@ export function ParallaxContentSection() {
                 /* Left 0 - Top Left */
                 .card-left-0 {
                     transform: translateX(10%) rotate(-2deg) scale(0.95);
-                    margin-bottom: 40px;
+                    /* margin-bottom handled by gap now */
                 }
 
                 /* Left 1 - Middle Left (pushed out) */
                 .card-left-1 {
-                    transform: translateX(-15%) rotate(3deg) scale(1.1);
-                    margin-left: -40px;
+                    transform: translateX(-25%) rotate(3deg) scale(1.1);
+                    margin-left: -50px;
+                    z-index: 5; /* Lower Z-index to stay behind if overlap */
                 }
 
-                /* Left 2 - Bottom Left (Pull closer to avoid gap) */
+                /* Left 2 - Bottom Left ("It is not software you manage") */
                 .card-left-2 {
+                    /* Moved further right but SEPARATED from center overlap */
                     transform: translateX(20%) rotate(-4deg) scale(1.0);
-                    margin-top: -80px; /* Reduce space before last card */
                     max-width: 90%;
+                    z-index: 10;
                 }
 
 
                 /* Right 0 - Top Right */
                 .card-right-0 {
                     transform: translateX(-5%) rotate(2deg) scale(1.05);
-                    margin-top: 60px; /* Stagger start */
+                    margin-top: 80px; /* Slight stagger for right col start */
                 }
 
-                /* Right 1 - Middle Right (pushed in) */
+                /* Right 1 - Middle Right ("It is the structure that governs...") */
                 .card-right-1 {
+                    /* Moved further left but SEPARATED from center overlap */
                     transform: translateX(-20%) rotate(-3deg) scale(0.9);
-                    margin-left: -60px;
+                    margin-left: -40px;
+                    z-index: 5; /* Lower Z-index */
                 }
 
                 /* Right 2 - Bottom Right (Pull closer) */
                 .card-right-2 {
                     transform: translateX(10%) rotate(5deg) scale(1.15);
-                    margin-top: -100px; /* Reduce space before last card significantly */
                     margin-right: -20px;
+                    z-index: 10;
                 }
 
                 @media (max-width: 1024px) {
@@ -279,7 +288,7 @@ export function ParallaxContentSection() {
                         gap: 24px;
                     }
                     .center-space { display: none; }
-                    
+
                     .parallax-card p { font-size: 1.5rem; }
                 }
 
