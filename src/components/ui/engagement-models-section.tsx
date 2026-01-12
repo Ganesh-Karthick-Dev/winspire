@@ -126,7 +126,7 @@ export function EngagementModelsSection() {
                         fontFamily: "Outfit, sans-serif",
                         fontSize: "1rem",
                         fontWeight: 600,
-                        color: "#38bdf8",
+                        color: "white",
                         textTransform: "uppercase",
                         letterSpacing: "0.2em",
                         marginBottom: "24px",
