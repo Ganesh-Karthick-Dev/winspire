@@ -22,6 +22,12 @@ import CenterTextSection from '@/components/CenterTextSection';
 import { SpecialtySection } from '@/components/ui/specialty-section';
 import { EngagementModelsSection } from '@/components/ui/engagement-models-section';
 import ValuePropsSection from '@/components/ValuePropsSection';
+
+// React Flow doesn't support SSR, so we need to dynamically import
+const WhyNeuraSection = dynamic(() => import('@/components/WhyNeuraSection'), {
+    ssr: false,
+    loading: () => <div style={{ minHeight: '100vh', background: '#0a1628' }} />,
+});
 import CareersScrollSection from '@/components/CareersScrollSection';
 import NewsSection from '@/components/NewsSection';
 import CareersContactLinks from '@/components/CareersContactLinks';
@@ -453,6 +459,9 @@ export default function Home() {
 
                 {/* Engagement Models Section - Parallax Cards */}
                 <EngagementModelsSection />
+
+                {/* Why Neura AI Section - React Flow Diagram */}
+                <WhyNeuraSection />
 
                 {/* Careers Scroll Section - Frosted glass with animated image columns */}
                 <CareersScrollSection />

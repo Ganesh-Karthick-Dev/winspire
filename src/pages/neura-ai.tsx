@@ -23,6 +23,12 @@ const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
     loading: () => null,
 });
 
+// Why Neura Section - needs SSR disabled for React Flow
+const WhyNeuraSection = dynamic(() => import('@/components/WhyNeuraSection'), {
+    ssr: false,
+    loading: () => <div style={{ minHeight: '100vh', background: '#0a1628' }} />,
+});
+
 export default function NeuraAI() {
     const is3DDisabled = useRef(false);
 
@@ -66,7 +72,10 @@ export default function NeuraAI() {
             {/* Content Section - Related to Hero */}
             <ParallaxContentSection />
 
-            {/* Add more sections below */}
+            {/* Why Neura AI Is Fundamentally Different Section */}
+            <WhyNeuraSection />
+
         </Layout>
     );
 }
+
