@@ -66,6 +66,16 @@ const FlowComponent: React.FC = () => {
 
         // Authorization server (bottom - separate from FHIR)
         { id: 'auth', type: 'custom', position: { x: 1050, y: 650 }, data: { label: 'Authorization server' } },
+
+        // ===== EXTERNAL SYSTEMS (far right) =====
+        { id: 'clearing', type: 'custom', position: { x: 1700, y: 50 }, data: { label: 'Claim clearinghouse' } },
+        { id: 'insurance', type: 'custom', position: { x: 1700, y: 110 }, data: { label: 'Insurance portals' } },
+        { id: 'payment', type: 'custom', position: { x: 1700, y: 170 }, data: { label: 'Payment gateway' } },
+        { id: 'banking', type: 'custom', position: { x: 1700, y: 230 }, data: { label: 'Banking system' } },
+        { id: 'medicare', type: 'custom', position: { x: 1700, y: 290 }, data: { label: 'Medicare API' } },
+
+        // ===== ICD (far right bottom) =====
+        { id: 'icd', type: 'custom', position: { x: 1700, y: 450 }, data: { label: 'ICD/CPT provider' } },
     ], []);
 
     const edges: Edge[] = useMemo(() => [
