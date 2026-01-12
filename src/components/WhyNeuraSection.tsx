@@ -67,15 +67,19 @@ const FlowComponent: React.FC = () => {
         // Authorization server (bottom - separate from FHIR)
         { id: 'auth', type: 'custom', position: { x: 1050, y: 650 }, data: { label: 'Authorization server' } },
 
+        // ===== JUNCTION NODES (for line separation) =====
+        { id: 'ext-junction', type: 'custom', position: { x: 2000, y: 170 }, data: { label: '' } },
+        { id: 'icd-junction', type: 'custom', position: { x: 2000, y: 450 }, data: { label: '' } },
+
         // ===== EXTERNAL SYSTEMS (far right) =====
-        { id: 'clearing', type: 'custom', position: { x: 1700, y: 50 }, data: { label: 'Claim clearinghouse' } },
-        { id: 'insurance', type: 'custom', position: { x: 1700, y: 110 }, data: { label: 'Insurance portals' } },
-        { id: 'payment', type: 'custom', position: { x: 1700, y: 170 }, data: { label: 'Payment gateway' } },
-        { id: 'banking', type: 'custom', position: { x: 1700, y: 230 }, data: { label: 'Banking system' } },
-        { id: 'medicare', type: 'custom', position: { x: 1700, y: 290 }, data: { label: 'Medicare API' } },
+        { id: 'clearing', type: 'custom', position: { x: 2200, y: 50 }, data: { label: 'Claim clearinghouse' } },
+        { id: 'insurance', type: 'custom', position: { x: 2200, y: 110 }, data: { label: 'Insurance portals' } },
+        { id: 'payment', type: 'custom', position: { x: 2200, y: 170 }, data: { label: 'Payment gateway' } },
+        { id: 'banking', type: 'custom', position: { x: 2200, y: 230 }, data: { label: 'Banking system' } },
+        { id: 'medicare', type: 'custom', position: { x: 2200, y: 290 }, data: { label: 'Medicare API' } },
 
         // ===== ICD (far right bottom) =====
-        { id: 'icd', type: 'custom', position: { x: 1700, y: 450 }, data: { label: 'ICD/CPT provider' } },
+        { id: 'icd', type: 'custom', position: { x: 2200, y: 450 }, data: { label: 'ICD/CPT provider' } },
     ], []);
 
     const edges: Edge[] = useMemo(() => [
@@ -103,6 +107,14 @@ const FlowComponent: React.FC = () => {
         { id: 'e14', source: 'fhir', target: 'claims', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
         { id: 'e15', source: 'fhir', target: 'reporting', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
         { id: 'e16', source: 'fhir', target: 'audit', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        // FHIR → External Systems (5 nodes)
+        { id: 'e17', source: 'fhir', target: 'clearing', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e18', source: 'fhir', target: 'insurance', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e19', source: 'fhir', target: 'payment', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e20', source: 'fhir', target: 'banking', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e21', source: 'fhir', target: 'medicare', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        // FHIR → ICD
+        { id: 'e22', source: 'fhir', target: 'icd', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
     ], []);
 
     return (
