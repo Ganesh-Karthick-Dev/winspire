@@ -7,12 +7,36 @@
 
 'use client';
 
-import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
 import { ParallaxComponent } from '@/components/ui/parallax-scrolling';
+import { ParallaxContentSection } from '@/components/ui/parallax-content-section';
+import { shouldDisable3D } from '@/lib/threeUtils';
+import { bookDemoScrollKeyframes } from '@/lib/bookDemoScrollAnimations';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import styles from '@/styles/neura.module.css';
+
+// 3D Model
+const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
+    ssr: false,
+    loading: () => null,
+});
 
 export default function NeuraAI() {
+    const is3DDisabled = useRef(false);
+
+    // Use scroll animation for 3D model (same as book-demo page)
+    const { transform, scrollProgress } = useScrollAnimation({
+        keyframes: bookDemoScrollKeyframes
+    });
+
+    const enableWobble = scrollProgress <= 0.95;
+    const rotateSpeed = 0.003;
+
     useEffect(() => {
+        is3DDisabled.current = shouldDisable3D();
+
         // Hide the loader immediately
         const loader = document.querySelector('.loader-overlay') as HTMLElement;
         if (loader) {
@@ -24,8 +48,23 @@ export default function NeuraAI() {
 
     return (
         <Layout title="Neura AI" description="Discover Winspire's Neura AI - intelligent automation for healthcare">
-            {/* Parallax Hero Section - position absolute to overlay from top */}
+            {/* 3D Model - FIXED behind everything (like book-demo page) */}
+            {!is3DDisabled.current && (
+                <div className={styles.modelContainer}>
+                    <GLTFViewer
+                        manualTransform={transform}
+                        rotateSpeed={rotateSpeed}
+                        enableWobble={enableWobble}
+                        className="w-full h-full"
+                    />
+                </div>
+            )}
+
+            {/* Parallax Hero Section */}
             <ParallaxComponent title="Neura AI" />
+
+            {/* Content Section - Related to Hero */}
+            <ParallaxContentSection />
 
             {/* Add more sections below */}
         </Layout>

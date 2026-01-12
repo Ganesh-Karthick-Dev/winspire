@@ -107,9 +107,6 @@ export function ParallaxComponent({
                 </div>
             </section>
 
-            {/* Scroll space for parallax effect */}
-            <div className="parallax-scroll-space"></div>
-
             <style jsx>{`
                 /* Match .hero structure - 16px padding with content inside */
                 .parallax-hero {
