@@ -59,8 +59,13 @@ const FlowComponent: React.FC = () => {
         { id: 'postgres', type: 'custom', position: { x: 1550, y: 140 }, data: { label: 'PostgreSQL' } },
         { id: 'billing', type: 'custom', position: { x: 1300, y: 210 }, data: { label: 'Billing system' } },
         { id: 'storage', type: 'custom', position: { x: 1550, y: 210 }, data: { label: 'Object storage' } },
-        // Gap for Billing's infrastructure children (Kafka, Prometheus, etc.)
-        { id: 'charge', type: 'custom', position: { x: 1300, y: 420 }, data: { label: 'Charge capture' } },
+        // Kafka and infrastructure children
+        { id: 'kafka', type: 'custom', position: { x: 1300, y: 290 }, data: { label: 'Kafka' } },
+        { id: 'prometheus', type: 'custom', position: { x: 1550, y: 260 }, data: { label: 'Prometheus' } },
+        { id: 'elastic', type: 'custom', position: { x: 1550, y: 310 }, data: { label: 'Elastic Stack' } },
+        { id: 'jaeger', type: 'custom', position: { x: 1550, y: 360 }, data: { label: 'JAEGER' } },
+        // Rest of RCM modules
+        { id: 'charge', type: 'custom', position: { x: 1300, y: 450 }, data: { label: 'Charge capture' } },
         { id: 'coding', type: 'custom', position: { x: 1300, y: 490 }, data: { label: 'Coding engine' } },
         { id: 'claims', type: 'custom', position: { x: 1300, y: 560 }, data: { label: 'Claims processor' } },
         { id: 'reporting', type: 'custom', position: { x: 1300, y: 630 }, data: { label: 'Reporting module' } },
@@ -118,6 +123,12 @@ const FlowComponent: React.FC = () => {
         { id: 'e23', source: 'ehr', target: 'postgres', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
         // Billing → Object storage
         { id: 'e24', source: 'billing', target: 'storage', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        // FHIR → Kafka
+        { id: 'e25', source: 'fhir', target: 'kafka', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        // Kafka → Prometheus, Elastic Stack, JAEGER
+        { id: 'e26', source: 'kafka', target: 'prometheus', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e27', source: 'kafka', target: 'elastic', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        { id: 'e28', source: 'kafka', target: 'jaeger', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
     ], []);
 
     return (
