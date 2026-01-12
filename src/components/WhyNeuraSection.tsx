@@ -56,7 +56,9 @@ const FlowComponent: React.FC = () => {
         { id: 'appointment', type: 'custom', position: { x: 1300, y: 0 }, data: { label: 'Appointment module' } },
         { id: 'patient', type: 'custom', position: { x: 1300, y: 50 }, data: { label: 'Patient module' } },
         { id: 'ehr', type: 'custom', position: { x: 1300, y: 100 }, data: { label: 'EHR module' } },
+        { id: 'postgres', type: 'custom', position: { x: 1550, y: 100 }, data: { label: 'PostgreSQL' } },
         { id: 'billing', type: 'custom', position: { x: 1300, y: 150 }, data: { label: 'Billing system' } },
+        { id: 'storage', type: 'custom', position: { x: 1550, y: 150 }, data: { label: 'Object storage' } },
         // Gap for Billing's infrastructure children (Kafka, Prometheus, etc.)
         { id: 'charge', type: 'custom', position: { x: 1300, y: 350 }, data: { label: 'Charge capture' } },
         { id: 'coding', type: 'custom', position: { x: 1300, y: 400 }, data: { label: 'Coding engine' } },
@@ -112,6 +114,10 @@ const FlowComponent: React.FC = () => {
         { id: 'e21', source: 'fhir', target: 'medicare', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
         // FHIR → ICD
         { id: 'e22', source: 'fhir', target: 'icd', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        // EHR → PostgreSQL
+        { id: 'e23', source: 'ehr', target: 'postgres', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        // Billing → Object storage
+        { id: 'e24', source: 'billing', target: 'storage', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
     ], []);
 
     return (
