@@ -53,26 +53,26 @@ const FlowComponent: React.FC = () => {
         { id: 'fhir', type: 'custom', position: { x: 1050, y: 300 }, data: { label: 'FHIR server (HAPI FHIR)' } },
 
         // ===== 10 RCM MODULES (children of FHIR) =====
-        { id: 'appointment', type: 'custom', position: { x: 1300, y: 0 }, data: { label: 'Appointment module' } },
-        { id: 'patient', type: 'custom', position: { x: 1300, y: 70 }, data: { label: 'Patient module' } },
-        { id: 'ehr', type: 'custom', position: { x: 1300, y: 140 }, data: { label: 'EHR module' } },
-        { id: 'postgres', type: 'custom', position: { x: 1550, y: 140 }, data: { label: 'PostgreSQL' } },
-        { id: 'billing', type: 'custom', position: { x: 1300, y: 210 }, data: { label: 'Billing system' } },
-        { id: 'storage', type: 'custom', position: { x: 1550, y: 210 }, data: { label: 'Object storage' } },
+        { id: 'appointment', type: 'custom', position: { x: 1300, y: -100 }, data: { label: 'Appointment module' } },
+        { id: 'patient', type: 'custom', position: { x: 1300, y: -30 }, data: { label: 'Patient module' } },
+        { id: 'ehr', type: 'custom', position: { x: 1300, y: 40 }, data: { label: 'EHR module' } },
+        { id: 'postgres', type: 'custom', position: { x: 1550, y: 40 }, data: { label: 'PostgreSQL' } },
+        { id: 'billing', type: 'custom', position: { x: 1300, y: 110 }, data: { label: 'Billing system' } },
+        { id: 'storage', type: 'custom', position: { x: 1550, y: 110 }, data: { label: 'Object storage' } },
         // Kafka and infrastructure children
-        { id: 'kafka', type: 'custom', position: { x: 1300, y: 290 }, data: { label: 'Kafka' } },
-        { id: 'prometheus', type: 'custom', position: { x: 1550, y: 260 }, data: { label: 'Prometheus' } },
-        { id: 'elastic', type: 'custom', position: { x: 1550, y: 310 }, data: { label: 'Elastic Stack' } },
-        { id: 'jaeger', type: 'custom', position: { x: 1550, y: 360 }, data: { label: 'JAEGER' } },
+        { id: 'kafka', type: 'custom', position: { x: 1300, y: 190 }, data: { label: 'Kafka' } },
+        { id: 'prometheus', type: 'custom', position: { x: 1550, y: 180 }, data: { label: 'Prometheus' } },
+        { id: 'elastic', type: 'custom', position: { x: 1550, y: 240 }, data: { label: 'Elastic Stack' } },
+        { id: 'jaeger', type: 'custom', position: { x: 1550, y: 300 }, data: { label: 'JAEGER' } },
         // Rest of RCM modules
-        { id: 'charge', type: 'custom', position: { x: 1300, y: 450 }, data: { label: 'Charge capture' } },
-        { id: 'coding', type: 'custom', position: { x: 1300, y: 490 }, data: { label: 'Coding engine' } },
-        { id: 'claims', type: 'custom', position: { x: 1300, y: 560 }, data: { label: 'Claims processor' } },
-        { id: 'reporting', type: 'custom', position: { x: 1300, y: 630 }, data: { label: 'Reporting module' } },
-        { id: 'audit', type: 'custom', position: { x: 1300, y: 700 }, data: { label: 'Audit tracker' } },
+        { id: 'charge', type: 'custom', position: { x: 1300, y: 350 }, data: { label: 'Charge capture' } },
+        { id: 'coding', type: 'custom', position: { x: 1300, y: 420 }, data: { label: 'Coding engine' } },
+        { id: 'claims', type: 'custom', position: { x: 1300, y: 490 }, data: { label: 'Claims processor' } },
+        { id: 'reporting', type: 'custom', position: { x: 1300, y: 560 }, data: { label: 'Reporting module' } },
+        { id: 'audit', type: 'custom', position: { x: 1300, y: 630 }, data: { label: 'Audit tracker' } },
 
         // Authorization server (bottom - separate from FHIR)
-        { id: 'auth', type: 'custom', position: { x: 1050, y: 800 }, data: { label: 'Authorization server' } },
+        { id: 'auth', type: 'custom', position: { x: 1050, y: 750 }, data: { label: 'Authorization server' } },
 
 
         // ===== EXTERNAL SYSTEMS (far right) =====
