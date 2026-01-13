@@ -78,14 +78,14 @@ const FlowComponent: React.FC = () => {
 
 
         // ===== EXTERNAL SYSTEMS (far right) =====
-        { id: 'clearing', type: 'custom', position: { x: 2200, y: 50 }, data: { label: 'Claim clearinghouse' } },
-        { id: 'insurance', type: 'custom', position: { x: 2200, y: 110 }, data: { label: 'Insurance portals' } },
-        { id: 'payment', type: 'custom', position: { x: 2200, y: 170 }, data: { label: 'Payment gateway' } },
-        { id: 'banking', type: 'custom', position: { x: 2200, y: 230 }, data: { label: 'Banking system' } },
-        { id: 'medicare', type: 'custom', position: { x: 2200, y: 290 }, data: { label: 'Medicare API' } },
+        { id: 'clearing', type: 'custom', position: { x: 2200, y: 150 }, data: { label: 'Claim clearinghouse' } },
+        { id: 'insurance', type: 'custom', position: { x: 2200, y: 210 }, data: { label: 'Insurance portals' } },
+        { id: 'payment', type: 'custom', position: { x: 2200, y: 270 }, data: { label: 'Payment gateway' } },
+        { id: 'banking', type: 'custom', position: { x: 2200, y: 330 }, data: { label: 'Banking system' } },
+        { id: 'medicare', type: 'custom', position: { x: 2200, y: 390 }, data: { label: 'Medicare API' } },
 
         // ===== ICD (far right bottom) =====
-        { id: 'icd', type: 'custom', position: { x: 2200, y: 450 }, data: { label: 'ICD/CPT provider' } },
+        { id: 'icd', type: 'custom', position: { x: 2200, y: 550 }, data: { label: 'ICD/CPT provider' } },
     ], []);
 
     const edges: Edge[] = useMemo(() => [
