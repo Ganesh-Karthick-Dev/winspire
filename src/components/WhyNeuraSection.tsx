@@ -53,17 +53,17 @@ const FlowComponent: React.FC = () => {
         { id: 'fhir', type: 'custom', position: { x: 1050, y: 300 }, data: { label: 'FHIR server (HAPI FHIR)' } },
 
         // ===== 10 RCM MODULES (children of FHIR) =====
-        { id: 'appointment', type: 'custom', position: { x: 1300, y: -100 }, data: { label: 'Appointment module' } },
-        { id: 'patient', type: 'custom', position: { x: 1300, y: -30 }, data: { label: 'Patient module' } },
-        { id: 'ehr', type: 'custom', position: { x: 1300, y: 40 }, data: { label: 'EHR module' } },
-        { id: 'postgres', type: 'custom', position: { x: 1550, y: 40 }, data: { label: 'PostgreSQL' } },
-        { id: 'billing', type: 'custom', position: { x: 1300, y: 110 }, data: { label: 'Billing system' } },
-        { id: 'storage', type: 'custom', position: { x: 1550, y: 110 }, data: { label: 'Object storage' } },
+        { id: 'appointment', type: 'custom', position: { x: 1300, y: -280 }, data: { label: 'Appointment module' } },
+        { id: 'patient', type: 'custom', position: { x: 1300, y: -210 }, data: { label: 'Patient module' } },
+        { id: 'ehr', type: 'custom', position: { x: 1300, y: -140 }, data: { label: 'EHR module' } },
+        { id: 'postgres', type: 'custom', position: { x: 1550, y: -140 }, data: { label: 'PostgreSQL' } },
+        { id: 'billing', type: 'custom', position: { x: 1300, y: -70 }, data: { label: 'Billing system' } },
+        { id: 'storage', type: 'custom', position: { x: 1550, y: -70 }, data: { label: 'Object storage' } },
         // Kafka and infrastructure children
-        { id: 'kafka', type: 'custom', position: { x: 1300, y: 190 }, data: { label: 'Kafka' } },
-        { id: 'prometheus', type: 'custom', position: { x: 1550, y: 180 }, data: { label: 'Prometheus' } },
-        { id: 'elastic', type: 'custom', position: { x: 1550, y: 240 }, data: { label: 'Elastic Stack' } },
-        { id: 'jaeger', type: 'custom', position: { x: 1550, y: 300 }, data: { label: 'JAEGER' } },
+        { id: 'kafka', type: 'custom', position: { x: 1300, y: 10 }, data: { label: 'Kafka' } },
+        { id: 'prometheus', type: 'custom', position: { x: 1550, y: 0 }, data: { label: 'Prometheus' } },
+        { id: 'elastic', type: 'custom', position: { x: 1550, y: 60 }, data: { label: 'Elastic Stack' } },
+        { id: 'jaeger', type: 'custom', position: { x: 1550, y: 120 }, data: { label: 'JAEGER' } },
         // Rest of RCM modules
         { id: 'charge', type: 'custom', position: { x: 1300, y: 350 }, data: { label: 'Charge capture' } },
         { id: 'coding', type: 'custom', position: { x: 1300, y: 420 }, data: { label: 'Coding engine' } },
