@@ -69,7 +69,9 @@ const FlowComponent: React.FC = () => {
         { id: 'coding', type: 'custom', position: { x: 1300, y: 420 }, data: { label: 'Coding engine' } },
         { id: 'claims', type: 'custom', position: { x: 1300, y: 490 }, data: { label: 'Claims processor' } },
         { id: 'reporting', type: 'custom', position: { x: 1300, y: 560 }, data: { label: 'Reporting module' } },
+        { id: 'datawarehouse', type: 'custom', position: { x: 1550, y: 560 }, data: { label: 'Data warehouse' } },
         { id: 'audit', type: 'custom', position: { x: 1300, y: 630 }, data: { label: 'Audit tracker' } },
+        { id: 'mongodb', type: 'custom', position: { x: 1550, y: 630 }, data: { label: 'MongoDB' } },
 
         // Authorization server (bottom - separate from FHIR)
         { id: 'auth', type: 'custom', position: { x: 1050, y: 750 }, data: { label: 'Authorization server' } },
@@ -129,6 +131,10 @@ const FlowComponent: React.FC = () => {
         { id: 'e26', source: 'kafka', target: 'prometheus', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
         { id: 'e27', source: 'kafka', target: 'elastic', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
         { id: 'e28', source: 'kafka', target: 'jaeger', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        // Reporting → Data warehouse
+        { id: 'e29', source: 'reporting', target: 'datawarehouse', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
+        // Audit → MongoDB
+        { id: 'e30', source: 'audit', target: 'mongodb', type: 'smoothstep', style: { stroke: '#94a3b8', strokeWidth: 2, strokeDasharray: '5 4' }, markerEnd: { type: MarkerType.ArrowClosed, color: '#94a3b8' } },
     ], []);
 
     return (
@@ -175,8 +181,8 @@ const WhyNeuraSection: React.FC = () => {
             </div>
 
             <style jsx>{`
-                .why-neura-section { position: relative; min-height: 100vh; padding: 8px 16px; background: transparent; z-index: 20; display: flex; align-items: flex-start; justify-content: center; }
-                .why-neura-card { width: 100%; height: calc(100vh - 16px); padding: 28px 36px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(40px); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 30px 100px rgba(0, 0, 0, 0.08); overflow: hidden; display: flex; flex-direction: column; }
+                .why-neura-section { position: relative; min-height: 130vh; padding: 8px 16px; background: transparent; z-index: 20; display: flex; align-items: flex-start; justify-content: center; }
+                .why-neura-card { width: 100%; height: calc(130vh - 16px); padding: 28px 36px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(40px); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 30px 100px rgba(0, 0, 0, 0.08); overflow: hidden; display: flex; flex-direction: column; }
                 .header-section { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
                 .accent-label { display: flex; align-items: center; gap: 12px; }
                 .dots-wrapper { display: flex; flex-direction: column; gap: 4px; }
@@ -189,8 +195,8 @@ const WhyNeuraSection: React.FC = () => {
                 .text-content p { font-family: 'Outfit', sans-serif; font-size: 0.9rem; line-height: 1.4; color: #333; margin: 0 0 6px 0; }
                 .text-content strong { color: #0066FF; font-weight: 700; }
                 .highlight-text { padding: 8px 12px; background: rgba(0, 102, 255, 0.05); border-left: 3px solid #0066FF; border-radius: 0 6px 6px 0; }
-                .flow-diagram { flex: 1; width: 100%; min-height: 400px; background: linear-gradient(135deg, #f8fafc 0%, #eef6ff 100%); border-radius: 14px; border: 1px solid rgba(0, 102, 255, 0.1); }
-                @media (max-width: 768px) { .why-neura-card { padding: 20px 14px; height: auto; min-height: calc(100vh - 40px); } .flow-diagram { height: 350px; flex: none; } }
+                .flow-diagram { flex: 1; width: 100%; min-height: 700px; background: linear-gradient(135deg, #f8fafc 0%, #eef6ff 100%); border-radius: 14px; border: 1px solid rgba(0, 102, 255, 0.1); }
+                @media (max-width: 768px) { .why-neura-card { padding: 20px 14px; height: auto; min-height: calc(100vh - 40px); } .flow-diagram { height: 500px; flex: none; } }
             `}</style>
         </section>
     );
