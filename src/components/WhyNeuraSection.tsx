@@ -197,6 +197,8 @@ const WhyNeuraSection: React.FC = () => {
                 .highlight-text { padding: 8px 12px; background: rgba(0, 102, 255, 0.05); border-left: 3px solid #0066FF; border-radius: 0 6px 6px 0; }
                 .flow-diagram { flex: 1; width: 100%; min-height: 700px; padding-bottom: 60px; background: linear-gradient(135deg, #f8fafc 0%, #eef6ff 100%); border-radius: 14px; border: 1px solid rgba(0, 102, 255, 0.1); }
                 @media (max-width: 768px) { .why-neura-card { padding: 20px 14px; height: auto; min-height: calc(100vh - 40px); } .flow-diagram { height: 500px; flex: none; } }
+                @keyframes flowAnimation { 0% { stroke-dashoffset: 18; } 100% { stroke-dashoffset: 0; } }
+                .flow-diagram :global(.react-flow__edge-path) { animation: flowAnimation 1s linear infinite; }
             `}</style>
         </section>
     );
