@@ -13,24 +13,47 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-// Node component
-const CustomNode = ({ data }: { data: { label: string } }) => (
+// Icons
+import {
+    FaUserMd, FaDesktop, FaMobileAlt, FaServer, FaDatabase, FaCalendarCheck,
+    FaUserInjured, FaFileMedical, FaFileInvoiceDollar, FaCloud, FaChartBar,
+    FaShieldAlt, FaExchangeAlt, FaCode, FaSearch, FaClipboardCheck, FaWarehouse
+} from 'react-icons/fa';
+import {
+    SiApachekafka, SiPrometheus, SiElasticsearch, SiMongodb, SiPostgresql, SiGraphql
+} from 'react-icons/si';
+import {
+    MdPayment, MdHealthAndSafety, MdOutlineLocalHospital
+} from 'react-icons/md';
+import {
+    HiOfficeBuilding, HiCreditCard, HiDocumentReport
+} from 'react-icons/hi';
+import { BiNetworkChart } from 'react-icons/bi';
+import { RiLockPasswordLine } from 'react-icons/ri';
+
+// Node component with icon
+const CustomNode = ({ data }: { data: { label: string; icon?: React.ReactNode } }) => (
     <div style={{
-        padding: '12px 20px',
+        padding: '10px 16px',
         borderRadius: '10px',
         background: '#fff',
         border: '2px solid #0066FF',
         color: '#1a1a2e',
         fontFamily: 'Outfit, sans-serif',
-        fontSize: '13px',
+        fontSize: '12px',
         fontWeight: 600,
         textAlign: 'center',
-        minWidth: '140px',
+        minWidth: '130px',
         boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        justifyContent: 'center',
     }}>
         <Handle type="target" position={Position.Left} style={{ background: '#94a3b8', width: 6, height: 6 }} />
         <Handle type="source" position={Position.Right} style={{ background: '#94a3b8', width: 6, height: 6 }} />
         <Handle type="source" position={Position.Bottom} id="bottom" style={{ background: '#94a3b8', width: 6, height: 6 }} />
+        {data.icon && <span style={{ fontSize: '16px', color: '#0066FF', display: 'flex' }}>{data.icon}</span>}
         {data.label}
     </div>
 );
@@ -40,52 +63,52 @@ const nodeTypes = { custom: CustomNode };
 const FlowComponent: React.FC = () => {
     const nodes: Node[] = useMemo(() => [
         // Healthcare staff (left side)
-        { id: 'staff', type: 'custom', position: { x: 50, y: 300 }, data: { label: 'Healthcare staff' } },
+        { id: 'staff', type: 'custom', position: { x: 50, y: 300 }, data: { label: 'Healthcare staff', icon: <FaUserMd /> } },
         // Web front-end (above, to the right)
-        { id: 'web', type: 'custom', position: { x: 300, y: 200 }, data: { label: 'Web front-end' } },
+        { id: 'web', type: 'custom', position: { x: 300, y: 200 }, data: { label: 'Web front-end', icon: <FaDesktop /> } },
         // Mobile app (below, to the right)
-        { id: 'mobile', type: 'custom', position: { x: 300, y: 400 }, data: { label: 'Mobile app' } },
+        { id: 'mobile', type: 'custom', position: { x: 300, y: 400 }, data: { label: 'Mobile app', icon: <FaMobileAlt /> } },
         // API gateway
-        { id: 'apigateway', type: 'custom', position: { x: 550, y: 300 }, data: { label: 'API gateway' } },
+        { id: 'apigateway', type: 'custom', position: { x: 550, y: 300 }, data: { label: 'API gateway', icon: <FaServer /> } },
         // GraphQL API
-        { id: 'graphql', type: 'custom', position: { x: 800, y: 300 }, data: { label: 'GraphQL API' } },
+        { id: 'graphql', type: 'custom', position: { x: 800, y: 300 }, data: { label: 'GraphQL API', icon: <SiGraphql /> } },
         // FHIR server
-        { id: 'fhir', type: 'custom', position: { x: 1050, y: 300 }, data: { label: 'FHIR server (HAPI FHIR)' } },
+        { id: 'fhir', type: 'custom', position: { x: 1050, y: 300 }, data: { label: 'FHIR server (HAPI FHIR)', icon: <MdHealthAndSafety /> } },
 
         // ===== 10 RCM MODULES (children of FHIR) =====
-        { id: 'appointment', type: 'custom', position: { x: 1300, y: -280 }, data: { label: 'Appointment module' } },
-        { id: 'patient', type: 'custom', position: { x: 1300, y: -210 }, data: { label: 'Patient module' } },
-        { id: 'ehr', type: 'custom', position: { x: 1300, y: -140 }, data: { label: 'EHR module' } },
-        { id: 'postgres', type: 'custom', position: { x: 1550, y: -140 }, data: { label: 'PostgreSQL' } },
-        { id: 'billing', type: 'custom', position: { x: 1300, y: -70 }, data: { label: 'Billing system' } },
-        { id: 'storage', type: 'custom', position: { x: 1550, y: -70 }, data: { label: 'Object storage' } },
+        { id: 'appointment', type: 'custom', position: { x: 1300, y: -280 }, data: { label: 'Appointment module', icon: <FaCalendarCheck /> } },
+        { id: 'patient', type: 'custom', position: { x: 1300, y: -210 }, data: { label: 'Patient module', icon: <FaUserInjured /> } },
+        { id: 'ehr', type: 'custom', position: { x: 1300, y: -140 }, data: { label: 'EHR module', icon: <FaFileMedical /> } },
+        { id: 'postgres', type: 'custom', position: { x: 1550, y: -140 }, data: { label: 'PostgreSQL', icon: <SiPostgresql /> } },
+        { id: 'billing', type: 'custom', position: { x: 1300, y: -70 }, data: { label: 'Billing system', icon: <FaFileInvoiceDollar /> } },
+        { id: 'storage', type: 'custom', position: { x: 1550, y: -70 }, data: { label: 'Object storage', icon: <FaCloud /> } },
         // Kafka and infrastructure children
-        { id: 'kafka', type: 'custom', position: { x: 1300, y: 10 }, data: { label: 'Kafka' } },
-        { id: 'prometheus', type: 'custom', position: { x: 1550, y: 0 }, data: { label: 'Prometheus' } },
-        { id: 'elastic', type: 'custom', position: { x: 1550, y: 60 }, data: { label: 'Elastic Stack' } },
-        { id: 'jaeger', type: 'custom', position: { x: 1550, y: 120 }, data: { label: 'JAEGER' } },
+        { id: 'kafka', type: 'custom', position: { x: 1300, y: 10 }, data: { label: 'Kafka', icon: <SiApachekafka /> } },
+        { id: 'prometheus', type: 'custom', position: { x: 1550, y: 0 }, data: { label: 'Prometheus', icon: <SiPrometheus /> } },
+        { id: 'elastic', type: 'custom', position: { x: 1550, y: 60 }, data: { label: 'Elastic Stack', icon: <SiElasticsearch /> } },
+        { id: 'jaeger', type: 'custom', position: { x: 1550, y: 120 }, data: { label: 'JAEGER', icon: <FaSearch /> } },
         // Rest of RCM modules
-        { id: 'charge', type: 'custom', position: { x: 1300, y: 350 }, data: { label: 'Charge capture' } },
-        { id: 'coding', type: 'custom', position: { x: 1300, y: 420 }, data: { label: 'Coding engine' } },
-        { id: 'claims', type: 'custom', position: { x: 1300, y: 490 }, data: { label: 'Claims processor' } },
-        { id: 'reporting', type: 'custom', position: { x: 1300, y: 560 }, data: { label: 'Reporting module' } },
-        { id: 'datawarehouse', type: 'custom', position: { x: 1550, y: 560 }, data: { label: 'Data warehouse' } },
-        { id: 'audit', type: 'custom', position: { x: 1300, y: 630 }, data: { label: 'Audit tracker' } },
-        { id: 'mongodb', type: 'custom', position: { x: 1550, y: 630 }, data: { label: 'MongoDB' } },
+        { id: 'charge', type: 'custom', position: { x: 1300, y: 350 }, data: { label: 'Charge capture', icon: <HiCreditCard /> } },
+        { id: 'coding', type: 'custom', position: { x: 1300, y: 420 }, data: { label: 'Coding engine', icon: <FaCode /> } },
+        { id: 'claims', type: 'custom', position: { x: 1300, y: 490 }, data: { label: 'Claims processor', icon: <FaClipboardCheck /> } },
+        { id: 'reporting', type: 'custom', position: { x: 1300, y: 560 }, data: { label: 'Reporting module', icon: <HiDocumentReport /> } },
+        { id: 'datawarehouse', type: 'custom', position: { x: 1550, y: 560 }, data: { label: 'Data warehouse', icon: <FaWarehouse /> } },
+        { id: 'audit', type: 'custom', position: { x: 1300, y: 630 }, data: { label: 'Audit tracker', icon: <FaChartBar /> } },
+        { id: 'mongodb', type: 'custom', position: { x: 1550, y: 630 }, data: { label: 'MongoDB', icon: <SiMongodb /> } },
 
         // Authorization server (bottom - separate from FHIR)
-        { id: 'auth', type: 'custom', position: { x: 1050, y: 750 }, data: { label: 'Authorization server' } },
+        { id: 'auth', type: 'custom', position: { x: 1050, y: 750 }, data: { label: 'Authorization server', icon: <RiLockPasswordLine /> } },
 
 
         // ===== EXTERNAL SYSTEMS (far right) =====
-        { id: 'clearing', type: 'custom', position: { x: 2200, y: 150 }, data: { label: 'Claim clearinghouse' } },
-        { id: 'insurance', type: 'custom', position: { x: 2200, y: 210 }, data: { label: 'Insurance portals' } },
-        { id: 'payment', type: 'custom', position: { x: 2200, y: 270 }, data: { label: 'Payment gateway' } },
-        { id: 'banking', type: 'custom', position: { x: 2200, y: 330 }, data: { label: 'Banking system' } },
-        { id: 'medicare', type: 'custom', position: { x: 2200, y: 390 }, data: { label: 'Medicare API' } },
+        { id: 'clearing', type: 'custom', position: { x: 2200, y: 150 }, data: { label: 'Claim clearinghouse', icon: <FaExchangeAlt /> } },
+        { id: 'insurance', type: 'custom', position: { x: 2200, y: 210 }, data: { label: 'Insurance portals', icon: <FaShieldAlt /> } },
+        { id: 'payment', type: 'custom', position: { x: 2200, y: 270 }, data: { label: 'Payment gateway', icon: <MdPayment /> } },
+        { id: 'banking', type: 'custom', position: { x: 2200, y: 330 }, data: { label: 'Banking system', icon: <HiOfficeBuilding /> } },
+        { id: 'medicare', type: 'custom', position: { x: 2200, y: 390 }, data: { label: 'Medicare API', icon: <MdOutlineLocalHospital /> } },
 
         // ===== ICD (far right bottom) =====
-        { id: 'icd', type: 'custom', position: { x: 2200, y: 550 }, data: { label: 'ICD/CPT provider' } },
+        { id: 'icd', type: 'custom', position: { x: 2200, y: 550 }, data: { label: 'ICD/CPT provider', icon: <BiNetworkChart /> } },
     ], []);
 
     const edges: Edge[] = useMemo(() => [
