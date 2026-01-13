@@ -3,20 +3,11 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './NeuraCapabilitiesSection.module.css';
 import {
-    FaChartLine,
-    FaNetworkWired,
-    FaRobot,
-    FaBolt,
-    FaUsers,
-    FaUserCheck,
-    FaGraduationCap,
-    FaTrophy,
     FaShieldAlt,
-    FaExclamationTriangle,
-    FaLightbulb,
-    FaHandshake,
-    FaCogs,
-    FaGlobeAmericas,
+    FaBolt,
+    FaChartLine,
+    FaUsers,
+    FaHeart,
     FaCheck
 } from 'react-icons/fa';
 
@@ -37,215 +28,97 @@ interface CapabilityLayer {
 const capabilitiesData: CapabilityLayer[] = [
     {
         id: 1,
-        title: "Intelligent Revenue Operations Layer",
-        description: "Neura AI replaces fragmented tools with a single, intelligent operating layer for the entire RCM chain.",
+        title: "Revenue Protection & Yield Improvement",
+        description: "Stop preventable leakage before it happens",
         features: [
             {
-                title: "Liquidation Intelligence",
+                title: "What changes",
                 details: [
-                    "Predictive collectible revenue across aging buckets",
-                    "Real-time denial breakdown by severity and recoverability",
-                    "Forecasting models for expected cash acceleration"
+                    "Denials are predicted before submission",
+                    "Collectible AR is separated from dead inventory in real time",
+                    "Appeals follow payer-specific logic, not guesswork"
                 ],
-                impact: "Faster collections, zero leakage, higher predictability.",
-                icon: FaChartLine
-            },
-            {
-                title: "AI Work Allocation & Load Balancing",
-                details: [
-                    "Auto-allocation of tasks based on volume bursts",
-                    "Intelligent reprioritization to meet SLAs",
-                    "Real-time load balancing across teams, shifts, time zones"
-                ],
-                impact: "No idle time, SLA compliance becomes automatic.",
-                icon: FaNetworkWired
-            },
-            {
-                title: "Denial Prediction Engine",
-                details: [
-                    "Machine learning models interpret payer patterns",
-                    "Predicts denials before submission",
-                    "One-click resolution insights"
-                ],
-                impact: "Higher first-pass yield, exponentially lower rework.",
-                icon: FaRobot
-            },
-            {
-                title: "Instant Payer Connectivity",
-                details: [
-                    "Integration with 1,300+ payers",
-                    "Real-time eligibility & claim status",
-                    "No calls, no portals, zero delays"
-                ],
-                impact: "Your AR team moves at payer-speed, not paper-speed.",
-                icon: FaBolt
+                impact: "30–50% fewer avoidable denials, 2–3% higher liquidation on aged AR, 10–20% higher appeal overturn rates",
+                icon: FaShieldAlt
             }
         ]
     },
     {
         id: 2,
-        title: "Real-Time Leadership Intelligence",
-        description: "This converts leadership from reactive decision-making to proactive revenue engineering.",
+        title: "Speed, Throughput & Operational Efficiency",
+        description: "Do more with the same effort — or less",
         features: [
             {
-                title: "Deep Analytics & Live KPIs",
+                title: "What changes",
                 details: [
-                    "Productivity, Quality, TAT, SLA dashboards",
-                    "AR health & denial intelligence per client",
-                    "Visual anomaly detection"
+                    "Instant claim status, eligibility, and authorization checks across 1,300+ payers",
+                    "Work auto-prioritized by urgency and financial impact",
+                    "Escalations triggered before SLAs are missed"
                 ],
-                impact: "Leaders never “wait for reports”.",
-                icon: FaChartLine
-            },
-            {
-                title: "Client Health & Revenue Tracking",
-                details: [
-                    "Individual dashboards for every client",
-                    "Compliance + revenue + risk view",
-                    "AR trends, forecasted threats, and opportunities"
-                ],
-                impact: "Offshore becomes transparent and predictable, eliminating the trust deficit.",
-                icon: FaHandshake
+                impact: "30–50% less time spent per claim, 3–5 days faster resolution cycles, 5–10% fewer SLA misses",
+                icon: FaBolt
             }
         ]
     },
     {
         id: 3,
-        title: "Workforce Intelligence Layer",
-        description: "Neura AI treats talent as a science, not a guess.",
+        title: "Leadership Visibility & Control",
+        description: "No more surprises at month-end",
         features: [
             {
-                title: "Employee Intelligence Hub",
+                title: "What changes",
                 details: [
-                    "Productivity vs readiness benchmarks",
-                    "Engagement signals & burnout prediction",
-                    "Early leader identification"
+                    "Real-time AR health and payer risk signals",
+                    "Live dashboards with drill-down, not lagging reports"
                 ],
-                impact: "You build a leadership pipeline, not just a labor pool.",
-                icon: FaUsers
-            },
-            {
-                title: "Smart Hiring Engine",
-                details: [
-                    "Profiles the ideal candidate DNA using real data",
-                    "Predicts success probability per role",
-                    "Aligns skills with client expectations"
-                ],
-                impact: "Faster hiring, accurate fitment, minimal attrition.",
-                icon: FaUserCheck
-            },
-            {
-                title: "L&D With Real-Time Feedback Loops",
-                details: [
-                    "Auto-assesses skill gaps",
-                    "Recommends role-specific training paths",
-                    "Gamified, continuous learning"
-                ],
-                impact: "Every week, your team gets sharper.",
-                icon: FaGraduationCap
-            },
-            {
-                title: "Rewards & Recognition Automation",
-                details: [
-                    "Performance scoring engine",
-                    "Auto recognition from dashboards",
-                    "Transparent, data-led appreciation"
-                ],
-                impact: "Remote teams stay aligned, motivated, loyal.",
-                icon: FaTrophy
+                impact: "1–2% improvement in net collections, 5–7 days earlier intervention on emerging risks",
+                icon: FaChartLine
             }
         ]
     },
     {
         id: 4,
-        title: "Quality Governance Layer",
-        description: "A continuous system of revenue protection.",
+        title: "People Performance & Quality at Scale",
+        description: "Turn effort into consistent outcomes",
         features: [
             {
-                title: "Advanced Quality Management",
+                title: "What changes",
                 details: [
-                    "Recurring error detection",
-                    "Severity scoring",
-                    "Targeted learning prescriptions"
+                    "Unified productivity and quality scorecards",
+                    "Automated error tagging with severity tracking",
+                    "AI-led onboarding and continuous role-based learning"
                 ],
-                impact: "Quality isn’t inspected—it is engineered.",
-                icon: FaShieldAlt
-            },
-            {
-                title: "Escalation & SLA Management",
-                details: [
-                    "Live SLA health",
-                    "Automated escalation pathing",
-                    "Predicts SLA breaches before they happen"
-                ],
-                impact: "No surprises, no late discoveries.",
-                icon: FaExclamationTriangle
+                impact: "10–15% productivity lift, 20–30% fewer repeat errors, 30–40% faster onboarding",
+                icon: FaUsers
             }
         ]
     },
     {
         id: 5,
-        title: "Culture Engine Layer",
-        description: "Offshore usually fails due to culture distance, not lack of talent. Neura AI directly engineers ownership.",
+        title: "Culture, Alignment & Continuous Improvement",
+        description: "Sustain performance without burnout",
         features: [
             {
-                title: "Innovation Hub",
+                title: "What changes",
                 details: [
-                    "Anyone can contribute ideas",
-                    "Team votes prioritize what matters",
-                    "Monthly implementation cycles"
+                    "Recognition tied to real impact, not activity",
+                    "Ideas move from submission to execution through a structured system"
                 ],
-                impact: "Everyone becomes a co-builder of the RCM ecosystem.",
-                icon: FaLightbulb
-            },
-            {
-                title: "Engagement + Recognition",
-                details: [
-                    "Tracks contribution at the individual level",
-                    "Makes remote work feel connected & meaningful"
-                ],
-                impact: "High engagement, low attrition—without the cost bloat.",
-                icon: FaHandshake
-            }
-        ]
-    },
-    {
-        id: 6,
-        title: "Fluid Architecture",
-        description: "Your biggest differentiator. Neura isn’t a product—it's an RCM organism that reshapes itself around each client.",
-        features: [
-            {
-                title: "System-Dependent, Not People-Dependent",
-                details: [
-                    "Configures to their EHR",
-                    "Maps their workflows",
-                    "Zero-cost customization"
-                ],
-                impact: "System intelligence replaces tribal knowledge. If staff leave, performance stays.",
-                icon: FaCogs
-            }
-        ]
-    },
-    {
-        id: 7,
-        title: "Full Offshore Transformation Engine",
-        description: "This is the positioning that kills every competitor. Neura AI isn’t just software to run offshore; it is an offshore success system:",
-        features: [
-            {
-                title: "It ensures:",
-                details: [
-                    "Every account is traceable",
-                    "Every employee is measurable",
-                    "Every SLA is visible",
-                    "Every decision is data-backed",
-                    "Every transition is structured"
-                ],
-                impact: "Offshore stops being a risk. Offshore becomes your multiplier.",
-                icon: FaGlobeAmericas
+                impact: "Lower attrition among top performers, 1–3% year-over-year efficiency gains",
+                icon: FaHeart
             }
         ]
     }
 ];
+
+// Outcome text for each layer
+const outcomes: Record<number, string> = {
+    1: "Revenue is protected upstream, not chased downstream.",
+    2: "Time shifts from information collection to intelligent action.",
+    3: "Leaders guide execution instead of reacting to results.",
+    4: "Performance scales without burnout or dependency on individuals.",
+    5: "Improvement becomes continuous, not episodic."
+};
 
 const NeuraCapabilitiesSection: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
@@ -299,8 +172,8 @@ const NeuraCapabilitiesSection: React.FC = () => {
         <section ref={sectionRef} className={styles.section}>
             {/* Section Header */}
             <div className={styles.sectionHeader}>
-                <span className={styles.label}>Advanced Capabilities</span>
-                <h2 className={styles.title}>Neura AI: The RCM Operating System</h2>
+                <span className={styles.label}>Where the Efficiency Actually Comes From</span>
+                <h2 className={styles.title}>Efficiency doesn't come from working harder.<br />It comes from designing the system right.</h2>
             </div>
 
             {/* Capabilities Container */}
@@ -333,8 +206,12 @@ const NeuraCapabilitiesSection: React.FC = () => {
                                         ))}
                                     </ul>
                                     <div className={styles.impactBox}>
-                                        <span className={styles.impactLabel}>Impact</span>
+                                        <span className={styles.impactLabel}>What it delivers</span>
                                         <p className={styles.impactText}>{feature.impact}</p>
+                                    </div>
+                                    <div className={styles.outcomeBox}>
+                                        <span className={styles.outcomeLabel}>Outcome</span>
+                                        <p className={styles.outcomeText}>{outcomes[layer.id]}</p>
                                     </div>
                                 </div>
                             ))}

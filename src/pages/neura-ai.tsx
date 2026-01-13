@@ -16,6 +16,7 @@ import { shouldDisable3D } from '@/lib/threeUtils';
 import { bookDemoScrollKeyframes } from '@/lib/bookDemoScrollAnimations';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import styles from '@/styles/neura.module.css';
+import NeuraCapabilitiesSection from '@/components/neura/NeuraCapabilitiesSection';
 
 // 3D Model
 const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
@@ -74,6 +75,11 @@ export default function NeuraAI() {
 
             {/* Why Neura AI Is Fundamentally Different Section */}
             <WhyNeuraSection />
+
+            {/* Neura Capabilities Section - from old page */}
+            <div id="capabilities" style={{ scrollMarginTop: '100px' }}>
+                <NeuraCapabilitiesSection />
+            </div>
 
         </Layout>
     );
