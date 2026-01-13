@@ -206,18 +206,18 @@ const WhyNeuraSection: React.FC = () => {
             <style jsx>{`
                 .why-neura-section { position: relative; min-height: 120vh; padding: 8px 16px; background: transparent; z-index: 20; display: flex; align-items: flex-start; justify-content: center; }
                 .why-neura-card { width: 100%; height: calc(120vh - 16px); padding: 28px 36px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(40px); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 30px 100px rgba(0, 0, 0, 0.08); overflow: hidden; display: flex; flex-direction: column; }
-                .header-section { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
-                .accent-label { display: flex; align-items: center; gap: 12px; }
-                .dots-wrapper { display: flex; flex-direction: column; gap: 4px; }
-                .dot { width: 8px; height: 5px; background: #0066FF; border-radius: 50%; }
-                .label-text { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; color: #0a1f44; }
-                .sub-label { font-family: 'Outfit', sans-serif; font-size: 0.7rem; color: #0066FF; margin: 0; padding-left: 20px; }
-                .section-title { font-family: 'Outfit', sans-serif; font-size: clamp(1.3rem, 2vw, 1.8rem); font-weight: 800; color: #0a1f44; margin-bottom: 12px; }
+                .header-section { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+                .accent-label { display: flex; align-items: center; gap: 14px; }
+                .dots-wrapper { display: flex; flex-direction: column; gap: 5px; }
+                .dot { width: 10px; height: 6px; background: #0066FF; border-radius: 50%; }
+                .label-text { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; color: #0a1f44; }
+                .sub-label { font-family: 'Outfit', sans-serif; font-size: 0.9rem; color: #0066FF; margin: 0; padding-left: 24px; font-weight: 500; letter-spacing: 0.5px; }
+                .section-title { font-family: 'Outfit', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; color: #0a1f44; margin-bottom: 16px; }
                 .title-highlight { background: linear-gradient(135deg, #0066FF, #00a2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-                .text-content { margin-bottom: 16px; max-width: 800px; }
-                .text-content p { font-family: 'Outfit', sans-serif; font-size: 0.9rem; line-height: 1.4; color: #333; margin: 0 0 6px 0; }
+                .text-content { margin-bottom: 20px; max-width: 900px; }
+                .text-content p { font-family: 'Outfit', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #333; margin: 0 0 10px 0; }
                 .text-content strong { color: #0066FF; font-weight: 700; }
-                .highlight-text { padding: 8px 12px; background: rgba(0, 102, 255, 0.05); border-left: 3px solid #0066FF; border-radius: 0 6px 6px 0; }
+                .highlight-text { padding: 12px 16px; background: rgba(0, 102, 255, 0.05); border-left: 4px solid #0066FF; border-radius: 0 8px 8px 0; }
                 .flow-diagram { flex: 1; width: 100%; min-height: 700px; padding-bottom: 60px; background: linear-gradient(135deg, #f8fafc 0%, #eef6ff 100%); border-radius: 14px; border: 1px solid rgba(0, 102, 255, 0.1); }
                 @media (max-width: 768px) { .why-neura-card { padding: 20px 14px; height: auto; min-height: calc(100vh - 40px); } .flow-diagram { height: 500px; flex: none; } }
                 @keyframes flowAnimation { 0% { stroke-dashoffset: 18; } 100% { stroke-dashoffset: 0; } }
