@@ -40,6 +40,11 @@
     width: 100%;
 }
 
+/* Quote block - styled like home page "Our Mission" */
+.heroQuoteBlock {
+    max-width: 500px;
+}
+
 /* About label with decorative dots */
 .heroLabel {
     display: flex;

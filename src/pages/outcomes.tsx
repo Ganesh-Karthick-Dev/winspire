@@ -136,17 +136,19 @@ export default function Outcomes() {
                 </div>
             )}
 
-            {/* Hero Section (Same as Company/Solutions) */}
+            {/* Hero Section */}
             <section ref={heroRef} className={styles.heroSection}>
                 {/* Content */}
                 <div className={styles.heroContent}>
-                    {/* Label */}
-                    <div className={styles.heroLabel}>
-                        <div className={styles.heroDots}>
-                            <span className={styles.heroDot}></span>
-                            <span className={styles.heroDot}></span>
+                    {/* Quote Section - styled like home page "Our Mission" */}
+                    <div className={styles.heroQuoteBlock}>
+                        <div
+                            className="text-2xl font-bold leading-tight font-[Outfit] text-gradient-shimmer"
+                        >
+                            <span style={{ fontSize: '1.3em', fontWeight: 700 }}>Outcomes Are Not Metrics.</span>
+                            <br />
+                            They Are the Consequence of Design.
                         </div>
-                        <span>Our Impact</span>
                     </div>
 
                     {/* Main Title */}
