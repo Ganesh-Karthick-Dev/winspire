@@ -149,9 +149,23 @@ export default function Outcomes() {
                             <br />
                             They Are the Consequence of Design.
                         </div>
+
+                        {/* Description paragraphs */}
+                        <div className={styles.heroDescription}>
+                            <p>
+                                At Winspire RCM, outcomes are not targets that teams are pushed to chase. They are the natural result of how revenue systems are designed.
+                            </p>
+                            <p>
+                                When structure, accountability, and intelligence are aligned upfront, performance becomes predictable, calm, and repeatable.
+                            </p>
+                            <p>
+                                We don't chase metrics.<br />
+                                We design environments where the right metrics emerge.
+                            </p>
+                        </div>
                     </div>
 
-                    {/* Main Title */}
+                    {/* Main Title - SEO optimized H1 */}
                     <h1 className={styles.heroTitle}>Outcomes</h1>
                 </div>
 
