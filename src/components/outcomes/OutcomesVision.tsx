@@ -143,14 +143,17 @@ export default function OutcomesVision() {
 
                     {/* Top Left Text */}
                     <div ref={topLeftTextRef} className="absolute top-8 left-8 z-20">
-                        <span className="text-xl md:text-2xl font-semibold tracking-wide !text-white" style={{ color: 'white' }}>Winspire RCM + Neura AI</span>
+                        <span className="text-xl md:text-2xl font-semibold tracking-wide !text-white" style={{ color: 'white' }}>Why Outcomes Look<br />Different at Winspire</span>
                     </div>
 
                     {/* Top Right Text */}
                     <div ref={topRightTextRef} className="absolute top-8 right-8 z-20 max-w-xl text-right">
-                        <h2 className="text-4xl md:text-6xl font-sans font-bold leading-tight !text-white" style={{ color: 'white' }}>
-                            Measurable Outcomes That <br />
-                            <span className="">Redefine Revenue</span> Performance.
+                        <h2 className="text-3xl md:text-5xl font-sans font-bold leading-tight !text-white" style={{ color: 'white' }}>
+                            Most RCM organizations<br />
+                            react to problems<br />
+                            after they surface.<br />
+                            We design for outcomes<br />
+                            before execution begins.
                         </h2>
                     </div>
 
