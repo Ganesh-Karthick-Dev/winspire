@@ -113,10 +113,6 @@ export default function GLTFViewer({
         visionObserverRef.current.observe(visionSection);
     }, []);
 
-    // Previous transform values for scroll detection
-    const prevRotationX = useRef(0);
-    const prevRotationY = useRef(0);
-
     // Smooth rotation update in animation loop
     // Uses REFS to always read the latest values (avoids stale closures)
     const updateRotation = useCallback(() => {
@@ -124,22 +120,7 @@ export default function GLTFViewer({
 
         const model = stateRef.current.model;
         const currentTransform = manualTransformRef.current;
-        const baseSpeed = rotateSpeedRef.current;
-
-        // Detect scroll activity by checking if rotation values are changing
-        const currentRotX = currentTransform?.rotation.x ?? 0;
-        const currentRotY = currentTransform?.rotation.y ?? 0;
-        const rotationDelta = Math.abs(currentRotX - prevRotationX.current) +
-            Math.abs(currentRotY - prevRotationY.current);
-        const isScrolling = rotationDelta > 0.01; // Threshold for scroll detection
-
-        // Update previous values
-        prevRotationX.current = currentRotX;
-        prevRotationY.current = currentRotY;
-
-        // Boost rotation speed during scroll to compensate for perceived slowing
-        const scrollBoost = isScrolling ? 2.5 : 1.0; // 2.5x faster during scroll
-        const currentSpeed = baseSpeed * scrollBoost;
+        const currentSpeed = rotateSpeedRef.current;
 
         // Continuous smooth rotation - Z-axis (Wheel spin)
         continuousRotation.current += currentSpeed;
@@ -161,9 +142,7 @@ export default function GLTFViewer({
             // MODE A: Manual Control (Home Page)
             const radX = toRadians(currentTransform.rotation.x);
             const radY = toRadians(currentTransform.rotation.y);
-            // Use fixed Z tilt (23.23°) - continuous spin handles the rest
-            // This prevents scroll interpolation from fighting with constant rotation
-            const radZ = toRadians(23.23);
+            const radZ = toRadians(currentTransform.rotation.z);
 
             model.rotation.x = radX + wobbleX;
             model.rotation.y = radY + wobbleY;
