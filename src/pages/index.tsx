@@ -35,6 +35,7 @@ import GradientButton from '@/components/ui/GradientButton';
 import { scrollKeyframes, animationSettings } from '@/lib/scrollAnimations';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import WhyNeuraSection from '@/components/WhyNeuraSection';
 
 /**
  * Dynamically import GLTFViewer with SSR disabled.
@@ -454,6 +455,7 @@ export default function Home() {
 
                 {/* Engagement Models Section - Parallax Cards */}
                 <EngagementModelsSection />
+
 
                 {/* Careers Scroll Section - Frosted glass with animated image columns */}
                 <CareersScrollSection />

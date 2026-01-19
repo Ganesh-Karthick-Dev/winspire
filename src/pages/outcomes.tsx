@@ -136,20 +136,36 @@ export default function Outcomes() {
                 </div>
             )}
 
-            {/* Hero Section (Same as Company/Solutions) */}
+            {/* Hero Section */}
             <section ref={heroRef} className={styles.heroSection}>
                 {/* Content */}
                 <div className={styles.heroContent}>
-                    {/* Label */}
-                    <div className={styles.heroLabel}>
-                        <div className={styles.heroDots}>
-                            <span className={styles.heroDot}></span>
-                            <span className={styles.heroDot}></span>
+                    {/* Quote Section - styled like home page "Our Mission" */}
+                    <div className={styles.heroQuoteBlock}>
+                        <div
+                            className="text-2xl font-bold leading-tight font-[Outfit] text-gradient-shimmer"
+                        >
+                            <span style={{ fontSize: '1.3em', fontWeight: 700 }}>Outcomes Are Not Metrics.</span>
+                            <br />
+                            They Are the Consequence of Design.
                         </div>
-                        <span>Our Impact</span>
+
+                        {/* Description paragraphs */}
+                        <div className={styles.heroDescription}>
+                            <p>
+                                At Winspire RCM, outcomes are not targets that teams are pushed to chase. They are the natural result of how revenue systems are designed.
+                            </p>
+                            <p>
+                                When structure, accountability, and intelligence are aligned upfront, performance becomes predictable, calm, and repeatable.
+                            </p>
+                            <p>
+                                We don't chase metrics.<br />
+                                We design environments where the right metrics emerge.
+                            </p>
+                        </div>
                     </div>
 
-                    {/* Main Title */}
+                    {/* Main Title - SEO optimized H1 */}
                     <h1 className={styles.heroTitle}>Outcomes</h1>
                 </div>
 
