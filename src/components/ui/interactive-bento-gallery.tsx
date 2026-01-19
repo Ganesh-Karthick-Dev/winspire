@@ -143,6 +143,18 @@ interface GalleryModalProps {
 const GalleryModal = ({ selectedItem, isOpen, onClose, setSelectedItem, mediaItems }: GalleryModalProps) => {
     const [dockPosition, setDockPosition] = useState({ x: 0, y: 0 });  // Track the position of the dockable panel
 
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isOpen]);
+
     if (!isOpen) return null; // Return null if the modal is not open
 
     return (
@@ -196,12 +208,14 @@ const GalleryModal = ({ selectedItem, isOpen, onClose, setSelectedItem, mediaIte
                                 onClick={onClose}
                             >
                                 <MediaItem item={selectedItem} className="w-full h-auto object-contain bg-gray-900/20" onClick={onClose} />
-                                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-6 
-                                              bg-gradient-to-t from-black/70 to-transparent">
-                                    <h3 className="text-white text-base sm:text-lg md:text-xl font-semibold">
+                                {/* Gradient overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent rounded-lg" />
+                                {/* Text overlay - matching bento grid positioning exactly */}
+                                <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 md:bottom-10 md:left-10 md:right-10">
+                                    <h3 className="text-white text-xl sm:text-2xl md:text-3xl font-semibold">
                                         {selectedItem.title}
                                     </h3>
-                                    <p className="text-white/80 text-xs sm:text-sm mt-1">
+                                    <p className="text-white/80 text-sm sm:text-base md:text-lg mt-2 sm:mt-3">
                                         {selectedItem.desc}
                                     </p>
                                 </div>
@@ -210,16 +224,20 @@ const GalleryModal = ({ selectedItem, isOpen, onClose, setSelectedItem, mediaIte
                     </div>
                 </div>
 
-                {/* Close Button */}
+                {/* Close Button - Professional styling */}
                 <motion.button
-                    className="absolute top-2 sm:top-2.5 md:top-3 right-2 sm:right-2.5 md:right-3 
-                              p-2 rounded-full bg-gray-200/80 text-gray-700 hover:bg-gray-300/80 
-                              text-xs sm:text-sm backdrop-blur-sm "
+                    className="absolute top-4 sm:top-5 md:top-6 right-4 sm:right-5 md:right-6 
+                              p-3 sm:p-3.5 md:p-4 rounded-full bg-white/90 text-gray-800 
+                              hover:bg-white hover:text-gray-900
+                              shadow-lg backdrop-blur-md
+                              border border-gray-200/50
+                              transition-colors duration-200"
                     onClick={onClose}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label="Close modal"
                 >
-                    <X className='w-3 h-3' />
+                    <X className='w-5 h-5 sm:w-6 sm:h-6' strokeWidth={2.5} />
                 </motion.button>
 
             </motion.div>

@@ -149,8 +149,9 @@ export function ParallaxContentSection() {
                     padding: 80px 40px 300px;
                     background: transparent;
                     z-index: 25;
-                    /* overflow: hidden;  <-- REMOVED to stop clipping */
-                    overflow: visible;
+                    /* Allow vertical overflow but clip horizontal to prevent cards going off-screen */
+                    overflow-x: clip;
+                    overflow-y: visible;
                 }
 
                 .content-wrapper {
@@ -247,8 +248,8 @@ export function ParallaxContentSection() {
 
                 /* Left 1 - Middle Left (pushed out) */
                 .card-left-1 {
-                    transform: translateX(-25%) rotate(3deg) scale(1.1);
-                    margin-left: -50px;
+                    transform: translateX(-5%) rotate(3deg) scale(1.1);
+                    margin-left: 0;
                     z-index: 5; /* Lower Z-index to stay behind if overlap */
                 }
 
