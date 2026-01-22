@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
+import CoreInsightSection from '@/components/CoreInsightSection';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import MarqueeText from '@/components/MarqueeText';
 import GradientButton from '@/components/ui/GradientButton';
@@ -349,6 +350,9 @@ export default function TempHome() {
                         </div>
                     )}
                 </div>
+
+                {/* Section 2 - Core Insight */}
+                <CoreInsightSection />
 
             </div>
 
