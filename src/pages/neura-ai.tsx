@@ -18,7 +18,6 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import styles from '@/styles/neura.module.css';
 import NeuraCapabilitiesSection from '@/components/neura/NeuraCapabilitiesSection';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
-import InteractiveBentoGallery from '@/components/ui/interactive-bento-gallery';
 import Image from 'next/image';
 
 // 3D Model
@@ -193,26 +192,6 @@ export default function NeuraAI() {
                 </div>
 
             </div>
-
-            {/* Interactive Bento Gallery Section */}
-            <div className="py-20 relative z-10 w-full flex justify-center">
-                <InteractiveBentoGallery
-                    mediaItems={[
-                        { id: 1, type: "image", title: "Quality Dashboard", desc: "Quality metrics and performance tracking", url: "/bento/img1.jpg", span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2" },
-                        { id: 2, type: "image", title: "Production Analytics", desc: "Real-time production monitoring", url: "/bento/img2.jpg", span: "md:col-span-2 md:row-span-2 col-span-1 sm:col-span-2 sm:row-span-2" },
-                        { id: 3, type: "image", title: "Learning Module", desc: "Training completion progress", url: "/bento/img3.jpg", span: "md:col-span-1 md:row-span-3 sm:col-span-2 sm:row-span-2" },
-                        { id: 4, type: "image", title: "Denial Management", desc: "Claims denial analytics and trends", url: "/bento/img4.jpg", span: "md:col-span-2 md:row-span-2 sm:col-span-1 sm:row-span-2" },
-                        { id: 5, type: "image", title: "Compliance Dashboard", desc: "Audit outcomes and compliance tracking", url: "/bento/img5.jpg", span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2" },
-                        { id: 6, type: "image", title: "Team Performance", desc: "Team analytics and KPIs", url: "/bento/img6.jpg", span: "md:col-span-2 md:row-span-2 sm:col-span-1 sm:row-span-2" },
-                        { id: 7, type: "image", title: "Eligibility & Benefits", desc: "Patient eligibility verification", url: "/bento/img7.jpg", span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2" },
-                        { id: 8, type: "image", title: "Account Receivables", desc: "AR aging and financial tracking", url: "/bento/img8.jpg", span: "md:col-span-2 md:row-span-2 sm:col-span-1 sm:row-span-2" },
-                        { id: 9, type: "image", title: "AR Health Dashboard", desc: "Client health and revenue insights", url: "/bento/img9.jpg", span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2" },
-                    ]}
-                    title=""
-                    description=""
-                />
-            </div>
-
         </Layout>
     );
 }
