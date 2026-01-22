@@ -9,11 +9,11 @@ import { Target, Layers, Zap, AlertTriangle } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 const systemPillars = [
-    { name: "Revenue Protection & Yield Improvement", range: "20–25%" },
-    { name: "Speed, Throughput & Operational Efficiency", range: "18–22%" },
-    { name: "Leadership Visibility & Control", range: "10–12%" },
-    { name: "People Performance & Quality at Scale", range: "15–18%" },
-    { name: "Culture, Alignment & Continuous Improvement", range: "5–8%" },
+    { name: "Revenue Protection & Yield Improvement", range: "20–25%", minPercent: 20, maxPercent: 25 },
+    { name: "Speed, Throughput & Operational Efficiency", range: "18–22%", minPercent: 18, maxPercent: 22 },
+    { name: "Leadership Visibility & Control", range: "10–12%", minPercent: 10, maxPercent: 12 },
+    { name: "People Performance & Quality at Scale", range: "15–18%", minPercent: 15, maxPercent: 18 },
+    { name: "Culture, Alignment & Continuous Improvement", range: "5–8%", minPercent: 5, maxPercent: 8 },
 ];
 
 const successPillars = [
@@ -21,19 +21,19 @@ const successPillars = [
         icon: Target,
         action: "Defining clear",
         label: "OUTCOMES",
-        color: "#22c55e" // green
+        color: "#ffffff"
     },
     {
         icon: Layers,
         action: "Designing the right",
         label: "STRUCTURE",
-        color: "#3b82f6" // blue
+        color: "#ffffff"
     },
     {
         icon: Zap,
         action: "Executing disciplined",
         label: "STRATEGIES",
-        color: "#a855f7" // purple
+        color: "#ffffff"
     },
 ];
 
@@ -44,6 +44,7 @@ export default function CoreInsightSection() {
         if (!sectionRef.current) return;
 
         const ctx = gsap.context(() => {
+            // Existing animations
             gsap.utils.toArray<HTMLElement>(".ci-animate").forEach((el) => {
                 gsap.fromTo(el,
                     { opacity: 0, y: 20 },
@@ -60,6 +61,60 @@ export default function CoreInsightSection() {
                     }
                 );
             });
+
+            // Pillar Cards Animation (Staggered Fade Up)
+            gsap.fromTo(".ci-pillar-card",
+                { opacity: 0, y: 20 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    stagger: 0.15,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: ".ci-pillars-grid",
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+
+            // Progress Bar Animation
+            // Animate Base Bar
+            gsap.fromTo(".ci-bar-base",
+                { scaleX: 0 },
+                {
+                    scaleX: 1,
+                    duration: 1,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    transformOrigin: "left center",
+                    scrollTrigger: {
+                        trigger: ".ci-stats-list",
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+
+            // Animate Highlight Bar (with slight delay)
+            gsap.fromTo(".ci-bar-highlight",
+                { scaleX: 0 },
+                {
+                    scaleX: 1,
+                    duration: 1,
+                    stagger: 0.1,
+                    delay: 0.2, // Start slightly after base
+                    ease: "power3.out",
+                    transformOrigin: "left center",
+                    scrollTrigger: {
+                        trigger: ".ci-stats-list",
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+
         }, sectionRef);
 
         return () => ctx.revert();
@@ -96,8 +151,11 @@ export default function CoreInsightSection() {
                             <span className="ci-pillars-label">True success comes from:</span>
                             <div className="ci-pillars-grid">
                                 {successPillars.map((pillar, idx) => (
-                                    <div key={idx} className="ci-pillar-card">
-                                        <div className="ci-pillar-icon" style={{ backgroundColor: `${pillar.color}20`, borderColor: `${pillar.color}40` }}>
+                                    <div
+                                        key={idx}
+                                        className="ci-pillar-card"
+                                    >
+                                        <div className="ci-pillar-icon" style={{ backgroundColor: `${pillar.color}10`, borderColor: `${pillar.color}30` }}>
                                             <pillar.icon size={20} style={{ color: pillar.color }} />
                                         </div>
                                         <div className="ci-pillar-text">
@@ -130,9 +188,19 @@ export default function CoreInsightSection() {
                         </p>
                         <ul className="ci-stats-list">
                             {systemPillars.map((pillar, idx) => (
-                                <li key={idx}>
-                                    <span>{pillar.name}</span>
-                                    <strong>{pillar.range}</strong>
+                                <li
+                                    key={idx}
+                                    className="ci-stats-item"
+                                >
+                                    {/* Animated Bars */}
+                                    <div className="ci-bar-base" style={{ width: `${pillar.minPercent}%` }} />
+                                    <div className="ci-bar-highlight" style={{ left: `${pillar.minPercent}%`, width: `${pillar.maxPercent - pillar.minPercent}%` }} />
+
+                                    {/* Content */}
+                                    <div className="ci-stats-content">
+                                        <span>{pillar.name}</span>
+                                        <strong>{pillar.range}</strong>
+                                    </div>
                                 </li>
                             ))}
                         </ul>

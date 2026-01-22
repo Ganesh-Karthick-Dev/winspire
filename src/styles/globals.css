@@ -6265,7 +6265,7 @@ footer p {
   gap: 12px;
   padding: 14px 16px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
   border-radius: 10px;
   transition: all 0.3s ease;
 }
@@ -6310,8 +6310,8 @@ footer p {
   display: flex;
   gap: 16px;
   padding: 20px;
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(251, 191, 36, 0.02) 100%);
-  border: 1px solid rgba(251, 191, 36, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
 }
 
@@ -6322,9 +6322,9 @@ footer p {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(251, 191, 36, 0.15);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  color: #fbbf24;
+  color: #fff;
 }
 
 .ci-quote-content {
@@ -6367,7 +6367,7 @@ footer p {
 }
 
 .ci-stats-intro strong {
-  color: #60a5fa;
+  color: #fff;
   font-weight: 700;
 }
 
@@ -6381,21 +6381,59 @@ footer p {
   gap: 6px;
 }
 
-.ci-stats-list li {
+.ci-stats-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 1;
+  transition: transform 0.3s ease;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  color: #ffffff;
+}
+
+.ci-stats-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 6px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.9);
-  transition: background 0.2s ease;
+  width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
-.ci-stats-list li:hover {
-  background: rgba(255, 255, 255, 0.06);
+.ci-bar-base {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 0;
+  border-radius: 8px 0 0 8px;
+  transform-origin: left center;
+}
+
+.ci-bar-highlight {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.45);
+  z-index: 0;
+  transform-origin: left center;
+}
+
+.ci-stats-item:hover {
+  transform: translateX(4px);
+}
+
+.ci-stats-item:hover .ci-bar-base {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.ci-stats-item:hover .ci-bar-highlight {
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .ci-stats-list li span {
@@ -6403,7 +6441,7 @@ footer p {
 }
 
 .ci-stats-list li strong {
-  color: #60a5fa;
+  color: #fff;
   font-weight: 700;
   margin-left: 16px;
   white-space: nowrap;

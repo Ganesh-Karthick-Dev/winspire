@@ -74,7 +74,7 @@ export default function SectionTitle({
         {/* The white text (always visible) */}
         <div
           ref={titleRef}
-          className={`${titleSize} font-bold tracking-[0.3em] uppercase text-white font-[Outfit]`}
+          className={`${titleSize} font-bold tracking-[0.1em] uppercase text-white font-[Outfit]`}
         >
           {title}
         </div>
