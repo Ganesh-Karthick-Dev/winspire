@@ -3,21 +3,105 @@
  * 
  * Simplified homepage with only:
  * - Navbar (via Layout)
- * - Hero section
+ * - Hero section (with 3D model)
  * - Footer (via Layout)
  */
 
-import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import { useEffect, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import MarqueeText from '@/components/MarqueeText';
 import GradientButton from '@/components/ui/GradientButton';
+import { resetLoaderToZero } from '@/lib/loaderManager';
+import { shouldDisable3D } from '@/lib/threeUtils';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { scrollKeyframes, animationSettings } from '@/lib/scrollAnimations';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
+/**
+ * Dynamically import GLTFViewer with SSR disabled.
+ */
+const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
+    ssr: false,
+    loading: () => null,
+});
+
+/**
+ * Dynamically import ModelDebugPanel (only in dev mode)
+ */
+const ModelDebugPanel = dynamic(() => import('@/components/ModelDebugPanel'), {
+    ssr: false,
+});
+
+// Get initial transform from first keyframe (Hero)
+const getInitialTransform = () => {
+    const firstKeyframe = scrollKeyframes[0];
+    return {
+        position: { ...firstKeyframe.transform.position },
+        rotation: { ...firstKeyframe.transform.rotation },
+        scale: firstKeyframe.transform.scale,
+    };
+};
+
 export default function TempHome() {
+    // Track if 3D should be disabled
+    const is3DDisabled = useRef(false);
+    const isDev = process.env.NODE_ENV === 'development';
+
     const isMobile = useIsMobile();
+
+    // ========================================
+    // DEBUG MODE TOGGLE
+    // ========================================
+    const DEBUG_MODE = false;
+
+    // === Manual Transform State (for Debug Mode) ===
+    const [manualTransform, setManualTransform] = useState(getInitialTransform);
+    const [rotateSpeed, setRotateSpeed] = useState(animationSettings.rotationSpeed);
+
+    // === Scroll Animation (for Production Mode) ===
+    const { transform: scrollTransform } = useScrollAnimation({
+        enabled: !DEBUG_MODE,
+    });
+
+    // Choose which transform to use based on mode
+    const modelTransform = DEBUG_MODE ? manualTransform : scrollTransform;
+
+    // ========================================
+    // LOADER TOGGLE
+    // ========================================
+    const SHOW_LOADER = true;
+
+    useEffect(() => {
+        if (!SHOW_LOADER) {
+            const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
+            if (loaderOverlay) {
+                loaderOverlay.style.opacity = '0';
+                loaderOverlay.style.visibility = 'hidden';
+            }
+            document.body.classList.remove('loading');
+            return;
+        }
+
+        resetLoaderToZero();
+        is3DDisabled.current = shouldDisable3D();
+
+        const safetyTimeout = setTimeout(() => {
+            const progressEl = document.querySelector('.loader-progress');
+            const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
+            if (progressEl && progressEl.textContent === '0%' && loaderOverlay) {
+                console.warn('Loader stuck at 0% - forcing hide');
+                loaderOverlay.style.opacity = '0';
+                loaderOverlay.style.visibility = 'hidden';
+                document.body.classList.remove('loading');
+            }
+        }, 5000);
+
+        return () => clearTimeout(safetyTimeout);
+    }, []);
 
     // === Mission Text Cycling ===
     const missionMessages = [
@@ -40,10 +124,7 @@ export default function TempHome() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            // Fade out
             setMissionFade(false);
-
-            // After fade out, change text and fade in
             setTimeout(() => {
                 setCurrentMissionIndex((prev) => (prev + 1) % missionMessages.length);
                 setMissionFade(true);
@@ -76,8 +157,27 @@ export default function TempHome() {
             title="Temp Home"
             description="Temporary homepage with navbar, hero, and footer only."
         >
+            {/* Leva Debug Panel - Only in dev mode AND debug mode enabled */}
+            {isDev && DEBUG_MODE && (
+                <ModelDebugPanel
+                    transform={manualTransform}
+                    onTransformChange={setManualTransform}
+                    rotateSpeed={rotateSpeed}
+                    onRotateSpeedChange={setRotateSpeed}
+                />
+            )}
+
             {/* Page wrapper for z-index stacking */}
             <div className="page-wrapper">
+                {/* 3D Viewer - Now shown on all devices with mobile-optimized keyframes */}
+                {!is3DDisabled.current && (
+                    <GLTFViewer
+                        manualTransform={modelTransform}
+                        rotateSpeed={rotateSpeed}
+                        enableWobble={false}
+                        className="!z-20"
+                    />
+                )}
 
                 {/* Front-layer Marquee Text */}
                 <div className="hero !absolute !top-0 !left-0 w-full !min-h-screen z-30 pointer-events-none !bg-transparent">
