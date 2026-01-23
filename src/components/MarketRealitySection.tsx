@@ -122,7 +122,7 @@ export default function MarketRealitySection() {
                     className="mr-cta-banner"
                     style={{
                         backgroundColor: '#ffffff',
-                        padding: '7rem 3rem'
+                        padding: '5rem 3rem'
                     }}
                 >
                     <div className="mr-cta-content">
