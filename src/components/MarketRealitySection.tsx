@@ -101,9 +101,10 @@ export default function MarketRealitySection() {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
                                 className="mr-item"
+                                style={{ '--item-color': item.color } as React.CSSProperties}
                             >
-                                <div className="mr-icon-box" style={{ color: item.color, backgroundColor: `${item.color}15` }}>
-                                    <item.icon size={24} />
+                                <div className="mr-icon-box">
+                                    <item.icon size={28} />
                                 </div>
                                 <div className="mr-item-content">
                                     <h4 className="mr-item-title">{item.title}</h4>
@@ -150,14 +151,13 @@ export default function MarketRealitySection() {
                     width: 100%;
                     max-width: 1400px;
                     margin: 0 auto;
-                    /* padding: 6rem 48px; REMOVED padding here */
                     padding-top: 6rem;
-                    background: rgba(15, 23, 42, 0.9); /* Dark frosted glass */
+                    background: rgba(15, 23, 42, 0.6);
                     backdrop-filter: blur(40px);
                     -webkit-backdrop-filter: blur(40px);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    border-radius: 24px;
-                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    border-radius: 32px;
+                    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
                     overflow: hidden;
                     display: flex;
                     flex-direction: column;
@@ -166,9 +166,9 @@ export default function MarketRealitySection() {
                 /* Header Styling */
                 .mr-header {
                     text-align: left;
-                    margin-bottom: 4rem;
-                    padding-left: 48px;
-                    padding-right: 48px;
+                    margin-bottom: 5rem;
+                    padding-left: 64px;
+                    padding-right: 64px;
                 }
 
                 .title-container {
@@ -178,112 +178,151 @@ export default function MarketRealitySection() {
                 .mr-intro-grid {
                     display: grid;
                     grid-template-columns: 1.5fr 1fr;
-                    gap: 4rem;
+                    gap: 5rem;
                     align-items: center;
                 }
 
                 .mr-intro-text p {
                     font-family: 'Outfit', sans-serif;
                     font-size: 1.5rem;
-                    line-height: 1.5;
+                    line-height: 1.6;
                     color: #cbd5e1;
                     margin: 0;
                 }
 
                 .mr-intro-text strong {
                     color: #ffffff;
+                    font-weight: 600;
                 }
 
                 .mr-risk-alert {
                     display: flex;
-                    align-items: flex-start;
+                    align-items: center;
                     gap: 1.25rem;
-                    padding: 1.5rem;
-                    background: rgba(244, 63, 94, 0.1);
-                    border: 1px solid rgba(244, 63, 94, 0.2);
-                    border-radius: 16px;
+                    padding: 1.5rem 2rem;
+                    background: rgba(244, 63, 94, 0.08); /* More subtle red background */
+                    border: 1px solid rgba(244, 63, 94, 0.25);
+                    border-radius: 100px; /* Pill shape for modern look */
+                    backdrop-filter: blur(10px);
                 }
 
                 .mr-alert-icon {
                     color: #f43f5e;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(244, 63, 94, 0.2);
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
                     flex-shrink: 0;
-                    margin-top: 2px;
                 }
 
                 .mr-risk-alert p {
                     font-family: 'Outfit', sans-serif;
                     font-size: 1.125rem;
-                    line-height: 1.5;
-                    color: #e2e8f0;
+                    color: #ffdce5; /* Lighter text for contrast */
                     margin: 0;
+                    font-weight: 400;
                 }
 
                 .mr-risk-alert strong {
                     color: #ffffff;
+                    font-weight: 600;
                 }
 
                 /* Body Content Styling */
                 .mr-content-body {
-                    margin-bottom: 6rem;
-                    padding-left: 48px;
-                    padding-right: 48px;
-                    flex: 1; /* Pushes footer down if content is short */
+                    margin-bottom: 8rem;
+                    padding-left: 64px;
+                    padding-right: 64px;
+                    flex: 1;
                 }
 
                 .mr-body-intro {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.25rem;
-                    color: #94a3b8;
-                    margin-bottom: 2.5rem;
-                    font-weight: 500;
+                    font-size: 1.5rem; /* Larger intro */
+                    color: #ffffff;
+                    margin-bottom: 3rem;
+                    font-weight: 600;
                 }
 
                 .mr-grid {
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Slightly wider cards */
                     gap: 2rem;
                 }
 
                 .mr-item {
                     display: flex;
                     flex-direction: column;
-                    gap: 1.25rem;
-                    padding: 2rem;
-                    background: rgba(255, 255, 255, 0.02);
-                    border-radius: 20px;
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    transition: all 0.3s ease;
+                    gap: 1.5rem;
+                    padding: 2.5rem;
+                    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border-radius: 24px;
+                    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+                    position: relative;
+                    overflow: hidden;
                 }
 
                 .mr-item:hover {
-                    background: rgba(255, 255, 255, 0.05);
-                    border-color: rgba(255, 255, 255, 0.1);
-                    transform: translateY(-4px);
+                    background: linear-gradient(145deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
+                    border-color: rgba(255, 255, 255, 0.2);
+                    transform: translateY(-8px);
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+                }
+
+                /* Colored line at top of card instead of glow */
+                .mr-item::after { 
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 1px;
+                    background: linear-gradient(90deg, transparent, var(--item-color), transparent);
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+
+                .mr-item:hover::after {
+                    opacity: 1;
                 }
 
                 .mr-icon-box {
-                    width: 52px;
-                    height: 52px;
-                    border-radius: 14px;
+                    width: 56px;
+                    height: 56px;
+                    border-radius: 16px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    flex-shrink: 0;
+                    background: rgba(255, 255, 255, 0.05);
+                    color: var(--item-color);
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    transition: all 0.3s ease;
+                }
+                
+                .mr-item:hover .mr-icon-box {
+                    transform: scale(1.1);
+                    background: rgba(255, 255, 255, 0.1);
+                    border-color: var(--item-color);
+                    box-shadow: 0 0 20px -5px var(--item-color);
                 }
 
                 .mr-item-title {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.25rem;
+                    font-size: 1.5rem;
                     font-weight: 700;
                     color: #ffffff;
-                    margin-bottom: 0.5rem;
+                    margin-bottom: 0.75rem;
                 }
 
                 .mr-item-desc {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1rem;
+                    font-size: 1.125rem;
                     color: #94a3b8;
-                    line-height: 1.5;
+                    line-height: 1.6;
                     margin: 0;
                 }
 
