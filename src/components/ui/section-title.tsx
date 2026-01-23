@@ -22,6 +22,12 @@ interface SectionTitleProps {
   subtitleLoop?: boolean;
   /** Text alignment */
   align?: "left" | "center" | "right";
+  /** Text color class (default: "text-white") */
+  textColor?: string;
+  /** Shadow color for subtitle (default: "rgba(255,255,255,") */
+  shadowColor?: string;
+  /** Disable text shadow for subtitle */
+  disableShadow?: boolean;
 }
 
 export default function SectionTitle({
@@ -31,7 +37,10 @@ export default function SectionTitle({
   titleSize = "text-2xl md:text-4xl lg:text-5xl",
   subtitleSize = "text-2xl md:text-3xl lg:text-4xl",
   subtitleLoop = false,
-  align = "left"
+  align = "left",
+  textColor = "text-white",
+  shadowColor = "rgba(255,255,255,",
+  disableShadow = false
 }: SectionTitleProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -71,10 +80,10 @@ export default function SectionTitle({
     <div ref={containerRef} className={`flex flex-col gap-4 ${alignClass} ${className}`}>
       {/* Main Title with White Block Reveal Animation */}
       <div className="relative inline-block">
-        {/* The white text (always visible) */}
+        {/* The text (always visible) */}
         <div
           ref={titleRef}
-          className={`${titleSize} font-bold tracking-[0.1em] uppercase text-white font-[Outfit]`}
+          className={`${titleSize} font-bold tracking-[0.1em] uppercase ${textColor} font-[Outfit]`}
         >
           {title}
         </div>
@@ -85,7 +94,11 @@ export default function SectionTitle({
           className="absolute top-0 right-0 h-full"
           style={{
             width: "100%",
-            backgroundColor: "white",
+            backgroundColor: "white", // Keep overlay white as it matches the background usually, or maybe we should make this configurable too? 
+            // Actually, if the background is white, a white overlay is invisible. 
+            // But the animation is "reveal". If background is white, we don't need a white overlay to hide it?
+            // Wait, if background is white and text is black, a white overlay works perfectly to hide the black text.
+            // So keeping it white is correct for white backgrounds too.
           }}
         />
       </div>
@@ -95,7 +108,9 @@ export default function SectionTitle({
         <BlurTextAnimation
           text={subtitle}
           fontSize={subtitleSize}
-          textColor="text-white"
+          textColor={textColor}
+          shadowColor={shadowColor}
+          disableShadow={disableShadow}
           loop={subtitleLoop}
           className="max-w-4xl"
         />

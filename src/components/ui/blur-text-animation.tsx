@@ -19,6 +19,8 @@ interface BlurTextAnimationProps {
     textColor?: string;
     animationDelay?: number;
     loop?: boolean;
+    shadowColor?: string;
+    disableShadow?: boolean;
 }
 
 export default function BlurTextAnimation({
@@ -29,7 +31,9 @@ export default function BlurTextAnimation({
     fontFamily = "font-['Outfit',_system-ui,_sans-serif]",
     textColor = "text-white",
     animationDelay = 4000,
-    loop = true
+    loop = true,
+    shadowColor = "rgba(255,255,255,",
+    disableShadow = false
 }: BlurTextAnimationProps) {
     const [isAnimating, setIsAnimating] = useState(false);
     const animationTimeoutRef = useRef<NodeJS.Timeout>();
@@ -91,6 +95,20 @@ export default function BlurTextAnimation({
         };
     }, [textWords, animationDelay, loop]);
 
+    // Parse shadow base color to handle opacity
+    const getShadow = (opacity: number) => {
+        if (shadowColor.startsWith("rgba")) {
+            // If user passed full rgba, try to replace alpha? 
+            // Actually, simpler to just expect the base color "r,g,b" or "rgba(r,g,b,"
+            // Let's assume the default "rgba(255,255,255," and user can pass "rgba(0,0,0,"
+            return `${shadowColor}${opacity})`;
+        }
+        // If it's a hex or other format, we can't easily append opacity.
+        // So let's just use the color as is for the glow, maybe with a fixed opacity if possible?
+        // For now, let's stick to the convention: shadowColor should be "rgba(r,g,b,"
+        return `${shadowColor}${opacity})`;
+    };
+
     return (
         <div className={className}>
             <p className={`${textColor} ${fontSize} ${fontFamily} font-light leading-relaxed tracking-wide`}>
@@ -112,9 +130,11 @@ export default function BlurTextAnimation({
                             willChange: 'filter, transform, opacity',
                             transformStyle: 'preserve-3d',
                             backfaceVisibility: 'hidden',
-                            textShadow: isAnimating
-                                ? '0 2px 8px rgba(255,255,255,0.1)'
-                                : '0 0 40px rgba(255,255,255,0.4)'
+                            textShadow: disableShadow
+                                ? 'none'
+                                : (isAnimating
+                                    ? `0 2px 8px ${getShadow(0.1)}`
+                                    : `0 0 40px ${getShadow(0.4)}`)
                         }}
                     >
                         {word.text}

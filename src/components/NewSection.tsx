@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import SectionTitle from "./ui/section-title";
-import { TrendingUp, Shield, Lightbulb, ArrowRight } from "lucide-react";
+import { Users, Cpu, LineChart, ArrowRight, CheckCircle2 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
@@ -10,25 +10,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 const features = [
     {
-        icon: TrendingUp,
-        title: "Strategic Growth",
-        description: "Drive sustainable revenue growth through data-driven insights and intelligent automation.",
+        icon: Users,
+        title: "Deep RCM Expertise",
+        description: "Expertise across complex healthcare environments, ensuring every claim is handled with precision.",
         color: "#22c55e"
     },
     {
-        icon: Shield,
-        title: "Risk Mitigation",
-        description: "Proactively identify and address compliance gaps before they impact your bottom line.",
+        icon: Cpu,
+        title: "Intelligent Systems",
+        description: "Advanced technology that removes friction and guesswork, automating routine tasks for speed.",
         color: "#3b82f6"
     },
     {
-        icon: Lightbulb,
-        title: "Innovation at Scale",
-        description: "Transform operations with cutting-edge AI solutions tailored to healthcare workflows.",
+        icon: LineChart,
+        title: "Real-Time Insight",
+        description: "Operational visibility that leaders can trust, providing data-driven confidence in every decision.",
         color: "#a855f7"
     }
 ];
-
 
 export default function NewSection() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -37,211 +36,440 @@ export default function NewSection() {
         if (!sectionRef.current) return;
 
         const ctx = gsap.context(() => {
-            gsap.utils.toArray<HTMLElement>(".ns-animate").forEach((el, idx) => {
-                gsap.fromTo(el,
-                    { opacity: 0, y: 30 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.7,
-                        delay: idx * 0.1,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: el,
-                            start: "top 85%",
-                            toggleActions: "play none none none"
-                        }
+            // Header Animation
+            gsap.fromTo(".ns-header-animate",
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".ns-header",
+                        start: "top 85%",
+                        toggleActions: "play none none none"
                     }
-                );
-            });
+                }
+            );
+
+            // Features Animation
+            gsap.fromTo(".ns-feature-card",
+                { opacity: 0, y: 40 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    stagger: 0.15,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".ns-features-grid",
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+
+            // Bottom Content Animation
+            gsap.fromTo(".ns-bottom-animate",
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".ns-conclusion",
+                        start: "top 90%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+
         }, sectionRef);
 
         return () => ctx.revert();
     }, []);
 
     return (
-        <section ref={sectionRef} id="new-section" className="ns-section">
+        <section ref={sectionRef} id="why-winspire" className="ns-section">
             <div className="ns-wrapper">
-                {/* Section Header */}
-                <header className="ns-header ns-animate">
-                    <SectionTitle
-                        title="Transforming Healthcare Financial Operations"
-                        subtitle="A smarter approach to revenue cycle excellence."
-                        align="center"
-                        subtitleSize="text-lg md:text-xl"
-                    />
+                {/* Header Section */}
+                <header className="ns-header">
+                    <div className="ns-header-animate title-container">
+                        <SectionTitle
+                            title="WHY WINSPIRE"
+                            subtitle="Your Extended Revenue Team. Designed for Reliability."
+                            align="left"
+                            textColor="!text-black"
+                            subtitleSize="text-lg md:text-xl"
+                            disableShadow={true}
+                        />
+                    </div>
+
+                    <div className="ns-intro-grid ns-header-animate">
+                        <div className="ns-intro-item">
+                            <div className="ns-check-icon"><CheckCircle2 size={20} /></div>
+                            <p>Your clinicians focus on <strong>care</strong>.</p>
+                        </div>
+                        <div className="ns-intro-item">
+                            <div className="ns-check-icon"><CheckCircle2 size={20} /></div>
+                            <p>Your leadership focuses on <strong>vision and growth</strong>.</p>
+                        </div>
+                    </div>
+
+                    <p className="ns-main-desc ns-header-animate">
+                        We operate your revenue cycle with discipline, accountability, and real-time visibility—so revenue becomes <strong>predictable instead of stressful</strong>.
+                    </p>
                 </header>
 
-                {/* Features Grid */}
-                <div className="ns-features-grid">
-                    {features.map((feature, idx) => (
-                        <div key={idx} className="ns-feature-card ns-animate">
-                            <div
-                                className="ns-feature-icon"
-                                style={{
-                                    backgroundColor: `${feature.color}15`,
-                                    borderColor: `${feature.color}30`
-                                }}
-                            >
-                                <feature.icon size={28} style={{ color: feature.color }} />
+                {/* Content Body - Modern Feature List */}
+                <div className="ns-content-body ns-header-animate">
+                    <p className="ns-body-intro">
+                        Winspire functions as your internal revenue capability, powered by:
+                    </p>
+
+                    <div className="ns-modern-grid">
+                        {/* Item 1 */}
+                        <div className="ns-modern-item">
+                            <div className="ns-icon-box blue">
+                                <Users size={24} />
                             </div>
-                            <h3 className="ns-feature-title">{feature.title}</h3>
-                            <p className="ns-feature-desc">{feature.description}</p>
+                            <p className="ns-item-text">
+                                Deep RCM expertise across complex healthcare environments
+                            </p>
                         </div>
-                    ))}
+
+                        {/* Item 2 */}
+                        <div className="ns-modern-item">
+                            <div className="ns-icon-box purple">
+                                <Cpu size={24} />
+                            </div>
+                            <p className="ns-item-text">
+                                Intelligent systems that remove friction and guesswork
+                            </p>
+                        </div>
+
+                        {/* Item 3 */}
+                        <div className="ns-modern-item">
+                            <div className="ns-icon-box green">
+                                <LineChart size={24} />
+                            </div>
+                            <p className="ns-item-text">
+                                Real-time operational insight leaders can trust
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                {/* CTA Block */}
-                <div className="ns-cta-block ns-animate">
-                    <div className="ns-cta-content">
-                        <h3 className="ns-cta-title">Ready to Transform Your Revenue Cycle?</h3>
-                        <p className="ns-cta-text">
-                            Discover how our AI-powered solutions can unlock predictable financial outcomes for your organization.
-                        </p>
+                {/* Conclusion & CTA - Blue Banner Redesign */}
+                <div className="ns-cta-banner ns-bottom-animate">
+                    {/* Left Geometric Pattern */}
+                    <div className="ns-geo-pattern pattern-left">
+                        <div className="ns-geo-square s1"></div>
+                        <div className="ns-geo-square s2"></div>
+                        <div className="ns-geo-square s3"></div>
+                        <div className="ns-geo-square s4"></div>
+                        <div className="ns-geo-square s5"></div>
                     </div>
-                    <button className="ns-cta-button">
-                        <span>Get Started</span>
-                        <ArrowRight size={18} />
-                    </button>
+
+                    {/* Right Geometric Pattern */}
+                    <div className="ns-geo-pattern pattern-right">
+                        <div className="ns-geo-square s1"></div>
+                        <div className="ns-geo-square s2"></div>
+                        <div className="ns-geo-square s3"></div>
+                        <div className="ns-geo-square s4"></div>
+                        <div className="ns-geo-square s5"></div>
+                    </div>
+
+                    <div className="ns-cta-content">
+                        <h3 className="ns-cta-title">The result is not more effort.</h3>
+                        <p className="ns-cta-text">
+                            It’s <strong>control, predictability, and confidence</strong>—day after day.
+                        </p>
+
+                        <button className="ns-cta-button-white mt-8">
+                            <span>Explore How We Work</span>
+                            <ArrowRight size={18} />
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <style jsx>{`
                 .ns-section {
-                    padding: 6rem 0;
-                    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+                    padding: 8rem 0;
+                    background: #ffffff;
                     position: relative;
                     z-index: 30;
-                    overflow: hidden;
                 }
 
                 .ns-wrapper {
-                    max-width: 1200px;
+                    width: 100%;
+                    max-width: 1400px;
                     margin: 0 auto;
-                    padding: 0 1.5rem;
+                    padding: 0 48px;
                 }
 
+                /* Header Styling */
                 .ns-header {
-                    text-align: center;
-                    margin-bottom: 4rem;
+                    text-align: left;
+                    margin-bottom: 3rem;
+                    max-width: 800px;
                 }
 
-                .ns-features-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                    gap: 2rem;
-                    margin-bottom: 4rem;
+                .ns-header-animate.title-container {
+                    margin-bottom: 3rem;
                 }
 
-                .ns-feature-card {
-                    background: #ffffff;
-                    border: 1px solid rgba(0, 0, 0, 0.06);
-                    border-radius: 16px;
-                    padding: 2rem;
-                    transition: all 0.3s ease;
-                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-                }
-
-                .ns-feature-card:hover {
-                    transform: translateY(-4px);
-                    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-                    border-color: rgba(0, 0, 0, 0.1);
-                }
-
-                .ns-feature-icon {
-                    width: 56px;
-                    height: 56px;
-                    border-radius: 14px;
+                .ns-intro-grid {
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border: 1px solid;
-                    margin-bottom: 1.25rem;
-                }
-
-                .ns-feature-title {
-                    font-family: 'Outfit', sans-serif;
-                    font-size: 1.25rem;
-                    font-weight: 600;
-                    color: #0f172a;
-                    margin-bottom: 0.75rem;
-                }
-
-                .ns-feature-desc {
-                    font-family: 'Outfit', sans-serif;
-                    font-size: 0.95rem;
-                    line-height: 1.6;
-                    color: #64748b;
-                }
-
-                .ns-cta-block {
-                    background: linear-gradient(135deg, #083151 0%, #0a4d7a 100%);
-                    border-radius: 20px;
-                    padding: 3rem;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    gap: 2rem;
+                    justify-content: flex-start;
+                    gap: 3rem;
+                    margin-bottom: 2.5rem;
                     flex-wrap: wrap;
                 }
 
+                .ns-intro-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 1.125rem;
+                    font-weight: 500;
+                }
+
+                .ns-intro-item p {
+                    color: #000000 !important;
+                    margin: 0;
+                }
+
+                .ns-intro-item strong {
+                    color: #000000 !important;
+                }
+
+                .ns-check-icon {
+                    color: #22c55e;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .ns-main-desc {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 1.25rem;
+                    line-height: 1.6;
+                    color: #000000;
+                    max-width: 900px;
+                }
+
+                .ns-main-desc strong {
+                    color: #000000;
+                    font-weight: 700;
+                }
+
+                /* Body Content Styling */
+                .ns-content-body {
+                    margin-bottom: 6rem;
+                    width: 100%;
+                }
+
+                .ns-body-intro {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 1.25rem;
+                    color: #000000;
+                    margin-bottom: 2rem;
+                    font-weight: 500;
+                }
+
+                .ns-modern-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 2rem;
+                    margin-top: 1rem;
+                }
+
+                .ns-modern-item {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 1.25rem;
+                    padding: 1.5rem;
+                    background: #f8fafc;
+                    border-radius: 16px;
+                    border: 1px solid #e2e8f0;
+                    transition: all 0.3s ease;
+                }
+
+                .ns-modern-item:hover {
+                    background: #ffffff;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+                    border-color: #cbd5e1;
+                    transform: translateY(-2px);
+                }
+
+                .ns-icon-box {
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                }
+
+                .ns-icon-box.blue {
+                    background: rgba(59, 130, 246, 0.1);
+                    color: #3b82f6;
+                }
+
+                .ns-icon-box.purple {
+                    background: rgba(168, 85, 247, 0.1);
+                    color: #a855f7;
+                }
+
+                .ns-icon-box.green {
+                    background: rgba(34, 197, 94, 0.1);
+                    color: #22c55e;
+                }
+
+                .ns-item-text {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 1.125rem;
+                    color: #0f172a;
+                    line-height: 1.5;
+                    font-weight: 500;
+                    margin: 0;
+                    padding-top: 2px;
+                }
+
+                /* CTA Banner Styling */
+                .ns-cta-banner {
+                    position: relative;
+                    width: 100%;
+                    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+                    border-radius: 24px;
+                    padding: 5rem 2rem;
+                    text-align: center;
+                    overflow: hidden;
+                    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                /* Geometric Patterns */
+                .ns-geo-pattern {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 500px;
+                    height: 500px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    pointer-events: none;
+                }
+
+                .pattern-left {
+                    left: -250px;
+                }
+
+                .pattern-right {
+                    right: -250px;
+                }
+
+                .ns-geo-square {
+                    position: absolute;
+                    border-radius: 40px;
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                }
+
+                .s1 { width: 100%; height: 100%; opacity: 0.1; }
+                .s2 { width: 80%; height: 80%; opacity: 0.15; }
+                .s3 { width: 60%; height: 60%; opacity: 0.2; }
+                .s4 { width: 40%; height: 40%; opacity: 0.25; }
+                .s5 { width: 20%; height: 20%; opacity: 0.3; }
+
                 .ns-cta-content {
-                    flex: 1;
-                    min-width: 280px;
+                    position: relative;
+                    z-index: 10;
+                    max-width: 700px;
                 }
 
                 .ns-cta-title {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.5rem;
-                    font-weight: 600;
+                    font-size: clamp(2rem, 5vw, 2.5rem);
+                    font-weight: 700;
                     color: #ffffff;
-                    margin-bottom: 0.5rem;
+                    margin-bottom: 1rem;
+                    line-height: 1.2;
                 }
 
                 .ns-cta-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1rem;
-                    color: rgba(255, 255, 255, 0.8);
+                    font-size: 1.25rem;
+                    color: rgba(255, 255, 255, 0.9);
+                    margin-bottom: 0;
                     line-height: 1.6;
                 }
 
-                .ns-cta-button {
-                    display: flex;
+                .ns-cta-text strong {
+                    color: #ffffff;
+                    font-weight: 600;
+                }
+
+                .ns-cta-button-white {
+                    display: inline-flex;
                     align-items: center;
-                    gap: 0.5rem;
+                    gap: 0.75rem;
                     background: #ffffff;
-                    color: #083151;
+                    color: #0f172a;
                     font-family: 'Outfit', sans-serif;
                     font-size: 1rem;
-                    font-weight: 600;
+                    font-weight: 700;
                     padding: 1rem 2rem;
                     border-radius: 12px;
                     border: none;
                     cursor: pointer;
                     transition: all 0.3s ease;
-                    white-space: nowrap;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
                 }
 
-                .ns-cta-button:hover {
-                    transform: scale(1.05);
-                    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+                .ns-cta-button-white:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+                    background: #f8fafc;
                 }
 
                 @media (max-width: 768px) {
                     .ns-section {
-                        padding: 4rem 0;
+                        padding: 5rem 0;
+                    }
+                    
+                    .ns-wrapper {
+                        padding: 0 24px;
                     }
 
-                    .ns-cta-block {
+                    .ns-intro-grid {
                         flex-direction: column;
-                        text-align: center;
-                        padding: 2rem;
+                        gap: 1rem;
+                        align-items: flex-start;
                     }
 
-                    .ns-cta-button {
-                        width: 100%;
-                        justify-content: center;
+                    .ns-modern-grid {
+                        grid-template-columns: 1fr;
+                        gap: 1rem;
                     }
+
+                    .ns-cta-banner {
+                        padding: 3rem 1.5rem;
+                        border-radius: 16px;
+                    }
+                    
+                    .pattern-left { left: -200px; }
+                    .pattern-right { right: -200px; }
                 }
             `}</style>
         </section>
