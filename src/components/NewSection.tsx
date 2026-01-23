@@ -200,7 +200,7 @@ export default function NewSection() {
             <style jsx>{`
                 .ns-section {
                     padding: 8rem 0;
-                    background: #ffffff;
+                    background: transparent; /* Transparent to show page background through the card */
                     position: relative;
                     z-index: 30;
                 }
@@ -209,7 +209,14 @@ export default function NewSection() {
                     width: 100%;
                     max-width: 1400px;
                     margin: 0 auto;
-                    padding: 0 48px;
+                    padding: 6rem 48px;
+                    background: rgba(255, 255, 255, 0.85); /* Transparent white */
+                    backdrop-filter: blur(40px);
+                    -webkit-backdrop-filter: blur(40px);
+                    border: 1px solid rgba(255, 255, 255, 0.5);
+                    border-radius: 24px;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+                    overflow: hidden;
                 }
 
                 /* Header Styling */
