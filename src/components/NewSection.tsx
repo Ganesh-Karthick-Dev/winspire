@@ -80,7 +80,7 @@ export default function NewSection() {
                     stagger: 0.1,
                     ease: "power3.out",
                     scrollTrigger: {
-                        trigger: ".ns-conclusion",
+                        trigger: ".ns-cta-banner",
                         start: "top 90%",
                         toggleActions: "play none none none"
                     }
@@ -346,7 +346,7 @@ export default function NewSection() {
                 .ns-cta-banner {
                     position: relative;
                     width: 100%;
-                    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+                    background: #3b82f6;
                     border-radius: 24px;
                     padding: 5rem 2rem;
                     text-align: center;
@@ -382,15 +382,15 @@ export default function NewSection() {
                 .ns-geo-square {
                     position: absolute;
                     border-radius: 40px;
-                    background: rgba(255, 255, 255, 0.1);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border: 1.5px solid rgba(255, 255, 255, 0.15);
+                    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05);
                 }
 
-                .s1 { width: 100%; height: 100%; opacity: 0.1; }
-                .s2 { width: 80%; height: 80%; opacity: 0.15; }
-                .s3 { width: 60%; height: 60%; opacity: 0.2; }
-                .s4 { width: 40%; height: 40%; opacity: 0.25; }
-                .s5 { width: 20%; height: 20%; opacity: 0.3; }
+                .s1 { width: 100%; height: 100%; background: rgba(255, 255, 255, 0.03); }
+                .s2 { width: 80%; height: 80%; background: rgba(255, 255, 255, 0.05); }
+                .s3 { width: 60%; height: 60%; background: rgba(255, 255, 255, 0.08); }
+                .s4 { width: 40%; height: 40%; background: rgba(255, 255, 255, 0.12); }
+                .s5 { width: 20%; height: 20%; background: rgba(255, 255, 255, 0.18); }
 
                 .ns-cta-content {
                     position: relative;
