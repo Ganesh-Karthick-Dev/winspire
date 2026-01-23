@@ -121,10 +121,6 @@ export default function MarketRealitySection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="mr-cta-banner"
-                    style={{
-                        backgroundColor: '#ffffff',
-                        padding: '5rem 3rem'
-                    }}
                 >
                     <div className="mr-cta-content">
                         <div className="mr-cta-text-group">
@@ -327,16 +323,16 @@ export default function MarketRealitySection() {
                     margin: 0;
                 }
 
-                /* CTA Banner - Premium Dark Redesign */
+                /* CTA Banner - Targeted Spacing & Visibility Redesign */
                 .mr-cta-banner {
-                    background: linear-gradient(to bottom, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%) !important;
-                    backdrop-filter: blur(20px);
-                    -webkit-backdrop-filter: blur(20px);
+                    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.85) 0%, rgba(10, 15, 28, 0.98) 100%) !important;
+                    backdrop-filter: blur(30px);
+                    -webkit-backdrop-filter: blur(30px);
                     border-radius: 0;
-                    padding: 8rem 64px 12rem !important; /* Increased bottom padding */
+                    padding: 10rem 64px 15rem !important; /* Massive bottom space targeted to footer */
                     position: relative;
                     overflow: hidden;
-                    border-top: 1px solid rgba(255, 255, 255, 0.1);
+                    border-top: 1px solid rgba(244, 63, 94, 0.2);
                     z-index: 20;
                     width: 100%;
                 }
@@ -345,8 +341,8 @@ export default function MarketRealitySection() {
                     content: '';
                     position: absolute;
                     top: 0;
-                    left: 10%;
-                    right: 10%;
+                    left: 5%;
+                    right: 5%;
                     height: 1px;
                     background: linear-gradient(90deg, transparent, rgba(244, 63, 94, 0.5), transparent);
                 }
@@ -358,22 +354,23 @@ export default function MarketRealitySection() {
                     gap: 6rem;
                     position: relative;
                     z-index: 10;
-                    max-width: 1200px;
+                    max-width: 1250px;
                     margin: 0 auto;
                     width: 100%;
                 }
 
                 .mr-cta-text-group {
                     max-width: 600px;
+                    flex: 1;
                 }
 
                 .mr-cta-label {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 0.875rem;
+                    font-size: 0.95rem;
                     text-transform: uppercase;
-                    letter-spacing: 0.2em;
+                    letter-spacing: 0.3em;
                     color: #fb7185;
-                    margin-bottom: 0.75rem;
+                    margin-bottom: 1.5rem;
                     font-weight: 700;
                     display: block;
                     line-height: 1.2;
@@ -381,7 +378,7 @@ export default function MarketRealitySection() {
 
                 .mr-cta-title {
                     font-family: 'Outfit', sans-serif;
-                    font-size: clamp(3rem, 6vw, 4rem);
+                    font-size: clamp(3.5rem, 6vw, 4.5rem);
                     font-weight: 800;
                     color: #ffffff;
                     margin: 0;
@@ -392,19 +389,19 @@ export default function MarketRealitySection() {
                 .mr-cta-button {
                     display: inline-flex;
                     align-items: center;
-                    gap: 1rem;
+                    gap: 1.25rem;
                     background: #f43f5e;
                     color: #ffffff;
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.25rem;
+                    font-size: 1.35rem;
                     font-weight: 800;
-                    padding: 1.25rem 2.5rem;
-                    border-radius: 16px;
+                    padding: 1.5rem 3rem;
+                    border-radius: 20px;
                     border: none;
                     cursor: pointer;
                     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                     flex-shrink: 0;
-                    box-shadow: 0 10px 30px rgba(244, 63, 94, 0.2);
+                    box-shadow: 0 15px 40px rgba(244, 63, 94, 0.3);
                 }
 
                 .mr-cta-button:hover {

@@ -393,12 +393,13 @@ export default function NeuraSection() {
                 }
 
                 /* CTA Banner - Premium Dark Redesign */
+                /* CTA Banner - Targeted Spacing & Visibility Redesign */
                 .ns-cta-banner {
-                    background: linear-gradient(to bottom, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
-                    backdrop-filter: blur(20px);
-                    -webkit-backdrop-filter: blur(20px);
-                    padding: 8rem 64px 12rem; /* Increased bottom padding */
-                    border-top: 1px solid rgba(255, 255, 255, 0.1);
+                    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.85) 0%, rgba(10, 15, 28, 0.98) 100%);
+                    backdrop-filter: blur(30px);
+                    -webkit-backdrop-filter: blur(30px);
+                    padding: 10rem 64px 15rem; /* Massive bottom space targeted to footer */
+                    border-top: 1px solid rgba(59, 130, 246, 0.2);
                     position: relative;
                 }
 
@@ -406,67 +407,70 @@ export default function NeuraSection() {
                     content: '';
                     position: absolute;
                     top: 0;
-                    left: 10%;
-                    right: 10%;
+                    left: 5%;
+                    right: 5%;
                     height: 1px;
                     background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
                 }
 
                 .ns-cta-content {
                     display: flex;
-                    align-items: center;
+                    align-items: flex-start;
                     justify-content: space-between;
-                    gap: 6rem;
-                    max-width: 1200px;
+                    gap: 8rem;
+                    max-width: 1250px;
                     margin: 0 auto;
                 }
 
                 .ns-cta-left {
-                    flex: 1;
+                    flex: 1.2;
+                    min-width: 480px; /* Prevent awkward title wrapping */
                 }
 
                 .ns-cta-label {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 0.875rem;
+                    font-size: 0.95rem;
                     text-transform: uppercase;
-                    letter-spacing: 0.25em;
+                    letter-spacing: 0.3em;
                     color: #3b82f6;
-                    margin-bottom: 1.5rem; /* Increased space below label */
+                    margin-bottom: 2rem;
                     font-weight: 700;
                     display: block;
                 }
 
                 .ns-cta-title {
                     font-family: 'Outfit', sans-serif;
-                    font-size: clamp(3rem, 6vw, 4rem);
+                    font-size: clamp(3.5rem, 6vw, 4.5rem);
                     font-weight: 800;
                     color: #ffffff;
                     margin: 0;
-                    line-height: 1.1;
-                    letter-spacing: -0.02em;
+                    line-height: 1.05;
+                    letter-spacing: -0.03em;
                 }
 
                 .ns-cta-quote {
                     flex: 1.5;
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.5rem; /* Increased font size */
+                    font-size: 1.65rem;
                     color: #cbd5e1;
-                    line-height: 1.6;
+                    line-height: 1.5;
                     font-style: italic;
-                    padding-left: 5rem;
-                    border-left: 1px solid rgba(255, 255, 255, 0.15);
+                    padding-left: 6rem;
+                    border-left: 1px solid rgba(59, 130, 246, 0.3);
                     margin: 0;
                     position: relative;
+                    margin-top: 1.5rem;
                 }
                 
                 .ns-cta-quote::before {
                     content: '"';
                     position: absolute;
                     left: 2rem;
-                    top: -0.5rem;
-                    font-size: 4rem;
-                    color: rgba(59, 130, 246, 0.2);
+                    top: -1rem;
+                    font-size: 5rem;
+                    color: rgba(59, 130, 246, 0.3);
                     font-family: serif;
+                    line-height: 1;
                 }
 
                 /* Responsive */
