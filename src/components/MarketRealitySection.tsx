@@ -120,6 +120,7 @@ export default function MarketRealitySection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="mr-cta-banner"
+                    style={{ backgroundColor: '#ffffff' }}
                 >
                     <div className="mr-cta-content">
                         <div className="mr-cta-text-group">
@@ -146,7 +147,8 @@ export default function MarketRealitySection() {
                     width: 100%;
                     max-width: 1400px;
                     margin: 0 auto;
-                    padding: 6rem 48px;
+                    /* padding: 6rem 48px; REMOVED padding here */
+                    padding-top: 6rem;
                     background: rgba(15, 23, 42, 0.9); /* Dark frosted glass */
                     backdrop-filter: blur(40px);
                     -webkit-backdrop-filter: blur(40px);
@@ -154,12 +156,16 @@ export default function MarketRealitySection() {
                     border-radius: 24px;
                     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
                     overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
                 }
 
                 /* Header Styling */
                 .mr-header {
                     text-align: left;
                     margin-bottom: 4rem;
+                    padding-left: 48px;
+                    padding-right: 48px;
                 }
 
                 .title-container {
@@ -216,6 +222,9 @@ export default function MarketRealitySection() {
                 /* Body Content Styling */
                 .mr-content-body {
                     margin-bottom: 6rem;
+                    padding-left: 48px;
+                    padding-right: 48px;
+                    flex: 1; /* Pushes footer down if content is short */
                 }
 
                 .mr-body-intro {
@@ -277,45 +286,55 @@ export default function MarketRealitySection() {
 
                 /* CTA Banner Styling */
                 .mr-cta-banner {
-                    background: #f43f5e;
-                    border-radius: 24px;
-                    padding: 4rem 3rem;
+                    background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%) !important;
+                    border-radius: 0;
+                    padding: 8rem 48px; /* Matched to section padding */
                     position: relative;
                     overflow: hidden;
-                    box-shadow: 0 20px 40px rgba(244, 63, 94, 0.3);
+                    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.05);
+                    z-index: 20;
+                    width: 100%;
+                    border-top: 1px solid rgba(0, 0, 0, 0.03);
                 }
 
                 .mr-cta-content {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    gap: 3rem;
+                    gap: 4rem;
                     position: relative;
                     z-index: 10;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    width: 100%;
+                    padding: 0;
                 }
 
                 .mr-cta-label {
                     font-family: 'Outfit', sans-serif;
                     font-size: 1.25rem;
-                    color: rgba(255, 255, 255, 0.9);
-                    margin-bottom: 0.5rem;
+                    color: #64748b;
+                    margin-bottom: 3rem;
+                    font-weight: 500;
+                    letter-spacing: 0.02em;
                 }
 
                 .mr-cta-title {
                     font-family: 'Outfit', sans-serif;
-                    font-size: clamp(2rem, 5vw, 3rem);
+                    font-size: clamp(3rem, 7vw, 4.5rem);
                     font-weight: 900;
-                    color: #ffffff;
+                    color: #0f172a;
                     margin: 0;
-                    line-height: 1;
+                    line-height: 1.1;
+                    letter-spacing: -0.02em;
                 }
 
                 .mr-cta-button {
                     display: inline-flex;
                     align-items: center;
                     gap: 1rem;
-                    background: #ffffff;
-                    color: #f43f5e;
+                    background: #f43f5e;
+                    color: #ffffff;
                     font-family: 'Outfit', sans-serif;
                     font-size: 1.25rem;
                     font-weight: 800;
@@ -329,7 +348,7 @@ export default function MarketRealitySection() {
 
                 .mr-cta-button:hover {
                     transform: scale(1.05);
-                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                    box-shadow: 0 10px 30px rgba(244, 63, 94, 0.4);
                 }
 
                 @media (max-width: 1024px) {
@@ -347,7 +366,12 @@ export default function MarketRealitySection() {
 
                 @media (max-width: 768px) {
                     .mr-wrapper {
-                        padding: 4rem 24px;
+                        padding-top: 4rem; /* Mobile top padding */
+                    }
+
+                    .mr-header, .mr-content-body {
+                        padding-left: 24px;
+                        padding-right: 24px;
                     }
 
                     .mr-intro-text p {
@@ -356,6 +380,12 @@ export default function MarketRealitySection() {
 
                     .mr-cta-banner {
                         padding: 3rem 1.5rem;
+                        margin-bottom: 0;
+                        width: 100%;
+                    }
+                    
+                    .mr-content-body {
+                        margin-bottom: 0; /* Remove extra space above footer on mobile */
                     }
 
                     .mr-cta-button {
