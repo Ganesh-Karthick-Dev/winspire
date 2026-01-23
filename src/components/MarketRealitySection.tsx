@@ -120,7 +120,10 @@ export default function MarketRealitySection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     className="mr-cta-banner"
-                    style={{ backgroundColor: '#ffffff' }}
+                    style={{
+                        backgroundColor: '#ffffff',
+                        padding: '7rem 3rem'
+                    }}
                 >
                     <div className="mr-cta-content">
                         <div className="mr-cta-text-group">
@@ -288,7 +291,7 @@ export default function MarketRealitySection() {
                 .mr-cta-banner {
                     background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%) !important;
                     border-radius: 0;
-                    padding: 8rem 48px; /* Matched to section padding */
+                    padding: 12rem 48px !important; /* Force padding application */
                     position: relative;
                     overflow: hidden;
                     box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.05);
@@ -301,32 +304,39 @@ export default function MarketRealitySection() {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    gap: 4rem;
+                    gap: 6rem;
                     position: relative;
                     z-index: 10;
-                    max-width: 1200px;
+                    max-width: 1200px; /* Constrained width */
                     margin: 0 auto;
                     width: 100%;
-                    padding: 0;
+                    padding: 0 2rem; /* Inner breathing room */
+                }
+
+                .mr-cta-text-group {
+                    max-width: 600px;
                 }
 
                 .mr-cta-label {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.25rem;
+                    font-size: 0.875rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.15em;
                     color: #64748b;
-                    margin-bottom: 3rem;
-                    font-weight: 500;
-                    letter-spacing: 0.02em;
+                    margin-bottom: 0; /* No space between */
+                    font-weight: 700;
+                    display: block;
+                    line-height: 1.2;
                 }
 
                 .mr-cta-title {
                     font-family: 'Outfit', sans-serif;
-                    font-size: clamp(3rem, 7vw, 4.5rem);
-                    font-weight: 900;
+                    font-size: clamp(3rem, 6vw, 4rem);
+                    font-weight: 800;
                     color: #0f172a;
                     margin: 0;
-                    line-height: 1.1;
-                    letter-spacing: -0.02em;
+                    line-height: 1; /* Tight line height */
+                    letter-spacing: -0.03em;
                 }
 
                 .mr-cta-button {
