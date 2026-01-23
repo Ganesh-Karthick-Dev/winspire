@@ -13,6 +13,7 @@ import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import CoreInsightSection from '@/components/CoreInsightSection';
 import NewSection from '@/components/NewSection';
+import MarketRealitySection from '@/components/MarketRealitySection';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import MarqueeText from '@/components/MarqueeText';
 import GradientButton from '@/components/ui/GradientButton';
@@ -357,6 +358,9 @@ export default function TempHome() {
 
                 {/* New Section */}
                 <NewSection />
+
+                {/* Market Reality Section */}
+                <MarketRealitySection />
 
             </div>
 

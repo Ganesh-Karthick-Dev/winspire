@@ -36,6 +36,7 @@ import { scrollKeyframes, animationSettings } from '@/lib/scrollAnimations';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import WhyNeuraSection from '@/components/WhyNeuraSection';
+import MarketRealitySection from '@/components/MarketRealitySection';
 
 /**
  * Dynamically import GLTFViewer with SSR disabled.
@@ -459,6 +460,9 @@ export default function Home() {
 
                 {/* Careers Scroll Section - Frosted glass with animated image columns */}
                 <CareersScrollSection />
+
+                {/* Market Reality Section - Dark theme with urgency */}
+                <MarketRealitySection />
 
                 {/* News Section - Sticky title with scrollable news list */}
                 <NewsSection />
