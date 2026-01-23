@@ -37,6 +37,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import WhyNeuraSection from '@/components/WhyNeuraSection';
 import MarketRealitySection from '@/components/MarketRealitySection';
+import NeuraSection from '@/components/NeuraSection';
 
 /**
  * Dynamically import GLTFViewer with SSR disabled.
@@ -463,6 +464,9 @@ export default function Home() {
 
                 {/* Market Reality Section - Dark theme with urgency */}
                 <MarketRealitySection />
+
+                {/* Neura Intelligence Section - Transparent with glassmorphism */}
+                <NeuraSection />
 
                 {/* News Section - Sticky title with scrollable news list */}
                 <NewsSection />

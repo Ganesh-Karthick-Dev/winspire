@@ -1,0 +1,217 @@
+"use client"
+
+import { useState, useEffect, useCallback, type ReactNode } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { cn } from "@/lib/utils"
+
+export interface CommandItem {
+    id: string
+    icon: ReactNode
+    label: string
+    shortcut?: string
+    onClick?: () => void
+}
+
+export interface CircularCommandMenuProps {
+    items?: CommandItem[]
+    trigger?: ReactNode
+    className?: string
+    radius?: number
+    defaultOpen?: boolean
+    onSelect?: (item: CommandItem) => void
+}
+
+function CircularCommandMenu({
+    items = [],
+    trigger,
+    className,
+    radius = 240, // Further increased radius for extreme airiness
+    defaultOpen = false,
+    onSelect,
+}: CircularCommandMenuProps) {
+    const [isOpen, setIsOpen] = useState(defaultOpen)
+    const [activeIndex, setActiveIndex] = useState<number | null>(null)
+
+    // Defensive check for items
+    const safeItems = items || []
+    const itemCount = safeItems.length
+
+    const angleStep = itemCount > 0 ? 360 / itemCount : 0
+    const startAngle = -90 // Start from top
+
+    useEffect(() => {
+        if (defaultOpen) {
+            setIsOpen(true)
+        }
+    }, [defaultOpen])
+
+    const handleKeyDown = useCallback(
+        (e: KeyboardEvent) => {
+            // If forced open, we might not want to close on escape, but valid for now
+            if (!isOpen || itemCount === 0) return
+
+            const currentActive = activeIndex ?? 0
+
+            switch (e.key) {
+                case "ArrowRight":
+                case "ArrowDown":
+                    e.preventDefault()
+                    setActiveIndex((currentActive + 1) % itemCount)
+                    break
+                case "ArrowLeft":
+                case "ArrowUp":
+                    e.preventDefault()
+                    setActiveIndex((currentActive - 1 + itemCount) % itemCount)
+                    break
+                case "Enter":
+                    e.preventDefault()
+                    const selectedItem = safeItems[currentActive]
+                    if (selectedItem) {
+                        selectedItem.onClick?.()
+                        onSelect?.(selectedItem)
+                    }
+                    // If it's a menu that should stay open, maybe don't close?
+                    // For now, let's keep it closeable unless strictly required otherwise
+                    // But user said "no button click to open", implying it stays open or opens on view?
+                    // Let's assume standard behavior for selection but auto-open.
+                    break
+            }
+        },
+        [isOpen, activeIndex, safeItems, itemCount, onSelect],
+    )
+
+    useEffect(() => {
+        window.addEventListener("keydown", handleKeyDown)
+        return () => window.removeEventListener("keydown", handleKeyDown)
+    }, [handleKeyDown])
+
+    const getItemPosition = (index: number) => {
+        const angle = ((startAngle + index * angleStep) * Math.PI) / 180
+        return {
+            x: Math.cos(angle) * radius,
+            y: Math.sin(angle) * radius,
+        }
+    }
+
+    const totalSize = (radius + 160) * 2 // Increased buffer for EXTREME labels
+
+    return (
+        <div
+            className={cn("relative flex items-center justify-center mx-auto", className)}
+            style={{
+                height: `${totalSize}px`,
+                width: `${totalSize}px`
+            }}
+        >
+            {/* Central Anchor / Trigger */}
+            <motion.div
+                className={cn(
+                    "relative z-20 flex h-20 w-20 items-center justify-center rounded-full",
+                    "bg-[#0f172a] border border-blue-500/30 shadow-[0_0_40px_rgba(59,130,246,0.3)]",
+                    "text-blue-400"
+                )}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+            >
+                {trigger || (
+                    <div className="flex flex-col items-center justify-center">
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mt-1">Supports</span>
+                    </div>
+                )}
+            </motion.div>
+
+            {/* Menu Items */}
+            <AnimatePresence>
+                {isOpen && itemCount > 0 && (
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10" role="menu">
+                        {safeItems.map((item, index) => {
+                            const position = getItemPosition(index)
+                            // Determine if on left or right side to align tooltip
+                            const isRightSide = position.x >= 0;
+
+                            return (
+                                <motion.div
+                                    key={item.id}
+                                    initial={{
+                                        opacity: 0,
+                                        x: 0,
+                                        y: 0,
+                                        scale: 0,
+                                    }}
+                                    animate={{
+                                        opacity: 1,
+                                        x: position.x - 28, // Offset by half width (w-14 = 56px / 2 = 28)
+                                        y: position.y - 28,
+                                        scale: 1,
+                                    }}
+                                    exit={{
+                                        opacity: 0,
+                                        x: 0,
+                                        y: 0,
+                                        scale: 0,
+                                    }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 300,
+                                        damping: 20,
+                                        delay: index * 0.1 + 0.3, // Staggered delay after center appears
+                                    }}
+                                    className="absolute"
+                                >
+                                    <motion.button
+                                        onClick={() => {
+                                            item.onClick?.()
+                                            onSelect?.(item)
+                                        }}
+                                        onMouseEnter={() => setActiveIndex(index)}
+                                        onMouseLeave={() => setActiveIndex(null)}
+                                        className={cn(
+                                            "flex h-16 w-16 items-center justify-center rounded-full",
+                                            "border border-white/10 bg-[#0f172a] shadow-[0_0_15px_rgba(0,0,0,0.5)]",
+                                            "transition-all duration-300 hover:bg-blue-600 hover:border-blue-400 hover:scale-110 hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]",
+                                            activeIndex === index && "ring-2 ring-blue-500 bg-blue-600 scale-110",
+                                            "text-blue-400 hover:text-white"
+                                        )}
+                                        role="menuitem"
+                                        aria-label={item.label}
+                                    >
+                                        <div className="text-current scale-125">{item.icon}</div>
+                                    </motion.button>
+
+                                    {/* Hybrid Label Positioning */}
+                                    <motion.div
+                                        className={cn(
+                                            "absolute whitespace-nowrap pointer-events-none",
+                                            "text-sm font-semibold tracking-wide text-slate-100 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
+                                            // Hybrid Logic - EXTREME Spacing
+                                            Math.abs(position.x) < 40 // Near vertical axis
+                                                ? (position.y < 0
+                                                    ? "left-1/2 -translate-x-1/2 bottom-full mb-16" // Top item - massive 4rem margin
+                                                    : "left-1/2 -translate-x-1/2 top-full mt-16")   // Bottom item - massive 4rem margin
+                                                : (position.x > 0
+                                                    ? "left-full ml-20 top-1/2 -translate-y-1/2"    // Right side items - massive 5rem margin
+                                                    : "right-full mr-20 top-1/2 -translate-y-1/2")   // Left side items - massive 5rem margin
+                                        )}
+                                        initial={{
+                                            opacity: 0,
+                                            x: Math.abs(position.x) < 40 ? 0 : (position.x > 0 ? -10 : 10),
+                                            y: Math.abs(position.x) < 40 ? (position.y < 0 ? 10 : -10) : 0
+                                        }}
+                                        animate={{ opacity: 1, x: 0, y: 0 }}
+                                        transition={{ delay: index * 0.1 + 0.5 }}
+                                    >
+                                        {item.label}
+                                    </motion.div>
+                                </motion.div>
+                            )
+                        })}
+                    </div>
+                )}
+            </AnimatePresence>
+        </div>
+    )
+}
+
+// Export Component as default and named
+export { CircularCommandMenu }

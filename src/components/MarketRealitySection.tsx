@@ -163,6 +163,7 @@ export default function MarketRealitySection() {
                     flex-direction: column;
                 }
 
+                
                 /* Header Styling */
                 .mr-header {
                     text-align: left;
@@ -326,17 +327,28 @@ export default function MarketRealitySection() {
                     margin: 0;
                 }
 
-                /* CTA Banner Styling */
+                /* CTA Banner - Premium Dark Redesign */
                 .mr-cta-banner {
-                    background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%) !important;
+                    background: linear-gradient(to bottom, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%) !important;
+                    backdrop-filter: blur(20px);
+                    -webkit-backdrop-filter: blur(20px);
                     border-radius: 0;
-                    padding: 12rem 48px !important; /* Force padding application */
+                    padding: 8rem 64px 12rem !important; /* Increased bottom padding */
                     position: relative;
                     overflow: hidden;
-                    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.05);
+                    border-top: 1px solid rgba(255, 255, 255, 0.1);
                     z-index: 20;
                     width: 100%;
-                    border-top: 1px solid rgba(0, 0, 0, 0.03);
+                }
+
+                .mr-cta-banner::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 10%;
+                    right: 10%;
+                    height: 1px;
+                    background: linear-gradient(90deg, transparent, rgba(244, 63, 94, 0.5), transparent);
                 }
 
                 .mr-cta-content {
@@ -346,10 +358,9 @@ export default function MarketRealitySection() {
                     gap: 6rem;
                     position: relative;
                     z-index: 10;
-                    max-width: 1200px; /* Constrained width */
+                    max-width: 1200px;
                     margin: 0 auto;
                     width: 100%;
-                    padding: 0 2rem; /* Inner breathing room */
                 }
 
                 .mr-cta-text-group {
@@ -360,9 +371,9 @@ export default function MarketRealitySection() {
                     font-family: 'Outfit', sans-serif;
                     font-size: 0.875rem;
                     text-transform: uppercase;
-                    letter-spacing: 0.15em;
-                    color: #64748b;
-                    margin-bottom: 0; /* No space between */
+                    letter-spacing: 0.2em;
+                    color: #fb7185;
+                    margin-bottom: 0.75rem;
                     font-weight: 700;
                     display: block;
                     line-height: 1.2;
@@ -372,9 +383,9 @@ export default function MarketRealitySection() {
                     font-family: 'Outfit', sans-serif;
                     font-size: clamp(3rem, 6vw, 4rem);
                     font-weight: 800;
-                    color: #0f172a;
+                    color: #ffffff;
                     margin: 0;
-                    line-height: 1; /* Tight line height */
+                    line-height: 1.1;
                     letter-spacing: -0.03em;
                 }
 
@@ -393,6 +404,7 @@ export default function MarketRealitySection() {
                     cursor: pointer;
                     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                     flex-shrink: 0;
+                    box-shadow: 0 10px 30px rgba(244, 63, 94, 0.2);
                 }
 
                 .mr-cta-button:hover {
