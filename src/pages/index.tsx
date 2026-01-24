@@ -38,6 +38,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import WhyNeuraSection from '@/components/WhyNeuraSection';
 import MarketRealitySection from '@/components/MarketRealitySection';
 import NeuraSection from '@/components/NeuraSection';
+import OutcomesSection from '@/components/OutcomesSection';
 
 /**
  * Dynamically import GLTFViewer with SSR disabled.
@@ -467,6 +468,9 @@ export default function Home() {
 
                 {/* Neura Intelligence Section - Transparent with glassmorphism */}
                 <NeuraSection />
+
+                {/* Outcomes & Proof Section - Transparent Glass Card */}
+                <OutcomesSection />
 
                 {/* News Section - Sticky title with scrollable news list */}
                 <NewsSection />
