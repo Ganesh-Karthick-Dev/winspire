@@ -17,6 +17,7 @@ import MarketRealitySection from '@/components/MarketRealitySection';
 import NeuraSection from '@/components/NeuraSection';
 import OutcomesSection from '@/components/OutcomesSection';
 import { SpecialtySection } from '@/components/ui/specialty-section';
+import { EngagementModelsSection } from '@/components/ui/engagement-models-section';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import MarqueeText from '@/components/MarqueeText';
 import GradientButton from '@/components/ui/GradientButton';
@@ -373,6 +374,9 @@ export default function TempHome() {
 
                 {/* Specialties Section */}
                 <SpecialtySection />
+
+                {/* Engagement Models Section */}
+                <EngagementModelsSection />
 
             </div>
 
