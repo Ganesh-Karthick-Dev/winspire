@@ -162,20 +162,24 @@ export default function NeuraSection() {
                 </motion.div>
 
                 {/* Footer Banner */}
+                {/* Footer Banner */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="ns-cta-banner"
+                    className="relative z-20 m-4 md:m-8"
+                    style={{ padding: "6rem 4rem" }}
                 >
-                    <div className="ns-cta-content">
-                        <div className="ns-cta-left">
-                            <p className="ns-cta-label">Technology with purpose</p>
-                            <h3 className="ns-cta-title">Perform at your best.</h3>
+                    <div className="flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-32 max-w-[1250px] mx-auto">
+                        <div className="flex-1 min-w-[300px]">
+                            <p className="font-outfit text-sm md:text-base uppercase tracking-[0.3em] text-blue-500 font-bold mb-6 block">Technology with purpose</p>
+                            <h3 className="font-outfit text-[3.5rem] md:text-[4.5rem] font-extrabold text-white m-0 leading-[1.05] tracking-tight">Perform at your best.</h3>
                         </div>
-                        <p className="ns-cta-quote">
-                            "Technology exists here for one reason: to help people perform at their best, consistently and at scale."
-                        </p>
+                        <div className="flex-1 lg:pl-12 border-t-2 lg:border-t-0 lg:border-l-2 border-slate-700 pt-8 lg:pt-0 relative mt-2 lg:mt-0">
+                            <p className="font-outfit text-2xl md:text-3xl text-slate-300 italic leading-relaxed font-medium">
+                                "Technology exists here for one reason: to help people perform at their best, consistently and at scale."
+                            </p>
+                        </div>
                     </div>
                 </motion.div>
             </div>
@@ -392,86 +396,8 @@ export default function NeuraSection() {
                    /* No transform scale to avoid layout confusion */
                 }
 
-                /* CTA Banner - Premium Dark Redesign */
                 /* CTA Banner - Targeted Spacing & Visibility Redesign */
-                .ns-cta-banner {
-                    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.85) 0%, rgba(10, 15, 28, 0.98) 100%);
-                    backdrop-filter: blur(30px);
-                    -webkit-backdrop-filter: blur(30px);
-                    padding: 10rem 64px 15rem; /* Massive bottom space targeted to footer */
-                    border-top: 1px solid rgba(59, 130, 246, 0.2);
-                    position: relative;
-                }
-
-                .ns-cta-banner::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 5%;
-                    right: 5%;
-                    height: 1px;
-                    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
-                }
-
-                .ns-cta-content {
-                    display: flex;
-                    align-items: flex-start;
-                    justify-content: space-between;
-                    gap: 8rem;
-                    max-width: 1250px;
-                    margin: 0 auto;
-                }
-
-                .ns-cta-left {
-                    flex: 1.2;
-                    min-width: 480px; /* Prevent awkward title wrapping */
-                }
-
-                .ns-cta-label {
-                    font-family: 'Outfit', sans-serif;
-                    font-size: 0.95rem;
-                    text-transform: uppercase;
-                    letter-spacing: 0.3em;
-                    color: #3b82f6;
-                    margin-bottom: 2rem;
-                    font-weight: 700;
-                    display: block;
-                }
-
-                .ns-cta-title {
-                    font-family: 'Outfit', sans-serif;
-                    font-size: clamp(3.5rem, 6vw, 4.5rem);
-                    font-weight: 800;
-                    color: #ffffff;
-                    margin: 0;
-                    line-height: 1.05;
-                    letter-spacing: -0.03em;
-                }
-
-                .ns-cta-quote {
-                    flex: 1.5;
-                    font-family: 'Outfit', sans-serif;
-                    font-size: 1.65rem;
-                    color: #cbd5e1;
-                    line-height: 1.5;
-                    font-style: italic;
-                    padding-left: 6rem;
-                    border-left: 1px solid rgba(59, 130, 246, 0.3);
-                    margin: 0;
-                    position: relative;
-                    margin-top: 1.5rem;
-                }
-                
-                .ns-cta-quote::before {
-                    content: '"';
-                    position: absolute;
-                    left: 2rem;
-                    top: -1rem;
-                    font-size: 5rem;
-                    color: rgba(59, 130, 246, 0.3);
-                    font-family: serif;
-                    line-height: 1;
-                }
+                /* Removed custom .ns-cta-banner styles in favor of Tailwind classes */
 
                 /* Responsive */
                 @media (max-width: 1024px) {

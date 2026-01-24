@@ -120,15 +120,15 @@ export default function MarketRealitySection() {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="relative z-20 overflow-hidden bg-white m-4 md:m-8 shadow-2xl"
+                    className="relative z-20 m-4 md:m-8"
                     style={{ padding: "4rem 4rem" }}
                 >
-                    <div className="mr-cta-content">
-                        <div className="mr-cta-text-group">
-                            <p className="mr-cta-label">Delay doesn’t preserve stability.</p>
-                            <h3 className="mr-cta-title">It erodes it.</h3>
+                    <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24 relative z-10 max-w-[1250px] mx-auto w-full text-center lg:text-left">
+                        <div className="max-w-[600px] flex-1">
+                            <p className="font-outfit text-sm md:text-base uppercase tracking-[0.3em] text-rose-500 font-bold mb-6 block leading-tight">Delay doesn’t preserve stability.</p>
+                            <h3 className="font-outfit text-[3.5rem] md:text-[4.5rem] font-extrabold text-white m-0 leading-[1.1] tracking-tighter">It erodes it.</h3>
                         </div>
-                        <button className="mr-cta-button">
+                        <button className="inline-flex items-center justify-center gap-5 bg-rose-500 text-white font-outfit text-xl md:text-2xl font-extrabold py-6 px-12 rounded-[20px] transition-all hover:scale-105 hover:shadow-xl shadow-lg border-none cursor-pointer shrink-0 w-full md:w-auto">
                             <span>Stop Revenue Leakage</span>
                             <ArrowRight size={20} />
                         </button>
