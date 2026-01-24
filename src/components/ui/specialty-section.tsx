@@ -116,7 +116,7 @@ export function SpecialtySection() {
                 @media (min-width: 768px) {
                     .specialties-grid { 
                         grid-template-columns: repeat(2, 1fr);
-                        column-gap: 4rem;
+                        column-gap: 3rem;
                         row-gap: 2rem;
                     }
                 }
@@ -129,25 +129,40 @@ export function SpecialtySection() {
                 .specialty-item {
                     display: flex;
                     align-items: center;
-                    gap: 1rem;
-                    padding: 1rem;
-                    border-radius: 12px;
-                    transition: background 0.3s ease;
+                    gap: 1.25rem;
+                    padding: 1.5rem;
+                    border-radius: 16px;
+                    background: rgba(15, 23, 42, 0.3); /* Subtle dark glass */
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    backdrop-filter: blur(10px);
+                    transition: all 0.3s ease;
+                    cursor: default;
                 }
                 .specialty-item:hover {
-                    background: rgba(255, 255, 255, 0.05);
+                    background: rgba(30, 41, 59, 0.5);
+                    border-color: rgba(96, 165, 250, 0.3); /* Blue hover border */
+                    transform: translateY(-2px);
+                    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
                 }
 
                 .icon-wrapper {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    width: 2rem;
-                    height: 2rem;
-                    border-radius: 50%;
-                    background: rgba(59, 130, 246, 0.1);
+                    width: 3rem;
+                    height: 3rem;
+                    border-radius: 12px;
+                    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(99, 102, 241, 0.05));
+                    border: 1px solid rgba(59, 130, 246, 0.1);
                     flex-shrink: 0;
+                    transition: all 0.3s ease;
                 }
+                .specialty-item:hover .icon-wrapper {
+                    background: rgba(59, 130, 246, 0.2);
+                    border-color: rgba(59, 130, 246, 0.3);
+                    transform: scale(1.05); /* Icon pop */
+                }
+
                 :global(.check-icon) {
                     color: #60a5fa;
                 }
@@ -155,8 +170,9 @@ export function SpecialtySection() {
                 .specialty-text {
                     font-family: 'Outfit', sans-serif;
                     font-size: 1.125rem;
-                    color: white;
+                    color: #f1f5f9; /* Slate-100 */
                     font-weight: 500;
+                    line-height: 1.4;
                 }
 
                 .divider {
