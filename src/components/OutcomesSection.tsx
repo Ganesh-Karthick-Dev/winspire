@@ -61,7 +61,7 @@ export default function OutcomesSection() {
                     <SectionTitle
                         title="RESULTS THAT SPEAK FOR THEMSELVES."
                         subtitle="Outcomes & Proof"
-                        align="center"
+                        align="left"
                         textColor="text-white"
                         subtitleSize="text-sm md:text-base tracking-[0.3em] font-bold text-blue-400 uppercase"
                         disableShadow={true}
@@ -125,19 +125,25 @@ export default function OutcomesSection() {
             <style jsx>{`
                 .outcomes-section {
                     position: relative;
-                    padding: 8rem 2rem;
+                    z-index: 50; /* Increased to stay above 3D viewer */
+                    padding: 8rem 0; /* Removed side padding here */
                     background: transparent;
                     perspective: 2000px; /* Enable 3D space */
                 }
 
                 .outcomes-container {
+                    width: 100%;
                     max-width: 1400px;
                     margin: 0 auto;
                 }
 
                 .outcomes-header {
                     margin-bottom: 6rem;
-                    text-align: center;
+                    text-align: left;
+                    padding: 0 24px; /* Mobile Padding */
+                }
+                @media (min-width: 768px) {
+                    .outcomes-header { padding: 0 64px; } /* Desktop Padding to match Neura */
                 }
 
                 /* 3D Grid */
@@ -147,6 +153,13 @@ export default function OutcomesSection() {
                     gap: 2rem;
                     margin-bottom: 6rem;
                     perspective: 1000px;
+                    padding: 0 24px; /* Mobile Padding */
+                }
+                @media (min-width: 768px) {
+                    .outcomes-grid { 
+                        padding: 0 64px; /* Desktop Padding to match Neura */
+                        grid-template-columns: repeat(3, 1fr); /* Force 3 columns on large screens */
+                    }
                 }
 
                 .outcome-card-wrapper {
@@ -265,6 +278,10 @@ export default function OutcomesSection() {
                     flex-direction: column;
                     align-items: center;
                     gap: 4rem;
+                    padding: 0 24px; /* Mobile Padding */
+                }
+                @media (min-width: 768px) {
+                    .proof-footer { padding: 0 64px; } /* Desktop Padding */
                 }
 
                 .testimonials-row {
