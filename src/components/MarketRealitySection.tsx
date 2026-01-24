@@ -120,7 +120,7 @@ export default function MarketRealitySection() {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="relative z-20 m-4 md:m-8 bg-white rounded-[32px] shadow-2xl overflow-hidden"
+                    className="relative z-20 m-4 md:m-8 bg-white shadow-2xl overflow-hidden"
                     style={{ padding: "4rem 4rem" }}
                 >
                     <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24 relative z-10 max-w-[1250px] mx-auto w-full text-center lg:text-left">
@@ -128,9 +128,12 @@ export default function MarketRealitySection() {
                             <p className="font-outfit text-sm md:text-base uppercase tracking-[0.3em] !text-rose-500 font-bold mb-6 block leading-tight">Delay doesn’t preserve stability.</p>
                             <h3 className="font-outfit text-[3.5rem] md:text-[4.5rem] font-extrabold !text-slate-900 m-0 leading-[1.1] tracking-tighter">It erodes it.</h3>
                         </div>
-                        <button className="flex items-center justify-center gap-5 bg-rose-500 text-white font-outfit text-xl md:text-2xl font-extrabold py-6 px-12 rounded-[20px] transition-all hover:scale-105 hover:shadow-xl shadow-lg border-none cursor-pointer shrink-0 w-full md:w-auto">
-                            <span>Stop Revenue Leakage</span>
-                            <ArrowRight size={20} />
+                        <button
+                            className="flex items-center justify-center gap-5 bg-rose-500 text-white font-outfit text-xl md:text-2xl font-bold rounded-[20px] transition-all hover:scale-105 hover:shadow-xl shadow-lg border-none cursor-pointer shrink-0 w-full md:w-auto min-w-fit whitespace-nowrap"
+                            style={{ padding: "24px 48px" }}
+                        >
+                            <span className="relative top-[1px]">Stop Revenue Leakage</span>
+                            <ArrowRight size={24} strokeWidth={2.5} />
                         </button>
                     </div>
                 </motion.div>

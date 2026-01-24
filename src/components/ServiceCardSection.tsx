@@ -589,7 +589,7 @@ export default function ServiceCardSection() {
                                     <p style={{ color: '#333', fontSize: '15px', fontWeight: 600, fontFamily: 'Outfit, sans-serif', margin: 0, lineHeight: 1.3 }}>
                                         Delay doesn't preserve stability.<br />It erodes it.
                                     </p>
-                                    <p style={{ color: '#4f9cf9', fontSize: '13px', fontWeight: 600, fontFamily: 'Outfit, sans-serif', margin: '8px 0 0 0', cursor: 'pointer' }}>
+                                    <p style={{ color: '#4f9cf9', fontSize: '13px', fontWeight: 600, fontFamily: 'Outfit, sans-serif', margin: '8px 0 0 0', cursor: 'pointer'}}>
                                         Stop Revenue Leakage →
                                     </p>
                                 </div>
