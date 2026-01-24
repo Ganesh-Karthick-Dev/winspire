@@ -293,24 +293,44 @@ export default function OutcomesSection() {
                 }
 
                 .testimonial-simple {
-                    max-width: 500px;
+                    flex: 1;
+                    min-width: 300px;
+                    max-width: 450px;
+                    padding: 2rem 2.5rem;
+                    border-radius: 24px;
+                    background: rgba(15, 23, 42, 0.3);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    transition: all 0.3s ease;
+                }
+
+                .testimonial-simple:hover {
+                    background: rgba(15, 23, 42, 0.5);
+                    border-color: rgba(96, 165, 250, 0.3);
+                    transform: translateY(-5px);
                 }
 
                 .t-quote {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.25rem;
-                    color: #e2e8f0;
-                    margin-bottom: 1rem;
+                    font-size: 1.125rem;
+                    color: white;
+                    margin-bottom: 1.5rem;
                     line-height: 1.6;
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Good contrast */
+                }
+                @media (min-width: 768px) {
+                    .t-quote { font-size: 1.25rem; }
                 }
 
                 .t-author {
                     font-family: 'Outfit', sans-serif;
                     font-size: 0.875rem;
-                    letter-spacing: 0.1em;
+                    letter-spacing: 0.15em;
                     text-transform: uppercase;
-                    color: #60a5fa;
-                    font-weight: 700;
+                    color: #bae6fd; /* Sky-200 for visibility */
+                    font-weight: 800;
+                    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
                 }
 
                 /* PREMIUM CTA */
