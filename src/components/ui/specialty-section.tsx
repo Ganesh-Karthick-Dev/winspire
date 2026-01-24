@@ -160,8 +160,8 @@ export function SpecialtySection() {
                 }
 
                 .divider {
-                    height: 1px;
-                    background: rgba(255, 255, 255, 0.1);
+                    height: 2px; /* Thicker divider */
+                    background: rgba(255, 255, 255, 0.2); /* Slightly more visible */
                     margin: 3rem 0;
                     width: 100%;
                 }
@@ -169,10 +169,11 @@ export function SpecialtySection() {
                 .description-text {
                     font-family: 'Outfit', sans-serif;
                     font-size: 1.25rem;
-                    color: #94a3b8;
+                    color: #ffffff; /* White for better visibility */
                     line-height: 1.6;
                     margin-bottom: 3rem;
                     max-width: 900px;
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Shadow to pop against 3D bg */
                 }
 
                 .cta-wrapper {
