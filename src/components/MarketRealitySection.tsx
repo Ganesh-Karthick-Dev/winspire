@@ -120,7 +120,8 @@ export default function MarketRealitySection() {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mr-cta-banner"
+                    className="relative z-20 overflow-hidden bg-white m-4 md:m-8 shadow-2xl"
+                    style={{ padding: "4rem 4rem" }}
                 >
                     <div className="mr-cta-content">
                         <div className="mr-cta-text-group">
@@ -324,28 +325,8 @@ export default function MarketRealitySection() {
                 }
 
                 /* CTA Banner - Targeted Spacing & Visibility Redesign */
-                .mr-cta-banner {
-                    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.85) 0%, rgba(10, 15, 28, 0.98) 100%) !important;
-                    backdrop-filter: blur(30px);
-                    -webkit-backdrop-filter: blur(30px);
-                    border-radius: 0;
-                    padding: 10rem 64px 15rem !important; /* Massive bottom space targeted to footer */
-                    position: relative;
-                    overflow: hidden;
-                    border-top: 1px solid rgba(244, 63, 94, 0.2);
-                    z-index: 20;
-                    width: 100%;
-                }
+                /* Removed custom .mr-cta-banner styles in favor of Tailwind classes */
 
-                .mr-cta-banner::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 5%;
-                    right: 5%;
-                    height: 1px;
-                    background: linear-gradient(90deg, transparent, rgba(244, 63, 94, 0.5), transparent);
-                }
 
                 .mr-cta-content {
                     display: flex;
@@ -380,7 +361,7 @@ export default function MarketRealitySection() {
                     font-family: 'Outfit', sans-serif;
                     font-size: clamp(3.5rem, 6vw, 4.5rem);
                     font-weight: 800;
-                    color: #ffffff;
+                    color: #0f172a;
                     margin: 0;
                     line-height: 1.1;
                     letter-spacing: -0.03em;
