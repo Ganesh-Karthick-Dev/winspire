@@ -14,109 +14,204 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
-import Hero from '@/components/Hero';
-import AboutSection from '@/components/AboutSection';
-import ServicesSection from '@/components/ServicesSection';
-import ServiceCardSection from '@/components/ServiceCardSection';
-import CenterTextSection from '@/components/CenterTextSection';
-import { SpecialtySection } from '@/components/ui/specialty-section';
-import { EngagementModelsSection } from '@/components/ui/engagement-models-section';
-import ValuePropsSection from '@/components/ValuePropsSection';
-
-import CareersScrollSection from '@/components/CareersScrollSection';
-import NewsSection from '@/components/NewsSection';
-import CareersContactLinks from '@/components/CareersContactLinks';
+import DebugPanel from '@/components/DebugPanel';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import { animationSettings } from '@/lib/scrollAnimations';
 import MarqueeText from '@/components/MarqueeText';
 import GradientButton from '@/components/ui/GradientButton';
-import { scrollKeyframes, animationSettings } from '@/lib/scrollAnimations';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import WhyNeuraSection from '@/components/WhyNeuraSection';
+
+// All sections enabled
+import Hero from '@/components/Hero';
+// STEP 2: Enable AboutSection
+import AboutSection from '@/components/AboutSection';
+// STEP 3: Enable ValuePropsSection
+import ValuePropsSection from '@/components/ValuePropsSection';
+// STEP 4: Enable ServicesSection
+import ServicesSection from '@/components/ServicesSection';
+// STEP 5: Enable ServiceCardSection
+import ServiceCardSection from '@/components/ServiceCardSection';
+// STEP 6: Enable CenterTextSection
+import CenterTextSection from '@/components/CenterTextSection';
+// STEP 7: Enable SpecialtySection
+import { SpecialtySection } from '@/components/ui/specialty-section';
+// STEP 8: EngagementModelsSection - ⚠️ DISABLED: Causes compilation hang
+// import { EngagementModelsSection } from '@/components/ui/engagement-models-section';
+// STEP 9: Enable CareersScrollSection
+import CareersScrollSection from '@/components/CareersScrollSection';
+// STEP 10: Enable MarketRealitySection
 import MarketRealitySection from '@/components/MarketRealitySection';
+// STEP 11: Enable NeuraSection
 import NeuraSection from '@/components/NeuraSection';
+// STEP 12: Enable OutcomesSection
 import OutcomesSection from '@/components/OutcomesSection';
+// STEP 13: Enable NewsSection
+import NewsSection from '@/components/NewsSection';
+// STEP 14: Enable CareersContactLinks (last section)
+import CareersContactLinks from '@/components/CareersContactLinks';
+// import ValuePropsSection from '@/components/ValuePropsSection';
+// import ServicesSection from '@/components/ServicesSection';
+// import ServiceCardSection from '@/components/ServiceCardSection';
+// import CenterTextSection from '@/components/CenterTextSection';
+// import { SpecialtySection } from '@/components/ui/specialty-section';
+// import { EngagementModelsSection } from '@/components/ui/engagement-models-section';
+// import CareersScrollSection from '@/components/CareersScrollSection';
+// import NewsSection from '@/components/NewsSection';
+// import CareersContactLinks from '@/components/CareersContactLinks';
+// import WhyNeuraSection from '@/components/WhyNeuraSection';
+// import MarketRealitySection from '@/components/MarketRealitySection';
+// import NeuraSection from '@/components/NeuraSection';
+// import OutcomesSection from '@/components/OutcomesSection';
 
 /**
- * Dynamically import GLTFViewer with SSR disabled.
+ * 3D Model imports - ENABLED
  */
 const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
     ssr: false,
     loading: () => null,
 });
 
-/**
- * Dynamically import ModelDebugPanel (only in dev mode)
- */
 const ModelDebugPanel = dynamic(() => import('@/components/ModelDebugPanel'), {
     ssr: false,
 });
 
-// Get initial transform from first keyframe (Hero)
-const getInitialTransform = () => {
-    const firstKeyframe = scrollKeyframes[0];
-    return {
-        position: { ...firstKeyframe.transform.position },
-        rotation: { ...firstKeyframe.transform.rotation },
-        scale: firstKeyframe.transform.scale,
-    };
-};
+// Wrapper component to track Hero load time
+function HeroWrapper() {
+    useEffect(() => {
+        if ((window as any).debugPanel) {
+            (window as any).debugPanel.startTimer('Hero');
+        }
+        const timer = setTimeout(() => {
+            if ((window as any).debugPanel) {
+                (window as any).debugPanel.endTimer('Hero');
+            }
+        }, 100);
+        return () => clearTimeout(timer);
+    }, []);
+
+    return (
+        <Hero
+            title="Designing Revenue Cycles That Actually Work"
+            subtitle="AI-Powered. System-Driven. Outcome-Guaranteed"
+            ctaText="Explore Features"
+            ctaHref="#about"
+        />
+    );
+}
+
+// Generic wrapper to track any section load time
+function SectionWrapper({ name, children }: { name: string; children: React.ReactNode }) {
+    useEffect(() => {
+        if ((window as any).debugPanel) {
+            (window as any).debugPanel.startTimer(name);
+            (window as any).debugPanel.log('info', `Rendering ${name}`, name);
+        }
+        const timer = setTimeout(() => {
+            if ((window as any).debugPanel) {
+                (window as any).debugPanel.endTimer(name);
+            }
+        }, 50);
+        return () => clearTimeout(timer);
+    }, [name]);
+
+    return <>{children}</>;
+}
 
 export default function Home() {
     // Track if 3D should be disabled
     const is3DDisabled = useRef(false);
     const isDev = process.env.NODE_ENV === 'development';
-
-    // Mobile detection - uses window.matchMedia which works with DevTools
     const isMobile = useIsMobile();
 
-    // Add ScrollTrigger for fade effect
+    // Loader management - ENABLED
+    const SHOW_LOADER = true;
     useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
-        const ctx = gsap.context(() => {
-            gsap.to('.hero-text-fade', {
-                opacity: 0,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: 'body',
-                    start: 'top top',
-                    end: '+=250', // Immediate fast fade out
-                    scrub: true,
+        if ((window as any).debugPanel) {
+            (window as any).debugPanel.log('info', 'Home component mounted', 'Home');
+        }
+
+        if (!SHOW_LOADER) {
+            const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
+            if (loaderOverlay) {
+                loaderOverlay.style.opacity = '0';
+                loaderOverlay.style.visibility = 'hidden';
+            }
+            document.body.classList.remove('loading');
+            return;
+        }
+
+        // Reset loader and check if 3D should be disabled
+        resetLoaderToZero();
+        is3DDisabled.current = shouldDisable3D();
+
+        if ((window as any).debugPanel) {
+            (window as any).debugPanel.log('info', `3D disabled: ${is3DDisabled.current}`, 'Home');
+        }
+
+        // Safety timeout: If loader is still stuck after 5 seconds, hide it
+        const safetyTimeout = setTimeout(() => {
+            const progressEl = document.querySelector('.loader-progress');
+            const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
+            if (progressEl && progressEl.textContent === '0%' && loaderOverlay) {
+                if ((window as any).debugPanel) {
+                    (window as any).debugPanel.log('warn', 'Loader stuck at 0% - forcing hide', 'Home');
                 }
-            });
-        });
-        return () => ctx.revert();
+                loaderOverlay.style.opacity = '0';
+                loaderOverlay.style.visibility = 'hidden';
+                document.body.classList.remove('loading');
+            }
+        }, 5000);
+
+        return () => clearTimeout(safetyTimeout);
     }, []);
 
-    // ========================================
-    // DEBUG MODE TOGGLE
-    // Set to true to use Leva controls for finding coordinates
-    // Set to false to use scroll-based animation
-    // ========================================
-    const DEBUG_MODE = false; // 🎯 Toggle this to switch modes
-
-    // === Manual Transform State (for Debug Mode) ===
-    // Initial values come from first keyframe in scrollAnimations.ts
-    const [manualTransform, setManualTransform] = useState(getInitialTransform);
-    const [rotateSpeed, setRotateSpeed] = useState(animationSettings.rotationSpeed);
-
-    // === Scroll Progress Debug ===
-    const [scrollProgress, setScrollProgress] = useState(0);
+    // Scroll animation for 3D model - ENABLED
+    const DEBUG_MODE = false;
+    const scrollAnimation = useScrollAnimation({
+        enabled: !DEBUG_MODE,
+    });
+    
+    // State to force React updates when transform changes
+    // The scroll animation uses refs internally, so we need to read it periodically
+    const [modelTransform, setModelTransform] = useState(() => scrollAnimation.transform);
+    
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
-            setScrollProgress(progress);
+        let rafId: number;
+        const updateTransform = () => {
+            const current = scrollAnimation.transform;
+            setModelTransform(prev => {
+                // Only update if values actually changed (avoid unnecessary re-renders)
+                if (
+                    prev.position.x !== current.position.x ||
+                    prev.position.y !== current.position.y ||
+                    prev.position.z !== current.position.z ||
+                    prev.rotation.x !== current.rotation.x ||
+                    prev.rotation.y !== current.rotation.y ||
+                    prev.rotation.z !== current.rotation.z ||
+                    prev.scale !== current.scale
+                ) {
+                    return {
+                        position: { ...current.position },
+                        rotation: { ...current.rotation },
+                        scale: current.scale,
+                    };
+                }
+                return prev;
+            });
+            rafId = requestAnimationFrame(updateTransform);
         };
-        window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Initial
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+        rafId = requestAnimationFrame(updateTransform);
+        return () => cancelAnimationFrame(rafId);
+    }, [scrollAnimation]);
+    
+    // Rotate speed from settings
+    const rotateSpeed = animationSettings.rotationSpeed;
 
-    // === Mission Text Cycling ===
+    // Mission Text Cycling - ENABLED
     const missionMessages = [
         {
             title: "Our Mission",
@@ -137,79 +232,154 @@ export default function Home() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            // Fade out
             setMissionFade(false);
-
-            // After fade out, change text and fade in
             setTimeout(() => {
                 setCurrentMissionIndex((prev) => (prev + 1) % missionMessages.length);
                 setMissionFade(true);
-            }, 300); // 300ms for fade out
-        }, 8000); // Change every 8 seconds (much slower)
+            }, 300);
+        }, 8000);
 
         return () => clearInterval(interval);
     }, []);
 
-
-    // === Scroll Animation (for Production Mode) ===
-    const { transform: scrollTransform } = useScrollAnimation({
-        enabled: !DEBUG_MODE, // Only enable when not in debug mode
-    });
-
-    // Choose which transform to use based on mode
-    const modelTransform = DEBUG_MODE ? manualTransform : scrollTransform;
-
-    // ========================================
-    // LOADER TOGGLE
-    // ========================================
-    const SHOW_LOADER = true; // Set to true to show loader animation
-
+    // ScrollTrigger for fade effect - ENABLED
     useEffect(() => {
-        // Skip loader if disabled
-        if (!SHOW_LOADER) {
-            const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
-            if (loaderOverlay) {
-                loaderOverlay.style.opacity = '0';
-                loaderOverlay.style.visibility = 'hidden';
-            }
-            document.body.classList.remove('loading');
-            return;
-        }
-
-        // Always show loader on page load - let the 3D model loading control progress
-        resetLoaderToZero();
-
-        is3DDisabled.current = shouldDisable3D();
-
-        // Safety timeout: If loader is still stuck after 5 seconds, hide it (Safari/Mac fix)
-        const safetyTimeout = setTimeout(() => {
-            const progressEl = document.querySelector('.loader-progress');
-            const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
-            if (progressEl && progressEl.textContent === '0%' && loaderOverlay) {
-                console.warn('Loader stuck at 0% - forcing hide');
-                loaderOverlay.style.opacity = '0';
-                loaderOverlay.style.visibility = 'hidden';
-                document.body.classList.remove('loading');
-            }
-        }, 5000);
-
-        return () => clearTimeout(safetyTimeout);
+        gsap.registerPlugin(ScrollTrigger);
+        const ctx = gsap.context(() => {
+            gsap.to('.hero-text-fade', {
+                opacity: 0,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: '+=250',
+                    scrub: true,
+                }
+            });
+        });
+        return () => ctx.revert();
     }, []);
+
+    // COMMENTED OUT - ScrollTrigger fade effect
+    // useEffect(() => {
+    //     gsap.registerPlugin(ScrollTrigger);
+    //     const ctx = gsap.context(() => {
+    //         gsap.to('.hero-text-fade', {
+    //             opacity: 0,
+    //             ease: 'none',
+    //             scrollTrigger: {
+    //                 trigger: 'body',
+    //                 start: 'top top',
+    //                 end: '+=250',
+    //                 scrub: true,
+    //             }
+    //         });
+    //     });
+    //     return () => ctx.revert();
+    // }, []);
+
+    // COMMENTED OUT - Debug mode and 3D transform state
+    // const DEBUG_MODE = false;
+    // const [manualTransform, setManualTransform] = useState(DEFAULT_INITIAL_TRANSFORM);
+    // const [rotateSpeed, setRotateSpeed] = useState(animationSettings.rotationSpeed);
+    // useEffect(() => {
+    //     getInitialTransform().then(transform => {
+    //         setManualTransform(transform);
+    //     });
+    // }, []);
+
+    // COMMENTED OUT - Scroll progress debug
+    // const [scrollProgress, setScrollProgress] = useState(0);
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    //         const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
+    //         setScrollProgress(progress);
+    //     };
+    //     window.addEventListener('scroll', handleScroll);
+    //     handleScroll();
+    //     return () => window.removeEventListener('scroll', handleScroll);
+    // }, []);
+
+    // COMMENTED OUT - Mission Text Cycling (used with 3D overlay)
+    // const missionMessages = [
+    //     {
+    //         title: "Our Mission",
+    //         content: (
+    //             <>
+    //                 <span style={{ fontSize: '1.3em', fontWeight: 700 }}>Winspire RCM is a human-centric</span>
+    //                 , AI-enabled partner that helps healthcare organizations engineer predictable financial outcomes.
+    //             </>
+    //         )
+    //     },
+    //     {
+    //         title: "Authority Thought",
+    //         content: "RCM doesn't fail at the bottom. It fails at the top."
+    //     }
+    // ];
+    // const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
+    // const [missionFade, setMissionFade] = useState(true);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setMissionFade(false);
+    //         setTimeout(() => {
+    //             setCurrentMissionIndex((prev) => (prev + 1) % missionMessages.length);
+    //             setMissionFade(true);
+    //         }, 300);
+    //     }, 8000);
+    //     return () => clearInterval(interval);
+    // }, []);
+
+
+    // COMMENTED OUT - Scroll animation hook
+    // const { transform: scrollTransform } = useScrollAnimation({
+    //     enabled: !DEBUG_MODE,
+    // });
+    // const modelTransform = DEBUG_MODE ? manualTransform : scrollTransform;
+
+    // COMMENTED OUT - Loader management
+    // const SHOW_LOADER = true;
+    // useEffect(() => {
+    //     if (!SHOW_LOADER) {
+    //         const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
+    //         if (loaderOverlay) {
+    //             loaderOverlay.style.opacity = '0';
+    //             loaderOverlay.style.visibility = 'hidden';
+    //         }
+    //         document.body.classList.remove('loading');
+    //         return;
+    //     }
+    //     resetLoaderToZero();
+    //     is3DDisabled.current = shouldDisable3D();
+    //     const safetyTimeout = setTimeout(() => {
+    //         const progressEl = document.querySelector('.loader-progress');
+    //         const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
+    //         if (progressEl && progressEl.textContent === '0%' && loaderOverlay) {
+    //             console.warn('Loader stuck at 0% - forcing hide');
+    //             loaderOverlay.style.opacity = '0';
+    //             loaderOverlay.style.visibility = 'hidden';
+    //             document.body.classList.remove('loading');
+    //         }
+    //     }, 5000);
+    //     return () => clearTimeout(safetyTimeout);
+    // }, []);
 
     return (
         <Layout
             title="Home"
             description="Experience stunning 3D visuals with smooth scroll animations. Built with Next.js, Three.js, and GSAP for optimal performance."
         >
-            {/* Leva Debug Panel - Only in dev mode AND debug mode enabled */}
-            {isDev && DEBUG_MODE && (
+            {/* Debug Panel */}
+            <DebugPanel />
+            {/* COMMENTED OUT - Debug Panel */}
+            {/* {isDev && DEBUG_MODE && (
                 <ModelDebugPanel
                     transform={manualTransform}
                     onTransformChange={setManualTransform}
                     rotateSpeed={rotateSpeed}
                     onRotateSpeedChange={setRotateSpeed}
                 />
-            )}
+            )} */}
 
             {/* Debug Mode Indicator */}
             {/* {isDev && DEBUG_MODE && (
@@ -244,9 +414,9 @@ export default function Home() {
 
             {/* ... rest of the component ... */}
 
-            {/* Page wrapper for z-index stacking */}
+            {/* Page wrapper with 3D model */}
             <div className="page-wrapper">
-                {/* 3D Viewer - Now shown on all devices with mobile-optimized keyframes */}
+                {/* 3D Viewer - ENABLED */}
                 {!is3DDisabled.current && (
                     <GLTFViewer
                         manualTransform={modelTransform}
@@ -256,18 +426,9 @@ export default function Home() {
                     />
                 )}
 
-                {/* 
-                  Front-layer Marquee Text - ON TOP of 3D model (right side only)
-                  Must be absolute so it scrolls with the page.
-                  Uses .hero class to inherit exact same responsive padding as the real Hero section.
-                  This ensures the text aligns perfectly with the back layer.
-                */}
+                {/* Front-layer Marquee Text - Right Side (ON TOP of 3D model) */}
                 {!is3DDisabled.current && (
                     <div className="hero !absolute !top-0 !left-0 w-full !min-h-screen z-30 pointer-events-none !bg-transparent">
-                        {/* 
-                            Inner wrapper mimics .hero-content area.
-                            The .hero class handles the responsive padding around this wrapper.
-                        */}
                         <div className="w-full flex-1 relative">
                             <div
                                 className="absolute left-0 right-0 flex items-center hero-text-fade"
@@ -359,19 +520,13 @@ export default function Home() {
                                     </GradientButton>
                                 </div>
                             )}
-
                         </div>
                     </div>
                 )}
 
                 {/* Hero Section with Mobile Overlay Container */}
                 <div className="hero-section-container" style={{ position: 'relative' }}>
-                    <Hero
-                        title={`Designing Revenue Cycles That Actually Work`}
-                        subtitle="AI-Powered. System-Driven. Outcome-Guaranteed"
-                        ctaText="Explore Features"
-                        ctaHref="#about"
-                    />
+                    <HeroWrapper />
 
                     {/* Mobile Hero Overlay - Mission & Scroll Indicator */}
                     {isMobile && (
@@ -437,48 +592,61 @@ export default function Home() {
                         </div>
                     )}
                 </div>
-
-                {/* Value Props Section - 3 Interactive Cards */}
-                <ValuePropsSection />
-
-                {/* About Section with Transition Zone */}
-                <AboutSection />
-
-                {/* Services Section - Sticky Left + Scrollable Right */}
-                <ServicesSection />
-
-                {/* Service Card Section - Sticky with animated sphere */}
-                <ServiceCardSection />
-
-                {/* Center Text Section - Simple 100vh centered text */}
-                <CenterTextSection />
-
-                {/* Built for Every Specialty Section */}
-                <SpecialtySection />
-
-                {/* Engagement Models Section - Parallax Cards */}
-                <EngagementModelsSection />
-
-
-                {/* Careers Scroll Section - Frosted glass with animated image columns */}
-                <CareersScrollSection />
-
-                {/* Market Reality Section - Dark theme with urgency */}
-                <MarketRealitySection />
-
-                {/* Neura Intelligence Section - Transparent with glassmorphism */}
-                <NeuraSection />
-
-                {/* Outcomes & Proof Section - Transparent Glass Card */}
-                <OutcomesSection />
-
-                {/* News Section - Sticky title with scrollable news list */}
-                <NewsSection />
-
+                
+                <SectionWrapper name="ValuePropsSection">
+                    <ValuePropsSection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="AboutSection">
+                    <AboutSection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="ServicesSection">
+                    <ServicesSection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="ServiceCardSection">
+                    <ServiceCardSection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="CenterTextSection">
+                    <CenterTextSection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="SpecialtySection">
+                    <SpecialtySection />
+                </SectionWrapper>
+                
+                {/* ⚠️ DISABLED: EngagementModelsSection causes compilation hang */}
+                {/* <SectionWrapper name="EngagementModelsSection">
+                    <EngagementModelsSection />
+                </SectionWrapper> */}
+                
+                <SectionWrapper name="CareersScrollSection">
+                    <CareersScrollSection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="MarketRealitySection">
+                    <MarketRealitySection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="NeuraSection">
+                    <NeuraSection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="OutcomesSection">
+                    <OutcomesSection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="NewsSection">
+                    <NewsSection />
+                </SectionWrapper>
             </div>
 
             {/* Careers & Contact Links - Large gradient cards (outside wrapper for full-width) */}
-            <CareersContactLinks />
+            <SectionWrapper name="CareersContactLinks">
+                <CareersContactLinks />
+            </SectionWrapper>
 
         </Layout>
     );

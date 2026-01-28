@@ -15,11 +15,10 @@ import {
     getLightingAtProgress,
     ModelTransform,
     LightingConfig,
-    scrollKeyframes,
     animationSettings,
     defaultLighting
 } from '@/lib/scrollAnimations';
-import { mobileScrollKeyframes } from '@/lib/mobileScrollAnimations';
+import type { ScrollKeyframe } from '@/lib/scrollAnimations';
 
 // Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {
@@ -46,7 +45,7 @@ export interface UseScrollAnimationOptions {
     /** End position (default: 'bottom bottom') */
     end?: string;
     /** Custom keyframes to use instead of default */
-    keyframes?: typeof scrollKeyframes;
+    keyframes?: ScrollKeyframe[];
     /** Damping factor for smooth interpolation (0-1) */
     dampingFactor?: number;
     /** Use easing function for interpolation */
@@ -72,19 +71,49 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     // Start with false to match SSR, will update after hydration
     const [isMobile, setIsMobile] = useState(false);
     const [isHydrated, setIsHydrated] = useState(false);
+    const [loadedKeyframes, setLoadedKeyframes] = useState<typeof customKeyframes | null>(null);
 
+    // Lazy load keyframes to avoid blocking compilation
     useEffect(() => {
-        const mobile = isMobileDevice();
-        setIsMobile(mobile);
-        setIsHydrated(true);
-    }, []);
+        const loadKeyframes = async () => {
+            if (customKeyframes) {
+                setLoadedKeyframes(customKeyframes);
+                setIsHydrated(true);
+                return;
+            }
 
-    // Use custom keyframes if provided, otherwise auto-select based on device
-    // After hydration, use the correct keyframes
-    const activeKeyframes = customKeyframes || (isHydrated && isMobile ? mobileScrollKeyframes : scrollKeyframes);
+            const mobile = isMobileDevice();
+            setIsMobile(mobile);
+            
+            if (mobile) {
+                const { mobileScrollKeyframes } = await import('@/lib/mobileScrollAnimations');
+                setLoadedKeyframes(mobileScrollKeyframes);
+            } else {
+                const { scrollKeyframes } = await import('@/lib/scrollAnimations');
+                setLoadedKeyframes(scrollKeyframes);
+            }
+            
+            setIsHydrated(true);
+        };
+        
+        loadKeyframes();
+    }, [customKeyframes]);
+
+    // Use custom keyframes if provided, otherwise use lazy-loaded keyframes
+    const activeKeyframes = customKeyframes || loadedKeyframes || [];
 
     // Initialize with first keyframe values - USE REFS to avoid re-renders
-    const firstKeyframe = activeKeyframes[0];
+    // Use default values until keyframes are loaded
+    const defaultKeyframe = {
+        scrollProgress: 0,
+        transform: {
+            position: { x: 0, y: 0.06, z: 0 },
+            rotation: { x: -22.177, y: 37.456, z: 23.23 },
+            scale: 10,
+        },
+        lighting: defaultLighting,
+    };
+    const firstKeyframe = activeKeyframes[0] || defaultKeyframe;
 
     // Current (displayed) transform - smoothly interpolates toward target
     const transformRef = useRef<ModelTransform>({
@@ -178,8 +207,8 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
     }, [smoothUpdate]);
 
     useEffect(() => {
-        // Skip on server or if disabled
-        if (typeof window === 'undefined' || !enabled) {
+        // Skip on server or if disabled or keyframes not loaded
+        if (typeof window === 'undefined' || !enabled || !loadedKeyframes || !activeKeyframes.length) {
             return;
         }
 
@@ -218,7 +247,7 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
             scrollTrigger.kill();
             window.removeEventListener('resize', handleResize);
         };
-    }, [enabled, scrub, trigger, start, end, updateTargetTransform, isMobile, isHydrated, activeKeyframes, dampingFactor, useEasing]);
+    }, [enabled, scrub, trigger, start, end, updateTargetTransform, isMobile, isHydrated, activeKeyframes, dampingFactor, useEasing, loadedKeyframes]);
 
     // Return a stable object with refs - GLTFViewer reads from refs directly
     return useMemo(() => ({
@@ -233,7 +262,7 @@ export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
         /** Current keyframe label (if any) */
         get currentLabel() {
             return activeKeyframes.find(
-                (kf, i, arr) =>
+                (kf: ScrollKeyframe, i: number, arr: ScrollKeyframe[]) =>
                     scrollProgressRef.current >= kf.scrollProgress &&
                     (i === arr.length - 1 || scrollProgressRef.current < arr[i + 1].scrollProgress)
             )?.label;

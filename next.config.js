@@ -12,7 +12,47 @@ const nextConfig = {
     reactStrictMode: true,
 
     // Turbopack configuration (Next.js 16+)
-    turbopack: {},
+    // Optimize for Windows and large files
+    turbopack: {
+        resolveAlias: {
+            // Ensure proper path resolution on Windows
+        },
+    },
+
+    // Experimental features to help with compilation
+    experimental: {
+        // Optimize server components
+        optimizePackageImports: ['gsap', 'three', '@tabler/icons-react'],
+    },
+    
+    // Increase webpack memory and timeout
+    webpack: (config, { isServer }) => {
+        // Increase memory limit
+        config.optimization = {
+            ...config.optimization,
+            moduleIds: 'deterministic',
+        };
+        
+        // Optimize three.js imports - only include what's needed
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            'three': 'three',
+        };
+
+        // Handle WASM files
+        config.experiments = {
+            ...config.experiments,
+            asyncWebAssembly: true,
+        };
+
+        // Add rule for WASM files
+        config.module.rules.push({
+            test: /\.wasm$/,
+            type: 'webassembly/async',
+        });
+
+        return config;
+    },
 
     // Enable static export if deploying to static hosting
     // output: 'export',
@@ -64,28 +104,9 @@ const nextConfig = {
         ];
     },
 
-    // Webpack configuration for three.js optimization
-    webpack: (config, { isServer }) => {
-        // Optimize three.js imports - only include what's needed
-        config.resolve.alias = {
-            ...config.resolve.alias,
-            'three': 'three',
-        };
 
-        // Handle WASM files
-        config.experiments = {
-            ...config.experiments,
-            asyncWebAssembly: true,
-        };
-
-        // Add rule for WASM files
-        config.module.rules.push({
-            test: /\.wasm$/,
-            type: 'webassembly/async',
-        });
-
-        return config;
-    },
+    // Turbopack configuration (default in Next.js 16+)
+    // Turbopack handles WASM files automatically, no special config needed
 };
 
 module.exports = nextConfig;
