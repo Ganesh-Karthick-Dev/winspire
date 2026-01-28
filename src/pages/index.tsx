@@ -39,11 +39,8 @@ import ServiceCardSection from '@/components/ServiceCardSection';
 import CenterTextSection from '@/components/CenterTextSection';
 // STEP 7: Enable SpecialtySection
 import { SpecialtySection } from '@/components/ui/specialty-section';
-// STEP 8: EngagementModelsSection - Using dynamic import to fix compilation hang
-const EngagementModelsSection = dynamic(() => import('@/components/ui/engagement-models-section').then(mod => ({ default: mod.EngagementModelsSection })), {
-    ssr: false,
-    loading: () => <div style={{ minHeight: '50vh', background: 'transparent' }} />,
-});
+// STEP 8: EngagementModelsSection - ⚠️ DISABLED: Causes compilation hang
+// import { EngagementModelsSection } from '@/components/ui/engagement-models-section';
 // STEP 9: Enable CareersScrollSection
 import CareersScrollSection from '@/components/CareersScrollSection';
 // STEP 10: Enable MarketRealitySection
@@ -620,10 +617,10 @@ export default function Home() {
                     <SpecialtySection />
                 </SectionWrapper>
                 
-                {/* EngagementModelsSection - Using dynamic import to prevent compilation hang */}
-                <SectionWrapper name="EngagementModelsSection">
+                {/* ⚠️ DISABLED: EngagementModelsSection causes compilation hang */}
+                {/* <SectionWrapper name="EngagementModelsSection">
                     <EngagementModelsSection />
-                </SectionWrapper>
+                </SectionWrapper> */}
                 
                 <SectionWrapper name="CareersScrollSection">
                     <CareersScrollSection />
