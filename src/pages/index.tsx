@@ -39,8 +39,11 @@ import ServiceCardSection from '@/components/ServiceCardSection';
 import CenterTextSection from '@/components/CenterTextSection';
 // STEP 7: Enable SpecialtySection
 import { SpecialtySection } from '@/components/ui/specialty-section';
-// STEP 8: EngagementModelsSection - ⚠️ ISSUE FOUND: This section causes compilation hang
-// import { EngagementModelsSection } from '@/components/ui/engagement-models-section';
+// STEP 8: EngagementModelsSection - Using dynamic import to fix compilation hang
+const EngagementModelsSection = dynamic(() => import('@/components/ui/engagement-models-section').then(mod => ({ default: mod.EngagementModelsSection })), {
+    ssr: false,
+    loading: () => <div style={{ minHeight: '50vh', background: 'transparent' }} />,
+});
 // STEP 9: Enable CareersScrollSection
 import CareersScrollSection from '@/components/CareersScrollSection';
 // STEP 10: Enable MarketRealitySection
@@ -615,4 +618,39 @@ export default function Home() {
                 
                 <SectionWrapper name="SpecialtySection">
                     <SpecialtySection />
-        
+                </SectionWrapper>
+                
+                {/* EngagementModelsSection - Using dynamic import to prevent compilation hang */}
+                <SectionWrapper name="EngagementModelsSection">
+                    <EngagementModelsSection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="CareersScrollSection">
+                    <CareersScrollSection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="MarketRealitySection">
+                    <MarketRealitySection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="NeuraSection">
+                    <NeuraSection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="OutcomesSection">
+                    <OutcomesSection />
+                </SectionWrapper>
+                
+                <SectionWrapper name="NewsSection">
+                    <NewsSection />
+                </SectionWrapper>
+            </div>
+
+            {/* Careers & Contact Links - Large gradient cards (outside wrapper for full-width) */}
+            <SectionWrapper name="CareersContactLinks">
+                <CareersContactLinks />
+            </SectionWrapper>
+
+        </Layout>
+    );
+}
