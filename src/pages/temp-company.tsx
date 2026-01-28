@@ -27,6 +27,7 @@ import CultureSection from '@/components/temp-company/CultureSection';
 import LeadershipSection from '@/components/temp-company/LeadershipSection';
 import VisionMissionSection from '@/components/temp-company/VisionMissionSection';
 import FinalCTASection from '@/components/temp-company/FinalCTASection';
+import { VideoScrollHero } from '@/components/ui/video-scroll-hero';
 
 // 3D Model - same as company page
 const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
@@ -140,41 +141,47 @@ export default function TempCompany() {
                 </div>
             )}
 
-            {/* Hero Section */}
-            <section ref={heroRef} className={styles.heroSection}>
-                {/* Content */}
-                <div className={styles.heroContent}>
-                    {/* Label */}
-                    <div className={styles.heroLabel}>
-                        <div className={styles.heroDots}>
-                            <span className={styles.heroDot}></span>
-                            <span className={styles.heroDot}></span>
+            {/* Hero Section + Scaling Card */}
+            <div className="relative">
+                <section ref={heroRef} className={styles.heroSection}>
+                    {/* Content */}
+                    <div className={styles.heroContent}>
+                        {/* Label */}
+                        <div className={styles.heroLabel}>
+                            <div className={styles.heroDots}>
+                                <span className={styles.heroDot}></span>
+                                <span className={styles.heroDot}></span>
+                            </div>
+                            <span>About Winspire RCM</span>
                         </div>
-                        <span>About Winspire RCM</span>
+
+                        {/* Main Title */}
+                        <h1 className={styles.heroTitle}>
+                            Built Inside Healthcare.<br/>
+                            <span className={styles.heroSubtitle}>Designed for Predictable Outcomes.</span>
+                        </h1>
                     </div>
 
-                    {/* Main Title */}
-                    <h1 className={styles.heroTitle}>
-                        Built Inside Healthcare.<br/>
-                        Designed for Predictable Outcomes.
-                    </h1>
-                </div>
+                    {/* Scroll Indicator */}
+                    <div className={styles.scrollIndicator} onClick={handleScrollClick}>
+                        <span>Scroll</span>
+                        <span>↓</span>
+                    </div>
+                </section>
 
-                {/* Image Card - half in, half out */}
-                <div className={styles.heroCard}>
-                    <img
-                        className={styles.heroCardVideo}
-                        src="/poster/qefqe.webp"
-                        alt="About Winspire RCM"
+                {/* Scaling Card - Starts inside hero, expands to 80% */}
+                <div className="absolute top-0 left-0 w-full h-[300vh] pointer-events-none z-50">
+                    <VideoScrollHero 
+                        imageSrc="/poster/qefqe.webp" 
+                        startScale={0.35}
+                        maxScale={0.8}
+                        className="pointer-events-auto"
                     />
                 </div>
+            </div>
 
-                {/* Scroll Indicator */}
-                <div className={styles.scrollIndicator} onClick={handleScrollClick}>
-                    <span>Scroll</span>
-                    <span>↓</span>
-                </div>
-            </section>
+            {/* SPACER to account for the sticky scaling card which is 300vh */}
+            <div className="h-[200vh] pointer-events-none"></div>
 
             {/* Main Content Wrapper with huge spacing */}
             <div className="relative z-20 flex flex-col pb-32">
