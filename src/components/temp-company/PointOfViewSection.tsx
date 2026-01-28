@@ -1,5 +1,7 @@
 /**
  * Our Point of View Section Component for Temp Company Page
+ * Fixed: Explicit dark text colors using inline styles to override global white-text.
+ * Performance: Optimized parallax for smooth scrolling.
  */
 
 'use client';
@@ -14,23 +16,26 @@ if (typeof window !== 'undefined') {
 
 export default function PointOfViewSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const imageRef = useRef<HTMLImageElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.fromTo(sectionRef.current,
-                { opacity: 0, y: 50 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: 'power3.out',
+            // Image Parallax Effect
+            if (containerRef.current && imageRef.current) {
+                gsap.set(imageRef.current, { scale: 1.15, yPercent: -10 });
+                
+                gsap.to(imageRef.current, {
+                    yPercent: 10,
+                    ease: 'none',
                     scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top 85%',
-                        toggleActions: 'play none none reverse'
+                        trigger: containerRef.current,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 1.5 // Smoother scrubbing
                     }
-                }
-            );
+                });
+            }
         }, sectionRef);
 
         return () => ctx.revert();
@@ -39,73 +44,102 @@ export default function PointOfViewSection() {
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-screen z-20 flex bg-[#0f172a] !p-0"
+            className="relative min-h-screen z-20 flex bg-white !p-0 overflow-hidden"
         >
             <div className="flex flex-col lg:flex-row w-full min-h-screen">
-                {/* Left: Image (Full Bleed, No Padding) */}
-                <div className="w-full lg:w-1/2 relative min-h-[50vh] lg:min-h-screen order-1">
+                {/* Left: Image (Full Bleed, High Quality Color, Parallax) */}
+                <div ref={containerRef} className="w-full lg:w-1/2 relative min-h-[50vh] lg:min-h-screen order-1 overflow-hidden">
                      <img 
+                        ref={imageRef}
                         src="/images/company-page/business-people-shaking-hands-congratulations-work-success.webp" 
                         alt="Leadership Design" 
-                        className="absolute inset-0 w-full h-full object-cover grayscale opacity-70"
+                        className="absolute inset-0 w-full h-[120%] object-cover opacity-100 will-change-transform"
                         loading="lazy"
                     />
                 </div>
 
-                {/* Right: Content (Fixed Layout with Inline Styles) */}
-                <div className="w-full lg:w-1/2 flex flex-col bg-[#0f172a] lg:order-2 min-h-screen">
+                {/* Right: Content (High-Contrast Text via Inline Styles) */}
+                <div className="w-full lg:w-1/2 flex flex-col bg-slate-50 lg:order-2 min-h-screen border-l border-slate-200">
                     <div 
                         className="w-full flex flex-col justify-center"
                         style={{ 
-                            padding: '50px', 
-                            paddingTop: '200px',
-                            paddingRight: '80px' // Extra space for large screens
+                            padding: '60px', 
+                            paddingTop: '180px',
+                            paddingRight: '80px' 
                         }}
                     >
-                        <div className="w-full max-w-2xl flex flex-col gap-12 mx-auto">
-                            <span className="text-sm font-bold tracking-[0.5em] text-cyan-400 uppercase opacity-60">
+                        <div className="w-full max-w-2xl flex flex-col gap-10 mx-auto">
+                            <span 
+                                className="text-xs font-black tracking-[0.4em] uppercase"
+                                style={{ color: '#2563eb' }}
+                            >
                                 Our Point of View
                             </span>
                             
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tighter">
+                            <h2 
+                                className="text-4xl md:text-5xl lg:text-5xl font-black leading-[1.1] tracking-tighter"
+                                style={{ color: '#0f172a' }}
+                            >
                                 Leadership Design <br/> 
-                                Comes Before Execution
+                                Comes Before <span style={{ color: '#2563eb' }}>Execution</span>
                             </h2>
                             
-                            <p className="text-slate-300 text-xl md:text-2xl leading-[1.6] font-light">
+                            <p 
+                                className="text-lg md:text-xl leading-relaxed font-semibold opacity-90"
+                                style={{ color: '#334155' }}
+                            >
                                 After years of managing and transforming complex revenue cycles, one truth became clear:
                             </p>
                             
                             <div className="relative">
-                                <p className="text-white text-2xl md:text-3xl lg:text-4xl font-extralight italic border-l-4 border-cyan-400 pl-10 py-6 bg-white/[0.02] leading-relaxed">
+                                <p 
+                                    className="text-xl md:text-2xl lg:text-3xl font-light italic border-l-8 border-blue-600 pl-10 py-8 bg-blue-100/40 leading-relaxed shadow-sm rounded-r-lg"
+                                    style={{ color: '#0f172a' }}
+                                >
                                     People do not fail. <br/>
-                                    <span className="font-bold text-cyan-400 not-italic">Poorly designed systems do.</span>
+                                    <span className="font-black not-italic" style={{ color: '#1d4ed8' }}>
+                                        Poorly designed systems do.
+                                    </span>
                                 </p>
                             </div>
                             
-                            <div className="space-y-8">
-                                <p className="text-slate-400 text-xs font-bold tracking-widest uppercase mb-4">
+                            <div className="space-y-6">
+                                <p 
+                                    className="text-[11px] font-black tracking-widest uppercase mb-2"
+                                    style={{ color: '#64748b' }}
+                                >
                                     The Sequence for Success:
                                 </p>
                                 
-                                <ul className="space-y-6 text-white">
-                                    <li className="flex items-center gap-6">
-                                        <span className="w-12 h-12 rounded-full bg-cyan-400 text-black flex items-center justify-center text-xl font-black flex-shrink-0">1</span>
-                                        <span className="text-xl md:text-2xl font-bold leading-tight tracking-tight">Defining the outcomes that truly matter</span>
-                                    </li>
-                                    <li className="flex items-center gap-6">
-                                        <span className="w-12 h-12 rounded-full bg-cyan-400 text-black flex items-center justify-center text-xl font-black flex-shrink-0">2</span>
-                                        <span className="text-xl md:text-2xl font-bold leading-tight tracking-tight">Designing the structure that supports those outcomes</span>
-                                    </li>
-                                    <li className="flex items-center gap-6">
-                                        <span className="w-12 h-12 rounded-full bg-cyan-400 text-black flex items-center justify-center text-xl font-black flex-shrink-0">3</span>
-                                        <span className="text-xl md:text-2xl font-bold leading-tight tracking-tight">Executing with clarity, discipline, and accountability</span>
-                                    </li>
+                                <ul className="space-y-4">
+                                    {[
+                                        "Defining the outcomes that truly matter",
+                                        "Designing the structure that supports those outcomes",
+                                        "Executing with clarity, discipline, and accountability"
+                                    ].map((text, idx) => (
+                                        <li key={idx} className="flex items-start gap-5">
+                                            <span 
+                                                className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-black flex-shrink-0 shadow-md"
+                                                style={{ backgroundColor: '#0f172a', color: '#ffffff' }}
+                                            >
+                                                {idx + 1}
+                                            </span>
+                                            <span 
+                                                className="text-xl font-bold pt-1.5"
+                                                style={{ color: '#1e293b' }}
+                                            >
+                                                {text}
+                                            </span>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                             
-                            <div className="pt-10 border-t border-white/10 mt-4">
-                                <p className="text-slate-500 text-xl font-light italic leading-relaxed">
+                            <div className="pt-8 border-t border-slate-300 mt-2">
+                                <p 
+                                    className="text-lg md:text-xl font-bold italic leading-relaxed"
+                                    style={{ color: '#475569' }}
+                                >
                                     When this sequence is respected, teams perform better, leaders regain control, and results follow naturally.
                                 </p>
                             </div>
