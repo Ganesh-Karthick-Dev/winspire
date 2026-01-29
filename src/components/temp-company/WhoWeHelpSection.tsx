@@ -40,9 +40,9 @@ export default function WhoWeHelpSection() {
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: 'top center', // Start when section hits center of viewport
-                    end: 'bottom bottom',   // End when section leaves
-                    scrub: 0.5,
+                    start: 'top 40%', // Start a bit earlier
+                    end: 'bottom 80%',   // End sooner
+                    scrub: 1, // Increased scrub for smoother, less "immediate" feel
                 }
             });
 
