@@ -17,6 +17,10 @@ const RoleOfTechnologySection: React.FC = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
+            // 0. Initialize States
+            gsap.set(leftTextRef.current, { opacity: 1 });
+            gsap.set(imageRef.current, { opacity: 0 });
+
             // 1. Pin the left column
             ScrollTrigger.create({
                 trigger: sectionRef.current,
@@ -28,17 +32,19 @@ const RoleOfTechnologySection: React.FC = () => {
             });
 
             // 2. Control Left Side: Text Fades Out, Image Fades In
+            // Triggered by the section's overall scroll to ensure it happens later
             const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: `.${styles.featureList}`,
-                    start: "top 60%", // Start earlier
-                    end: "top 20%",
-                    scrub: 0.5, // Reduced scrub for responsiveness
+                    trigger: sectionRef.current,
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 1.5,
                 }
             });
 
-            tl.to(leftTextRef.current, { opacity: 0, duration: 1 })
-              .to(imageRef.current, { opacity: 1, duration: 1 }, "-=0.5");
+            tl.to({}, { duration: 5 }) // Stay on text for the first ~40% of scroll
+              .to(leftTextRef.current, { opacity: 0, duration: 2, ease: "power2.inOut" })
+              .to(imageRef.current, { opacity: 1, duration: 2, ease: "power2.inOut" }, "-=1");
 
             // 3. Highlight Feature Items on Scroll
             const features = gsap.utils.toArray(`.${styles.featureItem}`);

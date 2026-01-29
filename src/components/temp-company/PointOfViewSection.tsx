@@ -1,6 +1,7 @@
 /**
  * Our Point of View Section Component for Temp Company Page
- * Fixed: Explicit dark text colors using inline styles to override global white-text.
+ * 
+ * Migrated to CSS Modules for consistent styling.
  * Performance: Optimized parallax for smooth scrolling.
  */
 
@@ -9,6 +10,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import styles from '@/styles/PointOfViewSection.module.css';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -36,98 +38,68 @@ export default function PointOfViewSection() {
                     }
                 });
             }
+            ScrollTrigger.refresh();
         }, sectionRef);
 
         return () => ctx.revert();
     }, []);
 
     return (
-        <section
-            ref={sectionRef}
-            className="relative min-h-screen z-20 flex bg-white !p-0 overflow-hidden"
-        >
-            <div className="flex flex-col lg:flex-row w-full min-h-screen">
+        <section ref={sectionRef} className={styles.section}>
+            <div className={styles.container}>
                 {/* Left: Image (Full Bleed, High Quality Color, Parallax) */}
-                <div ref={containerRef} className="w-full lg:w-1/2 relative min-h-[50vh] lg:min-h-screen order-1 overflow-hidden">
+                <div ref={containerRef} className={styles.imageSide}>
                      <img 
                         ref={imageRef}
                         src="/images/company-page/business-people-shaking-hands-congratulations-work-success.webp" 
                         alt="Leadership Design" 
-                        className="absolute inset-0 w-full h-[120%] object-cover opacity-100 will-change-transform"
+                        className={styles.parallaxImage}
                         loading="lazy"
                     />
                 </div>
 
-                {/* Right: Content (High-Contrast Text via Inline Styles) */}
-                <div className="w-full lg:w-1/2 flex flex-col bg-slate-50 lg:order-2 min-h-screen border-l border-slate-200">
-                    <div 
-                        className="w-full flex flex-col justify-center"
-                        style={{ 
-                            padding: '60px', 
-                            paddingTop: '180px',
-                            paddingRight: '80px' 
-                        }}
-                    >
-                        <div className="w-full max-w-2xl flex flex-col gap-10 mx-auto">
-                            <span 
-                                className="text-xs font-black tracking-[0.4em] uppercase"
-                                style={{ color: '#2563eb' }}
-                            >
+                {/* Right: Content (High-Contrast Text via CSS Modules) */}
+                <div className={styles.contentSide}>
+                    <div className={styles.contentWrapper}>
+                        <div className={styles.innerContent}>
+                            <span className={styles.label}>
                                 Our Point of View
                             </span>
                             
-                            <h2 
-                                className="text-4xl md:text-5xl lg:text-5xl font-black leading-[1.1] tracking-tighter"
-                                style={{ color: '#0f172a' }}
-                            >
+                            <h2 className={styles.heading}>
                                 Leadership Design <br/> 
-                                Comes Before <span style={{ color: '#2563eb' }}>Execution</span>
+                                Comes Before <span className={styles.headingHighlight}>Execution</span>
                             </h2>
                             
-                            <p 
-                                className="text-lg md:text-xl leading-relaxed font-semibold opacity-90"
-                                style={{ color: '#334155' }}
-                            >
+                            <p className={styles.subText}>
                                 After years of managing and transforming complex revenue cycles, one truth became clear:
                             </p>
                             
-                            <div className="relative">
-                                <p 
-                                    className="text-xl md:text-2xl lg:text-3xl font-light italic border-l-8 border-blue-600 pl-10 py-8 bg-blue-100/40 leading-relaxed shadow-sm rounded-r-lg"
-                                    style={{ color: '#0f172a' }}
-                                >
+                            <div className={styles.quoteContainer}>
+                                <p className={styles.quoteBox}>
                                     People do not fail. <br/>
-                                    <span className="font-black not-italic" style={{ color: '#1d4ed8' }}>
+                                    <span className={styles.quoteHighlight}>
                                         Poorly designed systems do.
                                     </span>
                                 </p>
                             </div>
                             
-                            <div className="space-y-6">
-                                <p 
-                                    className="text-[11px] font-black tracking-widest uppercase mb-2"
-                                    style={{ color: '#64748b' }}
-                                >
+                            <div className={styles.listSection}>
+                                <p className={styles.listTitle}>
                                     The Sequence for Success:
                                 </p>
                                 
-                                <ul className="space-y-4">
+                                <ul className={styles.list}>
                                     {[
                                         "Defining the outcomes that truly matter",
                                         "Designing the structure that supports those outcomes",
                                         "Executing with clarity, discipline, and accountability"
                                     ].map((text, idx) => (
-                                        <li key={idx} className="flex items-start gap-5">
-                                            <span 
-                                                className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-black flex-shrink-0 shadow-md"
-                                                style={{ backgroundColor: '#0f172a', color: '#ffffff' }}
-                                            >
+                                        <li key={idx} className={styles.listItem}>
+                                            <span className={styles.listNumber}>
                                                 {idx + 1}
                                             </span>
-                                            <span 
-                                                className="text-xl font-bold pt-1.5"
-                                                style={{ color: '#1e293b' }}
-                                            >
+                                            <span className={styles.listText}>
                                                 {text}
                                             </span>
                                         </li>
@@ -135,11 +107,8 @@ export default function PointOfViewSection() {
                                 </ul>
                             </div>
                             
-                            <div className="pt-8 border-t border-slate-300 mt-2">
-                                <p 
-                                    className="text-lg md:text-xl font-bold italic leading-relaxed"
-                                    style={{ color: '#475569' }}
-                                >
+                            <div className={styles.footerSection}>
+                                <p className={styles.footerText}>
                                     When this sequence is respected, teams perform better, leaders regain control, and results follow naturally.
                                 </p>
                             </div>

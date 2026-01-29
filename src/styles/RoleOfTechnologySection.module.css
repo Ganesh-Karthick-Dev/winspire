@@ -4,6 +4,7 @@
     padding: 0;
     overflow: hidden;
     background: transparent; /* Parent remains clean for GSAP */
+    z-index: 10;
 }
 
 /* Glass Layer isolated from GSAP logic */
@@ -72,7 +73,6 @@
     flex-direction: column;
     justify-content: center;
     z-index: 2;
-    transition: opacity 0.5s ease;
 }
 
 .heading {
@@ -107,7 +107,6 @@
     height: 100%;
     opacity: 0;
     z-index: 1; /* Initially below text */
-    transition: opacity 0.8s ease;
 }
 
 .revealImg {
@@ -120,8 +119,8 @@
 /* RIGHT COLUMN - SCROLLING */
 .rightColumn {
     width: 45%;
-    padding-top: 25vh; /* Reduced from 40vh */
-    padding-bottom: 40vh; /* Reduced from 100vh to tighten scroll */
+    padding-top: 40vh; /* Reverted to 40vh for better section separation */
+    padding-bottom: 40vh; 
 }
 
 .rightCard {
