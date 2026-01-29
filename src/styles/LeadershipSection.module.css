@@ -1,6 +1,6 @@
 .section {
     position: relative;
-    padding: 100px 0;
+    padding: 100px 0 0 0;
     overflow: hidden;
     background: transparent;
 }

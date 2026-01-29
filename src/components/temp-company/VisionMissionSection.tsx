@@ -1,63 +1,86 @@
 /**
- * Vision Mission Section Component for Temp Company Page
+ * Vision Mission Section Component
  * 
- * Redesigned: Clean horizontal layout with simple values grid.
+ * Features:
+ * - GSAP Native Pinning (Fixes gap issues)
+ * - Restored Core Values logic
+ * - Robust 50% scroll threshold for swapping slides
  */
 
-import { useEffect, useRef } from 'react';
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import styles from '@/styles/VisionMissionSection.module.css';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
 
 export default function VisionMissionSection() {
-    const sectionRef = useRef<HTMLElement>(null);
+    const mainWrapperRef = useRef<HTMLDivElement>(null);
+    const pinnedContentRef = useRef<HTMLDivElement>(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    const slides = [
+        {
+            id: 'vision',
+            title: 'Our Vision',
+            text: 'To build the most trusted, human-centric, and intelligently designed Revenue Cycle Management organization in healthcare where clarity replaces chaos and outcomes are engineered, not chased.',
+            image: '/images/company-page/business-people-shaking-hands-congratulations-work-success.webp',
+            alt: 'Vision'
+        },
+        {
+            id: 'mission',
+            title: 'Our Mission',
+            text: 'To help healthcare organizations design, operate, and sustain revenue cycles that are predictable, transparent, and scalable by combining experienced people, disciplined execution, and intelligent systems.',
+            image: '/images/company-page/iso-standards-quality-control-businessman-hold-virtual-globe-with-quality-assurance-guarantee-product-iso-standard-certification-modern-iso-banner.webp',
+            alt: 'Mission'
+        }
+    ];
+
+    const values = [
+         { name: 'Client Centric Partnership', desc: 'We place our clients goals at the center of every decision and work as true partners in achieving them.' },
+         { name: 'Analytical Excellence', desc: 'We use data, insight, and experience to guide decisions and drive meaningful outcomes.' },
+         { name: 'Continuous Innovation', desc: 'We evolve constantly to stay ahead of industry change and deliver better solutions.' },
+         { name: 'Integrity and Transparency', desc: 'We operate with honesty, accountability, and clarity in all our interactions.' },
+         { name: 'Results That Matter', desc: 'We focus on measurable outcomes that drive long-term financial stability.' }
+    ];
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.fromTo(sectionRef.current,
-                { opacity: 0, y: 50 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top 85%',
-                        toggleActions: 'play none none reverse'
+        let ctx = gsap.context(() => {
+            
+            // 1. PIN THE ENTIRE SECTION
+            ScrollTrigger.create({
+                trigger: pinnedContentRef.current,
+                start: "top top",
+                end: "+=200%", 
+                pin: true,
+                pinSpacing: true,
+                scrub: 1,
+                onUpdate: (self) => {
+                    // Logic: Keep Vision active until 50% scroll progress is reached
+                    const progress = self.progress;
+                    if (progress > 0.5) {
+                        setActiveIndex(1);
+                    } else {
+                        setActiveIndex(0);
                     }
                 }
-            );
-
-            gsap.utils.toArray('.vm-item').forEach((item: any, i) => {
-                 gsap.fromTo(item,
-                    { opacity: 0, x: -30 },
-                    {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.8,
-                        delay: i * 0.2,
-                        scrollTrigger: {
-                            trigger: item,
-                            start: 'top 85%',
-                            toggleActions: 'play none none reverse'
-                        }
-                    }
-                 );
             });
-                       // Value Items Expansion Animation (Compact Accordion)
-             gsap.utils.toArray('.value-item').forEach((item: any) => {
-                 const title = item.querySelector('.value-title');
-                 const content = item.querySelector('.value-content');
+
+            // 2. CORE VALUES ACCORDION
+            gsap.utils.toArray(`.${styles.valueItem}`).forEach((item: any) => {
+                 const title = item.querySelector(`.${styles.valueItemTitle}`);
+                 const content = item.querySelector(`.${styles.valueContent}`);
                  
                  ScrollTrigger.create({
                      trigger: item,
-                     start: 'top center+=5%', 
-                     end: 'bottom center+=5%',
-                     toggleClass: { targets: item, className: 'active-value' },
+                     start: 'top center+=15%', 
+                     end: 'bottom center+=15%',
+                     toggleClass: { targets: item, className: styles.activeValue },
                      onEnter: () => expandItem(item, title, content),
                      onEnterBack: () => expandItem(item, title, content),
                      onLeave: () => collapseItem(item, title, content),
@@ -67,107 +90,91 @@ export default function VisionMissionSection() {
 
             const expandItem = (item: any, title: any, content: any) => {
                 gsap.to(item, { opacity: 1, duration: 0.4 });
-                gsap.to(title, { 
-                    scale: 1.1,
-                    marginBottom: '1rem',
-                    color: '#ffffff',
-                    duration: 0.4
-                });
-                gsap.to(content, { 
-                    height: 'auto', 
-                    opacity: 1, 
-                    duration: 0.4,
-                    ease: 'power2.out'
-                });
+                gsap.to(title, { scale: 1.05, marginBottom: '1rem', color: '#ffffff', duration: 0.4 });
+                gsap.to(content, { height: 'auto', opacity: 1, duration: 0.4, ease: 'power2.out' });
             };
 
             const collapseItem = (item: any, title: any, content: any) => {
                 gsap.to(item, { opacity: 0.6, duration: 0.4 });
-                gsap.to(title, { 
-                scale: 1,
-                    marginBottom: '0',
-                    color: '#e2e8f0', // slate-200
-                    duration: 0.4
-                });
-                gsap.to(content, { 
-                    height: 0, 
-                    opacity: 0, 
-                    duration: 0.4,
-                    ease: 'power2.in'
-                });
+                gsap.to(title, { scale: 1, marginBottom: '0', color: '#e2e8f0', duration: 0.4 });
+                gsap.to(content, { height: 0, opacity: 0, duration: 0.4, ease: 'power2.in' });
             };
-        }, sectionRef);
+
+            // Force refresh to fix initial alignment errors
+            ScrollTrigger.refresh();
+
+        }, mainWrapperRef);
 
         return () => ctx.revert();
     }, []);
 
     return (
-        <section
-            ref={sectionRef}
-            className="relative min-h-screen py-24 px-6 md:px-12 z-20 flex flex-col"
-            style={{ background: 'transparent' }}
-        >
-            <div className="max-w-7xl mx-auto w-full">
-                
-                {/* Vision / Mission Section - Redesigned */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32">
-                    <div className="vm-item relative p-8 border-t-2 border-sky-500/30 bg-white/[0.02] backdrop-blur-sm rounded-2xl text-center">
-                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Our Vision</h2>
-                        <p className="text-xl text-slate-300 leading-relaxed">
-                            To build the most trusted, human-centric, and intelligently designed <span className="text-sky-400">Revenue Cycle Management</span> organization in healthcare where clarity replaces chaos.
-                        </p>
-                    </div>
-                    <div className="vm-item relative p-8 border-t-2 border-purple-500/30 bg-white/[0.02] backdrop-blur-sm rounded-2xl text-center">
-                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Our Mission</h2>
-                        <p className="text-xl text-slate-300 leading-relaxed">
-                            To help healthcare organizations design, operate, and sustain revenue cycles that are <span className="text-purple-400">predictable, transparent, and scalable</span> by combining experienced people and intelligent systems.
-                        </p>
-                    </div>
-                </div>
-
-                {/* Values Scroll Section (Compact FAQ Style) */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-white/10 pt-24 pb-32">
-                    
-                    {/* Sticky Header */}
-                    <div className="lg:col-span-4">
-                        <div className="sticky top-32">
-                            <h3 className="text-white font-medium text-left text-5xl md:text-6xl tracking-tighter leading-tight mb-6">
-                                Our Core<br/>Values
-                            </h3>
-                            <div className="h-1 w-24 bg-sky-500 rounded-full mb-6"></div>
-                            <p className="text-slate-400 text-lg max-w-xs">
-                                The principles that guide every decision we make. Scroll to explore.
-                            </p>
+        <div ref={mainWrapperRef} className={styles.mainWrapper}>
+            {/* PINNED SECTION: Vision & Mission */}
+            <div ref={pinnedContentRef} className={styles.pinnedSection}>
+                <div className={styles.cardsContainer}>
+                    {/* LEFT CARD */}
+                    <div className={styles.leftCard}>
+                        <span className={styles.leftCardLabel}>Winspire Way</span>
+                        <div className={styles.titleContainer}>
+                            {slides.map((slide, i) => (
+                                <h2 
+                                    key={slide.id} 
+                                    className={`${styles.title} ${i === activeIndex ? styles.titleActive : ''}`}
+                                >
+                                    {slide.title}
+                                </h2>
+                            ))}
                         </div>
                     </div>
-                    
-                    {/* Scroll List */}
-                    <div className="lg:col-span-8 flex flex-col space-y-0"> 
-                        {[
-                            { name: 'Client Centric Partnership', desc: 'We place our clients goals at the center of every decision and work as true partners in achieving them.' },
-                            { name: 'Analytical Excellence', desc: 'We use data, insight, and experience to guide decisions and drive meaningful outcomes.' },
-                            { name: 'Continuous Innovation', desc: 'We evolve constantly to stay ahead of industry change and deliver better solutions.' },
-                            { name: 'Integrity and Transparency', desc: 'We operate with honesty, accountability, and clarity in all our interactions.' },
-                            { name: 'Results That Matter', desc: 'We focus on measurable outcomes that drive long-term financial stability.' }
-                        ].map((val, i) => (
-                            <div key={i} className="value-item flex flex-col justify-center items-start text-left py-12 border-b border-white/10 last:border-0 opacity-60 transition-all origin-left">
-                                <span className="text-xs font-mono text-sky-500 block mb-3 uppercase tracking-wider">Metric 0{i+1}</span>
-                                {/* Title */}
-                                <h4 className="value-title text-3xl md:text-5xl font-bold text-slate-200 mb-0 tracking-tight leading-tight cursor-pointer transition-colors hover:text-white">
-                                    {val.name}
-                                </h4>
-                                {/* Content (Accordion) */}
-                                <div className="value-content h-0 opacity-0 overflow-hidden">
-                                    <p className="text-xl text-slate-300 font-light leading-relaxed max-w-2xl pt-6 pl-1 border-l-2 border-white/20 ml-1">
-                                        {val.desc}
-                                    </p>
+
+                    {/* RIGHT CARD */}
+                    <div className={styles.rightCard}>
+                        {slides.map((slide, i) => (
+                            <div 
+                                key={slide.id} 
+                                className={`${styles.slideContainer} ${i === activeIndex ? styles.slideActive : ''}`}
+                            >
+                                <Image
+                                    src={slide.image}
+                                    alt={slide.alt}
+                                    fill
+                                    className={styles.slideImage}
+                                    priority={i === 0}
+                                />
+                                <div className={styles.glassCard}>
+                                    <span className={styles.cardHeading}>Winspire {slide.title.replace('Our ', '')}</span>
+                                    <p className={styles.cardText}>{slide.text}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
-
             </div>
-        </section>
+
+            {/* CORE VALUES SECTION */}
+            <section className={styles.valuesSection}>
+                <div className={styles.valuesContainer}>
+                    <div className={styles.valuesHeaderWrapper}>
+                        <div className={styles.valuesSticky}>
+                            <h3 className={styles.valuesTitle}>Our Core<br/>Values</h3>
+                            <div className={styles.separator}></div>
+                            <p className={styles.valuesDescription}>The principles that guide every decision we make.</p>
+                        </div>
+                    </div>
+                    <div className={styles.valuesList}> 
+                        {values.map((val, i) => (
+                            <div key={i} className={styles.valueItem}>
+                                <span className={styles.valueMetric}>Metric 0{i+1}</span>
+                                <h4 className={styles.valueItemTitle}>{val.name}</h4>
+                                <div className={styles.valueContent}>
+                                    <p className={styles.valueDescriptionText}>{val.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        </div>
     );
 }
