@@ -118,9 +118,6 @@ export default function LeadershipSection() {
                             <div className={styles.cardContent}>
                                 <h3 className={styles.cardTitle}>{p.title}</h3>
                                 <p className={styles.cardText}>{p.description}</p>
-                                <button className={styles.cardButton}>
-                                    Follow on LinkedIn <ArrowRight size={14} />
-                                </button>
                             </div>
                         </div>
                     ))}

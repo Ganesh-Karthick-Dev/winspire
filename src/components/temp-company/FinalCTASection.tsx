@@ -1,7 +1,8 @@
 /**
- * Final CTA Section Component for Temp Company Page
+ * Final CTA Section Component
  * 
- * Redesigned: Ultra-minimalist centered call to action.
+ * Re-designed with a premium "Glass Card" aesthetic.
+ * Features a glowing ambient background and smooth GSAP entrance animations.
  */
 
 'use client';
@@ -9,7 +10,9 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
+import styles from '@/styles/FinalCTASection.module.css';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -17,71 +20,93 @@ if (typeof window !== 'undefined') {
 
 export default function FinalCTASection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const cardRef = useRef<HTMLDivElement>(null);
+    const glowRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // General fade in
-            gsap.fromTo(sectionRef.current,
-                { opacity: 0, y: 50 },
+            // 1. Ambient Background Pulse (Continuous)
+            // (Handled via CSS keyframes in module, but we can enhance entrance here)
+            gsap.fromTo(glowRef.current, 
+                { opacity: 0, scale: 0.8 },
                 {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: 'power3.out',
+                    opacity: 0.6,
+                    scale: 1,
+                    duration: 1.5,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: sectionRef.current,
-                        start: 'top 85%',
-                        toggleActions: 'play none none reverse'
+                        start: "top 80%",
                     }
                 }
             );
 
-            // Animate buttons scale
-            gsap.fromTo('.cta-btn', 
-                { opacity: 0, y: 20 },
+            // 2. Glass Card Entrance (Scale Up + Fade In)
+            gsap.fromTo(cardRef.current,
+                { opacity: 0, scale: 0.9, y: 40 },
                 {
                     opacity: 1,
+                    scale: 1,
                     y: 0,
-                    duration: 0.6,
-                    stagger: 0.1,
-                    delay: 0.2,
-                    ease: 'back.out(1.5)',
+                    duration: 1.2,
+                    ease: "power3.out",
                     scrollTrigger: {
-                        trigger: '.cta-btn',
-                        start: 'top 90%',
-                        toggleActions: 'play none none reverse'
+                        trigger: sectionRef.current,
+                        start: "top 75%", // Triggers slightly later for dramatic effect
                     }
                 }
             );
+
+            // 3. Staggered Text Entrance
+            const elements = cardRef.current?.querySelectorAll(`.${styles.heading}, .${styles.subText}, .${styles.buttonGroup}`);
+            if (elements) {
+                gsap.fromTo(elements, 
+                    { opacity: 0, y: 20 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        stagger: 0.15,
+                        delay: 0.3, // Wait for card to start appearing
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: sectionRef.current,
+                            start: "top 75%",
+                        }
+                    }
+                );
+            }
+
         }, sectionRef);
 
         return () => ctx.revert();
     }, []);
 
     return (
-        <section
-            ref={sectionRef}
-            className="relative py-32 md:py-48 px-6 z-20 flex items-center justify-center text-center"
-            style={{ background: 'transparent' }}
-        >
-            <div className="max-w-3xl mx-auto space-y-10">
-                <h2 className="text-4xl md:text-6xl font-semibold text-white tracking-tight leading-tight">
-                    Let’s Design a Revenue Cycle That Works for the <span className="text-sky-400">Long Term.</span>
+        <section ref={sectionRef} className={styles.section}>
+            {/* Ambient Glow Background */}
+            <div ref={glowRef} className={styles.glowBackground}></div>
+
+            {/* Glass Card Container */}
+            <div ref={cardRef} className={styles.glassCard}>
+                <h2 className={styles.heading}>
+                    Let’s Design a Revenue Cycle That <br/>
+                    Works for the <span className={styles.headingHighlight}>Long Term.</span>
                 </h2>
                 
-                <p className="text-xl text-slate-400 font-light">
+                <p className={styles.subText}>
                     If you are looking for an RCM partner who understands healthcare deeply, values people, and builds systems that last, we would welcome the conversation.
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
-                    <button className="cta-btn group px-8 py-4 bg-white text-black text-sm font-bold uppercase tracking-widest hover:bg-slate-200 transition-colors flex items-center gap-3">
+                <div className={styles.buttonGroup}>
+                    <Link href="/book-demo" className={styles.primaryButton}>
                         Book a Strategic Conversation
-                        <FaArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
-                    </button>
+                        <FaArrowRight size={12} />
+                    </Link>
                     
-                    <button className="cta-btn px-8 py-4 border border-white/20 text-white text-sm font-bold uppercase tracking-widest hover:bg-white/5 transition-colors">
+                    <Link href="#how-we-work" className={styles.secondaryButton}>
                         Explore How We Work
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>
