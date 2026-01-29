@@ -52,14 +52,13 @@ export default function VisionMissionSection() {
     useEffect(() => {
         let ctx = gsap.context(() => {
             
-            // 1. PIN THE ENTIRE SECTION
             ScrollTrigger.create({
                 trigger: pinnedContentRef.current,
                 start: "top top",
-                end: "+=200%", 
+                end: "+=250%", // Increased duration for smoother scroll
                 pin: true,
                 pinSpacing: true,
-                scrub: 1,
+                scrub: 1.2,    // Slightly smoother scrub
                 onUpdate: (self) => {
                     // Logic: Keep Vision active until 50% scroll progress is reached
                     const progress = self.progress;
@@ -78,30 +77,34 @@ export default function VisionMissionSection() {
                  
                  ScrollTrigger.create({
                      trigger: item,
-                     start: 'top center+=15%', 
-                     end: 'bottom center+=15%',
-                     toggleClass: { targets: item, className: styles.activeValue },
-                     onEnter: () => expandItem(item, title, content),
-                     onEnterBack: () => expandItem(item, title, content),
-                     onLeave: () => collapseItem(item, title, content),
-                     onLeaveBack: () => collapseItem(item, title, content),
+                     start: 'top 70%', // Trigger when the top of the item is 70% down the screen
+                     end: 'bottom 30%', // Until the bottom is 30% down
+                     onToggle: (self) => {
+                        if (self.isActive) {
+                            expandItem(item, title, content);
+                        } else {
+                            collapseItem(item, title, content);
+                        }
+                     }
                  });
             });
 
             const expandItem = (item: any, title: any, content: any) => {
-                gsap.to(item, { opacity: 1, duration: 0.4 });
-                gsap.to(title, { scale: 1.05, marginBottom: '1rem', color: '#ffffff', duration: 0.4 });
-                gsap.to(content, { height: 'auto', opacity: 1, duration: 0.4, ease: 'power2.out' });
+                gsap.to(item, { opacity: 1, duration: 0.5, ease: "power2.out" });
+                gsap.to(title, { scale: 1.02, marginBottom: '1.5rem', color: '#ffffff', duration: 0.5, ease: "power2.out" });
+                gsap.to(content, { height: 'auto', opacity: 1, duration: 0.6, ease: 'power2.out' });
             };
 
             const collapseItem = (item: any, title: any, content: any) => {
-                gsap.to(item, { opacity: 0.6, duration: 0.4 });
-                gsap.to(title, { scale: 1, marginBottom: '0', color: '#e2e8f0', duration: 0.4 });
-                gsap.to(content, { height: 0, opacity: 0, duration: 0.4, ease: 'power2.in' });
+                gsap.to(item, { opacity: 0.4, duration: 0.5, ease: "power2.inOut" });
+                gsap.to(title, { scale: 1, marginBottom: '0', color: '#94a3b8', duration: 0.5, ease: "power2.inOut" });
+                gsap.to(content, { height: 0, opacity: 0, duration: 0.4, ease: 'power1.in' });
             };
 
             // Force refresh to fix initial alignment errors
-            ScrollTrigger.refresh();
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 200);
 
         }, mainWrapperRef);
 

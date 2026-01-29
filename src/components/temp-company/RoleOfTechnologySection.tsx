@@ -60,6 +60,7 @@ const RoleOfTechnologySection: React.FC = () => {
                 });
             });
 
+            ScrollTrigger.refresh();
         }, sectionRef);
 
         return () => ctx.revert();

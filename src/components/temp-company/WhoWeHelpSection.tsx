@@ -86,7 +86,7 @@ export default function WhoWeHelpSection() {
                     });
                 });
             }
-
+            ScrollTrigger.refresh();
         }, containerRef);
 
         return () => ctx.revert();

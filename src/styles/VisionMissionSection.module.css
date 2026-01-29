@@ -3,6 +3,7 @@
 .mainWrapper {
     position: relative;
     width: 100%;
+  
 }
 
 /* --- Pinned Section (Vision/Mission) --- */
@@ -13,10 +14,10 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    background: transparent;
+    background: transparent; /* Solid background to prevent bleed-through */
     overflow: hidden;
     padding: 2rem;
-    z-index: 5;
+    z-index: 20;
 }
 
 .cardsContainer {
