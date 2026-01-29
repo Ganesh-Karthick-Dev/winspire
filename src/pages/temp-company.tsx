@@ -170,7 +170,7 @@ export default function TempCompany() {
                 </section>
 
                 {/* Scaling Card - Starts inside hero, expands to 80% */}
-                <div className="absolute top-0 left-0 w-full h-[300vh] pointer-events-none z-50">
+                <div className="absolute top-0 left-0 w-full h-[150vh] pointer-events-none z-50">
                     <VideoScrollHero 
                         imageSrc="/poster/qefqe.webp" 
                         startScale={0.35}
@@ -180,11 +180,11 @@ export default function TempCompany() {
                 </div>
             </div>
 
-            {/* SPACER to account for the sticky scaling card which is 300vh */}
-            <div className="h-[200vh] pointer-events-none"></div>
+            {/* SPACER - Adjusted to allow the 150vh animation to finish without overlap */}
+            <div className="h-[80vh] pointer-events-none"></div>
 
-            {/* Main Content Wrapper with huge spacing */}
-            <div className="relative z-20 flex flex-col pb-32">
+            {/* Main Content Wrapper */}
+            <div className="relative z-20 flex flex-col pb-12">
                 
                 {/* Our Story Section */}
                 <div id="our-story">

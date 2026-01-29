@@ -9,6 +9,7 @@ module.exports = {
             fontFamily: {
                 outfit: ['Outfit', 'sans-serif'],
                 poppins: ['Poppins', 'sans-serif'],
+                serif: ['Georgia', 'Times New Roman', 'serif'],
             },
             colors: {
                 primary: '#4f9cf9',

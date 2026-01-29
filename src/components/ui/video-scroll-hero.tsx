@@ -63,7 +63,7 @@ export function VideoScrollHero({
       {/* Hero Section with Video/Image */}
       <div
         ref={containerRef}
-        className="relative h-[200vh]"
+        className="relative h-[150vh]"
       >
         {/* Fixed Container */}
         <div className="sticky top-0 w-full h-screen flex items-center justify-center z-10">
