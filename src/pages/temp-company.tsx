@@ -21,7 +21,7 @@ import OurStorySection from '@/components/temp-company/OurStorySection';
 import WhyWeExistSection from '@/components/temp-company/WhyWeExistSection';
 import PointOfViewSection from '@/components/temp-company/PointOfViewSection';
 import HowWeWorkSection from '@/components/temp-company/HowWeWorkSection';
-import TechnologySection from '@/components/temp-company/TechnologySection';
+import RoleOfTechnologySection from '@/components/temp-company/RoleOfTechnologySection';
 import WhoWeHelpSection from '@/components/temp-company/WhoWeHelpSection';
 import CultureSection from '@/components/temp-company/CultureSection';
 import LeadershipSection from '@/components/temp-company/LeadershipSection';
@@ -208,7 +208,7 @@ export default function TempCompany() {
 
                 {/* Technology Section */}
                 <div id="technology">
-                    <TechnologySection />
+                    <RoleOfTechnologySection />
                 </div>
 
                 {/* Who We Help Section */}
