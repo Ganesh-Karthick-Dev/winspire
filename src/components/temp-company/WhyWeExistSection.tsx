@@ -1,8 +1,8 @@
 /**
  * Why We Exist Section Component for Temp Company Page
  * 
- * Redesigned: Clean split layout with structured typography.
- * Professional, high-contrast, no visual noise.
+ * Redesigned: Zigzag layout with Titles OUTSIDE cards.
+ * Dark Glass Cards + Yellow Icon Hover Effect.
  */
 
 'use client';
@@ -10,6 +10,8 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import styles from '../../styles/WhyWeExistSection.module.css';
+import Image from 'next/image';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -20,90 +22,108 @@ export default function WhyWeExistSection() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.fromTo(sectionRef.current,
-                { opacity: 0, y: 50 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: 'top 85%',
-                        toggleActions: 'play none none reverse'
-                    },
-                }
-            );
+            const wrappers = gsap.utils.toArray(`.${styles.itemWrapper}`);
             
-            gsap.utils.toArray('.stat-line').forEach((line: any) => {
-                 gsap.fromTo(line,
-                    { scaleX: 0 },
+            wrappers.forEach((wrapper: any, i) => {
+                gsap.fromTo(wrapper,
+                    { y: 100, opacity: 0 },
                     {
-                        scaleX: 1,
+                        y: 0,
+                        opacity: 1,
                         duration: 1,
-                        ease: 'power2.out',
+                        ease: 'power3.out',
                         scrollTrigger: {
-                            trigger: line,
-                            start: 'top 90%',
+                            trigger: wrapper,
+                            start: 'top 85%',
                             toggleActions: 'play none none reverse'
                         }
                     }
-                 );
+                );
             });
+
         }, sectionRef);
 
         return () => ctx.revert();
     }, []);
 
-    const steps = [
-        { num: '01', title: "Define Outcomes", desc: "Identify what truly matters." },
-        { num: '02', title: "Structure Design", desc: "Build the support framework." },
-        { num: '03', title: "Disciplined Execution", desc: "Operate with clarity." },
-    ];
-
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-screen py-24 md:py-32 px-6 md:px-12 z-20"
-            style={{ background: 'transparent' }}
+            className={styles.section}
         >
-            <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-                    
-                    {/* Left: Heading & Context */}
-                    <div className="space-y-12">
-                        <div>
-                           <span className="text-xs font-bold tracking-[0.2em] text-sky-500 uppercase mb-4 block">Why We Exist</span>
-                           <h2 className="text-4xl md:text-6xl font-semibold text-white leading-tight mb-8">
-                               Because RCM Was Never Meant to Be <br/>
-                               <span className="text-slate-400 font-light">Reactive.</span>
-                           </h2>
-                           <p className="text-slate-300 text-lg leading-relaxed max-w-md">
-                               In many healthcare organizations, revenue problems only become visible after damage is done—when denials increase, AR ages, or cash flow tightens.
-                           </p>
-                        </div>
-                        
-                        <div className="p-8 bg-white/5 border border-white/10 rounded-sm">
-                            <h4 className="text-white font-medium mb-2">The Reality</h4>
-                            <p className="text-sm text-slate-400">
+            <div className={styles.container}>
+                
+                {/* 1. Left: Why We Exist */}
+                <div className={`${styles.itemWrapper} ${styles.left}`}>
+                    <h3 className={styles.sectionTitle}>Why We Exist</h3>
+                    <div className={styles.card}>
+                         <div className={styles.cardContent}>
+                             <h2 className={styles.heading}>
+                                Because RCM Was Never Meant to Be <br/>
+                                <span className={styles.accentText}>Reactive.</span>
+                             </h2>
+                             <p className={styles.description}>
+                                In many healthcare organizations, revenue problems only become visible after damage is done—when denials increase, AR ages, or cash flow tightens.
+                             </p>
+                         </div>
+                         <div className={styles.iconWrapper}>
+                             <Image 
+                                src="/svg/Group.svg" 
+                                alt="Icon" 
+                                width={180} 
+                                height={180} 
+                                className={styles.icon} 
+                            />
+                         </div>
+                    </div>
+                </div>
+
+                {/* 2. Right: The Reality */}
+                <div className={`${styles.itemWrapper} ${styles.right}`}>
+                    <h3 className={styles.sectionTitle}>The Reality</h3>
+                    <div className={styles.card}>
+                        <div className={styles.cardContent}>
+                            <p className={styles.description}>
                                 From experience, we know this reactive approach creates pressure, not stability.
                             </p>
                         </div>
-                    </div>
-
-                    {/* Right: The Method */}
-                    <div className="flex flex-col justify-center space-y-8">
-                        <h3 className="text-lg font-medium text-white">Intentional Design</h3>
-                        <p className="text-slate-300 text-lg leading-relaxed">
-                            True revenue performance is shaped long before claims are submitted. It is determined by how leadership designs structure, accountability, and intelligence at the top.
-                        </p>
-                        <div className="p-8 bg-sky-500/10 border border-sky-500/20 rounded-sm mt-8">
-                            <p className="text-white font-medium">
-                                Winspire was created to help organizations move from reactive execution to intentional design so revenue performance becomes predictable instead of stressful.
-                            </p>
+                        <div className={styles.iconWrapper}>
+                            <Image 
+                                src="/svg/Vector.svg" 
+                                alt="Icon" 
+                                width={180} 
+                                height={180} 
+                                className={styles.icon} 
+                            />
                         </div>
                     </div>
                 </div>
+
+                {/* 3. Left: Intentional Design */}
+                <div className={`${styles.itemWrapper} ${styles.lastLeft}`}>
+                     <h3 className={styles.sectionTitle}>Intentional Design</h3>
+                     <div className={styles.card}>
+                        <div className={styles.cardContent}>
+                            <p className={styles.description}>
+                                 True revenue performance is shaped long before claims are submitted. It is determined by how leadership designs structure, accountability, and intelligence at the top.
+                            </p>
+                            <br/>
+                            <p className={styles.description}>
+                                 Winspire was created to help organizations move from reactive execution to intentional design so revenue performance becomes predictable instead of stressful.
+                            </p>
+                        </div>
+                        <div className={styles.iconWrapper}>
+                             <Image 
+                                src="/svg/Group.svg" 
+                                alt="Icon" 
+                                width={180} 
+                                height={180} 
+                                className={styles.icon} 
+                            />
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </section>
     );
