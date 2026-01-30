@@ -35,6 +35,7 @@ export async function getStaticProps() {
 
 export default function TempNeuraAI() {
     const is3DDisabled = useRef(false);
+    const heroRef = useRef<HTMLDivElement>(null); // Defined heroRef
     const secondSectionRef = useRef<HTMLElement>(null);
     const whiteSectionRef = useRef<HTMLDivElement>(null);
     const secondTitleRef = useRef<HTMLHeadingElement>(null);
@@ -74,6 +75,21 @@ export default function TempNeuraAI() {
             pinSpacing: true,
         });
 
+        // Hero Blur Effect
+        // As the second section slides up (covering the hero), blur the hero.
+        if (heroRef.current) {
+            gsap.to(heroRef.current, {
+                filter: 'blur(20px)', // Aggressive blur for readability
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: secondSectionRef.current,
+                    start: 'top bottom', // Start when section enters viewport from bottom
+                    end: 'center center',    // Max blur when section is fully centered/covering
+                    scrub: true
+                }
+            });
+        }
+
         return () => ScrollTrigger.getAll().forEach((t) => t.kill());
     }, []);
 
@@ -83,7 +99,7 @@ export default function TempNeuraAI() {
             description="Neura AI - The Intelligence That Makes Revenue Cycles Predictable"
         >
             <div className="temp-neura-page-wrapper">
-                <div className="temp-neura-hero-viewport">
+                <div ref={heroRef} className="temp-neura-hero-viewport">
                     <div className="temp-neura-hero-bg" aria-hidden="true" />
                     {!is3DDisabled.current && (
                         <div className="temp-neura-model-layer">

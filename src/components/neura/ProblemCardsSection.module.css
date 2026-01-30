@@ -118,8 +118,7 @@
 .conclusion .highlight {
     font-size: 1.5rem;
     font-weight: 700;
-    background: linear-gradient(90deg, #2563eb, #7c3aed);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #000000;
+    /* Black color */
+    /* Removed blue gradient */
 }

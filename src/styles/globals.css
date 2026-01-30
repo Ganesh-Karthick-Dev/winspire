@@ -471,7 +471,8 @@ body.modal-open .webgl-canvas.ready {
   font-family: 'Outfit', sans-serif;
   /* Match project font */
   font-weight: 900;
-  font-size: 80px;
+  font-size: 110px;
+  /* Increased from 80px */
   /* Base size for SVG coordinate system */
   /* Responsive scaling relies on SVG scaling */
 }
@@ -479,7 +480,8 @@ body.modal-open .webgl-canvas.ready {
 .svg-subtitle {
   font-family: 'Outfit', sans-serif;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 38px;
+  /* Increased from 24px */
   fill: black;
 }
 
@@ -490,11 +492,13 @@ body.modal-open .webgl-canvas.ready {
 
 @media (max-width: 1024px) {
   .svg-title {
-    font-size: 60px;
+    font-size: 80px;
+    /* Increased from 60px */
   }
 
   .svg-subtitle {
-    font-size: 20px;
+    font-size: 28px;
+    /* Increased from 20px */
   }
 }
 
