@@ -90,8 +90,8 @@
 /* --- The Active Morphing Image --- */
 .activeImageContainer {
     position: absolute;
-    width: 400px; /* Default Card Width */
-    height: 300px; /* Default Card Height */
+    width: 500px; /* Default Card Width - Updated from 400px */
+    height: 400px; /* Default Card Height - Updated from 300px */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Start centered */

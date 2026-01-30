@@ -103,8 +103,8 @@ const OutcomesContent = () => {
 
             // Initial visual state
             gsap.set(imageRef.current, { 
-                width: '400px', 
-                height: '300px', 
+                width: '500px', 
+                height: '400px', 
                 xPercent: -50, 
                 yPercent: -50, 
                 x: 0, 
@@ -215,9 +215,12 @@ const OutcomesContent = () => {
                 } else {
                     // ODD: Shrink to Side
                     tl.to(imageRef.current, {
-                        width: '400px',
-                        height: '300px',
-                        borderRadius: '2rem',
+                        width: '500px',
+                        height: () => {
+                            const textEl = document.getElementById(`text-${section.id}`);
+                            return textEl ? `${textEl.offsetHeight}px` : '400px';
+                        },
+                        borderRadius: '2.5rem',
                         x: `${targetXVal}vw`, 
                         y: 0,
                         filter: 'blur(0px)',
