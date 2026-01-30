@@ -26,8 +26,8 @@
 .card {
     position: relative;
     flex: 0 0 clamp(700px, 50vw, 1000px);
-    height: 70vh;
-    /* 'Little big' landscape scale */
+    height: 75vh;
+    /* Increased height for better presence */
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
@@ -76,9 +76,12 @@
     font-family: 'Outfit', sans-serif;
     font-size: 1.7rem;
     font-weight: 700;
-    color: #fff;
     line-height: 1.2;
     letter-spacing: -0.01em;
+    background: linear-gradient(135deg, #0D1F47 0%, #264792 35%, #4073BF 65%, #332E73 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .cardDescription {
@@ -114,14 +117,12 @@
 .cardTakeaway {
     margin-top: auto;
     font-family: 'Inter', sans-serif;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: #38bdf8;
-    background: rgba(56, 189, 248, 0.08);
-    padding: 0.5rem 1rem;
-    border-radius: 100px;
-    display: inline-block;
-    align-self: flex-start;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    padding-top: 2rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    line-height: 1.5;
 }
 
 @media (max-width: 1200px) {
