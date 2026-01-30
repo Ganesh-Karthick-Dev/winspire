@@ -3,6 +3,10 @@ import React, { useEffect, useRef } from 'react';
 import Layout from '../components/Layout';
 import SolutionsHero from '../components/solutions/SolutionsHero';
 import SolutionsContent from '../components/solutions/SolutionsContent';
+import RevenueCycleSolutions from '../components/solutions/RevenueCycleSolutions';
+import TargetedSolutions from '../components/solutions/TargetedSolutions';
+import RevenueExperience from '../components/solutions/RevenueExperience';
+import CareModels from '../components/solutions/CareModels';
 import { solutionsScrollKeyframes } from '@/lib/solutionsScrollAnimations';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { shouldDisable3D } from '@/lib/threeUtils';
@@ -45,6 +49,10 @@ export default function TempSolutions() {
             )}
             <SolutionsHero />
             <SolutionsContent />
+            <RevenueCycleSolutions />
+            <TargetedSolutions />
+            <RevenueExperience />
+            <CareModels />
         </Layout>
     );
 }

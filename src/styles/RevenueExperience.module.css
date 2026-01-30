@@ -1,0 +1,166 @@
+.section {
+    position: relative;
+    width: 100%;
+    padding: 120px 0;
+    overflow: hidden;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start; /* Align top since left column is taller/stacked */
+}
+
+/* Left Column: Text Content + Image */
+.leftColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.tag {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 24px;
+    display: inline-block;
+}
+
+.title {
+    font-size: 48px;
+    line-height: 1.1;
+    font-weight: 400;
+    margin: 0 0 16px 0;
+    background: linear-gradient(90deg, #fff, #aaa);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.titleHighlight {
+    font-weight: 600;
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+}
+
+.subtitle {
+    font-size: 24px;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 24px;
+}
+
+.introText {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0px; 
+    max-width: 500px;
+}
+
+/* Right Column: Steps Grid */
+.rightColumn {
+    padding-top: 40px; /* Align slightly with image text flow or center? Start with some padding */
+}
+
+.stepsList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 32px;
+    row-gap: 60px; /* Increased row gap for the stagger effect breathing room */
+}
+
+.stepItem {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+/* The Zig-Zag Effect */
+.stepItem:nth-child(even) {
+    transform: translateY(80px); /* Push even items (2nd column) down */
+}
+
+.stepNumber {
+    width: auto;
+    min-width: 40px;
+    padding: 0 10px;
+    height: 24px;
+    background-color: #00d2aa;
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.stepContent {
+    flex: 1;
+}
+
+.stepTitle {
+    font-size: 28px;
+    font-weight: 300;
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+    color: #ffffff;
+}
+
+.stepDescription {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    max-width: 400px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .leftColumn {
+        order: 1;
+    }
+
+    .rightColumn {
+        order: 2;
+        padding-top: 0;
+    }
+    
+    .stepsList {
+        row-gap: 40px;
+    }
+    
+    .stepItem:nth-child(even) {
+        transform: none; /* remove stagger on mobile stack if single column, but grid-template-columns is still 1fr 1fr? */
+        /* If screen is narrow, grid might need to be 1 col */
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 32px;
+    }
+    
+    .stepsList {
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
+    
+    .stepItem:nth-child(even) {
+        transform: none; /* No zig zag in single column */
+    }
+}
