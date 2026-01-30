@@ -1,35 +1,39 @@
 /* Neura AI Hero Section - pure CSS, no Tailwind */
+/* Full simple background. Text left, 3D (in layer below) shows on right. */
 
 .hero {
     position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
-    background: linear-gradient(
-        135deg,
-        #fdf6f0 0%,
-        #fceee4 25%,
-        #fae5d8 50%,
-        #f8ddd0 75%,
-        #f5d4c4 100%
-    );
-    z-index: 10;
+    padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+    /* Transparent so 3D (z-25) shows; left side gets gradient from .content for text readability */
+    background: transparent;
     overflow: hidden;
 }
 
 .inner {
-    max-width: 720px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    max-width: 1400px;
     margin: 0 auto;
     width: 100%;
+    align-items: center;
+    min-height: 70vh;
 }
 
+/* Text stays in left column; gradient behind text only so 3D shows on right */
 .content {
+    max-width: 520px;
     width: 100%;
+    padding: 1.5rem 1.5rem 1.5rem 0;
+    background: linear-gradient(90deg, rgba(253, 246, 240, 0.92) 0%, rgba(252, 238, 228, 0.85) 85%, transparent 100%);
+    border-radius: 0 12px 12px 0;
 }
 
 .title {
-    font-size: clamp(3.5rem, 8vw, 6rem);
+    font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 700;
     line-height: 0.95;
     letter-spacing: -0.03em;
@@ -42,12 +46,12 @@
 }
 
 .subtitle {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.02em;
     color: #1e293b;
-    margin: 0 0 1.75rem 0;
+    margin: 0 0 1.5rem 0;
 }
 
 .subtitleWord {
@@ -55,18 +59,39 @@
 }
 
 .body {
-    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    font-size: clamp(0.95rem, 1.1vw, 1.0625rem);
     line-height: 1.65;
-    color: #334155;
+    color: #1e293b;
     margin: 0;
 }
 
 .body p {
-    margin: 0 0 0.75rem 0;
+    margin: 0 0 0.7rem 0;
 }
 
 .body p:last-child {
     margin-bottom: 0;
+}
+
+/* Right column: empty so 3D model (fixed behind) shows through */
+.rightColumn {
+    position: relative;
+    min-height: 400px;
+    pointer-events: none;
+}
+
+@media (max-width: 992px) {
+    .inner {
+        grid-template-columns: 1fr;
+    }
+
+    .content {
+        max-width: 100%;
+    }
+
+    .rightColumn {
+        display: none;
+    }
 }
 
 @media (max-width: 640px) {
@@ -75,11 +100,11 @@
     }
 
     .title {
-        font-size: 2.75rem;
+        font-size: 2.5rem;
     }
 
     .subtitle {
-        font-size: 1.35rem;
+        font-size: 1.25rem;
     }
 
     .body {

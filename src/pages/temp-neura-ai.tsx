@@ -13,7 +13,6 @@ import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { bookDemoScrollKeyframes } from '@/lib/bookDemoScrollAnimations';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import styles from '@/styles/neura.module.css';
 
 const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
     ssr: false,
@@ -54,19 +53,26 @@ export default function TempNeuraAI() {
             title="Neura AI (Temp)"
             description="Neura AI - The Intelligence That Makes Revenue Cycles Predictable"
         >
-            {/* 3D model - fixed behind hero */}
-            {!is3DDisabled.current && (
-                <div className={styles.modelContainer}>
-                    <GLTFViewer
-                        manualTransform={transform}
-                        rotateSpeed={rotateSpeed}
-                        enableWobble={enableWobble}
-                        className="w-full h-full"
-                    />
-                </div>
-            )}
+            {/* Hero + 3D only in first viewport (100vh), like homepage; footer stays below */}
+            <div className="temp-neura-page-wrapper">
+                <div className="temp-neura-hero-viewport">
+                    <div className="temp-neura-hero-bg" aria-hidden="true" />
+                    {!is3DDisabled.current && (
+                        <div className="temp-neura-model-layer">
+                            <GLTFViewer
+                                manualTransform={transform}
+                                rotateSpeed={rotateSpeed}
+                                enableWobble={enableWobble}
+                                className="w-full h-full"
+                            />
+                        </div>
+                    )}
 
-            <NeuraHeroSection />
+                    <div className="temp-neura-hero-layer">
+                        <NeuraHeroSection />
+                    </div>
+                </div>
+            </div>
         </Layout>
     );
 }

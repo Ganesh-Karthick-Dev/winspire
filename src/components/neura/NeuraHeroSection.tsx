@@ -113,6 +113,7 @@ export default function NeuraHeroSection() {
                         </p>
                     </div>
                 </div>
+                <div className={styles.rightColumn} aria-hidden="true" />
             </div>
         </section>
     );
