@@ -8,6 +8,8 @@
     grid-template-rows: auto 1fr auto auto;
     gap: 0 2rem;
     row-gap: 1.5rem;
+    /* Reverting to original */
+    /* Reduced from 4rem to bring elements closer */
     padding: clamp(7rem, 16vh, 10rem) clamp(1.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 2.5rem);
     background: transparent;
 }
@@ -22,6 +24,8 @@
 .rightCol {
     grid-column: 2;
     grid-row: 1 / -1;
+    /* Reverting to full height span */
+    /* Spans only top area, stopping before divider */
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -84,19 +88,28 @@
     margin-right: auto;
     width: 100%;
     margin-top: 0.75rem;
+    /* Reverting to original */
+    /* Reduced from 2rem */
     padding-bottom: 0.25rem;
 }
 
-.bottomLeft {
-    min-width: 0;
-}
-
-.bottomCenter {
-    min-width: 0;
-}
-
+.bottomLeft,
+.bottomCenter,
 .bottomRight {
     min-width: 0;
+    /* Glassmorphism Card Style */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    /* Subtle shadow */
+    border-radius: 16px;
+    padding: 1.5rem;
+    height: 100%;
+    /* Equal heights */
+    display: flex;
+    align-items: center;
 }
 
 .bottomCopy {
@@ -104,12 +117,11 @@
     line-height: 1.6;
     margin: 0;
     max-width: 100%;
-    font-weight: 400;
+    font-weight: 500;
+    /* Slightly bolder for readability */
     white-space: pre-line;
-    background: linear-gradient(135deg, #0D1F47 0%, #264792 35%, #4073BF 65%, #332E73 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    /* Solid Dark Blue for maximum readability on glass */
+    color: #0D1F47;
 }
 
 /* Gradient colors from body SVG (Neura Bg.svg / animated-background-fallback) */
