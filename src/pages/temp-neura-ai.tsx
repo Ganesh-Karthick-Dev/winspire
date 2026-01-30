@@ -76,21 +76,6 @@ export default function TempNeuraAI() {
             pinSpacing: true,
         });
 
-        // Hero Blur Effect
-        // As the second section slides up (covering the hero), blur the hero.
-        if (heroRef.current) {
-            gsap.to(heroRef.current, {
-                filter: 'blur(20px)', // Aggressive blur for readability
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: secondSectionRef.current,
-                    start: 'top bottom', // Start when section enters viewport from bottom
-                    end: 'center center',    // Max blur when section is fully centered/covering
-                    scrub: true
-                }
-            });
-        }
-
         return () => ScrollTrigger.getAll().forEach((t) => t.kill());
     }, []);
 
