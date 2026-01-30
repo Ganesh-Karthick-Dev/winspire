@@ -1,91 +1,86 @@
 .section {
     width: 100%;
     position: relative;
-    /* Ensure stacking context */
     z-index: 200;
-    /* Higher than previous section (100) to ensure distinct separation */
-    background-color: #ffffff;
-    /* White background */
-    margin-top: 30vh;
-    /* Substantial gap between sections */
-    padding: clamp(4rem, 10vh, 8rem) 1.5rem;
-    display: flex;
-    justify-content: center;
-    color: #000000;
-    /* Black text */
+    margin-top: 5vh;
+    padding: 0;
+    display: block;
 }
 
 .container {
-    width: 100%;
-    max-width: 900px;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    align-items: center;
 }
 
 .headline {
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     line-height: 1.1;
-    margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
     color: #000000;
+    margin-bottom: 3rem;
+    text-align: center;
 }
 
-.contentBlock {
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 100%;
+}
+
+.featureBlock {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: left;
+}
+
+.featureBlock:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+}
+
+.iconContainer {
+    width: 48px;
+    height: 48px;
+    background: #000;
+    color: #fff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.featureTitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #000;
 }
 
 .paragraph {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
-    /* ~18px to 24px */
-    line-height: 1.5;
-    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 450;
     margin: 0;
-    max-width: 800px;
-    color: #1a1a1a;
-    /* Very dark gray for readability */
+    color: #333;
 }
 
-.divider {
-    width: 100%;
-    height: 1px;
-    background-color: #e5e5e5;
-    /* Light subtle divider */
-    margin: 2rem 0;
-    position: relative;
-}
-
-/* Optional: Add a subtle decoration or stronger line if user wants it purely structurally like the image */
-/* The image showed a simple dotted/solid line. */
-.divider::after {
-    /* Simulate a dotted or patterned look if needed, but solid is cleaner.
-       Let's stick to a clean solid line first as per "perfect Neura AI" style. 
-       Or maybe a "structural" feeling. */
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100px;
-    /* Accent */
-    background-color: #000;
-}
-
-@media (max-width: 768px) {
-    .headline {
-        margin-bottom: 1rem;
-    }
-
-    .contentBlock {
-        gap: 1rem;
-    }
-
-    .divider {
-        margin: 1.5rem 0;
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 }

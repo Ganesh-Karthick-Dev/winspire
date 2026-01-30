@@ -4,6 +4,8 @@
     position: relative;
     width: 100%;
     padding: 8rem 5%;
+    background-color: #080c14;
+    /* Deep Navy/Black for contrast */
     color: white;
     overflow: visible;
 }

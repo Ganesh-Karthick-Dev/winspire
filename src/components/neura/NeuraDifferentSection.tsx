@@ -1,36 +1,71 @@
 import React from 'react';
+import { Zap, Workflow, TrendingUp } from 'lucide-react';
 import styles from './NeuraDifferentSection.module.css';
 
 const NeuraDifferentSection = () => {
     return (
-        <section className={styles.section} aria-label="What Makes Neura Fundamentally Different">
-            <div className={styles.container}>
-                <h2 className={styles.headline}>What Makes Neura Fundamentally Different</h2>
+        <section
+            className={styles.section}
+            aria-label="What Makes Neura Fundamentally Different"
+            style={{
+                backgroundColor: 'transparent',
+                marginTop: '10vh',
+                marginBottom: '10vh',
+                padding: '0'
+            }}
+        >
+            <div
+                className={styles.container}
+                style={{
+                    width: '97%',
+                    maxWidth: '1400px',
+                    margin: '0 auto',
+                    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
+                    borderRadius: '24px',
+                    padding: 'clamp(3rem, 8vh, 5rem) clamp(1rem, 3vw, 4rem)',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                    boxShadow: '0 15px 40px rgba(0, 0, 0, 0.04)',
+                }}
+            >
+                <h2 className={styles.headline}>
+                    What Makes Neura Fundamentally Different
+                </h2>
 
-                <div className={styles.contentBlock}>
-                    <p className={styles.paragraph}>
-                        Most RCM technology focuses on reporting.
-                    </p>
-                    <p className={styles.paragraph}>
-                        Neura focuses on decision timing, sequencing, and execution control.
-                    </p>
-                    <p className={styles.paragraph}>
-                        It redesigns how work flows across people, processes, and payers instead of optimizing individual tasks in isolation.
-                    </p>
-                </div>
+                <div className={styles.grid}>
+                    {/* Feature 1: Command */}
+                    <div className={styles.featureBlock}>
+                        <div className={styles.iconContainer}>
+                            <Zap size={24} />
+                        </div>
+                        <h3 className={styles.featureTitle}>Real-time Command</h3>
+                        <p className={styles.paragraph}>
+                            Traditional RCM tracks what happened. Neura masters the timing, sequencing, and precise control of every decision as it happens.
+                        </p>
+                    </div>
 
-                <div className={styles.divider} aria-hidden="true" />
+                    {/* Feature 2: Architecture */}
+                    <div className={styles.featureBlock}>
+                        <div className={styles.iconContainer}>
+                            <Workflow size={24} />
+                        </div>
+                        <h3 className={styles.featureTitle}>Workflow Architecture</h3>
+                        <p className={styles.paragraph}>
+                            Instead of optimizing isolated tasks, we re-architect the entire flow between people, processes, and payers for seamless execution.
+                        </p>
+                    </div>
 
-                <div className={styles.contentBlock}>
-                    <p className={styles.paragraph}>
-                        The result is not incremental improvement.
-                    </p>
-                    <p className={styles.paragraph}>
-                        It is structural change.
-                    </p>
-                    <p className={styles.paragraph}>
-                        Neura-enabled organizations typically achieve a 60–70% efficiency improvement within 60–90 days not by pushing teams harder, but by fixing the system they operate within.
-                    </p>
+                    {/* Feature 3: Results */}
+                    <div className={styles.featureBlock}>
+                        <div className={styles.iconContainer}>
+                            <TrendingUp size={24} />
+                        </div>
+                        <h3 className={styles.featureTitle}>The Structural Leap</h3>
+                        <p className={styles.paragraph}>
+                            Realize a <strong>60–70% efficiency gain</strong> within 90 days by fixing the underlying system, not demanding more from your teams.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
