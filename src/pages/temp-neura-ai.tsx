@@ -68,16 +68,22 @@ export default function TempNeuraAI() {
         if (typeof window === 'undefined' || !secondSectionRef.current) return;
         gsap.registerPlugin(ScrollTrigger);
 
-        // Pin the section while animating the cards
-        ScrollTrigger.create({
-            trigger: secondSectionRef.current,
-            start: 'top top',
-            end: '+=2000', // Scroll distance to complete animation
-            pin: true,
-            pinSpacing: true,
+        const ctx = gsap.context(() => {
+            // Pin the section while animating the cards
+            ScrollTrigger.create({
+                trigger: secondSectionRef.current,
+                start: 'top top',
+                end: '+=2000', // Scroll distance to complete animation
+                pin: true,
+                pinSpacing: true,
+                invalidateOnRefresh: true,
+            });
+
+            // Refresh to ensure following sections know their positions
+            ScrollTrigger.refresh();
         });
 
-        return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+        return () => ctx.revert();
     }, []);
 
     return (

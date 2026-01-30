@@ -86,45 +86,47 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
             });
         });
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: triggerEl,
-                start: 'top top',
-                end: '+=2000', // Sync with parent pin
-                scrub: 1.5,    // Smooth scrubbing
-                // anticipatePin: 1 // help prevent jitter?
-            }
-        });
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: triggerEl,
+                    start: 'top top',
+                    end: '+=2000', // Sync with parent pin
+                    scrub: 1.5,    // Smooth scrubbing
+                    // anticipatePin: 1 // help prevent jitter?
+                }
+            });
 
-        cards.forEach((card, i) => {
-            // Final random rotation for the "messy pile" look
-            const finalRotation = (Math.random() - 0.5) * 15;
+            cards.forEach((card, i) => {
+                // Final random rotation for the "messy pile" look
+                const finalRotation = (Math.random() - 0.5) * 15;
 
-            tl.to(
-                card,
-                {
-                    x: 0,
-                    y: 0,
-                    rotation: finalRotation,
-                    duration: 1, // Normalized duration for scrub
-                    ease: 'power2.out'
-                },
-                i * 0.2 // Stagger
-            );
-        });
+                tl.to(
+                    card,
+                    {
+                        x: 0,
+                        y: 0,
+                        rotation: finalRotation,
+                        duration: 1, // Normalized duration for scrub
+                        ease: 'power2.out'
+                    },
+                    i * 0.2 // Stagger
+                );
+            });
 
-        // FADE OUT TEXT (Close the holes)
-        // Animate mask text fill from Black (hole) to White (sheet).
-        // This effectively "fills in" the letters with white, making them disappear into the white bg.
+            // FADE OUT TEXT (Close the holes)
+            // Animate mask text fill from Black (hole) to White (sheet).
+            // This effectively "fills in" the letters with white, making them disappear into the white bg.
 
-        tl.to('.svg-title, .svg-subtitle', {
-            fill: 'white', // Close the hole
-            attr: { fill: 'white' }, // Backup attr plugin if needed
-            duration: 0.8,
-            ease: 'power2.inOut'
-        }, '+=0.1');
+            tl.to('.svg-title, .svg-subtitle', {
+                fill: 'white', // Close the hole
+                attr: { fill: 'white' }, // Backup attr plugin if needed
+                duration: 0.8,
+                ease: 'power2.inOut'
+            }, '+=0.1');
+        }, triggerEl as HTMLElement);
 
-        return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+        return () => ctx.revert();
     }, [pinTriggerRef]);
 
     return (

@@ -16,20 +16,23 @@ const NeuraEfficiencySection = () => {
 
         if (!section || !bg) return;
 
-        // Extreme parallax effect using GSAP
+        // ELITE Parallax: Upward Sweep + Follow-Lag
         const ctx = gsap.context(() => {
             gsap.to(bg, {
-                y: '40%', // Increased for much more noticeable shift
+                yPercent: -33.3, // Moves the 150% height container UP
                 ease: 'none',
                 scrollTrigger: {
                     trigger: section,
                     start: 'top bottom',
                     end: 'bottom top',
-                    scrub: true,
+                    scrub: 1.5, // Cinematic follow-lag
                     invalidateOnRefresh: true,
                 }
             });
-        }, section);
+
+            // Refresh to ensure layout height from pinned sections is accounted for
+            ScrollTrigger.refresh();
+        });
 
         return () => ctx.revert();
     }, []);
@@ -43,10 +46,11 @@ const NeuraEfficiencySection = () => {
             {/* Parallax Background */}
             <div ref={bgRef} className={styles.parallaxBg}>
                 <Image
-                    src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2000&auto=format&fit=crop"
-                    alt="Neural Efficiency Background"
+                    src="/images/neura/cta-bg.jpg"
+                    alt="Neura Efficiency Design"
                     fill
                     className={styles.bgImage}
+                    style={{ objectPosition: 'bottom' }}
                     priority
                     unoptimized
                 />
