@@ -241,16 +241,6 @@
 }
 
 /* Typography matching previous design */
-.sectionNumber {
-    display: inline-block;
-    font-family: monospace;
-    font-size: 1rem;
-    color: #38bdf8;
-    background: rgba(56, 189, 248, 0.1);
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    margin-bottom: 1.5rem;
-}
 
 .sectionTitle {
     font-size: 1.85rem; /* Reduced from 2.25rem */
@@ -445,17 +435,6 @@
 }
 
 /* Typography Overrides */
-.sectionNumber {
-    display: inline-block;
-    font-family: monospace;
-    font-size: 1rem;
-    color: #ffffff !important; /* Force White */
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    margin-bottom: 1.5rem;
-}
 
 /* --- CTA Section (Shows at the end) --- */
 .ctaWrapper {

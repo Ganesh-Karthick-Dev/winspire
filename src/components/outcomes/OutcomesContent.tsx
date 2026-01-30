@@ -256,11 +256,6 @@ const OutcomesContent = () => {
                     '>-2');
                 }
 
-                // ANIMATE TITLE CHARACTERS & NUMBER
-                tl.fromTo(`#text-${section.id} .${styles.sectionNumber}`, 
-                    { opacity: 0, x: -20 },
-                    { opacity: 1, x: 0, duration: 10, ease: 'power2.out' },
-                '<1');
 
                 tl.fromTo(`.section-title-${section.id} .char`,
                     { y: 40, opacity: 0, rotateX: -90, filter: 'blur(10px)' },
@@ -368,7 +363,6 @@ const OutcomesContent = () => {
                                 id={`text-${section.id}`}
                                 className={`${styles.textSection} ${isEvenSection ? styles.centered : (isTextLeft ? styles.left : styles.right)}`}
                             >
-                                <span className={styles.sectionNumber}>{String(section.id).padStart(2, '0')}</span>
                                 {/* Use renderTitle for char splitting */}
                                 <h3 className={styles.sectionTitle}>
                                     {renderTitle(section.title, section.id)}
