@@ -6,43 +6,78 @@ import {
     FaShieldAlt,
     FaBolt,
     FaChartLine,
-    FaUsers
+    FaUsers,
+    FaCogs
 } from 'react-icons/fa';
 
 const capabilities = [
     {
         id: 1,
-        title: "Intelligent Governance",
-        description: "The autonomous operating system for revenue cycle control.",
+        title: "Revenue Protection and Yield Improvement",
+        description: "Neura shifts revenue protection upstream. It predicts risk before claims are submitted, separates collectible AR from dead inventory in real time, and applies payer-specific logic to appeals.",
+        outcomes: [
+            "30–50% fewer avoidable denials",
+            "2–3% higher liquidation on aged AR",
+            "10–20% higher appeal overturn rates"
+        ],
+        takeaway: "Revenue is protected early instead of chased late.",
         icon: FaShieldAlt,
-        status: "Level 01"
+        level: "Level 01"
     },
     {
         id: 2,
-        title: "Predictive Execution",
-        description: "Moving from reactive management to pre-emptive action.",
+        title: "Speed, Throughput, and Operational Efficiency",
+        description: "Neura eliminates time lost to searching, logging in, and waiting. With live connectivity to over 1,300 payers, it automates eligibility, authorization, and claim status checks while prioritizing work by urgency and financial impact.",
+        outcomes: [
+            "30–50% reduction in time spent per claim",
+            "3–5 days faster resolution cycles",
+            "5–10% fewer SLA misses"
+        ],
+        takeaway: "Time shifts from information gathering to intelligent action.",
         icon: FaBolt,
-        status: "Level 02"
+        level: "Level 02"
     },
     {
         id: 3,
-        title: "Yield Optimization",
-        description: "Capturing 100% of earned revenue with zero leakage.",
+        title: "Leadership Visibility and Control",
+        description: "Neura replaces lagging reports with live operational insight. Leaders gain real-time visibility into AR health, payer risk, and performance drivers with the ability to intervene early.",
+        outcomes: [
+            "1–2% improvement in net collections",
+            "5–7 days earlier intervention on emerging issues"
+        ],
+        takeaway: "Leadership moves from reacting to guiding execution.",
         icon: FaChartLine,
-        status: "Level 03"
+        level: "Level 03"
     },
     {
         id: 4,
-        title: "Human Synergy",
-        description: "Augmenting specialists with real-time algorithmic guidance.",
+        title: "People Performance and Quality at Scale",
+        description: "Neura turns individual effort into consistent performance. It unifies productivity and quality metrics, automates error tracking, and accelerates onboarding through role-based intelligence.",
+        outcomes: [
+            "10–15% productivity improvement",
+            "20–30% reduction in repeat errors",
+            "30–40% faster onboarding"
+        ],
+        takeaway: "Performance scales without burnout or dependency on individuals.",
         icon: FaUsers,
-        status: "Level 04"
+        level: "Level 04"
+    },
+    {
+        id: 5,
+        title: "Culture, Alignment, and Continuous Improvement",
+        description: "Sustainable performance requires more than metrics. Neura embeds recognition, learning, and improvement into daily execution so progress does not depend on periodic initiatives.",
+        outcomes: [
+            "Lower attrition among top performers",
+            "1–3% year-over-year efficiency gains"
+        ],
+        takeaway: "Improvement becomes continuous, not episodic.",
+        icon: FaCogs,
+        level: "Level 05"
     }
 ];
 
 const NeuraCapabilitiesSection: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
-    const triggerRef = useRef<HTMLDivElement>(null);
     const horizontalTrackRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -53,15 +88,13 @@ const NeuraCapabilitiesSection: React.FC = () => {
 
             const section = sectionRef.current;
             const track = horizontalTrackRef.current;
-            const container = triggerRef.current;
 
-            if (!section || !track || !container) return;
+            if (!section || !track) return;
 
             const ctx = gsap.context(() => {
-                // Horizontal Slide + Pinning
                 const trackWidth = track.scrollWidth;
                 const windowWidth = window.innerWidth;
-                const xMove = -(trackWidth - windowWidth + (windowWidth * 0.1));
+                const xMove = -(trackWidth - windowWidth + (windowWidth * 0.15));
 
                 gsap.to(track, {
                     x: xMove,
@@ -76,10 +109,10 @@ const NeuraCapabilitiesSection: React.FC = () => {
                     }
                 });
 
-                // Ensure layout sync after parent pinning shifts
+                // Intensive layout refresh to handle cascading pins above
                 setTimeout(() => {
                     ScrollTrigger.refresh();
-                }, 150);
+                }, 500);
             }, section);
 
             return () => ctx.revert();
@@ -90,29 +123,32 @@ const NeuraCapabilitiesSection: React.FC = () => {
 
     return (
         <section ref={sectionRef} className={styles.section}>
-            <div ref={triggerRef} className={styles.horizontalContainer}>
+            <div className={styles.horizontalContainer}>
                 <div ref={horizontalTrackRef} className={styles.horizontalTrack}>
                     {capabilities.map((cap) => (
                         <div key={cap.id} className={styles.card}>
                             <div className={styles.cardGlow} />
-                            <div className={styles.cardNumber}>{cap.id.toString().padStart(2, '0')}</div>
 
                             <div className={styles.cardHeader}>
-                                <div className={styles.iconWrapper}>
-                                    <cap.icon size={32} />
-                                </div>
                                 <h3 className={styles.cardTitle}>{cap.title}</h3>
+                                <p className={styles.cardDescription}>{cap.description}</p>
                             </div>
 
-                            <div className={styles.cardBody}>
-                                <p>{cap.description}</p>
-                            </div>
-
-                            <div className={styles.cardFooter}>
-                                <div className={styles.statusIndicator}>
-                                    <span className={styles.statusDot} />
-                                    <span>{cap.status}</span>
+                            <div className={styles.outcomesWrapper}>
+                                <div className={styles.labelWrapper}>
+                                    <span className={styles.cardLabel}>Impact:</span>
                                 </div>
+                                <div className={styles.outcomesList}>
+                                    {cap.outcomes.map((outcome, i) => (
+                                        <div key={i} className={styles.outcomeItem}>
+                                            {outcome}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className={styles.cardTakeaway}>
+                                {cap.takeaway}
                             </div>
                         </div>
                     ))}
