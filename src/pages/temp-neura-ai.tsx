@@ -78,6 +78,14 @@ export default function TempNeuraAI() {
                         <NeuraHeroSection />
                     </div>
                 </div>
+
+                <section className="temp-neura-second-section" aria-label="Next section">
+                    <div className="temp-neura-second-content">
+                        <h2 className="temp-neura-second-headline">
+                            A next-generation intelligence layer built for revenue teams who move fast and think ahead.
+                        </h2>
+                    </div>
+                </section>
             </div>
         </Layout>
     );

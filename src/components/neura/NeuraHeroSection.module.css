@@ -100,13 +100,16 @@
 }
 
 .bottomCopy {
-    color: #0a0a0a;
     font-size: clamp(0.7rem, 1vw, 0.85rem);
     line-height: 1.6;
     margin: 0;
     max-width: 100%;
     font-weight: 400;
     white-space: pre-line;
+    background: linear-gradient(135deg, #0D1F47 0%, #264792 35%, #4073BF 65%, #332E73 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 /* Gradient colors from body SVG (Neura Bg.svg / animated-background-fallback) */
