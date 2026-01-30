@@ -16,9 +16,9 @@ const capabilities = [
         title: "Revenue Protection and Yield Improvement",
         description: "Neura shifts revenue protection upstream. It predicts risk before claims are submitted, separates collectible AR from dead inventory in real time, and applies payer-specific logic to appeals.",
         outcomes: [
-            "30–50% fewer avoidable denials",
-            "2–3% higher liquidation on aged AR",
-            "10–20% higher appeal overturn rates"
+            { text: "30–50% fewer avoidable denials", min: 30, max: 50 },
+            { text: "2–3% higher liquidation on aged AR", min: 2, max: 3 },
+            { text: "10–20% higher appeal overturn rates", min: 10, max: 20 }
         ],
         takeaway: "Revenue is protected early instead of chased late.",
         icon: FaShieldAlt,
@@ -29,9 +29,9 @@ const capabilities = [
         title: "Speed, Throughput, and Operational Efficiency",
         description: "Neura eliminates time lost to searching, logging in, and waiting. With live connectivity to over 1,300 payers, it automates eligibility, authorization, and claim status checks while prioritizing work by urgency and financial impact.",
         outcomes: [
-            "30–50% reduction in time spent per claim",
-            "3–5 days faster resolution cycles",
-            "5–10% fewer SLA misses"
+            { text: "30–50% reduction in time spent per claim", min: 30, max: 50 },
+            { text: "3–5 days faster resolution cycles", min: 3, max: 5 },
+            { text: "5–10% fewer SLA misses", min: 5, max: 10 }
         ],
         takeaway: "Time shifts from information gathering to intelligent action.",
         icon: FaBolt,
@@ -42,8 +42,8 @@ const capabilities = [
         title: "Leadership Visibility and Control",
         description: "Neura replaces lagging reports with live operational insight. Leaders gain real-time visibility into AR health, payer risk, and performance drivers with the ability to intervene early.",
         outcomes: [
-            "1–2% improvement in net collections",
-            "5–7 days earlier intervention on emerging issues"
+            { text: "1–2% improvement in net collections", min: 1, max: 2 },
+            { text: "5–7 days earlier intervention on emerging issues", min: 5, max: 7 }
         ],
         takeaway: "Leadership moves from reacting to guiding execution.",
         icon: FaChartLine,
@@ -54,9 +54,9 @@ const capabilities = [
         title: "People Performance and Quality at Scale",
         description: "Neura turns individual effort into consistent performance. It unifies productivity and quality metrics, automates error tracking, and accelerates onboarding through role-based intelligence.",
         outcomes: [
-            "10–15% productivity improvement",
-            "20–30% reduction in repeat errors",
-            "30–40% faster onboarding"
+            { text: "10–15% productivity improvement", min: 10, max: 15 },
+            { text: "20–30% reduction in repeat errors", min: 20, max: 30 },
+            { text: "30–40% faster onboarding", min: 30, max: 40 }
         ],
         takeaway: "Performance scales without burnout or dependency on individuals.",
         icon: FaUsers,
@@ -67,8 +67,8 @@ const capabilities = [
         title: "Culture, Alignment, and Continuous Improvement",
         description: "Sustainable performance requires more than metrics. Neura embeds recognition, learning, and improvement into daily execution so progress does not depend on periodic initiatives.",
         outcomes: [
-            "Lower attrition among top performers",
-            "1–3% year-over-year efficiency gains"
+            { text: "Lower attrition among top performers", min: 5, max: 5 },
+            { text: "1–3% year-over-year efficiency gains", min: 1, max: 3 }
         ],
         takeaway: "Improvement becomes continuous, not episodic.",
         icon: FaCogs,
@@ -96,7 +96,7 @@ const NeuraCapabilitiesSection: React.FC = () => {
                 const windowWidth = window.innerWidth;
                 const xMove = -(trackWidth - windowWidth + (windowWidth * 0.15));
 
-                gsap.to(track, {
+                const horizontalTween = gsap.to(track, {
                     x: xMove,
                     ease: "none",
                     scrollTrigger: {
@@ -107,6 +107,44 @@ const NeuraCapabilitiesSection: React.FC = () => {
                         scrub: 1,
                         invalidateOnRefresh: true,
                     }
+                });
+
+                // Animate bars as they come into view
+                gsap.utils.toArray<HTMLElement>(`.${styles.barBase}`).forEach((bar) => {
+                    gsap.fromTo(bar,
+                        { scaleX: 0 },
+                        {
+                            scaleX: 1,
+                            duration: 1.2,
+                            ease: "power3.out",
+                            transformOrigin: "left center",
+                            scrollTrigger: {
+                                trigger: bar,
+                                containerAnimation: horizontalTween, // Correctly reference the tween
+                                start: "left 85%",
+                                toggleActions: "play none none none"
+                            }
+                        }
+                    );
+                });
+
+                gsap.utils.toArray<HTMLElement>(`.${styles.barHighlight}`).forEach((bar) => {
+                    gsap.fromTo(bar,
+                        { scaleX: 0 },
+                        {
+                            scaleX: 1,
+                            duration: 1.2,
+                            delay: 0.2,
+                            ease: "power3.out",
+                            transformOrigin: "left center",
+                            scrollTrigger: {
+                                trigger: bar,
+                                containerAnimation: horizontalTween, // Correctly reference the tween
+                                start: "left 85%",
+                                toggleActions: "play none none none"
+                            }
+                        }
+                    );
                 });
 
                 // Intensive layout refresh to handle cascading pins above
@@ -141,7 +179,9 @@ const NeuraCapabilitiesSection: React.FC = () => {
                                 <div className={styles.outcomesList}>
                                     {cap.outcomes.map((outcome, i) => (
                                         <div key={i} className={styles.outcomeItem}>
-                                            {outcome}
+                                            <div className={styles.barBase} style={{ width: `${outcome.min}%` }} />
+                                            <div className={styles.barHighlight} style={{ left: `${outcome.min}%`, width: `${outcome.max - outcome.min}%` }} />
+                                            <div className={styles.outcomeText}>{outcome.text}</div>
                                         </div>
                                     ))}
                                 </div>

@@ -33,11 +33,11 @@
     -webkit-backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    padding: 3rem 4rem;
+    padding: 2.5rem 3.5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 1.5rem;
+    gap: 1rem;
     overflow: hidden;
 }
 
@@ -74,7 +74,7 @@
 
 .cardTitle {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.01em;
@@ -86,8 +86,8 @@
 
 .cardDescription {
     font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    /* Reduced as requested */
+    font-size: 0.85rem;
+    /* Reduced to fit better */
     color: rgba(255, 255, 255, 0.6);
     line-height: 1.6;
 }
@@ -106,21 +106,54 @@
 }
 
 .outcomeItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 2rem;
+}
+
+.barBase {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    /* Subtle base */
+    z-index: 0;
+    border-radius: 6px 0 0 6px;
+    transform-origin: left center;
+}
+
+.barHighlight {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.18);
+    /* Brighter highlight */
+    z-index: 0;
+    transform-origin: left center;
+}
+
+.outcomeText {
+    position: relative;
+    z-index: 2;
     font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    /* Reduced to match description */
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 400;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    line-height: 1.4;
 }
 
 .cardTakeaway {
     margin-top: auto;
     font-family: 'Inter', sans-serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: #fff;
-    padding-top: 2rem;
+    padding-top: 1.5rem;
     border-top: 2px solid rgba(255, 255, 255, 0.2);
     line-height: 1.5;
 }
