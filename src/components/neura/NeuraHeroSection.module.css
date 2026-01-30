@@ -1,113 +1,49 @@
-/* Neura AI Hero Section - pure CSS, no Tailwind */
-/* Full simple background. Text left, 3D (in layer below) shows on right. */
+/* Neura AI Hero - left: headline (top-left); right: Neura AI (right center, bigger) */
 
 .hero {
     position: relative;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
-    /* Transparent so 3D (z-25) shows; left side gets gradient from .content for text readability */
-    background: transparent;
-    overflow: hidden;
-}
-
-.inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
+    gap: 2rem;
+    padding: clamp(7rem, 16vh, 10rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 8vw, 6rem);
+    background: transparent;
+}
+
+.leftCol {
+    display: flex;
+    align-items: flex-start;
+}
+
+.rightCol {
+    display: flex;
     align-items: center;
-    min-height: 70vh;
+    justify-content: flex-end;
 }
 
-/* Text stays in left column; gradient behind text only so 3D shows on right */
-.content {
-    max-width: 520px;
-    width: 100%;
-    padding: 1.5rem 1.5rem 1.5rem 0;
-    background: linear-gradient(90deg, rgba(253, 246, 240, 0.92) 0%, rgba(252, 238, 228, 0.85) 85%, transparent 100%);
-    border-radius: 0 12px 12px 0;
-}
-
-.title {
-    font-size: clamp(3rem, 6vw, 5rem);
+/* Gradient colors from body SVG (Neura Bg.svg / animated-background-fallback) */
+.headline {
+    font-size: clamp(1.5rem, 3.25vw, 2.35rem);
     font-weight: 700;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    color: #1e293b;
-    margin: 0 0 0.5rem 0;
-}
-
-.titleWord {
-    display: inline-block;
-}
-
-.subtitle {
-    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
-    font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.25;
     letter-spacing: -0.02em;
-    color: #1e293b;
-    margin: 0 0 1.5rem 0;
+    margin: 1.5rem 0 0 0;
+    max-width: 400px;
+    background: linear-gradient(135deg, #0D1F47 0%, #264792 35%, #4073BF 65%, #332E73 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.subtitleWord {
-    display: inline-block;
-}
-
-.body {
-    font-size: clamp(0.95rem, 1.1vw, 1.0625rem);
-    line-height: 1.65;
-    color: #1e293b;
+/* Right center: Neura AI - bigger */
+.rightTitle {
+    font-size: clamp(3.5rem, 10vw, 6rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
     margin: 0;
-}
-
-.body p {
-    margin: 0 0 0.7rem 0;
-}
-
-.body p:last-child {
-    margin-bottom: 0;
-}
-
-/* Right column: empty so 3D model (fixed behind) shows through */
-.rightColumn {
-    position: relative;
-    min-height: 400px;
-    pointer-events: none;
-}
-
-@media (max-width: 992px) {
-    .inner {
-        grid-template-columns: 1fr;
-    }
-
-    .content {
-        max-width: 100%;
-    }
-
-    .rightColumn {
-        display: none;
-    }
-}
-
-@media (max-width: 640px) {
-    .hero {
-        padding: 4rem 1.25rem;
-    }
-
-    .title {
-        font-size: 2.5rem;
-    }
-
-    .subtitle {
-        font-size: 1.25rem;
-    }
-
-    .body {
-        font-size: 1rem;
-    }
+    background: linear-gradient(135deg, #0D1F47 0%, #264792 35%, #4073BF 65%, #332E73 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
