@@ -1,24 +1,112 @@
-/* Neura AI Hero - left: headline (top-left); right: Neura AI (right center, bigger) */
+/* Neura AI Hero - headline + Neura AI, divider, bottom row: left / center / right copy */
 
 .hero {
     position: relative;
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    padding: clamp(7rem, 16vh, 10rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 8vw, 6rem);
+    grid-template-rows: auto 1fr auto auto;
+    gap: 0 2rem;
+    row-gap: 1.5rem;
+    padding: clamp(7rem, 16vh, 10rem) clamp(1.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 2.5rem);
     background: transparent;
 }
 
 .leftCol {
+    grid-column: 1;
+    grid-row: 1;
     display: flex;
     align-items: flex-start;
 }
 
 .rightCol {
+    grid-column: 2;
+    grid-row: 1 / -1;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
+
+/* Horizontal line with center cross - sits above bottom text at screen bottom */
+.divider {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+.dividerLine {
+    flex: 1;
+    height: 2px;
+    background: #fff;
+    min-width: 0;
+}
+
+/* Center: little vertical line (no gap) + rounded filled white circle at intersection */
+.dividerCrossWrap {
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.dividerCrossV {
+    width: 2px;
+    height: 16px;
+    background: #fff;
+}
+
+.dividerCrossCenter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.bottomRow {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: clamp(1rem, 3vw, 2.5rem) clamp(1.25rem, 4vw, 3rem);
+    align-items: start;
+    max-width: min(90vw, 1100px);
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin-top: 0.75rem;
+    padding-bottom: 0.25rem;
+}
+
+.bottomLeft {
+    min-width: 0;
+}
+
+.bottomCenter {
+    min-width: 0;
+}
+
+.bottomRight {
+    min-width: 0;
+}
+
+.bottomCopy {
+    color: #0a0a0a;
+    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 100%;
+    font-weight: 400;
+    white-space: pre-line;
 }
 
 /* Gradient colors from body SVG (Neura Bg.svg / animated-background-fallback) */
