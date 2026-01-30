@@ -76,7 +76,7 @@ export default function OurStorySection() {
                     
                     {/* Decoration: Date Stamp */}
                      <div className={styles.dateStamp}>
-                         <span className={styles.dateText}>2019</span>
+                         <span className={styles.dateText}>WINSPIRE</span>
                     </div>
 
                     {/* Card 1: Image (Top Left) */}

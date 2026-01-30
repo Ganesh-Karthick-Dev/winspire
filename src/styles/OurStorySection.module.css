@@ -3,10 +3,12 @@
 .sectionContainer {
     position: relative;
     width: 100%;
-    background-color: #fdfbf7;
+    background: rgba(253, 251, 247, 0.7);
+    backdrop-filter: blur(20px) saturate(1.1);
     color: #1a1a1a;
     overflow: hidden;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Part 1: Who We Are (Serif Intro) */
@@ -74,9 +76,10 @@
 /* Part 2: The Pattern */
 .patternSection {
     width: 100%;
-    background-color: #ffffff;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
     padding: 1rem 1.5rem;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .patternContainer {

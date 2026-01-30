@@ -13,7 +13,7 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: 1rem; /* Added gap now that overlapping is removed */
 }
 
 /* Titles Outside Cards */
@@ -35,7 +35,7 @@
     display: block;
     width: 60px;
     height: 1px;
-    background-color: #EDFD85;
+    background-color: #187bec;
 }
 
 /* Glass Card Style */
@@ -79,7 +79,6 @@
 
 .right {
     align-items: flex-end;
-    margin-top: -10rem; /* Overlap */
 }
 
 /* Reversed the title line for right-aligned items */
@@ -89,13 +88,14 @@
 
 .lastLeft {
     align-items: flex-start;
-    margin-top: -10rem; /* Overlap */
 }
 
 /* Typography */
 .accentText {
-    color: #EDFD85;
+    color: #2986ff;
+    transition: color 0.4s ease;
 }
+
 
 .heading {
     font-size: 3.5rem;
@@ -136,12 +136,12 @@
     filter: brightness(1) grayscale(1) opacity(0.3);
 }
 
-/* Hover: High-Contrast Bright Yellow */
+/* Hover: High-Contrast Bright White */
 .card:hover .icon {
-    /* Precise Yellow Tint */
-    filter: brightness(1) grayscale(0) drop-shadow(0 0 20px rgba(237, 253, 133, 0.4));
+    /* Precise White Tint */
+    filter: brightness(2) grayscale(1) drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
     opacity: 1;
-    transform: scale(1.15) rotate(-5deg);
+    transform: scale(1.1) rotate(0deg); /* Simplified rotation per user request for "simple animation" */
 }
 
 /* Special filter for default to be yellow but darker? 

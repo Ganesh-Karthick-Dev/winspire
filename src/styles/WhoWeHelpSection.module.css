@@ -20,7 +20,7 @@
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.2em;
-    color: #EDFD85;
+    color: #2986ff;
     text-transform: uppercase;
     display: block;
     margin-bottom: 1.5rem;
@@ -40,7 +40,7 @@
 
 .description {
     font-size: 1.5rem;
-    color: #94a3b8;
+    color: #d4dfee;
     max-width: 800px;
     margin: 0 auto;
     line-height: 1.6;
@@ -71,9 +71,9 @@
     left: 50%;
     width: 2px;
     height: 0%; /* animate this */
-    background: #EDFD85; /* Active color */
+    background: #60c3fc; /* Active color */
     transform: translateX(-50%);
-    box-shadow: 0 0 15px rgba(237, 253, 133, 0.6);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
     z-index: 1;
 }
 
@@ -83,10 +83,10 @@
     left: 50%;
     width: 14px;
     height: 14px;
-    background: #EDFD85;
+    background: #2241ee;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 10px rgba(237, 253, 133, 0.6);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     z-index: 5;
 }
 
@@ -159,7 +159,7 @@
 
 .itemIndex {
     font-size: 1rem;
-    color: #EDFD85;
+    color: #2986ff;
     font-family: monospace;
     margin-bottom: 0.5rem;
     display: block;
@@ -181,8 +181,8 @@
 }
 
 .activeRow .marker {
-    background: #EDFD85;
-    border-color: #EDFD85;
+    background: #ffffff;
+    border-color: #ffffff;
     transform: translate(-50%, -50%) scale(1.2);
 }
 
@@ -206,7 +206,7 @@
 }
 
 .footerAccent {
-    color: #EDFD85;
+    color: #6bdcff;
 }
 
 @media (max-width: 768px) {
