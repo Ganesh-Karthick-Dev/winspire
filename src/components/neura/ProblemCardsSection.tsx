@@ -113,14 +113,19 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
             );
         });
 
+        // FADE OUT TEXT immediately after stacking
+        tl.to('.temp-neura-text-layer', {
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.inOut'
+        }, '+=0.1'); // Small delay or direct append
+
         return () => ScrollTrigger.getAll().forEach((t) => t.kill());
     }, [pinTriggerRef]);
 
     return (
         <div ref={containerRef} className={styles.container}>
-            <p className={styles.subtitle}>
-                Modern healthcare revenue cycles operate in a constantly shifting environment:
-            </p>
+            {/* Subtitle moved to parent for background layering */}
 
             <div className={styles.cardsStack}>
                 {// Reverse map to put first cards at bottom of stack visually if needed?

@@ -441,34 +441,58 @@ body.modal-open .webgl-canvas.ready {
 .temp-neura-second-white {
   position: relative;
   z-index: 100;
-  /* Ensure it is on top */
   width: 100%;
   min-height: 100vh;
-  /* Let height grow */
   background: #fff;
+  overflow: hidden;
+  /* Clip overflow */
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Center vertically */
-  padding: 6rem 1.5rem;
-  /* Large vertical padding to container */
-  box-sizing: border-box;
+}
+
+.temp-neura-text-layer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  /* Behind cards */
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 1.5rem;
+}
+
+.temp-neura-cards-layer {
+  position: relative;
+  z-index: 10;
+  /* On top of text */
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .temp-neura-second-section .temp-neura-second-title {
-  font-size: clamp(3rem, 6vw, 5rem);
-  /* Much Bigger */
+  font-size: clamp(3rem, 7vw, 6rem);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: -0.03em;
   color: #1a1a1a;
+  opacity: 0.2;
   margin: 0 0 1.5rem 0;
-  /* Add margin bottom */
   text-align: center;
-  max-width: 900px;
 }
 
+.temp-neura-second-subtitle {
+  font-size: clamp(1.2rem, 2vw, 1.75rem);
+  color: #4b5563;
+  opacity: 0.8;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Legacy fix: Ensure no conflicting margins */
 .temp-neura-second-section .temp-neura-second-content {
   margin: 2rem 0 0;
   padding: 0;

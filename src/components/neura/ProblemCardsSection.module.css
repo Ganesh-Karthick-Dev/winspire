@@ -10,11 +10,12 @@
 }
 
 .subtitle {
-    font-size: 1.75rem;
-    /* Bigger */
+    font-size: 1.5rem;
+    /* Slightly smaller to fit */
     color: #4b5563;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    /* Reduced from 2rem */
     font-weight: 500;
     max-width: 800px;
     line-height: 1.4;

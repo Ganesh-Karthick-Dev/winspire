@@ -103,8 +103,18 @@ export default function TempNeuraAI() {
 
                 <section ref={secondSectionRef} className="temp-neura-second-section" aria-label="The Problem Neura Solves">
                     <div ref={whiteSectionRef} className="temp-neura-second-white">
-                        <h2 ref={secondTitleRef} className="temp-neura-second-title">The Problem Neura Solves</h2>
-                        <ProblemCardsSection pinTriggerRef={secondSectionRef} />
+                        {/* Text Layer - Centered Behind */}
+                        <div className="temp-neura-text-layer">
+                            <h2 ref={secondTitleRef} className="temp-neura-second-title">The Problem Neura Solves</h2>
+                            <p className="temp-neura-second-subtitle">
+                                Modern healthcare revenue cycles operate in a constantly shifting environment:
+                            </p>
+                        </div>
+
+                        {/* Cards Layer - On Top */}
+                        <div className="temp-neura-cards-layer">
+                            <ProblemCardsSection pinTriggerRef={secondSectionRef} />
+                        </div>
                     </div>
                 </section>
             </div>
