@@ -14,7 +14,6 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
-import DebugPanel from '@/components/DebugPanel';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -369,8 +368,8 @@ export default function Home() {
             title="Home"
             description="Experience stunning 3D visuals with smooth scroll animations. Built with Next.js, Three.js, and GSAP for optimal performance."
         >
-            {/* Debug Panel */}
-            <DebugPanel />
+            {/* Debug Panel - disabled */}
+            {/* <DebugPanel /> */}
             {/* COMMENTED OUT - Debug Panel */}
             {/* {isDev && DEBUG_MODE && (
                 <ModelDebugPanel
