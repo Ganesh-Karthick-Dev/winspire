@@ -103,12 +103,31 @@ export default function TempNeuraAI() {
 
                 <section ref={secondSectionRef} className="temp-neura-second-section" aria-label="The Problem Neura Solves">
                     <div ref={whiteSectionRef} className="temp-neura-second-white">
-                        {/* Text Layer - Centered Behind */}
+                        {/* Text Layer - SVG MASK Implementation (Aggressive Cutout) */}
                         <div className="temp-neura-text-layer">
-                            <h2 ref={secondTitleRef} className="temp-neura-second-title">The Problem Neura Solves</h2>
-                            <p className="temp-neura-second-subtitle">
-                                Modern healthcare revenue cycles operate in a constantly shifting environment:
-                            </p>
+                            <svg className="temp-neura-mask-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+                                <defs>
+                                    <mask id="text-mask">
+                                        {/* White rect = Opaque (The Sheet) */}
+                                        <rect width="100%" height="100%" fill="white" />
+                                        {/* Black text = Transparent (The Hole) */}
+                                        <text x="50%" y="45%" textAnchor="middle" className="svg-title">
+                                            The Problem Neura Solves
+                                        </text>
+
+                                        {/* Multiline subtitle check - SVG doesn't wrap automatically well */}
+                                        {/* Breaking manually or using tspan */}
+                                        <text x="50%" y="55%" textAnchor="middle" className="svg-subtitle">
+                                            Modern healthcare revenue cycles operate
+                                        </text>
+                                        <text x="50%" y="60%" textAnchor="middle" className="svg-subtitle">
+                                            in a constantly shifting environment:
+                                        </text>
+                                    </mask>
+                                </defs>
+                                {/* The Visible White Sheet with Cutouts */}
+                                <rect width="100%" height="100%" fill="white" mask="url(#text-mask)" className="svg-bg-rect" />
+                            </svg>
                         </div>
 
                         {/* Cards Layer - On Top */}

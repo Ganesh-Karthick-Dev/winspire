@@ -113,12 +113,16 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
             );
         });
 
-        // FADE OUT TEXT immediately after stacking
-        tl.to('.temp-neura-text-layer', {
-            opacity: 0,
-            duration: 0.5,
+        // FADE OUT TEXT (Close the holes)
+        // Animate mask text fill from Black (hole) to White (sheet).
+        // This effectively "fills in" the letters with white, making them disappear into the white bg.
+
+        tl.to('.svg-title, .svg-subtitle', {
+            fill: 'white', // Close the hole
+            attr: { fill: 'white' }, // Backup attr plugin if needed
+            duration: 0.8,
             ease: 'power2.inOut'
-        }, '+=0.1'); // Small delay or direct append
+        }, '+=0.1');
 
         return () => ScrollTrigger.getAll().forEach((t) => t.kill());
     }, [pinTriggerRef]);

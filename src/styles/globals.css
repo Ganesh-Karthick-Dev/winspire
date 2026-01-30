@@ -437,59 +437,84 @@ body.modal-open .webgl-canvas.ready {
   padding: 0;
 }
 
-/* White section: full width, title at top, cards stack below */
+/* White section */
 .temp-neura-second-white {
   position: relative;
   z-index: 100;
   width: 100%;
   min-height: 100vh;
-  background: #fff;
+  background: transparent;
   overflow: hidden;
-  /* Clip overflow */
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
 }
 
 .temp-neura-text-layer {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
   z-index: 0;
-  /* Behind cards */
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* No white bg here, SVG handles it */
+}
+
+.temp-neura-mask-svg {
   width: 100%;
-  max-width: 900px;
-  padding: 0 1.5rem;
+  height: 100%;
+  display: block;
+}
+
+.svg-title {
+  font-family: 'Outfit', sans-serif;
+  /* Match project font */
+  font-weight: 900;
+  font-size: 80px;
+  /* Base size for SVG coordinate system */
+  /* Responsive scaling relies on SVG scaling */
+}
+
+.svg-subtitle {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  fill: black;
+}
+
+/* Close the hole animation target */
+/* We will animate the TEXT Fill from Black (Transparent) to White (Opaque/Hole Closed) -> No wait */
+/* If mask text is black, it cuts a hole. If mask text is white, it is opaque (sheet is white). */
+/* So changing mask text fill to WHITE will "close the hole" (make it just solid white sheet). Correct. */
+
+@media (max-width: 1024px) {
+  .svg-title {
+    font-size: 60px;
+  }
+
+  .svg-subtitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .svg-title {
+    font-size: 40px;
+  }
+
+  .svg-subtitle {
+    font-size: 16px;
+  }
 }
 
 .temp-neura-cards-layer {
   position: relative;
   z-index: 10;
-  /* On top of text */
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-.temp-neura-second-section .temp-neura-second-title {
-  font-size: clamp(3rem, 7vw, 6rem);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: #1a1a1a;
-  opacity: 0.2;
-  margin: 0 0 1.5rem 0;
-  text-align: center;
-}
-
-.temp-neura-second-subtitle {
-  font-size: clamp(1.2rem, 2vw, 1.75rem);
-  color: #4b5563;
-  opacity: 0.8;
-  font-weight: 500;
-  line-height: 1.4;
+  pointer-events: auto;
 }
 
 /* Legacy fix: Ensure no conflicting margins */
