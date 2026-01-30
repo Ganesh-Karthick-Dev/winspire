@@ -1,0 +1,92 @@
+/* OutcomesHero.module.css */
+
+.heroSection {
+    position: relative;
+    height: 80vh;
+    min-height: 500px;
+    width: calc(100% - 1.5rem);
+    margin: 0.6rem auto;
+    /* Ensure it doesn't overlap the fixed navbar text visually */
+    margin-top: 120px; 
+    border-radius: 24px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.heroSvg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* The Text Style inside SVG */
+.svgText {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 300px; /* Scaled via viewBox */
+    letter-spacing: -0.05em;
+    fill: black; /* Cuts the hole in the white mask */
+}
+
+/* The Overlay Color (Wall) */
+.overlayRect {
+    fill: rgba(15, 23, 42, 0.95); /* Slight Glass Effect (Dark Slate Blue with 95% opacity) */
+    /* Note: backdrop-filter doesn't work on SVG elements directly in all browsers */
+    transition: fill 0.5s ease;
+}
+
+/* New Subheading Styles */
+.subheadingContainer {
+    position: absolute;
+    top: 65%; /* Positioned below the main text roughly */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10; /* Above the SVG overlay */
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 2rem;
+    pointer-events: none; /* Let clicks pass through if needed */
+}
+
+.subheadingText {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* Scroll Indication */
+.scrollIndicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    font-weight: 500;
+    z-index: 110;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+}
+
+/* Responsive Font Sizes */
+@media (max-width: 768px) {
+    .svgText {
+        font-size: 180px; 
+    }
+    
+    .subheadingText {
+        font-size: 1.1rem;
+        width: 80%;
+        margin: 0 auto;
+    }
+}
