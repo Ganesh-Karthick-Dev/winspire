@@ -423,30 +423,79 @@ body.modal-open .webgl-canvas.ready {
   pointer-events: auto;
 }
 
-/* Second section: scrolls up from below and covers hero (parallax cover effect) */
+/* Second section: full width, explicit height so footer stays below */
 .temp-neura-second-section {
   position: relative;
   z-index: 50;
+  width: 100%;
   min-height: 100vh;
+  height: 100vh;
+  background: transparent;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+}
+
+/* White section: 100vh, full width, title at top, cards stack below */
+.temp-neura-second-white {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
   background: #fff;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: clamp(4rem, 10vh, 6rem) clamp(1.5rem, 5vw, 4rem);
+  justify-content: flex-start;
+  padding: clamp(2.5rem, 8vh, 4rem) 1.5rem 2rem;
+  box-sizing: border-box;
 }
 
-.temp-neura-second-section .temp-neura-second-content {
-  max-width: 800px;
-  text-align: center;
-}
-
-.temp-neura-second-section .temp-neura-second-headline {
+.temp-neura-second-section .temp-neura-second-title {
   font-size: clamp(1.75rem, 4vw, 2.75rem);
-  font-weight: 600;
-  line-height: 1.35;
+  font-weight: 700;
+  line-height: 1.25;
   letter-spacing: -0.02em;
   color: #1a1a1a;
   margin: 0;
+  text-align: center;
+}
+
+.temp-neura-second-section .temp-neura-second-content {
+  margin: 2rem 0 0;
+  padding: 0;
+}
+
+.temp-neura-second-section .temp-neura-second-intro {
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  line-height: 1.6;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+}
+
+.temp-neura-second-section .temp-neura-second-list {
+  margin: 0 0 1.5rem 0;
+  padding-left: 1.5rem;
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  line-height: 1.7;
+  color: #1a1a1a;
+}
+
+.temp-neura-second-section .temp-neura-second-list li {
+  margin-bottom: 0.5rem;
+}
+
+.temp-neura-second-section .temp-neura-second-body {
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  line-height: 1.6;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+}
+
+.temp-neura-second-section .temp-neura-second-body:last-of-type {
+  margin-bottom: 0;
 }
 
 main {

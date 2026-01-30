@@ -7,8 +7,11 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Layout from '@/components/Layout';
 import NeuraHeroSection from '@/components/neura/NeuraHeroSection';
+import ProblemCardsSection from '@/components/neura/ProblemCardsSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -32,6 +35,9 @@ export async function getStaticProps() {
 
 export default function TempNeuraAI() {
     const is3DDisabled = useRef(false);
+    const secondSectionRef = useRef<HTMLElement>(null);
+    const whiteSectionRef = useRef<HTMLDivElement>(null);
+    const secondTitleRef = useRef<HTMLHeadingElement>(null);
     const { transform } = useScrollAnimation({
         keyframes: tempNeuraHeroKeyframes,
     });
@@ -53,6 +59,19 @@ export default function TempNeuraAI() {
         }, 5000);
 
         return () => clearTimeout(safetyTimeout);
+    }, []);
+
+    useEffect(() => {
+        if (typeof window === 'undefined' || !secondSectionRef.current) return;
+        gsap.registerPlugin(ScrollTrigger);
+        ScrollTrigger.create({
+            trigger: secondSectionRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            pin: true,
+            pinSpacing: true,
+        });
+        return () => ScrollTrigger.getAll().forEach((t) => t.kill());
     }, []);
 
     return (
@@ -79,11 +98,10 @@ export default function TempNeuraAI() {
                     </div>
                 </div>
 
-                <section className="temp-neura-second-section" aria-label="Next section">
-                    <div className="temp-neura-second-content">
-                        <h2 className="temp-neura-second-headline">
-                            A next-generation intelligence layer built for revenue teams who move fast and think ahead.
-                        </h2>
+                <section ref={secondSectionRef} className="temp-neura-second-section" aria-label="The Problem Neura Solves">
+                    <div ref={whiteSectionRef} className="temp-neura-second-white">
+                        <h2 ref={secondTitleRef} className="temp-neura-second-title">The Problem Neura Solves</h2>
+                        <ProblemCardsSection pinTriggerRef={secondSectionRef} />
                     </div>
                 </section>
             </div>
