@@ -429,7 +429,7 @@ body.modal-open .webgl-canvas.ready {
   z-index: 50;
   width: 100%;
   min-height: 100vh;
-  height: 100vh;
+  /* height: 100vh; <-- Removed to fix overflow */
   background: transparent;
   display: flex;
   align-items: stretch;
@@ -437,30 +437,36 @@ body.modal-open .webgl-canvas.ready {
   padding: 0;
 }
 
-/* White section: 100vh, full width, title at top, cards stack below */
+/* White section: full width, title at top, cards stack below */
 .temp-neura-second-white {
   position: relative;
-  z-index: 1;
+  z-index: 100;
+  /* Ensure it is on top */
   width: 100%;
   min-height: 100vh;
-  height: 100vh;
+  /* Let height grow */
   background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: clamp(2.5rem, 8vh, 4rem) 1.5rem 2rem;
+  justify-content: center;
+  /* Center vertically */
+  padding: 6rem 1.5rem;
+  /* Large vertical padding to container */
   box-sizing: border-box;
 }
 
 .temp-neura-second-section .temp-neura-second-title {
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-size: clamp(3rem, 6vw, 5rem);
+  /* Much Bigger */
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.1;
   letter-spacing: -0.02em;
   color: #1a1a1a;
-  margin: 0;
+  margin: 0 0 1.5rem 0;
+  /* Add margin bottom */
   text-align: center;
+  max-width: 900px;
 }
 
 .temp-neura-second-section .temp-neura-second-content {

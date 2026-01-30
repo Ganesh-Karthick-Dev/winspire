@@ -64,13 +64,16 @@ export default function TempNeuraAI() {
     useEffect(() => {
         if (typeof window === 'undefined' || !secondSectionRef.current) return;
         gsap.registerPlugin(ScrollTrigger);
+
+        // Pin the section while animating the cards
         ScrollTrigger.create({
             trigger: secondSectionRef.current,
             start: 'top top',
-            end: 'bottom top',
+            end: '+=2000', // Scroll distance to complete animation
             pin: true,
             pinSpacing: true,
         });
+
         return () => ScrollTrigger.getAll().forEach((t) => t.kill());
     }, []);
 
