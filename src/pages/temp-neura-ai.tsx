@@ -1,16 +1,35 @@
 /**
  * Temp Neura AI Page
  *
- * Stub page with navbar and footer only.
+ * Hero section with 3D model behind, navbar and footer.
  * Sections will be added one by one.
  */
 
-import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
+import NeuraHeroSection from '@/components/neura/NeuraHeroSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
+import { shouldDisable3D } from '@/lib/threeUtils';
+import { bookDemoScrollKeyframes } from '@/lib/bookDemoScrollAnimations';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import styles from '@/styles/neura.module.css';
+
+const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
+    ssr: false,
+    loading: () => null,
+});
 
 export default function TempNeuraAI() {
+    const is3DDisabled = useRef(false);
+    const { transform, scrollProgress } = useScrollAnimation({
+        keyframes: bookDemoScrollKeyframes,
+    });
+    const enableWobble = scrollProgress <= 0.95;
+    const rotateSpeed = 0.003;
+
     useEffect(() => {
+        is3DDisabled.current = shouldDisable3D();
         resetLoaderToZero();
 
         const safetyTimeout = setTimeout(() => {
@@ -29,10 +48,21 @@ export default function TempNeuraAI() {
     return (
         <Layout
             title="Neura AI (Temp)"
-            description="Neura AI - sections in progress"
+            description="Neura AI - The Intelligence That Makes Revenue Cycles Predictable"
         >
-            {/* Main content - sections to be added here */}
-            <div style={{ minHeight: '50vh' }} />
+            {/* 3D model - fixed behind hero */}
+            {!is3DDisabled.current && (
+                <div className={styles.modelContainer}>
+                    <GLTFViewer
+                        manualTransform={transform}
+                        rotateSpeed={rotateSpeed}
+                        enableWobble={enableWobble}
+                        className="w-full h-full"
+                    />
+                </div>
+            )}
+
+            <NeuraHeroSection />
         </Layout>
     );
 }

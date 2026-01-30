@@ -1,0 +1,170 @@
+/* Neura AI Hero Section - Screenshot style */
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+    background: linear-gradient(
+        135deg,
+        #fdf6f0 0%,
+        #fceee4 25%,
+        #fae5d8 50%,
+        #f8ddd0 75%,
+        #f5d4c4 100%
+    );
+    z-index: 10;
+    overflow: hidden;
+}
+
+.inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    align-items: center;
+}
+
+.content {
+    max-width: 560px;
+}
+
+.title {
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: #1e293b;
+    margin: 0 0 0.5rem 0;
+}
+
+.subtitle {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #1e293b;
+    margin: 0 0 1.75rem 0;
+}
+
+.body {
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    line-height: 1.65;
+    color: #334155;
+    margin: 0 0 2rem 0;
+}
+
+.body p {
+    margin: 0 0 0.75rem 0;
+}
+
+.body p:last-child {
+    margin-bottom: 0;
+}
+
+.ctaWrap {
+    margin-top: 2rem;
+}
+
+.cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.75rem;
+    background: #1e293b;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.cta:hover {
+    background: #0f172a;
+    transform: translateY(-1px);
+}
+
+.cta:focus-visible {
+    outline: 2px solid #1e293b;
+    outline-offset: 2px;
+}
+
+.ctaArrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.cta:hover .ctaArrow {
+    transform: translateX(4px);
+}
+
+/* Right side - "Imagine more" decorative text */
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.imagineMore {
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: #1e293b;
+    opacity: 0.9;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .content {
+        max-width: 100%;
+    }
+
+    .right {
+        order: -1;
+        min-height: 120px;
+    }
+
+    .imagineMore {
+        font-size: clamp(3rem, 12vw, 5rem);
+    }
+}
+
+@media (max-width: 640px) {
+    .hero {
+        padding: 4rem 1.25rem;
+    }
+
+    .title {
+        font-size: 2.75rem;
+    }
+
+    .subtitle {
+        font-size: 1.35rem;
+    }
+
+    .body {
+        font-size: 1rem;
+    }
+
+    .cta {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.875rem;
+    }
+}
