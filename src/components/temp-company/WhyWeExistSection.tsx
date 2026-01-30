@@ -25,12 +25,19 @@ export default function WhyWeExistSection() {
             const wrappers = gsap.utils.toArray(`.${styles.itemWrapper}`);
             
             wrappers.forEach((wrapper: any, i) => {
+                const isRight = wrapper.classList.contains(styles.right);
+                
                 gsap.fromTo(wrapper,
-                    { y: 100, opacity: 0 },
+                    { 
+                        x: isRight ? 100 : -100, 
+                        opacity: 0,
+                        filter: 'blur(10px)'
+                    },
                     {
-                        y: 0,
+                        x: 0,
                         opacity: 1,
-                        duration: 1,
+                        filter: 'blur(0px)',
+                        duration: 1.2,
                         ease: 'power3.out',
                         scrollTrigger: {
                             trigger: wrapper,
