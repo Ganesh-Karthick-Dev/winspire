@@ -16,22 +16,24 @@ const NeuraEfficiencySection = () => {
 
         if (!section || !bg) return;
 
-        // ELITE Parallax: Upward Sweep + Follow-Lag
+        // ULTIMATE Parallax: Maximum Upward Shift + Feedback-Driven Feel
         const ctx = gsap.context(() => {
             gsap.to(bg, {
-                yPercent: -33.3, // Moves the 150% height container UP
+                yPercent: -45, // Massive move: shifts nearly half the total BG height UP
                 ease: 'none',
                 scrollTrigger: {
                     trigger: section,
                     start: 'top bottom',
                     end: 'bottom top',
-                    scrub: 1.5, // Cinematic follow-lag
+                    scrub: 1, // Snappier follow
                     invalidateOnRefresh: true,
                 }
             });
 
-            // Refresh to ensure layout height from pinned sections is accounted for
-            ScrollTrigger.refresh();
+            // Critical refresh to account for page-wide layout pinning above
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 100);
         });
 
         return () => ctx.revert();
