@@ -20,6 +20,10 @@ const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
     loading: () => null,
 });
 
+export async function getStaticProps() {
+    return { props: {} };
+}
+
 export default function TempNeuraAI() {
     const is3DDisabled = useRef(false);
     const { transform, scrollProgress } = useScrollAnimation({

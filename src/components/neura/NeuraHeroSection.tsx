@@ -1,10 +1,8 @@
 /**
  * Neura AI Hero Section
  *
- * Left: title, subtitle, body copy.
- * Right: "Imagine more" decorative text.
- * 3D model sits behind (handled by page).
- * GSAP: word/line reveals, stagger, blur, clip-path.
+ * Exact content only. 3D model behind (handled by page).
+ * GSAP: word/line stagger, blur reveal. Pure CSS module, no Tailwind.
  */
 
 'use client';
@@ -14,133 +12,106 @@ import gsap from 'gsap';
 import styles from './NeuraHeroSection.module.css';
 
 const SUBTITLE_WORDS = 'The Intelligence That Makes Revenue Cycles Predictable'.split(' ');
-const IMAGINE_WORDS = ['Imagine', 'more'];
 
 export default function NeuraHeroSection() {
-    const titleLineRef = useRef<HTMLHeadingElement>(null);
-    const titleWordsRef = useRef<HTMLDivElement>(null);
-    const subtitleRef = useRef<HTMLHeadingElement>(null);
-    const bodyRef = useRef<HTMLDivElement>(null);
-    const imagineRef = useRef<HTMLDivElement>(null);
+    const sectionRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
-        const titleWords = titleWordsRef.current?.querySelectorAll(`.${styles.titleWord}`);
-        const subtitleWords = subtitleRef.current?.querySelectorAll(`.${styles.subtitleWord}`);
-        const bodyParagraphs = bodyRef.current?.querySelectorAll('p');
-        const imagineWords = imagineRef.current?.querySelectorAll(`.${styles.imagineWord}`);
+        const section = sectionRef.current;
+        if (!section) return;
 
-        if (!titleWords?.length || !subtitleWords?.length || !bodyParagraphs?.length || !imagineWords?.length) return;
+        const run = () => {
+            const titleWords = section.querySelectorAll('[data-animate="title-word"]');
+            const subtitleWords = section.querySelectorAll('[data-animate="subtitle-word"]');
+            const bodyParagraphs = section.querySelectorAll('[data-animate="body-p"]');
 
-        // Title words: start below with blur, reveal up
-        gsap.set(titleWords, {
-            y: '1.2em',
-            opacity: 0,
-            filter: 'blur(12px)',
-        });
-        gsap.set(subtitleWords, {
-            y: '0.8em',
-            opacity: 0,
-            filter: 'blur(8px)',
-        });
-        gsap.set(bodyParagraphs, {
-            y: 28,
-            opacity: 0,
-            filter: 'blur(4px)',
-        });
-        gsap.set(imagineWords, {
-            y: '0.6em',
-            opacity: 0,
-            filter: 'blur(10px)',
-        });
+            if (!titleWords.length || !subtitleWords.length || !bodyParagraphs.length) return;
 
-        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+            gsap.set(titleWords, { y: 32, opacity: 0, filter: 'blur(10px)' });
+            gsap.set(subtitleWords, { y: 24, opacity: 0, filter: 'blur(8px)' });
+            gsap.set(bodyParagraphs, { y: 24, opacity: 0, filter: 'blur(6px)' });
 
-        tl.to(titleWords, {
-            y: 0,
-            opacity: 1,
-            filter: 'blur(0px)',
-            duration: 1,
-            stagger: 0.08,
-            ease: 'power3.out',
-        })
-            .to(
-                subtitleWords,
-                {
-                    y: 0,
-                    opacity: 1,
-                    filter: 'blur(0px)',
-                    duration: 0.65,
-                    stagger: 0.04,
-                    ease: 'power2.out',
-                },
-                '-=0.5'
-            )
-            .to(
-                bodyParagraphs,
-                {
-                    y: 0,
-                    opacity: 1,
-                    filter: 'blur(0px)',
-                    duration: 0.55,
-                    stagger: 0.1,
-                    ease: 'power2.out',
-                },
-                '-=0.35'
-            )
-            .to(
-                imagineWords,
-                {
-                    y: 0,
-                    opacity: 0.92,
-                    filter: 'blur(0px)',
-                    duration: 0.8,
-                    stagger: 0.12,
-                    ease: 'power3.out',
-                },
-                '-=1.4'
-            );
+            const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+            tl.to(titleWords, {
+                y: 0,
+                opacity: 1,
+                filter: 'blur(0px)',
+                duration: 0.9,
+                stagger: 0.1,
+            })
+                .to(
+                    subtitleWords,
+                    {
+                        y: 0,
+                        opacity: 1,
+                        filter: 'blur(0px)',
+                        duration: 0.6,
+                        stagger: 0.035,
+                    },
+                    '-=0.45'
+                )
+                .to(
+                    bodyParagraphs,
+                    {
+                        y: 0,
+                        opacity: 1,
+                        filter: 'blur(0px)',
+                        duration: 0.5,
+                        stagger: 0.08,
+                    },
+                    '-=0.3'
+                );
+        };
+
+        const id = requestAnimationFrame(() => {
+            requestAnimationFrame(run);
+        });
+        return () => cancelAnimationFrame(id);
     }, []);
 
     return (
-        <section className={styles.hero} aria-label="Neura AI hero">
+        <section ref={sectionRef} className={styles.hero} aria-label="Neura AI hero">
             <div className={styles.inner}>
                 <div className={styles.content}>
-                    <h1 ref={titleLineRef} className={styles.title} aria-hidden={false}>
-                        <div ref={titleWordsRef} className={styles.titleLine}>
-                            <span className={styles.titleWord}>Neura</span>
-                            <span className={styles.titleWord}>AI</span>
-                        </div>
+                    <h1 className={styles.title}>
+                        <span data-animate="title-word" className={styles.titleWord}>
+                            Neura
+                        </span>{' '}
+                        <span data-animate="title-word" className={styles.titleWord}>
+                            AI
+                        </span>
                     </h1>
-                    <h2 ref={subtitleRef} className={styles.subtitle}>
+                    <h2 className={styles.subtitle}>
                         {SUBTITLE_WORDS.map((word, i) => (
-                            <span key={i} className={styles.subtitleWord}>
+                            <span
+                                key={i}
+                                data-animate="subtitle-word"
+                                className={styles.subtitleWord}
+                            >
                                 {word}{' '}
                             </span>
                         ))}
                     </h2>
-                    <div ref={bodyRef} className={styles.body}>
-                        <p>Revenue cycles rarely fail because teams lack effort.</p>
-                        <p>They fail because the system lacks intelligence.</p>
-                        <p>Neura AI was built to solve that problem.</p>
-                        <p>
+                    <div className={styles.body}>
+                        <p data-animate="body-p">
+                            Revenue cycles rarely fail because teams lack effort.
+                        </p>
+                        <p data-animate="body-p">
+                            They fail because the system lacks intelligence.
+                        </p>
+                        <p data-animate="body-p">Neura AI was built to solve that problem.</p>
+                        <p data-animate="body-p">
                             It is not software to manage. It is an embedded intelligence layer
                             that governs how revenue work is prioritized, executed, and improved
                             every day.
                         </p>
-                        <p>
+                        <p data-animate="body-p">
                             Where traditional RCM tools tell you what went wrong after the fact,
-                            Neura works ahead of outcomes guiding decisions before revenue is lost.
+                            Neura works ahead of outcomes guiding decisions before revenue is
+                            lost.
                         </p>
                     </div>
-                </div>
-                <div ref={imagineRef} className={styles.right}>
-                    <span className={styles.imagineMore}>
-                        {IMAGINE_WORDS.map((word, i) => (
-                            <span key={i} className={styles.imagineWord}>
-                                {word}{' '}
-                            </span>
-                        ))}
-                    </span>
                 </div>
             </div>
         </section>
