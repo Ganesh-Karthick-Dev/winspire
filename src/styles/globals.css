@@ -381,6 +381,12 @@ body.modal-open .webgl-canvas.ready {
   z-index: 10;
 }
 
+.temp-neura-hero-scroll-group {
+  position: relative;
+  /* Acts as the containment block for sticky hero */
+  width: 100%;
+}
+
 .temp-neura-hero-viewport {
   position: sticky;
   top: 0;

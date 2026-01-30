@@ -12,6 +12,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Layout from '@/components/Layout';
 import NeuraHeroSection from '@/components/neura/NeuraHeroSection';
 import ProblemCardsSection from '@/components/neura/ProblemCardsSection';
+import NeuraDifferentSection from '@/components/neura/NeuraDifferentSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -99,59 +100,68 @@ export default function TempNeuraAI() {
             description="Neura AI - The Intelligence That Makes Revenue Cycles Predictable"
         >
             <div className="temp-neura-page-wrapper">
-                <div ref={heroRef} className="temp-neura-hero-viewport">
-                    <div className="temp-neura-hero-bg" aria-hidden="true" />
-                    {!is3DDisabled.current && (
-                        <div className="temp-neura-model-layer">
-                            <GLTFViewer
-                                manualTransform={transform}
-                                rotateSpeed={rotateSpeed}
-                                enableWobble={enableWobble}
-                                className="w-full h-full"
-                            />
-                        </div>
-                    )}
 
-                    <div className="temp-neura-hero-layer">
-                        <NeuraHeroSection />
+                {/* Scroll Group: Hero + Second Section. 
+                    Hero is sticky relative to THIS container. 
+                    When this container scrolls away, Hero goes with it. */}
+                <div className="temp-neura-hero-scroll-group">
+                    <div ref={heroRef} className="temp-neura-hero-viewport">
+                        <div className="temp-neura-hero-bg" aria-hidden="true" />
+                        {!is3DDisabled.current && (
+                            <div className="temp-neura-model-layer">
+                                <GLTFViewer
+                                    manualTransform={transform}
+                                    rotateSpeed={rotateSpeed}
+                                    enableWobble={enableWobble}
+                                    className="w-full h-full"
+                                />
+                            </div>
+                        )}
+
+                        <div className="temp-neura-hero-layer">
+                            <NeuraHeroSection />
+                        </div>
                     </div>
+
+                    <section ref={secondSectionRef} className="temp-neura-second-section" aria-label="The Problem Neura Solves">
+                        <div ref={whiteSectionRef} className="temp-neura-second-white">
+                            {/* Text Layer - SVG MASK Implementation (Aggressive Cutout) */}
+                            <div className="temp-neura-text-layer">
+                                <svg className="temp-neura-mask-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+                                    <defs>
+                                        <mask id="text-mask">
+                                            {/* White rect = Opaque (The Sheet) */}
+                                            <rect width="100%" height="100%" fill="white" />
+                                            {/* Black text = Transparent (The Hole) */}
+                                            <text x="50%" y="45%" textAnchor="middle" className="svg-title">
+                                                The Problem Neura Solves
+                                            </text>
+
+                                            {/* Multiline subtitle check - SVG doesn't wrap automatically well */}
+                                            {/* Breaking manually or using tspan */}
+                                            <text x="50%" y="55%" textAnchor="middle" className="svg-subtitle">
+                                                Modern healthcare revenue cycles operate
+                                            </text>
+                                            <text x="50%" y="60%" textAnchor="middle" className="svg-subtitle">
+                                                in a constantly shifting environment:
+                                            </text>
+                                        </mask>
+                                    </defs>
+                                    {/* The Visible White Sheet with Cutouts */}
+                                    <rect width="100%" height="100%" fill="white" mask="url(#text-mask)" className="svg-bg-rect" />
+                                </svg>
+                            </div>
+
+                            {/* Cards Layer - On Top */}
+                            <div className="temp-neura-cards-layer">
+                                <ProblemCardsSection pinTriggerRef={secondSectionRef} />
+                            </div>
+                        </div>
+                    </section>
                 </div>
 
-                <section ref={secondSectionRef} className="temp-neura-second-section" aria-label="The Problem Neura Solves">
-                    <div ref={whiteSectionRef} className="temp-neura-second-white">
-                        {/* Text Layer - SVG MASK Implementation (Aggressive Cutout) */}
-                        <div className="temp-neura-text-layer">
-                            <svg className="temp-neura-mask-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
-                                <defs>
-                                    <mask id="text-mask">
-                                        {/* White rect = Opaque (The Sheet) */}
-                                        <rect width="100%" height="100%" fill="white" />
-                                        {/* Black text = Transparent (The Hole) */}
-                                        <text x="50%" y="45%" textAnchor="middle" className="svg-title">
-                                            The Problem Neura Solves
-                                        </text>
+                <NeuraDifferentSection />
 
-                                        {/* Multiline subtitle check - SVG doesn't wrap automatically well */}
-                                        {/* Breaking manually or using tspan */}
-                                        <text x="50%" y="55%" textAnchor="middle" className="svg-subtitle">
-                                            Modern healthcare revenue cycles operate
-                                        </text>
-                                        <text x="50%" y="60%" textAnchor="middle" className="svg-subtitle">
-                                            in a constantly shifting environment:
-                                        </text>
-                                    </mask>
-                                </defs>
-                                {/* The Visible White Sheet with Cutouts */}
-                                <rect width="100%" height="100%" fill="white" mask="url(#text-mask)" className="svg-bg-rect" />
-                            </svg>
-                        </div>
-
-                        {/* Cards Layer - On Top */}
-                        <div className="temp-neura-cards-layer">
-                            <ProblemCardsSection pinTriggerRef={secondSectionRef} />
-                        </div>
-                    </div>
-                </section>
             </div>
         </Layout>
     );
