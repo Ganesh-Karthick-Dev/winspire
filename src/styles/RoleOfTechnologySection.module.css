@@ -1,0 +1,207 @@
+.section {
+    position: relative;
+    color: #fff;
+    padding: 0;
+    overflow: hidden;
+    background: transparent; /* Parent remains clean for GSAP */
+    z-index: 10;
+}
+
+/* Glass Layer isolated from GSAP logic */
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: -1;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+}
+
+.leftColumn {
+    width: 48%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    z-index: 10;
+}
+
+.cardLeft {
+    position: relative;
+    width: 100%;
+    height: 65vh; /* Responsive height */
+    max-height: 700px;
+    min-height: 500px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    overflow: hidden;
+    will-change: opacity, transform;
+}
+
+/* Initial Text State */
+.textState {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+}
+
+.heading {
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: #fff;
+    font-weight: 600;
+}
+
+.subText {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #a0a0a0;
+    max-width: 90%;
+}
+
+.subText strong {
+    color: #fff;
+}
+
+/* Image Reveal State */
+.imageState {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 1; /* Initially below text */
+}
+
+.revealImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+}
+
+/* RIGHT COLUMN - SCROLLING */
+.rightColumn {
+    width: 45%;
+    padding-top: 40vh; /* Reverted to 40vh for better section separation */
+    padding-bottom: 40vh; 
+}
+
+.rightCard {
+    background: transparent;
+    border-radius: 16px;
+    margin-bottom: 400px; /* Spacing to allow scroll duration */
+}
+
+/* Section Title - sticky or just first item */
+.sectionTitleWrapper {
+    margin-bottom: 80px;
+    /* Removed sticky for cleaner scroll logic */
+}
+
+.sectionTitle {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #ffaa40; /* Accent color */
+    margin-bottom: 16px;
+    display: block;
+}
+
+.mainTitle {
+    font-size: 3.5rem;
+    font-weight: 500;
+    line-height: 1.1;
+    background: linear-gradient(90deg, #fff, #888);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Scrolling List Feature Items */
+.featureList {
+    margin-top: 20vh; /* Reduced from 40vh */
+    margin-bottom: 10vh;
+}
+
+.featureItem {
+    margin-bottom: 80px; /* Reduced to tighten space */
+    padding: 30px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    opacity: 0.3; /* Start dim */
+}
+
+.featureItem.active {
+    opacity: 1;
+    border-left-color: #ffaa40;
+    padding-left: 40px;
+}
+
+.featureTitle {
+    font-size: 2.3rem; /* Increased size */
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.featureDesc {
+    font-size: 1.5rem; /* Increased size */
+    color: rgba(255, 255, 255, 0.9); /* Made visible white */
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+    }
+    .leftColumn {
+        width: 100%;
+        position: relative;
+        top: 0;
+        height: auto;
+        min-height: 500px;
+        margin-bottom: 40px;
+    }
+    .rightColumn {
+        width: 100%;
+    }
+    .featureList {
+        margin-top: 40px;
+    }
+}

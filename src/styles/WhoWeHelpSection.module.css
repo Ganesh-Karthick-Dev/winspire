@@ -1,0 +1,249 @@
+/* WhoWeHelpSection.module.css */
+
+.section {
+    position: relative;
+    padding: 6rem 2rem;
+    z-index: 20;
+    min-height: 100vh;
+    color: #fff;
+    overflow: hidden;
+}
+
+.titleContainer {
+    text-align: center;
+    margin-bottom: 5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #EDFD85;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.heading {
+    font-size: 3.5rem;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.description {
+    font-size: 1.5rem;
+    color: #94a3b8;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Timeline Wrapper */
+.timelineWrapper {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+/* The Central Line */
+.linePlane {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-50%);
+}
+
+.activeLine {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 0%; /* animate this */
+    background: #EDFD85; /* Active color */
+    transform: translateX(-50%);
+    box-shadow: 0 0 15px rgba(237, 253, 133, 0.6);
+    z-index: 1;
+}
+
+.ball {
+    position: absolute;
+    top: 0%; /* animate this */
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    background: #EDFD85;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(237, 253, 133, 0.6);
+    z-index: 5;
+}
+
+.itemsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+/* Items */
+.itemRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem; /* Spacing between items */
+    position: relative;
+    opacity: 0.2; /* Default "empty" state */
+    transition: opacity 0.5s ease;
+}
+
+.activeRow {
+    opacity: 1; 
+}
+
+/* The Row content wrapper to help alignment */
+.rowContent {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Left and Right sides */
+.leftSide, .rightSide {
+    width: 45%;
+    display: flex;
+    align-items: center;
+}
+
+.leftSide {
+    justify-content: flex-end;
+    text-align: right;
+    padding-right: 3rem;
+    transform: translateX(-10px);
+    transition: transform 0.6s ease-out;
+}
+
+.rightSide {
+    justify-content: flex-start;
+    text-align: left;
+    padding-left: 3rem;
+    transform: translateX(10px);
+    transition: transform 0.6s ease-out;
+}
+
+/* On Active, move them to neutral position */
+.activeRow .leftSide, .activeRow .rightSide {
+    transform: translateX(0);
+}
+
+/* Text styles */
+.itemTitle {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #fff;
+    margin: 0;
+}
+
+.itemIndex {
+    font-size: 1rem;
+    color: #EDFD85;
+    font-family: monospace;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Marker on the line (the target point) */
+.marker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    background: #333;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.activeRow .marker {
+    background: #EDFD85;
+    border-color: #EDFD85;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* Footer Section */
+.footer {
+    text-align: center;
+    margin-top: 5rem;
+    padding: 4rem 3rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.footerText {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: #fff;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.footerAccent {
+    color: #EDFD85;
+}
+
+@media (max-width: 768px) {
+    .heading {
+        font-size: 2.5rem;
+    }
+    .description {
+        font-size: 1.1rem;
+    }
+    .itemRow {
+        flex-direction: column;
+        margin-bottom: 4rem;
+        text-align: left;
+    }
+    
+    .linePlane, .activeLine, .ball, .marker {
+        left: 20px; /* Move line to left on mobile */
+        transform: none;
+    }
+    .ball {
+        transform: translate(-50%, -50%); /* Ball is centered on line */
+        left: 20px;
+    }
+    .activeLine {
+        transform: translateX(-50%);
+        left: 20px;
+    }
+
+    .leftSide, .rightSide {
+        width: 100%;
+        padding-left: 60px; /* Offset for line */
+        padding-right: 0;
+        justify-content: flex-start;
+        text-align: left;
+    }
+    
+    .itemTitle {
+        font-size: 1.8rem;
+    }
+}

@@ -13,6 +13,7 @@ import AnimatedBackground from './AnimatedBackground';
 import SmartNavbar from './SmartNavbar';
 import Footer from './Footer';
 import FlowerCursor from './FlowerCursor';
+import SmoothScroll from './SmoothScroll';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -48,9 +49,11 @@ export default function Layout({
             {!hideNavbar && <SmartNavbar />}
 
             {/* Main content area */}
-            <main id="main-content" role="main" tabIndex={-1}>
-                {children}
-            </main>
+            <SmoothScroll>
+                <main id="main-content" role="main" tabIndex={-1}>
+                    {children}
+                </main>
+            </SmoothScroll>
 
             {/* Footer */}
             <Footer />

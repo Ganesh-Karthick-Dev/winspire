@@ -1,0 +1,450 @@
+/* OurStorySection.module.css */
+
+.sectionContainer {
+    position: relative;
+    width: 100%;
+    background-color: #fdfbf7;
+    color: #1a1a1a;
+    overflow: hidden;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* Part 1: Who We Are (Serif Intro) */
+.introSection {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+}
+
+.introGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.introLabelWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.introLine {
+    width: 2rem;
+    height: 2px;
+    background-color: #000;
+}
+
+.introLabel {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'Outfit', sans-serif; /* Keep sans-serif for labels if desired, or remove */
+}
+
+.introHeadline {
+    font-size: 3rem;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    color: #1a1a1a; /* Explicitly set to dark */
+}
+
+.introSubtitle {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.introTextWrapper {
+    max-width: 42rem;
+    margin-left: auto;
+    border-left: 2px solid #e5e7eb;
+    padding-left: 2rem;
+}
+
+.introText {
+    font-size: 1.15rem;
+    line-height: 1.4;
+    font-weight: 300;
+    color: #1f2937;
+}
+
+/* Part 2: The Pattern */
+.patternSection {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.patternContainer {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.patternHeadline {
+    font-size: 2.5rem;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 2rem;
+    max-width: 56rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+    color: #1a1a1a; /* Explicitly set to dark */
+}
+
+.patternHighlight {
+    font-style: italic;
+    color: #9ca3af;
+}
+
+.patternGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.patternItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.patternNumber {
+    display: block;
+    font-size: 3.5rem;
+    line-height: 1;
+    font-weight: 400;
+    color: #222;
+    transition: color 0.5s;
+    margin-bottom: 0.5rem;
+}
+
+.patternItem:hover .patternNumber {
+    color: #111827;
+}
+
+.patternText {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #111;
+    letter-spacing: -0.01em;
+    font-family: 'Outfit', sans-serif;
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Part 3: The Journey (Scrapbook) */
+.journeySection {
+    width: 100%;
+    padding: 2rem 1.5rem;
+    overflow: hidden;
+    background-color: #e5e5e5;
+    position: relative;
+}
+
+.journeyContainer {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+    min-height: 1000px;
+}
+
+.journeyIntro {
+    max-width: 56rem;
+    margin: 0 auto 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 20;
+}
+
+.journeyHeadline {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #1a1a1a; /* Explicitly set to dark */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 1.5rem;
+}
+
+.journeyHeadline span {
+    font-style: italic;
+    color: #4b5563;
+}
+
+.dateStamp {
+    position: absolute;
+    top: 2.5rem;
+    left: 2.5rem;
+    opacity: 0.2;
+    transform: rotate(-5deg);
+    pointer-events: none;
+}
+
+.dateText {
+    font-size: 10rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    color: #9ca3af;
+    line-height: 1;
+}
+
+/* Common Card Styles */
+.card {
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+    transition: all 0.5s ease-out;
+    transform-origin: center;
+}
+
+.card:hover {
+    z-index: 30;
+    transform: rotate(0deg) scale(1.02) !important; /* Override individual rotations on hover */
+}
+
+/* Card 1: Top Left Image */
+.card1 {
+    top: 10rem;
+    left: 0;
+    max-width: 24rem;
+    padding: 0.75rem;
+    padding-bottom: 2rem;
+    transform: rotate(-3deg);
+}
+
+.imageWrapper {
+    overflow: hidden;
+    background-color: #f3f4f6;
+    border: 1px solid #f3f4f6;
+}
+
+.sepiaImage {
+    width: 100%;
+    height: 16rem;
+    object-fit: cover;
+    filter: sepia(0.3) contrast(1.25);
+}
+
+.caption {
+    font-style: italic;
+    margin-top: 1rem;
+    text-align: center;
+    color: #6b7280;
+    font-size: 1.125rem;
+}
+
+/* Card 2: Top Right Quote */
+.card2 {
+    top: 5rem;
+    right: 0;
+    max-width: 28rem;
+    background-color: #fffdf5;
+    padding: 2rem;
+    transform: rotate(2deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.tape {
+    position: absolute;
+    top: -0.75rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(-1deg);
+    width: 8rem;
+    height: 2rem;
+    background-color: rgba(254, 243, 199, 0.5);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.quoteIcon {
+    font-size: 2.25rem;
+    color: #d1d5db;
+    margin-bottom: 1.5rem;
+}
+
+.cardTitle {
+    font-size: 1.875rem;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+}
+
+.cardText {
+    font-size: 1.25rem;
+    line-height: 1.625;
+    color: #1f2937;
+}
+
+/* Card 3: Center Image */
+.card3 {
+    top: 450px;
+    left: 50%;
+    transform: translateX(-50%) rotate(1deg);
+    max-width: 28rem;
+    padding: 1rem;
+    padding-bottom: 2.5rem;
+    z-index: 20;
+}
+
+.centerImage {
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+}
+
+.figureCaption {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 0.5rem;
+}
+
+.figTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.figNum {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+/* Card 4: Bottom Left Mission */
+.card4 {
+    bottom: 10rem;
+    left: 1rem;
+    max-width: 20rem;
+    padding: 2rem;
+    transform: rotate(-4deg);
+    border-left: 4px solid #000;
+}
+
+.missionLabel {
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #9ca3af;
+    font-family: 'Outfit', sans-serif;
+}
+
+.missionText {
+    font-size: 1.5rem;
+    color: #111827;
+    line-height: 1.25;
+}
+
+/* Card 5: Bottom Right Note */
+.card5 {
+    bottom: 2rem;
+    right: 1rem;
+    max-width: 340px;
+    background-color: #fff9c4; /* Soft yellow */
+    padding: 2rem;
+    transform: rotate(3deg);
+    border: none;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.08);
+    background-image: radial-gradient(#e0d68a 1.2px, transparent 1.2px);
+    background-size: 18px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.noteText {
+    font-style: italic;
+    font-size: 1.125rem;
+    color: #713f12;
+    line-height: 1.375;
+}
+
+/* Media Queries for Responsiveness */
+@media (min-width: 768px) {
+    .introSection {
+        padding: 1.5rem 3rem;
+    }
+
+    .introGrid {
+        grid-template-columns: repeat(12, 1fr);
+        gap: 1rem;
+    }
+
+    .introLabelWrapper {
+        grid-column: span 3;
+    }
+
+    .introContent {
+        grid-column: span 9;
+    }
+
+    .introHeadline {
+        font-size: 4.5rem;
+    }
+
+    .introText {
+        font-size: 1.5rem;
+    }
+    
+    .patternSection {
+        padding: 1.5rem 3rem;
+    }
+
+    .patternHeadline {
+        font-size: 4.5rem;
+    }
+
+    .patternGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .patternNumber {
+        font-size: 4rem;
+    }
+
+    .journeySection {
+        min-height: 900px;
+    }
+    
+    .dateStamp {
+        left: 5rem;
+    }
+
+    .dateText {
+        font-size: 15rem;
+    }
+
+    .card1 {
+        left: 6rem;
+    }
+
+    .card2 {
+        right: 8rem;
+    }
+
+    .card4 {
+        left: 8rem;
+    }
+
+    .card5 {
+        right: 10rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .introHeadline {
+        font-size: 6rem;
+    }
+    .patternHeadline {
+        font-size: 6rem;
+    }
+}

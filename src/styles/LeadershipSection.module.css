@@ -1,0 +1,225 @@
+.section {
+    position: relative;
+    padding: 100px 0 0 0;
+    overflow: hidden;
+    background: transparent;
+}
+
+/* Glass Layer */
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: -1;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.titleWrapper {
+    text-align: center;
+    margin-bottom: 80px;
+    position: relative;
+    z-index: 2;
+}
+
+.label {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #ffaa40; /* Matching accent from other sections */
+    margin-bottom: 16px;
+    display: block;
+    font-weight: 600;
+}
+
+.mainTitle {
+    font-size: 4.5rem; /* Larger */
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 32px;
+}
+
+.mainTitle em {
+    font-style: italic;
+    font-family: serif; 
+    font-size: 1.1em; /* Slightly larger than the main text */
+    display: block; /* Typically on its own line in these designs */
+    margin-top: 10px;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.description {
+    font-size: 1.25rem;
+    color: #a0a0a0;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.carouselContainer {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carouselTrack {
+    display: flex;
+    gap: 30px;
+    overflow: hidden;
+    width: 100%;
+    padding: 20px 0; /* Space for shadows/hover effects */
+    justify-content: center;
+}
+
+.card {
+    position: relative;
+    flex: 0 0 350px;
+    min-height: 450px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: all 0.4s ease;
+    cursor: default;
+    overflow: hidden;
+    padding: 0; /* Remove padding to let image fill */
+}
+
+.cardImageContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.cardImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7); /* Dim the image for text readability */
+    transition: transform 0.6s ease;
+}
+
+.card:hover .cardImage {
+    transform: scale(1.05);
+    filter: brightness(0.8);
+}
+
+.cardContent {
+    position: relative;
+    z-index: 2;
+    padding: 32px;
+    background: #fff; /* White background like in image */
+    width: 90%;
+    margin: 0 auto 20px auto;
+    border-radius: 16px;
+    color: #000; /* Black text on white background */
+}
+
+.cardTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.cardText {
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.cardButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #56eba2; /* The green color from the image */
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.cardButton:hover {
+    background: #45d68b;
+}
+
+/* Navigation Buttons */
+.navButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #000; /* Black background as seen in image */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.navButton:hover {
+    background: #222;
+    transform: translateY(-50%) scale(1.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.prevButton {
+    left: 0;
+}
+
+.nextButton {
+    right: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .mainTitle {
+        font-size: 2.5rem;
+    }
+    
+    .carouselTrack {
+        flex-direction: column;
+        align-items: center;
+        overflow: visible;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    .navButton {
+        display: none; /* Hide arrows on mobile, just stack them */
+    }
+}
