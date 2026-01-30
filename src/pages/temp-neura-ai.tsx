@@ -14,6 +14,7 @@ import NeuraHeroSection from '@/components/neura/NeuraHeroSection';
 import ProblemCardsSection from '@/components/neura/ProblemCardsSection';
 import NeuraDifferentSection from '@/components/neura/NeuraDifferentSection';
 import NeuraEfficiencySection from '@/components/neura/NeuraEfficiencySection';
+import NeuraCapabilitiesSection from '@/components/neura/NeuraCapabilitiesSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -154,6 +155,7 @@ export default function TempNeuraAI() {
 
                 <NeuraDifferentSection />
                 <NeuraEfficiencySection />
+                <NeuraCapabilitiesSection />
 
             </div>
         </Layout>
