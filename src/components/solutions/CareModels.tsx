@@ -121,7 +121,7 @@ const CareModels: React.FC = () => {
             
             <div className={styles.container}>
                 <div className={styles.header} ref={headerRef}>
-                    <span className={styles.eyebrow} ref={eyebrowRef}>5. Supporting New Care Models</span>
+                    <span className={styles.eyebrow} ref={eyebrowRef}>Supporting New Care Models</span>
                     <h2 className={styles.title} ref={titleRef}>
                         <span className={styles.titleLine}>Revenue Enablement for</span>
                         <span className={styles.titleLine}>Remote Patient Monitoring</span>
@@ -141,7 +141,7 @@ const CareModels: React.FC = () => {
                         </div>
                         <div className={styles.visualElement} ref={visualRef}>
                             <img
-                                src="/images/company-page/cloud-computing-cyber-security.webp"
+                                src="/temp/117735.jpg"
                                 alt="Scale confidently"
                                 className={styles.visualImage}
                             />

@@ -18,17 +18,17 @@ const principles = [
     {
         title: 'Design before scaling',
         description: 'We believe in laying a robust foundation before rapid expansion. Every system is architected for future growth.',
-        image: '/images/team/philip-leone.png'
+        image: '/temp/550.jpg'
     },
     {
         title: 'Solve root causes, not symptoms',
         description: 'Our approach digs deep to find the underlying issues, ensuring long-term solutions instead of quick fixes.',
-        image: '/images/team/dan-schulte.png'
+        image: '/temp/656934.jpg'
     },
     {
         title: 'Build systems that outlast individuals',
         description: 'Creating resilient processes and knowledge bases that ensure continuity and excellence regardless of personnel changes.',
-        image: '/images/team/john-kostic.png'
+        image: '/temp/8414.jpg'
     },
 ];
 

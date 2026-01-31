@@ -83,7 +83,7 @@ export default function OurStorySection() {
                     <div className={`${styles.card} ${styles.card1}`}>
                         <div className={styles.imageWrapper}>
                              <img 
-                                src="/images/company-page/business-people-shaking-hands-congratulations-work-success.webp" 
+                                src="/temp/117735.jpg" 
                                 alt="Founding moment" 
                                 className={styles.sepiaImage}
                             />
@@ -105,7 +105,7 @@ export default function OurStorySection() {
                     <div className={`${styles.card} ${styles.card3}`}>
                          <div className={styles.imageWrapper}>
                              <img 
-                                src="/poster/qefqe.webp" 
+                                src="/temp/13071.jpg" 
                                 alt="Growth phase" 
                                 className={styles.centerImage}
                             />

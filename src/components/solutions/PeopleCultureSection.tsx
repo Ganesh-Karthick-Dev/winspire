@@ -202,7 +202,6 @@ const PeopleCultureSection: React.FC = () => {
                         <div key={card.id} className={styles.panel}>
                             <div className={styles.cardPanel}>
                                 <div className={styles.bentoCard} data-card={cardIndex}>
-                                    <span className={styles.cardNumber}>{card.id}</span>
                                     <div className={styles.cardBento}>
                                         <div className={`${styles.bentoCell} ${styles.cellTag} ${styles.blueLight} ${styles.textSm}`}>
                                             <span className={styles.cardTag}>{card.tag}</span>

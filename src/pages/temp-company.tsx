@@ -172,7 +172,7 @@ export default function TempCompany() {
                 {/* Scaling Card - Starts inside hero, expands to 80% */}
                 <div className="absolute top-0 left-0 w-full h-[150vh] pointer-events-none z-50">
                     <VideoScrollHero 
-                        imageSrc="/poster/qefqe.webp" 
+                        videoSrc="/temp/0_Doctor_Patient_1280x672.mp4"
                         startScale={0.35}
                         maxScale={0.8}
                         className="pointer-events-auto"

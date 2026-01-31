@@ -100,13 +100,18 @@ const RoleOfTechnologySection: React.FC = () => {
                             </p>
                         </div>
 
-                        {/* STATE 2: Image Reveal */}
+                        {/* STATE 2: Video Reveal */}
                         <div className={styles.imageState} ref={imageRef}>
-                            <img 
-                                src="/images/company-page/cloud-computing-cyber-security.webp" 
-                                alt="Role of Technology Interface" 
-                                className={styles.revealImg} 
-                            />
+                            <video 
+                                autoPlay 
+                                loop 
+                                muted 
+                                playsInline
+                                className={styles.revealImg}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            >
+                                <source src="/temp/5478718_Coll_wavebreak_Animation_1280x720.mp4" type="video/mp4" />
+                            </video>
                         </div>
                     </div>
                 </div>

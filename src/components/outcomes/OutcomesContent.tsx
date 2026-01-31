@@ -13,7 +13,7 @@ const OutcomesContent = () => {
     const textRef = useRef<HTMLDivElement>(null);
     const introLeftRef = useRef<HTMLDivElement>(null);
     const introRightRef = useRef<HTMLDivElement>(null);
-    const outcomeImagesRef = useRef<(HTMLImageElement | null)[]>([]);
+    const outcomeImagesRef = useRef<(HTMLImageElement | HTMLVideoElement | null)[]>([]);
     const mobileSectionRefs = useRef<(HTMLDivElement | null)[]>([]);
     const mobileCtaRef = useRef<HTMLDivElement>(null);
     const mobileScrollContainerRef = useRef<HTMLDivElement>(null);
@@ -36,7 +36,7 @@ const OutcomesContent = () => {
             list: ["System-designed workflows, not hero-driven processes", "Cross-functional visibility instead of departmental silos", "Prioritization based on financial impact, not task volume"],
             final: "This is how performance scales without burnout.",
             icon: "⚙️",
-            image: "/images/company-page/network-digit-0.webp"
+            image: "/temp/16457.jpg"
         },
         {
             id: 3,
@@ -54,7 +54,7 @@ const OutcomesContent = () => {
             list: ["Identifying risk early", "Prioritizing work by financial impact", "Providing real-time visibility across teams and departments"],
             final: "AI here strengthens human judgment. It never replaces it.",
             icon: "🧠",
-            image: "/images/company-page/ai-assistant-ai-chatbot-generate-images-write-code-writer-bot-translate-advertising-llm.webp"
+            image: "/temp/2151968689.jpg"
         },
         {
             id: 5,
@@ -72,7 +72,7 @@ const OutcomesContent = () => {
             list: ["Employee KPIs are directly tied to client KPIs", "Performance is measured across the full revenue lifecycle", "Recognition is based on impact, not tenure"],
             final: "Contribution matters more than titles. Ownership matters more than hierarchy.",
             icon: "🤝",
-            image: "/images/careers/presentation.png"
+            image: "/temp/36643.jpg"
         },
         {
             id: 7,
@@ -81,7 +81,9 @@ const OutcomesContent = () => {
             list: ["Azure cloud infrastructure", "100% US data residency", "HIPAA, ISO, and ISMS compliance", "Strict PHI governance"],
             final: "Security is not a feature. It is a baseline expectation.",
             icon: "🔒",
-            image: "/images/company-page/cloud-computing-cyber-security.webp"
+            image: "/images/company-page/cloud-computing-cyber-security.webp",
+            isVideo: true,
+            videoSrc: "/temp/0_Brain_Research_1280x720.mp4"
         },
         {
             id: 8,
@@ -90,7 +92,7 @@ const OutcomesContent = () => {
             list: ["Design systems instead of managing chaos", "Enable people instead of exhausting them", "Act on intelligence instead of assumptions"],
             final: "That future is not coming. It is already here.",
             icon: "🚀",
-            image: "/images/company-page/Glow 1.webp"
+            image: "/temp/39810.jpg"
         }
     ];
 
@@ -403,19 +405,43 @@ const OutcomesContent = () => {
 
                         {/* The Morphing Active Image */}
                         <div ref={imageRef} className={styles.activeImageContainer}>
-                            {/* Initial Image */}
-                            <img id="initial-image" src="/images/company/hero-main.png" alt="" className={styles.outcomeImage} />
+                            {/* Initial Video */}
+                            <video
+                                id="initial-image"
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className={styles.outcomeImage}
+                                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                            >
+                                <source src="/temp/0_Doctors_Medical_1280x672.mp4" type="video/mp4" />
+                            </video>
 
-                            {/* Stacked Outcome Images */}
+                            {/* Stacked Outcome Images/Videos */}
                             {sections.map((section, idx) => (
-                                <img
-                                    key={`img-${section.id}`}
-                                    ref={el => { outcomeImagesRef.current[idx] = el; }}
-                                    src={section.image}
-                                    alt={section.title}
-                                    className={styles.outcomeImage}
-                                    style={{ opacity: 0 }}
-                                />
+                                section.isVideo && section.videoSrc ? (
+                                    <video
+                                        key={`img-${section.id}`}
+                                        ref={el => { outcomeImagesRef.current[idx] = el; }}
+                                        src={section.videoSrc}
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className={styles.outcomeImage}
+                                        style={{ opacity: 0, objectFit: 'cover', width: '100%', height: '100%' }}
+                                    />
+                                ) : (
+                                    <img
+                                        key={`img-${section.id}`}
+                                        ref={el => { outcomeImagesRef.current[idx] = el; }}
+                                        src={section.image}
+                                        alt={section.title}
+                                        className={styles.outcomeImage}
+                                        style={{ opacity: 0 }}
+                                    />
+                                )
                             ))}
 
                             <div className={`${styles.activeImageContent} visible`}>
@@ -517,7 +543,13 @@ const OutcomesContent = () => {
                                 className={styles.mobileSection}
                             >
                                 <div className={styles.mobileSectionImage}>
-                                    <img src={section.image} alt={section.title} />
+                                    {section.isVideo && section.videoSrc ? (
+                                        <video autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
+                                            <source src={section.videoSrc} type="video/mp4" />
+                                        </video>
+                                    ) : (
+                                        <img src={section.image} alt={section.title} />
+                                    )}
                                 </div>
                                 <h3 className={styles.mobileSectionTitle}>{section.title}</h3>
                                 <p className={styles.mobileSectionParagraph}>{section.content}</p>

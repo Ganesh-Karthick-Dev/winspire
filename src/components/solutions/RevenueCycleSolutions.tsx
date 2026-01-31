@@ -18,14 +18,14 @@ const RevenueCycleSolutions: React.FC = () => {
                     <div className={styles.featureImageWrapper}>
                         {/* Placeholder image - ensuring we use an absolute path or public URL */}
                         <img 
-                            src="/images/company-page/cloud-computing-cyber-security.webp" 
+                            src="/temp/97345.jpg" 
                             alt="Integrated System" 
                             className={styles.featureImage} 
                         />
                     </div>
                     <div className={styles.contentSideWrapper}>
                         <div className={styles.featureContentInner}>
-                            <span className={styles.featureTag}>2. Designed to Work as One System</span>
+                            <span className={styles.featureTag}>Designed to Work as One System</span>
                             <h2 className={styles.featureTitle}>Comprehensive Revenue Cycle Solutions</h2>
                             <p className={styles.featureDescription}>
                                 Winspire delivers full-spectrum Revenue Cycle Management services across front-end, mid-cycle, and back-office operations.

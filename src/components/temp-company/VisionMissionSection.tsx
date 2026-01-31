@@ -31,7 +31,7 @@ export default function VisionMissionSection() {
             title: 'Our Vision',
             tagline: 'Clarity replaces chaos. Outcomes are engineered, not chased.',
             text: 'To build the most trusted, human-centric, and intelligently designed Revenue Cycle Management organization in healthcare where clarity replaces chaos and outcomes are engineered, not chased.',
-            image: '/images/company-page/business-people-shaking-hands-congratulations-work-success.webp',
+            image: '/temp/16457.jpg',
             alt: 'Vision'
         },
         {
@@ -39,7 +39,7 @@ export default function VisionMissionSection() {
             title: 'Our Mission',
             tagline: 'Predictable, transparent, and scalable revenue cycles—powered by people and systems.',
             text: 'To help healthcare organizations design, operate, and sustain revenue cycles that are predictable, transparent, and scalable by combining experienced people, disciplined execution, and intelligent systems.',
-            image: '/images/company-page/iso-standards-quality-control-businessman-hold-virtual-globe-with-quality-assurance-guarantee-product-iso-standard-certification-modern-iso-banner.webp',
+            image: '/temp/17101.jpg',
             alt: 'Mission'
         }
     ];
