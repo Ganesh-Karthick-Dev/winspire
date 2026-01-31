@@ -2,7 +2,9 @@
     position: relative;
     width: 100%;
     min-height: 100vh;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
     color: #000;
     padding: 8rem 2rem;
     display: flex;
@@ -28,7 +30,7 @@
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #000 0%, #444 100%);
+    background: linear-gradient(135deg, #0D1F47 0%, #264792 35%, #4073BF 65%, #332E73 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 2rem;
