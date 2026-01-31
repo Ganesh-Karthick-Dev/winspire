@@ -11,6 +11,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from '@/styles/VisionMissionSection.module.css';
@@ -28,6 +29,7 @@ export default function VisionMissionSection() {
         {
             id: 'vision',
             title: 'Our Vision',
+            tagline: 'Clarity replaces chaos. Outcomes are engineered, not chased.',
             text: 'To build the most trusted, human-centric, and intelligently designed Revenue Cycle Management organization in healthcare where clarity replaces chaos and outcomes are engineered, not chased.',
             image: '/images/company-page/business-people-shaking-hands-congratulations-work-success.webp',
             alt: 'Vision'
@@ -35,6 +37,7 @@ export default function VisionMissionSection() {
         {
             id: 'mission',
             title: 'Our Mission',
+            tagline: 'Predictable, transparent, and scalable revenue cycles—powered by people and systems.',
             text: 'To help healthcare organizations design, operate, and sustain revenue cycles that are predictable, transparent, and scalable by combining experienced people, disciplined execution, and intelligent systems.',
             image: '/images/company-page/iso-standards-quality-control-businessman-hold-virtual-globe-with-quality-assurance-guarantee-product-iso-standard-certification-modern-iso-banner.webp',
             alt: 'Mission'
@@ -118,16 +121,37 @@ export default function VisionMissionSection() {
                 <div className={styles.cardsContainer}>
                     {/* LEFT CARD */}
                     <div className={styles.leftCard}>
+                        <div className={styles.leftCardAccent} aria-hidden />
                         <span className={styles.leftCardLabel}>Winspire Way</span>
-                        <div className={styles.titleContainer}>
-                            {slides.map((slide, i) => (
-                                <h2 
-                                    key={slide.id} 
-                                    className={`${styles.title} ${i === activeIndex ? styles.titleActive : ''}`}
-                                >
-                                    {slide.title}
-                                </h2>
-                            ))}
+                        <div className={styles.leftCardContent}>
+                            <div className={styles.titleContainer}>
+                                {slides.map((slide, i) => (
+                                    <h2 
+                                        key={slide.id} 
+                                        className={`${styles.title} ${i === activeIndex ? styles.titleActive : ''}`}
+                                    >
+                                        {slide.title}
+                                    </h2>
+                                ))}
+                            </div>
+                            <div className={styles.taglineContainer}>
+                                {slides.map((slide, i) => (
+                                    <p 
+                                        key={slide.id} 
+                                        className={`${styles.tagline} ${i === activeIndex ? styles.taglineActive : ''}`}
+                                    >
+                                        {slide.tagline}
+                                    </p>
+                                ))}
+                            </div>
+                            <div className={styles.leftCardDots} aria-hidden>
+                                {[0, 1].map((i) => (
+                                    <span key={i} className={i === activeIndex ? styles.dotActive : ''} />
+                                ))}
+                            </div>
+                        </div>
+                        <div className={styles.leftCardIconWrap} aria-hidden>
+                            <Sparkles className={styles.leftCardIcon} aria-hidden />
                         </div>
                     </div>
 
