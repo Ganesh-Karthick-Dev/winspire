@@ -256,7 +256,7 @@ export default function ScrollMorphHero() {
                         initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
                         animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 1 - morphValue * 2, y: 0, filter: "blur(0px)" } : { opacity: 0, filter: "blur(10px)" }}
                         transition={{ duration: 1 }}
-                        className="text-2xl font-medium tracking-tight text-gray-800 md:text-4xl"
+                        className="text-2xl font-medium tracking-tight text-black md:text-4xl"
                     >
                         The future is built on AI.
                     </motion.h1>
@@ -264,7 +264,7 @@ export default function ScrollMorphHero() {
                         initial={{ opacity: 0 }}
                         animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 0.5 - morphValue } : { opacity: 0 }}
                         transition={{ duration: 1, delay: 0.2 }}
-                        className="mt-4 text-xs font-bold tracking-[0.2em] text-gray-500"
+                        className="mt-4 text-xs font-bold tracking-[0.2em] text-black/60"
                     >
                         SCROLL TO EXPLORE
                     </motion.p>
@@ -275,10 +275,10 @@ export default function ScrollMorphHero() {
                     style={{ opacity: contentOpacity, y: contentY }}
                     className="absolute top-[10%] z-10 flex flex-col items-center justify-center text-center pointer-events-none px-4"
                 >
-                    <h2 className="text-3xl md:text-5xl font-semibold text-gray-900 tracking-tight mb-4">
+                    <h2 className="text-3xl md:text-5xl font-semibold text-black tracking-tight mb-4">
                         Explore Our Vision
                     </h2>
-                    <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed">
+                    <p className="text-sm md:text-base text-black/70 max-w-lg leading-relaxed">
                         Discover a world where technology meets creativity. <br className="hidden md:block" />
                         Scroll through our curated collection of innovations designed to shape the future.
                     </p>
