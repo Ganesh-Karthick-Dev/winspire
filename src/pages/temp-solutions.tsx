@@ -8,6 +8,8 @@ import TargetedSolutions from '../components/solutions/TargetedSolutions';
 import IntelligenceSolutionsSection from '../components/solutions/IntelligenceSolutionsSection';
 import RevenueExperience from '../components/solutions/RevenueExperience';
 import CareModels from '../components/solutions/CareModels';
+import PeopleCultureSection from '../components/solutions/PeopleCultureSection';
+import SolutionsFinalCTA from '../components/solutions/SolutionsFinalCTA';
 import { solutionsScrollKeyframes } from '@/lib/solutionsScrollAnimations';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { shouldDisable3D } from '@/lib/threeUtils';
@@ -55,6 +57,8 @@ export default function TempSolutions() {
             <IntelligenceSolutionsSection />
             <RevenueExperience />
             <CareModels />
+            <PeopleCultureSection />
+            <SolutionsFinalCTA />
         </Layout>
     );
 }
