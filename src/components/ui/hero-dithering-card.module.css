@@ -30,11 +30,14 @@
     /* border-border approx */
     background-color: #0a0a0a;
     /* bg-card / dark theme */
-    min-height: 600px;
+    min-height: 400px;
+    /* Reduced from 600px */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 3rem 1.5rem;
+    /* Add padding to ensure breathing room if content grows */
     transition: all 0.5s ease;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
@@ -56,9 +59,9 @@
     height: 100%;
     /* Default position center (50% 50%) if vars not set, otherwise track mouse */
     background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-            rgba(79, 156, 249, 0.4) 0%,
-            transparent 40%),
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.3'/%3E%3C/svg%3E");
+            rgba(79, 156, 249, 0.7) 0%,
+            transparent 45%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
     background-size: cover, 200px 200px;
     background-blend-mode: screen, overlay;
     /* Use screen for the glow to add brightness */
@@ -110,30 +113,31 @@
 
 /* Typography */
 .headline {
-    font-family: serif;
-    /* font-serif */
-    font-size: 3rem;
-    /* text-5xl */
+    font-family: 'Outfit', sans-serif;
+    /* font-sans */
+    font-size: 2.25rem;
+    /* text-4xl? was 3rem */
     font-weight: 500;
     letter-spacing: -0.025em;
     /* tracking-tight */
     color: white;
     /* text-foreground */
-    margin-bottom: 2rem;
-    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    /* Reduced from 2rem */
+    line-height: 1.1;
 }
 
 @media (min-width: 768px) {
     .headline {
-        font-size: 4.5rem;
-        /* md:text-7xl */
+        font-size: 3.5rem;
+        /* was 4.5rem */
     }
 }
 
 @media (min-width: 1024px) {
     .headline {
-        font-size: 6rem;
-        /* lg:text-8xl */
+        font-size: 4.5rem;
+        /* was 6rem */
     }
 }
 
@@ -149,7 +153,8 @@
     /* text-lg */
     max-width: 42rem;
     /* max-w-2xl */
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    /* Reduced from 3rem */
     line-height: 1.625;
 }
 
