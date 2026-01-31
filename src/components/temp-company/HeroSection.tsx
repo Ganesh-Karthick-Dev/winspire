@@ -49,7 +49,7 @@ export default function HeroSection() {
             <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white -z-20" />
 
             <div className="max-w-5xl mx-auto">
-                {/* Label */}
+                Label
                 <span className="hero-anim inline-block bg-slate-100 text-slate-600 text-xs font-bold tracking-[0.3em] uppercase py-2 px-6 rounded-full mb-10 border border-slate-200">
                     ABOUT WINSPIRE RCM
                 </span>

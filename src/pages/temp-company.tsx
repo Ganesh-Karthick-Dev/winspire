@@ -148,11 +148,11 @@ export default function TempCompany() {
                     <div className={styles.heroContent}>
                         {/* Label */}
                         <div className={styles.heroLabel}>
-                            <div className={styles.heroDots}>
+                            {/* <div className={styles.heroDots}>
                                 <span className={styles.heroDot}></span>
                                 <span className={styles.heroDot}></span>
-                            </div>
-                            <span>About Winspire RCM</span>
+                            </div> */}
+                            {/* <span>About Winspire RCM</span> */}
                         </div>
 
                         {/* Main Title */}

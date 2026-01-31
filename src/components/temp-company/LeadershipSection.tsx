@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,6 +9,10 @@ import styles from '../../styles/LeadershipSection.module.css';
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
+
+const CARD_WIDTH = 350;
+const CARD_GAP = 30;
+const AUTO_ADVANCE_MS = 4500;
 
 const principles = [
     {
@@ -30,7 +34,42 @@ const principles = [
 
 export default function LeadershipSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [containerWidth, setContainerWidth] = useState(0);
+    const [isPaused, setIsPaused] = useState(false);
+
+    const nextSlide = useCallback(() => {
+        setActiveIndex((prev) => (prev + 1) % principles.length);
+    }, []);
+
+    const prevSlide = useCallback(() => {
+        setActiveIndex((prev) => (prev - 1 + principles.length) % principles.length);
+    }, []);
+
+    // Measure container for center-aligned transform
+    useEffect(() => {
+        const updateWidth = () => {
+            if (containerRef.current) {
+                setContainerWidth(containerRef.current.offsetWidth);
+            }
+        };
+        updateWidth();
+        const ro = new ResizeObserver(updateWidth);
+        if (containerRef.current) ro.observe(containerRef.current);
+        window.addEventListener('resize', updateWidth);
+        return () => {
+            ro.disconnect();
+            window.removeEventListener('resize', updateWidth);
+        };
+    }, []);
+
+    // Auto-advance carousel
+    useEffect(() => {
+        if (isPaused) return;
+        const id = setInterval(nextSlide, AUTO_ADVANCE_MS);
+        return () => clearInterval(id);
+    }, [isPaused, nextSlide]);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -51,36 +90,14 @@ export default function LeadershipSection() {
         return () => ctx.revert();
     }, []);
 
-    const nextSlide = () => {
-        setActiveIndex((prev) => (prev + 1) % principles.length);
-    };
-
-    const prevSlide = () => {
-        setActiveIndex((prev) => (prev - 1 + principles.length) % principles.length);
-    };
-
-    // Calculate transform to center the active item
-    // Assuming card width 350px + gap 30px = 380px
-    // We want the active item to be in the center
-    // However, for a small number of items (3) that fit on screen, maybe we don't need to translate?
-    // But to support the "carousel" behavior requested:
-    
-    // transform = -(activeIndex * 380)px ... plus some offset to center it.
-    // Ideally we'd measure container width, but for a quick CSS-only valid approach:
-    // Let's rely on CSS `transform`.
-    // Actually, simply translating by -100% * index might be too much if we want them side-by-side.
-    // Let's stick to the visual "row" if they fit, but if we want them to slide, we need to move them.
-    
-    // Simplified: Just center the set if they fit. If the user wants "Previous/Next", it implies focus.
-    // Let's adding a `transform` to `.carouselTrack` in CSS? No, needs dynamic value.
-    
-    // We'll return a style object.
+    // Center the active slide: move track so active card's center aligns with container center
+    const effectiveWidth = containerWidth || 1400;
+    const offset = effectiveWidth / 2 - (activeIndex * (CARD_WIDTH + CARD_GAP) + CARD_WIDTH / 2);
     const trackStyle = {
-        transform: `translateX(calc(50% - ${activeIndex * 380}px - 175px))`, // 175 is half card width
-        transition: 'transform 0.5s ease',
-        width: 'max-content' // Ensure track is wide enough
+        transform: `translateX(${offset}px)`,
+        transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        width: 'max-content',
     };
-    // Note: The parent .carouselContainer needs overflow:hidden for this to look like a carousel window.
 
     return (
         <section ref={sectionRef} className={styles.section}>
@@ -100,7 +117,13 @@ export default function LeadershipSection() {
                 </div>
             </div>
 
-            <div className={styles.carouselContainer} style={{ overflow: 'hidden' }}>
+            <div
+                ref={containerRef}
+                className={styles.carouselContainer}
+                style={{ overflow: 'hidden' }}
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+            >
                 <button onClick={prevSlide} className={`${styles.navButton} ${styles.prevButton}`} aria-label="Previous">
                     <ArrowLeft size={24} />
                 </button>
