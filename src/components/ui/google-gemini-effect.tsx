@@ -29,11 +29,7 @@ export const GoogleGeminiEffect = ({
             </p>
 
             <div className={styles.svgContainer}>
-                <div className={styles.buttonWrapper}>
-                    <button className={styles.linkButton}>
-                        ui.aceternity.com
-                    </button>
-                </div>
+
 
                 <svg
                     width="1440"
