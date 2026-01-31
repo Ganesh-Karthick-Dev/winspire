@@ -42,7 +42,8 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    font-family: 'Outfit', sans-serif; /* Keep sans-serif for labels if desired, or remove */
+    font-family: 'Outfit', sans-serif;
+    /* Keep sans-serif for labels if desired, or remove */
 }
 
 .introHeadline {
@@ -51,7 +52,8 @@
     letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
     font-weight: 400;
-    color: #1a1a1a; /* Explicitly set to dark */
+    color: #1a1a1a;
+    /* Explicitly set to dark */
 }
 
 .introSubtitle {
@@ -181,7 +183,8 @@
     font-size: 1.75rem;
     line-height: 1.2;
     font-weight: 400;
-    color: #1a1a1a; /* Explicitly set to dark */
+    color: #1a1a1a;
+    /* Explicitly set to dark */
     font-family: Georgia, 'Times New Roman', Times, serif;
     margin-bottom: 1.5rem;
 }
@@ -220,7 +223,8 @@
 
 .card:hover {
     z-index: 30;
-    transform: rotate(0deg) scale(1.02) !important; /* Override individual rotations on hover */
+    transform: rotate(0deg) scale(1.02) !important;
+    /* Override individual rotations on hover */
 }
 
 /* Card 1: Top Left Image */
@@ -363,11 +367,12 @@
     bottom: 2rem;
     right: 1rem;
     max-width: 340px;
-    background-color: #fff9c4; /* Soft yellow */
+    background-color: #fff9c4;
+    /* Soft yellow */
     padding: 2rem;
     transform: rotate(3deg);
     border: none;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.08);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.08);
     background-image: radial-gradient(#e0d68a 1.2px, transparent 1.2px);
     background-size: 18px 18px;
     display: flex;
@@ -408,7 +413,7 @@
     .introText {
         font-size: 1.5rem;
     }
-    
+
     .patternSection {
         padding: 1.5rem 3rem;
     }
@@ -428,7 +433,7 @@
     .journeySection {
         min-height: 900px;
     }
-    
+
     .dateStamp {
         left: 5rem;
     }
@@ -458,7 +463,88 @@
     .introHeadline {
         font-size: 6rem;
     }
+
     .patternHeadline {
         font-size: 5rem;
+    }
+}
+
+/* Mobile Overrides - Added to fix responsiveness without breaking desktop */
+@media (max-width: 768px) {
+    .sectionContainer {
+        height: auto;
+        overflow: visible;
+    }
+
+    .journeySection {
+        height: auto;
+        min-height: auto;
+        padding-bottom: 4rem;
+    }
+
+    .journeyContainer {
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding-bottom: 3rem;
+    }
+
+    .card {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    /* Override specific card positions */
+    .card1,
+    .card2,
+    .card3,
+    .card4,
+    .card5 {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Add slight visual variation but keep flow */
+    .card2 {
+        transform: rotate(1deg) !important;
+    }
+
+    .card4 {
+        transform: rotate(-1deg) !important;
+        border-left: 4px solid #000;
+    }
+
+    .introHeadline {
+        font-size: 2.5rem;
+    }
+
+    .patternHeadline {
+        font-size: 2rem;
+    }
+
+    .patternNumber {
+        font-size: 2.5rem;
+    }
+
+    .dateStamp {
+        display: none;
+    }
+
+    .journeyHeadline {
+        font-size: 1.5rem;
     }
 }

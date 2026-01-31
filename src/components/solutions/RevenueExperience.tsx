@@ -88,7 +88,7 @@ const RevenueExperience: React.FC = () => {
                 {/* Left Column: Text */}
                 <div className={styles.leftColumn} ref={leftColumnRef}>
                     <div className={styles.textBlock}>
-                        <div className={styles.tag}>4. Revenue Experience That Respects Patients</div>
+                        <div className={styles.tag}>Revenue Experience That Respects Patients</div>
                         <h2 className={styles.title}>
                             Where Financial <br/>
                             <span className={styles.titleHighlight}>Performance Meets Patient Trust</span>

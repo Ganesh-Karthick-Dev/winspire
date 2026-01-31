@@ -125,7 +125,7 @@ export default function HowWeWorkSection() {
                  <div ref={containerRef} className={styles.imageSide}>
                      <img 
                         ref={imageRef}
-                        src="/images/company-page/iso-standards-quality-control-businessman-hold-virtual-globe-with-quality-assurance-guarantee-product-iso-standard-certification-modern-iso-banner.webp" 
+                        src="/temp/39810.jpg" 
                         alt="How We Work" 
                         className={styles.parallaxImage}
                         loading="lazy"

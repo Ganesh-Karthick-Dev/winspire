@@ -164,11 +164,16 @@ const IntelligenceSolutionsSection: React.FC = () => {
                 {/* LEFT COLUMN - Pinned: image holder above, titles below */}
                 <div className={styles.leftColumn} ref={leftColumnRef}>
                     <div className={styles.imageHolder}>
-                        <img
-                            src="/images/company-page/cloud-computing-cyber-security.webp"
-                            alt="Intelligence and solutions"
+                        <video
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
                             className={styles.imageHolderImg}
-                        />
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        >
+                            <source src="/temp/0_Brain_Research_1280x720 (1).mp4" type="video/mp4" />
+                        </video>
                     </div>
                     <div className={styles.titleWrapper}>
                         {SECTIONS.map((sec, index) => (
@@ -193,7 +198,6 @@ const IntelligenceSolutionsSection: React.FC = () => {
                             className={styles.contentBlock}
                             ref={(el) => { contentBlockRefs.current[index] = el; }}
                         >
-                            <span className={styles.sectionNumber}>{sec.id}.</span>
                             <div className={styles.sectionLine} />
                             <h3 className={styles.blockTitle}>{sec.title}</h3>
                             <p className={styles.subtitle}>{sec.subtitle}</p>
@@ -215,15 +219,19 @@ const IntelligenceSolutionsSection: React.FC = () => {
             {/* MOBILE VIEW - stacked, no pin */}
             <div className={styles.mobileView}>
                 <div className={styles.mobileImageHolder}>
-                    <img
-                        src="/images/company-page/cloud-computing-cyber-security.webp"
-                        alt="Intelligence and solutions"
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
                         className={styles.mobileImageHolderImg}
-                    />
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    >
+                        <source src="/temp/0_Brain_Research_1280x720 (1).mp4" type="video/mp4" />
+                    </video>
                 </div>
                 {SECTIONS.map((sec) => (
                     <div key={sec.id} className={styles.mobileBlock}>
-                        <span className={styles.sectionNumber}>{sec.id}.</span>
                         <h3 className={styles.mobileBlockTitle}>{sec.title}</h3>
                         <p className={styles.mobileSubtitle}>{sec.subtitle}</p>
                         <p className={styles.mobileIntro}>{sec.intro}</p>

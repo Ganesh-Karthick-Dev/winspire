@@ -58,7 +58,7 @@ export function prefersReducedMotion(): boolean {
 
 /**
  * Determine if 3D should be disabled
- * Combines low-end device check and reduced motion preference
+ * Combines low-end device check and reduced motion preference.
  * @returns true if 3D should not be initialized
  */
 export function shouldDisable3D(): boolean {

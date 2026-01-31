@@ -148,11 +148,11 @@ export default function TempCompany() {
                     <div className={styles.heroContent}>
                         {/* Label */}
                         <div className={styles.heroLabel}>
-                            <div className={styles.heroDots}>
+                            {/* <div className={styles.heroDots}>
                                 <span className={styles.heroDot}></span>
                                 <span className={styles.heroDot}></span>
-                            </div>
-                            <span>About Winspire RCM</span>
+                            </div> */}
+                            {/* <span>About Winspire RCM</span> */}
                         </div>
 
                         {/* Main Title */}
@@ -172,7 +172,7 @@ export default function TempCompany() {
                 {/* Scaling Card - Starts inside hero, expands to 80% */}
                 <div className="absolute top-0 left-0 w-full h-[150vh] pointer-events-none z-50">
                     <VideoScrollHero 
-                        imageSrc="/poster/qefqe.webp" 
+                        videoSrc="/temp/0_Doctor_Patient_1280x672.mp4"
                         startScale={0.35}
                         maxScale={0.8}
                         className="pointer-events-auto"

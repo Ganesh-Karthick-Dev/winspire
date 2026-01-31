@@ -47,7 +47,7 @@ export default function CultureSection() {
                     <div className={styles.imageWrapperLeft}>
                         {/* Image 1 - Left Bottom */}
                         <img 
-                            src="/images/company-page/business-people-shaking-hands-congratulations-work-success.webp" 
+                            src="/temp/2151968689.jpg" 
                             alt="Team collaboration" 
                             className={styles.imageLeft}
                         />
@@ -59,7 +59,7 @@ export default function CultureSection() {
                     <div className={styles.imageWrapperRight}>
                         {/* Image 2 - Right Top */}
                         <img 
-                            src="/images/company-page/iso-standards-quality-control-businessman-hold-virtual-globe-with-quality-assurance-guarantee-product-iso-standard-certification-modern-iso-banner.webp" 
+                            src="/temp/31625.jpg" 
                             alt="Quality assurance" 
                             className={styles.imageRight}
                         />

@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from '../../styles/RevenueCycleSolutions.module.css';
-import { FaArrowRight, FaCheck } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const RevenueCycleSolutions: React.FC = () => {
@@ -19,14 +18,14 @@ const RevenueCycleSolutions: React.FC = () => {
                     <div className={styles.featureImageWrapper}>
                         {/* Placeholder image - ensuring we use an absolute path or public URL */}
                         <img 
-                            src="/images/company-page/cloud-computing-cyber-security.webp" 
+                            src="/temp/97345.jpg" 
                             alt="Integrated System" 
                             className={styles.featureImage} 
                         />
                     </div>
                     <div className={styles.contentSideWrapper}>
                         <div className={styles.featureContentInner}>
-                            <span className={styles.featureTag}>2. Designed to Work as One System</span>
+                            <span className={styles.featureTag}>Designed to Work as One System</span>
                             <h2 className={styles.featureTitle}>Comprehensive Revenue Cycle Solutions</h2>
                             <p className={styles.featureDescription}>
                                 Winspire delivers full-spectrum Revenue Cycle Management services across front-end, mid-cycle, and back-office operations.
@@ -34,9 +33,6 @@ const RevenueCycleSolutions: React.FC = () => {
                             <p className={styles.featureDescription}>
                                 Our solutions can be deployed as a complete revenue cycle redesign or as focused support for specific challenges.
                             </p>
-                        </div>
-                        <div className={styles.cornerButton}>
-                            <FaArrowRight />
                         </div>
                     </div>
                 </motion.div>
@@ -67,9 +63,6 @@ const RevenueCycleSolutions: React.FC = () => {
                                 Strong front-end execution improves downstream performance and reduces avoidable denials.
                             </div>
                         </div>
-                        <button className={styles.cardButton} aria-label="Learn more">
-                            <FaArrowRight />
-                        </button>
                     </motion.div>
 
                     {/* Card 2: Mid-Cycle (Staggered Down) */}
@@ -93,9 +86,6 @@ const RevenueCycleSolutions: React.FC = () => {
                             <div className={styles.cardFooter}>
                                 This layer protects revenue integrity and ensures claims are payer-ready.
                             </div>
-                        </div>
-                        <div className={styles.cardButton}>
-                            <FaArrowRight />
                         </div>
                     </motion.div>
 
@@ -121,9 +111,6 @@ const RevenueCycleSolutions: React.FC = () => {
                             <div className={styles.cardFooter}>
                                 Work is prioritized based on collectability, financial impact, and risk, not aging alone.
                             </div>
-                        </div>
-                        <div className={styles.cardButton}>
-                            <FaArrowRight />
                         </div>
                     </motion.div>
 

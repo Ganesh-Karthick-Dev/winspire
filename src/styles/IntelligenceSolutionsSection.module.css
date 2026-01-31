@@ -237,7 +237,8 @@
 
     .mobileView {
         display: block;
-        padding: 48px 24px 64px;
+        padding: 48px 20px 64px;
+        /* Slightly tighter padding */
     }
 
     .mobileBlock {
@@ -246,12 +247,13 @@
 
     .mobileImageHolder {
         width: 100%;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 16 / 9;
+        /* More standard mobile aspect ratio */
         max-height: 240px;
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        margin-bottom: 24px;
+        border-radius: 16px;
+        margin-bottom: 32px;
         overflow: hidden;
     }
 
@@ -259,7 +261,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 12px;
+        border-radius: 16px;
     }
 
     .mobileBlock:last-child {
@@ -271,7 +273,7 @@
         font-weight: 600;
         line-height: 1.25;
         color: #ffffff;
-        margin: 0 0 8px 0;
+        margin: 0 0 12px 0;
     }
 
     .mobileSubtitle {
@@ -279,6 +281,7 @@
         font-weight: 500;
         color: #f1f5f9;
         margin: 0 0 16px 0;
+        line-height: 1.4;
     }
 
     .mobileIntro {
@@ -291,7 +294,7 @@
     .mobileBulletList {
         list-style: none;
         padding: 0;
-        margin: 0 0 20px 0;
+        margin: 0 0 24px 0;
     }
 
     .mobileBulletList li {
@@ -300,7 +303,7 @@
         color: #f1f5f9;
         padding-left: 20px;
         position: relative;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
     }
 
     .mobileBulletList li::before {

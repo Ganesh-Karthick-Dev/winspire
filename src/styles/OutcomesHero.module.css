@@ -78,15 +78,40 @@
     pointer-events: none;
 }
 
-/* Responsive Font Sizes */
+/* Responsive: mobile layout and animations (desktop unchanged) */
 @media (max-width: 768px) {
-    .svgText {
-        font-size: 180px; 
+    .heroSection {
+        margin-top: 100px;
+        width: calc(100% - 1rem);
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        min-height: 400px;
+        border-radius: 20px;
+        overflow: hidden;
     }
-    
+
+    .heroSvg {
+        overflow: hidden;
+    }
+
+    /* Smaller text so "OUTCOMES" mask stays inside container on narrow viewports */
+    .svgText {
+        font-size: 90px;
+        letter-spacing: -0.02em;
+    }
+
+    .subheadingContainer {
+        padding: 0 1.25rem;
+    }
+
     .subheadingText {
         font-size: 1.1rem;
         width: 80%;
         margin: 0 auto;
+    }
+
+    .scrollIndicator {
+        bottom: 1.5rem;
+        font-size: 0.85rem;
     }
 }
