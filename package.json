@@ -53,5 +53,8 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "optionalDependencies": {
+    "lightningcss-win32-x64-msvc": "^1.31.1"
   }
 }

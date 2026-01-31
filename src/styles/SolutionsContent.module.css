@@ -2,15 +2,15 @@
     position: relative;
     width: 100%;
     padding: 100px 20px;
-    background: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
-    backdrop-filter: blur(12px); /* Glass blur effect */
-    -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    color: #1a1a1a;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     display: flex;
     justify-content: center;
     overflow: hidden;
-    z-index: 20; /* Ensure it stays above the fixed 3D model */
+    z-index: 20;
 }
 
 .container {
@@ -54,8 +54,8 @@
     font-size: 0.875rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #2b80ff; /* Accent blue */
+    letter-spacing: 0.12em;
+    color: #2563eb;
     margin-bottom: 1rem;
     display: block;
 }
@@ -64,14 +64,18 @@
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.2;
     font-weight: 700;
-    color: #111;
+    color: #0f172a;
     margin-bottom: 1.5rem;
+}
+
+.headingLine {
+    display: block;
 }
 
 .description {
     font-size: 1.125rem;
-    line-height: 1.6;
-    color: #4a4a4a;
+    line-height: 1.65;
+    color: #475569;
     margin-bottom: 1.5rem;
 }
 
@@ -82,83 +86,118 @@
     display: none;
 }
 
-/* Card Styles */
+/* Card Styles - Curved corners (top-left, bottom-right) */
 .cardList {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
+/* Cards - premium dark glass */
 .card {
-    background: #fff;
-    border: 1px solid #eaeaea;
-    border-radius: 16px;
-    padding: 1.5rem;
+    position: relative;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.75rem 2.5rem 1.75rem 1.75rem;
     display: flex;
-    align-items: center; /* Center vertically like the reference */
+    align-items: flex-start;
     gap: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
     cursor: default;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    opacity: 0.8;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.cardIconBox,
+.cardContent {
+    position: relative;
+    z-index: 1;
 }
 
 .cardIconBox {
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
-    border-radius: 16px; /* Rounded square instead of circle */
-    background-color: #fff8e1;
-    color: #fbc02d;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fbbf24;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+    flex-shrink: 0;
 }
 
-/* Make each icon box color slightly different if desired, or keep uniform */
 .card:nth-child(2) .cardIconBox {
-    background-color: #e3f2fd;
-    color: #1e88e5;
+    color: #60a5fa;
 }
 
 .card:nth-child(3) .cardIconBox {
-    background-color: #e8f5e9;
-    color: #43a047;
+    color: #34d399;
 }
 
 .cardContent {
     flex: 1;
+    min-width: 0;
 }
 
 .cardTitle {
-    font-size: 1.1rem;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.35;
+}
+
+.titleLine1 {
+    display: block;
+    font-size: 1.15rem;
     font-weight: 600;
-    color: #222;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+
+.titleLine2 {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.cardDescription {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.65);
     margin: 0;
-    line-height: 1.4;
-}
-
-.cardArrow {
-    color: #ccc;
-    font-size: 1.5rem;
-    margin-left: auto;
-    transition: color 0.3s ease;
-}
-
-.card:hover .cardArrow {
-    color: #2b80ff;
 }
 
 .startByLabel {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: #666;
+    color: #475569;
     margin-bottom: 1rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
 }

@@ -10,7 +10,11 @@ if (typeof window !== 'undefined') {
 const CareModels: React.FC = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
+    const eyebrowRef = useRef<HTMLSpanElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const subtitleRef = useRef<HTMLParagraphElement>(null);
     const cardRef = useRef<HTMLDivElement>(null);
+    const visualRef = useRef<HTMLDivElement>(null);
     const listRef = useRef<HTMLDivElement>(null);
 
     const services = [
@@ -34,55 +38,76 @@ const CareModels: React.FC = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Header Animation
-            gsap.fromTo(headerRef.current,
-                { opacity: 0, y: 50 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "top 80%",
-                    }
+            const section = sectionRef.current;
+            if (!section) return;
+
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) return;
+
+            // Awards-style: Scroll-scrubbed timeline - animations tied to scroll progress
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 75%",
+                    end: "bottom 25%",
+                    scrub: 1.2,
                 }
+            });
+
+            // 1. Eyebrow: fade + slide up
+            tl.fromTo(eyebrowRef.current,
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.15, ease: "power2.out" },
+                0
             );
 
-            // Featured Card Animation
-            gsap.fromTo(cardRef.current,
-                { opacity: 0, x: -50 },
-                {
-                    opacity: 1,
-                    x: 0,
-                    duration: 1,
-                    delay: 0.2,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "top 80%",
-                    }
-                }
+            // 2. Title: clip-path reveal (awards-style wipe)
+            const titleLines = titleRef.current?.querySelectorAll(`.${styles.titleLine}`);
+            if (titleLines?.length) {
+                gsap.set(titleLines, { clipPath: "inset(0 100% 0 0)" });
+                tl.to(titleLines, {
+                    clipPath: "inset(0 0% 0 0)",
+                    duration: 0.4,
+                    stagger: 0.08,
+                    ease: "power3.inOut"
+                }, 0.08);
+            }
+
+            // 3. Subtitle: fade in
+            tl.fromTo(subtitleRef.current,
+                { opacity: 0, y: 16 },
+                { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" },
+                0.25
             );
 
-            // List Items Animation
+            // 4. Featured card: scale + fade (awards-style entrance)
+            tl.fromTo(cardRef.current,
+                { opacity: 0, scale: 0.88, y: 40 },
+                { opacity: 1, scale: 1, y: 0, duration: 0.35, ease: "back.out(1.2)" },
+                0.35
+            );
+
+            // 5. Image: mask reveal
+            if (visualRef.current) {
+                gsap.set(visualRef.current, { clipPath: "inset(0 0 100% 0)" });
+                tl.to(visualRef.current, {
+                    clipPath: "inset(0 0 0% 0)",
+                    duration: 0.3,
+                    ease: "power3.inOut"
+                }, 0.55);
+            }
+
+            // 6. Service cards: sequential reveal (each card wipes in from left)
             const items = listRef.current?.children;
             if (items) {
-                gsap.fromTo(items,
-                    { opacity: 0, x: 50 },
-                    {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.8,
-                        stagger: 0.15,
-                        delay: 0.4,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: sectionRef.current,
-                            start: "top 80%",
-                        }
-                    }
-                );
+                Array.from(items).forEach((item, i) => {
+                    gsap.set(item, { clipPath: "inset(0 100% 0 0)" });
+                    tl.to(item, {
+                        clipPath: "inset(0 0% 0 0)",
+                        duration: 0.2,
+                        ease: "power3.out"
+                    }, 0.6 + i * 0.1);
+                });
             }
 
         }, sectionRef);
@@ -96,9 +121,12 @@ const CareModels: React.FC = () => {
             
             <div className={styles.container}>
                 <div className={styles.header} ref={headerRef}>
-                    <span className={styles.eyebrow}>5. Supporting New Care Models</span>
-                    <h2 className={styles.title}>Revenue Enablement for<br />Remote Patient Monitoring</h2>
-                    <p className={styles.subtitle}>
+                    <span className={styles.eyebrow} ref={eyebrowRef}>5. Supporting New Care Models</span>
+                    <h2 className={styles.title} ref={titleRef}>
+                        <span className={styles.titleLine}>Revenue Enablement for</span>
+                        <span className={styles.titleLine}>Remote Patient Monitoring</span>
+                    </h2>
+                    <p className={styles.subtitle} ref={subtitleRef}>
                         As virtual care models expand, revenue operations must evolve. We ensure your RPM programs scale confidently with compliant and efficient financial workflows.
                     </p>
                 </div>
@@ -111,7 +139,13 @@ const CareModels: React.FC = () => {
                                 Launch and grow your remote patient monitoring programs without being held back by operational inefficiencies or compliance risks.
                             </p>
                         </div>
-                        <div className={styles.visualElement} />
+                        <div className={styles.visualElement} ref={visualRef}>
+                            <img
+                                src="/images/company-page/cloud-computing-cyber-security.webp"
+                                alt="Scale confidently"
+                                className={styles.visualImage}
+                            />
+                        </div>
                     </div>
 
                     <div className={styles.servicesList} ref={listRef}>

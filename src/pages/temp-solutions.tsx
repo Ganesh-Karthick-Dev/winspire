@@ -5,6 +5,7 @@ import SolutionsHero from '../components/solutions/SolutionsHero';
 import SolutionsContent from '../components/solutions/SolutionsContent';
 import RevenueCycleSolutions from '../components/solutions/RevenueCycleSolutions';
 import TargetedSolutions from '../components/solutions/TargetedSolutions';
+import IntelligenceSolutionsSection from '../components/solutions/IntelligenceSolutionsSection';
 import RevenueExperience from '../components/solutions/RevenueExperience';
 import CareModels from '../components/solutions/CareModels';
 import { solutionsScrollKeyframes } from '@/lib/solutionsScrollAnimations';
@@ -51,6 +52,7 @@ export default function TempSolutions() {
             <SolutionsContent />
             <RevenueCycleSolutions />
             <TargetedSolutions />
+            <IntelligenceSolutionsSection />
             <RevenueExperience />
             <CareModels />
         </Layout>

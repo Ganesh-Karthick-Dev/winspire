@@ -45,20 +45,34 @@ const TargetedSolutions: React.FC = () => {
                 }
             );
 
-            // Grid items animations
+            // Grid items animations - cards spread from center to their positions
             const gridItems = gridRef.current?.children;
             if (gridItems) {
                 Array.from(gridItems).forEach((item, index) => {
-                    const xOffset = index % 2 === 0 ? -50 : 50; // Slide from left for odd columns, right for even
+                    // 2x2 grid: cards animate from center outward to corners
+                    // 0=top-left, 1=top-right, 2=bottom-left, 3=bottom-right
+                    const col = index % 2;
+                    const row = Math.floor(index / 2);
+                    const spreadDist = 120;
+                    const xOffset = col === 0 ? spreadDist : -spreadDist; // move from center
+                    const yOffset = row === 0 ? spreadDist : -spreadDist;
+                    gsap.set(item, { transformOrigin: 'center center' });
                     gsap.fromTo(
                         item,
-                        { x: xOffset, opacity: 0 },
+                        {
+                            x: xOffset,
+                            y: yOffset,
+                            scale: 0.3,
+                            opacity: 0,
+                        },
                         {
                             x: 0,
+                            y: 0,
+                            scale: 1,
                             opacity: 1,
-                            duration: 0.8,
-                            delay: index * 0.1 + 0.4,
-                            ease: 'power3.out',
+                            duration: 0.9,
+                            delay: index * 0.08 + 0.3,
+                            ease: 'back.out(1.4)',
                             scrollTrigger: {
                                 trigger: gridRef.current,
                                 start: 'top 85%',
