@@ -1,0 +1,32 @@
+.section {
+    position: relative;
+    width: 100%;
+    /* Height = viewport + scroll distance for animation */
+    height: 400vh;
+    background: #FAFAFA;
+}
+
+/* Sticky container pins content to viewport while scrolling through section */
+.stickyContainer {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #666;
+}
