@@ -11,7 +11,8 @@
 }
 
 .container {
-    max-width: 90rem; /* Increased width to accommodate images */
+    max-width: 90rem;
+    /* Increased width to accommodate images */
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
@@ -66,7 +67,8 @@
     -webkit-backdrop-filter: blur(8px);
     padding: 2rem;
     border-radius: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Standard border instead of thick accent */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Standard border instead of thick accent */
     line-height: 1.4;
     margin-top: 1rem;
 }
@@ -82,7 +84,7 @@
     height: auto;
     border-radius: 1.5rem;
     object-fit: cover;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -103,7 +105,7 @@
     height: auto;
     border-radius: 1.5rem;
     object-fit: cover;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -111,14 +113,16 @@
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    padding: 1.5rem; /* Reduced from 2rem */
+    padding: 1.5rem;
+    /* Reduced from 2rem */
     border-radius: 2.5rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
-    gap: 0.5rem; /* Reduced from 1.5rem */
-    margin-top: auto; 
+    gap: 0.5rem;
+    /* Reduced from 1.5rem */
+    margin-top: auto;
 }
 
 .listHeader {
@@ -136,7 +140,8 @@
     display: flex;
     align-items: center;
     gap: 1.25rem;
-    padding:  1rem; /* Reduced from 1.5rem */
+    padding: 1rem;
+    /* Reduced from 1.5rem */
     border-radius: 1rem;
     border: 1px solid transparent;
     transition: all 0.3s ease;
@@ -156,10 +161,12 @@
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.1);
-    color: #ffffff; /* White numbers */
+    color: #ffffff;
+    /* White numbers */
     border-radius: 50%;
     font-weight: 700;
-    font-size: 1.15rem; /* Increased size */
+    font-size: 1.15rem;
+    /* Increased size */
     transition: transform 0.3s ease;
 }
 
@@ -179,7 +186,7 @@
     .section {
         padding: 10rem 4rem;
     }
-    
+
     .heading {
         font-size: 3.75rem;
     }
@@ -202,9 +209,10 @@
 
     .rightColumn {
         justify-content: flex-start;
-        padding-top: 6rem; /* Offset right column down OR keep image at top */
+        padding-top: 6rem;
+        /* Offset right column down OR keep image at top */
     }
-    
+
     /* 
        Reference: Left has Text (Top) -> Image (Bottom)
                   Right has Image (Top) -> Text (Bottom)
@@ -212,4 +220,42 @@
        The right image seems to align somewhat with the text on the left?
        Let's stick to simple grid first.
     */
+}
+
+/* Mobile Overrides */
+@media (max-width: 768px) {
+    .section {
+        padding: 4rem 1.5rem;
+    }
+
+    .container {
+        gap: 3rem;
+    }
+
+    .leftColumn,
+    .rightColumn {
+        gap: 3rem;
+    }
+
+    .heading {
+        font-size: 2.25rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .highlightBox {
+        font-size: 1.25rem;
+        padding: 1.5rem;
+    }
+
+    .listCard {
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+    }
+
+    .itemText {
+        font-size: 1rem;
+    }
 }

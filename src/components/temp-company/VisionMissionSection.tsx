@@ -45,53 +45,58 @@ export default function VisionMissionSection() {
     ];
 
     const values = [
-         { name: 'Client Centric Partnership', desc: 'We place our clients goals at the center of every decision and work as true partners in achieving them.' },
-         { name: 'Analytical Excellence', desc: 'We use data, insight, and experience to guide decisions and drive meaningful outcomes.' },
-         { name: 'Continuous Innovation', desc: 'We evolve constantly to stay ahead of industry change and deliver better solutions.' },
-         { name: 'Integrity and Transparency', desc: 'We operate with honesty, accountability, and clarity in all our interactions.' },
-         { name: 'Results That Matter', desc: 'We focus on measurable outcomes that drive long-term financial stability.' }
+        { name: 'Client Centric Partnership', desc: 'We place our clients goals at the center of every decision and work as true partners in achieving them.' },
+        { name: 'Analytical Excellence', desc: 'We use data, insight, and experience to guide decisions and drive meaningful outcomes.' },
+        { name: 'Continuous Innovation', desc: 'We evolve constantly to stay ahead of industry change and deliver better solutions.' },
+        { name: 'Integrity and Transparency', desc: 'We operate with honesty, accountability, and clarity in all our interactions.' },
+        { name: 'Results That Matter', desc: 'We focus on measurable outcomes that drive long-term financial stability.' }
     ];
 
     useEffect(() => {
-        let ctx = gsap.context(() => {
-            
-            ScrollTrigger.create({
-                trigger: pinnedContentRef.current,
-                start: "top top",
-                end: "+=250%", // Increased duration for smoother scroll
-                pin: true,
-                pinSpacing: true,
-                scrub: 1.2,    // Slightly smoother scrub
-                onUpdate: (self) => {
-                    // Logic: Keep Vision active until 50% scroll progress is reached
-                    const progress = self.progress;
-                    if (progress > 0.5) {
-                        setActiveIndex(1);
-                    } else {
-                        setActiveIndex(0);
-                    }
-                }
-            });
+        const ctx = gsap.context(() => {
+            const mm = gsap.matchMedia();
 
-            // 2. CORE VALUES ACCORDION
-            gsap.utils.toArray(`.${styles.valueItem}`).forEach((item: any) => {
-                 const title = item.querySelector(`.${styles.valueItemTitle}`);
-                 const content = item.querySelector(`.${styles.valueContent}`);
-                 
-                 ScrollTrigger.create({
-                     trigger: item,
-                     start: 'top 70%', // Trigger when the top of the item is 70% down the screen
-                     end: 'bottom 30%', // Until the bottom is 30% down
-                     onToggle: (self) => {
-                        if (self.isActive) {
-                            expandItem(item, title, content);
+            // DESKTOP: Pinning enabled
+            mm.add("(min-width: 769px)", () => {
+                ScrollTrigger.create({
+                    trigger: pinnedContentRef.current,
+                    start: "top top",
+                    end: "+=250%",
+                    pin: true,
+                    pinSpacing: true,
+                    scrub: 1.2,
+                    onUpdate: (self) => {
+                        const progress = self.progress;
+                        if (progress > 0.5) {
+                            setActiveIndex(1);
                         } else {
-                            collapseItem(item, title, content);
+                            setActiveIndex(0);
                         }
-                     }
-                 });
+                    }
+                });
             });
 
+            // MOBILE: Short pin + scroll-driven slide switch so Vision/Mission animation works
+            mm.add("(max-width: 768px)", () => {
+                ScrollTrigger.create({
+                    trigger: pinnedContentRef.current,
+                    start: "top top",
+                    end: "+=150%",
+                    pin: true,
+                    pinSpacing: true,
+                    scrub: 0.5,
+                    onUpdate: (self) => {
+                        const progress = self.progress;
+                        if (progress > 0.5) {
+                            setActiveIndex(1);
+                        } else {
+                            setActiveIndex(0);
+                        }
+                    }
+                });
+            });
+
+            // Define before use (avoid "Cannot access before initialization" when ScrollTrigger fires onToggle)
             const expandItem = (item: any, title: any, content: any) => {
                 gsap.to(item, { opacity: 1, duration: 0.5, ease: "power2.out" });
                 gsap.to(title, { scale: 1.02, marginBottom: '1.5rem', color: '#ffffff', duration: 0.5, ease: "power2.out" });
@@ -104,7 +109,25 @@ export default function VisionMissionSection() {
                 gsap.to(content, { height: 0, opacity: 0, duration: 0.4, ease: 'power1.in' });
             };
 
-            // Force refresh to fix initial alignment errors
+            // 2. CORE VALUES ACCORDION (Keep enabled for both, it's nice)
+            gsap.utils.toArray(`.${styles.valueItem}`).forEach((item: any) => {
+                const title = item.querySelector(`.${styles.valueItemTitle}`);
+                const content = item.querySelector(`.${styles.valueContent}`);
+
+                ScrollTrigger.create({
+                    trigger: item,
+                    start: 'top 85%', // Gentler trigger for mobile
+                    end: 'bottom 15%',
+                    onToggle: (self) => {
+                        if (self.isActive) {
+                            expandItem(item, title, content);
+                        } else {
+                            collapseItem(item, title, content);
+                        }
+                    }
+                });
+            });
+
             setTimeout(() => {
                 ScrollTrigger.refresh();
             }, 200);
@@ -126,8 +149,8 @@ export default function VisionMissionSection() {
                         <div className={styles.leftCardContent}>
                             <div className={styles.titleContainer}>
                                 {slides.map((slide, i) => (
-                                    <h2 
-                                        key={slide.id} 
+                                    <h2
+                                        key={slide.id}
                                         className={`${styles.title} ${i === activeIndex ? styles.titleActive : ''}`}
                                     >
                                         {slide.title}
@@ -136,8 +159,8 @@ export default function VisionMissionSection() {
                             </div>
                             <div className={styles.taglineContainer}>
                                 {slides.map((slide, i) => (
-                                    <p 
-                                        key={slide.id} 
+                                    <p
+                                        key={slide.id}
                                         className={`${styles.tagline} ${i === activeIndex ? styles.taglineActive : ''}`}
                                     >
                                         {slide.tagline}
@@ -158,8 +181,8 @@ export default function VisionMissionSection() {
                     {/* RIGHT CARD */}
                     <div className={styles.rightCard}>
                         {slides.map((slide, i) => (
-                            <div 
-                                key={slide.id} 
+                            <div
+                                key={slide.id}
                                 className={`${styles.slideContainer} ${i === activeIndex ? styles.slideActive : ''}`}
                             >
                                 <Image
@@ -184,15 +207,15 @@ export default function VisionMissionSection() {
                 <div className={styles.valuesContainer}>
                     <div className={styles.valuesHeaderWrapper}>
                         <div className={styles.valuesSticky}>
-                            <h3 className={styles.valuesTitle}>Our Core<br/>Values</h3>
+                            <h3 className={styles.valuesTitle}>Our Core<br />Values</h3>
                             <div className={styles.separator}></div>
                             <p className={styles.valuesDescription}>The principles that guide every decision we make.</p>
                         </div>
                     </div>
-                    <div className={styles.valuesList}> 
+                    <div className={styles.valuesList}>
                         {values.map((val, i) => (
                             <div key={i} className={styles.valueItem}>
-                                <span className={styles.valueMetric}>Metric 0{i+1}</span>
+                                <span className={styles.valueMetric}>Metric 0{i + 1}</span>
                                 <h4 className={styles.valueItemTitle}>{val.name}</h4>
                                 <div className={styles.valueContent}>
                                     <p className={styles.valueDescriptionText}>{val.desc}</p>

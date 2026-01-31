@@ -3,7 +3,8 @@
     color: #fff;
     padding: 0;
     overflow: hidden;
-    background: transparent; /* Parent remains clean for GSAP */
+    background: transparent;
+    /* Parent remains clean for GSAP */
     z-index: 10;
 }
 
@@ -47,7 +48,8 @@
 .cardLeft {
     position: relative;
     width: 100%;
-    height: 65vh; /* Responsive height */
+    height: 65vh;
+    /* Responsive height */
     max-height: 700px;
     min-height: 500px;
     border-radius: 24px;
@@ -106,7 +108,8 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    z-index: 1; /* Initially below text */
+    z-index: 1;
+    /* Initially below text */
 }
 
 .revealImg {
@@ -119,14 +122,16 @@
 /* RIGHT COLUMN - SCROLLING */
 .rightColumn {
     width: 45%;
-    padding-top: 40vh; /* Reverted to 40vh for better section separation */
-    padding-bottom: 40vh; 
+    padding-top: 40vh;
+    /* Reverted to 40vh for better section separation */
+    padding-bottom: 40vh;
 }
 
 .rightCard {
     background: transparent;
     border-radius: 16px;
-    margin-bottom: 400px; /* Spacing to allow scroll duration */
+    margin-bottom: 400px;
+    /* Spacing to allow scroll duration */
 }
 
 /* Section Title - sticky or just first item */
@@ -139,7 +144,8 @@
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #ffaa40; /* Accent color */
+    color: #ffaa40;
+    /* Accent color */
     margin-bottom: 16px;
     display: block;
 }
@@ -156,16 +162,19 @@
 
 /* Scrolling List Feature Items */
 .featureList {
-    margin-top: 20vh; /* Reduced from 40vh */
+    margin-top: 20vh;
+    /* Reduced from 40vh */
     margin-bottom: 10vh;
 }
 
 .featureItem {
-    margin-bottom: 80px; /* Reduced to tighten space */
+    margin-bottom: 80px;
+    /* Reduced to tighten space */
     padding: 30px;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
-    opacity: 0.3; /* Start dim */
+    opacity: 0.3;
+    /* Start dim */
 }
 
 .featureItem.active {
@@ -175,14 +184,17 @@
 }
 
 .featureTitle {
-    font-size: 2.3rem; /* Increased size */
+    font-size: 2.3rem;
+    /* Increased size */
     color: #fff;
     margin-bottom: 10px;
 }
 
 .featureDesc {
-    font-size: 1.5rem; /* Increased size */
-    color: rgba(255, 255, 255, 0.9); /* Made visible white */
+    font-size: 1.5rem;
+    /* Increased size */
+    color: rgba(255, 255, 255, 0.9);
+    /* Made visible white */
 }
 
 /* Responsive */
@@ -190,6 +202,7 @@
     .container {
         flex-direction: column;
     }
+
     .leftColumn {
         width: 100%;
         position: relative;
@@ -198,10 +211,87 @@
         min-height: 500px;
         margin-bottom: 40px;
     }
+
     .rightColumn {
         width: 100%;
     }
+
     .featureList {
         margin-top: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        overflow: visible;
+    }
+
+    .leftColumn {
+        min-height: 0;
+        height: auto;
+    }
+
+    .cardLeft {
+        min-height: 0;
+        height: auto;
+        overflow: visible;
+        padding: 28px 20px 32px;
+    }
+
+    /* Mobile: stack content, no overlay – prevents clipping */
+    .textState {
+        position: relative;
+        padding: 0;
+        height: auto;
+        min-height: 0;
+    }
+
+    .imageState {
+        position: relative;
+        margin-top: 1.5rem;
+        height: 220px;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .imageState .revealImg {
+        border-radius: 16px;
+    }
+
+    .heading {
+        font-size: 1.75rem;
+        margin-bottom: 16px;
+    }
+
+    .subText {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    .mainTitle {
+        font-size: 2.25rem;
+    }
+
+    .rightColumn {
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+
+    .featureItem {
+        margin-bottom: 40px;
+        padding: 20px;
+        border-left: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .featureTitle {
+        font-size: 1.5rem;
+    }
+
+    .featureDesc {
+        font-size: 1.1rem;
+    }
+
+    .featureList {
+        margin-top: 20px;
     }
 }

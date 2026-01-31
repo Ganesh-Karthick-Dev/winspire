@@ -34,72 +34,104 @@ export default function WhoWeHelpSection() {
     ];
 
     useEffect(() => {
-        if (!containerRef.current || !activeLineRef.current || !ballRef.current) return;
+        let refreshTimer: ReturnType<typeof setTimeout> | undefined;
+        let ctx: ReturnType<typeof gsap.context> | undefined;
 
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: 'top 40%', // Start a bit earlier
-                    end: 'bottom 80%',   // End sooner
-                    scrub: 1, // Increased scrub for smoother, less "immediate" feel
+        if (!containerRef.current || !activeLineRef.current || !ballRef.current) {
+            return () => {
+                if (refreshTimer != null) clearTimeout(refreshTimer);
+                ctx?.revert();
+            };
+        }
+
+        ctx = gsap.context(() => {
+            const mm = gsap.matchMedia();
+
+            // DESKTOP: Full timeline scrub animation
+            mm.add("(min-width: 769px)", () => {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: 'top 40%',
+                        end: 'bottom 80%',
+                        scrub: 1,
+                    }
+                });
+
+                const timelineWrapper = containerRef.current?.querySelector(`.${styles.timelineWrapper}`);
+
+                if (timelineWrapper) {
+                    tl.to(ballRef.current, {
+                        top: '100%',
+                        ease: 'none',
+                    }, 0);
+
+                    tl.to(activeLineRef.current, {
+                        height: '100%',
+                        ease: 'none',
+                    }, 0);
+
+                    itemsRef.current.forEach((item, index) => {
+                        if (!item) return;
+                        ScrollTrigger.create({
+                            trigger: item,
+                            start: 'top 60%',
+                            end: 'bottom 40%',
+                            onEnter: () => item.classList.add(styles.activeRow),
+                            onLeaveBack: () => item.classList.remove(styles.activeRow)
+                        });
+                    });
                 }
             });
 
-            // Animate the ball and the active line height together
-            // We want the ball to travel from 0% to 100% of the timelineWrapper height
-            // But actually we are inside .timelineWrapper, so we can just use height 100%
-            
-            // The timeline container height is defined by content. 
-            // We want the ball to move down relative to the scroll.
-            
-            const timelineWrapper = containerRef.current?.querySelector(`.${styles.timelineWrapper}`);
-            
-            if (timelineWrapper) {
-                // Ball movement
-                tl.to(ballRef.current, {
-                    top: '100%', 
-                    ease: 'none',
-                }, 0);
-
-                // Active line growth (follows ball)
-                tl.to(activeLineRef.current, {
-                    height: '100%',
-                    ease: 'none',
-                }, 0);
-
-                // Items activation
-                itemsRef.current.forEach((item, index) => {
-                    if (!item) return;
-
-                    // Calculate trigger point relative to the progress
-                    ScrollTrigger.create({
-                        trigger: item,
-                        start: 'top 60%', // When item acts as trigger
-                        end: 'bottom 40%',
-                        onEnter: () => {
-                            item.classList.add(styles.activeRow);
-                        },
-                        onLeaveBack: () => {
-                            item.classList.remove(styles.activeRow);
+            // MOBILE: Scroll-linked ball + line animation (same idea as desktop, different bounds)
+            mm.add("(max-width: 768px)", () => {
+                const timelineWrapper = containerRef.current?.querySelector(`.${styles.timelineWrapper}`);
+                if (timelineWrapper && ballRef.current && activeLineRef.current) {
+                    const tl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: containerRef.current,
+                            start: 'top 35%',
+                            end: 'bottom 65%',
+                            scrub: 1,
                         }
                     });
+                    tl.to(ballRef.current, { top: '100%', ease: 'none' }, 0);
+                    tl.to(activeLineRef.current, { height: '100%', ease: 'none' }, 0);
+                }
+
+                // Items light up as they enter viewport
+                itemsRef.current.forEach((item) => {
+                    if (!item) return;
+                    ScrollTrigger.create({
+                        trigger: item,
+                        start: 'top 82%',
+                        end: 'bottom 18%',
+                        onEnter: () => item.classList.add(styles.activeRow),
+                        onLeaveBack: () => item.classList.remove(styles.activeRow),
+                    });
                 });
-            }
+            });
+
             ScrollTrigger.refresh();
         }, containerRef);
 
-        return () => ctx.revert();
+        refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 400);
+
+        return () => {
+            if (refreshTimer != null) clearTimeout(refreshTimer);
+            ctx?.revert();
+        };
     }, []);
 
     return (
         <section ref={containerRef} className={styles.section}>
-            
+
             {/* Header */}
             <div className={styles.titleContainer}>
                 <span className={styles.label}>Who We Help</span>
                 <h2 className={styles.heading}>
-                    Healthcare Organizations That <br /> 
+                    Healthcare Organizations That <br />
                     Expect Stability
                 </h2>
                 <p className={styles.description}>
@@ -112,7 +144,7 @@ export default function WhoWeHelpSection() {
                 {/* Lines */}
                 <div className={styles.linePlane}></div>
                 <div ref={activeLineRef} className={styles.activeLine}></div>
-                
+
                 {/* The Ball */}
                 <div ref={ballRef} className={styles.ball}></div>
 
@@ -121,8 +153,8 @@ export default function WhoWeHelpSection() {
                     {partners.map((partner, i) => {
                         const isEven = i % 2 === 0;
                         return (
-                            <div 
-                                key={i} 
+                            <div
+                                key={i}
                                 ref={(el: HTMLDivElement | null) => { itemsRef.current[i] = el; }}
                                 className={styles.itemRow}
                             >
@@ -159,7 +191,7 @@ export default function WhoWeHelpSection() {
             {/* Footer / Closing */}
             <div className={styles.footer}>
                 <p className={styles.footerText}>
-                    "Each environment brings different payer behavior, risk, and operational complexity.<br/>
+                    "Each environment brings different payer behavior, risk, and operational complexity.<br />
                     <span className={styles.footerAccent}>Our approach adapts. Our discipline remains constant."</span>
                 </p>
             </div>

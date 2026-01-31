@@ -17,46 +17,61 @@ const RoleOfTechnologySection: React.FC = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // 0. Initialize States
-            gsap.set(leftTextRef.current, { opacity: 1 });
-            gsap.set(imageRef.current, { opacity: 0 });
+            const mm = gsap.matchMedia();
 
-            // 1. Pin the left column
-            ScrollTrigger.create({
-                trigger: sectionRef.current,
-                start: "top top",
-                end: "bottom bottom",
-                pin: `.${styles.leftColumn}`,
-                pinSpacing: true, // Enable pin spacing to prevent sticking to bottom of section
-                anticipatePin: 1,
-            });
+            // DESKTOP: Pin, scrub timeline, feature highlights
+            mm.add("(min-width: 769px)", () => {
+                gsap.set(leftTextRef.current, { opacity: 1 });
+                gsap.set(imageRef.current, { opacity: 0 });
 
-            // 2. Control Left Side: Text Fades Out, Image Fades In
-            // Triggered by the section's overall scroll to ensure it happens later
-            const tl = gsap.timeline({
-                scrollTrigger: {
+                ScrollTrigger.create({
                     trigger: sectionRef.current,
                     start: "top top",
                     end: "bottom bottom",
-                    scrub: 1.5,
-                }
+                    pin: `.${styles.leftColumn}`,
+                    pinSpacing: true,
+                    anticipatePin: 1,
+                });
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top top",
+                        end: "bottom bottom",
+                        scrub: 1.5,
+                    }
+                });
+
+                tl.to({}, { duration: 5 })
+                  .to(leftTextRef.current, { opacity: 0, duration: 2, ease: "power2.inOut" })
+                  .to(imageRef.current, { opacity: 1, duration: 2, ease: "power2.inOut" }, "-=1");
+
+                const features = gsap.utils.toArray(`.${styles.featureItem}`);
+                features.forEach((feat: any) => {
+                    gsap.to(feat, {
+                        scrollTrigger: {
+                            trigger: feat,
+                            start: "top 60%",
+                            end: "bottom 40%",
+                            toggleClass: styles.active,
+                            scrub: true
+                        }
+                    });
+                });
             });
 
-            tl.to({}, { duration: 5 }) // Stay on text for the first ~40% of scroll
-              .to(leftTextRef.current, { opacity: 0, duration: 2, ease: "power2.inOut" })
-              .to(imageRef.current, { opacity: 1, duration: 2, ease: "power2.inOut" }, "-=1");
-
-            // 3. Highlight Feature Items on Scroll
-            const features = gsap.utils.toArray(`.${styles.featureItem}`);
-            features.forEach((feat: any) => {
-                gsap.to(feat, {
-                    scrollTrigger: {
+            // MOBILE: No pin/scrub – show text + image stacked, ensure content visible
+            mm.add("(max-width: 768px)", () => {
+                gsap.set(leftTextRef.current, { opacity: 1 });
+                gsap.set(imageRef.current, { opacity: 1 });
+                // Feature items: simple scroll-in active state
+                const features = gsap.utils.toArray(`.${styles.featureItem}`);
+                features.forEach((feat: any) => {
+                    ScrollTrigger.create({
                         trigger: feat,
-                        start: "top 60%",
-                        end: "bottom 40%",
-                        toggleClass: styles.active,
-                        scrub: true
-                    }
+                        start: "top 85%",
+                        onEnter: () => (feat as HTMLElement).classList.add(styles.active),
+                    });
                 });
             });
 

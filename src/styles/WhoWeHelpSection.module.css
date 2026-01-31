@@ -70,8 +70,10 @@
     top: 0;
     left: 50%;
     width: 2px;
-    height: 0%; /* animate this */
-    background: #60c3fc; /* Active color */
+    height: 0%;
+    /* animate this */
+    background: #60c3fc;
+    /* Active color */
     transform: translateX(-50%);
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
     z-index: 1;
@@ -79,7 +81,8 @@
 
 .ball {
     position: absolute;
-    top: 0%; /* animate this */
+    top: 0%;
+    /* animate this */
     left: 50%;
     width: 14px;
     height: 14px;
@@ -103,14 +106,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 4rem; /* Spacing between items */
+    margin-bottom: 4rem;
+    /* Spacing between items */
     position: relative;
-    opacity: 0.2; /* Default "empty" state */
+    opacity: 0.2;
+    /* Default "empty" state */
     transition: opacity 0.5s ease;
 }
 
 .activeRow {
-    opacity: 1; 
+    opacity: 1;
 }
 
 /* The Row content wrapper to help alignment */
@@ -122,7 +127,8 @@
 }
 
 /* Left and Right sides */
-.leftSide, .rightSide {
+.leftSide,
+.rightSide {
     width: 45%;
     display: flex;
     align-items: center;
@@ -145,7 +151,8 @@
 }
 
 /* On Active, move them to neutral position */
-.activeRow .leftSide, .activeRow .rightSide {
+.activeRow .leftSide,
+.activeRow .rightSide {
     transform: translateX(0);
 }
 
@@ -210,40 +217,81 @@
 }
 
 @media (max-width: 768px) {
+    .section {
+        padding: 4rem 1.5rem;
+        overflow: visible;
+        min-height: auto;
+    }
+
+    .timelineWrapper {
+        overflow: visible;
+        padding: 0;
+    }
+
     .heading {
         font-size: 2.5rem;
     }
+
     .description {
         font-size: 1.1rem;
     }
+
     .itemRow {
         flex-direction: column;
-        margin-bottom: 4rem;
+        margin-bottom: 3rem;
         text-align: left;
     }
-    
-    .linePlane, .activeLine, .ball, .marker {
-        left: 20px; /* Move line to left on mobile */
-        transform: none;
-    }
-    .ball {
-        transform: translate(-50%, -50%); /* Ball is centered on line */
-        left: 20px;
-    }
+
+    /* Move timeline to left */
+    .linePlane,
     .activeLine {
-        transform: translateX(-50%);
         left: 20px;
+        transform: translateX(-50%);
     }
 
-    .leftSide, .rightSide {
+    .ball {
+        left: 20px;
+        transform: translate(-50%, -50%);
+    }
+
+    .marker {
+        left: 20px;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Content align */
+    .leftSide,
+    .rightSide {
         width: 100%;
-        padding-left: 60px; /* Offset for line */
+        padding-left: 50px;
+        /* Space for line */
         padding-right: 0;
         justify-content: flex-start;
         text-align: left;
+        transform: none !important;
     }
-    
+
+    .rowContent {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Hide unused side in mobile layout if needed due to flex column */
+    /* Actually leftSide and rightSide are distinct items in the code, likely alternating. 
+       If they are just containers for text, we ensure they align. */
+
     .itemTitle {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .footer {
+        margin-top: 3rem;
+        padding: 2rem 1.5rem;
+        border-radius: 2rem;
+    }
+
+    .footerText {
+        font-size: 1.25rem;
     }
 }

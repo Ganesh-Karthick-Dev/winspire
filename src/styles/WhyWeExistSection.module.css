@@ -9,11 +9,13 @@
 }
 
 .container {
-    max-width: 100rem; /* Wider to show zigzag better */
+    max-width: 100rem;
+    /* Wider to show zigzag better */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* Added gap now that overlapping is removed */
+    gap: 1rem;
+    /* Added gap now that overlapping is removed */
 }
 
 /* Titles Outside Cards */
@@ -21,7 +23,7 @@
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.2em;
-    color: #ffffff; 
+    color: #ffffff;
     text-transform: uppercase;
     margin-bottom: 2rem;
     display: flex;
@@ -40,18 +42,20 @@
 
 /* Glass Card Style */
 .card {
-    background: rgba(12, 12, 12, 0.7); 
-    backdrop-filter: blur(30px); 
+    background: rgba(12, 12, 12, 0.7);
+    backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    
-    border-radius: 3rem; /* More rounded like reference */
+
+    border-radius: 3rem;
+    /* More rounded like reference */
     padding: 4rem 5rem;
     position: relative;
-    width: 70%; /* Narrower for clearer zigzag */
+    width: 70%;
+    /* Narrower for clearer zigzag */
     box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -149,23 +153,37 @@
 }
 
 @media (max-width: 768px) {
-    .container {
-        gap: 6rem;
+    .section {
+        padding: 4rem 1.5rem;
     }
-    .right, .lastLeft {
+
+    .container {
+        gap: 3rem;
+    }
+
+    .right,
+    .lastLeft {
         margin-top: 0;
     }
+
     .card {
         width: 100%;
         flex-direction: column-reverse;
         text-align: left;
         padding: 2.5rem;
+        border-radius: 2rem;
     }
+
     .iconWrapper {
         min-width: unset;
         width: 100%;
     }
+
     .heading {
         font-size: 2.5rem;
+    }
+
+    .description {
+        font-size: 1.1rem;
     }
 }

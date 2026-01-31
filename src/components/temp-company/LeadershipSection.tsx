@@ -90,10 +90,22 @@ export default function LeadershipSection() {
         return () => ctx.revert();
     }, []);
 
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     // Center the active slide: move track so active card's center aligns with container center
+    // Only apply complex transform on desktop
     const effectiveWidth = containerWidth || 1400;
     const offset = effectiveWidth / 2 - (activeIndex * (CARD_WIDTH + CARD_GAP) + CARD_WIDTH / 2);
-    const trackStyle = {
+
+    // On mobile, we disable the track translation and let CSS stack them
+    const trackStyle = isMobile ? {} : {
         transform: `translateX(${offset}px)`,
         transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         width: 'max-content',
@@ -111,7 +123,7 @@ export default function LeadershipSection() {
                     <p className={styles.description}>
                         Winspire is led by professionals who have built, managed, and transformed revenue cycles across diverse healthcare environments.
                     </p>
-                     <p className={styles.description}>
+                    <p className={styles.description}>
                         Experience informs our decisions. Discipline guides our execution. Integrity anchors everything we do.
                     </p>
                 </div>
@@ -130,8 +142,8 @@ export default function LeadershipSection() {
 
                 <div className={styles.carouselTrack} style={trackStyle}>
                     {principles.map((p, i) => (
-                        <div 
-                            key={i} 
+                        <div
+                            key={i}
                             className={`${styles.card} ${i === activeIndex ? styles.activeCard : ''}`}
                             style={{ opacity: i === activeIndex ? 1 : 0.5, transform: i === activeIndex ? 'scale(1)' : 'scale(0.9)' }}
                         >
