@@ -1,41 +1,32 @@
 .section {
     position: relative;
     width: 100%;
-    height: 60vh;
-    /* Reduced height as requested */
-    min-height: 480px;
-    overflow: hidden;
+    height: 70vh;
+    min-height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    background-color: #000;
+    overflow: hidden;
 }
 
+/* Parallax Background using background-attachment: fixed */
 .parallaxBg {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 180%;
-    /* 80% extra height for major upward travel */
+    inset: 0;
     z-index: 1;
-    will-change: transform;
+    background-image: url('/images/neura/cta-bg.jpg');
+    background-size: cover;
+    background-position: center bottom;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
-.bgImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.7;
-    will-change: transform;
-}
-
-/* Gradient overlay for better text contrast if needed */
+/* Gradient overlay for better text contrast */
 .overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.7) 100%);
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
     z-index: 2;
 }
 
@@ -80,8 +71,21 @@
     margin-top: 1rem;
 }
 
+/* Mobile: fallback to scroll attachment (iOS doesn't support fixed well) */
 @media (max-width: 768px) {
     .section {
         height: 60vh;
+    }
+
+    .parallaxBg {
+        background-attachment: scroll;
+        background-position: center center;
+    }
+}
+
+/* Tablet and touch devices - fallback */
+@media (hover: none) {
+    .parallaxBg {
+        background-attachment: scroll;
     }
 }
