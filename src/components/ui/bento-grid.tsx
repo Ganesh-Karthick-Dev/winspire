@@ -5,14 +5,14 @@ import { ReactNode } from "react";
 
 export function FUIBentoGridDark() {
     return (
-        <div className="container mx-auto flex min-w-full flex-col bg-transparent p-10 pt-32 text-white">
-            <h1 className="font-outfit text-3xl tracking-tight md:text-5xl font-bold">
+        <div className="container mx-auto flex flex-col bg-transparent p-10 pt-32 text-white">
+            <h1 className="font-outfit text-3xl tracking-tight md:text-5xl font-bold mb-8">
                 Sales
             </h1>
-            <p className="mt-2 text-2xl/8 font-medium tracking-tight bg-gradient-to-br from-white to-white/40 bg-clip-text text-transparent max-w-3xl">
+            <p className="text-2xl/8 font-medium tracking-tight bg-gradient-to-br from-white to-white/40 bg-clip-text text-transparent max-w-3xl mb-20">
                 Know more about your customers than they do.
             </p>
-            <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-6 lg:grid-rows-2">
                 <BentoCard
                     eyebrow="Insight"
                     title="Get perfect clarity"
@@ -96,8 +96,8 @@ export function BentoCard({
         >
             <div className="relative h-full w-full shrink-0 overflow-hidden">
                 {graphic}
-                {/* Gradient overlays for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-90" />
+                {/* Gradient overlays for text readability - reduced opacity slightly */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60" />
 
                 {fade.includes("top") && (
                     <div className="absolute inset-0 bg-gradient-to-b from-black to-transparent opacity-50" />
@@ -107,12 +107,15 @@ export function BentoCard({
                 )}
             </div>
 
-            <div className="absolute bottom-0 left-0 right-0 p-8 z-20 flex flex-col justify-end h-full pointer-events-none">
-                <h3 className="text-secondary text-sm font-bold uppercase tracking-wider mb-2">{eyebrow}</h3>
-                <p className="text-2xl font-bold tracking-tight text-white mb-2">
+            <div
+                className="absolute bottom-0 left-0 right-0 z-20 bg-black/50 backdrop-blur-md border-t border-white/10 box-border"
+                style={{ padding: '3rem' }}
+            >
+                <h3 className="text-secondary text-[10px] font-bold uppercase tracking-wider mb-2">{eyebrow}</h3>
+                <p className="text-lg font-bold tracking-tight text-white mb-2">
                     {title}
                 </p>
-                <p className="text-sm font-normal text-gray-400 leading-relaxed max-w-prose">
+                <p className="text-[11px] font-normal text-gray-300 leading-relaxed max-w-prose">
                     {description}
                 </p>
             </div>
