@@ -207,8 +207,17 @@
     top: 50%;
     transform: translateY(-50%);
     width: 45%; 
+    max-height: 85vh;
+    overflow-y: auto;
     opacity: 0; /* Hidden by default */
-    /* transition: opacity 0.5s ease; We'll use GSAP */
+}
+
+/* 1st & 3rd sections (left/right): top-aligned so content never goes above viewport */
+.textSection.left,
+.textSection.right {
+    top: 12vh;
+    transform: translateY(0);
+    max-height: 78vh; /* 12vh + 78vh = 90vh, stays in view */
 }
 
 .textSection.left {
@@ -227,6 +236,8 @@
     transform: translateY(-50%);
     width: 42%; 
     max-width: 550px;
+    max-height: 95vh; /* Fit section 8 content without scroll */
+    overflow-y: visible; /* No scrollbar - content fits in 95vh */
     text-align: left;
     background: rgba(2, 6, 23, 0.7); 
     backdrop-filter: blur(15px); 

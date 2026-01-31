@@ -243,14 +243,14 @@ const OutcomesContent = () => {
                         }, 
                     '<5'); 
                 } else {
-                    // Side Text Reveal (Slide Up)
+                    // Side Text Reveal (1st, 3rd, 5th, 7th) - keep yPercent 0 so top-aligned, never goes above
                    tl.fromTo(`#text-${section.id}`, 
                         { opacity: 0, yPercent: 0, filter: 'blur(10px)', zIndex: 5 }, 
                         { 
                             opacity: 1, 
-                            yPercent: -50, 
+                            yPercent: 0, 
                             filter: 'blur(0px)', 
-                            duration: 8, // Slower
+                            duration: 8,
                             ease: 'power3.out' 
                         }, 
                     '>-2');
