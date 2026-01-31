@@ -42,19 +42,23 @@ export function HeroDitheringCard() {
                     <div className={styles.content}>
                         {/* Headline */}
                         <h2 className={styles.headline}>
-                            Your words, <br />
-                            <span className={styles.headlineSub}>delivered perfectly.</span>
+                            Built for Automation <br />
+                            and What Comes Next
                         </h2>
 
                         {/* Description */}
                         <p className={styles.description}>
-                            Join 2,847 founders using the only AI that understands the nuance of your voice.
-                            Clean, precise, and uniquely yours.
+                            Automation only works when structure exists.
+                            <br /><br />
+                            Neura provides the foundation for safe automation, agentic AI, and autonomous execution with compliance guardrails.
+                            <br /><br />
+                            Clarity comes first. <br />
+                            Automation follows.
                         </p>
 
                         {/* Button */}
                         <button className={styles.button}>
-                            <span className={styles.buttonText}>Start Typing</span>
+                            <span className={styles.buttonText}>Get Started</span>
                             <ArrowRight className={styles.buttonIcon} />
                         </button>
                     </div>
