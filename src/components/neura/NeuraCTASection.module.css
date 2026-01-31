@@ -1,0 +1,5 @@
+.section {
+    width: 100%;
+    position: relative;
+    /* Wrapper styles if needed, mostly handled by the inner component */
+}

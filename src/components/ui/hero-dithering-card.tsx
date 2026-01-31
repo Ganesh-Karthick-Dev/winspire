@@ -1,0 +1,65 @@
+import { ArrowRight } from "lucide-react";
+import { useState, useRef } from "react";
+import styles from "./hero-dithering-card.module.css";
+
+// Placeholder for the missing shader package
+// const Dithering = lazy(() =>
+//    import("@paper-design/shaders-react").then((mod) => ({ default: mod.Dithering }))
+// );
+
+export function HeroDitheringCard() {
+    const [isHovered, setIsHovered] = useState(false);
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Update CSS variables directly for performance (no re-renders)
+        cardRef.current.style.setProperty('--mouse-x', `${x}px`);
+        cardRef.current.style.setProperty('--mouse-y', `${y}px`);
+    };
+
+    return (
+        <section className={styles.container}>
+            <div
+                className={styles.wrapper}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                <div
+                    ref={cardRef}
+                    className={styles.card}
+                    onMouseMove={handleMouseMove}
+                >
+                    {/* Fallback for missing shader */}
+                    <div className={styles.shaderBackground}>
+                        <div className={styles.cssDithering} />
+                    </div>
+
+                    <div className={styles.content}>
+                        {/* Headline */}
+                        <h2 className={styles.headline}>
+                            Your words, <br />
+                            <span className={styles.headlineSub}>delivered perfectly.</span>
+                        </h2>
+
+                        {/* Description */}
+                        <p className={styles.description}>
+                            Join 2,847 founders using the only AI that understands the nuance of your voice.
+                            Clean, precise, and uniquely yours.
+                        </p>
+
+                        {/* Button */}
+                        <button className={styles.button}>
+                            <span className={styles.buttonText}>Start Typing</span>
+                            <ArrowRight className={styles.buttonIcon} />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}

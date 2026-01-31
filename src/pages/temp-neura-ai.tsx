@@ -48,6 +48,8 @@ export async function getStaticProps() {
     return { props: {} };
 }
 
+import NeuraCTASection from '@/components/neura/NeuraCTASection';
+
 export default function TempNeuraAI() {
     const is3DDisabled = useRef(false);
     const heroRef = useRef<HTMLDivElement>(null); // Defined heroRef
@@ -171,6 +173,7 @@ export default function TempNeuraAI() {
                 <NeuraLivingSystemsSection />
                 <NeuraGeminiEffectSection />
                 <NeuraStaySecureSection />
+                <NeuraCTASection />
 
             </div>
         </Layout>
