@@ -1,0 +1,446 @@
+.section {
+    position: relative;
+    overflow: hidden;
+    z-index: 20;
+    min-height: 100vh;
+}
+
+.pinWrapper {
+    width: 100%;
+    max-width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.horizontalTrack {
+    display: flex;
+    flex-direction: row;
+    width: 400vw;
+    will-change: transform;
+}
+
+.panel {
+    width: 100vw;
+    min-width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+/* Marquee - Panel 1 (no glass effect) */
+.scrollingText {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.marqueeRail {
+    display: flex;
+    will-change: transform;
+}
+
+.marqueeItem {
+    white-space: nowrap;
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1em;
+    margin: 0 40px 0 0;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+/* Card panels - larger bento grid, fit within viewport */
+.cardPanel {
+    width: 100%;
+    max-width: min(1400px, 90vw);
+    max-height: calc(100vh - 3rem);
+    padding: 1.25rem 2rem;
+    margin: 0 auto;
+    overflow: hidden;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.bentoCard {
+    flex: 1;
+    min-height: 0;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 1rem 1.25rem;
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardNumber {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2.5rem;
+    font-weight: 200;
+    color: rgba(255, 255, 255, 0.12);
+    z-index: 1;
+}
+
+/* Bento grid - irregular layout, fit within viewport */
+.cardBento {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0.875rem;
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+}
+
+.bentoCell {
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Blue color variants - different shades */
+.blueLight {
+    background: rgba(125, 211, 252, 0.3);
+    color: #ffffff;
+}
+
+.blueMedium {
+    background: rgba(59, 130, 246, 0.4);
+    color: #ffffff;
+}
+
+.blueSlate {
+    background: rgba(30, 64, 175, 0.55);
+    color: #ffffff;
+}
+
+.blueDark {
+    background: rgba(15, 23, 42, 0.75);
+    color: #ffffff;
+}
+
+/* Text size variants - varied per cell, scale down to fit */
+.textXl {
+    font-size: clamp(1.25rem, 2vw, 1.9rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.textLg {
+    font-size: clamp(1rem, 1.3vw, 1.2rem);
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.textMd {
+    font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+.textSm {
+    font-size: clamp(0.75rem, 0.95vw, 0.9rem);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.cellTag {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.cellTitle {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.cellSubtitle {
+    grid-column: span 1;
+}
+
+.cellIntro {
+    grid-column: span 3;
+    grid-row: span 1;
+}
+
+.cellBullet {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.75rem;
+    text-align: left;
+}
+
+.bulletDot {
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    min-height: 8px;
+    border-radius: 50%;
+    background: #60a5fa;
+    margin-top: 0.35rem;
+}
+
+.cardTag {
+    display: block;
+    font-size: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+}
+
+.cardTitle {
+    font-size: inherit;
+    font-weight: 700;
+    line-height: inherit;
+    color: inherit;
+    margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.cardSubtitle {
+    font-size: inherit;
+    color: inherit;
+    margin: 0;
+    opacity: 0.95;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.cardContent {
+    font-size: inherit;
+    color: inherit;
+    margin: 0;
+    opacity: 0.95;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.cellBullet span:last-child {
+    font-size: inherit;
+    color: inherit;
+    line-height: inherit;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    min-width: 0;
+}
+
+/* Card 1 (panel 2): tall title cell, irregular bento */
+.panel:nth-child(2) .cardBento {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    grid-template-rows: auto auto auto minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.panel:nth-child(2) .cellTag {
+    grid-column: span 1;
+}
+
+.panel:nth-child(2) .cellTitle {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.panel:nth-child(2) .cellSubtitle {
+    grid-column: span 1;
+}
+
+.panel:nth-child(2) .cellIntro {
+    grid-column: span 2;
+}
+
+.panel:nth-child(2) .cellBullet:nth-child(5) {
+    grid-column: span 1;
+}
+
+.panel:nth-child(2) .cellBullet:nth-child(6) {
+    grid-column: span 1;
+}
+
+.panel:nth-child(2) .cellBullet:nth-child(7) {
+    grid-column: span 2;
+}
+
+/* Card 2 (panel 3) Gratify: wide top, square bottom cells */
+.panel:nth-child(3) .cardBento {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.panel:nth-child(3) .cellTag {
+    grid-column: span 1;
+}
+
+.panel:nth-child(3) .cellTitle {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.panel:nth-child(3) .cellSubtitle {
+    grid-column: span 2;
+}
+
+.panel:nth-child(3) .cellIntro {
+    grid-column: span 2;
+}
+
+.panel:nth-child(3) .cellBullet {
+    grid-column: span 1;
+}
+
+/* Card 3 (panel 4): 3-col bento - irregular */
+.panel:nth-child(4) .cardBento {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr);
+    grid-template-rows: auto auto minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.panel:nth-child(4) .cellTag {
+    grid-column: span 2;
+}
+
+.panel:nth-child(4) .cellTitle {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.panel:nth-child(4) .cellSubtitle {
+    grid-column: span 2;
+}
+
+.panel:nth-child(4) .cellIntro {
+    grid-column: span 3;
+}
+
+.panel:nth-child(4) .cellBullet:nth-child(5),
+.panel:nth-child(4) .cellBullet:nth-child(6) {
+    grid-column: span 1;
+}
+
+.panel:nth-child(4) .cellBullet:nth-child(7),
+.panel:nth-child(4) .cellBullet:nth-child(8) {
+    grid-column: span 1;
+}
+
+/* Mobile: stacked layout */
+@media (max-width: 768px) {
+    .section {
+        min-height: auto;
+    }
+
+    .pinWrapper {
+        height: auto;
+        overflow: visible;
+        flex-direction: column;
+    }
+
+    .horizontalTrack {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .panel {
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+        min-height: 50vh;
+        padding: 3rem 1.5rem;
+    }
+
+    .scrollingText {
+        min-height: 40vh;
+    }
+
+    .marqueeRail {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .marqueeItem {
+        font-size: clamp(2.5rem, 8vw, 4rem);
+        margin: 0;
+        white-space: normal;
+    }
+
+    .cardPanel {
+        padding: 1.5rem 1rem;
+    }
+
+    .bentoCard {
+        min-height: auto;
+        padding: 1rem;
+    }
+
+    .cardBento,
+    .panel:nth-child(2) .cardBento,
+    .panel:nth-child(3) .cardBento,
+    .panel:nth-child(4) .cardBento {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 0.875rem;
+        min-height: auto;
+    }
+
+    .panel:nth-child(2) .cellTitle,
+    .panel:nth-child(4) .cellTitle {
+        grid-row: span 1;
+    }
+
+    .panel:nth-child(4) .cellTag,
+    .panel:nth-child(4) .cellTitle,
+    .panel:nth-child(4) .cellSubtitle,
+    .panel:nth-child(4) .cellIntro,
+    .panel:nth-child(4) .cellBullet {
+        grid-column: span 1;
+    }
+
+    .panel:nth-child(2) .cellBullet:nth-child(7) {
+        grid-column: span 1;
+    }
+
+    .cellIntro,
+    .cellTag,
+    .cellTitle,
+    .cellSubtitle {
+        grid-column: span 1;
+    }
+
+    .textXl {
+        font-size: clamp(1.25rem, 4vw, 1.5rem);
+    }
+
+    .textLg {
+        font-size: clamp(1.1rem, 3vw, 1.25rem);
+    }
+
+    .textMd {
+        font-size: 1rem;
+    }
+
+    .textSm {
+        font-size: 0.9rem;
+    }
+}

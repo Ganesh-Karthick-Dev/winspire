@@ -1,0 +1,343 @@
+.section {
+    position: relative;
+    width: 100%;
+    padding: 100px 20px;
+    background-color: transparent;
+    /* overflow: hidden; Removed to allow sticky positioning to work */
+    z-index: 20;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+/* --- Top Feature Section --- */
+.featureSection {
+    display: flex;
+    flex-direction: column;
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+@media (min-width: 992px) {
+    .featureSection {
+        flex-direction: row;
+        align-items: stretch;
+        min-height: 500px;
+    }
+}
+
+.featureImageWrapper {
+    flex: 1;
+    position: relative;
+    min-height: 300px;
+    overflow: hidden;
+}
+
+.featureImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.featureSection:hover .featureImage {
+    transform: scale(1.05);
+}
+
+.featureContent {
+    flex: 1;
+    padding: 3rem 3rem 6rem 3rem; /* Extra bottom padding for the scoop */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    
+    /* The mask for the scooped corner */
+    mask-image: radial-gradient(circle at 100% 100%, transparent 40px, black 41px);
+    -webkit-mask-image: radial-gradient(circle at 100% 100%, transparent 40px, black 41px);
+}
+
+.featureTag {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2b80ff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+}
+
+.featureTitle {
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.featureDescription {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+/* The button that sits in the scoop */
+.featureButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 80px; /* Match the scoop size roughly (40px radius -> 80px square space?) No, the scoop is 40px radius from corner. */
+    height: 80px;
+    background: #111;
+    border-radius: 20px 0 24px 0; /* Top-Left rounded to match scoop? Or just a box? */
+    /* Let's make it a separate floating element outside the mask context, 
+       but we need to position it exactly in the void. 
+       Actually, if it's outside .featureContent, we need a parent wrapper. */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    z-index: 10;
+}
+
+/* But wait, if .featureContent handles the layout, the button needs to be outside if it's masked out.
+   So we will wrap the content side.
+*/
+
+.contentSideWrapper {
+    flex: 1;
+    position: relative;
+    /* This wrapper holds the masked content AND the button */
+}
+
+.featureContentInner {
+    height: 100%;
+    padding: 3rem 4rem 4rem 3rem;
+    background: transparent;
+    mask-image: radial-gradient(circle at 100% 100%, transparent 50px, black 51px);
+    -webkit-mask-image: radial-gradient(circle at 100% 100%, transparent 50px, black 51px);
+}
+
+.cornerButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: #1a1a1a;
+    border-top-left-radius: 50px; /* Match the curved mask */
+    /* ... */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.cornerButton:hover {
+    background: #2b80ff;
+    transform: scale(1.05);
+}
+
+/* --- Cards Stack (formerly Grid) --- */
+.cardsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem; /* Space between cards before they stack */
+    padding-bottom: 4rem;
+}
+
+/* Remove the grid layout for larger screens since we want a vertical stack now */
+@media (min-width: 768px) {
+    .cardsGrid {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.cardWrapper {
+    position: sticky;
+    top: 15vh; /* Stick starting from 15% down the viewport */
+    height: auto; /* Let content define height */
+}
+
+/* Stacking Offsets */
+/* Each subsequent card needs to stick slightly lower to create the stacked look */
+.cardWrapper:nth-child(1) {
+    top: 10vh; /* Start higher */
+    z-index: 1;
+}
+
+.cardWrapper:nth-child(2) {
+    top: 15vh; /* 5vh offset */
+    z-index: 2;
+}
+
+.cardWrapper:nth-child(3) {
+    top: 20vh; /* 10vh offset */
+    z-index: 3;
+}
+
+/* Removed the old staggering media queries as we are now using sticky */
+
+.card {
+    position: relative;
+    padding: 2.5rem 2.5rem 4rem 2.5rem; /* Extra bottom padding for scoop */
+    border-radius: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Masking for the bottom right scoop */
+    mask-image: radial-gradient(circle at 100% 100%, transparent 40px, black 41px);
+    -webkit-mask-image: radial-gradient(circle at 100% 100%, transparent 40px, black 41px);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Color Themes */
+.cardThemeWhite {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #333;
+}
+.cardThemeWhite .cardTitle { color: #111; }
+.cardThemeWhite .list { border-top-color: #eee; }
+
+.cardThemeBlue {
+    background: rgba(43, 128, 255, 0.85); /* Semi-transparent Brand Blue */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff;
+}
+.cardThemeBlue .cardTitle { color: #fff; }
+.cardThemeBlue .list { border-top-color: rgba(255,255,255,0.2); }
+
+.cardThemeDark {
+    background: rgba(26, 26, 26, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #aaa;
+}
+.cardThemeDark .cardTitle { color: #fff; }
+.cardThemeDark .list { border-top-color: rgba(255,255,255,0.1); }
+
+
+.cardTitle {
+    font-size: 2rem; /* Increased from 1.5rem */
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.cardDescription {
+    font-size: 1.2rem; /* Increased from 1rem */
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    opacity: 1; /* Removed opacity for better visibility */
+    font-weight: 500;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid; /* color set by theme */
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: row; /* Horizontal layout for tags */
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.listItem {
+    margin-bottom: 0; /* Handled by gap */
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 50px; /* Pill shape */
+    background: rgba(0,0,0,0.05);
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.listItem::before {
+    content: none; /* Remove bullet */
+}
+
+.listItem:hover {
+    transform: translateY(-2px);
+    background: rgba(0,0,0,0.1);
+}
+
+/* Theme specific pill styles */
+.cardThemeWhite .listItem {
+    background: rgba(0,0,0,0.05); /* Light grey on white */
+    color: #333;
+}
+
+.cardThemeBlue .listItem {
+    background: rgba(255,255,255,0.2); /* Semi-transparent white on blue */
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+.cardThemeBlue .listItem:hover { margin-top: 0; background: rgba(255,255,255,0.3); }
+
+.cardThemeDark .listItem {
+    background: rgba(255,255,255,0.1); /* Semi-transparent white on dark */
+    color: #ddd;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.cardThemeDark .listItem:hover { margin-top: 0; background: rgba(255,255,255,0.2); }
+
+.cardFooter {
+    font-size: 1.1rem; /* Increased */
+    margin-top: auto;
+    padding-top: 1.5rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Floating Buttons for Cards */
+.cardButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background: #e0e0e0;
+    border-top-left-radius: 40px; /* Match width/height for perfect fit with 40px mask */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.cardThemeWhite + .cardButton { background: #f0f0f0; color: #111; }
+.cardThemeBlue + .cardButton { background: #004080; color: #fff; }
+.cardThemeDark + .cardButton { background: #333; color: #fff; }
+
+.cardButton:hover {
+    transform: scale(1.1);
+}
