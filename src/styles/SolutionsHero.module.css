@@ -179,8 +179,15 @@
 }
 
 @keyframes scrollBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(5px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -262,21 +269,50 @@
 
 @media (max-width: 768px) {
     .heroSection {
-        padding-top: 120px;
-        padding-bottom: 56px;
+        padding-top: 100px;
+        /* Reduced from 120px */
+        padding-bottom: 48px;
+        /* Reduced from 56px */
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     .leftCol {
-        gap: 1.25rem;
+        gap: 1rem;
+    }
+
+    .headlineLine1,
+    .headlineLine2 {
+        font-size: clamp(2.25rem, 9vw, 3rem);
+        /* Smaller mobile font */
+        line-height: 1.1;
+    }
+
+    .tagline {
+        font-size: 1rem;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    .ctaWrap {
+        margin-top: 0.5rem;
     }
 
     .glassCard {
-        padding: 1.75rem 1.5rem;
-        border-radius: 20px;
+        padding: 1.5rem;
+        border-radius: 16px;
+        margin-top: 1rem;
+    }
+
+    .description {
+        font-size: 0.95rem;
+        line-height: 1.6;
     }
 
     .ctaButton {
-        padding: 14px 26px;
+        padding: 14px 28px;
         font-size: 0.95rem;
+        width: 100%;
+        /* Full width button on mobile */
     }
 }

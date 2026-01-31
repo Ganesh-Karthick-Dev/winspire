@@ -82,7 +82,8 @@
 .divider {
     width: 2px;
     background-color: #000;
-    height: 100px; /* Adjust as conceptual divider if needed, though not strictly in design */
+    height: 100px;
+    /* Adjust as conceptual divider if needed, though not strictly in design */
     display: none;
 }
 
@@ -200,4 +201,52 @@
     margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+}
+
+@media (max-width: 768px) {
+    .philosophySection {
+        padding: 60px 20px;
+        /* Reduced top/bottom padding */
+    }
+
+    .container {
+        gap: 3rem;
+    }
+
+    .contentWrapper {
+        gap: 2.5rem;
+    }
+
+    .heading {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .description {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+        gap: 1rem;
+        flex-direction: column;
+        /* Stack icon and content */
+        align-items: flex-start;
+    }
+
+    .cardIconBox {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        font-size: 1.1rem;
+    }
+
+    .titleLine1 {
+        font-size: 1.1rem;
+    }
+
+    .titleLine2 {
+        font-size: 1rem;
+    }
 }

@@ -26,7 +26,7 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 @media (min-width: 992px) {
@@ -57,13 +57,14 @@
 
 .featureContent {
     flex: 1;
-    padding: 3rem 3rem 6rem 3rem; /* Extra bottom padding for the scoop */
+    padding: 3rem 3rem 6rem 3rem;
+    /* Extra bottom padding for the scoop */
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     background: #fff;
-    
+
     /* The mask for the scooped corner */
     mask-image: radial-gradient(circle at 100% 100%, transparent 40px, black 41px);
     -webkit-mask-image: radial-gradient(circle at 100% 100%, transparent 40px, black 41px);
@@ -98,10 +99,12 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 80px; /* Match the scoop size roughly (40px radius -> 80px square space?) No, the scoop is 40px radius from corner. */
+    width: 80px;
+    /* Match the scoop size roughly (40px radius -> 80px square space?) No, the scoop is 40px radius from corner. */
     height: 80px;
     background: #111;
-    border-radius: 20px 0 24px 0; /* Top-Left rounded to match scoop? Or just a box? */
+    border-radius: 20px 0 24px 0;
+    /* Top-Left rounded to match scoop? Or just a box? */
     /* Let's make it a separate floating element outside the mask context, 
        but we need to position it exactly in the void. 
        Actually, if it's outside .featureContent, we need a parent wrapper. */
@@ -139,7 +142,8 @@
     width: 50px;
     height: 50px;
     background: #1a1a1a;
-    border-top-left-radius: 50px; /* Match the curved mask */
+    border-top-left-radius: 50px;
+    /* Match the curved mask */
     /* ... */
     display: flex;
     align-items: center;
@@ -158,7 +162,8 @@
 .cardsGrid {
     display: flex;
     flex-direction: column;
-    gap: 4rem; /* Space between cards before they stack */
+    gap: 4rem;
+    /* Space between cards before they stack */
     padding-bottom: 4rem;
 }
 
@@ -172,24 +177,29 @@
 
 .cardWrapper {
     position: sticky;
-    top: 15vh; /* Stick starting from 15% down the viewport */
-    height: auto; /* Let content define height */
+    top: 15vh;
+    /* Stick starting from 15% down the viewport */
+    height: auto;
+    /* Let content define height */
 }
 
 /* Stacking Offsets */
 /* Each subsequent card needs to stick slightly lower to create the stacked look */
 .cardWrapper:nth-child(1) {
-    top: 10vh; /* Start higher */
+    top: 10vh;
+    /* Start higher */
     z-index: 1;
 }
 
 .cardWrapper:nth-child(2) {
-    top: 15vh; /* 5vh offset */
+    top: 15vh;
+    /* 5vh offset */
     z-index: 2;
 }
 
 .cardWrapper:nth-child(3) {
-    top: 20vh; /* 10vh offset */
+    top: 20vh;
+    /* 10vh offset */
     z-index: 3;
 }
 
@@ -197,7 +207,8 @@
 
 .card {
     position: relative;
-    padding: 2.5rem 2.5rem 4rem 2.5rem; /* Extra bottom padding for scoop */
+    padding: 2.5rem 2.5rem 4rem 2.5rem;
+    /* Extra bottom padding for scoop */
     border-radius: 24px;
     height: 100%;
     display: flex;
@@ -220,17 +231,30 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: #333;
 }
-.cardThemeWhite .cardTitle { color: #111; }
-.cardThemeWhite .list { border-top-color: #eee; }
+
+.cardThemeWhite .cardTitle {
+    color: #111;
+}
+
+.cardThemeWhite .list {
+    border-top-color: #eee;
+}
 
 .cardThemeBlue {
-    background: rgba(43, 128, 255, 0.85); /* Semi-transparent Brand Blue */
+    background: rgba(43, 128, 255, 0.85);
+    /* Semi-transparent Brand Blue */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     color: #fff;
 }
-.cardThemeBlue .cardTitle { color: #fff; }
-.cardThemeBlue .list { border-top-color: rgba(255,255,255,0.2); }
+
+.cardThemeBlue .cardTitle {
+    color: #fff;
+}
+
+.cardThemeBlue .list {
+    border-top-color: rgba(255, 255, 255, 0.2);
+}
 
 .cardThemeDark {
     background: rgba(26, 26, 26, 0.85);
@@ -238,22 +262,32 @@
     -webkit-backdrop-filter: blur(10px);
     color: #aaa;
 }
-.cardThemeDark .cardTitle { color: #fff; }
-.cardThemeDark .list { border-top-color: rgba(255,255,255,0.1); }
+
+.cardThemeDark .cardTitle {
+    color: #fff;
+}
+
+.cardThemeDark .list {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
 
 
 .cardTitle {
-    font-size: 2rem; /* Increased from 1.5rem */
+    font-size: 2rem;
+    /* Increased from 1.5rem */
     font-weight: 700;
     margin-bottom: 1.5rem;
     line-height: 1.2;
 }
 
 .cardDescription {
-    font-size: 1.2rem; /* Increased from 1rem */
+    font-size: 1.2rem;
+    color: black;
+    /* Increased from 1rem */
     line-height: 1.6;
     margin-bottom: 2rem;
-    opacity: 1; /* Removed opacity for better visibility */
+    opacity: 1;
+    /* Removed opacity for better visibility */
     font-weight: 500;
 }
 
@@ -261,57 +295,74 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    border-top: 1px solid; /* color set by theme */
+    border-top: 1px solid;
+    /* color set by theme */
     padding-top: 2rem;
     display: flex;
-    flex-direction: row; /* Horizontal layout for tags */
+    flex-direction: row;
+    /* Horizontal layout for tags */
     flex-wrap: wrap;
     gap: 1rem;
 }
 
 .listItem {
-    margin-bottom: 0; /* Handled by gap */
+    margin-bottom: 0;
+    /* Handled by gap */
     font-size: 1.05rem;
     font-weight: 500;
     padding: 0.5rem 1rem;
-    border-radius: 50px; /* Pill shape */
-    background: rgba(0,0,0,0.05);
+    border-radius: 50px;
+    /* Pill shape */
+    background: rgba(0, 0, 0, 0.05);
     display: inline-flex;
     align-items: center;
     transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .listItem::before {
-    content: none; /* Remove bullet */
+    content: none;
+    /* Remove bullet */
 }
 
 .listItem:hover {
     transform: translateY(-2px);
-    background: rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.1);
 }
 
 /* Theme specific pill styles */
 .cardThemeWhite .listItem {
-    background: rgba(0,0,0,0.05); /* Light grey on white */
+    background: rgba(0, 0, 0, 0.05);
+    /* Light grey on white */
     color: #333;
 }
 
 .cardThemeBlue .listItem {
-    background: rgba(255,255,255,0.2); /* Semi-transparent white on blue */
+    background: rgba(255, 255, 255, 0.2);
+    /* Semi-transparent white on blue */
     color: #fff;
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
-.cardThemeBlue .listItem:hover { margin-top: 0; background: rgba(255,255,255,0.3); }
+
+.cardThemeBlue .listItem:hover {
+    margin-top: 0;
+    background: rgba(255, 255, 255, 0.3);
+}
 
 .cardThemeDark .listItem {
-    background: rgba(255,255,255,0.1); /* Semi-transparent white on dark */
+    background: rgba(255, 255, 255, 0.1);
+    /* Semi-transparent white on dark */
     color: #ddd;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.cardThemeDark .listItem:hover { margin-top: 0; background: rgba(255,255,255,0.2); }
+
+.cardThemeDark .listItem:hover {
+    margin-top: 0;
+    background: rgba(255, 255, 255, 0.2);
+}
 
 .cardFooter {
-    font-size: 1.1rem; /* Increased */
+    font-size: 1.1rem;
+    /* Increased */
     margin-top: auto;
     padding-top: 1.5rem;
     font-style: italic;
@@ -326,7 +377,8 @@
     width: 40px;
     height: 40px;
     background: #e0e0e0;
-    border-top-left-radius: 40px; /* Match width/height for perfect fit with 40px mask */
+    border-top-left-radius: 40px;
+    /* Match width/height for perfect fit with 40px mask */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -334,10 +386,113 @@
     transition: all 0.3s ease;
 }
 
-.cardThemeWhite + .cardButton { background: #f0f0f0; color: #111; }
-.cardThemeBlue + .cardButton { background: #004080; color: #fff; }
-.cardThemeDark + .cardButton { background: #333; color: #fff; }
+.cardThemeWhite+.cardButton {
+    background: #f0f0f0;
+    color: #111;
+}
+
+.cardThemeBlue+.cardButton {
+    background: #004080;
+    color: #fff;
+}
+
+.cardThemeDark+.cardButton {
+    background: #333;
+    color: #fff;
+}
 
 .cardButton:hover {
     transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 60px 20px;
+    }
+
+    .container {
+        gap: 3rem;
+    }
+
+    /* Feature Section Mobile */
+    .featureSection {
+        flex-direction: column;
+        border-radius: 20px;
+    }
+
+    .featureImageWrapper {
+        min-height: 200px;
+        max-height: 250px;
+    }
+
+    .featureContent {
+        padding: 2rem 1.5rem 4rem 1.5rem;
+        /* Keep bottom padding for scoop */
+    }
+
+    .featureContentInner {
+        padding: 2rem 1.5rem 5rem 1.5rem;
+        /* Adjusted for mobile scoop */
+        mask-image: radial-gradient(circle at 100% 100%, transparent 40px, black 41px);
+        -webkit-mask-image: radial-gradient(circle at 100% 100%, transparent 40px, black 41px);
+    }
+
+    .featureTitle {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .featureDescription {
+        font-size: 1rem;
+    }
+
+    /* Disable Sticky Stacking on Mobile */
+    .cardsGrid {
+        gap: 2rem;
+        padding-bottom: 0;
+    }
+
+    .cardWrapper {
+        position: static;
+        /* Disable sticky */
+        top: auto;
+        z-index: auto;
+        height: auto;
+        margin-bottom: 1rem;
+    }
+
+    .cardWrapper:nth-child(n) {
+        top: auto;
+        z-index: auto;
+    }
+
+    .card {
+        padding: 2rem 1.5rem 4rem 1.5rem;
+        border-radius: 20px;
+    }
+
+    .cardTitle {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .cardDescription {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .list {
+        padding-top: 1.5rem;
+        gap: 0.5rem;
+    }
+
+    .listItem {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .cardFooter {
+        font-size: 1rem;
+        padding-top: 1rem;
+    }
 }

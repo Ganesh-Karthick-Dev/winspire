@@ -110,3 +110,44 @@
     line-height: 1.4;
     margin: 0;
 }
+
+@media (max-width: 768px) {
+    .section {
+        padding: 60px 20px;
+    }
+
+    .container {
+        padding: 0;
+        gap: 3rem;
+    }
+
+    .title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .description {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Grid is already 1fr by default, but ensuring adjustments */
+    .rightColumn {
+        gap: 16px;
+    }
+
+    .card {
+        padding: 2rem 1.5rem;
+        min-height: 160px;
+        border-radius: 16px;
+    }
+
+    .cardText {
+        font-size: 1.1rem;
+    }
+}
