@@ -23,6 +23,10 @@ export default function NeuraGeminiEffectSection() {
             ref={ref}
         >
             <GoogleGeminiEffect
+                title="Denial Management That Thinks Strategically"
+                description={`Neura transforms denial management from reaction to prevention.
+It classifies inventory, routes work intelligently, generates payer-specific appeals, and identifies trends that prevent repeat failures.
+Effort is focused only where value exists.`}
                 pathLengths={[
                     pathLengthFirst,
                     pathLengthSecond,
