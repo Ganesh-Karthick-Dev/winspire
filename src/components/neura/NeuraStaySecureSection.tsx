@@ -12,8 +12,16 @@ export default function NeuraStaySecureSection() {
                 transition={{ duration: 0.5 }}
                 className={styles.title}
             >
-                Stay secure
+                Cross-Department Alignment at Scale
             </motion.h2>
+            <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className={styles.subtitle}
+            >
+                Neura aligns billing, coding, AR, denials, eligibility, and posting around enterprise-level outcomes.
+            </motion.p>
 
             {/* Top Markers */}
             <div className={styles.markersRow}>
@@ -32,10 +40,10 @@ export default function NeuraStaySecureSection() {
                     className={styles.card}
                 >
                     <h3 className={styles.cardTitle}>
-                        $100M<br />insurance
+                        Predictable<br />Timelines
                     </h3>
                     <p className={styles.cardDescription}>
-                        Crypto assets are insured up to $100M through institutional-grade coverage.
+                        Clear turnaround times
                     </p>
                 </motion.div>
 
@@ -47,10 +55,10 @@ export default function NeuraStaySecureSection() {
                     className={styles.card}
                 >
                     <h3 className={styles.cardTitle}>
-                        Advanced<br />protection
+                        Real-time<br />Control
                     </h3>
                     <p className={styles.cardDescription}>
-                        Accounts are opened within minutes. Onboarding takes less than an hour.
+                        Real-time SLA risk alerts
                     </p>
                 </motion.div>
 
@@ -62,10 +70,10 @@ export default function NeuraStaySecureSection() {
                     className={styles.card}
                 >
                     <h3 className={styles.cardTitle}>
-                        Regulated<br />institution
+                        Connected<br />Workflows
                     </h3>
                     <p className={styles.cardDescription}>
-                        Keytom operates as a licensed financial institution in Canada and the Czech Republic.
+                        Structured, visible handoffs across teams
                     </p>
                 </motion.div>
             </div>

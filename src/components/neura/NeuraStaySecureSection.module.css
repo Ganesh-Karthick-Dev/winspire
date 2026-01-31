@@ -22,17 +22,30 @@
     /* If user wants gradient like title, we can adjust, but screenshot shows solid/gradient pink */
 }
 
+.subtitle {
+    font-size: 1.125rem;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    /* Updated to white */
+    max-width: 40rem;
+    margin: -1rem auto 3rem auto;
+    /* Negative top margin to sit closer to title, spacing below */
+    line-height: 1.6;
+}
+
 /* Markers Row */
 .markersRow {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 80rem;
+    max-width: 64rem;
+    /* Reduced from 80rem */
     /* Match card container width */
     padding: 0 0.5rem;
     /* Precise alignment tweaks */
-    margin-bottom: -12px;
-    /* Pull closer to cards to overlapping effect if needed, or just align */
+    margin-bottom: 12px;
+    /* Reduced overlap, pushing it up slightly or positive spacing */
     z-index: 10;
     position: relative;
     padding: 0;
@@ -42,8 +55,9 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 80rem;
-    margin-top: -12px;
+    max-width: 64rem;
+    /* Reduced from 80rem */
+    margin-top: 12px;
     z-index: 10;
     position: relative;
     padding: 0;
@@ -67,8 +81,49 @@
     grid-template-columns: 1fr;
     gap: 1rem;
     width: 100%;
-    max-width: 80rem;
+    max-width: 64rem;
+    /* Reduced from 80rem */
     z-index: 5;
+}
+
+/* ... existing styles ... */
+
+/* Responsive */
+@media (min-width: 768px) {
+    .cardsGrid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        /* Larger gap on desktop */
+    }
+
+    .markersRow,
+    .markersRowBottom {
+        justify-content: normal;
+        /* Disable space-between */
+        position: relative;
+        height: 24px;
+    }
+
+    /* Marker gap formula: (100% - 2 * gap) / 3 = 1fr width.
+       Gap center 1 = 1fr + 0.5 * gap
+       Gap center 2 = 2 * 1fr + 1.5 * gap
+       Gap = 2rem
+    */
+    .marker:nth-child(1) {
+        left: 0;
+    }
+
+    .marker:nth-child(2) {
+        left: calc(((100% - 4rem) / 3) + 1rem);
+    }
+
+    .marker:nth-child(3) {
+        left: calc((2 * (100% - 4rem) / 3) + 3rem);
+    }
+
+    .marker:nth-child(4) {
+        left: 100%;
+    }
 }
 
 /* Card Styling */
