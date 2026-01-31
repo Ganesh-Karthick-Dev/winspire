@@ -17,6 +17,7 @@ import NeuraEfficiencySection from '@/components/neura/NeuraEfficiencySection';
 import NeuraCapabilitiesSection from '@/components/neura/NeuraCapabilitiesSection';
 import NeuraLivingSystemsSection from '@/components/neura/NeuraLivingSystemsSection';
 import NeuraGeminiEffectSection from '@/components/neura/NeuraGeminiEffectSection';
+import NeuraStaySecureSection from '@/components/neura/NeuraStaySecureSection';
 
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
@@ -169,6 +170,7 @@ export default function TempNeuraAI() {
                 <NeuraCapabilitiesSection />
                 <NeuraLivingSystemsSection />
                 <NeuraGeminiEffectSection />
+                <NeuraStaySecureSection />
 
             </div>
         </Layout>
