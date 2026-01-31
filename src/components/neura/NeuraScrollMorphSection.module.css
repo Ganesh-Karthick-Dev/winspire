@@ -2,8 +2,9 @@
     position: relative;
     width: 100%;
     /* Reduced height - 200vh for scroll space */
-    height: 200vh;
+    height: 100vh;
     /* Changed from 200vh to fit viewport for pinning */
+    z-index: 20;
     background: #FAFAFA;
     /* Top margin to separate from previous section */
     margin-top: 80px;

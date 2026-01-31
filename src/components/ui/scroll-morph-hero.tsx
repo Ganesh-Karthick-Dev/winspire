@@ -1,33 +1,23 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useRef } from "react";
-import { motion, useTransform, useSpring, useMotionValue } from "framer-motion";
+import React, { useMemo } from "react";
+import { motion } from "framer-motion";
 import styles from "./scroll-morph-hero.module.css";
-
-// --- Types ---
-export type AnimationPhase = "scatter" | "line" | "circle" | "bottom-strip";
-
-interface FlipCardProps {
-    src: string;
-    index: number;
-    total: number;
-    phase: AnimationPhase;
-    target: { x: number; y: number; rotation: number; scale: number; opacity: number };
-}
 
 // --- FlipCard Component ---
 const IMG_WIDTH = 60;
 const IMG_HEIGHT = 85;
 
-function FlipCard({
-    src,
-    index,
-    total,
-    phase,
-    target,
-}: FlipCardProps) {
+interface FlipCardProps {
+    src: string;
+    index: number;
+    target: { x: number; y: number; rotation: number; scale: number; opacity: number };
+}
+
+function FlipCard({ src, index, target }: FlipCardProps) {
     return (
         <motion.div
+            // Use directly mapped values for smooth, tied-to-scroll animation
             animate={{
                 x: target.x,
                 y: target.y,
@@ -36,9 +26,8 @@ function FlipCard({
                 opacity: target.opacity,
             }}
             transition={{
-                type: "spring",
-                stiffness: 40,
-                damping: 15,
+                // Quick spring for responsiveness to scroll scrubbing
+                type: "spring", stiffness: 60, damping: 15
             }}
             style={{
                 position: "absolute",
@@ -49,39 +38,25 @@ function FlipCard({
             }}
             className={styles.flipCard}
         >
-            <motion.div
-                className={styles.flipCardInner}
-                style={{ transformStyle: "preserve-3d" }}
-                transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
-                whileHover={{ rotateY: 180 }}
-            >
-                {/* Front Face */}
+            <div className={styles.flipCardInner}>
                 <div className={styles.flipCardFront} style={{ backfaceVisibility: "hidden" }}>
-                    <img
-                        src={src}
-                        alt={`hero-${index}`}
-                        className={styles.flipCardImage}
-                    />
+                    <img src={src} alt={`hero-${index}`} className={styles.flipCardImage} />
                     <div className={styles.flipCardOverlay} />
                 </div>
-
-                {/* Back Face */}
                 <div className={styles.flipCardBack} style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
                     <div className={styles.flipCardBackText}>
                         <p className={styles.flipCardBackLabel}>View</p>
                         <p className={styles.flipCardBackTitle}>Details</p>
                     </div>
                 </div>
-            </motion.div>
+            </div>
         </motion.div>
     );
 }
 
 // --- Main Hero Component ---
 const TOTAL_IMAGES = 20;
-const MAX_SCROLL = 3000;
 
-// Unsplash Images
 const IMAGES = [
     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=80",
     "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=300&q=80",
@@ -106,172 +81,62 @@ const IMAGES = [
 ];
 
 const lerp = (start: number, end: number, t: number) => start * (1 - t) + end * t;
+const invLerp = (start: number, end: number, value: number) => Math.min(Math.max((value - start) / (end - start), 0), 1);
 
-export default function ScrollMorphHero() {
-    const [introPhase, setIntroPhase] = useState<AnimationPhase>("scatter");
-    const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-    const containerRef = useRef<HTMLDivElement>(null);
+interface ScrollMorphHeroProps {
+    scrollProgress?: number; // 0 to 1
+}
 
-    // --- Container Size ---
-    useEffect(() => {
-        if (!containerRef.current) return;
+export default function ScrollMorphHero({ scrollProgress = 0 }: ScrollMorphHeroProps) {
+    // TIMELINE CONFIGURATION
+    // 0.00 -> 0.15: Scatter -> Circle
+    // 0.15 -> 0.40: Circle -> Arc
+    // 0.40 -> 1.00: Rotate Arc
 
-        const handleResize = (entries: ResizeObserverEntry[]) => {
-            for (const entry of entries) {
-                setContainerSize({
-                    width: entry.contentRect.width,
-                    height: entry.contentRect.height,
-                });
-            }
-        };
+    // 1. Calculate Progress for each phase
+    const scatterToCircleProgress = invLerp(0, 0.15, scrollProgress);
+    const circleToArcProgress = invLerp(0.15, 0.40, scrollProgress);
+    const rotationProgress = invLerp(0.40, 1.00, scrollProgress);
 
-        const observer = new ResizeObserver(handleResize);
-        observer.observe(containerRef.current);
-
-        setContainerSize({
-            width: containerRef.current.offsetWidth,
-            height: containerRef.current.offsetHeight,
-        });
-
-        return () => observer.disconnect();
-    }, []);
-
-    // --- Virtual Scroll Logic ---
-    const virtualScroll = useMotionValue(0);
-    const scrollRef = useRef(0);
-
-    useEffect(() => {
-        const container = containerRef.current;
-        if (!container) return;
-
-        const handleWheel = (e: WheelEvent) => {
-            e.preventDefault();
-            const newScroll = Math.min(Math.max(scrollRef.current + e.deltaY, 0), MAX_SCROLL);
-            scrollRef.current = newScroll;
-            virtualScroll.set(newScroll);
-        };
-
-        let touchStartY = 0;
-        const handleTouchStart = (e: TouchEvent) => {
-            touchStartY = e.touches[0].clientY;
-        };
-        const handleTouchMove = (e: TouchEvent) => {
-            const touchY = e.touches[0].clientY;
-            const deltaY = touchStartY - touchY;
-            touchStartY = touchY;
-
-            const newScroll = Math.min(Math.max(scrollRef.current + deltaY, 0), MAX_SCROLL);
-            scrollRef.current = newScroll;
-            virtualScroll.set(newScroll);
-        };
-
-        container.addEventListener("wheel", handleWheel, { passive: false });
-        container.addEventListener("touchstart", handleTouchStart, { passive: false });
-        container.addEventListener("touchmove", handleTouchMove, { passive: false });
-
-        return () => {
-            container.removeEventListener("wheel", handleWheel);
-            container.removeEventListener("touchstart", handleTouchStart);
-            container.removeEventListener("touchmove", handleTouchMove);
-        };
-    }, [virtualScroll]);
-
-    // Morph Progress
-    const morphProgress = useTransform(virtualScroll, [0, 600], [0, 1]);
-    const smoothMorph = useSpring(morphProgress, { stiffness: 40, damping: 20 });
-
-    // Scroll Rotation
-    const scrollRotate = useTransform(virtualScroll, [600, 3000], [0, 360]);
-    const smoothScrollRotate = useSpring(scrollRotate, { stiffness: 40, damping: 20 });
-
-    // Mouse Parallax
-    const mouseX = useMotionValue(0);
-    const smoothMouseX = useSpring(mouseX, { stiffness: 30, damping: 20 });
-
-    useEffect(() => {
-        const container = containerRef.current;
-        if (!container) return;
-
-        const handleMouseMove = (e: MouseEvent) => {
-            const rect = container.getBoundingClientRect();
-            const relativeX = e.clientX - rect.left;
-            const normalizedX = (relativeX / rect.width) * 2 - 1;
-            mouseX.set(normalizedX * 100);
-        };
-        container.addEventListener("mousemove", handleMouseMove);
-        return () => container.removeEventListener("mousemove", handleMouseMove);
-    }, [mouseX]);
-
-    // Intro Sequence
-    useEffect(() => {
-        const timer1 = setTimeout(() => setIntroPhase("line"), 500);
-        const timer2 = setTimeout(() => setIntroPhase("circle"), 2500);
-        return () => { clearTimeout(timer1); clearTimeout(timer2); };
-    }, []);
-
-    // Random Scatter Positions
+    // 2. Pre-calculate Positions
+    // Scatter Positions (Memoized)
     const scatterPositions = useMemo(() => {
         return IMAGES.map(() => ({
             x: (Math.random() - 0.5) * 1500,
             y: (Math.random() - 0.5) * 1000,
             rotation: (Math.random() - 0.5) * 180,
             scale: 0.6,
-            opacity: 0,
         }));
     }, []);
 
-    // State values
-    const [morphValue, setMorphValue] = useState(0);
-    const [rotateValue, setRotateValue] = useState(0);
-    const [parallaxValue, setParallaxValue] = useState(0);
+    // Derived Values for UI
+    const introOpacity = 1 - circleToArcProgress * 2; // Fade out as we morph to arc
+    const arcOpacity = Math.max(0, (circleToArcProgress - 0.6) / 0.4); // Fade in near end of morph
 
-    useEffect(() => {
-        const unsubscribeMorph = smoothMorph.on("change", setMorphValue);
-        const unsubscribeRotate = smoothScrollRotate.on("change", setRotateValue);
-        const unsubscribeParallax = smoothMouseX.on("change", setParallaxValue);
-        return () => {
-            unsubscribeMorph();
-            unsubscribeRotate();
-            unsubscribeParallax();
-        };
-    }, [smoothMorph, smoothScrollRotate, smoothMouseX]);
-
-    // Content Opacity
-    const contentOpacity = useTransform(smoothMorph, [0.8, 1], [0, 1]);
-    const contentY = useTransform(smoothMorph, [0.8, 1], [20, 0]);
-
+    // Main Render Loop
     return (
-        <div ref={containerRef} className={styles.container}>
+        <div className={styles.container}>
             <div className={styles.innerWrapper}>
 
                 {/* Intro Text */}
-                <div className={styles.introContainer}>
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                        animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 1 - morphValue * 2, y: 0, filter: "blur(0px)" } : { opacity: 0, filter: "blur(10px)" }}
-                        transition={{ duration: 1 }}
-                        className={styles.introHeadline}
-                    >
-                        The future is built on AI.
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 0.5 - morphValue } : { opacity: 0 }}
-                        transition={{ duration: 1, delay: 0.2 }}
-                        className={styles.introSubtitle}
-                    >
-                        SCROLL TO EXPLORE
-                    </motion.p>
-                </div>
+                <motion.div
+                    className={styles.introContainer}
+                    style={{
+                        opacity: Math.max(0, introOpacity),
+                        transform: `translateY(${circleToArcProgress * -50}px)`,
+                        filter: `blur(${Math.max(0, (1 - introOpacity) * 5)}px)`
+                    }}
+                >
+                    <h1 className={styles.introHeadline}>The future is built on AI.</h1>
+                    <p className={styles.introSubtitle}>SCROLL TO EXPLORE</p>
+                </motion.div>
 
                 {/* Arc Content */}
                 <motion.div
-                    style={{ opacity: contentOpacity, y: contentY }}
+                    style={{ opacity: arcOpacity, y: (1 - arcOpacity) * 20 }}
                     className={styles.arcContent}
                 >
-                    <h2 className={styles.arcHeadline}>
-                        Explore Our Vision
-                    </h2>
+                    <h2 className={styles.arcHeadline}>Explore Our Vision</h2>
                     <p className={styles.arcDescription}>
                         Discover a world where technology meets creativity.
                         Scroll through our curated collection of innovations designed to shape the future.
@@ -281,58 +146,51 @@ export default function ScrollMorphHero() {
                 {/* Cards */}
                 <div className={styles.cardsContainer}>
                     {IMAGES.slice(0, TOTAL_IMAGES).map((src, i) => {
-                        let target = { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1 };
+                        // --- 1. Circle Position ---
+                        const circleRadius = 350;
+                        const circleAngle = (i / TOTAL_IMAGES) * 360;
+                        const circleRad = (circleAngle * Math.PI) / 180;
+                        const circleItem = {
+                            x: Math.cos(circleRad) * circleRadius,
+                            y: Math.sin(circleRad) * circleRadius,
+                            rotation: circleAngle + 90,
+                            scale: 1,
+                        };
 
-                        if (introPhase === "scatter") {
-                            target = scatterPositions[i];
-                        } else if (introPhase === "line") {
-                            const lineSpacing = 70;
-                            const lineTotalWidth = TOTAL_IMAGES * lineSpacing;
-                            const lineX = i * lineSpacing - lineTotalWidth / 2;
-                            target = { x: lineX, y: 0, rotation: 0, scale: 1, opacity: 1 };
-                        } else {
-                            const isMobile = containerSize.width < 768;
-                            const minDimension = Math.min(containerSize.width, containerSize.height);
+                        // --- 2. Arc Position ---
+                        // Dynamic Arc Rotation based on scroll
+                        const spreadAngle = 130;
+                        const startAngle = -90 - (spreadAngle / 2);
+                        const step = spreadAngle / (TOTAL_IMAGES - 1);
+                        const maxRotation = spreadAngle * 0.8;
+                        const currentRotationOffset = -rotationProgress * maxRotation;
 
-                            const circleRadius = Math.min(minDimension * 0.35, 350);
-                            const circleAngle = (i / TOTAL_IMAGES) * 360;
-                            const circleRad = (circleAngle * Math.PI) / 180;
-                            const circlePos = {
-                                x: Math.cos(circleRad) * circleRadius,
-                                y: Math.sin(circleRad) * circleRadius,
-                                rotation: circleAngle + 90,
-                            };
+                        const currentArcAngle = startAngle + (i * step) + currentRotationOffset;
+                        const arcRad = (currentArcAngle * Math.PI) / 180;
+                        const arcRadius = 1100; // Base 1000 * 1.1
+                        const arcCenterY = 200 + arcRadius;
 
-                            const baseRadius = Math.min(containerSize.width, containerSize.height * 1.5);
-                            const arcRadius = baseRadius * (isMobile ? 1.4 : 1.1);
-                            const arcApexY = containerSize.height * (isMobile ? 0.35 : 0.25);
-                            const arcCenterY = arcApexY + arcRadius;
+                        const arcItem = {
+                            x: Math.cos(arcRad) * arcRadius,
+                            y: Math.sin(arcRad) * arcRadius + arcCenterY,
+                            rotation: currentArcAngle + 90,
+                            scale: 1.5,
+                        };
 
-                            const spreadAngle = isMobile ? 100 : 130;
-                            const startAngle = -90 - (spreadAngle / 2);
-                            const step = spreadAngle / (TOTAL_IMAGES - 1);
+                        // --- INTERPOLATION ---
+                        // Phase 1: Scatter -> Circle
+                        let currentX = lerp(scatterPositions[i].x, circleItem.x, scatterToCircleProgress);
+                        let currentY = lerp(scatterPositions[i].y, circleItem.y, scatterToCircleProgress);
+                        let currentRot = lerp(scatterPositions[i].rotation, circleItem.rotation, scatterToCircleProgress);
+                        let currentScale = lerp(scatterPositions[i].scale, circleItem.scale, scatterToCircleProgress);
 
-                            const scrollProgress = Math.min(Math.max(rotateValue / 360, 0), 1);
-                            const maxRotation = spreadAngle * 0.8;
-                            const boundedRotation = -scrollProgress * maxRotation;
-
-                            const currentArcAngle = startAngle + (i * step) + boundedRotation;
-                            const arcRad = (currentArcAngle * Math.PI) / 180;
-
-                            const arcPos = {
-                                x: Math.cos(arcRad) * arcRadius + parallaxValue,
-                                y: Math.sin(arcRad) * arcRadius + arcCenterY,
-                                rotation: currentArcAngle + 90,
-                                scale: isMobile ? 1.4 : 1.8,
-                            };
-
-                            target = {
-                                x: lerp(circlePos.x, arcPos.x, morphValue),
-                                y: lerp(circlePos.y, arcPos.y, morphValue),
-                                rotation: lerp(circlePos.rotation, arcPos.rotation, morphValue),
-                                scale: lerp(1, arcPos.scale, morphValue),
-                                opacity: 1,
-                            };
+                        // Phase 2: Circle -> Arc
+                        // If we are in phase 2, proceed from the 'Circle' state (which is end of Phase 1) to 'Arc'
+                        if (circleToArcProgress > 0) {
+                            currentX = lerp(circleItem.x, arcItem.x, circleToArcProgress);
+                            currentY = lerp(circleItem.y, arcItem.y, circleToArcProgress);
+                            currentRot = lerp(circleItem.rotation, arcItem.rotation, circleToArcProgress);
+                            currentScale = lerp(circleItem.scale, arcItem.scale, circleToArcProgress);
                         }
 
                         return (
@@ -340,9 +198,13 @@ export default function ScrollMorphHero() {
                                 key={i}
                                 src={src}
                                 index={i}
-                                total={TOTAL_IMAGES}
-                                phase={introPhase}
-                                target={target}
+                                target={{
+                                    x: currentX,
+                                    y: currentY,
+                                    rotation: currentRot,
+                                    scale: currentScale,
+                                    opacity: 1
+                                }}
                             />
                         );
                     })}

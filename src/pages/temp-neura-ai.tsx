@@ -16,7 +16,8 @@ import NeuraDifferentSection from '@/components/neura/NeuraDifferentSection';
 import NeuraEfficiencySection from '@/components/neura/NeuraEfficiencySection';
 import NeuraCapabilitiesSection from '@/components/neura/NeuraCapabilitiesSection';
 import NeuraLivingSystemsSection from '@/components/neura/NeuraLivingSystemsSection';
-import NeuraScrollMorphSection from '@/components/neura/NeuraScrollMorphSection';
+import NeuraGeminiEffectSection from '@/components/neura/NeuraGeminiEffectSection';
+
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -167,7 +168,7 @@ export default function TempNeuraAI() {
                 <NeuraEfficiencySection />
                 <NeuraCapabilitiesSection />
                 <NeuraLivingSystemsSection />
-                <NeuraScrollMorphSection />
+                <NeuraGeminiEffectSection />
 
             </div>
         </Layout>
