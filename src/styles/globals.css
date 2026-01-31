@@ -1835,7 +1835,7 @@ footer p {
   left: 40px;
   right: 40px;
   z-index: 1000;
-  padding: 20px 0;
+  padding: 12px 0;
   /* Less horizontal padding = items closer to edges */
   border-radius: 60px;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
@@ -1886,7 +1886,7 @@ footer p {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  padding: 16px 30px;
+  padding: 10px 24px;
 }
 
 /* Container - HORIZONTAL LAYOUT */
@@ -1914,7 +1914,7 @@ footer p {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 40px;
+  gap: 28px;
   /* Spacing between nav items */
   position: absolute;
   left: 50%;
@@ -1924,15 +1924,15 @@ footer p {
 .smart-navbar .smart-navbar-link {
   display: inline-flex !important;
   align-items: center;
-  gap: 8px;
-  font-size: 1.05rem;
+  gap: 6px;
+  font-size: 0.85rem;
   font-weight: 500;
   color: #1a1a5e;
   text-decoration: none;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   white-space: nowrap;
   letter-spacing: 0.01em;
-  padding: 10px 24px;
+  padding: 6px 14px;
   border-radius: 100px;
   border: 1px solid transparent;
   position: relative;
@@ -1997,8 +1997,8 @@ footer p {
 
 .smart-navbar .smart-navbar-link .link-dot {
   display: inline-block;
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   background: #1a1a5e;
   border-radius: 50%;
   flex-shrink: 0;
@@ -2023,12 +2023,12 @@ footer p {
 .smart-navbar .smart-navbar-contact {
   display: inline-flex !important;
   align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  /* Slightly increased padding */
+  gap: 6px;
+  padding: 8px 18px;
+  /* Compact padding */
   border: 1.5px solid #1a1a5e;
   border-radius: 50px;
-  font-size: 1.15rem;
+  font-size: 0.85rem;
   /* Match nav links */
   font-weight: 600;
   /* Match nav links */
@@ -2046,8 +2046,8 @@ footer p {
 }
 
 .smart-navbar .smart-navbar-contact .contact-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   background: #3b82f6;
   /* Blue like reference */
   border-radius: 50%;

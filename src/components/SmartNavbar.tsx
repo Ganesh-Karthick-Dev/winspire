@@ -116,8 +116,8 @@ export default function SmartNavbar() {
                     <Link href="/" className="smart-navbar-logo">
                         <div
                             style={{
-                                width: '170px',
-                                height: '45px',
+                                width: '140px',
+                                height: '36px',
                                 backgroundColor: '#1a1a5e',
                                 maskImage: 'url("/images/Logo-White.svg")',
                                 maskSize: 'contain',
