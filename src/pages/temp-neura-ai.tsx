@@ -103,32 +103,22 @@ export default function TempNeuraAI() {
         >
             <div className="temp-neura-page-wrapper">
 
-                {/* 3D Model - Fixed layer covering entire page */}
-                {!is3DDisabled.current && (
-                    <div className="temp-neura-model-layer" style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        zIndex: 15,
-                        pointerEvents: 'none'
-                    }}>
-                        <GLTFViewer
-                            manualTransform={transform}
-                            rotateSpeed={rotateSpeed}
-                            enableWobble={enableWobble}
-                            className="w-full h-full"
-                        />
-                    </div>
-                )}
-
                 {/* Scroll Group: Hero + Second Section. 
                     Hero is sticky relative to THIS container. 
                     When this container scrolls away, Hero goes with it. */}
                 <div className="temp-neura-hero-scroll-group">
                     <div ref={heroRef} className="temp-neura-hero-viewport">
                         <div className="temp-neura-hero-bg" aria-hidden="true" />
+                        {!is3DDisabled.current && (
+                            <div className="temp-neura-model-layer">
+                                <GLTFViewer
+                                    manualTransform={transform}
+                                    rotateSpeed={rotateSpeed}
+                                    enableWobble={enableWobble}
+                                    className="w-full h-full"
+                                />
+                            </div>
+                        )}
 
                         <div className="temp-neura-hero-layer">
                             <NeuraHeroSection />

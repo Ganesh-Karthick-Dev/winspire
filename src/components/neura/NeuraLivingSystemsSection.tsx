@@ -1,13 +1,40 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import styles from './NeuraLivingSystemsSection.module.css';
 
+// Dynamically import GLTFViewer (no SSR)
+const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
+    ssr: false,
+    loading: () => null,
+});
+
 const NeuraLivingSystemsSection = () => {
+    const sectionRef = useRef<HTMLElement>(null);
+
+    // Fixed transform for the model - positioned on the right side, larger size
+    const modelTransform = {
+        position: { x: 0.5, y: 0, z: 0 },
+        rotation: { x: 15, y: -20, z: -10 },
+        scale: 8
+    };
+
     return (
         <section
             id="living-systems"
+            ref={sectionRef}
             className={styles.section}
             aria-label="From Static Workflows to Living Systems"
         >
+            {/* 3D Model Layer - positioned on the right with slow spin */}
+            <div className={styles.modelLayer}>
+                <GLTFViewer
+                    manualTransform={modelTransform}
+                    rotateSpeed={0.003}
+                    enableWobble={true}
+                    className="w-full h-full"
+                />
+            </div>
+
             {/* Left Content */}
             <div className={styles.content}>
                 <h2 className={styles.headline}>
@@ -33,7 +60,7 @@ const NeuraLivingSystemsSection = () => {
                 </div>
             </div>
 
-            {/* Right side is empty - 3D model will be positioned here via keyframes */}
+            {/* Right side space for 3D model */}
             <div className={styles.modelSpace} aria-hidden="true" />
         </section>
     );
