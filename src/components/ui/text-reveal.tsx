@@ -28,18 +28,18 @@ const TextRevealByWord: FC<TextRevealByWordProps> = ({
     let globalWordIndex = 0;
 
     return (
-        <div ref={targetRef} className={cn("relative z-0 min-h-[200vh]", className)}>
+        <div ref={targetRef} className={cn("relative z-0 min-h-[100vh]", className)}>
             <div
                 className={
-                    "sticky top-0 mx-auto flex h-[50vh] max-w-4xl items-center bg-transparent px-[1rem] py-[5rem]"
+                    "sticky top-0 mx-auto flex h-[50vh] max-w-5xl items-center bg-transparent px-[1rem] py-[5rem]"
                 }
             >
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-12 w-full items-center">
                     {paragraphs.map((paragraph, pIndex) => (
                         <p
                             key={pIndex}
                             className={
-                                "flex flex-wrap text-2xl font-bold text-white/20 md:text-3xl lg:text-4xl xl:text-5xl"
+                                "flex flex-wrap justify-center text-3xl font-bold text-white/20 md:text-4xl lg:text-5xl leading-tight text-center"
                             }
                         >
                             {paragraph.split(" ").map((word, i) => {
@@ -70,7 +70,7 @@ interface WordProps {
 const Word: FC<WordProps> = ({ children, progress, range }) => {
     const opacity = useTransform(progress, range, [0, 1]);
     return (
-        <span className="xl:lg-3 relative mx-1 lg:mx-2.5">
+        <span className="relative mx-[0.2em]">
             <span className={"absolute opacity-30"}>{children}</span>
             <motion.span
                 style={{ opacity: opacity }}

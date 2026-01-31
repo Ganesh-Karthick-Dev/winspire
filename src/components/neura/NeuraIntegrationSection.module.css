@@ -1,10 +1,9 @@
 .section {
     position: relative;
     width: 100%;
-    width: 100%;
     background-color: #000;
     color: #fff;
-    padding: 4rem 2rem;
+    padding: 8rem 2rem;
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -41,10 +40,24 @@
     flex-direction: column;
     flex: 1;
     /* Take remaining space */
+    gap: 3rem;
     width: 100%;
     position: relative;
     /* Allow TextReveal to take space */
     min-height: 50vh;
+}
+
+.paragraph {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s ease;
+}
+
+.paragraph:hover {
+    color: #fff;
 }
 
 @media (min-width: 1024px) {

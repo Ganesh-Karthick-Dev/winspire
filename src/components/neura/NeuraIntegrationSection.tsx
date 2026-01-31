@@ -47,9 +47,12 @@ export default function NeuraIntegrationSection() {
                         How Neura Fits Into the Winspire Model
                     </h2>
                 </div>
-                {/* Replace list of paragraphs with Text Reveal */}
                 <div className={styles.content}>
-                    <TextRevealByWord text={content} />
+                    {content.map((text, i) => (
+                        <p key={i} className={styles.paragraph}>
+                            {text}
+                        </p>
+                    ))}
                 </div>
             </div>
         </section>
