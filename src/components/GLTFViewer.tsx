@@ -125,6 +125,11 @@ export default function GLTFViewer({
         // Continuous smooth rotation - Z-axis (Wheel spin)
         continuousRotation.current += currentSpeed;
 
+        // Smooth lerp mouse position for natural movement
+        const lerpFactor = 0.08;
+        currentMouseX.current += (mouseX.current - currentMouseX.current) * lerpFactor;
+        currentMouseY.current += (mouseY.current - currentMouseY.current) * lerpFactor;
+
         // Wobble/bobbing effect - Floating sensation
         // Enable wobble if prop is true (default)
         const wobbleAmount = enableWobbleRef.current ? 0.05 : 0;
@@ -144,8 +149,19 @@ export default function GLTFViewer({
             const radY = toRadians(currentTransform.rotation.y);
             const radZ = toRadians(currentTransform.rotation.z);
 
-            model.rotation.x = radX + wobbleX;
-            model.rotation.y = radY + wobbleY;
+            // Mouse-reactive rotation when model is on the right side (x > 0.3)
+            // This creates an interactive feel for the Living Systems section
+            let mouseRotX = 0;
+            let mouseRotY = 0;
+            if (currentTransform.position.x > 0.3) {
+                // Mouse influence: subtle rotation based on cursor position
+                const mouseInfluence = 0.15; // radians, ~8.5 degrees max
+                mouseRotX = currentMouseY.current * mouseInfluence;
+                mouseRotY = currentMouseX.current * mouseInfluence;
+            }
+
+            model.rotation.x = radX + wobbleX + mouseRotX;
+            model.rotation.y = radY + wobbleY + mouseRotY;
             model.rotation.z = radZ - continuousRotation.current;
 
             // Update Position & Scale

@@ -15,6 +15,7 @@ import ProblemCardsSection from '@/components/neura/ProblemCardsSection';
 import NeuraDifferentSection from '@/components/neura/NeuraDifferentSection';
 import NeuraEfficiencySection from '@/components/neura/NeuraEfficiencySection';
 import NeuraCapabilitiesSection from '@/components/neura/NeuraCapabilitiesSection';
+import NeuraLivingSystemsSection from '@/components/neura/NeuraLivingSystemsSection';
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -22,8 +23,16 @@ import type { ScrollKeyframe } from '@/lib/scrollAnimations';
 
 /** Hero: model centered, tilted (rotation transform), no constant spin (rotateSpeed=0). After hero: usual footer. */
 const tempNeuraHeroKeyframes: ScrollKeyframe[] = [
+    // Hero section - model centered
     { scrollProgress: 0, label: 'Hero Center', transform: { position: { x: 0, y: -0.08, z: 0 }, rotation: { x: 22.177, y: -27.456, z: -23.23 }, scale: 7.5 } },
-    { scrollProgress: 0.75, label: 'Hold', transform: { position: { x: 0, y: -0.08, z: 0 }, rotation: { x: 22.177, y: -37.456, z: -23.23 }, scale: 7.5 } },
+    // Hold position through middle sections
+    { scrollProgress: 0.50, label: 'Hold Mid', transform: { position: { x: 0, y: -0.08, z: 0 }, rotation: { x: 22.177, y: -35, z: -23.23 }, scale: 7.5 } },
+    { scrollProgress: 0.70, label: 'Hold', transform: { position: { x: 0, y: -0.08, z: 0 }, rotation: { x: 22.177, y: -42, z: -23.23 }, scale: 7.5 } },
+    // Living Systems section (near end) - model moves to right side
+    { scrollProgress: 0.80, label: 'Living Systems Trans', transform: { position: { x: 0.35, y: -0.05, z: 0 }, rotation: { x: 18, y: -30, z: -18 }, scale: 6 } },
+    { scrollProgress: 0.88, label: 'Living Systems', transform: { position: { x: 0.6, y: 0, z: 0 }, rotation: { x: 12, y: -15, z: -12 }, scale: 5 } },
+    { scrollProgress: 0.94, label: 'Living Systems Hold', transform: { position: { x: 0.6, y: 0, z: 0 }, rotation: { x: 12, y: -8, z: -12 }, scale: 5 } },
+    // Footer transition
     { scrollProgress: 1.0, label: 'Footer', transform: { position: { x: 0, y: -0.34, z: 0.6 }, rotation: { x: -82.177, y: 180, z: 8.23 }, scale: 15 } },
 ];
 
@@ -94,22 +103,32 @@ export default function TempNeuraAI() {
         >
             <div className="temp-neura-page-wrapper">
 
+                {/* 3D Model - Fixed layer covering entire page */}
+                {!is3DDisabled.current && (
+                    <div className="temp-neura-model-layer" style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        zIndex: 15,
+                        pointerEvents: 'none'
+                    }}>
+                        <GLTFViewer
+                            manualTransform={transform}
+                            rotateSpeed={rotateSpeed}
+                            enableWobble={enableWobble}
+                            className="w-full h-full"
+                        />
+                    </div>
+                )}
+
                 {/* Scroll Group: Hero + Second Section. 
                     Hero is sticky relative to THIS container. 
                     When this container scrolls away, Hero goes with it. */}
                 <div className="temp-neura-hero-scroll-group">
                     <div ref={heroRef} className="temp-neura-hero-viewport">
                         <div className="temp-neura-hero-bg" aria-hidden="true" />
-                        {!is3DDisabled.current && (
-                            <div className="temp-neura-model-layer">
-                                <GLTFViewer
-                                    manualTransform={transform}
-                                    rotateSpeed={rotateSpeed}
-                                    enableWobble={enableWobble}
-                                    className="w-full h-full"
-                                />
-                            </div>
-                        )}
 
                         <div className="temp-neura-hero-layer">
                             <NeuraHeroSection />
@@ -156,6 +175,7 @@ export default function TempNeuraAI() {
                 <NeuraDifferentSection />
                 <NeuraEfficiencySection />
                 <NeuraCapabilitiesSection />
+                <NeuraLivingSystemsSection />
 
             </div>
         </Layout>
