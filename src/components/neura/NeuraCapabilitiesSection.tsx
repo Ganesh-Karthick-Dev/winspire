@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styles from './NeuraCapabilitiesSection.module.css';
 import {
     FaShieldAlt,
@@ -76,102 +76,22 @@ const capabilities = [
     }
 ];
 
-const NeuraCapabilitiesSection: React.FC = () => {
-    const sectionRef = useRef<HTMLElement>(null);
-    const horizontalTrackRef = useRef<HTMLDivElement>(null);
+type Props = {
+    trackRef?: React.RefObject<HTMLDivElement | null>;
+};
 
-    useEffect(() => {
-        const init = async () => {
-            const { gsap } = await import('gsap');
-            const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-            gsap.registerPlugin(ScrollTrigger);
-
-            const section = sectionRef.current;
-            const track = horizontalTrackRef.current;
-
-            if (!section || !track) return;
-
-            const ctx = gsap.context(() => {
-                const trackWidth = track.scrollWidth;
-                const windowWidth = window.innerWidth;
-                const xMove = -(trackWidth - windowWidth + (windowWidth * 0.15));
-
-                const horizontalTween = gsap.to(track, {
-                    x: xMove,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top top",
-                        end: () => `+=${trackWidth}`,
-                        pin: true,
-                        scrub: 1,
-                        invalidateOnRefresh: true,
-                    }
-                });
-
-                // Animate bars as they come into view
-                gsap.utils.toArray<HTMLElement>(`.${styles.barBase}`).forEach((bar) => {
-                    gsap.fromTo(bar,
-                        { scaleX: 0 },
-                        {
-                            scaleX: 1,
-                            duration: 1.2,
-                            ease: "power3.out",
-                            transformOrigin: "left center",
-                            scrollTrigger: {
-                                trigger: bar,
-                                containerAnimation: horizontalTween, // Correctly reference the tween
-                                start: "left 85%",
-                                toggleActions: "play none none none"
-                            }
-                        }
-                    );
-                });
-
-                gsap.utils.toArray<HTMLElement>(`.${styles.barHighlight}`).forEach((bar) => {
-                    gsap.fromTo(bar,
-                        { scaleX: 0 },
-                        {
-                            scaleX: 1,
-                            duration: 1.2,
-                            delay: 0.2,
-                            ease: "power3.out",
-                            transformOrigin: "left center",
-                            scrollTrigger: {
-                                trigger: bar,
-                                containerAnimation: horizontalTween, // Correctly reference the tween
-                                start: "left 85%",
-                                toggleActions: "play none none none"
-                            }
-                        }
-                    );
-                });
-
-                // Intensive layout refresh to handle cascading pins above
-                setTimeout(() => {
-                    ScrollTrigger.refresh();
-                }, 500);
-            }, section);
-
-            return () => ctx.revert();
-        };
-
-        init();
-    }, []);
-
+const NeuraCapabilitiesSection: React.FC<Props> = ({ trackRef }) => {
     return (
-        <section ref={sectionRef} className={styles.section}>
-            <div className={styles.horizontalContainer}>
-                <div ref={horizontalTrackRef} className={styles.horizontalTrack}>
+        <section className={styles.section}>
+            <div className={styles.viewport}>
+                <div ref={trackRef} className={styles.horizontalTrack}>
                     {capabilities.map((cap) => (
                         <div key={cap.id} className={styles.card}>
                             <div className={styles.cardGlow} />
-
                             <div className={styles.cardHeader}>
                                 <h3 className={styles.cardTitle}>{cap.title}</h3>
                                 <p className={styles.cardDescription}>{cap.description}</p>
                             </div>
-
                             <div className={styles.outcomesWrapper}>
                                 <div className={styles.labelWrapper}>
                                     <span className={styles.cardLabel}>Impact:</span>
@@ -186,10 +106,7 @@ const NeuraCapabilitiesSection: React.FC = () => {
                                     ))}
                                 </div>
                             </div>
-
-                            <div className={styles.cardTakeaway}>
-                                {cap.takeaway}
-                            </div>
+                            <div className={styles.cardTakeaway}>{cap.takeaway}</div>
                         </div>
                     ))}
                 </div>

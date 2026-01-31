@@ -1,33 +1,37 @@
+/* Simple: section a bit taller, viewport clips, track is translated by GSAP (pin on wrapper in page). */
 .section {
-    position: relative;
     width: 100%;
     min-height: 100vh;
+    height: 108vh;
     background: transparent;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
-.horizontalContainer {
+.viewport {
     position: relative;
     flex: 1;
     display: flex;
     align-items: center;
-    padding: 0 8rem;
     width: 100%;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .horizontalTrack {
     display: flex;
-    gap: 4rem;
-    padding-right: 30vw;
-    will-change: transform;
+    gap: 2rem;
+    padding: 0 4rem;
+    min-width: min-content;
+    flex-shrink: 0;
 }
 
 .card {
     position: relative;
-    flex: 0 0 clamp(700px, 50vw, 1000px);
+    flex: 0 0 min(900px, 85vw);
     height: 75vh;
-    /* Increased height for better presence */
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
@@ -87,7 +91,6 @@
 .cardDescription {
     font-family: 'Inter', sans-serif;
     font-size: 0.85rem;
-    /* Reduced to fit better */
     color: rgba(255, 255, 255, 0.6);
     line-height: 1.6;
 }
@@ -121,7 +124,6 @@
     left: 0;
     height: 100%;
     background: rgba(255, 255, 255, 0.08);
-    /* Subtle base */
     z-index: 0;
     border-radius: 6px 0 0 6px;
     transform-origin: left center;
@@ -132,7 +134,6 @@
     top: 0;
     height: 100%;
     background: rgba(255, 255, 255, 0.18);
-    /* Brighter highlight */
     z-index: 0;
     transform-origin: left center;
 }
@@ -158,24 +159,15 @@
     line-height: 1.5;
 }
 
-@media (max-width: 1200px) {
-
-    .intro,
-    .horizontalContainer {
-        padding: 0 4rem;
-    }
-}
-
 @media (max-width: 768px) {
+    .horizontalTrack {
+        padding: 0 1.5rem;
+    }
+
     .card {
         flex: 0 0 85vw;
         height: auto;
         min-height: 50vh;
         padding: 2.5rem;
-    }
-
-    .intro,
-    .horizontalContainer {
-        padding: 0 1.5rem;
     }
 }

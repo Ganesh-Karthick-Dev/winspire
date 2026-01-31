@@ -51,13 +51,16 @@ export async function getStaticProps() {
 import NeuraCTASection from '@/components/neura/NeuraCTASection';
 import NeuraBentoSection from '@/components/neura/NeuraBentoSection';
 import NeuraIntegrationSection from '@/components/neura/NeuraIntegrationSection';
+import NeuraClosingPerspectiveSection from '@/components/neura/NeuraClosingPerspectiveSection';
 
 export default function TempNeuraAI() {
     const is3DDisabled = useRef(false);
-    const heroRef = useRef<HTMLDivElement>(null); // Defined heroRef
+    const heroRef = useRef<HTMLDivElement>(null);
     const secondSectionRef = useRef<HTMLElement>(null);
     const whiteSectionRef = useRef<HTMLDivElement>(null);
     const secondTitleRef = useRef<HTMLHeadingElement>(null);
+    const capabilitiesWrapperRef = useRef<HTMLDivElement>(null);
+    const capabilitiesTrackRef = useRef<HTMLDivElement>(null);
     const { transform } = useScrollAnimation({
         keyframes: tempNeuraHeroKeyframes,
     });
@@ -99,6 +102,34 @@ export default function TempNeuraAI() {
             // Refresh to ensure following sections know their positions
             ScrollTrigger.refresh();
         });
+
+        return () => ctx.revert();
+    }, []);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const wrapper = capabilitiesWrapperRef.current;
+        const track = capabilitiesTrackRef.current;
+        if (!wrapper || !track) return;
+
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.set(track, { x: 0 });
+
+        const PIN_SCROLL = 2000;
+
+        const ctx = gsap.context(() => {
+            gsap.to(track, {
+                x: () => -(track.scrollWidth - wrapper.clientWidth),
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: wrapper,
+                    start: 'top top',
+                    end: `+=${PIN_SCROLL}`,
+                    pin: true,
+                    scrub: 1,
+                },
+            });
+        }, wrapper);
 
         return () => ctx.revert();
     }, []);
@@ -171,13 +202,16 @@ export default function TempNeuraAI() {
 
                 <NeuraDifferentSection />
                 <NeuraEfficiencySection />
-                <NeuraCapabilitiesSection />
+                <div ref={capabilitiesWrapperRef} className="capabilities-pin-wrapper">
+                    <NeuraCapabilitiesSection trackRef={capabilitiesTrackRef} />
+                </div>
                 <NeuraLivingSystemsSection />
                 <NeuraGeminiEffectSection />
                 <NeuraStaySecureSection />
                 <NeuraCTASection />
                 <NeuraBentoSection />
                 <NeuraIntegrationSection />
+                <NeuraClosingPerspectiveSection />
 
             </div>
         </Layout>
