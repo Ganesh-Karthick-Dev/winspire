@@ -7,52 +7,58 @@ export function FUIBentoGridDark() {
     return (
         <div className="container mx-auto flex flex-col bg-transparent p-10 pt-32 text-white">
             <h1 className="font-outfit text-3xl tracking-tight md:text-5xl font-bold mb-8">
-                Sales
+                Proven Structural Outcomes
             </h1>
-            <p className="text-2xl/8 font-medium tracking-tight bg-gradient-to-br from-white to-white/40 bg-clip-text text-transparent max-w-3xl mb-20">
-                Know more about your customers than they do.
+            <p
+                className="text-2xl/8 font-medium tracking-tight bg-gradient-to-br from-white to-white/40 bg-clip-text text-transparent max-w-3xl mb-20"
+                style={{ marginBottom: '60px' }}
+            >
+                Across Neura-enabled organizations
             </p>
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-6 lg:grid-rows-2">
+            <div
+                className="grid grid-cols-1 gap-4 lg:grid-cols-6 lg:grid-rows-2"
+                style={{ marginTop: '60px' }}
+            >
                 <BentoCard
-                    eyebrow="Insight"
-                    title="Get perfect clarity"
-                    description="PerkAI uses social engineering to build a detailed financial picture of your leads. Know their budget, compensation package, social security number, and more."
+                    eyebrow="Revenue"
+                    title="Net Collection Rate"
+                    description="Improves from approximately 75% to 95%"
                     graphic={
                         <div className="absolute inset-0 bg-[url('https://framerusercontent.com/images/ghyfFEStl6BNusZl0ZQd5r7JpM.png')] bg-cover bg-center" />
                     }
                     className="max-lg:rounded-t-[2rem] lg:col-span-3 lg:rounded-tl-[2rem]"
                 />
                 <BentoCard
-                    eyebrow="Analysis"
-                    title="Undercut your competitors"
-                    description="With our advanced data mining, you’ll know which companies your leads are talking to and exactly how much they’re being charged."
+                    eyebrow="Speed"
+                    title="AR Days"
+                    description="Reduce from 50–60 to 25–30"
                     graphic={
                         <div className="absolute inset-0 bg-[url('https://framerusercontent.com/images/7CJtT0Pu3w1vNADktNltoMFC9J4.png')] bg-cover bg-center" />
                     }
                     className="lg:col-span-3 lg:rounded-tr-[2rem]"
                 />
                 <BentoCard
-                    eyebrow="Speed"
-                    title="Built for power users"
-                    description="It’s never been faster to cold email your entire contact list using our streamlined keyboard shortcuts."
+                    eyebrow="Efficiency"
+                    title="Denial Rates"
+                    description="Fall from 12–15% to below 3%"
                     graphic={
                         <div className="absolute inset-0 -top-20 -left-60 bg-[url('https://framerusercontent.com/images/gR21e8Wh6l3pU6CciDrqt8wjHM.png')] bg-cover bg-center bg-black" />
                     }
                     className="lg:col-span-2 lg:rounded-bl-[2rem]"
                 />
                 <BentoCard
-                    eyebrow="Source"
-                    title="Get the furthest reach"
-                    description="Bypass those inconvenient privacy laws to source leads from the most unexpected places."
+                    eyebrow="Accuracy"
+                    title="First-pass Resolution"
+                    description="Rises from 40–50% to 80–90%"
                     graphic={
                         <div className="absolute inset-0 bg-[url('https://framerusercontent.com/images/PTO3RQ3S65zfZRFEGZGpiOom6aQ.png')] bg-contain bg-no-repeat bg-center" />
                     }
                     className="lg:col-span-2"
                 />
                 <BentoCard
-                    eyebrow="Limitless"
-                    title="Sell globally"
-                    description="PerkAI helps you sell in locations currently under international embargo."
+                    eyebrow="Savings"
+                    title="Cost to Collect"
+                    description="Drops from 10–15% to approximately 5%"
                     graphic={
                         <div className="absolute inset-0 -top-44 -left-60 bg-[url('https://framerusercontent.com/images/h496iPSwtSnGZwpJyErl6cLWdtE.png')] bg-contain bg-no-repeat bg-center" />
                     }
