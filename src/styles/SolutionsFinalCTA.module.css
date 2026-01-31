@@ -1,0 +1,109 @@
+.section {
+    position: relative;
+    padding: 8rem 2rem 10rem;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.glowBackground {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 70%;
+    background: radial-gradient(
+        circle at center,
+        rgba(59, 130, 246, 0.12) 0%,
+        rgba(15, 23, 42, 0) 70%
+    );
+    transform: translate(-50%, -50%);
+    filter: blur(50px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.glassCard {
+    position: relative;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1.5rem;
+    padding: 4rem 3rem;
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.eyebrow {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #60a5fa;
+    margin-bottom: 1rem;
+}
+
+.heading {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #ffffff;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.02em;
+}
+
+.subText {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 680px;
+    margin: 0 auto 2.5rem auto;
+}
+
+.ctaButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #ffffff;
+    color: #0f172a;
+    padding: 1rem 2.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.2);
+}
+
+.ctaButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 30px -5px rgba(255, 255, 255, 0.3);
+    background: #f8fafc;
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 5rem 1.5rem 6rem;
+    }
+
+    .glassCard {
+        padding: 3rem 2rem;
+    }
+
+    .heading {
+        font-size: 1.75rem;
+    }
+
+    .subText {
+        font-size: 1.05rem;
+    }
+}

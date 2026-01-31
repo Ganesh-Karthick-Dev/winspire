@@ -90,8 +90,8 @@
 /* --- The Active Morphing Image --- */
 .activeImageContainer {
     position: absolute;
-    width: 400px; /* Default Card Width */
-    height: 300px; /* Default Card Height */
+    width: 500px; /* Default Card Width - Updated from 400px */
+    height: 400px; /* Default Card Height - Updated from 300px */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Start centered */
@@ -228,12 +228,12 @@
     width: 42%; 
     max-width: 550px;
     text-align: left;
-    background: rgba(253, 251, 247, 0.65); 
-    backdrop-filter: blur(25px) saturate(1.2); 
+    background: rgba(2, 6, 23, 0.7); 
+    backdrop-filter: blur(15px); 
     padding: 2rem; 
     border-radius: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     z-index: 20;
     display: flex;
     flex-direction: column;
@@ -241,21 +241,11 @@
 }
 
 /* Typography matching previous design */
-.sectionNumber {
-    display: inline-block;
-    font-family: monospace;
-    font-size: 1rem;
-    color: #38bdf8;
-    background: rgba(56, 189, 248, 0.1);
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    margin-bottom: 1.5rem;
-}
 
 .sectionTitle {
     font-size: 1.85rem; /* Reduced from 2.25rem */
     font-weight: 700;
-    color: #0f172a;
+    color: #f1f5f9;
     margin-bottom: 1rem;
     line-height: 1.2;
     perspective: 1000px; /* For 3D rotation */
@@ -268,7 +258,7 @@
 
 .sectionParagraph {
     font-size: 1.125rem;
-    color: #334155;
+    color: #cbd5e1;
     line-height: 1.7;
     margin-bottom: 2rem;
 }
@@ -445,17 +435,6 @@
 }
 
 /* Typography Overrides */
-.sectionNumber {
-    display: inline-block;
-    font-family: monospace;
-    font-size: 1rem;
-    color: #1e293b !important; /* Force Dark */
-    background: rgba(15, 23, 42, 0.1);
-    border: 1px solid rgba(15, 23, 42, 0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    margin-bottom: 1.5rem;
-}
 
 /* --- CTA Section (Shows at the end) --- */
 .ctaWrapper {
