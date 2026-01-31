@@ -13,9 +13,9 @@ const NeuraLivingSystemsSection = () => {
 
     // Fixed transform for the model - positioned on the right side, larger size
     const modelTransform = {
-        position: { x: 0.5, y: 0, z: 0 },
+        position: { x: 0.7, y: 0, z: 0 },
         rotation: { x: 15, y: -20, z: -10 },
-        scale: 8
+        scale: 10
     };
 
     return (
