@@ -50,6 +50,7 @@ export async function getStaticProps() {
 
 import NeuraCTASection from '@/components/neura/NeuraCTASection';
 import NeuraBentoSection from '@/components/neura/NeuraBentoSection';
+import NeuraIntegrationSection from '@/components/neura/NeuraIntegrationSection';
 
 export default function TempNeuraAI() {
     const is3DDisabled = useRef(false);
@@ -176,6 +177,7 @@ export default function TempNeuraAI() {
                 <NeuraStaySecureSection />
                 <NeuraCTASection />
                 <NeuraBentoSection />
+                <NeuraIntegrationSection />
 
             </div>
         </Layout>
