@@ -1,0 +1,182 @@
+/* Scroll Morph Hero Styles */
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #FAFAFA;
+    overflow: hidden;
+}
+
+.innerWrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+/* Intro Text Container */
+.introContainer {
+    position: absolute;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+    top: 25%;
+    transform: translateY(-50%);
+}
+
+.introHeadline {
+    font-family: 'Outfit', 'Inter', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #000000;
+}
+
+.introSubtitle {
+    margin-top: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* Arc Content */
+.arcContent {
+    position: absolute;
+    top: 3%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+    pointer-events: none;
+}
+
+.arcHeadline {
+    font-family: 'Outfit', 'Inter', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #000000;
+    margin-bottom: 1rem;
+}
+
+.arcDescription {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.7);
+    max-width: 32rem;
+    line-height: 1.6;
+}
+
+/* Cards Container */
+.cardsContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Flip Card */
+.flipCard {
+    cursor: pointer;
+}
+
+.flipCardInner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    transform-style: preserve-3d;
+}
+
+.flipCardFront,
+.flipCardBack {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    backface-visibility: hidden;
+}
+
+.flipCardFront {
+    background-color: #e5e7eb;
+}
+
+.flipCardBack {
+    background-color: #111827;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 1px solid #374151;
+    transform: rotateY(180deg);
+}
+
+.flipCardImage {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.flipCardOverlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.flipCard:hover .flipCardOverlay {
+    background-color: transparent;
+}
+
+.flipCardBackText {
+    text-align: center;
+}
+
+.flipCardBackLabel {
+    font-size: 0.5rem;
+    font-weight: 700;
+    color: #60a5fa;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+}
+
+.flipCardBackTitle {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .introHeadline {
+        font-size: 1.75rem;
+    }
+
+    .arcHeadline {
+        font-size: 1.5rem;
+    }
+
+    .arcDescription {
+        font-size: 0.875rem;
+    }
+}

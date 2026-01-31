@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useTransform, useSpring, useMotionValue } from "framer-motion";
+import styles from "./scroll-morph-hero.module.css";
 
 // --- Types ---
 export type AnimationPhase = "scatter" | "line" | "circle" | "bottom-strip";
@@ -46,35 +47,29 @@ function FlipCard({
                 transformStyle: "preserve-3d",
                 perspective: "1000px",
             }}
-            className="cursor-pointer group"
+            className={styles.flipCard}
         >
             <motion.div
-                className="relative h-full w-full"
+                className={styles.flipCardInner}
                 style={{ transformStyle: "preserve-3d" }}
                 transition={{ duration: 0.6, type: "spring", stiffness: 260, damping: 20 }}
                 whileHover={{ rotateY: 180 }}
             >
                 {/* Front Face */}
-                <div
-                    className="absolute inset-0 h-full w-full overflow-hidden rounded-xl shadow-lg bg-gray-200"
-                    style={{ backfaceVisibility: "hidden" }}
-                >
+                <div className={styles.flipCardFront} style={{ backfaceVisibility: "hidden" }}>
                     <img
                         src={src}
                         alt={`hero-${index}`}
-                        className="h-full w-full object-cover"
+                        className={styles.flipCardImage}
                     />
-                    <div className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-transparent" />
+                    <div className={styles.flipCardOverlay} />
                 </div>
 
                 {/* Back Face */}
-                <div
-                    className="absolute inset-0 h-full w-full overflow-hidden rounded-xl shadow-lg bg-gray-900 flex flex-col items-center justify-center p-4 border border-gray-700"
-                    style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-                >
-                    <div className="text-center">
-                        <p className="text-[8px] font-bold text-blue-400 uppercase tracking-widest mb-1">View</p>
-                        <p className="text-xs font-medium text-white">Details</p>
+                <div className={styles.flipCardBack} style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
+                    <div className={styles.flipCardBackText}>
+                        <p className={styles.flipCardBackLabel}>View</p>
+                        <p className={styles.flipCardBackTitle}>Details</p>
                     </div>
                 </div>
             </motion.div>
@@ -141,7 +136,7 @@ export default function ScrollMorphHero() {
         return () => observer.disconnect();
     }, []);
 
-    // --- Virtual Scroll Logic (wheel events on container) ---
+    // --- Virtual Scroll Logic ---
     const virtualScroll = useMotionValue(0);
     const scrollRef = useRef(0);
 
@@ -156,7 +151,6 @@ export default function ScrollMorphHero() {
             virtualScroll.set(newScroll);
         };
 
-        // Touch support
         let touchStartY = 0;
         const handleTouchStart = (e: TouchEvent) => {
             touchStartY = e.touches[0].clientY;
@@ -247,16 +241,16 @@ export default function ScrollMorphHero() {
     const contentY = useTransform(smoothMorph, [0.8, 1], [20, 0]);
 
     return (
-        <div ref={containerRef} className="relative w-full h-full bg-[#FAFAFA] overflow-hidden">
-            <div className="flex h-full w-full flex-col items-center justify-center perspective-1000">
+        <div ref={containerRef} className={styles.container}>
+            <div className={styles.innerWrapper}>
 
                 {/* Intro Text */}
-                <div className="absolute z-0 flex flex-col items-center justify-center text-center pointer-events-none top-1/2 -translate-y-1/2">
+                <div className={styles.introContainer}>
                     <motion.h1
                         initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
                         animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 1 - morphValue * 2, y: 0, filter: "blur(0px)" } : { opacity: 0, filter: "blur(10px)" }}
                         transition={{ duration: 1 }}
-                        className="text-2xl font-medium tracking-tight text-black md:text-4xl"
+                        className={styles.introHeadline}
                     >
                         The future is built on AI.
                     </motion.h1>
@@ -264,7 +258,7 @@ export default function ScrollMorphHero() {
                         initial={{ opacity: 0 }}
                         animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 0.5 - morphValue } : { opacity: 0 }}
                         transition={{ duration: 1, delay: 0.2 }}
-                        className="mt-4 text-xs font-bold tracking-[0.2em] text-black/60"
+                        className={styles.introSubtitle}
                     >
                         SCROLL TO EXPLORE
                     </motion.p>
@@ -273,19 +267,19 @@ export default function ScrollMorphHero() {
                 {/* Arc Content */}
                 <motion.div
                     style={{ opacity: contentOpacity, y: contentY }}
-                    className="absolute top-[10%] z-10 flex flex-col items-center justify-center text-center pointer-events-none px-4"
+                    className={styles.arcContent}
                 >
-                    <h2 className="text-3xl md:text-5xl font-semibold text-black tracking-tight mb-4">
+                    <h2 className={styles.arcHeadline}>
                         Explore Our Vision
                     </h2>
-                    <p className="text-sm md:text-base text-black/70 max-w-lg leading-relaxed">
-                        Discover a world where technology meets creativity. <br className="hidden md:block" />
+                    <p className={styles.arcDescription}>
+                        Discover a world where technology meets creativity.
                         Scroll through our curated collection of innovations designed to shape the future.
                     </p>
                 </motion.div>
 
                 {/* Cards */}
-                <div className="relative flex items-center justify-center w-full h-full">
+                <div className={styles.cardsContainer}>
                     {IMAGES.slice(0, TOTAL_IMAGES).map((src, i) => {
                         let target = { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1 };
 

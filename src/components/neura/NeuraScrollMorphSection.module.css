@@ -1,9 +1,12 @@
 .section {
     position: relative;
     width: 100%;
-    /* Height = viewport + scroll distance for animation */
-    height: 400vh;
+    /* Reduced height - 200vh for scroll space */
+    height: 200vh;
+    /* Changed from 200vh to fit viewport for pinning */
     background: #FAFAFA;
+    /* Top margin to separate from previous section */
+    margin-top: 80px;
 }
 
 /* Sticky container pins content to viewport while scrolling through section */
