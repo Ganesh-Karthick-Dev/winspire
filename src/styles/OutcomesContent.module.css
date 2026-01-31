@@ -1,5 +1,14 @@
 /* OutcomesContent.module.css */
 
+/* Desktop vs mobile view toggle (same pattern as OutcomesVision) */
+.desktopView {
+    display: block;
+}
+
+.mobileView {
+    display: none;
+}
+
 /* The main container provides the scroll length */
 .scrollContainer {
     width: 100%;
@@ -7,12 +16,13 @@
     z-index: 10;
     /* Height will be set dynamically or roughly sections * 100vh */
     /* Balanced height for 8 sections + CTA to end exactly when footer arrives */
-    height: 1700vh; 
+    height: 1700vh;
     overflow-x: hidden;
 }
 
 /* --- Split Intro Description Text --- */
-.introLeft, .introRight {
+.introLeft,
+.introRight {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -65,14 +75,16 @@
     top: 0;
     width: 100%;
     z-index: 20;
-    pointer-events: none; /* Let clicks pass if needed */
+    pointer-events: none;
+    /* Let clicks pass if needed */
 }
 
 .introContent {
     text-align: center;
     max-width: 900px;
     padding: 0 2rem;
-    opacity: 1; /* Will animate out */
+    opacity: 1;
+    /* Will animate out */
 }
 
 .introTitle {
@@ -90,11 +102,14 @@
 /* --- The Active Morphing Image --- */
 .activeImageContainer {
     position: absolute;
-    width: 500px; /* Default Card Width - Updated from 400px */
-    height: 400px; /* Default Card Height - Updated from 300px */
+    width: 500px;
+    /* Default Card Width - Updated from 400px */
+    height: 400px;
+    /* Default Card Height - Updated from 300px */
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Start centered */
+    transform: translate(-50%, -50%);
+    /* Start centered */
     border-radius: 2rem;
     overflow: hidden;
     z-index: 10;
@@ -118,7 +133,7 @@
     justify-content: center;
     text-align: center;
     padding: 2rem;
-    opacity: 0; 
+    opacity: 0;
     background: linear-gradient(to bottom, rgba(2, 6, 23, 0.2), rgba(2, 6, 23, 0.7));
     z-index: 1;
 }
@@ -164,7 +179,8 @@
     left: 50%;
     transform: translateX(-50%);
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Left, Right */
+    grid-template-columns: 1fr 1fr;
+    /* Left, Right */
     pointer-events: none;
     padding: 0 2rem;
     align-items: center;
@@ -175,7 +191,7 @@
     grid-column: 1;
     display: flex;
     justify-content: center;
-    height: 300px; 
+    height: 300px;
     /* This invisible box defines where the image sits on the left */
 }
 
@@ -197,8 +213,10 @@
     max-width: 1400px;
     left: 50%;
     transform: translateX(-50%);
-    pointer-events: none; /* Allow scrolling underneath */
-    z-index: 25; /* ABOVE the activeImageContainer (10) */
+    pointer-events: none;
+    /* Allow scrolling underneath */
+    z-index: 25;
+    /* ABOVE the activeImageContainer (10) */
     padding: 0 2rem;
 }
 
@@ -206,10 +224,11 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 45%; 
+    width: 45%;
     max-height: 85vh;
     overflow-y: auto;
-    opacity: 0; /* Hidden by default */
+    opacity: 0;
+    /* Hidden by default */
 }
 
 /* 1st & 3rd sections (left/right): top-aligned so content never goes above viewport */
@@ -217,7 +236,8 @@
 .textSection.right {
     top: 12vh;
     transform: translateY(0);
-    max-height: 78vh; /* 12vh + 78vh = 90vh, stays in view */
+    max-height: 78vh;
+    /* 12vh + 78vh = 90vh, stays in view */
 }
 
 .textSection.left {
@@ -234,14 +254,16 @@
     left: auto !important;
     top: 50%;
     transform: translateY(-50%);
-    width: 42%; 
+    width: 42%;
     max-width: 550px;
-    max-height: 95vh; /* Fit section 8 content without scroll */
-    overflow-y: visible; /* No scrollbar - content fits in 95vh */
+    max-height: 95vh;
+    /* Fit section 8 content without scroll */
+    overflow-y: visible;
+    /* No scrollbar - content fits in 95vh */
     text-align: left;
-    background: rgba(2, 6, 23, 0.7); 
-    backdrop-filter: blur(15px); 
-    padding: 2rem; 
+    background: rgba(2, 6, 23, 0.7);
+    backdrop-filter: blur(15px);
+    padding: 2rem;
     border-radius: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -251,15 +273,27 @@
     justify-content: center;
 }
 
+/* Section 8 (last): position at a fixed top to prevent it going above the viewport */
+.textSection.centered#text-8 {
+    z-index: 15;
+    max-height: 80vh;
+    overflow-y: auto;
+    top: 12vh;
+    transform: none;
+    justify-content: flex-start;
+}
+
 /* Typography matching previous design */
 
 .sectionTitle {
-    font-size: 1.85rem; /* Reduced from 2.25rem */
+    font-size: 1.85rem;
+    /* Reduced from 2.25rem */
     font-weight: 700;
     color: #f1f5f9;
     margin-bottom: 1rem;
     line-height: 1.2;
-    perspective: 1000px; /* For 3D rotation */
+    perspective: 1000px;
+    /* For 3D rotation */
 }
 
 .sectionTitleWrapper {
@@ -276,10 +310,12 @@
 
 /* --- Final Statement Design (Rough Glass Impact Box) --- */
 .finalStatementBox {
-    margin-top: 1.5rem; /* Reduced */
+    margin-top: 1.5rem;
+    /* Reduced */
     position: relative;
-    padding: 1.25rem 1.5rem; /* Reduced */
-    background: 
+    padding: 1.25rem 1.5rem;
+    /* Reduced */
+    background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08)),
         url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     background-blend-mode: overlay;
@@ -287,9 +323,10 @@
     border-radius: 1.25rem;
     color: #fff;
     font-weight: 500;
-    font-size: 1.1rem; /* Reduced */
+    font-size: 1.1rem;
+    /* Reduced */
     line-height: 1.5;
-    box-shadow: 
+    box-shadow:
         0 30px 60px rgba(0, 0, 0, 0.4),
         inset 0 0 30px rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(80px) saturate(1.8) contrast(1.1);
@@ -297,7 +334,8 @@
 }
 
 .finalStatementBox::before {
-    display: none; /* Removed Result text completely */
+    display: none;
+    /* Removed Result text completely */
 }
 
 /* --- List Variant 1 (Sections 1-2): Glass Cards (Enhanced) --- */
@@ -309,15 +347,18 @@
 }
 
 .cardV1 {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), transparent); /* Rougher grain */
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), transparent);
+    /* Rougher grain */
     border-left: 3px solid #38bdf8;
     padding: 1rem 1.25rem;
     color: #e2e8f0;
     font-size: 1.1rem;
     transition: transform 0.3s ease;
-    backdrop-filter: blur(20px); /* Rougher blur */
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    border-left: 3px solid #38bdf8; /* Re-affirm override */
+    backdrop-filter: blur(20px);
+    /* Rougher blur */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid #38bdf8;
+    /* Re-affirm override */
 }
 
 .cardV1:hover {
@@ -340,13 +381,15 @@
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 0.75rem 1.5rem;
-    border-radius: 9999px; /* Pill shape */
+    border-radius: 9999px;
+    /* Pill shape */
     color: #cbd5e1;
     font-size: 1rem;
     backdrop-filter: blur(15px);
     transition: all 0.3s ease;
     text-align: center;
-    flex: 1 1 auto; /* Auto-fit columns nicely */
+    flex: 1 1 auto;
+    /* Auto-fit columns nicely */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -359,7 +402,8 @@
 }
 
 .cardV2::before {
-    display: none; /* Remove old node circle */
+    display: none;
+    /* Remove old node circle */
 }
 
 /* --- List Variant 3 (Sections 5-6): Stacked Blocks (Fixing Bug) --- */
@@ -371,8 +415,9 @@
 }
 
 .cardV3 {
-    background: rgba(0, 0, 0, 0.3); 
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Fainter border */
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* Fainter border */
     padding: 1.25rem;
     border-radius: 0.5rem;
     color: #94a3b8;
@@ -384,11 +429,13 @@
 }
 
 .cardV3::before {
-    content: "◆"; /* Diamond bullet */
+    content: "◆";
+    /* Diamond bullet */
     color: #38bdf8;
     margin-right: 1rem;
     font-size: 0.8rem;
-    margin-top: 0.3rem; /* Align with text top */
+    margin-top: 0.3rem;
+    /* Align with text top */
 }
 
 .cardV3:hover {
@@ -400,7 +447,8 @@
 /* --- List Variant 4 (Sections 7-8): Icon Grid Boxes --- */
 .listVariant4 {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 Columns */
+    grid-template-columns: 1fr 1fr;
+    /* 2 Columns */
     gap: 1rem;
     margin-bottom: 2rem;
 }
@@ -418,13 +466,14 @@
     font-size: 1rem;
     font-weight: 500;
     transition: all 0.3s ease;
-    backdrop-filter: blur(25px); /* Rough glass */
+    backdrop-filter: blur(25px);
+    /* Rough glass */
 }
 
 .cardV4:hover {
     background: rgba(255, 255, 255, 0.08);
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     border-color: rgba(56, 189, 248, 0.3);
 }
 
@@ -442,7 +491,8 @@
 }
 
 .cardV4::before {
-    display: none; /* Remove old checkmarks */
+    display: none;
+    /* Remove old checkmarks */
 }
 
 /* Typography Overrides */
@@ -458,7 +508,7 @@
     align-items: center;
     justify-content: center;
     /* Glass Effect */
-    background: rgba(2, 6, 23, 0.3); 
+    background: rgba(2, 6, 23, 0.3);
     backdrop-filter: blur(40px) saturate(1.5);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -490,22 +540,121 @@
     line-height: 1.6;
 }
 
-/* Mobile Fallback */
-@media (max-width: 1024px) {
-    .layoutGrid {
-        display: none; /* Simplify on mobile */
+/* Mobile: show mobile view, hide desktop (768px breakpoint) */
+@media (max-width: 768px) {
+    .desktopView {
+        display: none !important;
     }
-    .activeImageContainer {
+
+    .mobileView {
+        display: block !important;
+    }
+}
+
+/* Mobile-only stacked layout (no pin, natural scroll height) */
+.mobileScrollContainer {
+    width: 100%;
+    min-height: auto;
+    padding: 1rem 1.25rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.mobileSection {
+    width: 100%;
+    padding: 1.25rem 0;
+    border-radius: 1rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.mobileSectionImage {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    max-height: 220px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    background: #1e293b;
+}
+
+.mobileSectionImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mobileSectionTitle {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin: 0 1.25rem 0.75rem;
+    line-height: 1.25;
+}
+
+.mobileSectionParagraph {
+    font-size: 1rem;
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin: 0 1.25rem 1.25rem;
+}
+
+.mobileSection .listVariant1,
+.mobileSection .listVariant2,
+.mobileSection .listVariant3,
+.mobileSection .listVariant4 {
+    margin: 0 1.25rem 1rem;
+}
+
+.mobileSection .finalStatementBox {
+    margin: 0 1.25rem 1.25rem;
+}
+
+.mobileSection .listVariant4 {
+    grid-template-columns: 1fr;
+}
+
+.mobileCta {
+    text-align: center;
+    padding: 2.5rem 1.25rem;
+    background: rgba(2, 6, 23, 0.5);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobileCtaTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin: 0 0 1rem;
+}
+
+.mobileCtaDescription {
+    font-size: 1rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+}
+
+/* Legacy tablet tweaks (desktop view only, when visible) */
+@media (max-width: 1024px) {
+    .desktopView .layoutGrid {
+        display: none;
+    }
+
+    .desktopView .activeImageContainer {
         width: 90%;
         top: 30%;
     }
-    .textSection {
+
+    .desktopView .textSection {
         width: 100%;
         left: 0 !important;
         right: 0 !important;
         top: 60%;
         padding: 1rem;
-        background: rgba(0,0,0,0.8);
+        background: rgba(0, 0, 0, 0.8);
         border-radius: 1rem;
     }
 }

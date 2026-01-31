@@ -98,6 +98,7 @@ export default function LeadershipSection() {
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
+    
 
     // Center the active slide: move track so active card's center aligns with container center
     // Only apply complex transform on desktop

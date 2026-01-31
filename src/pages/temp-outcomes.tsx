@@ -17,6 +17,7 @@ import OutcomesHero from '@/components/outcomes/OutcomesHero';
 
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
+import pageStyles from '@/styles/temp-outcomes.module.css'; // Outcomes-page-only mobile overrides (desktop unchanged)
 
 import { outcomesScrollKeyframes } from '@/lib/outcomesScrollAnimations';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -61,9 +62,9 @@ export default function Outcomes() {
 
     return (
         <Layout title="Outcomes" description="Measurable results with Winspire RCM">
-            {/* 3D Model - FIXED behind everything */}
+            {/* 3D Model - FIXED behind everything; on mobile (temp-outcomes only) modelWrapper sends it to background */}
             {!is3DDisabled.current && (
-                <div className={styles.modelContainer}>
+                <div className={`${styles.modelContainer} ${pageStyles.modelWrapper}`}>
                     <GLTFViewer
                         manualTransform={transform}
                         rotateSpeed={rotateSpeed}
@@ -73,16 +74,13 @@ export default function Outcomes() {
                 </div>
             )}
 
-            {/* Hero Section */}
-            <OutcomesHero />
-
-
-
-            {/* New Outcomes Content */}
-            <div id="outcomes-content" style={{ marginTop: '0' }}>
-                <OutcomesContent />
+            {/* Wrapper: mobile-only styles in temp-outcomes.module.css (z-index above model); desktop has no styles */}
+            <div className={pageStyles.outcomesPageContent}>
+                <OutcomesHero />
+                <div id="outcomes-content" style={{ marginTop: '0' }}>
+                    <OutcomesContent />
+                </div>
             </div>
-
 
         </Layout>
     );

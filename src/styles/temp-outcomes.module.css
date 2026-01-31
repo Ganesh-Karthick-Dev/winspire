@@ -1,0 +1,13 @@
+/* Temp-outcomes page only. Desktop: no styles (wrapper is layout-neutral). */
+
+/* Mobile only: keep 3D model in background, content above */
+@media (max-width: 768px) {
+    .modelWrapper {
+        z-index: 0;
+    }
+
+    .outcomesPageContent {
+        position: relative;
+        z-index: 10;
+    }
+}
