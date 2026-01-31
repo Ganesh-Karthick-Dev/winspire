@@ -37,6 +37,8 @@ const NeuraLivingSystemsSection = () => {
 
             {/* Left Content */}
             <div className={styles.content}>
+                <span className={styles.eyebrow}>Adaptive Intelligence</span>
+
                 <h2 className={styles.headline}>
                     From Static Workflows to Living Systems
                 </h2>
