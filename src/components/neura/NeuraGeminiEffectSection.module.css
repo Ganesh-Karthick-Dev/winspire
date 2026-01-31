@@ -2,6 +2,8 @@
     height: 400vh;
     background-color: black;
     width: 100%;
+    margin-top: 100px;
+    /* Separating from previous section */
     position: relative;
     padding-top: 10rem;
     /* pt-40 */
