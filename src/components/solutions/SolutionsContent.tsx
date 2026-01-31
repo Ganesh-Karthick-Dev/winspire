@@ -93,7 +93,7 @@ const SolutionsContent: React.FC = () => {
     }, []);
 
     return (
-        <div className={styles.philosophySection} ref={sectionRef}>
+        <div id="solutions-content" className={styles.philosophySection} ref={sectionRef}>
             <div className={styles.container}>
                 <div className={styles.contentWrapper}>
                     <div className={styles.leftColumn}>
