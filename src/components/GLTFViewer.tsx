@@ -154,8 +154,8 @@ export default function GLTFViewer({
             let mouseRotX = 0;
             let mouseRotY = 0;
             if (currentTransform.position.x > 0.3) {
-                // Mouse influence: subtle rotation based on cursor position
-                const mouseInfluence = 0.15; // radians, ~8.5 degrees max
+                // Mouse influence: stronger rotation based on cursor position
+                const mouseInfluence = 0.35; // radians, ~20 degrees max
                 mouseRotX = currentMouseY.current * mouseInfluence;
                 mouseRotY = currentMouseX.current * mouseInfluence;
             }
