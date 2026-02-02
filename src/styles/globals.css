@@ -196,6 +196,36 @@ body::-webkit-scrollbar-thumb {
   margin: 0;
 }
 
+/* Neura section title – raw CSS override (no Tailwind dependency) */
+#neura-intelligence .ns-section-title {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+  align-items: flex-start;
+}
+
+#neura-intelligence .ns-section-title > div:first-child > div:first-child {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+#neura-intelligence .ns-section-title [class*="BlurTextAnimation"] {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  #neura-intelligence .ns-section-title [class*="BlurTextAnimation"] {
+    font-size: clamp(1.875rem, 3vw, 2.25rem);
+  }
+}
+
 /* ============================================
    Text Selection Theme - Premium Electric
    ============================================ */

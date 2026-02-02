@@ -98,8 +98,7 @@ export default function NeuraSection() {
                             title="NEURA — THE INTELLIGENCE LAYER"
                             subtitle="The Intelligence Behind Our Execution"
                             align="left"
-                            textColor="text-white"
-                            subtitleSize="text-2xl md:text-3xl lg:text-4xl"
+                            className="ns-section-title"
                             disableShadow={false}
                             shadowColor="rgba(59, 130, 246,"
                         />
@@ -152,7 +151,7 @@ export default function NeuraSection() {
                             {supportsList.map((item, index) => (
                                 <div key={index} className="ns-supports-list-item">
                                     <div className="ns-supports-list-icon">
-                                        <item.icon size={22} className="text-blue-400" />
+                                        <item.icon size={22} className="ns-supports-list-icon-svg" />
                                     </div>
                                     <span className="ns-supports-list-label">{item.text}</span>
                                 </div>
@@ -170,7 +169,7 @@ export default function NeuraSection() {
                             <CircularCommandMenu
                                 items={supportsList.map(item => ({
                                     id: item.text.toLowerCase().replace(/\s+/g, '-'),
-                                    icon: <item.icon className="w-6 h-6" />,
+                                    icon: <item.icon className="ns-circle-menu-item-icon" />,
                                     label: item.text,
                                     onClick: () => { }
                                 }))}
@@ -178,7 +177,7 @@ export default function NeuraSection() {
                                     <img
                                         src="/images/Logo-White-Icon.svg"
                                         alt=""
-                                        className="w-10 h-10 object-contain"
+                                        className="ns-circle-menu-trigger-img"
                                         aria-hidden
                                     />
                                 }
@@ -191,22 +190,20 @@ export default function NeuraSection() {
                 )}
 
                 {/* Footer Banner */}
-                {/* Footer Banner */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="relative z-20 m-4 md:m-8"
-                    style={{ padding: "6rem 4rem" }}
+                    className="ns-footer-banner"
                 >
-                    <div className="flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-32 max-w-[1250px] mx-auto">
-                        <div className="flex-1 min-w-[300px]">
-                            <p className="font-outfit text-sm md:text-base uppercase tracking-[0.3em] text-blue-500 font-bold mb-6 block">Technology with purpose</p>
-                            <h3 className="font-outfit text-[3.5rem] md:text-[4.5rem] font-extrabold text-white m-0 leading-[1.05] tracking-tight">Perform at your best.</h3>
+                    <div className="ns-footer-inner">
+                        <div className="ns-footer-head">
+                            <p className="ns-footer-eyebrow">Technology with purpose</p>
+                            <h3 className="ns-footer-title">Perform at your best.</h3>
                         </div>
-                        <div className="flex-1 lg:pl-12 border-t-2 lg:border-t-0 lg:border-l-2 border-slate-700 pt-8 lg:pt-0 relative mt-2 lg:mt-0">
-                            <p className="font-outfit text-2xl md:text-3xl text-slate-300 italic leading-relaxed font-medium">
-                                "Technology exists here for one reason: to help people perform at their best, consistently and at scale."
+                        <div className="ns-footer-quote-wrap">
+                            <p className="ns-footer-quote">
+                                &ldquo;Technology exists here for one reason: to help people perform at their best, consistently and at scale.&rdquo;
                             </p>
                         </div>
                     </div>
@@ -510,6 +507,22 @@ export default function NeuraSection() {
                    align-items: center;
                 }
 
+                .ns-circle-menu-trigger-img {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    object-fit: contain;
+                }
+
+                .ns-circle-menu-item-icon {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    display: block;
+                }
+
+                .ns-supports-list-icon-svg {
+                    color: #60a5fa;
+                }
+
                 /* Mobile: simple vertical list (no circular menu) */
                 .ns-supports-list-mobile {
                     width: 100%;
@@ -556,6 +569,93 @@ export default function NeuraSection() {
                 /* CTA Banner - Targeted Spacing & Visibility Redesign */
                 /* Removed custom .ns-cta-banner styles in favor of Tailwind classes */
 
+                /* Footer banner – generous padding, balanced two-column */
+                .ns-footer-banner {
+                    position: relative;
+                    z-index: 20;
+                    margin: 4rem;
+                    padding: 5rem 4rem 6rem;
+                }
+
+                .ns-footer-inner {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: stretch;
+                    gap: 3rem;
+                    max-width: 1250px;
+                    margin: 0 auto;
+                    padding: 0 1rem;
+                }
+
+                .ns-footer-head {
+                    flex: 1;
+                    min-width: 0;
+                    padding: 1.5rem 0 1rem;
+                }
+
+                .ns-footer-eyebrow {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 0.875rem;
+                    font-weight: 700;
+                    letter-spacing: 0.3em;
+                    text-transform: uppercase;
+                    color: #ffffff;
+                    margin: 0 0 1.5rem 0;
+                }
+
+                .ns-footer-title {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: clamp(2.5rem, 5vw, 4rem);
+                    font-weight: 800;
+                    line-height: 1.1;
+                    letter-spacing: -0.02em;
+                    color: #ffffff;
+                    margin: 0;
+                }
+
+                .ns-footer-quote-wrap {
+                    flex: 1;
+                    min-width: 0;
+                    padding: 2.5rem 0 1rem;
+                    padding-left: 0;
+                    border-top: 1px solid rgba(255, 255, 255, 0.25);
+                }
+
+                .ns-footer-quote {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+                    font-weight: 500;
+                    font-style: normal;
+                    line-height: 1.75;
+                    letter-spacing: 0.02em;
+                    color: #ffffff;
+                    margin: 0;
+                    max-width: 32em;
+                    padding: 0 0.5rem 0 0;
+                }
+
+                @media (min-width: 1024px) {
+                    .ns-footer-inner {
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 4rem;
+                        padding: 0 2rem;
+                    }
+                    .ns-footer-head {
+                        padding: 2rem 2rem 2rem 0;
+                    }
+                    .ns-footer-quote-wrap {
+                        padding: 2rem 0 2rem 2.5rem;
+                        border-top: none;
+                        border-left: 3px solid rgba(255, 255, 255, 0.3);
+                    }
+                    .ns-footer-quote {
+                        max-width: 22em;
+                        padding: 1rem 2rem 1rem 0;
+                        line-height: 1.8;
+                    }
+                }
+
                 /* Responsive */
                 @media (max-width: 1024px) {
                     .ns-intro-grid {
@@ -576,6 +676,16 @@ export default function NeuraSection() {
                 }
 
                 @media (max-width: 768px) {
+                    .ns-footer-banner {
+                        margin: 2rem;
+                        padding: 4rem 1.5rem 5rem;
+                    }
+                    .ns-footer-inner {
+                        padding: 0 0.5rem;
+                    }
+                    .ns-footer-quote {
+                        padding: 0 0.25rem 0 0;
+                    }
                     .ns-header, .ns-content {
                         padding-left: 24px;
                         padding-right: 24px;
