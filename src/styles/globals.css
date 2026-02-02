@@ -27,6 +27,19 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Temp Home page only: base scale so design (tuned at 80% zoom) looks correct at 100% client zoom. */
+html.temp-home-scale {
+  font-size: 80%;
+}
+
+/* Temp Home page only: constrain content to ~97% width with side margins so card/sections don't go full width. */
+html.temp-home-scale .page-wrapper {
+  width: 97%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 body {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
