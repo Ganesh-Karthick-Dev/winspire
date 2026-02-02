@@ -26,43 +26,86 @@
 .glassCard {
     position: relative;
     z-index: 10;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 1.5rem;
-    padding: 4rem 3rem;
-    max-width: 900px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 2.5rem;
+    padding: 5rem 4rem;
+    max-width: 1000px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    box-shadow: 
+        0 40px 100px -20px rgba(0, 0, 0, 0.4),
+        inset 0 0 40px rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    transition: transform 0.4s ease;
+}
+
+.glassCard:hover {
+    transform: translateY(-5px);
+}
+
+.cardContent {
+    position: relative;
+    z-index: 5;
+}
+
+.grainOverlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-blend-mode: overlay;
+}
+
+.lightEffect {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(
+        800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(96, 165, 250, 0.05) 40%,
+        transparent 80%
+    );
+    opacity: 0.8;
 }
 
 .eyebrow {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 600;
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: #60a5fa;
-    margin-bottom: 1rem;
+    letter-spacing: 0.25em;
+    color: #ffffff; /* Changed from #60a5fa for visibility */
+    margin-bottom: 1.5rem;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .heading {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
     color: #ffffff;
-    margin: 0 0 1.5rem 0;
-    letter-spacing: -0.02em;
+    margin: 0 0 2rem 0;
+    letter-spacing: -0.03em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .subText {
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    max-width: 680px;
-    margin: 0 auto 2.5rem auto;
+    font-size: 1.25rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 720px;
+    margin: 0 auto 3rem auto;
+    font-weight: 300;
 }
 
 .ctaButton {

@@ -44,13 +44,15 @@ const CareModels: React.FC = () => {
             const isMobile = window.innerWidth <= 768;
             if (isMobile) return;
 
-            // Awards-style: Scroll-scrubbed timeline - animations tied to scroll progress
+            // Trigger-based animation: Plays when the section enters the viewport
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: section,
-                    start: "top 75%",
-                    end: "bottom 25%",
-                    scrub: 1.2,
+                    start: "top 65%",
+                    end: "bottom 75%",
+                    scrub: 0.6,
+                    // Trigger early so it finishes as user arrives
+                    toggleActions: "play none none none",
                 }
             });
 

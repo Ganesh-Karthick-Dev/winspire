@@ -33,6 +33,7 @@ function useReducedMotion(): boolean {
 
 export default function SolutionsHero() {
     const sectionRef = useRef<HTMLElement>(null);
+    const glassCardRef = useRef<HTMLDivElement>(null);
     const reduceMotion = useReducedMotion();
 
     useEffect(() => {
@@ -75,6 +76,16 @@ export default function SolutionsHero() {
 
         return () => tl.kill();
     }, [reduceMotion]);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!glassCardRef.current) return;
+        const rect = glassCardRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        glassCardRef.current.style.setProperty('--mouse-x', `${x}px`);
+        glassCardRef.current.style.setProperty('--mouse-y', `${y}px`);
+    };
 
     const scrollToContent = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -125,7 +136,14 @@ export default function SolutionsHero() {
                     </a>
                 </div>
                 <div className={styles.rightCol}>
-                    <div className={styles.glassCard}>
+                    <div 
+                        ref={glassCardRef} 
+                        className={styles.glassCard}
+                        onMouseMove={handleMouseMove}
+                    >
+                        <div className={styles.grainOverlay} aria-hidden="true" />
+                        <div className={styles.lightEffect} aria-hidden="true" />
+                        
                         {DESCRIPTION_PARAS.map((para, i) => (
                             <p key={i} data-animate="body-p" className={styles.description}>
                                 {para}
