@@ -27,7 +27,7 @@ const OutcomesContent = () => {
             list: ["Clearly defined objectives", "System-led workflows", "Embedded accountability"],
             final: "When the system is designed correctly, results follow without firefighting, escalation, or constant people dependency.",
             icon: "📐",
-            image: "/images/company-page/iso-standards-quality-control-businessman-hold-virtual-globe-with-quality-assurance-guarantee-product-iso-standard-certification-modern-iso-banner.webp"
+            image: "/temp/human-interact-with-ai-artificial-intelligence-brain-process-generative-ai-uuid.jpg"
         },
         {
             id: 2,
@@ -36,7 +36,7 @@ const OutcomesContent = () => {
             list: ["System-designed workflows, not hero-driven processes", "Cross-functional visibility instead of departmental silos", "Prioritization based on financial impact, not task volume"],
             final: "This is how performance scales without burnout.",
             icon: "⚙️",
-            image: "/temp/16457.jpg"
+            image: "/temp/artificial-intelligence-machine-learning-business-internet-technology-concept (1).jpg"
         },
         {
             id: 3,
@@ -54,7 +54,7 @@ const OutcomesContent = () => {
             list: ["Identifying risk early", "Prioritizing work by financial impact", "Providing real-time visibility across teams and departments"],
             final: "AI here strengthens human judgment. It never replaces it.",
             icon: "🧠",
-            image: "/temp/2151968689.jpg"
+            image: "/temp/hand-with-brain-dark-backdrop.jpg"
         },
         {
             id: 5,
@@ -72,7 +72,7 @@ const OutcomesContent = () => {
             list: ["Employee KPIs are directly tied to client KPIs", "Performance is measured across the full revenue lifecycle", "Recognition is based on impact, not tenure"],
             final: "Contribution matters more than titles. Ownership matters more than hierarchy.",
             icon: "🤝",
-            image: "/temp/36643.jpg"
+            image: "/temp/human-interact-with-ai-artificial-intelligence-brain-process-generative-ai-uuid (1).jpg"
         },
         {
             id: 7,
@@ -92,7 +92,7 @@ const OutcomesContent = () => {
             list: ["Design systems instead of managing chaos", "Enable people instead of exhausting them", "Act on intelligence instead of assumptions"],
             final: "That future is not coming. It is already here.",
             icon: "🚀",
-            image: "/temp/39810.jpg"
+            image: "/temp/woman-sits-front-monitor-that-has-word-brain-it.jpg"
         }
     ];
 
@@ -239,22 +239,20 @@ const OutcomesContent = () => {
                     });
                 }
 
-                // Step D: Fade In Text
                 if (isEvenSection) {
-                    const isSection8 = section.id === 8;
-                    // Right Overlay Reveal (Fade Up)
+                    // Right Overlay Reveal (Fade Up) - Even sections (2, 4, 6, 8)
                     tl.fromTo(`#text-${section.id}`,
-                        { opacity: 0, scale: 0.95, yPercent: isSection8 ? 0 : -40, zIndex: 25, display: 'block' },
+                        { opacity: 0, scale: 0.95, yPercent: -45, zIndex: 25, display: 'flex' },
                         {
                             opacity: 1,
                             scale: 1,
-                            yPercent: isSection8 ? 0 : -50,
-                            duration: 8, // Slower
+                            yPercent: -50,
+                            duration: 8,
                             ease: 'power3.out'
                         },
                         '<5');
                 } else {
-                    // Side Text Reveal (1st, 3rd, 5th, 7th) - keep yPercent 0 so top-aligned, never goes above
+                    // Side Text Reveal (Odd sections 1, 3, 5, 7)
                     tl.fromTo(`#text-${section.id}`,
                         { opacity: 0, yPercent: 0, filter: 'blur(10px)', zIndex: 5 },
                         {
