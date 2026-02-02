@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, useEffect, useCallback, type ReactNode } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect, useCallback, useRef, type ReactNode } from "react"
+import { motion, AnimatePresence, useInView } from "framer-motion"
 import { cn } from "@/lib/utils"
+import styles from "./circular-command-menu.module.css"
 
 export interface CommandItem {
     id: string
@@ -94,25 +95,28 @@ function CircularCommandMenu({
     }
 
     const totalSize = (radius + 160) * 2 // Increased buffer for EXTREME labels
+    const wrapperRef = useRef<HTMLDivElement>(null)
+    const isInView = useInView(wrapperRef, { once: true, amount: 0.25 })
 
     return (
         <div
+            ref={wrapperRef}
             className={cn("relative flex items-center justify-center mx-auto", className)}
             style={{
                 height: `${totalSize}px`,
                 width: `${totalSize}px`
             }}
         >
-            {/* Central Anchor / Trigger */}
+            {/* Central logo — appears first when in view */}
             <motion.div
                 className={cn(
                     "relative z-20 flex h-20 w-20 items-center justify-center rounded-full",
                     "bg-[#0f172a] border border-blue-500/30 shadow-[0_0_40px_rgba(59,130,246,0.3)]",
                     "text-blue-400"
                 )}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: isInView ? 1 : 0, opacity: isInView ? 1 : 0 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
                 {trigger || (
                     <div className="flex flex-col items-center justify-center">
@@ -134,17 +138,26 @@ function CircularCommandMenu({
                                 <motion.div
                                     key={item.id}
                                     initial={{
-                                        opacity: 0,
+                                        opacity: 1,
                                         x: 0,
                                         y: 0,
                                         scale: 0,
                                     }}
-                                    animate={{
-                                        opacity: 1,
-                                        x: position.x - 28, // Offset by half width (w-14 = 56px / 2 = 28)
-                                        y: position.y - 28,
-                                        scale: 1,
-                                    }}
+                                    animate={
+                                        isInView
+                                            ? {
+                                                  opacity: 1,
+                                                  x: position.x - 28,
+                                                  y: position.y - 28,
+                                                  scale: 1,
+                                              }
+                                            : {
+                                                  opacity: 1,
+                                                  x: 0,
+                                                  y: 0,
+                                                  scale: 0,
+                                              }
+                                    }
                                     exit={{
                                         opacity: 0,
                                         x: 0,
@@ -152,10 +165,9 @@ function CircularCommandMenu({
                                         scale: 0,
                                     }}
                                     transition={{
-                                        type: "spring",
-                                        stiffness: 300,
-                                        damping: 20,
-                                        delay: index * 0.1 + 0.3, // Staggered delay after center appears
+                                        duration: 0.65,
+                                        ease: [0.22, 1, 0.36, 1],
+                                        delay: isInView ? 0.25 : 0,
                                     }}
                                     className="absolute"
                                 >
@@ -179,27 +191,21 @@ function CircularCommandMenu({
                                         <div className="text-current scale-125">{item.icon}</div>
                                     </motion.button>
 
-                                    {/* Hybrid Label Positioning */}
+                                    {/* Label: raw CSS positioning + gap (circular-command-menu.module.css) */}
                                     <motion.div
                                         className={cn(
-                                            "absolute whitespace-nowrap pointer-events-none",
-                                            "text-sm font-semibold tracking-wide text-slate-100 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]",
-                                            // Hybrid Logic - EXTREME Spacing
-                                            Math.abs(position.x) < 40 // Near vertical axis
-                                                ? (position.y < 0
-                                                    ? "left-1/2 -translate-x-1/2 bottom-full mb-16" // Top item - massive 4rem margin
-                                                    : "left-1/2 -translate-x-1/2 top-full mt-16")   // Bottom item - massive 4rem margin
-                                                : (position.x > 0
-                                                    ? "left-full ml-20 top-1/2 -translate-y-1/2"    // Right side items - massive 5rem margin
-                                                    : "right-full mr-20 top-1/2 -translate-y-1/2")   // Left side items - massive 5rem margin
+                                            styles.ccmLabel,
+                                            Math.abs(position.x) < 40
+                                                ? position.y < 0
+                                                    ? styles.ccmLabelTop
+                                                    : styles.ccmLabelBottom
+                                                : position.x > 0
+                                                    ? styles.ccmLabelRight
+                                                    : styles.ccmLabelLeft
                                         )}
-                                        initial={{
-                                            opacity: 0,
-                                            x: Math.abs(position.x) < 40 ? 0 : (position.x > 0 ? -10 : 10),
-                                            y: Math.abs(position.x) < 40 ? (position.y < 0 ? 10 : -10) : 0
-                                        }}
-                                        animate={{ opacity: 1, x: 0, y: 0 }}
-                                        transition={{ delay: index * 0.1 + 0.5 }}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: isInView ? 1 : 0 }}
+                                        transition={{ delay: isInView ? 0.95 : 0, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                                     >
                                         {item.label}
                                     </motion.div>
