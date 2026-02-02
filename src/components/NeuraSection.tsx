@@ -18,6 +18,7 @@ import {
     BrainCircuit,
 } from "lucide-react";
 import { CircularCommandMenu } from "./ui/circular-command-menu";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Data for "Neura enables our teams to"
 const enablesList = [
@@ -65,6 +66,7 @@ const supportsList = [
 
 export default function NeuraSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const isMobile = useIsMobile();
 
     return (
         <section ref={sectionRef} id="neura-intelligence" className="ns-section">
@@ -137,29 +139,55 @@ export default function NeuraSection() {
                     </div>
                 </div>
 
-                {/* Supports - Minimal Inline Design */}
-                {/* Supports - Circular Command Menu */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    className="ns-circle-menu-container"
-                >
-                    <div className="ns-circle-wrapper">
-                        <CircularCommandMenu
-                            items={supportsList.map(item => ({
-                                id: item.text.toLowerCase().replace(/\s+/g, '-'),
-                                icon: <item.icon className="w-6 h-6" />,
-                                label: item.text,
-                                onClick: () => { }
-                            }))}
-                            trigger={<BrainCircuit size={32} className="text-blue-400" />}
-                            defaultOpen={true}
-                            radius={180}
-                            className="ns-circle-menu"
-                        />
-                    </div>
-                </motion.div>
+                {/* Supports: desktop = circular menu, mobile = simple list */}
+                {isMobile ? (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="ns-supports-list-mobile"
+                    >
+                        <div className="ns-supports-list-inner">
+                            {supportsList.map((item, index) => (
+                                <div key={index} className="ns-supports-list-item">
+                                    <div className="ns-supports-list-icon">
+                                        <item.icon size={22} className="text-blue-400" />
+                                    </div>
+                                    <span className="ns-supports-list-label">{item.text}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                ) : (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="ns-circle-menu-container"
+                    >
+                        <div className="ns-circle-wrapper">
+                            <CircularCommandMenu
+                                items={supportsList.map(item => ({
+                                    id: item.text.toLowerCase().replace(/\s+/g, '-'),
+                                    icon: <item.icon className="w-6 h-6" />,
+                                    label: item.text,
+                                    onClick: () => { }
+                                }))}
+                                trigger={
+                                    <img
+                                        src="/images/Logo-White-Icon.svg"
+                                        alt=""
+                                        className="w-10 h-10 object-contain"
+                                        aria-hidden
+                                    />
+                                }
+                                defaultOpen={true}
+                                radius={180}
+                                className="ns-circle-menu"
+                            />
+                        </div>
+                    </motion.div>
+                )}
 
                 {/* Footer Banner */}
                 {/* Footer Banner */}
@@ -369,16 +397,12 @@ export default function NeuraSection() {
                     margin: 0;
                 }
 
-                /* Circular Menu Container */
-                /* Circular Menu Container - Simplified Robust Layout */
-                /* Circular Menu Container - Final Robust Spacing */
-                /* Circular Menu Container - Natural Flow */
+                /* Circular Menu Container - desktop only */
                 .ns-circle-menu-container {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     width: 100%;
-                    /* No longer needing massive fixed heights or margins */
                     padding: 4rem 0;
                     margin: 2rem 0;
                     position: relative;
@@ -393,7 +417,49 @@ export default function NeuraSection() {
                    display: flex;
                    justify-content: center;
                    align-items: center;
-                   /* No transform scale to avoid layout confusion */
+                }
+
+                /* Mobile: simple vertical list (no circular menu) */
+                .ns-supports-list-mobile {
+                    width: 100%;
+                    padding: 2rem 0;
+                    margin: 2rem 0;
+                }
+
+                .ns-supports-list-inner {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.75rem;
+                    max-width: 100%;
+                    padding: 0 1rem;
+                }
+
+                .ns-supports-list-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 1rem 1.25rem;
+                    background: rgba(255, 255, 255, 0.04);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border-radius: 12px;
+                }
+
+                .ns-supports-list-icon {
+                    flex-shrink: 0;
+                    width: 44px;
+                    height: 44px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(59, 130, 246, 0.15);
+                    border-radius: 10px;
+                }
+
+                .ns-supports-list-label {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    color: #e2e8f0;
                 }
 
                 /* CTA Banner - Targeted Spacing & Visibility Redesign */
@@ -424,6 +490,10 @@ export default function NeuraSection() {
                         padding-right: 24px;
                     }
                     .ns-supports-block {
+                        padding-left: 24px;
+                        padding-right: 24px;
+                    }
+                    .ns-supports-list-inner {
                         padding-left: 24px;
                         padding-right: 24px;
                     }
