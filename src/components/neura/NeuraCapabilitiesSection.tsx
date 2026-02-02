@@ -77,7 +77,7 @@ const capabilities = [
 ];
 
 type Props = {
-    trackRef?: React.RefObject<HTMLDivElement | null>;
+    trackRef?: React.Ref<HTMLDivElement>;
 };
 
 const NeuraCapabilitiesSection: React.FC<Props> = ({ trackRef }) => {

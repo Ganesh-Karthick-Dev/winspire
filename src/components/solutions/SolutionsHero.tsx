@@ -73,7 +73,9 @@ export default function SolutionsHero() {
             .to(glassCard, { opacity: 1, x: 0, duration: 0.7 }, 0.5)
             .to(bodyParagraphs || [], { opacity: 1, y: 0, duration: 0.45, stagger: 0.06 }, 0.75);
 
-        return () => tl.kill();
+        return () => {
+            tl.kill();
+        };
     }, [reduceMotion]);
 
     const scrollToContent = (e: React.MouseEvent) => {
