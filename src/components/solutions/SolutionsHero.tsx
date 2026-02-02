@@ -123,7 +123,7 @@ export default function SolutionsHero() {
                             </span>
                         </button>
                     </div>
-                    <a
+                    {/* <a
                         href="#solutions-content"
                         className={styles.scrollIndicator}
                         onClick={scrollToContent}
@@ -135,7 +135,7 @@ export default function SolutionsHero() {
                                 <path d="M4 8l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </span>
-                    </a>
+                    </a> */}
                 </div>
                 <div className={styles.rightCol}>
                     <div 
