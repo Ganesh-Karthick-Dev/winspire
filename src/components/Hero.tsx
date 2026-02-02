@@ -409,7 +409,7 @@ export default function Hero({
                     <MarqueeText
                         text="Designing Revenue Cycles That Actually Work • "
                         duration={45}
-                        fontSize="clamp(4rem, 14vw, 11rem)"
+                        fontSize="clamp(2.25rem, 7vw, 5.5rem)"
                         color="#000000"
                         gradient={true}
                     />

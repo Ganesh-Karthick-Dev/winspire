@@ -115,6 +115,30 @@ export default function CoreInsightSection() {
                 }
             );
 
+            // Animate RHS value from 0 to peak (e.g. "0–0%" → "20–25%")
+            const items = sectionRef.current.querySelectorAll<HTMLElement>(".ci-stats-item");
+            systemPillars.forEach((pillar, i) => {
+                const item = items[i];
+                const valueEl = item?.querySelector<HTMLElement>(".ci-stats-content strong");
+                if (!valueEl) return;
+                const obj = { min: 0, max: 0 };
+                gsap.to(obj, {
+                    min: pillar.minPercent,
+                    max: pillar.maxPercent,
+                    duration: 1,
+                    delay: 0.2 + i * 0.1,
+                    ease: "power3.out",
+                    onUpdate: () => {
+                        valueEl.textContent = `${Math.round(obj.min)}–${Math.round(obj.max)}%`;
+                    },
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            });
+
         }, sectionRef);
 
         return () => ctx.revert();
@@ -196,10 +220,10 @@ export default function CoreInsightSection() {
                                     <div className="ci-bar-base" style={{ width: `${pillar.minPercent}%` }} />
                                     <div className="ci-bar-highlight" style={{ left: `${pillar.minPercent}%`, width: `${pillar.maxPercent - pillar.minPercent}%` }} />
 
-                                    {/* Content */}
+                                    {/* Content - value animates from 0–0% to pillar range via GSAP */}
                                     <div className="ci-stats-content">
                                         <span>{pillar.name}</span>
-                                        <strong>{pillar.range}</strong>
+                                        <strong>0–0%</strong>
                                     </div>
                                 </li>
                             ))}

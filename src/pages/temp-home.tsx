@@ -120,20 +120,14 @@ export default function TempHome() {
     }, []);
 
     // === Mission Text Cycling ===
-    const missionMessages = [
-        {
-            title: "Our Mission",
-            content: (
-                <>
-                    <span style={{ fontSize: '1.3em', fontWeight: 700 }}>Winspire RCM is a human-centric</span>
-                    , AI-enabled partner that helps healthcare organizations engineer predictable financial outcomes.
-                </>
-            )
-        },
-        {
-            title: "Authority Thought",
-            content: "RCM doesn't fail at the bottom. It fails at the top."
-        }
+    // Title is always "Our Mission"; only the content below cycles
+    const missionContents = [
+        (
+            <>
+                Winspire RCM is a human-centric, AI-enabled partner that helps healthcare organizations engineer predictable financial outcomes.
+            </>
+        ),
+        "RCM doesn't fail at the bottom. It fails at the top.",
     ];
     const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
     const [missionFade, setMissionFade] = useState(true);
@@ -142,7 +136,7 @@ export default function TempHome() {
         const interval = setInterval(() => {
             setMissionFade(false);
             setTimeout(() => {
-                setCurrentMissionIndex((prev) => (prev + 1) % missionMessages.length);
+                setCurrentMissionIndex((prev) => (prev + 1) % missionContents.length);
                 setMissionFade(true);
             }, 300);
         }, 8000);
@@ -211,7 +205,7 @@ export default function TempHome() {
                             <MarqueeText
                                 text="Designing Revenue Cycles That Actually Work • "
                                 duration={45}
-                                fontSize="clamp(4rem, 14vw, 11rem)"
+                                fontSize="clamp(2.25rem, 7vw, 5.5rem)"
                                 color="#083151"
                             />
                         </div>
@@ -229,7 +223,7 @@ export default function TempHome() {
                                         transition: 'opacity 0.3s ease-in-out'
                                     }}
                                 >
-                                    {missionMessages[currentMissionIndex].title}
+                                    Our Mission
                                 </h3>
                                 <div
                                     className="text-2xl font-bold leading-tight font-[Outfit] text-gradient-shimmer"
@@ -238,7 +232,7 @@ export default function TempHome() {
                                         transition: 'opacity 0.3s ease-in-out'
                                     }}
                                 >
-                                    {missionMessages[currentMissionIndex].content}
+                                    {missionContents[currentMissionIndex]}
                                 </div>
                             </div>
                         )}
@@ -313,7 +307,7 @@ export default function TempHome() {
                                         transition: 'opacity 0.3s ease-in-out'
                                     }}
                                 >
-                                    {missionMessages[currentMissionIndex].title}
+                                    Our Mission
                                 </h3>
                                 <div
                                     className="mobile-mission-text text-gradient-shimmer"
@@ -322,7 +316,7 @@ export default function TempHome() {
                                         transition: 'opacity 0.3s ease-in-out'
                                     }}
                                 >
-                                    {missionMessages[currentMissionIndex].content}
+                                    {missionContents[currentMissionIndex]}
                                 </div>
                             </div>
 
