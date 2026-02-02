@@ -14,6 +14,7 @@ const systemPillars = [
     { name: "Leadership Visibility & Control", range: "10–12%", minPercent: 10, maxPercent: 12 },
     { name: "People Performance & Quality at Scale", range: "15–18%", minPercent: 15, maxPercent: 18 },
     { name: "Culture, Alignment & Continuous Improvement", range: "5–8%", minPercent: 5, maxPercent: 8 },
+    { name: "Total Impact", range: "100%", minPercent: 0, maxPercent: 100 },
 ];
 
 const successPillars = [
@@ -153,7 +154,8 @@ export default function CoreInsightSection() {
                         title="RCM Is Not Improved by Working Harder."
                         subtitle="It Is Improved by Designing It Right."
                         align="left"
-                        subtitleSize="text-lg md:text-xl"
+                        subtitleSize="text-xl md:text-2xl lg:text-3xl"
+                        subtitleRevealWithGlow
                     />
                 </header>
 

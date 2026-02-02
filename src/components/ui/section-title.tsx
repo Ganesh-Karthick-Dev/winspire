@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import BlurTextAnimation from "./blur-text-animation";
+import PointerHighlight from "./pointer-highlight";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,6 +29,8 @@ interface SectionTitleProps {
   shadowColor?: string;
   /** Disable text shadow for subtitle */
   disableShadow?: boolean;
+  /** Subtitle: white card reveal + gradient glow (no blur animation) */
+  subtitleRevealWithGlow?: boolean;
 }
 
 export default function SectionTitle({
@@ -40,7 +43,8 @@ export default function SectionTitle({
   align = "left",
   textColor = "text-white",
   shadowColor = "rgba(255,255,255,",
-  disableShadow = false
+  disableShadow = false,
+  subtitleRevealWithGlow = false,
 }: SectionTitleProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -58,13 +62,12 @@ export default function SectionTitle({
         },
       });
 
-      // White overlay shrinks from left to right (revealing white text)
+      // White overlay shrinks from left to right (revealing title only)
       tl.to(overlayRef.current, {
         width: "0%",
         duration: 1.2,
         ease: "power3.inOut",
       });
-
     }, containerRef);
 
     return () => ctx.revert();
@@ -103,18 +106,40 @@ export default function SectionTitle({
         />
       </div>
 
-      {/* Subtitle with Blur Animation */}
-      {subtitle && (
-        <BlurTextAnimation
-          text={subtitle}
-          fontSize={subtitleSize}
-          textColor={textColor}
-          shadowColor={shadowColor}
-          disableShadow={disableShadow}
-          loop={subtitleLoop}
-          className="max-w-4xl"
-        />
-      )}
+      {/* Subtitle: PointerHighlight only (no text reveal), or blur animation */}
+      {subtitle &&
+        (subtitleRevealWithGlow ? (
+          <div className="max-w-4xl">
+            <div
+              className={`${subtitleSize} font-[Outfit] font-light leading-relaxed text-white`}
+            >
+              {subtitle.includes("Designing It Right") ? (
+                <>
+                  It Is Improved by{" "}
+                  <PointerHighlight
+                    rectangleClassName="bg-white/15 border-white/40 rounded-sm"
+                    pointerClassName="text-white/90"
+                    containerClassName="inline-block"
+                  >
+                    <span style={{ color: "#000" }}>Designing It Right.</span>
+                  </PointerHighlight>
+                </>
+              ) : (
+                subtitle
+              )}
+            </div>
+          </div>
+        ) : (
+          <BlurTextAnimation
+            text={subtitle}
+            fontSize={subtitleSize}
+            textColor={textColor}
+            shadowColor={shadowColor}
+            disableShadow={disableShadow}
+            loop={subtitleLoop}
+            className="max-w-4xl"
+          />
+        ))}
     </div>
   );
 }

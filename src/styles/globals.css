@@ -1266,6 +1266,11 @@ section {
   animation: text-shimmer 4s linear infinite;
 }
 
+/* Subtitle with gradient + soft glow (e.g. SectionTitle reveal) – kept for other uses */
+.subtitle-reveal-text.text-gradient-shimmer {
+  filter: drop-shadow(0 0 12px rgba(62, 138, 203, 0.5)) drop-shadow(0 0 24px rgba(77, 83, 163, 0.35));
+}
+
 @keyframes scroll-down-reveal {
   0% {
     transform: translateY(-100%);
