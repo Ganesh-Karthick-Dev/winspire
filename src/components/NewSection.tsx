@@ -112,11 +112,11 @@ export default function NewSection() {
                     <div className="ns-intro-grid ns-header-animate">
                         <div className="ns-intro-item">
                             <div className="ns-check-icon"><CheckCircle2 size={20} /></div>
-                            <p>Your clinicians focus on <strong>care</strong>.</p>
+                            <p>Your leadership focuses on <strong>vision and growth</strong>.</p>
                         </div>
                         <div className="ns-intro-item">
                             <div className="ns-check-icon"><CheckCircle2 size={20} /></div>
-                            <p>Your leadership focuses on <strong>vision and growth</strong>.</p>
+                            <p>Clinicians stay focused on <strong>care, not collections</strong>.</p>
                         </div>
                     </div>
 
@@ -302,9 +302,10 @@ export default function NewSection() {
                     align-items: flex-start;
                     gap: 1.25rem;
                     padding: 1.5rem;
-                    background: #f8fafc;
+                    background: #ffffff;
                     border-radius: 16px;
                     border: 1px solid #e2e8f0;
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
                     transition: all 0.3s ease;
                 }
 
@@ -417,15 +418,17 @@ export default function NewSection() {
 
                 .ns-cta-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.25rem;
-                    color: rgba(255, 255, 255, 0.9);
-                    margin-bottom: 0;
-                    line-height: 1.6;
+                    font-size: clamp(1.5rem, 4vw, 2rem);
+                    color: #ffffff;
+                    margin-bottom: 2.5rem;
+                    line-height: 1.3;
+                    font-weight: 500;
                 }
 
                 .ns-cta-text strong {
                     color: #ffffff;
-                    font-weight: 600;
+                    font-weight: 800;
+                    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
                 }
 
                 .ns-cta-button-white {
