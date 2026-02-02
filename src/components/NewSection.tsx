@@ -418,17 +418,34 @@ export default function NewSection() {
 
                 .ns-cta-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: clamp(1.5rem, 4vw, 2rem);
-                    color: #ffffff;
+                    font-size: clamp(1.5rem, 4vw, 2.25rem);
                     margin-bottom: 2.5rem;
                     line-height: 1.3;
-                    font-weight: 500;
+                    font-weight: 700;
+                    letter-spacing: -0.01em;
+                    
+                    /* Animated Gradient Text */
+                    background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 25%, #ffffff 50%, #a5b4fc 75%, #ffffff 100%);
+                    background-size: 200% auto;
+                    color: transparent;
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    animation: shine 4s linear infinite;
                 }
 
                 .ns-cta-text strong {
-                    color: #ffffff;
                     font-weight: 800;
-                    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                    color: inherit; /* Inherits the gradient */
+                    -webkit-text-fill-color: inherit;
+                    background: inherit;
+                    -webkit-background-clip: forwa; /* Safari fix attempt, but inherit usually sufficient if nested right */
+                }
+
+                @keyframes shine {
+                    to {
+                        background-position: 200% center;
+                    }
                 }
 
                 .ns-cta-button-white {
