@@ -84,3 +84,31 @@
         gap: 1.5rem;
     }
 }
+
+@media (max-width: 768px) {
+    .section {
+        overflow-x: hidden;
+        max-width: 100vw;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        box-sizing: border-box;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .grid {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .headline {
+        font-size: clamp(1.5rem, 5vw, 2.25rem);
+    }
+
+    .featureBlock {
+        padding: 1.5rem;
+    }
+}

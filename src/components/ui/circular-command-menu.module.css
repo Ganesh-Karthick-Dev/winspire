@@ -1,0 +1,51 @@
+/**
+ * Circular Command Menu - raw CSS (no Tailwind).
+ * Label spacing with !important so it wins over other styles.
+ */
+
+/* Label base */
+.ccmLabel {
+  position: absolute !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.025em !important;
+  color: #e2e8f0 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Top item only: label ABOVE circle (not to the right) */
+.ccmLabelTop {
+  left: 50% !important;
+  bottom: 100% !important;
+  top: auto !important;
+  transform: translateX(-50%) !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Bottom item: label BELOW circle, more gap */
+.ccmLabelBottom {
+  left: 50% !important;
+  top: 100% !important;
+  transform: translateX(-50%) !important;
+  margin-top: 2rem !important;
+}
+
+/* Right items: label to the RIGHT of circle, more gap */
+.ccmLabelRight {
+  left: 100% !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin-left: 2rem !important;
+}
+
+/* Left items: label to the LEFT of circle, more gap */
+.ccmLabelLeft {
+  right: 100% !important;
+  left: auto !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin-right: 2rem !important;
+}

@@ -83,6 +83,14 @@ export default function TempHome() {
     // ========================================
     const SHOW_LOADER = true;
 
+    /* Apply 80% base scale only on this page (removed on unmount so other pages unaffected) */
+    useEffect(() => {
+        document.documentElement.classList.add('temp-home-scale');
+        return () => {
+            document.documentElement.classList.remove('temp-home-scale');
+        };
+    }, []);
+
     useEffect(() => {
         if (!SHOW_LOADER) {
             const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;

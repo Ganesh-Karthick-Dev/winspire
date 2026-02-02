@@ -18,6 +18,8 @@ import {
     BrainCircuit,
 } from "lucide-react";
 import { CircularCommandMenu } from "./ui/circular-command-menu";
+import { BentoGridShowcase } from "./ui/bento-product-features";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Data for "Neura enables our teams to"
 const enablesList = [
@@ -53,6 +55,21 @@ const enablesList = [
     }
 ];
 
+function NeuraBentoSlot({ item }: { item: (typeof enablesList)[number] }) {
+    const Icon = item.icon;
+    return (
+        <div className="ns-bento-card ns-bento-card-cell" style={{ "--item-color": item.color } as React.CSSProperties}>
+            <div className="ns-stack-icon ns-stack-icon-tint">
+                <Icon size={22} />
+            </div>
+            <div className="ns-stack-text">
+                <h3 className="ns-stack-title">{item.title}</h3>
+                <p className="ns-stack-desc">{item.desc}</p>
+            </div>
+        </div>
+    );
+}
+
 // Data for "Neura supports"
 const supportsList = [
     { text: "Revenue operations", icon: PieChart },
@@ -65,6 +82,7 @@ const supportsList = [
 
 export default function NeuraSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const isMobile = useIsMobile();
 
     return (
         <section ref={sectionRef} id="neura-intelligence" className="ns-section">
@@ -87,79 +105,90 @@ export default function NeuraSection() {
                         />
                     </motion.div>
 
-                    <div className="ns-intro-grid">
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="ns-intro-text"
-                        >
-                            Neura is not software you manage. It is an <strong>embedded intelligence layer</strong> that powers how work gets done.
-                        </motion.p>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2 }}
-                            className="ns-alert"
-                        >
-                            <div className="ns-alert-icon"><BrainCircuit size={24} /></div>
-                            <p><strong>Predictive, not reactive.</strong> Neura sees the problems before they impact your bottom line.</p>
-                        </motion.div>
-                    </div>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="ns-intro-text"
+                    >
+                        Neura is not software you manage. It is an <strong>embedded intelligence layer</strong> that powers how work gets done.
+                    </motion.p>
                 </header>
 
-                {/* Enables Grid - Same style as MarketReality consequences */}
+                {/* Bento grid: Predictive (tall left) + 5 capabilities (raw CSS, all bordered, images) */}
                 <div className="ns-content">
                     <p className="ns-content-intro">Neura enables our teams to:</p>
-                    <div className="ns-grid">
-                        {enablesList.map((item, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="ns-item"
-                                style={{ '--item-color': item.color } as React.CSSProperties}
-                            >
-                                <div className="ns-icon-box">
-                                    <item.icon size={28} />
+                    <BentoGridShowcase
+                        integration={
+                            <div className="ns-bento-card ns-bento-card-hero">
+                                <div className="ns-bento-hero-bg" aria-hidden="true" />
+                                <div className="ns-stack-icon ns-stack-icon-blue">
+                                    <BrainCircuit size={24} />
                                 </div>
-                                <div className="ns-item-content">
-                                    <h4 className="ns-item-title">{item.title}</h4>
-                                    <p className="ns-item-desc">{item.desc}</p>
+                                <div className="ns-stack-text">
+                                    <h3 className="ns-stack-title">Predictive, not reactive.</h3>
+                                    <p className="ns-stack-desc">Neura sees the problems before they impact your bottom line.</p>
                                 </div>
-                            </motion.div>
-                        ))}
-                    </div>
+                            </div>
+                        }
+                        trackers={<NeuraBentoSlot item={enablesList[0]} />}
+                        statistic={<NeuraBentoSlot item={enablesList[1]} />}
+                        focus={<NeuraBentoSlot item={enablesList[2]} />}
+                        productivity={<NeuraBentoSlot item={enablesList[3]} />}
+                        shortcuts={<NeuraBentoSlot item={enablesList[4]} />}
+                    />
                 </div>
 
-                {/* Supports - Minimal Inline Design */}
-                {/* Supports - Circular Command Menu */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    className="ns-circle-menu-container"
-                >
-                    <div className="ns-circle-wrapper">
-                        <CircularCommandMenu
-                            items={supportsList.map(item => ({
-                                id: item.text.toLowerCase().replace(/\s+/g, '-'),
-                                icon: <item.icon className="w-6 h-6" />,
-                                label: item.text,
-                                onClick: () => { }
-                            }))}
-                            trigger={<BrainCircuit size={32} className="text-blue-400" />}
-                            defaultOpen={true}
-                            radius={180}
-                            className="ns-circle-menu"
-                        />
-                    </div>
-                </motion.div>
+                {/* Supports: desktop = circular menu, mobile = simple list */}
+                {isMobile ? (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="ns-supports-list-mobile"
+                    >
+                        <div className="ns-supports-list-inner">
+                            {supportsList.map((item, index) => (
+                                <div key={index} className="ns-supports-list-item">
+                                    <div className="ns-supports-list-icon">
+                                        <item.icon size={22} className="text-blue-400" />
+                                    </div>
+                                    <span className="ns-supports-list-label">{item.text}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                ) : (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="ns-circle-menu-container"
+                    >
+                        <div className="ns-circle-wrapper">
+                            <CircularCommandMenu
+                                items={supportsList.map(item => ({
+                                    id: item.text.toLowerCase().replace(/\s+/g, '-'),
+                                    icon: <item.icon className="w-6 h-6" />,
+                                    label: item.text,
+                                    onClick: () => { }
+                                }))}
+                                trigger={
+                                    <img
+                                        src="/images/Logo-White-Icon.svg"
+                                        alt=""
+                                        className="w-10 h-10 object-contain"
+                                        aria-hidden
+                                    />
+                                }
+                                defaultOpen={true}
+                                radius={180}
+                                className="ns-circle-menu"
+                            />
+                        </div>
+                    </motion.div>
+                )}
 
                 {/* Footer Banner */}
                 {/* Footer Banner */}
@@ -290,6 +319,96 @@ export default function NeuraSection() {
                     font-weight: 600;
                 }
 
+                /* Bento slot cards - content centered (main styles in globals.css #neura-intelligence) */
+                .ns-bento-card {
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .ns-bento-card-cell {
+                    background: rgba(255, 255, 255, 0.08);
+                    border: 1px solid rgba(255, 255, 255, 0.18);
+                }
+
+                /* Hero (Predictive) card: fill empty space with subtle image */
+                .ns-bento-card-hero {
+                    background: rgba(15, 23, 42, 0.85);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                }
+
+                .ns-bento-hero-bg {
+                    position: absolute;
+                    inset: 0;
+                    background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80');
+                    background-size: cover;
+                    background-position: center;
+                    opacity: 0.15;
+                    pointer-events: none;
+                }
+
+                .ns-bento-card-hero .ns-stack-icon,
+                .ns-bento-card-hero .ns-stack-text {
+                    position: relative;
+                    z-index: 1;
+                }
+
+                .ns-stack {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.25rem;
+                }
+
+                .ns-stack-card {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 1.25rem;
+                    padding: 1.5rem 1.75rem;
+                    background: rgba(255, 255, 255, 0.04);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 16px;
+                    font-family: 'Outfit', sans-serif;
+                }
+
+                .ns-stack-icon {
+                    flex-shrink: 0;
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .ns-stack-icon-blue {
+                    background: rgba(59, 130, 246, 0.2);
+                    color: #93c5fd;
+                }
+
+                .ns-stack-icon-tint {
+                    background: rgba(255, 255, 255, 0.08);
+                    color: var(--item-color);
+                }
+
+                .ns-stack-text {
+                    flex: 1;
+                    min-width: 0;
+                }
+
+                .ns-stack-title {
+                    font-size: 1.125rem;
+                    font-weight: 700;
+                    color: #ffffff;
+                    margin: 0 0 0.35rem 0;
+                    letter-spacing: -0.01em;
+                }
+
+                .ns-stack-desc {
+                    font-size: 0.9375rem;
+                    color: #94a3b8;
+                    line-height: 1.5;
+                    margin: 0;
+                }
+
                 /* Grid - Same as MarketReality */
                 .ns-grid {
                     display: grid;
@@ -369,16 +488,12 @@ export default function NeuraSection() {
                     margin: 0;
                 }
 
-                /* Circular Menu Container */
-                /* Circular Menu Container - Simplified Robust Layout */
-                /* Circular Menu Container - Final Robust Spacing */
-                /* Circular Menu Container - Natural Flow */
+                /* Circular Menu Container - desktop only */
                 .ns-circle-menu-container {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     width: 100%;
-                    /* No longer needing massive fixed heights or margins */
                     padding: 4rem 0;
                     margin: 2rem 0;
                     position: relative;
@@ -393,7 +508,49 @@ export default function NeuraSection() {
                    display: flex;
                    justify-content: center;
                    align-items: center;
-                   /* No transform scale to avoid layout confusion */
+                }
+
+                /* Mobile: simple vertical list (no circular menu) */
+                .ns-supports-list-mobile {
+                    width: 100%;
+                    padding: 2rem 0;
+                    margin: 2rem 0;
+                }
+
+                .ns-supports-list-inner {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.75rem;
+                    max-width: 100%;
+                    padding: 0 1rem;
+                }
+
+                .ns-supports-list-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 1rem 1.25rem;
+                    background: rgba(255, 255, 255, 0.04);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border-radius: 12px;
+                }
+
+                .ns-supports-list-icon {
+                    flex-shrink: 0;
+                    width: 44px;
+                    height: 44px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(59, 130, 246, 0.15);
+                    border-radius: 10px;
+                }
+
+                .ns-supports-list-label {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    color: #e2e8f0;
                 }
 
                 /* CTA Banner - Targeted Spacing & Visibility Redesign */
@@ -424,6 +581,10 @@ export default function NeuraSection() {
                         padding-right: 24px;
                     }
                     .ns-supports-block {
+                        padding-left: 24px;
+                        padding-right: 24px;
+                    }
+                    .ns-supports-list-inner {
                         padding-left: 24px;
                         padding-right: 24px;
                     }

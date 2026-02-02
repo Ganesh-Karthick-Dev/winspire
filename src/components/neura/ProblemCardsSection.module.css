@@ -122,3 +122,67 @@
     /* Black color */
     /* Removed blue gradient */
 }
+
+/* Mobile-only: contain cards and text in viewport, no horizontal overflow */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 1.5rem 1rem;
+        box-sizing: border-box;
+    }
+
+    .cardsStack {
+        width: 100%;
+        max-width: 100%;
+        height: 280px;
+        margin-top: 1.5rem;
+    }
+
+    .card {
+        width: min(280px, calc(100vw - 2rem));
+        max-width: 100%;
+        height: min(280px, calc(100vw - 2rem));
+        padding: 1.25rem;
+    }
+
+    .cardIcon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .cardLabel {
+        font-size: 0.95rem;
+    }
+
+    .conclusion {
+        margin-top: 2rem;
+        padding: 0 0.5rem;
+        max-width: 100%;
+    }
+
+    .conclusion p,
+    .conclusion .highlight {
+        font-size: 1rem;
+    }
+
+    .conclusion .highlight {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem 0.75rem;
+    }
+
+    .card {
+        width: min(260px, calc(100vw - 1.5rem));
+        height: min(260px, calc(100vw - 1.5rem));
+        padding: 1rem;
+    }
+
+    .cardLabel {
+        font-size: 0.875rem;
+    }
+}
