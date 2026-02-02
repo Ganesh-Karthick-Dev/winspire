@@ -18,6 +18,7 @@ import {
     BrainCircuit,
 } from "lucide-react";
 import { CircularCommandMenu } from "./ui/circular-command-menu";
+import { BentoGridShowcase } from "./ui/bento-product-features";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Data for "Neura enables our teams to"
@@ -54,6 +55,21 @@ const enablesList = [
     }
 ];
 
+function NeuraBentoSlot({ item }: { item: (typeof enablesList)[number] }) {
+    const Icon = item.icon;
+    return (
+        <div className="ns-bento-card ns-bento-card-cell" style={{ "--item-color": item.color } as React.CSSProperties}>
+            <div className="ns-stack-icon ns-stack-icon-tint">
+                <Icon size={22} />
+            </div>
+            <div className="ns-stack-text">
+                <h3 className="ns-stack-title">{item.title}</h3>
+                <p className="ns-stack-desc">{item.desc}</p>
+            </div>
+        </div>
+    );
+}
+
 // Data for "Neura supports"
 const supportsList = [
     { text: "Revenue operations", icon: PieChart },
@@ -89,54 +105,39 @@ export default function NeuraSection() {
                         />
                     </motion.div>
 
-                    <div className="ns-intro-grid">
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="ns-intro-text"
-                        >
-                            Neura is not software you manage. It is an <strong>embedded intelligence layer</strong> that powers how work gets done.
-                        </motion.p>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2 }}
-                            className="ns-alert"
-                        >
-                            <div className="ns-alert-icon"><BrainCircuit size={24} /></div>
-                            <p><strong>Predictive, not reactive.</strong> Neura sees the problems before they impact your bottom line.</p>
-                        </motion.div>
-                    </div>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="ns-intro-text"
+                    >
+                        Neura is not software you manage. It is an <strong>embedded intelligence layer</strong> that powers how work gets done.
+                    </motion.p>
                 </header>
 
-                {/* Enables Grid - Same style as MarketReality consequences */}
+                {/* Bento grid: Predictive (tall left) + 5 capabilities (raw CSS, all bordered, images) */}
                 <div className="ns-content">
                     <p className="ns-content-intro">Neura enables our teams to:</p>
-                    <div className="ns-grid">
-                        {enablesList.map((item, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="ns-item"
-                                style={{ '--item-color': item.color } as React.CSSProperties}
-                            >
-                                <div className="ns-icon-box">
-                                    <item.icon size={28} />
+                    <BentoGridShowcase
+                        integration={
+                            <div className="ns-bento-card ns-bento-card-hero">
+                                <div className="ns-bento-hero-bg" aria-hidden="true" />
+                                <div className="ns-stack-icon ns-stack-icon-blue">
+                                    <BrainCircuit size={24} />
                                 </div>
-                                <div className="ns-item-content">
-                                    <h4 className="ns-item-title">{item.title}</h4>
-                                    <p className="ns-item-desc">{item.desc}</p>
+                                <div className="ns-stack-text">
+                                    <h3 className="ns-stack-title">Predictive, not reactive.</h3>
+                                    <p className="ns-stack-desc">Neura sees the problems before they impact your bottom line.</p>
                                 </div>
-                            </motion.div>
-                        ))}
-                    </div>
+                            </div>
+                        }
+                        trackers={<NeuraBentoSlot item={enablesList[0]} />}
+                        statistic={<NeuraBentoSlot item={enablesList[1]} />}
+                        focus={<NeuraBentoSlot item={enablesList[2]} />}
+                        productivity={<NeuraBentoSlot item={enablesList[3]} />}
+                        shortcuts={<NeuraBentoSlot item={enablesList[4]} />}
+                    />
                 </div>
 
                 {/* Supports: desktop = circular menu, mobile = simple list */}
@@ -316,6 +317,96 @@ export default function NeuraSection() {
                     color: #ffffff;
                     margin-bottom: 2rem;
                     font-weight: 600;
+                }
+
+                /* Bento slot cards - content centered (main styles in globals.css #neura-intelligence) */
+                .ns-bento-card {
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .ns-bento-card-cell {
+                    background: rgba(255, 255, 255, 0.08);
+                    border: 1px solid rgba(255, 255, 255, 0.18);
+                }
+
+                /* Hero (Predictive) card: fill empty space with subtle image */
+                .ns-bento-card-hero {
+                    background: rgba(15, 23, 42, 0.85);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                }
+
+                .ns-bento-hero-bg {
+                    position: absolute;
+                    inset: 0;
+                    background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80');
+                    background-size: cover;
+                    background-position: center;
+                    opacity: 0.15;
+                    pointer-events: none;
+                }
+
+                .ns-bento-card-hero .ns-stack-icon,
+                .ns-bento-card-hero .ns-stack-text {
+                    position: relative;
+                    z-index: 1;
+                }
+
+                .ns-stack {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.25rem;
+                }
+
+                .ns-stack-card {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 1.25rem;
+                    padding: 1.5rem 1.75rem;
+                    background: rgba(255, 255, 255, 0.04);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 16px;
+                    font-family: 'Outfit', sans-serif;
+                }
+
+                .ns-stack-icon {
+                    flex-shrink: 0;
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .ns-stack-icon-blue {
+                    background: rgba(59, 130, 246, 0.2);
+                    color: #93c5fd;
+                }
+
+                .ns-stack-icon-tint {
+                    background: rgba(255, 255, 255, 0.08);
+                    color: var(--item-color);
+                }
+
+                .ns-stack-text {
+                    flex: 1;
+                    min-width: 0;
+                }
+
+                .ns-stack-title {
+                    font-size: 1.125rem;
+                    font-weight: 700;
+                    color: #ffffff;
+                    margin: 0 0 0.35rem 0;
+                    letter-spacing: -0.01em;
+                }
+
+                .ns-stack-desc {
+                    font-size: 0.9375rem;
+                    color: #94a3b8;
+                    line-height: 1.5;
+                    margin: 0;
                 }
 
                 /* Grid - Same as MarketReality */

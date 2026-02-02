@@ -113,6 +113,89 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
+/* Neura bento cards – global scope so all 5 capability cards get borders (BentoGridShowcase slots) */
+#neura-intelligence .ns-bento-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1.5rem 1.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 16px;
+  font-family: 'Outfit', sans-serif;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+#neura-intelligence .ns-bento-card-cell {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+#neura-intelligence .ns-bento-card-hero {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#neura-intelligence .ns-bento-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+#neura-intelligence .ns-bento-card-hero .ns-stack-icon,
+#neura-intelligence .ns-bento-card-hero .ns-stack-text {
+  position: relative;
+  z-index: 1;
+}
+
+#neura-intelligence .ns-stack-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#neura-intelligence .ns-stack-icon-blue {
+  background: rgba(59, 130, 246, 0.25);
+  color: #93c5fd;
+}
+
+#neura-intelligence .ns-stack-icon-tint {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--item-color);
+}
+
+#neura-intelligence .ns-stack-text {
+  flex: 1;
+  min-width: 0;
+}
+
+#neura-intelligence .ns-stack-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.35rem 0;
+  letter-spacing: -0.01em;
+}
+
+#neura-intelligence .ns-stack-desc {
+  font-size: 0.9375rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+}
+
 /* ============================================
    Text Selection Theme - Premium Electric
    ============================================ */

@@ -1,0 +1,59 @@
+/**
+ * Bento grid layout - raw CSS (no Tailwind).
+ * Layout: 1 tall col (3 rows) | 2 cols: 2 cells + 2 cells, then 1 wide (2 cols).
+ */
+
+.bentoGrid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax(160px, auto);
+  gap: 1.25rem;
+}
+
+.slot {
+  min-height: 0;
+}
+
+.slot > * {
+  height: 100%;
+  min-height: 160px;
+}
+
+/* Desktop: 3 columns, 3 rows */
+@media (min-width: 768px) {
+  .bentoGrid {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .slotIntegration {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+  }
+
+  .slotTrackers {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .slotStatistic {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .slotFocus {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .slotProductivity {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .slotShortcuts {
+    grid-column: 2 / span 2;
+    grid-row: 3;
+  }
+}
