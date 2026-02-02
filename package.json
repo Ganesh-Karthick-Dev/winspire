@@ -13,6 +13,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.6.0",
     "@tabler/icons-react": "^3.36.1",
     "@types/nodemailer": "^7.0.4",
     "clsx": "^2.1.1",

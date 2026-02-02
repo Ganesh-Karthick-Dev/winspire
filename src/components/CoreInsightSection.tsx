@@ -3,10 +3,18 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { Player } from "@lottiefiles/react-lottie-player";
 import SectionTitle from "./ui/section-title";
-import { Target, Layers, Zap, AlertTriangle } from "lucide-react";
+import { AlertTriangle, Target, Zap, Layers } from "lucide-react";
 
-gsap.registerPlugin(ScrollTrigger);
+
+
+/** Lottie animated icon URLs (free from LottieFiles) - replace with your own if needed */
+const PILLAR_LOTTIE_URLS = {
+    target: "https://assets10.lottiefiles.com/packages/lf20_touohxvx.json",
+    layers: "https://assets4.lottiefiles.com/packages/lf20_kxsd2tqp.json",
+    lightning: "https://assets9.lottiefiles.com/packages/lf20_2g2J5s.json",
+};
 
 const systemPillars = [
     { name: "Revenue Protection & Yield Improvement", range: "20–25%", minPercent: 20, maxPercent: 25 },
@@ -17,26 +25,16 @@ const systemPillars = [
     { name: "Total Impact", range: "100%", minPercent: 0, maxPercent: 100 },
 ];
 
-const successPillars = [
-    {
-        icon: Target,
-        action: "Defining clear",
-        label: "OUTCOMES",
-        color: "#ffffff"
-    },
-    {
-        icon: Layers,
-        action: "Designing the right",
-        label: "STRUCTURE",
-        color: "#ffffff"
-    },
-    {
-        icon: Zap,
-        action: "Executing disciplined",
-        label: "STRATEGIES",
-        color: "#ffffff"
-    },
-];
+const successPillars: Array<{
+    lottieKey: keyof typeof PILLAR_LOTTIE_URLS;
+    action: string;
+    label: string;
+    color: string;
+}> = [
+        { lottieKey: "target", action: "Defining clear", label: "OUTCOMES", color: "#ffffff" },
+        { lottieKey: "layers", action: "Designing the right", label: "STRUCTURE", color: "#ffffff" },
+        { lottieKey: "lightning", action: "Executing disciplined", label: "STRATEGIES", color: "#ffffff" },
+    ];
 
 export default function CoreInsightSection() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -45,6 +43,8 @@ export default function CoreInsightSection() {
         if (!sectionRef.current) return;
 
         const ctx = gsap.context(() => {
+            gsap.registerPlugin(ScrollTrigger);
+
             // Existing animations
             gsap.utils.toArray<HTMLElement>(".ci-animate").forEach((el) => {
                 gsap.fromTo(el,
@@ -64,21 +64,43 @@ export default function CoreInsightSection() {
             });
 
             // Pillar Cards Animation (Staggered Fade Up)
-            gsap.fromTo(".ci-pillar-card",
-                { opacity: 0, y: 20 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.5,
-                    stagger: 0.15,
-                    ease: "power2.out",
+            const cards = gsap.utils.toArray<HTMLElement>(".ci-pillar-card");
+            cards.forEach((card, i) => {
+                const tl = gsap.timeline({
                     scrollTrigger: {
-                        trigger: ".ci-pillars-grid",
+                        trigger: card,
                         start: "top 85%",
                         toggleActions: "play none none none"
                     }
+                });
+
+                tl.fromTo(card,
+                    { opacity: 0, y: 20 },
+                    { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+                );
+
+                // Icon Specific Animations
+                if (i === 0) { // Target - Spiral Outward
+                    tl.fromTo(card.querySelector(".icon-target"),
+                        { scale: 0, rotate: -180, opacity: 0 },
+                        { scale: 1, rotate: 0, opacity: 1, duration: 0.8, ease: "back.out(1.7)" },
+                        "-=0.3"
+                    );
+                } else if (i === 1) { // Layers - Stacking
+                    tl.fromTo(card.querySelectorAll(".icon-layer"),
+                        { y: 10, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.4, stagger: 0.2, ease: "power2.out" },
+                        "-=0.3"
+                    );
+                } else if (i === 2) { // Lightning - Flashy
+                    tl.fromTo(card.querySelector(".icon-zap"),
+                        { opacity: 0.3, scale: 0.8 },
+                        { opacity: 1, scale: 1.1, duration: 0.15, repeat: 3, yoyo: true, ease: "power1.inOut" },
+                        "-=0.3"
+                    ).to(card.querySelector(".icon-zap"), { scale: 1, duration: 0.2 });
                 }
-            );
+            });
+
 
             // Progress Bar Animation
             // Animate Base Bar
@@ -117,7 +139,7 @@ export default function CoreInsightSection() {
             );
 
             // Animate RHS value from 0 to peak (e.g. "0–0%" → "20–25%")
-            const items = sectionRef.current.querySelectorAll<HTMLElement>(".ci-stats-item");
+            const items = sectionRef.current?.querySelectorAll<HTMLElement>(".ci-stats-item") || [];
             systemPillars.forEach((pillar, i) => {
                 const item = items[i];
                 const valueEl = item?.querySelector<HTMLElement>(".ci-stats-content strong");
@@ -172,24 +194,47 @@ export default function CoreInsightSection() {
                             <strong> accountability</strong>, <strong>intelligence</strong>, and <strong>execution</strong> are designed upfront.
                         </p>
 
-                        {/* Success Pillars - Cards with Icons */}
+                        {/* Success Pillars - Custom Animated Icons */}
                         <div className="ci-pillars-section">
                             <span className="ci-pillars-label">True success comes from:</span>
                             <div className="ci-pillars-grid">
-                                {successPillars.map((pillar, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="ci-pillar-card"
-                                    >
-                                        <div className="ci-pillar-icon" style={{ backgroundColor: `${pillar.color}10`, borderColor: `${pillar.color}30` }}>
-                                            <pillar.icon size={20} style={{ color: pillar.color }} />
-                                        </div>
-                                        <div className="ci-pillar-text">
-                                            <span className="ci-pillar-action">{pillar.action}</span>
-                                            <strong className="ci-pillar-name">{pillar.label}</strong>
-                                        </div>
+
+                                {/* 1. Spiral (Target) */}
+                                <div className="ci-pillar-card">
+                                    <div className="ci-pillar-icon bg-blue-500/10 border-blue-500/20 text-blue-500 relative flex items-center justify-center overflow-hidden">
+                                        <Target className="icon-target w-6 h-6" />
                                     </div>
-                                ))}
+                                    <div className="ci-pillar-text">
+                                        <span className="ci-pillar-action">Defining clear</span>
+                                        <strong className="ci-pillar-name">OUTCOMES</strong>
+                                    </div>
+                                </div>
+
+                                {/* 2. Stacking (Layers) */}
+                                <div className="ci-pillar-card">
+                                    <div className="ci-pillar-icon bg-blue-500/10 border-blue-500/20 text-blue-500 relative flex items-center justify-center">
+                                        {/* Simulated stacked layers */}
+                                        <div className="icon-layer absolute w-5 h-5 border-2 border-current rounded-sm z-10 bg-white dark:bg-slate-900" style={{ transform: 'translateY(0)' }}></div>
+                                        <div className="icon-layer absolute w-5 h-5 border-2 border-current rounded-sm z-0 opacity-60" style={{ transform: 'translateY(-4px) scale(0.9)' }}></div>
+                                        <div className="icon-layer absolute w-5 h-5 border-2 border-current rounded-sm z-0 opacity-30" style={{ transform: 'translateY(-8px) scale(0.8)' }}></div>
+                                    </div>
+                                    <div className="ci-pillar-text">
+                                        <span className="ci-pillar-action">Designing the right</span>
+                                        <strong className="ci-pillar-name">STRUCTURE</strong>
+                                    </div>
+                                </div>
+
+                                {/* 3. Flashy (Lightning) */}
+                                <div className="ci-pillar-card">
+                                    <div className="ci-pillar-icon bg-blue-500/10 border-blue-500/20 text-blue-500 flex items-center justify-center">
+                                        <Zap className="icon-zap w-6 h-6 fill-current" />
+                                    </div>
+                                    <div className="ci-pillar-text">
+                                        <span className="ci-pillar-action">Executing disciplined</span>
+                                        <strong className="ci-pillar-name">STRATEGIES</strong>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 

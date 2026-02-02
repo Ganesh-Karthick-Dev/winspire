@@ -3,7 +3,9 @@ import styles from '@/styles/OutcomesContent.module.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 const MOBILE_BREAKPOINT = 768;
 

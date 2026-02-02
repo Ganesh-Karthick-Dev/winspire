@@ -6682,6 +6682,16 @@ footer p {
   border: 1px solid;
 }
 
+.ci-pillar-icon-lottie {
+  overflow: hidden;
+}
+
+.ci-pillar-icon-lottie lottie-player,
+.ci-pillar-icon-lottie .lf-player-container {
+  width: 40px !important;
+  height: 40px !important;
+}
+
 .ci-pillar-text {
   display: flex;
   flex-direction: column;

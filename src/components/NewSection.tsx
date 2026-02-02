@@ -6,7 +6,7 @@ import { Users, Cpu, LineChart, ArrowRight, CheckCircle2 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+
 
 const features = [
     {
@@ -36,6 +36,7 @@ export default function NewSection() {
         if (!sectionRef.current) return;
 
         const ctx = gsap.context(() => {
+            gsap.registerPlugin(ScrollTrigger);
             // Header Animation
             gsap.fromTo(".ns-header-animate",
                 { opacity: 0, y: 30 },
