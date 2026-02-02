@@ -40,6 +40,31 @@ html.temp-home-scale .page-wrapper {
   margin-right: auto;
 }
 
+/* Temp Home page only: mobile responsive — full width with safe padding, no horizontal overflow. Desktop layout unchanged. */
+@media (max-width: 768px) {
+  html.temp-home-scale .page-wrapper {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: hidden;
+  }
+  /* Slightly larger base text on mobile for readability (desktop keeps 80% scale). */
+  html.temp-home-scale {
+    font-size: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  html.temp-home-scale .page-wrapper {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
 body {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -399,6 +424,13 @@ body.modal-open .webgl-canvas.ready {
   overflow-y: visible;
 }
 
+@media (max-width: 768px) {
+  .capabilities-pin-wrapper {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
 .temp-neura-hero-scroll-group {
   position: relative;
   /* Acts as the containment block for sticky hero */
@@ -543,6 +575,46 @@ body.modal-open .webgl-canvas.ready {
   display: flex;
   justify-content: center;
   pointer-events: auto;
+}
+
+/* ========== Temp Neura AI: mobile-only (no desktop layout change) ========== */
+@media (max-width: 768px) {
+  .temp-neura-page-wrapper {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .temp-neura-hero-scroll-group {
+    overflow-x: hidden;
+  }
+
+  .temp-neura-second-section {
+    overflow-x: hidden;
+    padding: 0 1rem;
+  }
+
+  .temp-neura-second-white {
+    overflow-x: hidden;
+    padding: 0;
+  }
+
+  .temp-neura-cards-layer {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .temp-neura-second-section {
+    padding: 0 0.75rem;
+  }
+
+  .temp-neura-cards-layer {
+    padding: 0 0.75rem;
+  }
 }
 
 /* Legacy fix: Ensure no conflicting margins */
@@ -6686,30 +6758,133 @@ footer p {
 }
 
 @media (max-width: 768px) {
+  .ci-section {
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
+    padding: 60px 0;
+    box-sizing: border-box;
+  }
+
   .ci-wrapper {
-    padding: 0 20px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .ci-title {
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .ci-title * {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .ci-content {
+    min-width: 0;
+    overflow-x: hidden;
   }
 
   .ci-col {
     gap: 16px;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .ci-para {
     font-size: 1rem;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  /* Stack pillar cards vertically on mobile so they don't go out of screen */
+  .ci-pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .ci-pillar-card {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ci-pillar-text {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .ci-quote-box {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ci-quote-content {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .ci-quote-content p {
+    overflow-wrap: break-word;
   }
 
   .ci-stats-title {
     font-size: 1.2rem;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .ci-stats-list {
+    min-width: 0;
   }
 
   .ci-stats-list li {
     padding: 8px 12px;
     font-size: 0.875rem;
+    min-width: 0;
+  }
+
+  .ci-stats-content {
+    flex-wrap: wrap;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .ci-stats-list li span {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .ci-stats-list li strong {
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  .ci-closing {
+    min-width: 0;
+    overflow-wrap: break-word;
   }
 
   .ci-pillars {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ci-wrapper {
+    padding: 0 0.75rem;
+  }
+
+  .ci-pillar-card {
+    padding: 12px 14px;
   }
 }

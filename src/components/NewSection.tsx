@@ -456,7 +456,15 @@ export default function NewSection() {
                     }
                     
                     .ns-wrapper {
-                        padding: 0 24px;
+                        padding: 2.5rem 24px 2.5rem;
+                    }
+
+                    .ns-header {
+                        padding-top: 0.5rem;
+                    }
+
+                    .ns-header-animate.title-container {
+                        margin-bottom: 2rem;
                     }
 
                     .ns-intro-grid {
@@ -465,18 +473,64 @@ export default function NewSection() {
                         align-items: flex-start;
                     }
 
+                    .ns-content-body {
+                        margin-bottom: 3rem;
+                    }
+
                     .ns-modern-grid {
                         grid-template-columns: 1fr;
                         gap: 1rem;
                     }
 
+                    /* CTA banner: top & bottom padding so title doesn't touch border; enhanced for mobile */
                     .ns-cta-banner {
-                        padding: 3rem 1.5rem;
+                        padding: 3rem 1.5rem 3rem;
                         border-radius: 16px;
+                    }
+
+                    .ns-cta-content {
+                        padding: 0.5rem 0;
+                    }
+
+                    .ns-cta-title {
+                        margin-top: 0;
+                        margin-bottom: 1rem;
+                        font-size: clamp(1.5rem, 5vw, 2rem);
+                    }
+
+                    .ns-cta-text {
+                        margin-bottom: 1.5rem;
+                        font-size: 1.1rem;
+                    }
+
+                    .ns-cta-button-white {
+                        min-height: 48px;
+                        padding: 1rem 1.5rem;
+                        font-size: 1rem;
                     }
                     
                     .pattern-left { left: -200px; }
                     .pattern-right { right: -200px; }
+                }
+
+                @media (max-width: 480px) {
+                    .ns-wrapper {
+                        padding: 2rem 1rem 2rem;
+                    }
+
+                    .ns-cta-banner {
+                        padding: 2.5rem 1.25rem 2.5rem;
+                    }
+
+                    .ns-cta-title {
+                        font-size: clamp(1.35rem, 4.5vw, 1.75rem);
+                    }
+
+                    .ns-cta-button-white {
+                        width: 100%;
+                        justify-content: center;
+                        min-height: 52px;
+                    }
                 }
             `}</style>
         </section>
