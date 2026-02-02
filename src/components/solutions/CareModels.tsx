@@ -41,76 +41,104 @@ const CareModels: React.FC = () => {
             const section = sectionRef.current;
             if (!section) return;
 
-            const isMobile = window.innerWidth <= 768;
-            if (isMobile) return;
+            const mm = gsap.matchMedia();
 
-            // Trigger-based animation: Plays when the section enters the viewport
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 65%",
-                    end: "bottom 75%",
-                    scrub: 0.6,
-                    // Trigger early so it finishes as user arrives
-                    toggleActions: "play none none none",
+            // DESKTOP ANIMATION
+            mm.add("(min-width: 769px)", () => {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 65%",
+                        end: "bottom 75%",
+                        scrub: 0.6,
+                        toggleActions: "play none none none",
+                    }
+                });
+
+                // 1. Eyebrow
+                tl.fromTo(eyebrowRef.current,
+                    { opacity: 0, y: 20 },
+                    { opacity: 1, y: 0, duration: 0.15, ease: "power2.out" },
+                    0
+                );
+
+                // 2. Title Lines
+                const titleLines = titleRef.current?.querySelectorAll(`.${styles.titleLine}`);
+                if (titleLines && titleLines.length > 0) {
+                    gsap.set(titleLines, { clipPath: "inset(0 100% 0 0)" });
+                    tl.to(titleLines, {
+                        clipPath: "inset(0 0% 0 0)",
+                        duration: 0.4,
+                        stagger: 0.08,
+                        ease: "power3.inOut"
+                    }, 0.08);
+                }
+
+                // 3. Subtitle
+                tl.fromTo(subtitleRef.current,
+                    { opacity: 0, y: 16 },
+                    { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" },
+                    0.25
+                );
+
+                // 4. Featured Card
+                tl.fromTo(cardRef.current,
+                    { opacity: 0, scale: 0.88, y: 40 },
+                    { opacity: 1, scale: 1, y: 0, duration: 0.35, ease: "back.out(1.2)" },
+                    0.35
+                );
+
+                // 5. Image Reveal
+                if (visualRef.current) {
+                    gsap.set(visualRef.current, { clipPath: "inset(0 0 100% 0)" });
+                    tl.to(visualRef.current, {
+                        clipPath: "inset(0 0 0% 0)",
+                        duration: 0.3,
+                        ease: "power3.inOut"
+                    }, 0.55);
+                }
+
+                // 6. Service List Items
+                const items = listRef.current?.children;
+                if (items) {
+                    Array.from(items).forEach((item, i) => {
+                        gsap.set(item, { clipPath: "inset(0 100% 0 0)" });
+                        tl.to(item, {
+                            clipPath: "inset(0 0% 0 0)",
+                            duration: 0.2,
+                            ease: "power3.out"
+                        }, 0.6 + i * 0.1);
+                    });
                 }
             });
 
-            // 1. Eyebrow: fade + slide up
-            tl.fromTo(eyebrowRef.current,
-                { opacity: 0, y: 20 },
-                { opacity: 1, y: 0, duration: 0.15, ease: "power2.out" },
-                0
-            );
+            // MOBILE ANIMATION - Simple Staggered Fade Up
+            mm.add("(max-width: 768px)", () => {
+                const elements = [
+                    eyebrowRef.current,
+                    titleRef.current,
+                    subtitleRef.current,
+                    cardRef.current,
+                    visualRef.current,
+                    ...(listRef.current?.children ? Array.from(listRef.current.children) : [])
+                ].filter(Boolean);
 
-            // 2. Title: clip-path reveal (awards-style wipe)
-            const titleLines = titleRef.current?.querySelectorAll(`.${styles.titleLine}`);
-            if (titleLines?.length) {
-                gsap.set(titleLines, { clipPath: "inset(0 100% 0 0)" });
-                tl.to(titleLines, {
-                    clipPath: "inset(0 0% 0 0)",
-                    duration: 0.4,
-                    stagger: 0.08,
-                    ease: "power3.inOut"
-                }, 0.08);
-            }
-
-            // 3. Subtitle: fade in
-            tl.fromTo(subtitleRef.current,
-                { opacity: 0, y: 16 },
-                { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" },
-                0.25
-            );
-
-            // 4. Featured card: scale + fade (awards-style entrance)
-            tl.fromTo(cardRef.current,
-                { opacity: 0, scale: 0.88, y: 40 },
-                { opacity: 1, scale: 1, y: 0, duration: 0.35, ease: "back.out(1.2)" },
-                0.35
-            );
-
-            // 5. Image: mask reveal
-            if (visualRef.current) {
-                gsap.set(visualRef.current, { clipPath: "inset(0 0 100% 0)" });
-                tl.to(visualRef.current, {
-                    clipPath: "inset(0 0 0% 0)",
-                    duration: 0.3,
-                    ease: "power3.inOut"
-                }, 0.55);
-            }
-
-            // 6. Service cards: sequential reveal (each card wipes in from left)
-            const items = listRef.current?.children;
-            if (items) {
-                Array.from(items).forEach((item, i) => {
-                    gsap.set(item, { clipPath: "inset(0 100% 0 0)" });
-                    tl.to(item, {
-                        clipPath: "inset(0 0% 0 0)",
-                        duration: 0.2,
-                        ease: "power3.out"
-                    }, 0.6 + i * 0.1);
-                });
-            }
+                gsap.fromTo(elements, 
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        stagger: 0.1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 80%", // Start earlier on mobile
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
 
         }, sectionRef);
 
