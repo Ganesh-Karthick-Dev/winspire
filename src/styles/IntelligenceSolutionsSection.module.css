@@ -145,30 +145,42 @@
 
 .bulletList {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px 48px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
     list-style: none;
     padding: 0;
     margin: 0 0 28px 0;
+    width: 100%;
 }
 
 .bulletItem {
     font-size: 1.05rem;
     line-height: 1.5;
     color: #f1f5f9;
-    padding-left: 20px;
+    padding: 24px;
     position: relative;
+    display: flex;
+    align-items: flex-start;
+    border: 0 solid rgba(255, 255, 255, 0.2);
 }
 
+/* The Plus Design Borders */
+.bulletItem:nth-child(1) {
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+}
+
+.bulletItem:nth-child(2) {
+    border-bottom-width: 1px;
+}
+
+.bulletItem:nth-child(3) {
+    border-right-width: 1px;
+}
+
+/* Remove the bullet dot */
 .bulletItem::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.5em;
-    width: 6px;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
+    display: none;
 }
 
 .closing {
@@ -227,6 +239,15 @@
 
     .bulletList {
         grid-template-columns: 1fr;
+    }
+
+    .bulletItem:nth-child(n) {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .bulletItem:last-child {
+        border-bottom: none;
     }
 }
 
@@ -301,20 +322,18 @@
         font-size: 1rem;
         line-height: 1.5;
         color: #f1f5f9;
-        padding-left: 20px;
+        padding: 16px 0;
         position: relative;
-        margin-bottom: 12px;
+        margin-bottom: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .mobileBulletList li:last-child {
+        border-bottom: none;
     }
 
     .mobileBulletList li::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0.5em;
-        width: 6px;
-        height: 6px;
-        background: rgba(255, 255, 255, 0.6);
-        border-radius: 50%;
+        display: none;
     }
 
     .mobileClosing {
