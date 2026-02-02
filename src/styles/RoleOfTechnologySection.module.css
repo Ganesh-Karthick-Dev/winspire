@@ -144,7 +144,7 @@
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #ffaa40;
+    color: #ffffff;
     /* Accent color */
     margin-bottom: 16px;
     display: block;
@@ -179,7 +179,7 @@
 
 .featureItem.active {
     opacity: 1;
-    border-left-color: #ffaa40;
+    border-left-color: #ffffff;
     padding-left: 40px;
 }
 
