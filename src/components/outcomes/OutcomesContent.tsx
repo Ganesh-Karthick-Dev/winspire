@@ -254,10 +254,10 @@ const OutcomesContent = () => {
                 } else {
                     // Side Text Reveal (Odd sections 1, 3, 5, 7)
                     tl.fromTo(`#text-${section.id}`,
-                        { opacity: 0, yPercent: 0, filter: 'blur(10px)', zIndex: 5 },
+                        { opacity: 0, yPercent: -48, filter: 'blur(10px)', zIndex: 5 },
                         {
                             opacity: 1,
-                            yPercent: 0,
+                            yPercent: -50,
                             filter: 'blur(0px)',
                             duration: 8,
                             ease: 'power3.out'

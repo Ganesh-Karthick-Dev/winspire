@@ -234,10 +234,12 @@
 /* 1st & 3rd sections (left/right): top-aligned so content never goes above viewport */
 .textSection.left,
 .textSection.right {
-    top: 12vh;
-    transform: translateY(0);
-    max-height: 78vh;
-    /* 12vh + 78vh = 90vh, stays in view */
+    top: 52%; /* Slightly lower to clear navbar */
+    transform: translateY(-50%);
+    max-height: 88vh;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    box-sizing: border-box;
 }
 
 .textSection.left {
@@ -252,16 +254,16 @@
 .textSection.centered {
     right: 4% !important;
     left: auto !important;
-    top: 50%;
+    top: 52%; /* Slightly lower to clear navbar */
     transform: translateY(-50%);
     width: 42%;
     max-width: 550px;
-    max-height: 85vh; /* Reduced from 90vh */
+    max-height: 88vh;
     overflow-y: auto;
     text-align: left;
     background: rgba(2, 6, 23, 0.75);
     backdrop-filter: blur(20px);
-    padding: 1.75rem; /* Slightly reduced padding */
+    padding: 1.5rem; /* Reduced padding from 1.75rem */
     border-radius: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.6);
@@ -278,7 +280,7 @@
     /* Reduced from 2.25rem */
     font-weight: 700;
     color: #f1f5f9;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem; /* Reduced from 1rem */
     line-height: 1.2;
     perspective: 1000px;
     /* For 3D rotation */
@@ -290,33 +292,27 @@
 }
 
 .sectionParagraph {
-    font-size: 1.125rem;
+    font-size: 1.1rem; /* Slightly smaller */
     color: #cbd5e1;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
+    line-height: 1.6; /* Tighter line height */
+    margin-bottom: 1.25rem; /* Reduced from 1.5rem */
 }
 
 /* --- Final Statement Design (Rough Glass Impact Box) --- */
 .finalStatementBox {
-    margin-top: 1.5rem;
-    /* Reduced */
+    margin-top: 1rem; /* Reduced from 1.5rem */
     position: relative;
-    padding: 1.25rem 1.5rem;
-    /* Reduced */
+    padding: 1rem 1.25rem; /* Reduced padding */
     background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08)),
         url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     background-blend-mode: overlay;
     border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 1.25rem;
+    border-radius: 1.5rem;
     color: #fff;
     font-weight: 500;
-    font-size: 1.1rem;
-    /* Reduced */
-    line-height: 1.5;
-    box-shadow:
-        0 30px 60px rgba(0, 0, 0, 0.4),
-        inset 0 0 30px rgba(255, 255, 255, 0.05);
+    font-size: 1rem; /* Reduced from 1.1rem */
+    line-height: 1.4; /* Tighter */
     backdrop-filter: blur(80px) saturate(1.8) contrast(1.1);
     overflow: hidden;
 }
@@ -449,9 +445,9 @@
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 1rem;
-    padding: 1.25rem;
+    padding: 1rem; /* Reduced from 1.25rem */
     color: #e2e8f0;
-    font-size: 1rem;
+    font-size: 0.95rem; /* Slightly smaller */
     font-weight: 500;
     transition: all 0.3s ease;
     backdrop-filter: blur(25px);
