@@ -16,6 +16,16 @@ export default function SolutionsFinalCTA() {
     const cardRef = useRef<HTMLDivElement>(null);
     const glowRef = useRef<HTMLDivElement>(null);
 
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        cardRef.current.style.setProperty('--mouse-x', `${x}px`);
+        cardRef.current.style.setProperty('--mouse-y', `${y}px`);
+    };
+
     useEffect(() => {
         const ctx = gsap.context(() => {
             gsap.fromTo(
@@ -77,20 +87,29 @@ export default function SolutionsFinalCTA() {
     return (
         <section ref={sectionRef} className={styles.section}>
             <div ref={glowRef} className={styles.glowBackground} />
-            <div ref={cardRef} className={styles.glassCard}>
-                <span className={styles.eyebrow}>Final CTA</span>
-                <h2 className={styles.heading}>
-                    Let&apos;s Design the Right Revenue Solution for You
-                </h2>
-                <p className={styles.subText}>
-                    If you are looking for an RCM partner who understands healthcare
-                    deeply, values transparency, and designs solutions around outcomes
-                    rather than assumptions, we would welcome the conversation.
-                </p>
-                <Link href="/book-demo" className={styles.ctaButton}>
-                    Book a Strategic Conversation
-                    <FaArrowRight size={12} />
-                </Link>
+            <div 
+                ref={cardRef} 
+                className={styles.glassCard}
+                onMouseMove={handleMouseMove}
+            >
+                <div className={styles.grainOverlay} aria-hidden="true" />
+                <div className={styles.lightEffect} aria-hidden="true" />
+                
+                <div className={styles.cardContent}>
+                    <span className={styles.eyebrow}>Final CTA</span>
+                    <h2 className={styles.heading}>
+                        Let&apos;s Design the Right Revenue Solution for You
+                    </h2>
+                    <p className={styles.subText}>
+                        If you are looking for an RCM partner who understands healthcare
+                        deeply, values transparency, and designs solutions around outcomes
+                        rather than assumptions, we would welcome the conversation.
+                    </p>
+                    <Link href="/book-demo" className={styles.ctaButton}>
+                        Book a Strategic Conversation
+                        <FaArrowRight size={12} />
+                    </Link>
+                </div>
             </div>
         </section>
     );

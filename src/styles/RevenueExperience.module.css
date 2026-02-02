@@ -14,8 +14,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
-    align-items: start;
-    /* Align top since left column is taller/stacked */
+    align-items: center;
 }
 
 /* Left Column: Text Content + Image */
@@ -23,23 +22,35 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+    text-align: center;
+    align-items: center;
+}
+
+.textBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .tag {
     font-size: 14px;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.75);
     margin-bottom: 24px;
     display: inline-block;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .title {
-    font-size: 48px;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
     line-height: 1.1;
     font-weight: 400;
     margin: 0 0 16px 0;
-    background: linear-gradient(90deg, #fff, #aaa);
+    background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -52,18 +63,21 @@
 }
 
 .subtitle {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 400;
     color: #ffffff;
     margin-bottom: 24px;
+    opacity: 0.9;
 }
 
 .introText {
-    font-size: 16px;
+    font-size: 1.1rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 0px;
     max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Right Column: Steps Grid */
