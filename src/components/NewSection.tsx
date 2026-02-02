@@ -482,14 +482,20 @@ export default function NewSection() {
                         gap: 1rem;
                     }
 
-                    /* CTA banner: top & bottom padding so title doesn't touch border; enhanced for mobile */
+                    /* CTA banner: one centered block on mobile, no side boxy patterns */
                     .ns-cta-banner {
                         padding: 3rem 1.5rem 3rem;
                         border-radius: 16px;
                     }
 
+                    .ns-geo-pattern {
+                        display: none;
+                    }
+
                     .ns-cta-content {
                         padding: 0.5rem 0;
+                        width: 100%;
+                        max-width: 100%;
                     }
 
                     .ns-cta-title {
