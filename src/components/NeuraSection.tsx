@@ -114,7 +114,8 @@ export default function NeuraSection() {
                         style={{ marginTop: "4rem" }}
                         className="ns-intro-text"
                     >
-                        Neura is not software you manage. It is an <strong>embedded intelligence layer</strong> that powers how work gets done.
+                        Neura is not software you manage. <br />
+                        It is intelligence embedded into how work happens.
                     </motion.p>
                 </header>
 
