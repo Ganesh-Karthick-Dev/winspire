@@ -38,6 +38,12 @@ export default function OutcomesSection() {
             icon: Activity,
             stat: "AI",
             statLabel: "Driven Insights"
+        },
+        {
+            text: "Scale operations without proportional cost increases",
+            icon: CheckCircle2,
+            stat: "3x",
+            statLabel: "Capacity Growth"
         }
     ];
 
