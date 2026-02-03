@@ -98,21 +98,20 @@ const OutcomesDesignGraphic: React.FC<OutcomesDesignGraphicProps> = ({ items, is
                 </g>
 
                 {/* Text Labels - Mapping the SOLUTIONS items now */}
-                {/* Note: Colors are darkened slightly for readability on white/glass if needed, 
-                    but sticking to brand colors works well too. */}
+                {/* Note: Colors are lightened for readability on dark glass */}
                 <g className="point-text">
-                    <text x="250" y="155" fill="#334155" fontSize="14" fontWeight="bold">{items[0]}</text>
+                    <text x="250" y="155" fill="#f8fafc" fontSize="14" fontWeight="bold">{items[0]}</text>
                 </g>
                 <g className="point-text">
-                    <text x="290" y="270" fill="#334155" fontSize="14" fontWeight="bold">{items[1]}</text>
+                    <text x="290" y="270" fill="#f8fafc" fontSize="14" fontWeight="bold">{items[1]}</text>
                 </g>
                 <g className="point-text">
-                    <text x="250" y="375" fill="#334155" fontSize="14" fontWeight="bold">{items[2]}</text>
+                    <text x="250" y="375" fill="#f8fafc" fontSize="14" fontWeight="bold">{items[2]}</text>
                 </g>
 
                 {/* Updated Vertical Label */}
-                <text x="50" y="250" fill="#94a3b8" fontSize="20" fontWeight="bold">SYSTEM</text>
-                <text x="30" y="285" fill="#475569" fontSize="28" fontWeight="900">DESIGN</text>
+                <text x="50" y="250" fill="#cbd5e1" fontSize="20" fontWeight="bold">SYSTEM</text>
+                <text x="30" y="285" fill="#e2e8f0" fontSize="28" fontWeight="900">DESIGN</text>
             </svg>
         </div>
     );

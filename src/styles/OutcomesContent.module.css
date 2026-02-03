@@ -4,34 +4,37 @@
 .desktopView { display: block; }
 .mobileView { display: none; }
 
-/* Main Container - White Glass Theme */
-/* Main Container - Background removed per request: "just keep that inside white card alone" */
+/* Main Container */
 .staticContainer {
     width: 100%;
-    min-height: 100vh;
+    /* Reduced min-height to fit viewport better, previously 100vh */
+    min-height: 90vh; 
+    height: auto;
     position: relative;
-    background: transparent; /* Changed from gradient to transparent */
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem 2rem;
+    padding: 2rem 1.5rem; /* Reduced padding */
     z-index: 10;
 }
 
 .staticContentWrapper {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px; /* Condensed width */
     display: grid;
-    grid-template-columns: 1.2fr 1fr; /* Graphic gets slightly more space */
-    gap: 4rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem; /* Reduced gap */
     align-items: center;
-    /* White Glass Effect */
-    background: rgba(255, 255, 255, 0.5); /* Increased opacity for "White Card" Feel */
-    backdrop-filter: blur(50px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 2.5rem; /* Rounder corners */
-    padding: 4rem;
-    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.1);
+    /* Dark Glass Effect */
+    background: radial-gradient(circle at center, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    padding: 3.5rem 3rem; /* Reduced padding */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
 }
 
 /* Left Side: Graphic */
@@ -46,17 +49,16 @@
 .designGraphicWrapper {
     width: 100%;
     height: auto;
-    max-width: 600px;
+    max-width: 500px; /* Slightly reduced max-width */
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Removed dark radial gradient, keeping it clean */
 }
 
 .designGraphicSvg {
     width: 100%;
     height: auto;
-    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1)); /* Softer shadow */
+    filter: drop-shadow(0 0 25px rgba(0,0,0,0.4));
 }
 
 /* Right Side: Text */
@@ -65,69 +67,68 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-left: 1rem;
 }
 
-/* Typography - Dark Mode to Light Mode Conversion */
+/* Typography - Light Mode to Dark Mode Conversion */
 .section1Title {
-    font-size: 3.5rem;
+    font-size: 2.75rem; /* Reduced from 3.5rem */
     font-weight: 700;
     line-height: 1.1;
-    color: #1e293b; /* Slate 800 */
-    margin-bottom: 2rem;
-    letter-spacing: -0.03em;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
 }
 
 .highlightTitle {
-    color: #0ea5e9; /* Sky 500 - Matches Blue in graphic */
+    color: #38bdf8; /* Sky 400 */
     position: relative;
     display: inline-block;
 }
 
 .section1Content {
-    font-size: 1.25rem;
+    font-size: 1.125rem; /* Reduced from 1.25rem */
     line-height: 1.6;
-    color: #475569; /* Slate 600 */
+    color: #cbd5e1; /* Slate 300 */
     margin-bottom: 2rem;
     font-weight: 400;
+    max-width: 95%;
 }
 
-/* ... Final Statement - NEW PREMIUM PILL DESIGN ... */
+/* ... Final Statement ... */
 .finalStatementPill {
-    margin-top: 4rem;
+    margin-top: 1rem; /* Reduced margin */
     display: flex;
     align-items: center;
-    gap: 2rem;
-    padding: 1.5rem 2.5rem;
-    background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(40px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 9999px; /* Perfect Pill Shape */
-    box-shadow: 
-        0 4px 6px -1px rgba(0, 0, 0, 0.02),
-        0 20px 40px -10px rgba(0, 0, 0, 0.05);
-    transition: all 0.4s ease;
+    gap: 1.5rem;
+    padding: 1rem 2rem; /* Compact pill */
+    background: rgba(255, 255, 255, 0.05); /* Very transparent white */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 }
 
 .finalStatementPill:hover {
-    background: rgba(255, 255, 255, 0.6);
-    transform: translateY(-3px);
-    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.08);
-    border-color: #0ea5e9;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    border-color: rgba(56, 189, 248, 0.5);
 }
 
 .pillIcon {
     flex-shrink: 0;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3rem; /* Reduced size */
+    height: 3rem;
     background: #0ea5e9;
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 20px -5px rgba(14, 165, 233, 0.3);
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
 }
 
 .pillContent {
@@ -135,35 +136,11 @@
 }
 
 .pillContent p {
-    color: #0f172a;
+    color: #f1f5f9; /* Slate 100 */
     font-weight: 500;
-    font-size: 1.15rem;
+    font-size: 1rem;
     line-height: 1.4;
     margin: 0;
-}
-
-.pillStatus {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: inherit;
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #64748b;
-    letter-spacing: 0.1em;
-    padding: 0.5rem 1rem;
-    background: rgba(0, 0, 0, 0.03);
-    border-radius: 9999px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.statusDot {
-    width: 6px;
-    height: 6px;
-    background: #10b981; /* Success Green */
-    border-radius: 50%;
-    box-shadow: 0 0 8px #10b981;
 }
 
 /* Shimmer overlay for pill hover */
@@ -177,13 +154,13 @@
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(255, 255, 255, 0.4),
+        rgba(255, 255, 255, 0.1),
         transparent
     );
 }
 
 .finalStatementPill:hover::after {
-    animation: pillShimmer 1.5s ease-out forwards;
+    animation: pillShimmer 1.2s ease-out forwards;
 }
 
 @keyframes pillShimmer {
@@ -192,83 +169,67 @@
 
 /* Responsive Stacking */
 @media (max-width: 1024px) {
+    .staticContainer {
+        padding: 3rem 1.5rem;
+        height: auto;
+        min-height: auto;
+    }
+
     .staticContentWrapper {
         grid-template-columns: 1fr;
-        padding: 2rem;
-        gap: 3rem;
+        padding: 2.5rem 1.5rem;
+        gap: 2.5rem;
         text-align: center;
+        max-width: 600px;
     }
 
     .staticLeft {
-        order: 1; /* Keep graphic first or second? Usually graphic first is visual anchor */
+        order: 1;
     }
 
     .staticRight {
         order: 2;
+        padding-left: 0;
         align-items: center;
     }
     
     .section1Title {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
         text-align: center;
     }
     
     .section1Content {
         text-align: center;
-        margin: 0 auto 2.5rem;
-        max-width: 600px;
+        margin: 0 auto 2rem;
+        max-width: 100%;
     }
-    
-    .finalStatementBox {
-        text-align: left; /* Keep left alignment for readability usually, or center */
-        text-align: center;
-        border-left: none;
-        border-top: 4px solid #0ea5e9;
+
+    .finalStatementPill {
+        text-align: left;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
     }
 }
 
-@media (max-width: 768px) {
-    .staticContainer {
-        padding: 2rem 1rem;
-    }
-
+@media (max-width: 640px) {
     .staticContentWrapper {
-        padding: 1.5rem;
+        padding: 2rem 1rem;
         border-radius: 1.5rem;
     }
 
     .section1Title {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
-}
-
-/* List Styles */
-.contentList {
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.contentListItem {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    font-size: 1.2rem;
-    color: #475569;
-    line-height: 1.5;
-    font-weight: 500;
-}
-
-.checkIcon {
-    color: #0ea5e9;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 0.25rem;
-    background: rgba(14, 165, 233, 0.1);
-    border-radius: 50%;
-    padding: 0.25rem;
+    
+    .finalStatementPill {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+    
+    .pillIcon {
+        margin-bottom: 0.5rem;
+    }
 }
