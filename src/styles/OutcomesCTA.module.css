@@ -1,0 +1,60 @@
+/* OutcomesCTA.module.css */
+
+.ctaSection {
+    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, rgba(15, 23, 42, 0.5) 0%, rgba(2, 6, 23, 1) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4rem 2rem;
+    overflow: hidden;
+}
+
+.ctaContent {
+    text-align: center;
+    max-width: 800px;
+    z-index: 2;
+}
+
+.title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.description {
+    color: #94a3b8;
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    margin-bottom: 3rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ctaButton {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: linear-gradient(90deg, #0ea5e9, #2563eb);
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ctaButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.5);
+}

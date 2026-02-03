@@ -2,116 +2,76 @@
 
 .heroSection {
     position: relative;
-    height: 80vh;
-    min-height: 500px;
-    width: calc(100% - 1.5rem);
-    margin: 0.6rem auto;
-    /* Ensure it doesn't overlap the fixed navbar text visually */
-    margin-top: 120px; 
-    border-radius: 24px;
-    overflow: hidden;
-    z-index: 10;
-}
-
-.heroSvg {
-    display: block;
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
+    background-color: var(--background);
+    color: var(--foreground);
+    /* Removed flex to avoid sticky issues with auto-height children */
 }
 
-/* The Text Style inside SVG */
-.svgText {
+/* Top Hero Part */
+.heroTop {
+    position: relative;
+    width: 100%;
+    height: 90vh; /* Fixed height for the hero view */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes content to edges */
+    padding: 2rem 4rem; /* Adjust padding */
+    align-items: flex-start; /* Align Everything Left */
+    /* background: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 70%); Remove or keep subtle */
+}
+
+.mainTitle {
     font-family: 'Outfit', sans-serif;
+    font-size: clamp(3rem, 6vw, 7rem); /* Adjusted for left align */
     font-weight: 800;
-    font-size: 300px; /* Scaled via viewBox */
-    letter-spacing: -0.05em;
-    fill: black; /* Cuts the hole in the white mask */
-}
-
-/* The Overlay Color (Wall) */
-.overlayRect {
-    fill: rgba(15, 23, 42, 0.95); /* Slight Glass Effect (Dark Slate Blue with 95% opacity) */
-    /* Note: backdrop-filter doesn't work on SVG elements directly in all browsers */
-    transition: fill 0.5s ease;
-}
-
-/* New Subheading Styles */
-.subheadingContainer {
-    position: absolute;
-    top: 65%; /* Positioned below the main text roughly */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10; /* Above the SVG overlay */
-    text-align: center;
-    width: 100%;
-    max-width: 800px;
-    padding: 0 2rem;
-    pointer-events: none; /* Let clicks pass through if needed */
-}
-
-.subheadingText {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
-    letter-spacing: 0.02em;
-    line-height: 1.4;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-}
-
-/* Scroll Indication */
-.scrollIndicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgba(255,255,255,0.6);
-    font-size: 0.9rem;
-    font-weight: 500;
-    z-index: 110;
+    text-align: left; /* Left align */
+    line-height: 0.9;
+    letter-spacing: -0.04em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    pointer-events: none;
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.4) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 6rem; /* Space from top */
+    max-width: 80%;
+    z-index: 2;
+    filter: drop-shadow(0 0 40px rgba(255,255,255,0.1));
 }
 
-/* Responsive: mobile layout and animations (desktop unchanged) */
+.bottomSubtitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    font-weight: 500;
+    text-align: left; /* Left align */
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin-bottom: 4rem; /* Space from bottom */
+    line-height: 1.2;
+    z-index: 2;
+}
+
+/* Text Reveal Section Wrapper */
+.revealSection {
+    width: 100%;
+    position: relative;
+    background: transparent; /* Removed black background */
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .heroSection {
-        margin-top: 100px;
-        width: calc(100% - 1rem);
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-        min-height: 400px;
-        border-radius: 20px;
-        overflow: hidden;
+    .heroTop {
+        padding: 5rem 1rem 3rem;
+        min-height: 80vh;
+        justify-content: center;
+        gap: 2rem;
     }
-
-    .heroSvg {
-        overflow: hidden;
+    
+    .mainTitle {
+        margin-top: 0;
     }
-
-    /* Smaller text so "OUTCOMES" mask stays inside container on narrow viewports */
-    .svgText {
-        font-size: 90px;
-        letter-spacing: -0.02em;
-    }
-
-    .subheadingContainer {
-        padding: 0 1.25rem;
-    }
-
-    .subheadingText {
-        font-size: 1.1rem;
-        width: 80%;
-        margin: 0 auto;
-    }
-
-    .scrollIndicator {
-        bottom: 1.5rem;
-        font-size: 0.85rem;
+    
+    .bottomSubtitle {
+        font-size: 1.5rem;
     }
 }
