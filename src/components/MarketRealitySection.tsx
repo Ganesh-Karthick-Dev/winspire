@@ -63,7 +63,7 @@ export default function MarketRealitySection() {
                         />
                     </motion.div>
 
-                    <div className="mr-header-content" style={{ marginTop: "4rem" }}>
+                    <div className="mr-header-content">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -114,10 +114,7 @@ export default function MarketRealitySection() {
                                 className="mr-glass-card"
                                 style={{ '--item-color': item.color } as React.CSSProperties}
                             >
-                                {/* Background Index Number */}
-                                <span className="mr-card-bg-number">
-                                    0{index + 1}
-                                </span>
+
 
                                 <div className="mr-card-icon-prism">
                                     <item.icon size={28} />
@@ -152,8 +149,10 @@ export default function MarketRealitySection() {
                             className="flex items-center justify-center gap-5 bg-rose-500 text-white font-outfit text-xl md:text-2xl font-bold rounded-[20px] transition-all hover:scale-105 hover:shadow-xl shadow-lg border-none cursor-pointer shrink-0 w-full md:w-auto min-w-fit whitespace-nowrap"
                             style={{ padding: "24px 48px" }}
                         >
-                            <span className="relative top-[1px]">Stop Revenue Leakage</span>
-                            <ArrowRight size={24} strokeWidth={2.5} />
+                            <span className="relative top-[1px]">See Where Revenue Is Leaking</span>
+                            <div className="mr-cta-arrow">
+                                <ArrowRight size={24} strokeWidth={2.5} />
+                            </div>
                         </button>
                     </div>
                 </motion.div>
@@ -200,6 +199,7 @@ export default function MarketRealitySection() {
                     justify-content: space-between;
                     align-items: center;
                     gap: 6rem;
+                    margin-top: 4rem;
                 }
 
                 /* Truth Statements */
@@ -361,22 +361,7 @@ export default function MarketRealitySection() {
                     box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
                 }
 
-                .mr-card-bg-number {
-                    position: absolute;
-                    top: 24px;
-                    right: 40px;
-                    font-family: 'Outfit', sans-serif;
-                    font-size: 6rem;
-                    font-weight: 900;
-                    color: rgba(255, 255, 255, 0.03);
-                    pointer-events: none;
-                    line-height: 1;
-                    transition: color 0.5s ease;
-                }
 
-                .mr-glass-card:hover .mr-card-bg-number {
-                    color: rgba(255, 255, 255, 0.06);
-                }
 
                 .mr-card-icon-prism {
                     width: 60px;
@@ -433,6 +418,19 @@ export default function MarketRealitySection() {
 
                 .mr-glass-card:hover .mr-card-accent-line {
                     opacity: 1;
+                }
+
+                /* CTA Animation */
+                .mr-cta-arrow {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    animation: hit-border 1s infinite alternate cubic-bezier(0.17, 0.67, 0.83, 0.67);
+                }
+
+                @keyframes hit-border {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(10px); }
                 }
 
                 @media (max-width: 1100px) {
