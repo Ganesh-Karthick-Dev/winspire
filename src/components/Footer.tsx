@@ -26,14 +26,12 @@ export default function Footer() {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    padding: '40px 60px',
-                    // borderBottom: '1px solid rgba(255,255,255,0.1)'
+                    padding: '32px 48px',
                 }}>
                     {/* Logo */}
-                    {/* Logo */}
                     <div style={{
-                        width: '180px',
-                        height: '50px',
+                        width: '140px',
+                        height: '40px',
                         backgroundColor: 'white',
                         maskImage: 'url("/images/Logo-White.svg")',
                         maskSize: 'contain',
@@ -46,10 +44,10 @@ export default function Footer() {
                     }} />
 
                     {/* Social Links */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '50px' }}>
-                        <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}>Social</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '40px' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)' }}>Social</span>
                         <a href="https://www.linkedin.com/company/winspire-rcm-private-limited/" target="_blank" rel="noopener noreferrer"
-                            style={{ fontSize: '1rem', color: 'white' }}>
+                            style={{ fontSize: '0.875rem', color: 'white' }}>
                             LinkedIn
                         </a>
                     </div>
@@ -60,40 +58,40 @@ export default function Footer() {
                         style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '8px',
+                            gap: '6px',
                             background: 'none',
                             border: 'none',
                             color: 'white',
-                            fontSize: '0.85rem',
+                            fontSize: '0.75rem',
                             cursor: 'pointer',
                             padding: 0
                         }}
                     >
                         PageTop
-                        <span style={{ fontSize: '1rem' }}>↑</span>
+                        <span style={{ fontSize: '0.875rem' }}>↑</span>
                     </button>
                 </div>
 
                 {/* Main Content */}
                 <div style={{
                     display: 'flex',
-                    gap: '40px',
-                    padding: '40px 60px',
+                    gap: '32px',
+                    padding: '32px 48px',
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
                     flexWrap: 'wrap'
                 }}>
                     {/* Left - Service Card */}
                     <div style={{
-                        width: '300px',
+                        width: '240px',
                         flexShrink: 0,
-                        borderRadius: '16px',
+                        borderRadius: '12px',
                         overflow: 'hidden',
                         background: 'white',
-                        boxShadow: '0 10px 40px rgba(0,0,0,0.15)'
+                        boxShadow: '0 8px 32px rgba(0,0,0,0.15)'
                     }}>
                         {/* Card Image */}
-                        <div style={{ width: '100%', height: '160px', position: 'relative', overflow: 'hidden' }}>
+                        <div style={{ width: '100%', height: '130px', position: 'relative', overflow: 'hidden' }}>
                             <Image
                                 src="/poster/qefqe.webp"
                                 alt="Winspire RCM Service"
@@ -104,175 +102,175 @@ export default function Footer() {
 
                         {/* Card Bottom - White */}
                         <div style={{
-                            padding: '20px',
+                            padding: '16px',
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
                             background: 'white'
                         }}>
                             <div style={{ textAlign: 'left' }}>
-                                <div style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a1a' }}>Winspire RCM</div>
-                                <div style={{ fontSize: '0.8rem', color: '#666' }}>Service Site</div>
+                                <div style={{ fontSize: '0.875rem', fontWeight: 700, color: '#1a1a1a' }}>Winspire RCM</div>
+                                <div style={{ fontSize: '0.7rem', color: '#666' }}>Service Site</div>
                             </div>
-                            <span style={{ fontSize: '1.2rem', color: '#333', fontWeight: 'bold' }}>↗</span>
+                            <span style={{ fontSize: '1rem', color: '#333', fontWeight: 'bold' }}>↗</span>
                         </div>
 
                         {/* Award Badge */}
                         <div style={{
-                            padding: '15px 20px',
+                            padding: '12px 16px',
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '12px',
+                            gap: '10px',
                             borderTop: '1px solid #eee',
                             background: 'white'
                         }}>
                             <div style={{
-                                width: '30px',
-                                height: '30px',
+                                width: '24px',
+                                height: '24px',
                                 borderRadius: '50%',
                                 background: '#e53935',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 color: 'white',
-                                fontSize: '0.7rem',
+                                fontSize: '0.6rem',
                                 fontWeight: 700
                             }}>★</div>
                             <div style={{ textAlign: 'left' }}>
-                                <div style={{ fontSize: '0.65rem', color: '#666', letterSpacing: '0.05em' }}>HEALTHCARE EXCELLENCE</div>
-                                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#e53935' }}>2024 Award</div>
+                                <div style={{ fontSize: '0.55rem', color: '#666', letterSpacing: '0.05em' }}>HEALTHCARE EXCELLENCE</div>
+                                <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#e53935' }}>2024 Award</div>
                             </div>
                         </div>
                     </div>
 
                     {/* Right - Link Columns */}
-                    <div style={{ display: 'flex', gap: '40px', flex: 1, justifyContent: 'flex-end' }}>
+                    <div style={{ display: 'flex', gap: '32px', flex: 1, justifyContent: 'flex-end' }}>
 
                         {/* Company Column */}
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '180px' }}>
-                            <Link href="/company" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', width: '140px' }}>
+                            <Link href="/company" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
                                 <span style={{
                                     color: 'white',
-                                    marginRight: '12px',
-                                    fontSize: '1.2rem',
+                                    marginRight: '10px',
+                                    fontSize: '1rem',
                                     lineHeight: 1,
                                     position: 'relative',
-                                    left: '-5px' // Adjusted for thicker line
+                                    left: '-4px'
                                 }}>•</span>
-                                <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'white', margin: 0, cursor: 'pointer' }}>
+                                <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'white', margin: 0, cursor: 'pointer' }}>
                                     Company
                                 </h3>
                             </Link>
                             <div style={{
-                                borderLeft: '2px solid rgba(255,255,255,0.3)', // Thicker line
-                                paddingLeft: '24px',
+                                borderLeft: '2px solid rgba(255,255,255,0.3)',
+                                paddingLeft: '20px',
                                 marginLeft: '0px',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                gap: '12px',
+                                gap: '10px',
                                 alignItems: 'flex-start',
                                 textAlign: 'left'
                             }}>
-                                <Link href="/company#mission" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Mission</Link>
-                                <Link href="/company#vision" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Vision</Link>
-                                <Link href="/company#values" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Values</Link>
-                                <Link href="/company#board" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Board Members</Link>
-                                <Link href="/company#profile" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Profile</Link>
-                                <Link href="/company#access" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Access</Link>
+                                <Link href="/company#mission" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Mission</Link>
+                                <Link href="/company#vision" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Vision</Link>
+                                <Link href="/company#values" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Values</Link>
+                                <Link href="/company#board" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Board Members</Link>
+                                <Link href="/company#profile" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Profile</Link>
+                                <Link href="/company#access" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Access</Link>
                             </div>
                         </div>
 
                         {/* Outcomes Column */}
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '180px' }}>
-                            <Link href="/outcomes" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', width: '140px' }}>
+                            <Link href="/outcomes" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
                                 <span style={{
                                     color: 'white',
-                                    marginRight: '12px',
-                                    fontSize: '1.2rem',
+                                    marginRight: '10px',
+                                    fontSize: '1rem',
                                     lineHeight: 1,
                                     position: 'relative',
-                                    left: '-5px'
+                                    left: '-4px'
                                 }}>•</span>
-                                <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'white', margin: 0, cursor: 'pointer' }}>
+                                <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'white', margin: 0, cursor: 'pointer' }}>
                                     Outcomes
                                 </h3>
                             </Link>
                             <div style={{
                                 borderLeft: '2px solid rgba(255,255,255,0.3)',
-                                paddingLeft: '24px',
+                                paddingLeft: '20px',
                                 marginLeft: '0px',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                gap: '12px',
+                                gap: '10px',
                                 alignItems: 'flex-start',
                                 textAlign: 'left'
                             }}>
-                                <Link href="/outcomes#vision" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Vision</Link>
-                                <Link href="/outcomes#team" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Team</Link>
-                                <Link href="/outcomes#cases" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Case Studies</Link>
+                                <Link href="/outcomes#vision" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Vision</Link>
+                                <Link href="/outcomes#team" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Team</Link>
+                                <Link href="/outcomes#cases" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Case Studies</Link>
                             </div>
                         </div>
 
                         {/* Solutions Column */}
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '180px' }}>
-                            <Link href="/solutions" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', width: '140px' }}>
+                            <Link href="/solutions" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
                                 <span style={{
                                     color: 'white',
-                                    marginRight: '12px',
-                                    fontSize: '1.2rem',
+                                    marginRight: '10px',
+                                    fontSize: '1rem',
                                     lineHeight: 1,
                                     position: 'relative',
-                                    left: '-5px'
+                                    left: '-4px'
                                 }}>•</span>
-                                <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'white', margin: 0, cursor: 'pointer' }}>
+                                <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'white', margin: 0, cursor: 'pointer' }}>
                                     Solutions
                                 </h3>
                             </Link>
                             <div style={{
                                 borderLeft: '2px solid rgba(255,255,255,0.3)',
-                                paddingLeft: '24px',
+                                paddingLeft: '20px',
                                 marginLeft: '0px',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                gap: '12px',
+                                gap: '10px',
                                 alignItems: 'flex-start',
                                 textAlign: 'left'
                             }}>
-                                <Link href="/solutions#culture" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Culture</Link>
-                                <Link href="/solutions#people" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>People</Link>
-                                <Link href="/solutions#environment" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Environment</Link>
-                                <Link href="/solutions#faq" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>FAQ</Link>
+                                <Link href="/solutions#culture" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Culture</Link>
+                                <Link href="/solutions#people" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>People</Link>
+                                <Link href="/solutions#environment" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Environment</Link>
+                                <Link href="/solutions#faq" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>FAQ</Link>
                             </div>
                         </div>
 
                         {/* Neura AI Column */}
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '180px' }}>
-                            <Link href="/neura-ai" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', width: '140px' }}>
+                            <Link href="/neura-ai" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
                                 <span style={{
                                     color: 'white',
-                                    marginRight: '12px',
-                                    fontSize: '1.2rem',
+                                    marginRight: '10px',
+                                    fontSize: '1rem',
                                     lineHeight: 1,
                                     position: 'relative',
-                                    left: '-5px'
+                                    left: '-4px'
                                 }}>•</span>
-                                <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'white', margin: 0, cursor: 'pointer' }}>
+                                <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'white', margin: 0, cursor: 'pointer' }}>
                                     Neura AI
                                 </h3>
                             </Link>
                             <div style={{
                                 borderLeft: '2px solid rgba(255,255,255,0.3)',
-                                paddingLeft: '24px',
+                                paddingLeft: '20px',
                                 marginLeft: '0px',
                                 display: 'flex',
                                 flexDirection: 'column',
-                                gap: '12px',
+                                gap: '10px',
                                 alignItems: 'flex-start',
                                 textAlign: 'left'
                             }}>
-                                <Link href="/neura-ai#mission" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Mission</Link>
-                                <Link href="/neura-ai#services" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Services</Link>
-                                <Link href="/neura-ai#technology" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.85rem', textDecoration: 'none' }}>Technology</Link>
+                                <Link href="/neura-ai#mission" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Mission</Link>
+                                <Link href="/neura-ai#services" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Services</Link>
+                                <Link href="/neura-ai#technology" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Technology</Link>
                             </div>
                         </div>
 
@@ -284,32 +282,32 @@ export default function Footer() {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    padding: '40px 60px',
+                    padding: '32px 48px',
                     borderTop: '2px solid rgba(255,255,255,0.3)',
-                    marginTop: '60px'
+                    marginTop: '48px'
                 }}>
                     {/* Left - Privacy Badge + Link */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                         {/* Privacy Badge - White circle with blue P */}
                         <div style={{
-                            width: '50px',
-                            height: '50px',
-                            borderRadius: '10px',
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '8px',
                             background: 'white',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
                         }}>
-                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <circle cx="12" cy="12" r="10" stroke="#3b82f6" strokeWidth="2" fill="none" />
-                                <text x="12" y="16" textAnchor="middle" fill="#3b82f6" fontSize="12" fontWeight="bold">P</text>
+                                <text x="12" y="16" textAnchor="middle" fill="#3b82f6" fontSize="10" fontWeight="bold">P</text>
                             </svg>
                         </div>
                         <Link href="/privacy" style={{
                             color: 'white',
                             textDecoration: 'none',
-                            fontSize: '0.9rem',
+                            fontSize: '0.8rem',
                             fontWeight: 500
                         }}>
                             Privacy Policy
@@ -319,7 +317,7 @@ export default function Footer() {
                     {/* Right - Copyright */}
                     <span style={{
                         color: 'rgba(255,255,255,0.6)',
-                        fontSize: '0.85rem'
+                        fontSize: '0.75rem'
                     }}>
                         © Winspire RCM Inc. All Rights Reserved.
                     </span>

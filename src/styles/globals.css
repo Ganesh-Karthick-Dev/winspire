@@ -5225,9 +5225,8 @@ footer p {
   position: relative;
   z-index: 30;
   background: transparent;
-  padding: 80px 5% 40px;
+  padding: 60px 4% 32px;
   color: white;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
