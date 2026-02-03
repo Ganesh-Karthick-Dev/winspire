@@ -170,7 +170,7 @@ export default function TempCompany() {
                 </section>
 
                 {/* Scaling Card - Starts inside hero, expands to 80% */}
-                <div className="absolute top-0 left-0 w-full h-[150vh] pointer-events-none z-50">
+                <div className="absolute top-20 left-0 w-full h-[150vh] pointer-events-none z-50">
                     <VideoScrollHero 
                         videoSrc="/temp/0_Doctor_Patient_1280x672.mp4"
                         startScale={0.35}
@@ -181,7 +181,7 @@ export default function TempCompany() {
             </div>
 
             {/* SPACER - Adjusted to allow the 150vh animation to finish without overlap */}
-            <div className="h-[80vh] pointer-events-none"></div>
+            <div className="h-[100vh] pointer-events-none"></div>
 
             {/* Main Content Wrapper */}
             <div className="relative z-20 flex flex-col pb-12">

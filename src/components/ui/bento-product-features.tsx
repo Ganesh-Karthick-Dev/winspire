@@ -13,7 +13,7 @@ const containerVariants = {
       delayChildren: 0.1,
     },
   },
-};
+} as const;
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -26,7 +26,7 @@ const itemVariants = {
       damping: 10,
     },
   },
-};
+} as const;
 
 interface BentoGridShowcaseProps {
   integration: React.ReactNode;

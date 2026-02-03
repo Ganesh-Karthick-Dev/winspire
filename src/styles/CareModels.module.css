@@ -60,10 +60,8 @@
     line-height: 1.1;
     font-weight: 700;
     margin-bottom: 1.5rem;
-    background: linear-gradient(to right, #ffffff, #e2e8f0);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .titleLine {

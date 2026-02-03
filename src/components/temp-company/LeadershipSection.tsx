@@ -35,7 +35,7 @@ const principles = [
 export default function LeadershipSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(1);
     const [containerWidth, setContainerWidth] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
 
