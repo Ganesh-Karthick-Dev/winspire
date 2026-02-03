@@ -1,6 +1,32 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import styles from '@/styles/OutcomesContent.module.css';
 import OutcomesDesignGraphic from './OutcomesDesignGraphic';
+
+const FallingWord = ({ text, delay, isHighlight = false, highlightClass = "" }: { text: string, delay: number, isHighlight?: boolean, highlightClass?: string }) => {
+    return (
+        <div style={{ position: 'relative', display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom', marginRight: '0.25em', paddingBottom: '0.1em' }}>
+            <motion.div
+                initial={{ y: 0 }}
+                whileInView={{ y: '105%' }}
+                transition={{ delay, duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+                viewport={{ once: true, margin: "-10%" }}
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: '#0ea5e9',
+                    zIndex: 2
+                }}
+            />
+            <span className={isHighlight ? highlightClass : undefined} style={{ display: 'inline-block' }}>
+                {text}
+            </span>
+        </div>
+    );
+};
 
 const OutcomesContent = () => {
     // Outcome Data - Single Static Section
@@ -29,7 +55,13 @@ const OutcomesContent = () => {
                 {/* Right Side: Text Content */}
                 <div className={styles.staticRight}>
                     <h3 className={styles.section1Title}>
-                        Outcomes Start With <span className={styles.highlightTitle}>Design</span>, <br/> Not Execution
+                        <FallingWord text="Outcomes" delay={0.1} />
+                        <FallingWord text="Start" delay={0.3} />
+                        <FallingWord text="With" delay={0.5} />
+                        <FallingWord text="Design," isHighlight={true} highlightClass={styles.highlightTitle} delay={0.7} />
+                        <br />
+                        <FallingWord text="Not" delay={1.0} />
+                        <FallingWord text="Execution" delay={1.2} />
                     </h3>
                     
                     <p className={styles.section1Content}>

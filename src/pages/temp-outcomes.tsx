@@ -15,6 +15,7 @@ import dynamic from 'next/dynamic';
 import Layout from '@/components/Layout';
 import OutcomesHero from '@/components/outcomes/OutcomesHero';
 import OutcomesContent from '@/components/outcomes/OutcomesContent';
+import OutcomesSystems from '@/components/outcomes/OutcomesSystems';
 import OutcomesCTA from '@/components/outcomes/OutcomesCTA';
 import pageStyles from '@/styles/temp-outcomes.module.css'; 
 import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
@@ -73,6 +74,7 @@ export default function Outcomes() {
             <div className={pageStyles.outcomesPageContent}>
                 <OutcomesHero />
                 <OutcomesContent />
+                <OutcomesSystems />
                 <OutcomesCTA />
             </div>
         </Layout>
