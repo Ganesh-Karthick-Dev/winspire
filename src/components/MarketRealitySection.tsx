@@ -45,15 +45,15 @@ export default function MarketRealitySection() {
         <section ref={sectionRef} id="market-reality" className="mr-section">
             <div className="mr-wrapper">
                 {/* Header Section */}
-                <header className="mr-header">
+                <header className="mr-header-container">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="title-container"
+                        className="mr-title-wrapper"
                     >
                         <SectionTitle
-                            title="MARKET REALITY — COST OF WAITING"
+                            title="What Waiting Is Quietly Costing Your Revenue"
                             subtitle="The Cost of Operating RCM the Old Way"
                             align="left"
                             textColor="text-white"
@@ -63,16 +63,16 @@ export default function MarketRealitySection() {
                         />
                     </motion.div>
 
-                    <div className="mr-intro-grid">
+                    <div className="mr-header-content" style={{ marginTop: "4rem" }}>
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="mr-intro-text"
+                            className="mr-truths"
                         >
-                            <p>
-                                Healthcare reimbursement has changed. Payers are automated. Administrative costs continue to rise.
-                                <strong> Workflows remain fragmented.</strong>
+                            <p className="mr-truth-p">
+                                Healthcare reimbursement has changed. Payers are <span className="mr-highlight">automated</span>. Administrative costs continue to rise.
+                                <span className="mr-truth-sub">Workflows remain fragmented.</span>
                             </p>
                         </motion.div>
 
@@ -80,19 +80,30 @@ export default function MarketRealitySection() {
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            className="mr-risk-alert"
+                            className="mr-risk-card"
                         >
-                            <div className="mr-alert-icon"><AlertCircle size={24} /></div>
-                            <p>Delays and denials don’t announce themselves. They <strong>compound quietly—until cash flow tightens</strong>.</p>
+                            <div className="mr-risk-glow" />
+                            <div className="mr-risk-header">
+                                <div className="mr-risk-icon-box">
+                                    <AlertCircle size={28} />
+                                </div>
+                                <span className="mr-risk-label">Critical Risk Area</span>
+                            </div>
+                            <p className="mr-risk-text">
+                                Delays and denials don’t announce themselves. They <span className="mr-risk-highlight">compound quietly</span>—until cash flow tightens.
+                            </p>
                         </motion.div>
                     </div>
                 </header>
 
                 {/* Consequences Grid */}
-                <div className="mr-content-body">
-                    <p className="mr-body-intro">Every day without clarity leads to:</p>
+                <div className="mr-content-interior">
+                    <div className="mr-leads-to-container">
+                        <p className="mr-leads-to-text">Every day without clarity leads to:</p>
+                        <div className="mr-leads-to-line" />
+                    </div>
 
-                    <div className="mr-grid">
+                    <div className="mr-consequence-grid">
                         {consequences.map((item, index) => (
                             <motion.div
                                 key={index}
@@ -100,16 +111,25 @@ export default function MarketRealitySection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className="mr-item"
+                                className="mr-glass-card"
                                 style={{ '--item-color': item.color } as React.CSSProperties}
                             >
-                                <div className="mr-icon-box">
+                                {/* Background Index Number */}
+                                <span className="mr-card-bg-number">
+                                    0{index + 1}
+                                </span>
+
+                                <div className="mr-card-icon-prism">
                                     <item.icon size={28} />
                                 </div>
-                                <div className="mr-item-content">
-                                    <h4 className="mr-item-title">{item.title}</h4>
-                                    <p className="mr-item-desc">{item.desc}</p>
+
+                                <div className="mr-card-body">
+                                    <h4 className="mr-card-title">{item.title}</h4>
+                                    <p className="mr-card-desc">{item.desc}</p>
                                 </div>
+
+                                {/* Bottom Accent Line */}
+                                <div className="mr-card-accent-line" />
                             </motion.div>
                         ))}
                     </div>
@@ -163,277 +183,277 @@ export default function MarketRealitySection() {
                     flex-direction: column;
                 }
 
-                
-                /* Header Styling */
-                .mr-header {
+                /* Layout Containers */
+                .mr-header-container {
+                    padding: 0 64px;
+                    margin-bottom: 6rem;
                     text-align: left;
-                    margin-bottom: 5rem;
-                    padding-left: 64px;
-                    padding-right: 64px;
                 }
 
-                .title-container {
-                    margin-bottom: 3.5rem;
+                .mr-title-wrapper {
+                    margin-bottom: 12rem;
                 }
 
-                .mr-intro-grid {
-                    display: grid;
-                    grid-template-columns: 1.5fr 1fr;
-                    gap: 5rem;
+                .mr-header-content {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
                     align-items: center;
+                    gap: 6rem;
                 }
 
-                .mr-intro-text p {
+                /* Truth Statements */
+                .mr-truths {
+                    flex: 1.4;
+                }
+
+                .mr-truth-p {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.5rem;
-                    line-height: 1.6;
-                    color: #cbd5e1;
-                    margin: 0;
-                }
-
-                .mr-intro-text strong {
-                    color: #ffffff;
+                    font-size: 2.75rem;
+                    line-height: 1.25;
                     font-weight: 600;
+                    color: #f1f5f9;
+                    margin: 0;
+                    letter-spacing: -0.02em;
                 }
 
-                .mr-risk-alert {
+                .mr-highlight {
+                    color: #ffffff;
+                    font-weight: 700;
+                }
+
+                .mr-truth-sub {
+                    display: block;
+                    margin-top: 1.5rem;
+                    color: #fb7185;
+                    font-weight: 700;
+                    font-style: italic;
+                }
+
+                /* Risk Card Styling */
+                .mr-risk-card {
+                    flex: 1;
+                    position: relative;
+                    background: rgba(15, 23, 42, 0.85);
+                    border: 1px solid rgba(244, 63, 94, 0.3);
+                    border-radius: 28px;
+                    padding: 40px;
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+
+                .mr-risk-glow {
+                    position: absolute;
+                    top: -40px;
+                    right: -40px;
+                    width: 160px;
+                    height: 160px;
+                    background: rgba(244, 63, 94, 0.12);
+                    filter: blur(60px);
+                    pointer-events: none;
+                }
+
+                .mr-risk-header {
                     display: flex;
                     align-items: center;
                     gap: 1.25rem;
-                    padding: 1.5rem 2rem;
-                    background: rgba(244, 63, 94, 0.08); /* More subtle red background */
-                    border: 1px solid rgba(244, 63, 94, 0.25);
-                    border-radius: 100px; /* Pill shape for modern look */
-                    backdrop-filter: blur(10px);
+                    margin-bottom: 24px;
                 }
 
-                .mr-alert-icon {
+                .mr-risk-icon-box {
                     color: #f43f5e;
+                    background: rgba(244, 63, 94, 0.15);
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 12px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background: rgba(244, 63, 94, 0.2);
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    flex-shrink: 0;
+                    animation: pulse 2s infinite ease-in-out;
                 }
 
-                .mr-risk-alert p {
+                @keyframes pulse {
+                    0% { transform: scale(1); opacity: 1; }
+                    50% { transform: scale(1.1); opacity: 0.7; }
+                    100% { transform: scale(1); opacity: 1; }
+                }
+
+                .mr-risk-label {
+                    color: #f43f5e;
+                    text-transform: uppercase;
+                    font-weight: 800;
+                    letter-spacing: 0.25em;
+                    font-size: 0.875rem;
+                }
+
+                .mr-risk-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.125rem;
-                    color: #ffdce5; /* Lighter text for contrast */
+                    font-size: 1.45rem;
+                    line-height: 1.6;
+                    color: #e2e8f0;
                     margin: 0;
-                    font-weight: 400;
                 }
 
-                .mr-risk-alert strong {
+                .mr-risk-highlight {
                     color: #ffffff;
                     font-weight: 600;
+                    text-decoration: underline;
+                    text-decoration-color: rgba(244, 63, 94, 0.4);
+                    text-underline-offset: 6px;
                 }
 
-                /* Body Content Styling */
-                .mr-content-body {
+                /* Consequence Section Styling */
+                .mr-content-interior {
+                    padding: 0 64px;
                     margin-bottom: 8rem;
-                    padding-left: 64px;
-                    padding-right: 64px;
-                    flex: 1;
                 }
 
-                .mr-body-intro {
+                .mr-leads-to-container {
+                    display: flex;
+                    align-items: center;
+                    gap: 2.5rem;
+                    margin-bottom: 4rem;
+                }
+
+                .mr-leads-to-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.5rem; /* Larger intro */
+                    font-size: 1.75rem;
+                    font-weight: 700;
                     color: #ffffff;
-                    margin-bottom: 3rem;
-                    font-weight: 600;
+                    margin: 0;
+                    white-space: nowrap;
                 }
 
-                .mr-grid {
+                .mr-leads-to-line {
+                    flex: 1;
+                    height: 1px;
+                    background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+                }
+
+                /* Grid & Cards */
+                .mr-consequence-grid {
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Slightly wider cards */
+                    grid-template-columns: repeat(3, 1fr);
                     gap: 2rem;
                 }
 
-                .mr-item {
+                .mr-glass-card {
+                    position: relative;
+                    padding: 48px;
+                    background: rgba(255, 255, 255, 0.03);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border-radius: 40px;
+                    backdrop-filter: blur(20px);
+                    -webkit-backdrop-filter: blur(20px);
+                    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+                    overflow: hidden;
                     display: flex;
                     flex-direction: column;
-                    gap: 1.5rem;
-                    padding: 2.5rem;
-                    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    border-radius: 24px;
-                    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-                    position: relative;
-                    overflow: hidden;
+                    z-index: 1;
                 }
 
-                .mr-item:hover {
-                    background: linear-gradient(145deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
+                .mr-glass-card:hover {
+                    background: rgba(255, 255, 255, 0.06);
                     border-color: rgba(255, 255, 255, 0.2);
-                    transform: translateY(-8px);
-                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+                    transform: translateY(-10px);
+                    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
                 }
 
-                /* Colored line at top of card instead of glow */
-                .mr-item::after { 
-                    content: '';
+                .mr-card-bg-number {
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 1px;
-                    background: linear-gradient(90deg, transparent, var(--item-color), transparent);
-                    opacity: 0;
-                    transition: opacity 0.3s ease;
+                    top: 24px;
+                    right: 40px;
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 6rem;
+                    font-weight: 900;
+                    color: rgba(255, 255, 255, 0.03);
+                    pointer-events: none;
+                    line-height: 1;
+                    transition: color 0.5s ease;
                 }
 
-                .mr-item:hover::after {
-                    opacity: 1;
+                .mr-glass-card:hover .mr-card-bg-number {
+                    color: rgba(255, 255, 255, 0.06);
                 }
 
-                .mr-icon-box {
-                    width: 56px;
-                    height: 56px;
+                .mr-card-icon-prism {
+                    width: 60px;
+                    height: 60px;
+                    background: rgba(255, 255, 255, 0.05);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
                     border-radius: 16px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background: rgba(255, 255, 255, 0.05);
-                    color: var(--item-color);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    transition: all 0.3s ease;
+                    color: #cbd5e1;
+                    margin-bottom: 40px;
+                    transition: all 0.5s ease;
                 }
-                
-                .mr-item:hover .mr-icon-box {
-                    transform: scale(1.1);
-                    background: rgba(255, 255, 255, 0.1);
+
+                .mr-glass-card:hover .mr-card-icon-prism {
+                    background: rgba(var(--item-color-rgb), 0.15);
                     border-color: var(--item-color);
-                    box-shadow: 0 0 20px -5px var(--item-color);
+                    color: var(--item-color);
+                    transform: scale(1.1) rotate(5deg);
                 }
 
-                .mr-item-title {
+                .mr-card-title {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.5rem;
+                    font-size: 1.625rem;
                     font-weight: 700;
                     color: #ffffff;
-                    margin-bottom: 0.75rem;
+                    margin-bottom: 12px;
+                    transition: transform 0.3s ease;
                 }
 
-                .mr-item-desc {
+                .mr-glass-card:hover .mr-card-title {
+                    transform: translateX(4px);
+                }
+
+                .mr-card-desc {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.125rem;
-                    color: #94a3b8;
+                    font-size: 1.15rem;
                     line-height: 1.6;
+                    color: #94a3b8;
                     margin: 0;
                 }
 
-                /* CTA Banner - Targeted Spacing & Visibility Redesign */
-                /* Removed custom .mr-cta-banner styles in favor of Tailwind classes */
-
-
-                .mr-cta-content {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    gap: 6rem;
-                    position: relative;
-                    z-index: 10;
-                    max-width: 1250px;
-                    margin: 0 auto;
+                .mr-card-accent-line {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
                     width: 100%;
+                    height: 2px;
+                    background: linear-gradient(90deg, transparent, var(--item-color), transparent);
+                    opacity: 0;
+                    transition: opacity 0.5s ease;
                 }
 
-                .mr-cta-text-group {
-                    max-width: 600px;
-                    flex: 1;
+                .mr-glass-card:hover .mr-card-accent-line {
+                    opacity: 1;
                 }
 
-                .mr-cta-label {
-                    font-family: 'Outfit', sans-serif;
-                    font-size: 0.95rem;
-                    text-transform: uppercase;
-                    letter-spacing: 0.3em;
-                    color: #fb7185;
-                    margin-bottom: 1.5rem;
-                    font-weight: 700;
-                    display: block;
-                    line-height: 1.2;
-                }
-
-                .mr-cta-title {
-                    font-family: 'Outfit', sans-serif;
-                    font-size: clamp(3.5rem, 6vw, 4.5rem);
-                    font-weight: 800;
-                    color: #0f172a;
-                    margin: 0;
-                    line-height: 1.1;
-                    letter-spacing: -0.03em;
-                }
-
-                .mr-cta-button {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 1.25rem;
-                    background: #f43f5e;
-                    color: #ffffff;
-                    font-family: 'Outfit', sans-serif;
-                    font-size: 1.35rem;
-                    font-weight: 800;
-                    padding: 1.5rem 3rem;
-                    border-radius: 20px;
-                    border: none;
-                    cursor: pointer;
-                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                    flex-shrink: 0;
-                    box-shadow: 0 15px 40px rgba(244, 63, 94, 0.3);
-                }
-
-                .mr-cta-button:hover {
-                    transform: scale(1.05);
-                    box-shadow: 0 10px 30px rgba(244, 63, 94, 0.4);
-                }
-
-                @media (max-width: 1024px) {
-                    .mr-intro-grid {
-                        grid-template-columns: 1fr;
-                        gap: 2rem;
-                    }
-                    
-                    .mr-cta-content {
+                @media (max-width: 1100px) {
+                    .mr-header-content {
                         flex-direction: column;
-                        text-align: center;
-                        gap: 2rem;
+                        gap: 3rem;
+                    }
+                    .mr-consequence-grid {
+                        grid-template-columns: repeat(2, 1fr);
                     }
                 }
 
                 @media (max-width: 768px) {
-                    .mr-wrapper {
-                        padding-top: 4rem; /* Mobile top padding */
-                    }
-
-                    .mr-header, .mr-content-body {
-                        padding-left: 24px;
-                        padding-right: 24px;
-                    }
-
-                    .mr-intro-text p {
-                        font-size: 1.25rem;
-                    }
-
-                    .mr-cta-banner {
-                        padding: 3rem 1.5rem;
-                        margin-bottom: 0;
-                        width: 100%;
-                    }
-                    
-                    .mr-content-body {
-                        margin-bottom: 0; /* Remove extra space above footer on mobile */
-                    }
-
-                    .mr-cta-button {
-                        width: 100%;
-                        justify-content: center;
-                    }
+                    .mr-section { padding: 4rem 0; }
+                    .mr-header-container, .mr-content-interior { padding: 0 24px; }
+                    .mr-truth-p { font-size: 2rem; }
+                    .mr-risk-card { padding: 30px; }
+                    .mr-risk-text { font-size: 1.25rem; }
+                    .mr-consequence-grid { grid-template-columns: 1fr; }
+                    .mr-glass-card { padding: 32px; }
+                    .mr-title-wrapper { margin-bottom: 4rem; }
                 }
             `}</style>
         </section>
