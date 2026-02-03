@@ -2,7 +2,6 @@
 
 .container {
     position: relative;
-    /* Height controls scroll duration - set to 300vh to ensure 3 points complete */
     height: 300vh;
     width: 100%;
     z-index: 10;
@@ -11,7 +10,7 @@
 .stickyWrapper {
     position: sticky;
     top: 0;
-    height: 100vh; /* Full viewport height for stable pinning */
+    height: 100vh;
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -20,28 +19,26 @@
     background: transparent;
 }
 
-/* --- Progress Line --- */
 .progressContainer {
     position: absolute;
-    top: 15%; /* Positioned near top */
+    top: 15%;
     left: 0;
     width: 100%;
-    padding: 0 4rem; 
+    padding: 0 4rem;
     z-index: 20;
 }
 
 @media (min-width: 1280px) {
     .progressContainer {
-        padding: 0 6rem; 
+        padding: 0 6rem;
     }
 }
 
 .track {
     width: 100%;
     height: 1px;
-    background: rgba(255, 255, 255, 0.15); /* Slightly darker track */
+    background: rgba(255, 255, 255, 0.1);
     position: relative;
-    overflow: hidden;
 }
 
 .progressBar {
@@ -50,41 +47,34 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background: #ffffff; /* Solid white for more contrast */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); /* Stronger glow */
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-/* --- Counter (Left) --- */
 .counterContainer {
     position: absolute;
-    top: 25%; /* Positioned below the line (15%) */
-    left: 15%; /* Moved in to reduce gap */
-    transform: none; /* Removed centerY to follow top positioning */
+    top: 25%;
+    left: 10%;
     z-index: 20;
 }
 
 .counterBox {
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 9999px;
-    padding: 0.35rem 1.2rem;
-    font-size: 0.85rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
     color: white;
     font-family: monospace;
-    letter-spacing: 0.1em;
-    background: rgba(255, 255, 255, 0.08); /* Darker backdrop */
-    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
 }
 
-/* --- Text Content (Right) --- */
 .textContainer {
-    position: absolute; 
-    top: 25%; /* Aligned with counter below line */
-    right: 10%; /* Moved in to reduce gap */
-    width: 55%; /* Slightly wider to meet counter */
-    height: auto;
+    position: absolute;
+    top: 25%;
+    right: 10%;
+    width: 60%;
     z-index: 10;
-    pointer-events: none;
-    transform: none; /* Removed centerY */
 }
 
 .textItemWrapper {
@@ -95,46 +85,22 @@
 }
 
 .textItem {
-    font-family: inherit; 
-    font-size: 1.5rem; 
+    font-size: clamp(1.5rem, 4vw, 3rem);
     font-weight: 500;
-    line-height: 1.1; /* Increased to prevent clipping/overlap */
-    letter-spacing: -0.01em;
+    line-height: 1.1;
     color: white;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start; /* Left align terms */
-    gap: 0.4em 0.35em; 
+    gap: 0.4em 0.3em;
     text-align: left;
 }
 
-@media (min-width: 768px) {
-    .textItem {
-        font-size: 2rem; 
-    }
-}
-
-@media (min-width: 1024px) {
-    .textItem {
-        font-size: 2.5rem; 
-    }
-}
-
-@media (min-width: 1280px) {
-    .textItem {
-        font-size: 3rem; 
-    }
-}
-
-/* Word Span */
 .wordSpan {
     position: relative;
     display: inline-block;
-    /* Removed overflow: hidden to allow descenders and avoid clipping */
-    padding-bottom: 0.1em; 
+    padding-bottom: 0.1em;
 }
 
 .wordInner {
     display: inline-block;
-    color: white;
 }
