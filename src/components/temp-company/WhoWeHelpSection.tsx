@@ -29,7 +29,7 @@ export default function WhoWeHelpSection() {
         'Hospitals and health systems',
         'Ambulatory surgery centers',
         'Behavioral and mental health providers',
-        'Home health and hospice organizations',
+        'Emergency & Urgent Care Providers',
         'Tribal and community health networks',
     ];
 
