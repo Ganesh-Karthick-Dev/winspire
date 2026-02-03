@@ -93,15 +93,17 @@ export default function NeuraSection() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
+                        className="ns-title-wrapper"
                     >
-                        <SectionTitle
-                            title="NEURA — THE INTELLIGENCE LAYER"
-                            subtitle="The Intelligence Behind Our Execution"
-                            align="left"
-                            className="ns-section-title"
-                            disableShadow={false}
-                            shadowColor="rgba(59, 130, 246,"
-                        />
+                        <div className="ns-header-main">
+                            <h2 className="ns-mega-title-v2">
+                                NEURA — <br />
+                                <span className="text-glow">THE INTELLIGENCE LAYER</span>
+                            </h2>
+                            <p className="ns-mega-subtitle-v2">
+                                The Intelligence Behind Our Execution
+                            </p>
+                        </div>
                     </motion.div>
 
                     <motion.p
@@ -239,8 +241,46 @@ export default function NeuraSection() {
                 /* Header */
                 .ns-header {
                     text-align: left;
-                    margin-bottom: 5rem;
+                    margin-bottom: 6rem;
                     padding: 0 64px;
+                }
+
+                .ns-title-wrapper {
+                    margin-bottom: 12rem;
+                }
+
+                .ns-header-main {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                }
+
+                .ns-mega-title-v2 {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: clamp(3rem, 10vw, 110px);
+                    line-height: 0.95;
+                    font-weight: 800;
+                    letter-spacing: -0.02em;
+                    text-transform: uppercase;
+                    color: #ffffff;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .ns-mega-title-v2 span.text-glow {
+                    background: linear-gradient(180deg, #ffffff 30%, #3b82f6 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+
+                .ns-mega-subtitle-v2 {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: clamp(1.25rem, 3vw, 2rem);
+                    font-weight: 300;
+                    letter-spacing: 0.1em;
+                    text-transform: uppercase;
+                    color: #94a3b8;
+                    margin: 0;
                 }
 
                 .ns-intro-grid {
