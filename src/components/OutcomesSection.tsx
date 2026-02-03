@@ -1,9 +1,73 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Quote, Activity, Shield, Users, Eye, Zap } from "lucide-react";
+import React, { useRef, useEffect, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { ArrowRight, CheckCircle2, Activity, Shield, Users, Eye, Zap } from "lucide-react";
 import SectionTitle from "./ui/section-title";
+import { CleanTestimonial } from "./ui/clean-testimonial";
+
+// Animated Counter Component
+function AnimatedCounter({ value, delay = 0 }: { value: string; delay?: number }) {
+    const ref = useRef<HTMLSpanElement>(null);
+    const isInView = useInView(ref, { once: true, margin: "-50px" });
+    const [displayValue, setDisplayValue] = useState("0");
+
+    useEffect(() => {
+        if (!isInView) return;
+
+        // Parse the value to determine if it's a number
+        const isNegative = value.startsWith("-");
+        const cleanValue = value.replace(/[^0-9.]/g, "");
+        const numericValue = parseFloat(cleanValue);
+        const suffix = value.replace(/[0-9.-]/g, ""); // Get non-numeric suffix like %
+
+        // Non-numeric values (like "AI") just fade in
+        if (isNaN(numericValue)) {
+            const timer = setTimeout(() => setDisplayValue(value), delay * 1000);
+            return () => clearTimeout(timer);
+        }
+
+        // Animate numeric values
+        const duration = 1500; // 1.5 seconds
+        const startTime = Date.now() + delay * 1000;
+        const isDecimal = cleanValue.includes(".");
+
+        const animate = () => {
+            const now = Date.now();
+            const elapsed = now - startTime;
+
+            if (elapsed < 0) {
+                requestAnimationFrame(animate);
+                return;
+            }
+
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease-out cubic for smooth deceleration
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = eased * numericValue;
+
+            const formatted = isDecimal
+                ? current.toFixed(1)
+                : Math.floor(current).toString();
+
+            setDisplayValue(`${isNegative ? "-" : ""}${formatted}${suffix}`);
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                setDisplayValue(value); // Ensure final value is exact
+            }
+        };
+
+        requestAnimationFrame(animate);
+    }, [isInView, value, delay]);
+
+    return (
+        <span ref={ref} className="stat-value animated-stat">
+            {displayValue}
+        </span>
+    );
+}
 
 export default function OutcomesSection() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -12,8 +76,8 @@ export default function OutcomesSection() {
         {
             text: "Faster, more predictable cash flow",
             icon: Zap,
-            stat: "30%",
-            statLabel: "Faster Cycle"
+            stat: "50%",
+            statLabel: "Faster Claim to Cash Cycle"
         },
         {
             text: "Fewer denials and stronger first-pass performance",
@@ -24,8 +88,8 @@ export default function OutcomesSection() {
         {
             text: "Lower cost to collect without staff dependency",
             icon: Users,
-            stat: "-25%",
-            statLabel: "OpEx Reduction"
+            stat: "200%",
+            statLabel: "Cost to Collection"
         },
         {
             text: "Transparent oversight across every department",
@@ -44,17 +108,6 @@ export default function OutcomesSection() {
             icon: CheckCircle2,
             stat: "3x",
             statLabel: "Capacity Growth"
-        }
-    ];
-
-    const testimonials = [
-        {
-            quote: "For the first time, our revenue cycle feels predictable and under control.",
-            author: "CFO, Specialty Practice"
-        },
-        {
-            quote: "Winspire redesigned how we operate—not just our numbers.",
-            author: "CEO, Healthcare Network"
         }
     ];
 
@@ -94,7 +147,7 @@ export default function OutcomesSection() {
                                         </div>
                                         <h3 className="card-text">{item.text}</h3>
                                         <div className="card-stat">
-                                            <span className="stat-value">{item.stat}</span>
+                                            <AnimatedCounter value={item.stat} delay={index * 0.15} />
                                             <span className="stat-label">{item.statLabel}</span>
                                         </div>
                                     </div>
@@ -107,23 +160,9 @@ export default function OutcomesSection() {
                     })}
                 </div>
 
-                {/* Testimonials & CTA Section */}
-                <div className="proof-footer">
-                    <div className="testimonials-row">
-                        {testimonials.map((t, i) => (
-                            <div key={i} className="testimonial-simple">
-                                <p className="t-quote">"{t.quote}"</p>
-                                <p className="t-author">— {t.author}</p>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="cta-container">
-                        <button className="premium-cta group">
-                            <span className="cta-text">Read Client Stories</span>
-                            <ArrowRight size={20} className="cta-arrow" />
-                        </button>
-                    </div>
+                {/* Testimonial Section */}
+                <div className="testimonial-wrapper">
+                    <CleanTestimonial />
                 </div>
 
             </div>
@@ -166,6 +205,14 @@ export default function OutcomesSection() {
                         padding: 0 64px; /* Desktop Padding to match Neura */
                         grid-template-columns: repeat(3, 1fr); /* Force 3 columns on large screens */
                     }
+                }
+
+                .testimonial-wrapper {
+                    padding: 0 24px;
+                    margin-top: 2rem;
+                }
+                @media (min-width: 768px) {
+                    .testimonial-wrapper { padding: 0 64px; }
                 }
 
                 .outcome-card-wrapper {
@@ -243,13 +290,20 @@ export default function OutcomesSection() {
                     border-top: 1px solid rgba(255, 255, 255, 0.1);
                 }
 
-                .stat-value {
+                :global(.stat-value) {
                     font-family: 'Outfit', sans-serif;
                     font-size: 2rem;
                     font-weight: 800;
                     background: linear-gradient(to right, #60a5fa, #a5b4fc);
                     -webkit-background-clip: text;
+                    background-clip: text;
                     color: transparent;
+                    display: inline-block;
+                }
+
+                /* Animated stat - just for count-up, no glow */
+                :global(.animated-stat) {
+                    display: inline-block;
                 }
 
                 .stat-label {
