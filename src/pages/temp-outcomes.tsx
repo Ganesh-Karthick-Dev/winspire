@@ -16,6 +16,7 @@ import Layout from '@/components/Layout';
 import OutcomesHero from '@/components/outcomes/OutcomesHero';
 import OutcomesContent from '@/components/outcomes/OutcomesContent';
 import OutcomesSystems from '@/components/outcomes/OutcomesSystems';
+import OutcomesHumanCentric from '@/components/outcomes/OutcomesHumanCentric';
 import OutcomesCTA from '@/components/outcomes/OutcomesCTA';
 import pageStyles from '@/styles/temp-outcomes.module.css'; 
 import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
@@ -75,6 +76,7 @@ export default function Outcomes() {
                 <OutcomesHero />
                 <OutcomesContent />
                 <OutcomesSystems />
+                <OutcomesHumanCentric />
                 <OutcomesCTA />
             </div>
         </Layout>
