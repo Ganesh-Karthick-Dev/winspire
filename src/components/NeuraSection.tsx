@@ -109,6 +109,7 @@ export default function NeuraSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
+                        style={{ marginTop: "4rem" }}
                         className="ns-intro-text"
                     >
                         Neura is not software you manage. It is an <strong>embedded intelligence layer</strong> that powers how work gets done.
@@ -301,7 +302,7 @@ export default function NeuraSection() {
                 /* Content Body */
                 .ns-content {
                     padding: 0 64px;
-                    margin-bottom: 5rem;
+                    margin-bottom: 2rem;
                 }
 
                 .ns-supports-content {
