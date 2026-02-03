@@ -8,35 +8,30 @@ import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motio
 const testimonials = [
   {
     quote: "For the first time, our revenue cycle feels predictable and under control.",
-    author: "Sarah Chen",
-    role: "CFO",
+    author: "CFO",
     company: "Specialty Practice",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
   },
   {
     quote: "Winspire redesigned how we operate—not just our numbers.",
-    author: "Marcus Webb",
-    role: "CEO",
+    author: "CEO",
     company: "Healthcare Network",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
   },
   {
-    quote: "The attention to detail is unmatched. Every interaction feels intentional.",
-    author: "Elena Frost",
-    role: "Head of Operations",
-    company: "Regional Hospital",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+    quote: "Our denial rates dropped significantly within the first quarter of implementation.",
+    author: "VP Revenue Cycle",
+    company: "Multi-Specialty Clinic",
+  },
+  {
+    quote: "The transparency and real-time insights transformed how we make decisions.",
+    author: "COO",
+    company: "Regional Medical Center",
+  },
+  {
+    quote: "We finally have a partner who understands the complexity of healthcare billing.",
+    author: "Director of Finance",
+    company: "Physician Group",
   },
 ]
-
-function usePreloadImages(images: string[]) {
-  useEffect(() => {
-    images.forEach((src) => {
-      const img = new Image()
-      img.src = src
-    })
-  }, [images])
-}
 
 function SplitText({ text }: { text: string }) {
   const words = text.split(" ")
@@ -64,7 +59,7 @@ function SplitText({ text }: { text: string }) {
         }
         :global(.split-word) {
           display: inline-block;
-          margin-right: 0.25em;
+          margin-right: 0.3em;
         }
       `}</style>
     </span>
@@ -75,8 +70,7 @@ export function CleanTestimonial() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-
-  usePreloadImages(testimonials.map((t) => t.avatar))
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null)
 
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -84,6 +78,29 @@ export function CleanTestimonial() {
   const springConfig = { damping: 25, stiffness: 150 }
   const cursorX = useSpring(mouseX, springConfig)
   const cursorY = useSpring(mouseY, springConfig)
+
+  // Auto-slide every 3 seconds, pause on hover
+  useEffect(() => {
+    if (isHovered) {
+      // Clear interval when hovered
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current)
+        autoPlayRef.current = null
+      }
+      return
+    }
+
+    // Start auto-slide
+    autoPlayRef.current = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % testimonials.length)
+    }, 3000)
+
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current)
+      }
+    }
+  }, [isHovered])
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
@@ -100,6 +117,7 @@ export function CleanTestimonial() {
   }
 
   const currentTestimonial = testimonials[activeIndex]
+  const initials = currentTestimonial.author.charAt(0)
 
   return (
     <div
@@ -139,43 +157,46 @@ export function CleanTestimonial() {
         </motion.div>
       </motion.div>
 
-      {/* Floating index indicator */}
-      <motion.div
-        className="index-indicator"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        <motion.span
-          className="current-index"
-          key={activeIndex}
-          initial={{ y: 10, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.3 }}
+      {/* Top row with avatar stack and index indicator */}
+      <div className="top-row">
+        {/* Stacked initial circles for all testimonials */}
+        <motion.div
+          className="avatar-stack"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
         >
-          {String(activeIndex + 1).padStart(2, "0")}
-        </motion.span>
-        <span className="separator">/</span>
-        <span className="total">{String(testimonials.length).padStart(2, "0")}</span>
-      </motion.div>
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={i}
+              className={`avatar-preview ${i === activeIndex ? 'active' : ''}`}
+              whileHover={{ scale: 1.1 }}
+            >
+              <span className="avatar-initial">{t.author.charAt(0)}</span>
+            </motion.div>
+          ))}
+        </motion.div>
 
-      {/* Stacked avatar previews for other testimonials */}
-      <motion.div
-        className="avatar-stack"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.6 }}
-        transition={{ delay: 0.6 }}
-      >
-        {testimonials.map((t, i) => (
-          <motion.div
-            key={i}
-            className={`avatar-preview ${i === activeIndex ? 'active' : ''}`}
-            whileHover={{ scale: 1.1, opacity: 1 }}
+        {/* Floating index indicator */}
+        <motion.div
+          className="index-indicator"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <motion.span
+            className="current-index"
+            key={activeIndex}
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.3 }}
           >
-            <img src={t.avatar} alt={t.author} />
-          </motion.div>
-        ))}
-      </motion.div>
+            {String(activeIndex + 1).padStart(2, "0")}
+          </motion.span>
+          <span className="separator">/</span>
+          <span className="total">{String(testimonials.length).padStart(2, "0")}</span>
+        </motion.div>
+      </div>
 
       {/* Main content */}
       <div className="testimonial-content">
@@ -194,27 +215,20 @@ export function CleanTestimonial() {
         {/* Author with reveal line */}
         <motion.div className="author-section" layout>
           <div className="author-row">
-            {/* Avatar container with all images stacked */}
-            <div className="avatar-main">
-              <motion.div
-                className="avatar-ring"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              />
-              {testimonials.map((t, i) => (
-                <motion.img
-                  key={t.avatar}
-                  src={t.avatar}
-                  alt={t.author}
-                  className="avatar-image"
-                  animate={{
-                    opacity: i === activeIndex ? 1 : 0,
-                    zIndex: i === activeIndex ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                />
-              ))}
+            {/* Initial circle instead of avatar */}
+            <div className="initial-circle">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={activeIndex}
+                  className="initial-letter"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {initials}
+                </motion.span>
+              </AnimatePresence>
             </div>
 
             {/* Author info with accent line */}
@@ -237,7 +251,7 @@ export function CleanTestimonial() {
                   {currentTestimonial.author}
                 </span>
                 <span className="author-role">
-                  {currentTestimonial.role} — {currentTestimonial.company}
+                  {currentTestimonial.company}
                 </span>
               </motion.div>
             </AnimatePresence>
@@ -259,19 +273,19 @@ export function CleanTestimonial() {
       <motion.div
         className="click-hint"
         initial={{ opacity: 0 }}
-        animate={{ opacity: isHovered ? 0.4 : 0.2 }}
+        animate={{ opacity: isHovered ? 0.5 : 0.3 }}
         transition={{ duration: 0.3 }}
       >
-        <span>Click anywhere</span>
+        <span>{isHovered ? "Click to change" : "Auto-playing..."}</span>
       </motion.div>
 
       <style jsx>{`
         .testimonial-container {
           position: relative;
           width: 100%;
-          max-width: 700px;
+          max-width: 100%;
           margin: 0 auto;
-          padding: 5rem 2rem;
+          padding: 4rem 0;
           cursor: none;
         }
 
@@ -298,10 +312,51 @@ export function CleanTestimonial() {
           letter-spacing: 0.1em;
         }
 
+        .top-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 2rem;
+        }
+
+        :global(.avatar-stack) {
+          display: flex;
+        }
+
+        :global(.avatar-preview) {
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+          border: 2px solid rgba(255, 255, 255, 0.15);
+          overflow: hidden;
+          margin-left: -0.5rem;
+          opacity: 0.4;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.05);
+        }
+
+        :global(.avatar-preview:first-child) {
+          margin-left: 0;
+        }
+
+        :global(.avatar-preview.active) {
+          opacity: 1;
+          border-color: rgba(255, 255, 255, 0.6);
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .avatar-initial {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: white;
+          text-transform: uppercase;
+        }
+
         :global(.index-indicator) {
-          position: absolute;
-          top: 2rem;
-          right: 2rem;
           display: flex;
           align-items: baseline;
           gap: 0.25rem;
@@ -312,46 +367,11 @@ export function CleanTestimonial() {
         :global(.current-index) {
           font-size: 1.5rem;
           font-weight: 300;
-          color: #60a5fa;
+          color: white;
         }
 
         .separator, .total {
           color: rgba(255, 255, 255, 0.4);
-        }
-
-        :global(.avatar-stack) {
-          position: absolute;
-          top: 2rem;
-          left: 2rem;
-          display: flex;
-        }
-
-        :global(.avatar-preview) {
-          width: 1.5rem;
-          height: 1.5rem;
-          border-radius: 50%;
-          border: 2px solid rgba(15, 23, 42, 0.8);
-          overflow: hidden;
-          margin-left: -0.5rem;
-          filter: grayscale(1);
-          opacity: 0.5;
-          transition: all 0.3s ease;
-        }
-
-        :global(.avatar-preview:first-child) {
-          margin-left: 0;
-        }
-
-        :global(.avatar-preview.active) {
-          filter: grayscale(0);
-          opacity: 1;
-          box-shadow: 0 0 0 2px #60a5fa;
-        }
-
-        :global(.avatar-preview img) {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
         }
 
         .testimonial-content {
@@ -360,16 +380,22 @@ export function CleanTestimonial() {
 
         :global(.quote-text) {
           font-family: 'Outfit', sans-serif;
-          font-size: 1.5rem;
+          font-size: 2rem;
           font-weight: 300;
-          line-height: 1.6;
+          line-height: 1.5;
           letter-spacing: -0.01em;
           color: white;
         }
 
         @media (min-width: 768px) {
           :global(.quote-text) {
-            font-size: 1.75rem;
+            font-size: 2.5rem;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          :global(.quote-text) {
+            font-size: 3rem;
           }
         }
 
@@ -380,40 +406,32 @@ export function CleanTestimonial() {
         .author-row {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 1.25rem;
         }
 
-        .avatar-main {
+        .initial-circle {
           position: relative;
-          width: 3rem;
-          height: 3rem;
-        }
-
-        :global(.avatar-ring) {
-          position: absolute;
-          inset: -6px;
+          width: 3.5rem;
+          height: 3.5rem;
           border-radius: 50%;
-          border: 1px solid rgba(96, 165, 250, 0.4);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.05);
         }
 
-        :global(.avatar-image) {
-          position: absolute;
-          inset: 0;
-          width: 3rem;
-          height: 3rem;
-          border-radius: 50%;
-          object-fit: cover;
-          filter: grayscale(0.3);
-          transition: filter 0.5s ease;
-        }
-
-        :global(.avatar-image:hover) {
-          filter: grayscale(0);
+        :global(.initial-letter) {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: white;
+          text-transform: uppercase;
         }
 
         :global(.author-info) {
           position: relative;
-          padding-left: 1rem;
+          padding-left: 1.25rem;
         }
 
         :global(.accent-line) {
@@ -422,14 +440,14 @@ export function CleanTestimonial() {
           top: 0;
           bottom: 0;
           width: 1px;
-          background: #60a5fa;
+          background: rgba(255, 255, 255, 0.5);
           transform-origin: top;
         }
 
         .author-name {
           display: block;
           font-family: 'Outfit', sans-serif;
-          font-size: 0.875rem;
+          font-size: 1rem;
           font-weight: 500;
           color: white;
           letter-spacing: 0.05em;
@@ -437,18 +455,17 @@ export function CleanTestimonial() {
 
         .author-role {
           display: block;
-          font-family: monospace;
-          font-size: 0.7rem;
-          color: rgba(255, 255, 255, 0.5);
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.8rem;
+          color: rgba(255, 255, 255, 0.6);
           margin-top: 0.25rem;
-          text-transform: uppercase;
-          letter-spacing: 0.15em;
+          letter-spacing: 0.05em;
         }
 
         .progress-track {
-          margin-top: 4rem;
+          margin-top: 3rem;
           height: 1px;
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.15);
           position: relative;
           overflow: hidden;
         }
@@ -458,24 +475,23 @@ export function CleanTestimonial() {
           top: 0;
           left: 0;
           bottom: 0;
-          background: #60a5fa;
+          background: rgba(255, 255, 255, 0.6);
         }
 
         :global(.click-hint) {
           position: absolute;
-          bottom: 2rem;
-          left: 2rem;
+          bottom: 0;
+          right: 0;
           display: flex;
           align-items: center;
-          gap: 0.5rem;
         }
 
         :global(.click-hint span) {
-          font-size: 0.625rem;
-          color: rgba(255, 255, 255, 0.4);
+          font-size: 0.7rem;
+          color: rgba(255, 255, 255, 0.5);
           text-transform: uppercase;
-          letter-spacing: 0.15em;
-          font-family: monospace;
+          letter-spacing: 0.1em;
+          font-family: 'Outfit', sans-serif;
         }
       `}</style>
     </div>

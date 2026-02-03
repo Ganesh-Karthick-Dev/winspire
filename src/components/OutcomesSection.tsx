@@ -160,9 +160,11 @@ export default function OutcomesSection() {
                     })}
                 </div>
 
-                {/* Testimonial Section */}
+                {/* Testimonial Section with Glossy Card */}
                 <div className="testimonial-wrapper">
-                    <CleanTestimonial />
+                    <div className="glossy-card">
+                        <CleanTestimonial />
+                    </div>
                 </div>
 
             </div>
@@ -209,10 +211,61 @@ export default function OutcomesSection() {
 
                 .testimonial-wrapper {
                     padding: 0 24px;
-                    margin-top: 2rem;
+                    margin-top: 4rem;
                 }
                 @media (min-width: 768px) {
                     .testimonial-wrapper { padding: 0 64px; }
+                }
+
+                /* Glossy Card with Glassmorphism */
+                .glossy-card {
+                    position: relative;
+                    background: rgba(15, 23, 42, 0.6);
+                    backdrop-filter: blur(20px);
+                    -webkit-backdrop-filter: blur(20px);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 24px;
+                    padding: 2rem;
+                    box-shadow: 
+                        0 4px 30px rgba(0, 0, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+                }
+
+                @media (min-width: 768px) {
+                    .glossy-card {
+                        padding: 3rem;
+                    }
+                }
+
+                /* Corner Markers */
+                .corner-marker {
+                    position: absolute;
+                    font-size: 1.25rem;
+                    font-weight: 300;
+                    color: rgba(255, 255, 255, 0.4);
+                    pointer-events: none;
+                    user-select: none;
+                    line-height: 1;
+                }
+
+                .corner-marker.top-left {
+                    top: 0.75rem;
+                    left: 1rem;
+                }
+
+                .corner-marker.top-right {
+                    top: 0.75rem;
+                    right: 1rem;
+                }
+
+                .corner-marker.bottom-left {
+                    bottom: 0.75rem;
+                    left: 1rem;
+                }
+
+                .corner-marker.bottom-right {
+                    bottom: 0.75rem;
+                    right: 1rem;
                 }
 
                 .outcome-card-wrapper {
