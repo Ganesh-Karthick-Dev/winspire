@@ -18,6 +18,7 @@ import OutcomesContent from '@/components/outcomes/OutcomesContent';
 import OutcomesSystems from '@/components/outcomes/OutcomesSystems';
 import OutcomesHumanCentric from '@/components/outcomes/OutcomesHumanCentric';
 import OutcomesHorizontalScroll from '@/components/outcomes/OutcomesHorizontalScroll';
+import OutcomesSecurity from '@/components/outcomes/OutcomesSecurity';
 import OutcomesCTA from '@/components/outcomes/OutcomesCTA';
 import pageStyles from '@/styles/temp-outcomes.module.css'; 
 import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
@@ -79,6 +80,7 @@ export default function Outcomes() {
                 <OutcomesSystems />
                 <OutcomesHumanCentric />
                 <OutcomesHorizontalScroll />
+                <OutcomesSecurity />
                 <OutcomesCTA />
             </div>
         </Layout>

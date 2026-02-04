@@ -1,0 +1,275 @@
+.sectionWrapper {
+    width: 100%;
+    padding: 6rem 2rem;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+.sectionWrapper::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.glassContainer {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1400px;
+    background: radial-gradient(circle at center, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border-radius: 2rem;
+    padding: 4rem;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.headerContent {
+    max-width: 800px;
+    margin-bottom: 4rem;
+}
+
+.subLabel {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #38bdf8;
+    margin-bottom: 1rem;
+    background: rgba(56, 189, 248, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to right, #ffffff, #e0f2fe);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+}
+
+.description {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    width: 100%;
+}
+
+/* ==============================================================================
+   UIVERSE CARD DESIGN - REFINED FOR 3D ICON POP
+   ============================================================================== */
+
+.card {
+  width: 100%;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  background-color: #fffffe;
+  border-radius: 15px;
+  position: relative;
+  /* overflow: visible on hover to let the icon stick out */
+  overflow: visible;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.card:hover {
+    z-index: 10;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* Standard clipped elements container */
+.circleClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 15px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.card::before {
+  content: "";
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+  /* New Professional Blue Gradient */
+  background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 50%, #1d4ed8 100%);
+  transition: all 0.5s ease;
+  z-index: 0;
+}
+
+.card:hover::before {
+  height: 350px;
+  border-bottom: none;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  transform: scale(0.95);
+}
+
+.card * {
+  z-index: 1;
+}
+
+/* Background Circle - Clipped */
+.circleBg {
+  width: 130px;
+  height: 130px;
+  background-color: #1d4ed8; /* Deep Indigo Blue */
+  border-radius: 50%;
+  border: 4px solid #fefefe;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translate(-50%, 0); /* Initial state: center horizontally */
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover .circleBg {
+  /* Move to corner: Combine the initial centering with the requested move */
+  transform: translate(-50%, 0) scale(2) translate(-60%, -40%);
+}
+
+/* Icon Container - Not Clipped */
+.iconContainer {
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute; /* Changed to absolute to match circleBg exactly */
+  top: 30px;
+  left: 50%;
+  transform: translate(-50%, 0); /* Initial state: center horizontally */
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 2;
+}
+
+.card:hover .iconContainer {
+  /* Syncs movement with circleBg */
+  transform: translate(-50%, 0) scale(2) translate(-60%, -40%);
+}
+
+.iconImg {
+    width: 95%;
+    height: 95%;
+    object-fit: contain;
+    transition: all 0.5s ease;
+}
+
+.card:hover .iconImg {
+  /* Stays crisp and pops out */
+  transform: scale(0.75); 
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.5s ease;
+  padding: 0 1rem;
+  margin-top: 170px; /* Spacer for the absolute icon/circle area (130px + 40px margin) */
+}
+
+.card:hover .cardInfo {
+  transform: translate(0%,-25%);
+}
+
+.cardTitle {
+  font-weight: 600;
+  font-size: 24px;
+  color: #161A42;
+  margin-top: 15px;
+  line-height: 5px;
+}
+
+.cardDesc {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.9rem;
+}
+
+.card:hover .cardTitle,
+.card:hover .cardDesc {
+    color: #fff;
+}
+
+.button {
+  text-decoration: none;
+  background-color: #1468BF;
+  color: white;
+  padding: 5px 20px;
+  border-radius: 5px;
+  border: 1px solid white;
+  transition: all 0.5s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.button:hover {
+  background-color: #FF6844;
+  transform: scale(1.1);
+}
+
+@media (max-width: 1200px) {
+    .cardsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .cardsGrid {
+        grid-template-columns: 1fr;
+    }
+    .glassContainer {
+        padding: 2rem 1rem;
+    }
+}
