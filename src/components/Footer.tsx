@@ -229,11 +229,17 @@ export default function Footer() {
                     font-size: 0.8rem;
                     color: #666;
                     text-decoration: none;
-                    transition: color 0.2s ease;
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    padding: 6px 12px;
+                    border-radius: 8px;
+                    display: inline-block;
+                    margin-left: -12px; /* Offset the padding to keep alignment */
                 }
 
                 .column-links :global(a:hover) {
-                    color: #1a1a1a;
+                    color: #ffffff;
+                    background: #000000;
+                    transform: translateX(4px);
                 }
 
                 /* Bottom Bar */
