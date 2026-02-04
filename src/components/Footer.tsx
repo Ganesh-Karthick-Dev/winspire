@@ -52,38 +52,49 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Right - Link Columns */}
+                    {/* Right - Link Columns - Now 4 Columns */}
                     <div className="footer-links">
                         {/* Solutions Column */}
                         <div className="footer-column">
                             <h4 className="column-title">Solutions</h4>
                             <ul className="column-links">
-                                <li><Link href="/solutions#rcm">Revenue Cycle</Link></li>
-                                <li><Link href="/solutions#billing">Medical Billing</Link></li>
-                                <li><Link href="/solutions#coding">Coding Services</Link></li>
-                                <li><Link href="/solutions#ar">AR Management</Link></li>
+                                <li><Link href="/solutions">Overview</Link></li>
+                                <li><Link href="/solutions#revenue-cycle">Revenue Cycle</Link></li>
+                                <li><Link href="/solutions#targeted">Targeted Solutions</Link></li>
+                                <li><Link href="/solutions#intelligence">Intelligence</Link></li>
                             </ul>
                         </div>
 
-                        {/* Resources Column */}
-                        <div className="footer-column">
-                            <h4 className="column-title">Resources</h4>
-                            <ul className="column-links">
-                                <li><Link href="/resources">Blog</Link></li>
-                                <li><Link href="/resources#cases">Case Studies</Link></li>
-                                <li><Link href="/neura-ai">Neura AI</Link></li>
-                                <li><Link href="/book-demo">Book a Demo</Link></li>
-                            </ul>
-                        </div>
-
-                        {/* Company Column */}
+                        {/* Company Column - Verified IDs */}
                         <div className="footer-column">
                             <h4 className="column-title">Company</h4>
                             <ul className="column-links">
-                                <li><Link href="/company">About</Link></li>
-                                <li><Link href="/company#values">Values</Link></li>
-                                <li><Link href="/contact">Contact</Link></li>
-                                <li><Link href="/careers">Careers</Link></li>
+                                <li><Link href="/company#our-story">Our Story</Link></li>
+                                <li><Link href="/company#leadership">Leadership</Link></li>
+                                <li><Link href="/company#culture">Culture</Link></li>
+                                <li><Link href="/company#contact">Contact</Link></li>
+                            </ul>
+                        </div>
+
+                        {/* Outcomes Column */}
+                        <div className="footer-column">
+                            <h4 className="column-title">Outcomes</h4>
+                            <ul className="column-links">
+                                <li><Link href="/outcomes">Overview</Link></li>
+                                <li><Link href="/outcomes#systems">Systems</Link></li>
+                                <li><Link href="/outcomes#human-centric">Human Centric</Link></li>
+                                <li><Link href="/outcomes#future">Future Proofing</Link></li>
+                            </ul>
+                        </div>
+
+                        {/* Neura AI Column */}
+                        <div className="footer-column">
+                            <h4 className="column-title">Neura AI</h4>
+                            <ul className="column-links">
+                                <li><Link href="/neura-ai">Overview</Link></li>
+                                <li><Link href="/neura-ai#capabilities">Capabilities</Link></li>
+                                <li><Link href="/neura-ai#integration">Integration</Link></li>
+                                <li><Link href="/neura-ai#security">Security</Link></li>
                             </ul>
                         </div>
                     </div>
@@ -181,14 +192,18 @@ export default function Footer() {
                     transform: translateY(-2px);
                 }
 
-                /* Link Columns */
                 .footer-links {
                     display: flex;
-                    gap: 64px;
+                    gap: 32px; /* Reduced from 64px to fit 4 columns */
+                    flex-wrap: wrap; /* Allow wrapping on smaller screens */
                 }
 
                 .footer-column {
                     min-width: 120px;
+                    text-align: left;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
                 }
 
                 .column-title {
@@ -214,11 +229,17 @@ export default function Footer() {
                     font-size: 0.8rem;
                     color: #666;
                     text-decoration: none;
-                    transition: color 0.2s ease;
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    padding: 6px 12px;
+                    border-radius: 8px;
+                    display: inline-block;
+                    margin-left: -12px; /* Offset the padding to keep alignment */
                 }
 
                 .column-links :global(a:hover) {
-                    color: #1a1a1a;
+                    color: #ffffff;
+                    background: #000000;
+                    transform: translateX(4px);
                 }
 
                 /* Bottom Bar */
@@ -326,11 +347,12 @@ export default function Footer() {
                     .footer-bottom {
                         flex-direction: column;
                         gap: 16px;
-                        text-align: center;
+                        text-align: left;
+                        align-items: flex-start;
                     }
 
                     .legal-links {
-                        justify-content: center;
+                        justify-content: flex-start;
                     }
 
                     .footer-watermark {

@@ -50,6 +50,12 @@ export function isLoaderDisabled(): boolean {
     return loaderDisabled;
 }
 
+// Track if loader is currently active (started but not finished)
+let isLoaderActive: boolean = false;
+
+// Track if this is the first load of the session (refresh or new tab)
+let isFirstLoad: boolean = true;
+
 /**
  * Reset loader to 0% on every page mount
  * Should be called in useEffect on page load
@@ -60,6 +66,16 @@ export function resetLoaderToZero(): void {
         console.log('⏭️ Loader skipped (disabled)');
         return;
     }
+
+    // NEW: Skip if this is a client-side navigation (not the first load)
+    if (!isFirstLoad) {
+        // console.log('⏭️ Loader skipped (client navigation)');
+        return;
+    }
+
+    // Mark first load as done so subsequent navs don't trigger it
+    isFirstLoad = false;
+    isLoaderActive = true;
 
     loadStartTime = Date.now();
 
@@ -232,6 +248,16 @@ export async function animateGridTransition(): Promise<void> {
  * Order: Grid covers screen → Loader hides → Grid reveals → Landing page appears
  */
 export async function finishLoader(): Promise<void> {
+    // NEW: Skip finishLoader sequence if loader was never active (e.g. on navigation)
+    if (!isLoaderActive) {
+        // Just ensure canvas is shown in case it was hidden
+        showCanvas();
+        return;
+    }
+
+    // Mark as finished
+    isLoaderActive = false;
+
     // Ensure progress shows 100%
     updateLoaderUI(100);
 
