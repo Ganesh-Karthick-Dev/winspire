@@ -104,3 +104,59 @@
 .wordInner {
     display: inline-block;
 }
+/* Responsive Layout */
+@media (max-width: 1024px) {
+    .stickyWrapper {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; /* Center align everything */
+        padding: 0 2rem;
+    }
+
+    .progressContainer {
+        display: none;
+    }
+
+    /* Reset absolute positioning for counter */
+    .counterContainer {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-bottom: 2rem; /* Reduced from 3rem */
+        width: auto;
+        margin-top: -5rem; /* Pull it up significantly */
+    }
+
+    /* Reset absolute positioning for text */
+    .textContainer {
+        position: relative;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        width: 100%;
+        max-width: 600px;
+        text-align: center;
+    }
+
+    .textItem {
+        font-size: 2rem;
+        line-height: 1.3;
+        gap: 0.25em;
+        justify-content: center; /* Center the words */
+        text-align: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .stickyWrapper {
+        padding: 0 1.5rem;
+    }
+
+    .textItem {
+         font-size: 1.75rem;
+    }
+    
+    .counterContainer {
+        margin-bottom: 2rem;
+    }
+}

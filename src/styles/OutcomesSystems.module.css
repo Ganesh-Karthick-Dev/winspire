@@ -198,15 +198,61 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
     .cardsGrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr); /* 2 cols for tablet */
     }
     
     .card {
-        min-height: 400px;
+        min-height: 450px;
         padding: 3rem 2rem;
     }
 
+    .title {
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 4rem 0;
+    }
+
+    .header {
+        margin-bottom: 3rem;
+        padding: 0 1.5rem;
+    }
+
+    .title {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .subtitleTop, .subtitleBottom {
+        font-size: 1.25rem;
+    }
+
+    .cardsGrid {
+        grid-template-columns: 1fr; /* Stack for mobile */
+    }
+
+    .card {
+        min-height: auto;
+        padding: 2.5rem 1.5rem;
+        gap: 2rem;
+    }
+
+    .cardTitle {
+        font-size: 2rem;
+    }
+
+    .cardDescription {
+        font-size: 1.1rem;
+    }
+
     .scalingText {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+    }
+    
+    .scalingContainer {
+        padding: 2rem 1.5rem;
     }
 }

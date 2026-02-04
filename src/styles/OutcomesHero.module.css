@@ -60,19 +60,49 @@
 }
 
 /* Responsive adjustments */
+@media (max-width: 1024px) {
+    .heroTop {
+        padding: 4rem 2rem;
+        height: auto;
+        min-height: 70vh;
+        gap: 3rem;
+        justify-content: center;
+    }
+
+    .mainTitle {
+        font-size: 5rem;
+        margin-top: 0;
+        max-width: 100%;
+    }
+
+    .bottomSubtitle {
+        font-size: 2rem;
+        max-width: 100%;
+        margin-bottom: 0;
+    }
+}
+
 @media (max-width: 768px) {
     .heroTop {
-        padding: 5rem 1rem 3rem;
-        min-height: 80vh;
+        padding: 5rem 1.5rem 3rem;
+        min-height: auto;
         justify-content: center;
         gap: 2rem;
+        align-items: center; /* Center align for mobile usually looks better */
+        text-align: center;
     }
     
     .mainTitle {
+        font-size: 3rem; /* Smaller for mobile */
         margin-top: 0;
+        text-align: center;
+        max-width: 100%;
     }
     
     .bottomSubtitle {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+        text-align: center;
+        align-self: center; /* Override flex-end */
+        max-width: 100%;
     }
 }
