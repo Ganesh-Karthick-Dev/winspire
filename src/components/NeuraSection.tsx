@@ -121,7 +121,7 @@ export default function NeuraSection() {
 
                 {/* Bento grid: Predictive (tall left) + 5 capabilities (raw CSS, all bordered, images) */}
                 <div className="ns-content">
-                    <p className="ns-content-intro">Neura enables our teams to:</p>
+                    <p className="ns-content-intro">Neura enables our teams to</p>
                     <BentoGridShowcase
                         integration={
                             <div className="ns-bento-card ns-bento-card-hero">
@@ -355,7 +355,7 @@ export default function NeuraSection() {
                     font-family: 'Outfit', sans-serif;
                     font-size: 1.5rem;
                     color: #ffffff;
-                    margin-bottom: 2rem;
+                    margin-bottom: -3rem;
                     font-weight: 600;
                 }
 
