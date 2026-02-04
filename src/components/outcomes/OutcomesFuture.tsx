@@ -118,15 +118,16 @@ const OutcomesFuture = () => {
                         whileInView="visible"
                         viewport={{ once: true, margin: "-100px" }}
                     >
-                        <span className={styles.titleGradient} style={{ display: "inline-block", overflow: "hidden" }}>
+                        <span className={styles.titleGradient}>
                              {titleText.split(" ").map((word, index) => (
-                                <motion.span 
-                                    key={index} 
-                                    variants={wordVariants}
-                                    style={{ display: "inline-block", marginRight: "0.25em" }}
-                                >
-                                    {word}
-                                </motion.span>
+                                <span key={index} style={{ display: "inline-block", overflow: "hidden", marginRight: "0.25em", verticalAlign: "bottom" }}>
+                                    <motion.span 
+                                        variants={wordVariants}
+                                        style={{ display: "inline-block" }}
+                                    >
+                                        {word}
+                                    </motion.span>
+                                </span>
                              ))}
                         </span>
                     </motion.h2>
