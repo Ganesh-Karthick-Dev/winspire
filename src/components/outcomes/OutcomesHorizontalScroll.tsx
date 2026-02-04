@@ -44,49 +44,131 @@ const horizontalSections = [
 
 const OutcomesHorizontalScroll = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const scrollTrackRef = useRef<HTMLDivElement>(null);
+    const panelsRef = useRef<(HTMLDivElement | null)[]>([]);
+    const progressBarRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const container = containerRef.current;
-        const track = scrollTrackRef.current;
+        if (!container) return;
 
-        if (!container || !track) return;
+        const ctx = gsap.context(() => {
+            const panels = panelsRef.current.filter((p): p is HTMLDivElement => p !== null);
+            const totalPanels = panels.length;
+            
+            if (totalPanels === 0) return;
 
-        // Calculate total width of the track
-        let totalWidth = track.scrollWidth;
-        let viewportWidth = window.innerWidth;
+            // Initialize Styles
+            panels.forEach((panel, i) => {
+                const img = panel.querySelector(`.${styles.leftImage}`);
+                const text = panel.querySelector(`.${styles.rightContent}`);
+                
+                gsap.set(panel, { zIndex: i + 1, autoAlpha: 1 });
+                
+                if (i === 0) {
+                     // First panel fully visible
+                     if (img) gsap.set(img, { clipPath: 'circle(100% at 50% 50%)', scale: 1, opacity: 1 });
+                     if (text) gsap.set(text, { opacity: 1, y: 0 });
+                } else {
+                    // Others hidden - Circular reveal from center point
+                    if (img) gsap.set(img, { clipPath: 'circle(0% at 50% 50%)', opacity: 0, scale: 0.8 });
+                    if (text) gsap.set(text, { opacity: 0, y: 50 });
+                }
+            });
 
-        // Create the horizontal scroll tween
-        const scrollTween = gsap.to(track, {
-            x: () => -(track.scrollWidth - window.innerWidth),
-            ease: "none",
-            scrollTrigger: {
-                trigger: container,
-                start: "top top",
-                end: () => `+=${track.scrollWidth - window.innerWidth}`,
-                pin: true,
-                scrub: 1,
-                invalidateOnRefresh: true,
-                anticipatePin: 1
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top top",
+                    end: `+=${totalPanels * 100}%`,
+                    pin: true,
+                    scrub: 1,
+                    anticipatePin: 1
+                }
+            });
+
+            for (let i = 1; i < totalPanels; i++) {
+                const currentPanel = panels[i];
+                const previousPanel = panels[i - 1];
+
+                if (!currentPanel || !previousPanel) continue;
+
+                const currentImg = currentPanel.querySelector(`.${styles.leftImage}`);
+                const currentText = currentPanel.querySelector(`.${styles.rightContent}`);
+                const prevText = previousPanel.querySelector(`.${styles.rightContent}`);
+                
+                const startTime = i - 1; 
+
+                // 1. Animate NEW Image Enters (Circular expansion from center point)
+                if (currentImg) {
+                    tl.to(currentImg, {
+                        clipPath: 'circle(100% at 50% 50%)',
+                        opacity: 1,
+                        scale: 1,
+                        duration: 1,
+                        ease: "power2.inOut"
+                    }, startTime);
+                }
+
+                // 2. Animate PREVIOUS Text Exit
+                if (prevText) {
+                    tl.to(prevText, {
+                        opacity: 0,
+                        y: -30,
+                        duration: 0.5,
+                        ease: "power2.in"
+                    }, startTime);
+                }
+
+                // 3. Animate NEW Text Enter
+                if (currentText) {
+                    tl.to(currentText, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    }, startTime + 0.4); 
+                }
             }
-        });
 
-        return () => {
-            scrollTween.kill();
-            ScrollTrigger.getAll().forEach(t => t.kill());
-        };
+            if (progressBarRef.current) {
+                tl.to(progressBarRef.current, {
+                    width: '100%',
+                    ease: 'none',
+                    duration: totalPanels - 1
+                }, 0);
+            }
+
+        }, containerRef);
+
+        return () => ctx.revert();
     }, []);
 
     return (
         <div ref={containerRef} className={styles.scrollContainer}>
             <div className={styles.stickyHeader}>
-                <h2 className={styles.mainTitle}>Platform-Powered Discovery</h2>
-                <div className={styles.progressBar}></div>
+                <div className={styles.headerTop}>
+                    <h2 className={styles.mainTitle}>Platform-Powered Discovery</h2>
+                </div>
             </div>
 
-            <div ref={scrollTrackRef} className={styles.scrollTrack}>
+            {/* Progress line aligned only with content side */}
+            <div className={styles.contentLineWrapper}>
+                <div className={styles.contentLineInner}>
+                    <div className={styles.progressContainer}>
+                        <div ref={progressBarRef} className={styles.progressBar}></div>
+                    </div>
+                </div>
+            </div>
+
+            <div className={styles.scrollTrack}>
                 {horizontalSections.map((section, index) => (
-                    <div key={section.id} className={styles.sectionPanel}>
+                    <div 
+                        key={section.id} 
+                        className={styles.sectionPanel}
+                        ref={(el) => {
+                            panelsRef.current[index] = el;
+                        }}
+                    >
                         <div className={styles.panelContent}>
                             <div className={styles.leftImage}>
                                 <img src={section.image} alt={section.title} />
