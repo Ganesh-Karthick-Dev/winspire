@@ -116,22 +116,38 @@ export default function TempNeuraAI() {
         gsap.set(track, { x: 0 });
 
         const PIN_SCROLL = 2000;
+        const mm = gsap.matchMedia();
 
-        const ctx = gsap.context(() => {
-            gsap.to(track, {
-                x: () => -(track.scrollWidth - wrapper.clientWidth),
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: wrapper,
-                    start: 'top top',
-                    end: `+=${PIN_SCROLL}`,
-                    pin: true,
-                    scrub: 1,
-                },
-            });
-        }, wrapper);
+        mm.add({
+            isDesktop: "(min-width: 769px)",
+            isMobile: "(max-width: 768px)"
+        }, (context) => {
+            const { isDesktop } = context.conditions as any;
 
-        return () => ctx.revert();
+            if (isDesktop) {
+                gsap.to(track, {
+                    x: () => -(track.scrollWidth - wrapper.clientWidth),
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: wrapper,
+                        start: 'top top',
+                        end: `+=${PIN_SCROLL}`,
+                        pin: true,
+                        scrub: 1,
+                        invalidateOnRefresh: true,
+                    },
+                });
+            } else {
+                gsap.set(track, { x: 0, clearProps: 'all' });
+            }
+        });
+
+        // Refresh ScrollTrigger to catch correct positions after model/DOM load
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 500);
+
+        return () => mm.revert();
     }, []);
 
     return (
