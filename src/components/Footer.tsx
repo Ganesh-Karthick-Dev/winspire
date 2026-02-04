@@ -247,13 +247,16 @@ export default function Footer() {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    padding-top: 24px;
+                    padding: 24px;
+                    background: #000000;
+                    border-radius: 16px;
+                    margin-top: 40px;
                 }
 
                 .copyright {
                     font-family: 'Outfit', sans-serif;
                     font-size: 0.75rem;
-                    color: #999;
+                    color: rgba(255, 255, 255, 0.7);
                 }
 
                 .legal-links {
@@ -264,14 +267,15 @@ export default function Footer() {
                 .legal-links :global(a) {
                     font-family: 'Outfit', sans-serif;
                     font-size: 0.75rem;
-                    color: #666;
-                    text-decoration: underline;
-                    text-underline-offset: 2px;
-                    transition: color 0.2s ease;
+                    color: #ffffff;
+                    text-decoration: none;
+                    opacity: 0.9;
+                    transition: opacity 0.2s ease;
                 }
 
                 .legal-links :global(a:hover) {
-                    color: #1a1a1a;
+                    opacity: 1;
+                    text-decoration: underline;
                 }
 
                 /* Watermark */
