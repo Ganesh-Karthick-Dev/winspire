@@ -1,0 +1,236 @@
+.sectionWrapper {
+    position: relative;
+    width: 100%;
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.918);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.backgroundGlow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle at center, rgba(59, 130, 246, 0.03) 0%, rgba(255, 255, 255, 0) 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.contentContainer {
+    position: relative;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; /* Reduced gap from 6rem */
+}
+
+.headerContent {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.label {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(59, 130, 246, 0.1);
+    color: #2563EB;
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem; /* Reduced margin */
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem; /* Reduced margin */
+    letter-spacing: -0.02em;
+}
+
+.titleGradient {
+    background: linear-gradient(135deg, #1a1a1a 0%, #4B5563 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.description {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #4B5563;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cardsContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+}
+
+/* New Folder Card Styles */
+.card {
+    width: 300px; /* Slightly wider than 230px for better readability */
+    border-radius: 20px;
+    background: #1b233d;
+    padding: 5px;
+    overflow: hidden;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 20px 0px;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.topSection {
+    height: 150px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(45deg, rgb(4, 159, 187) 0%, rgb(80, 246, 255) 100%);
+    position: relative;
+    justify-content: center; /* Center icon */
+    align-items: center; /* Center icon */
+}
+
+.border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom-right-radius: 10px;
+    height: 30px;
+    width: 130px;
+    background: #1b233d;
+    transform: skew(-40deg);
+    transform-origin: top left; /* Pivot from top left so it stays anchored */
+    /* Adjust positioning to simulate the cutout */
+    left: -15px; /* Pull back slightly to hide left edge skew */
+        box-shadow: -10px -10px 0 0 #1b233d;
+    z-index: 2;
+}
+
+/* Pseudo-element for the curved join effect under/around the tab */
+.border::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 0;
+    right: -15px;
+    background: rgba(255, 255, 255, 0);
+    border-top-left-radius: 10px;
+    box-shadow: -5px -5px 0 2px #1b233d;
+}
+
+/* Inner curve on the body */
+.topSection::before {
+    content: "";
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background: rgba(255, 255, 255, 0);
+    height: 15px;
+    width: 15px;
+    border-top-left-radius: 15px;
+    box-shadow: -5px -5px 0 2px #1b233d;
+    z-index: 1;
+}
+
+.iconContainer {
+    z-index: 3;
+    color: white; /* Icon color on gradient */
+}
+
+/* Bottom Section Styles */
+.bottomSection {
+    margin-top: 15px;
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.cardTitle {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.cardSubtext {
+    font-size: 14px;
+    color: rgba(170, 222, 243, 0.8);
+    line-height: 1.4;
+}
+
+.closingSection {
+    text-align: center;
+    margin-top: 2rem; /* Reduced from 4rem */
+}
+
+.finalStatement {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.highlight {
+    color: #2563EB;
+    position: relative;
+    display: inline-block;
+}
+
+.highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.2em;
+    background: rgba(37, 99, 235, 0.1);
+    z-index: -1;
+}
+
+@media (max-width: 768px) {
+    .sectionWrapper {
+        padding: 3rem 1.5rem;
+    }
+
+    .cardsContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+}
