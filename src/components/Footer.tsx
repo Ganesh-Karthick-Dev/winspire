@@ -1,397 +1,414 @@
 /**
- * Footer Component - Updated to Match Site Structure
+ * Footer Component - Clean Minimal Design
  * 
  * Layout:
- * - Center aligned container
- * - Service card (purple gradient top + white bottom)
- * - Four link columns with vertical dividers (Company, Outcomes, Solutions, Neura AI)
- * - Bottom bar with privacy policy and copyright
+ * - Light gray background with white card
+ * - Left: Logo, tagline, social icons
+ * - Right: 3 link columns
+ * - Bottom bar: Copyright + legal links
+ * - Watermark: Large faded "WINSPIRE" text
  */
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Footer() {
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
     return (
-        <footer className="ref-footer">
-            {/* ================= DESKTOP VIEW ================= */}
-            <div className="footer-desktop-view">
-                {/* Top Row - Logo, Social Links, PageTop */}
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '32px 48px',
-                }}>
-                    {/* Logo */}
-                    <div style={{
-                        width: '140px',
-                        height: '40px',
-                        backgroundColor: 'white',
-                        maskImage: 'url("/images/Logo-White.svg")',
-                        maskSize: 'contain',
-                        maskRepeat: 'no-repeat',
-                        maskPosition: 'left center',
-                        WebkitMaskImage: 'url("/images/Logo-White.svg")',
-                        WebkitMaskSize: 'contain',
-                        WebkitMaskRepeat: 'no-repeat',
-                        WebkitMaskPosition: 'left center'
-                    }} />
-
-                    {/* Social Links */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '40px' }}>
-                        <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)' }}>Social</span>
-                        <a href="https://www.linkedin.com/company/winspire-rcm-private-limited/" target="_blank" rel="noopener noreferrer"
-                            style={{ fontSize: '0.875rem', color: 'white' }}>
-                            LinkedIn
-                        </a>
-                    </div>
-
-                    {/* PageTop Button */}
-                    <button
-                        onClick={scrollToTop}
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '6px',
-                            background: 'none',
-                            border: 'none',
-                            color: 'white',
-                            fontSize: '0.75rem',
-                            cursor: 'pointer',
-                            padding: 0
-                        }}
-                    >
-                        PageTop
-                        <span style={{ fontSize: '0.875rem' }}>↑</span>
-                    </button>
-                </div>
-
-                {/* Main Content */}
-                <div style={{
-                    display: 'flex',
-                    gap: '32px',
-                    padding: '32px 48px',
-                    alignItems: 'flex-start',
-                    justifyContent: 'space-between',
-                    flexWrap: 'wrap'
-                }}>
-                    {/* Left - Service Card */}
-                    <div style={{
-                        width: '240px',
-                        flexShrink: 0,
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        background: 'white',
-                        boxShadow: '0 8px 32px rgba(0,0,0,0.15)'
-                    }}>
-                        {/* Card Image */}
-                        <div style={{ width: '100%', height: '130px', position: 'relative', overflow: 'hidden' }}>
-                            <Image
-                                src="/poster/qefqe.webp"
-                                alt="Winspire RCM Service"
-                                fill
-                                style={{ objectFit: 'cover' }}
+        <footer className="footer-wrapper">
+            {/* Main Footer Card */}
+            <div className="footer-card">
+                {/* Top Section */}
+                <div className="footer-top">
+                    {/* Left - Brand Section */}
+                    <div className="footer-brand">
+                        {/* Logo */}
+                        <div className="footer-logo">
+                            <img
+                                src="/images/Logo-White.svg"
+                                alt="Winspire"
+                                className="logo-image"
                             />
                         </div>
 
-                        {/* Card Bottom - White */}
-                        <div style={{
-                            padding: '16px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            background: 'white'
-                        }}>
-                            <div style={{ textAlign: 'left' }}>
-                                <div style={{ fontSize: '0.875rem', fontWeight: 700, color: '#1a1a1a' }}>Winspire RCM</div>
-                                <div style={{ fontSize: '0.7rem', color: '#666' }}>Service Site</div>
-                            </div>
-                            <span style={{ fontSize: '1rem', color: '#333', fontWeight: 'bold' }}>↗</span>
-                        </div>
+                        {/* Tagline */}
+                        <p className="footer-tagline">
+                            Winspire partners with healthcare providers to optimize revenue cycles —
+                            making billing efficient, predictable, and transparent.
+                        </p>
 
-                        {/* Award Badge */}
-                        <div style={{
-                            padding: '12px 16px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '10px',
-                            borderTop: '1px solid #eee',
-                            background: 'white'
-                        }}>
-                            <div style={{
-                                width: '24px',
-                                height: '24px',
-                                borderRadius: '50%',
-                                background: '#e53935',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                color: 'white',
-                                fontSize: '0.6rem',
-                                fontWeight: 700
-                            }}>★</div>
-                            <div style={{ textAlign: 'left' }}>
-                                <div style={{ fontSize: '0.55rem', color: '#666', letterSpacing: '0.05em' }}>HEALTHCARE EXCELLENCE</div>
-                                <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#e53935' }}>2024 Award</div>
-                            </div>
+                        {/* Social Icons */}
+                        <div className="footer-socials">
+                            <a
+                                href="https://www.linkedin.com/company/winspire-rcm-private-limited/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="social-icon"
+                                aria-label="LinkedIn"
+                            >
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
 
                     {/* Right - Link Columns */}
-                    <div style={{ display: 'flex', gap: '32px', flex: 1, justifyContent: 'flex-end' }}>
+                    <div className="footer-links">
+                        {/* Solutions Column */}
+                        <div className="footer-column">
+                            <h4 className="column-title">Solutions</h4>
+                            <ul className="column-links">
+                                <li><Link href="/solutions#rcm">Revenue Cycle</Link></li>
+                                <li><Link href="/solutions#billing">Medical Billing</Link></li>
+                                <li><Link href="/solutions#coding">Coding Services</Link></li>
+                                <li><Link href="/solutions#ar">AR Management</Link></li>
+                            </ul>
+                        </div>
+
+                        {/* Resources Column */}
+                        <div className="footer-column">
+                            <h4 className="column-title">Resources</h4>
+                            <ul className="column-links">
+                                <li><Link href="/resources">Blog</Link></li>
+                                <li><Link href="/resources#cases">Case Studies</Link></li>
+                                <li><Link href="/neura-ai">Neura AI</Link></li>
+                                <li><Link href="/book-demo">Book a Demo</Link></li>
+                            </ul>
+                        </div>
 
                         {/* Company Column */}
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '140px' }}>
-                            <Link href="/company" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
-                                <span style={{
-                                    color: 'white',
-                                    marginRight: '10px',
-                                    fontSize: '1rem',
-                                    lineHeight: 1,
-                                    position: 'relative',
-                                    left: '-4px'
-                                }}>•</span>
-                                <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'white', margin: 0, cursor: 'pointer' }}>
-                                    Company
-                                </h3>
-                            </Link>
-                            <div style={{
-                                borderLeft: '2px solid rgba(255,255,255,0.3)',
-                                paddingLeft: '20px',
-                                marginLeft: '0px',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: '10px',
-                                alignItems: 'flex-start',
-                                textAlign: 'left'
-                            }}>
-                                <Link href="/company#mission" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Mission</Link>
-                                <Link href="/company#vision" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Vision</Link>
-                                <Link href="/company#values" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Values</Link>
-                                <Link href="/company#board" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Board Members</Link>
-                                <Link href="/company#profile" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Profile</Link>
-                                <Link href="/company#access" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Access</Link>
-                            </div>
+                        <div className="footer-column">
+                            <h4 className="column-title">Company</h4>
+                            <ul className="column-links">
+                                <li><Link href="/company">About</Link></li>
+                                <li><Link href="/company#values">Values</Link></li>
+                                <li><Link href="/contact">Contact</Link></li>
+                                <li><Link href="/careers">Careers</Link></li>
+                            </ul>
                         </div>
-
-                        {/* Outcomes Column */}
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '140px' }}>
-                            <Link href="/outcomes" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
-                                <span style={{
-                                    color: 'white',
-                                    marginRight: '10px',
-                                    fontSize: '1rem',
-                                    lineHeight: 1,
-                                    position: 'relative',
-                                    left: '-4px'
-                                }}>•</span>
-                                <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'white', margin: 0, cursor: 'pointer' }}>
-                                    Outcomes
-                                </h3>
-                            </Link>
-                            <div style={{
-                                borderLeft: '2px solid rgba(255,255,255,0.3)',
-                                paddingLeft: '20px',
-                                marginLeft: '0px',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: '10px',
-                                alignItems: 'flex-start',
-                                textAlign: 'left'
-                            }}>
-                                <Link href="/outcomes#vision" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Vision</Link>
-                                <Link href="/outcomes#team" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Team</Link>
-                                <Link href="/outcomes#cases" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Case Studies</Link>
-                            </div>
-                        </div>
-
-                        {/* Solutions Column */}
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '140px' }}>
-                            <Link href="/solutions" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
-                                <span style={{
-                                    color: 'white',
-                                    marginRight: '10px',
-                                    fontSize: '1rem',
-                                    lineHeight: 1,
-                                    position: 'relative',
-                                    left: '-4px'
-                                }}>•</span>
-                                <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'white', margin: 0, cursor: 'pointer' }}>
-                                    Solutions
-                                </h3>
-                            </Link>
-                            <div style={{
-                                borderLeft: '2px solid rgba(255,255,255,0.3)',
-                                paddingLeft: '20px',
-                                marginLeft: '0px',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: '10px',
-                                alignItems: 'flex-start',
-                                textAlign: 'left'
-                            }}>
-                                <Link href="/solutions#culture" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Culture</Link>
-                                <Link href="/solutions#people" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>People</Link>
-                                <Link href="/solutions#environment" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Environment</Link>
-                                <Link href="/solutions#faq" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>FAQ</Link>
-                            </div>
-                        </div>
-
-                        {/* Neura AI Column */}
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '140px' }}>
-                            <Link href="/neura-ai" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
-                                <span style={{
-                                    color: 'white',
-                                    marginRight: '10px',
-                                    fontSize: '1rem',
-                                    lineHeight: 1,
-                                    position: 'relative',
-                                    left: '-4px'
-                                }}>•</span>
-                                <h3 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'white', margin: 0, cursor: 'pointer' }}>
-                                    Neura AI
-                                </h3>
-                            </Link>
-                            <div style={{
-                                borderLeft: '2px solid rgba(255,255,255,0.3)',
-                                paddingLeft: '20px',
-                                marginLeft: '0px',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: '10px',
-                                alignItems: 'flex-start',
-                                textAlign: 'left'
-                            }}>
-                                <Link href="/neura-ai#mission" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Mission</Link>
-                                <Link href="/neura-ai#services" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Services</Link>
-                                <Link href="/neura-ai#technology" style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', textDecoration: 'none' }}>Technology</Link>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
-                {/* Bottom Bar - Matching Reference */}
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '32px 48px',
-                    borderTop: '2px solid rgba(255,255,255,0.3)',
-                    marginTop: '48px'
-                }}>
-                    {/* Left - Privacy Badge + Link */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                        {/* Privacy Badge - White circle with blue P */}
-                        <div style={{
-                            width: '40px',
-                            height: '40px',
-                            borderRadius: '8px',
-                            background: 'white',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-                        }}>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="10" stroke="#3b82f6" strokeWidth="2" fill="none" />
-                                <text x="12" y="16" textAnchor="middle" fill="#3b82f6" fontSize="10" fontWeight="bold">P</text>
-                            </svg>
-                        </div>
-                        <Link href="/privacy" style={{
-                            color: 'white',
-                            textDecoration: 'none',
-                            fontSize: '0.8rem',
-                            fontWeight: 500
-                        }}>
-                            Privacy Policy
-                        </Link>
-                    </div>
-
-                    {/* Right - Copyright */}
-                    <span style={{
-                        color: 'rgba(255,255,255,0.6)',
-                        fontSize: '0.75rem'
-                    }}>
-                        © Winspire RCM Inc. All Rights Reserved.
+                {/* Bottom Bar */}
+                <div className="footer-bottom">
+                    <span className="copyright">
+                        © {new Date().getFullYear()} Winspire RCM Inc. All rights reserved.
                     </span>
+                    <div className="legal-links">
+                        <Link href="/privacy">Privacy Policy</Link>
+                        <Link href="/terms">Terms of Service</Link>
+                    </div>
+                </div>
+
+                {/* Watermark - Inside card as background */}
+                <div className="footer-watermark" aria-hidden="true">
+                    WINSPIRE
                 </div>
             </div>
 
-            {/* ================= MOBILE VIEW ================= */}
-            <div className="footer-mobile-view">
-                {/* 1. Header Logo */}
-                <div className="footer-mobile-header">
-                    <h2 className="footer-mobile-logo">WINSPIRE</h2>
-                </div>
+            <style jsx>{`
+                .footer-wrapper {
+                    position: relative;
+                    background: transparent;
+                    padding: 60px 24px 40px;
+                    overflow: hidden;
+                    border-radius: 32px 32px 0 0;
+                }
 
-                {/* 2. Links Section (2 Columns) */}
-                <div className="footer-mobile-links">
-                    {/* Left Col: Main Links */}
-                    <div className="footer-links-left">
-                        <Link href="/company" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="footer-link-item"><span className="bullet">•</span> Company</Link>
-                        <Link href="/outcomes" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="footer-link-item"><span className="bullet">•</span> Outcomes</Link>
-                        <Link href="/solutions" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="footer-link-item"><span className="bullet">•</span> Solutions</Link>
-                        <Link href="/neura-ai" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="footer-link-item"><span className="bullet">•</span> Neura AI</Link>
-                        <Link href="/book-demo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="footer-link-item"><span className="bullet">•</span> Book a Demo</Link>
-                    </div>
+                .footer-card {
+                    position: relative;
+                    z-index: 10;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    background: white;
+                    border-radius: 32px;
+                    padding: 48px;
+                    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+                    overflow: hidden;
+                }
 
-                    {/* Right Col: Social (Smaller) */}
-                    <div className="footer-links-right">
-                        <div className="social-label">Social</div>
-                        <a href="https://www.linkedin.com/company/winspire-rcm-private-limited/" className="social-link">LinkedIn</a>
-                    </div>
-                </div>
+                .footer-top {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 48px;
+                    padding-bottom: 40px;
+                    border-bottom: 1px solid #eee;
+                }
 
-                {/* 3. Service Card (Horizontal) */}
-                <div className="footer-mobile-card">
-                    <div className="footer-card-image">
-                        <Image
-                            src="/poster/qefqe.webp"
-                            alt="Service"
-                            fill
-                            style={{ objectFit: 'cover' }}
-                        />
-                    </div>
-                    <div className="footer-card-content">
-                        <div className="footer-card-text">
-                            <div className="service-title">Winspire<br />Service<br />Site</div>
-                            <span className="card-arrow-icon">↗</span>
-                        </div>
-                        <div className="footer-award-badge">
-                            <span className="award-icon-red">★</span>
-                            <div className="award-text">
-                                <span className="award-year">2024 Award</span>
-                                <span className="award-name">HEALTHCARE EXCELLENCE</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                /* Brand Section */
+                .footer-brand {
+                    flex: 0 0 320px;
+                    max-width: 320px;
+                }
 
-                {/* 4. Bottom Section */}
-                <div className="footer-mobile-bottom">
-                    <div className="footer-divider-line"></div>
-                    <div className="footer-bottom-row">
-                        <div className="footer-policy-copyright">
-                            <Link href="/privacy" className="footer-privacy">Privacy Policy</Link>
-                            <span className="footer-copyright">© Winspire RCM Inc.<br />All Rights Reserved.</span>
-                        </div>
-                        {/* P-Mark Logo */}
-                        <div className="footer-p-mark">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="10" stroke="#3b82f6" strokeWidth="2" fill="none" />
-                                <text x="12" y="16" textAnchor="middle" fill="#3b82f6" fontSize="12" fontWeight="bold">P</text>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                .footer-logo {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 20px;
+                }
+
+                .logo-image {
+                    height: 32px;
+                    width: auto;
+                    filter: invert(1);
+                }
+
+                .footer-tagline {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 0.875rem;
+                    line-height: 1.6;
+                    color: #666;
+                    margin: 0 0 24px 0;
+                }
+
+                .footer-socials {
+                    display: flex;
+                    gap: 16px;
+                }
+
+                .social-icon {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 36px;
+                    height: 36px;
+                    color: #1a1a1a;
+                    transition: all 0.2s ease;
+                }
+
+                .social-icon:hover {
+                    color: #3b82f6;
+                    transform: translateY(-2px);
+                }
+
+                /* Link Columns */
+                .footer-links {
+                    display: flex;
+                    gap: 64px;
+                }
+
+                .footer-column {
+                    min-width: 120px;
+                }
+
+                .column-title {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 0.875rem;
+                    font-weight: 600;
+                    color: #1a1a1a;
+                    margin: 0 0 20px 0;
+                }
+
+                .column-links {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .column-links li {
+                    margin-bottom: 12px;
+                }
+
+                .column-links :global(a) {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 0.8rem;
+                    color: #666;
+                    text-decoration: none;
+                    transition: color 0.2s ease;
+                }
+
+                .column-links :global(a:hover) {
+                    color: #1a1a1a;
+                }
+
+                /* Bottom Bar */
+                .footer-bottom {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding-top: 24px;
+                }
+
+                .copyright {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 0.75rem;
+                    color: #999;
+                }
+
+                .legal-links {
+                    display: flex;
+                    gap: 24px;
+                }
+
+                .legal-links :global(a) {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 0.75rem;
+                    color: #666;
+                    text-decoration: underline;
+                    text-underline-offset: 2px;
+                    transition: color 0.2s ease;
+                }
+
+                .legal-links :global(a:hover) {
+                    color: #1a1a1a;
+                }
+
+                /* Watermark */
+                .footer-watermark {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 0;
+                    font-family: 'Outfit', sans-serif;
+                    font-size: clamp(80px, 14vw, 180px);
+                    font-weight: 800;
+                    text-align: center;
+                    color: rgba(0, 0, 0, 0.05);
+                    letter-spacing: 0.02em;
+                    white-space: nowrap;
+                    user-select: none;
+                    pointer-events: none;
+                    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+                    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+                }
+
+                /* ========== RESPONSIVE ========== */
+
+                /* Tablet */
+                @media (max-width: 1024px) {
+                    .footer-card {
+                        padding: 40px 32px;
+                    }
+
+                    .footer-top {
+                        flex-direction: column;
+                        gap: 40px;
+                    }
+
+                    .footer-brand {
+                        flex: none;
+                        max-width: 100%;
+                    }
+
+                    .footer-links {
+                        justify-content: flex-start;
+                        gap: 48px;
+                    }
+                }
+
+                /* Mobile Large */
+                @media (max-width: 768px) {
+                    .footer-wrapper {
+                        padding: 40px 16px 0;
+                    }
+
+                    .footer-card {
+                        padding: 32px 24px;
+                        border-radius: 16px;
+                    }
+
+                    .footer-top {
+                        gap: 32px;
+                        padding-bottom: 32px;
+                    }
+
+                    .footer-links {
+                        flex-wrap: wrap;
+                        gap: 32px;
+                    }
+
+                    .footer-column {
+                        flex: 1 1 calc(50% - 16px);
+                        min-width: 140px;
+                    }
+
+                    .footer-bottom {
+                        flex-direction: column;
+                        gap: 16px;
+                        text-align: center;
+                    }
+
+                    .legal-links {
+                        justify-content: center;
+                    }
+
+                    .footer-watermark {
+                        margin-top: -24px;
+                    }
+                }
+
+                /* Mobile Small */
+                @media (max-width: 480px) {
+                    .footer-wrapper {
+                        padding: 32px 12px 0;
+                    }
+
+                    .footer-card {
+                        padding: 24px 20px;
+                        border-radius: 12px;
+                    }
+
+                    .footer-logo {
+                        gap: 8px;
+                    }
+
+                    .logo-icon {
+                        width: 28px;
+                        height: 28px;
+                    }
+
+                    .logo-text {
+                        font-size: 1.25rem;
+                    }
+
+                    .footer-tagline {
+                        font-size: 0.8rem;
+                    }
+
+                    .footer-links {
+                        gap: 24px;
+                    }
+
+                    .footer-column {
+                        flex: 1 1 100%;
+                    }
+
+                    .column-title {
+                        font-size: 0.8rem;
+                        margin-bottom: 16px;
+                    }
+
+                    .column-links li {
+                        margin-bottom: 10px;
+                    }
+
+                    .column-links :global(a) {
+                        font-size: 0.75rem;
+                    }
+
+                    .legal-links {
+                        flex-direction: column;
+                        gap: 12px;
+                    }
+
+                    .footer-watermark {
+                        font-size: 60px;
+                        margin-top: -16px;
+                    }
+                }
+
+                /* Very Small Devices */
+                @media (max-width: 360px) {
+                    .footer-card {
+                        padding: 20px 16px;
+                    }
+
+                    .footer-watermark {
+                        font-size: 48px;
+                    }
+                }
+            `}</style>
         </footer>
     );
 }
