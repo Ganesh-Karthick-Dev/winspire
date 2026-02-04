@@ -41,7 +41,6 @@
     width: 100%;
     max-width: 64rem;
     /* Reduced from 80rem */
-    /* Match card container width */
     padding: 0 0.5rem;
     /* Precise alignment tweaks */
     margin-bottom: 12px;
@@ -84,46 +83,6 @@
     max-width: 64rem;
     /* Reduced from 80rem */
     z-index: 5;
-}
-
-/* ... existing styles ... */
-
-/* Responsive */
-@media (min-width: 768px) {
-    .cardsGrid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        /* Larger gap on desktop */
-    }
-
-    .markersRow,
-    .markersRowBottom {
-        justify-content: normal;
-        /* Disable space-between */
-        position: relative;
-        height: 24px;
-    }
-
-    /* Marker gap formula: (100% - 2 * gap) / 3 = 1fr width.
-       Gap center 1 = 1fr + 0.5 * gap
-       Gap center 2 = 2 * 1fr + 1.5 * gap
-       Gap = 2rem
-    */
-    .marker:nth-child(1) {
-        left: 0;
-    }
-
-    .marker:nth-child(2) {
-        left: calc(((100% - 4rem) / 3) + 1rem);
-    }
-
-    .marker:nth-child(3) {
-        left: calc((2 * (100% - 4rem) / 3) + 3rem);
-    }
-
-    .marker:nth-child(4) {
-        left: 100%;
-    }
 }
 
 /* Card Styling */
@@ -175,12 +134,6 @@
 
     .markersRow,
     .markersRowBottom {
-        /* Need to align markers with the gap. 
-           If gap is 2rem, markers should be space-between? 
-           Actually, space-between puts them at edges and evenly in middle.
-           If we have 3 cards, we have 4 vertical lines (edges).
-           4 markers with space-between aligns perfectly with 3 cards borders if widths match.
-        */
         justify-content: normal;
         /* Disable space-between */
         position: relative;
@@ -207,4 +160,36 @@
     .marker:nth-child(4) {
         left: 100%;
     }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem; 
+    }
+    .card {
+        height: auto;
+        padding: 1.5rem;
+    }
+    .cardTitle {
+        font-size: 1.8rem;
+    }
+    .markersRow, .markersRowBottom {
+        display: flex; /* Ensure they are displayed */
+        justify-content: space-between;
+        position: relative; 
+    }
+    .marker {
+        position: relative; /* Reset from absolute for flow if needed, or keep relative but ensure visibility */
+        transform: none; /* Reset transform */
+    }
+
+    /* On mobile, maybe we only want 2 markers visible for the single column? Or just hide them? 
+       The user said "plus sign was not visible", implying they WANT to see them.
+       If it's a single column of cards, the markers usually frame the top/bottom or sides.
+       Looking at the desktop code, markers are absolutely positioned to match grid lines.
+       On mobile, we have 1 column. So maybe we need markers on left and right?
+       Or maybe users sees the top row markers?
+       
+       Let's try to ensure the markers row is visible and items are spaced.
+    */
 }
