@@ -362,18 +362,54 @@ export default function NeuraSection() {
                 .ns-bento-card {
                     align-items: center;
                     justify-content: center;
+                    position: relative;
+                    overflow: hidden;
                 }
 
                 .ns-bento-card-cell {
                     background: rgba(255, 255, 255, 0.08);
                     border: 1px solid rgba(255, 255, 255, 0.18);
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                /* Frosty noise texture overlay */
+                /* Frosty noise texture overlay - actual div element */
+                .ns-frosty-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: 
+                        radial-gradient(600px circle at 50% 50%, rgba(79, 156, 249, 0.25) 0%, transparent 60%),
+                        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
+                    background-size: cover, 200px 200px;
+                    mix-blend-mode: screen;
+                    opacity: 0.7;
+                    pointer-events: none;
+                    z-index: 1;
+                    border-radius: inherit;
+                }
+
+                .ns-bento-card-cell .ns-stack-icon,
+                .ns-bento-card-cell .ns-stack-text {
+                    position: relative;
+                    z-index: 2;
                 }
 
                 /* Hero (Predictive) card: fill empty space with subtle image */
                 .ns-bento-card-hero {
                     background: rgba(15, 23, 42, 0.85);
                     border: 1px solid rgba(255, 255, 255, 0.2);
+                    position: relative;
+                    overflow: hidden;
                 }
+
+                .ns-bento-card-hero .ns-frosty-overlay {
+                    background: 
+                        radial-gradient(600px circle at 30% 70%, rgba(59, 130, 246, 0.3) 0%, transparent 60%),
+                        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
+                    opacity: 0.8;
+                }
+
 
                 .ns-bento-hero-bg {
                     position: absolute;
