@@ -233,3 +233,207 @@
         margin-bottom: 0.5rem;
     }
 }
+
+/* ========================================= */
+/*       SCROLLABLE STICKY SECTIONS          */
+/* ========================================= */
+
+.scrollContainer {
+    width: 100%;
+    position: relative;
+    padding-bottom: 5rem;
+}
+
+.scrollWrapper {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* LEFT: Sticky Image Area */
+.stickyImageContainer {
+    width: 50%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+.imageFrame {
+    width: 100%;
+    height: 100%;
+    max-height: 80vh; /* Don't fill full screen vertically, keep breathable */
+    border-radius: 2rem;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stickyImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-out;
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+.stickyImage.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* RIGHT: Scrolling Text Content */
+.scrollContentContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.scrollSection {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 4rem 4rem 2rem;
+    box-sizing: border-box;
+}
+
+.sectionHeader {
+    margin-bottom: 2.5rem;
+}
+
+.sectionTitle {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1.25rem;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sectionSubtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin-bottom: 2rem;
+    max-width: 90%;
+}
+
+.highlightText {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #38bdf8;
+    margin-top: 2rem;
+    display: block;
+    padding-left: 1rem;
+    border-left: 2px solid #38bdf8;
+}
+
+/* POINTS GRID - The "3 Points" styled as cards */
+.pointsGrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.pointCard {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.pointCard:hover {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(56, 189, 248, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.pointIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(14, 165, 233, 0.15);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #38bdf8;
+    flex-shrink: 0;
+}
+
+.pointTextContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.pointTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin-bottom: 0.25rem;
+}
+
+.pointDesc {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .scrollWrapper {
+        flex-direction: column;
+    }
+
+    .stickyImageContainer {
+        width: 100%;
+        height: 50vh;
+        position: relative;
+        top: 0;
+        padding: 1rem;
+        z-index: 5;
+    }
+    
+    .scrollContentContainer {
+        width: 100%;
+        padding-top: 0;
+    }
+
+    .scrollSection {
+        min-height: auto;
+        padding: 3rem 1.5rem;
+        background: rgba(15, 23, 42, 0.95); /* Opaque bg to cover scrolling content if overlapping */
+        position: relative; 
+        z-index: 10;
+        margin-top: -2rem; /* Slight overlap */
+        border-radius: 2rem 2rem 0 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sectionTitle {
+        font-size: 2.25rem;
+    }
+}

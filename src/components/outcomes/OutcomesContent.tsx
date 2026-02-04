@@ -2,6 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import styles from '@/styles/OutcomesContent.module.css';
 import OutcomesDesignGraphic from './OutcomesDesignGraphic';
+import { useEffect, useRef, useState } from 'react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import gsap from 'gsap';
+import { 
+    Brain, ShieldAlert, LineChart, 
+    LayoutDashboard, Activity, Clock, 
+    Users, Target, Award 
+} from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const FallingWord = ({ text, delay, isHighlight = false, highlightClass = "" }: { text: string, delay: number, isHighlight?: boolean, highlightClass?: string }) => {
     return (
@@ -30,7 +40,7 @@ const FallingWord = ({ text, delay, isHighlight = false, highlightClass = "" }: 
 
 const OutcomesContent = () => {
     // Outcome Data - Single Static Section
-    const section = {
+    const staticSection = {
         id: 1,
         title: "Outcomes Start With Design, Not Execution",
         content: "Most RCM organizations react to problems after they surface. Denials rise. AR ages. Cash flow slows. At Winspire, we designed for outcomes before execution begins.",
@@ -39,14 +49,15 @@ const OutcomesContent = () => {
     };
 
     return (
-        <div className={styles.staticContainer}>
+        <div className={styles.mainWrapper}>
+            <div className={styles.staticContainer}>
             <div className={styles.staticContentWrapper}>
                 
                 {/* Left Side: Graphic (Solutions) */}
                 <div className={styles.staticLeft}>
                     <div className={styles.designGraphicWrapper}>
                          <OutcomesDesignGraphic 
-                            items={section.list} 
+                            items={staticSection.list} 
                             isActive={true} 
                         />
                     </div>
@@ -65,7 +76,7 @@ const OutcomesContent = () => {
                     </h3>
                     
                     <p className={styles.section1Content}>
-                        {section.content}
+                        {staticSection.content}
                     </p>
 
                     <div className={styles.finalStatementPill}>
@@ -76,13 +87,15 @@ const OutcomesContent = () => {
                             </svg>
                         </div>
                         <div className={styles.pillContent}>
-                            <p>{section.final}</p>
+                            <p>{staticSection.final}</p>
                         </div>
                        
                     </div>
 
                 </div>
             </div>
+        </div>
+
         </div>
     );
 };
