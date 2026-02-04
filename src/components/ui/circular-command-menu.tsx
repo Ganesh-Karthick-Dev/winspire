@@ -94,7 +94,7 @@ function CircularCommandMenu({
         }
     }
 
-    const totalSize = (radius + 160) * 2 // Increased buffer for EXTREME labels
+    const totalSize = (radius + 80) * 2 // Reduced buffer for tighter layout
     const wrapperRef = useRef<HTMLDivElement>(null)
     const isInView = useInView(wrapperRef, { once: true, amount: 0.25 })
 
@@ -146,17 +146,17 @@ function CircularCommandMenu({
                                     animate={
                                         isInView
                                             ? {
-                                                  opacity: 1,
-                                                  x: position.x - 28,
-                                                  y: position.y - 28,
-                                                  scale: 1,
-                                              }
+                                                opacity: 1,
+                                                x: position.x - 28,
+                                                y: position.y - 28,
+                                                scale: 1,
+                                            }
                                             : {
-                                                  opacity: 1,
-                                                  x: 0,
-                                                  y: 0,
-                                                  scale: 0,
-                                              }
+                                                opacity: 1,
+                                                x: 0,
+                                                y: 0,
+                                                scale: 0,
+                                            }
                                     }
                                     exit={{
                                         opacity: 0,
@@ -180,8 +180,8 @@ function CircularCommandMenu({
                                         onMouseLeave={() => setActiveIndex(null)}
                                         className={cn(
                                             "flex h-16 w-16 items-center justify-center rounded-full",
-                                            "border border-white/10 bg-[#0f172a] shadow-[0_0_15px_rgba(0,0,0,0.5)]",
-                                            "transition-all duration-300 hover:bg-blue-600 hover:border-blue-400 hover:scale-110 hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]",
+                                            "border border-white/10 bg-[#0f172a]",
+                                            "transition-all duration-300 hover:bg-blue-600 hover:border-blue-400 hover:scale-110",
                                             activeIndex === index && "ring-2 ring-blue-500 bg-blue-600 scale-110",
                                             "text-blue-400 hover:text-white"
                                         )}

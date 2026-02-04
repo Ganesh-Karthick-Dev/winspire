@@ -9,11 +9,10 @@
   white-space: nowrap !important;
   pointer-events: none !important;
   font-family: 'Outfit', sans-serif !important;
-  font-size: 0.875rem !important;
+  font-size: 1.125rem !important;
   font-weight: 600 !important;
-  letter-spacing: 0.025em !important;
-  color: #e2e8f0 !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+  letter-spacing: 0.02em !important;
+  color: #ffffff !important;
 }
 
 /* Top item only: label ABOVE circle (not to the right) */

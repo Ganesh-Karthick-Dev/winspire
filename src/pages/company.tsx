@@ -1,8 +1,8 @@
 /**
- * Company Page - About Us / Who We Are
+ * Temp Company Page - About Us / Who We Are
  * 
- * Modern hero section with 3D model, video card,
- * and smooth scroll animations.
+ * Modern hero section with 3D model background and smooth scroll animations.
+ * Follows the same structure as company.tsx.
  */
 
 'use client';
@@ -10,28 +10,32 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
-import MissionSection from '@/components/company/MissionSection';
-import VisionSection from '@/components/company/VisionSection';
-import ValuesSection from '@/components/company/ValuesSection';
-import BoardSection from '@/components/company/BoardSection';
-import AwardSection from '@/components/company/AwardSection';
-import CorporateProfile from '@/components/company/CorporateProfile';
-import AccessSection from '@/components/company/AccessSection';
-import CareersContactLinks from '@/components/CareersContactLinks';
-import FloatingSectionNav from '@/components/FloatingSectionNav'; // Import added
 import { shouldDisable3D } from '@/lib/threeUtils';
 import styles from '@/styles/company.module.css';
 
 import { companyScrollKeyframes } from '@/lib/companyScrollAnimations';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
-// 3D Model - same as home page
+// Section Components
+import OurStorySection from '@/components/temp-company/OurStorySection';
+import WhyWeExistSection from '@/components/temp-company/WhyWeExistSection';
+import PointOfViewSection from '@/components/temp-company/PointOfViewSection';
+import HowWeWorkSection from '@/components/temp-company/HowWeWorkSection';
+import RoleOfTechnologySection from '@/components/temp-company/RoleOfTechnologySection';
+import WhoWeHelpSection from '@/components/temp-company/WhoWeHelpSection';
+import CultureSection from '@/components/temp-company/CultureSection';
+import LeadershipSection from '@/components/temp-company/LeadershipSection';
+import VisionMissionSection from '@/components/temp-company/VisionMissionSection';
+import FinalCTASection from '@/components/temp-company/FinalCTASection';
+import { VideoScrollHero } from '@/components/ui/video-scroll-hero';
+
+// 3D Model - same as company page
 const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
     ssr: false,
     loading: () => null,
 });
 
-export default function Company() {
+export default function TempCompany() {
     const heroRef = useRef<HTMLElement>(null);
     const is3DDisabled = useRef(false);
 
@@ -46,6 +50,8 @@ export default function Company() {
 
     useEffect(() => {
         is3DDisabled.current = shouldDisable3D();
+        
+        // Hide loader immediately without triggering it
         const loader = document.querySelector('.loader-overlay') as HTMLElement;
         if (loader) {
             loader.style.opacity = '0';
@@ -60,13 +66,11 @@ export default function Company() {
             const { ScrollTrigger } = await import('gsap/ScrollTrigger');
             gsap.registerPlugin(ScrollTrigger);
 
-
-
             // Use gsap.context for easy cleanup
             ctx = gsap.context(() => {
                 const tl = gsap.timeline({ delay: 0.1 });
 
-                // Initialize state immediately to avoid "flash" but ensure visibility if animation fails
+                // Initialize state immediately to avoid "flash"
                 gsap.set(`.${styles.heroLabel}`, { y: 20, opacity: 0 });
                 gsap.set(`.${styles.heroTitle}`, { y: 60, opacity: 0 });
                 gsap.set(`.${styles.heroCard}`, { x: 100, opacity: 0 });
@@ -90,7 +94,7 @@ export default function Company() {
                 });
             }, heroRef);
 
-            // Failsafe: Ensure visibility after a short delay in case GSAP hangs
+            // Failsafe: Ensure visibility after a short delay
             setTimeout(() => {
                 const elements = [
                     document.querySelector(`.${styles.heroLabel}`),
@@ -112,7 +116,7 @@ export default function Company() {
         }
 
         return () => {
-            if (ctx) ctx.revert(); // Cleanup GSAP animations/triggers
+            if (ctx) ctx.revert();
         };
     }, []);
 
@@ -121,7 +125,10 @@ export default function Company() {
     };
 
     return (
-        <Layout title="About Us" description="Learn about Winspire RCM - our mission, values, and team">
+        <Layout
+            title="About Winspire RCM"
+            description="Built Inside Healthcare. Designed for Predictable Outcomes. Learn about our mission, values, and team."
+        >
             {/* 3D Model - FIXED behind everything */}
             {!is3DDisabled.current && (
                 <div className={styles.modelContainer}>
@@ -134,105 +141,101 @@ export default function Company() {
                 </div>
             )}
 
-            {/* Hero Section */}
-            <section ref={heroRef} className={styles.heroSection}>
-                {/* Content */}
-                <div className={styles.heroContent}>
-                    {/* Label */}
-                    <div className={styles.heroLabel}>
-                        <div className={styles.heroDots}>
-                            <span className={styles.heroDot}></span>
-                            <span className={styles.heroDot}></span>
+            {/* Hero Section + Scaling Card */}
+            <div className="relative">
+                <section ref={heroRef} className={styles.heroSection}>
+                    {/* Content */}
+                    <div className={styles.heroContent}>
+                        {/* Label */}
+                        <div className={styles.heroLabel}>
+                            {/* <div className={styles.heroDots}>
+                                <span className={styles.heroDot}></span>
+                                <span className={styles.heroDot}></span>
+                            </div> */}
+                            {/* <span>About Winspire RCM</span> */}
                         </div>
-                        <span >About Winspire</span>
+
+                        {/* Main Title */}
+                        <h1 className={styles.heroTitle}>
+                            Built Inside Healthcare.<br/>
+                            <span className={styles.heroSubtitle}>Designed for Predictable Outcomes.</span>
+                        </h1>
                     </div>
 
-                    {/* Main Title */}
-                    <h1 className={styles.heroTitle}>About Us</h1>
-                </div>
+                    {/* Scroll Indicator */}
+                    <div className={styles.scrollIndicator} onClick={handleScrollClick}>
+                        <span>Scroll</span>
+                        <span>↓</span>
+                    </div>
+                </section>
 
-                {/* Image Card - half in, half out */}
-                <div className={styles.heroCard}>
-                    <img
-                        className={styles.heroCardVideo}
-                        src="/poster/qefqe.webp"
-                        alt="About Us"
+                {/* Scaling Card - Starts inside hero, expands to 80% */}
+                <div className="absolute top-20 left-0 w-full h-[150vh] pointer-events-none z-50">
+                    <VideoScrollHero 
+                        videoSrc="/temp/0_Doctor_Patient_1280x672.mp4"
+                        startScale={0.35}
+                        maxScale={0.8}
+                        className="pointer-events-auto"
                     />
                 </div>
+            </div>
 
+            {/* SPACER - Adjusted to allow the 150vh animation to finish without overlap */}
+            <div className="h-[100vh] pointer-events-none"></div>
 
-
-                {/* Scroll Indicator */}
-                <div className={styles.scrollIndicator} onClick={handleScrollClick}>
-                    <span>Scroll</span>
-                    <span>↓</span>
+            {/* Main Content Wrapper */}
+            <div className="relative z-20 flex flex-col pb-12">
+                
+                {/* Our Story Section */}
+                <div id="our-story">
+                    <OurStorySection />
                 </div>
-            </section>
 
-            {/* Mission Section */}
-            <div id="mission" style={{ scrollMarginTop: '100px' }}>
-                <MissionSection
-                    label="Mission"
-                    subtitle="Our purpose and commitment"
-                    statement={`Transforming Healthcare
-With Technology.`}
-                    description="Our mission is to enable healthcare organizations to operate with clarity, control, and confidence in their revenue cycle. By combining advanced technology, intelligent automation, and deep domain expertise, we simplify complex financial workflows and improve operational efficiency."
-                />
+                {/* Why We Exist Section */}
+                <div id="why-we-exist">
+                    <WhyWeExistSection />
+                </div>
+
+                {/* Our Point of View Section */}
+                <div id="point-of-view">
+                    <PointOfViewSection />
+                </div>
+
+                {/* How We Work Section */}
+                <div id="how-we-work">
+                    <HowWeWorkSection />
+                </div>
+
+                {/* Technology Section */}
+                <div id="technology">
+                    <RoleOfTechnologySection />
+                </div>
+
+                {/* Who We Help Section */}
+                <div id="who-we-help">
+                    <WhoWeHelpSection />
+                </div>
+
+                {/* Our Culture Section */}
+                <div id="culture">
+                    <CultureSection />
+                </div>
+
+                {/* Leadership Section */}
+                <div id="leadership">
+                    <LeadershipSection />
+                </div>
+
+                {/* Vision Mission Section */}
+                <div id="vision-mission">
+                    <VisionMissionSection />
+                </div>
+
+                {/* Final CTA Section */}
+                <div id="contact">
+                    <FinalCTASection />
+                </div>
             </div>
-
-            {/* Vision Section */}
-            <div id="vision" style={{ scrollMarginTop: '100px' }}>
-                <VisionSection
-                    label="Vision"
-                    subtitle="Our future outlook"
-                    statementLines={['Bridging Healthcare With', 'Intelligent Technology']}
-                    descriptions={[
-                        'Our vision is to create a future where healthcare operations are intelligent, connected, and continuously optimized through AI-driven systems. By bridging real-world processes with digital intelligence, we aim to transform how healthcare organizations understand, manage, and improve their financial performance.',
-                        "We envision a unified platform that acts as a digital twin of the healthcare revenue ecosystem, connecting data, workflows, and insights in real time. This approach enables proactive decision-making, adaptive operations, and sustainable growth, helping healthcare providers stay resilient in an ever-evolving industry.",
-                    ]}
-                />
-            </div>
-
-            {/* Values Section */}
-            <div id="values" style={{ scrollMarginTop: '100px' }}>
-                <ValuesSection />
-            </div>
-
-            {/* Board Members Section */}
-            <div id="board" style={{ scrollMarginTop: '100px' }}>
-                <BoardSection />
-            </div>
-
-            {/* Award Section */}
-            <div id="awards" style={{ scrollMarginTop: '100px' }}>
-                <AwardSection />
-            </div>
-
-            {/* Corporate Profile Section */}
-            <div id="profile" style={{ scrollMarginTop: '100px' }}>
-                <CorporateProfile />
-            </div>
-
-            {/* Access Section */}
-            <div id="access" style={{ scrollMarginTop: '100px' }}>
-                <AccessSection />
-            </div>
-
-            {/* Final CTA Section */}
-            <div id="contact" style={{ scrollMarginTop: '100px' }}>
-                <CareersContactLinks />
-            </div>
-
-            <FloatingSectionNav sections={[
-                { id: 'mission', label: 'Mission' },
-                { id: 'vision', label: 'Vision' },
-                { id: 'values', label: 'Values' },
-                { id: 'board', label: 'Board Members' },
-                { id: 'awards', label: 'Award' },
-                { id: 'profile', label: 'Corporate Profile' },
-                { id: 'access', label: 'Access' },
-            ]} />
-
         </Layout>
     );
 }
