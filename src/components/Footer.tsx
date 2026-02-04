@@ -9,10 +9,58 @@
  * - Watermark: Large faded "WINSPIRE" text
  */
 
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 
+const FOOTER_LINKS = [
+    {
+        title: 'Solutions',
+        items: [
+            { label: 'Overview', href: '/solutions' },
+            { label: 'Revenue Cycle', href: '/solutions#revenue-cycle' },
+            { label: 'Targeted Solutions', href: '/solutions#targeted' },
+            { label: 'Intelligence', href: '/solutions#intelligence' },
+        ]
+    },
+    {
+        title: 'Company',
+        items: [
+            { label: 'Our Story', href: '/company#our-story' },
+            { label: 'Leadership', href: '/company#leadership' },
+            { label: 'Culture', href: '/company#culture' },
+            { label: 'Contact', href: '/company#contact' },
+        ]
+    },
+    {
+        title: 'Outcomes',
+        items: [
+            { label: 'Overview', href: '/outcomes' },
+            { label: 'Systems', href: '/outcomes#systems' },
+            { label: 'Human Centric', href: '/outcomes#human-centric' },
+            { label: 'Future Proofing', href: '/outcomes#future' },
+        ]
+    },
+    {
+        title: 'Neura AI',
+        items: [
+            { label: 'Overview', href: '/neura-ai' },
+            { label: 'Capabilities', href: '/neura-ai#capabilities' },
+            { label: 'Integration', href: '/neura-ai#integration' },
+            { label: 'Security', href: '/neura-ai#security' },
+        ]
+    }
+];
+
 export default function Footer() {
+    const [openSection, setOpenSection] = useState<string | null>(null);
+
+    const toggleSection = (title: string) => {
+        if (window.innerWidth > 768) return; // Disable toggle on desktop
+        setOpenSection(openSection === title ? null : title);
+    };
+
     return (
         <footer className="footer-wrapper">
             {/* Main Footer Card */}
@@ -52,51 +100,30 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Right - Link Columns - Now 4 Columns */}
+                    {/* Right - Link Columns - Mapped */}
                     <div className="footer-links">
-                        {/* Solutions Column */}
-                        <div className="footer-column">
-                            <h4 className="column-title">Solutions</h4>
-                            <ul className="column-links">
-                                <li><Link href="/solutions">Overview</Link></li>
-                                <li><Link href="/solutions#revenue-cycle">Revenue Cycle</Link></li>
-                                <li><Link href="/solutions#targeted">Targeted Solutions</Link></li>
-                                <li><Link href="/solutions#intelligence">Intelligence</Link></li>
-                            </ul>
-                        </div>
-
-                        {/* Company Column - Verified IDs */}
-                        <div className="footer-column">
-                            <h4 className="column-title">Company</h4>
-                            <ul className="column-links">
-                                <li><Link href="/company#our-story">Our Story</Link></li>
-                                <li><Link href="/company#leadership">Leadership</Link></li>
-                                <li><Link href="/company#culture">Culture</Link></li>
-                                <li><Link href="/company#contact">Contact</Link></li>
-                            </ul>
-                        </div>
-
-                        {/* Outcomes Column */}
-                        <div className="footer-column">
-                            <h4 className="column-title">Outcomes</h4>
-                            <ul className="column-links">
-                                <li><Link href="/outcomes">Overview</Link></li>
-                                <li><Link href="/outcomes#systems">Systems</Link></li>
-                                <li><Link href="/outcomes#human-centric">Human Centric</Link></li>
-                                <li><Link href="/outcomes#future">Future Proofing</Link></li>
-                            </ul>
-                        </div>
-
-                        {/* Neura AI Column */}
-                        <div className="footer-column">
-                            <h4 className="column-title">Neura AI</h4>
-                            <ul className="column-links">
-                                <li><Link href="/neura-ai">Overview</Link></li>
-                                <li><Link href="/neura-ai#capabilities">Capabilities</Link></li>
-                                <li><Link href="/neura-ai#integration">Integration</Link></li>
-                                <li><Link href="/neura-ai#security">Security</Link></li>
-                            </ul>
-                        </div>
+                        {FOOTER_LINKS.map((section) => (
+                            <div className="footer-column" key={section.title}>
+                                <div
+                                    className={`column-header ${openSection === section.title ? 'active' : ''}`}
+                                    onClick={() => toggleSection(section.title)}
+                                >
+                                    <h4 className="column-title">{section.title}</h4>
+                                    <span className="accordion-icon">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <ul className={`column-links ${openSection === section.title ? 'open' : ''}`}>
+                                    {section.items.map((item) => (
+                                        <li key={item.label}>
+                                            <Link href={item.href}>{item.label}</Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
@@ -194,8 +221,10 @@ export default function Footer() {
 
                 .footer-links {
                     display: flex;
-                    gap: 32px; /* Reduced from 64px to fit 4 columns */
-                    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+                    gap: 32px;
+                    flex-wrap: wrap; 
+                    flex: 1;
+                    justify-content: flex-end;
                 }
 
                 .footer-column {
@@ -206,6 +235,10 @@ export default function Footer() {
                     align-items: flex-start;
                 }
 
+                .column-header {
+                    width: 100%;
+                }
+
                 .column-title {
                     font-family: 'Outfit', sans-serif;
                     font-size: 0.875rem;
@@ -214,6 +247,11 @@ export default function Footer() {
                     margin: 0 0 20px 0;
                 }
 
+                .accordion-icon {
+                    display: none; /* Hidden on desktop */
+                }
+
+                /* Links List */
                 .column-links {
                     list-style: none;
                     padding: 0;
@@ -233,7 +271,7 @@ export default function Footer() {
                     padding: 6px 12px;
                     border-radius: 8px;
                     display: inline-block;
-                    margin-left: -12px; /* Offset the padding to keep alignment */
+                    margin-left: -12px;
                 }
 
                 .column-links :global(a:hover) {
@@ -322,32 +360,64 @@ export default function Footer() {
                     }
                 }
 
-                /* Mobile Large */
+                /* Mobile Large - Accordion Trigger */
                 @media (max-width: 768px) {
-                    .footer-wrapper {
-                        padding: 40px 16px 0;
-                    }
-
-                    .footer-card {
-                        padding: 32px 24px;
-                        border-radius: 16px;
-                    }
-
-                    .footer-top {
-                        gap: 32px;
-                        padding-bottom: 32px;
-                    }
-
                     .footer-links {
-                        flex-wrap: wrap;
-                        gap: 32px;
+                        flex-direction: column;
+                        gap: 0; /* Remove gap, headers control spacing */
+                        width: 100%;
                     }
 
                     .footer-column {
-                        flex: 1 1 calc(50% - 16px);
-                        min-width: 140px;
+                        width: 100%;
+                        border-bottom: 1px solid #f0f0f0;
+                        padding-bottom: 0;
                     }
 
+                    .footer-column:last-child {
+                        border-bottom: none;
+                    }
+
+                    .column-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 20px 0;
+                        cursor: pointer;
+                        user-select: none;
+                    }
+
+                    .column-title {
+                        margin: 0; /* Remove bottom margin for alignment */
+                        font-size: 1rem;
+                    }
+
+                    .accordion-icon {
+                        display: block;
+                        transition: transform 0.3s ease;
+                        color: #1a1a1a;
+                    }
+
+                    .column-header.active .accordion-icon {
+                        transform: rotate(180deg);
+                    }
+
+                    /* Links are hidden by default on mobile */
+                    .column-links {
+                        max-height: 0;
+                        opacity: 0;
+                        overflow: hidden;
+                        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, margin-bottom 0.4s ease;
+                        margin-bottom: 0;
+                    }
+
+                    .column-links.open {
+                        max-height: 300px;
+                        opacity: 1;
+                        margin-bottom: 20px;
+                    }
+
+                    /* Footer Bottom Adjustments */
                     .footer-bottom {
                         flex-direction: column;
                         gap: 16px;
@@ -357,10 +427,7 @@ export default function Footer() {
 
                     .legal-links {
                         justify-content: flex-start;
-                    }
-
-                    .footer-watermark {
-                        margin-top: -24px;
+                        flex-wrap: wrap;
                     }
                 }
 
@@ -372,66 +439,12 @@ export default function Footer() {
 
                     .footer-card {
                         padding: 24px 20px;
-                        border-radius: 12px;
                     }
-
-                    .footer-logo {
-                        gap: 8px;
-                    }
-
-                    .logo-icon {
-                        width: 28px;
-                        height: 28px;
-                    }
-
-                    .logo-text {
-                        font-size: 1.25rem;
-                    }
-
-                    .footer-tagline {
-                        font-size: 0.8rem;
-                    }
-
-                    .footer-links {
-                        gap: 24px;
-                    }
-
-                    .footer-column {
-                        flex: 1 1 100%;
-                    }
-
-                    .column-title {
-                        font-size: 0.8rem;
-                        margin-bottom: 16px;
-                    }
-
-                    .column-links li {
-                        margin-bottom: 10px;
-                    }
-
-                    .column-links :global(a) {
-                        font-size: 0.75rem;
-                    }
-
-                    .legal-links {
-                        flex-direction: column;
-                        gap: 12px;
-                    }
-
+                    
+                    /* Adjust watermark */            
                     .footer-watermark {
                         font-size: 60px;
                         margin-top: -16px;
-                    }
-                }
-
-                /* Very Small Devices */
-                @media (max-width: 360px) {
-                    .footer-card {
-                        padding: 20px 16px;
-                    }
-
-                    .footer-watermark {
-                        font-size: 48px;
                     }
                 }
             `}</style>
