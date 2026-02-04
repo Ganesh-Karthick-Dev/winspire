@@ -10,7 +10,8 @@ import JsonLd from './JsonLd';
 import SkipToContent from './SkipToContent';
 import AnimatedBackground from './AnimatedBackground';
 // import Navbar from './Navbar'; // Old navbar - commented out
-import SmartNavbar from './SmartNavbar';
+// import SmartNavbar from './SmartNavbar'; // Old smart navbar - commented out
+import DockNavbar from './DockNavbar';
 import Footer from './Footer';
 import FlowerCursor from './FlowerCursor';
 import SmoothScroll from './SmoothScroll';
@@ -45,8 +46,8 @@ export default function Layout({
             {/* Animated Gradient Background */}
             <AnimatedBackground />
 
-            {/* Smart Navbar - Scroll-Aware */}
-            {!hideNavbar && <SmartNavbar />}
+            {/* Dock Navbar - Right Side */}
+            {!hideNavbar && <DockNavbar />}
 
             {/* Main content area */}
             <SmoothScroll>
