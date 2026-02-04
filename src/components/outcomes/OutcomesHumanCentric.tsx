@@ -74,23 +74,28 @@ const OutcomesHumanCentric = () => {
                     boxShadow: '0 40px 100px -20px rgba(0, 0, 0, 0.1)',
                     border: '1px solid rgba(255, 255, 255, 1)',
                     position: 'relative',
-                    /* Right Corner Cut using mask */
-                    WebkitMaskImage: 'radial-gradient(circle 60px at 100% 100%, transparent 98%, black 100%)',
-                    maskImage: 'radial-gradient(circle 60px at 100% 100%, transparent 98%, black 100%)'
                 }}
             >
-                {/* Filler for the gap created by mask */}
+                {/* Decorative Background Layer for Arc */}
                 <div style={{
                     position: 'absolute',
-                    bottom: '-20px',
-                    right: '-20px',
-                    width: '120px',
-                    height: '120px',
-                    background: 'linear-gradient(135deg, #0ea5e9, #1e40af)',
-                    borderRadius: '50%',
-                    zIndex: -1,
-                    boxShadow: '0 10px 30px rgba(14, 165, 233, 0.4)',
-                }} />
+                    inset: 0,
+                    borderRadius: '2.5rem',
+                    overflow: 'hidden',
+                    zIndex: 0,
+                    pointerEvents: 'none'
+                }}>
+                    <div style={{
+                        position: 'absolute',
+                        top: '-80px',
+                        right: '-80px',
+                        width: '200px',
+                        height: '200px',
+                        background: '#0ea5e9',
+                        borderRadius: '50%',
+                        opacity: 1
+                    }} />
+                </div>
 
                 {/* Left Side: Image & Final Statement */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
