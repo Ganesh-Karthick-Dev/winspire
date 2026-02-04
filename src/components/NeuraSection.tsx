@@ -726,7 +726,19 @@ export default function NeuraSection() {
                     .ns-footer-quote-wrap {
                         padding: 2rem 0 2rem 2.5rem;
                         border-top: none;
-                        border-left: 3px solid rgba(255, 255, 255, 0.3);
+                        border-left: none;
+                        position: relative;
+                    }
+                    .ns-footer-quote-wrap::before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        height: 60%;
+                        width: 2px;
+                        background: rgba(255, 255, 255, 0.3);
+                        border-radius: 1px;
                     }
                     .ns-footer-quote {
                         max-width: 22em;
