@@ -168,6 +168,7 @@ export default function NeuraSection() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         className="ns-circle-menu-container"
+                        style={{ marginBottom: '5rem' }}
                     >
                         <div className="ns-circle-wrapper">
                             <CircularCommandMenu
@@ -343,7 +344,7 @@ export default function NeuraSection() {
                 /* Content Body */
                 .ns-content {
                     padding: 0 64px;
-                    margin-bottom: 2rem;
+                    margin-bottom: 0;
                 }
 
                 .ns-supports-content {
@@ -569,8 +570,8 @@ export default function NeuraSection() {
                     justify-content: center;
                     align-items: center;
                     width: 100%;
-                    padding: 4rem 0;
-                    margin: 2rem 0;
+                    padding: 0;
+                    margin: -1rem 0 2rem 0;
                     position: relative;
                     z-index: 10;
                     isolation: isolate;

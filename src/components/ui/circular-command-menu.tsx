@@ -94,7 +94,7 @@ function CircularCommandMenu({
         }
     }
 
-    const totalSize = (radius + 160) * 2 // Increased buffer for EXTREME labels
+    const totalSize = (radius + 80) * 2 // Reduced buffer for tighter layout
     const wrapperRef = useRef<HTMLDivElement>(null)
     const isInView = useInView(wrapperRef, { once: true, amount: 0.25 })
 
@@ -146,17 +146,17 @@ function CircularCommandMenu({
                                     animate={
                                         isInView
                                             ? {
-                                                  opacity: 1,
-                                                  x: position.x - 28,
-                                                  y: position.y - 28,
-                                                  scale: 1,
-                                              }
+                                                opacity: 1,
+                                                x: position.x - 28,
+                                                y: position.y - 28,
+                                                scale: 1,
+                                            }
                                             : {
-                                                  opacity: 1,
-                                                  x: 0,
-                                                  y: 0,
-                                                  scale: 0,
-                                              }
+                                                opacity: 1,
+                                                x: 0,
+                                                y: 0,
+                                                scale: 0,
+                                            }
                                     }
                                     exit={{
                                         opacity: 0,
