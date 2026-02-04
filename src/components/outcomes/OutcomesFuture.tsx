@@ -2,7 +2,14 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import styles from '@/styles/OutcomesFuture.module.css';
+
+// Register ScrollTrigger if in browser
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 import { 
     Cpu, 
     Users, 
@@ -15,24 +22,80 @@ const OutcomesFuture = () => {
             icon: <Cpu className="w-12 h-12" />,
             title: "Design systems",
             subtext: "instead of managing chaos",
-            delay: 0.1
         },
         {
             icon: <Users className="w-12 h-12" />,
             title: "Enable people",
             subtext: "instead of exhausting them",
-            delay: 0.2
         },
         {
             icon: <Lightbulb className="w-12 h-12" />,
             title: "Act on intelligence",
             subtext: "instead of assumptions",
-            delay: 0.3
         }
     ];
 
+    const containerRef = React.useRef(null);
+    const titleRef = React.useRef(null);
+    const cardsRef = React.useRef<HTMLDivElement[]>([]);
+
+    React.useEffect(() => {
+        const ctx = gsap.context(() => {
+             // Card Animation
+             gsap.fromTo(cardsRef.current, 
+                { 
+                    y: 100, 
+                    opacity: 0,
+                    scale: 0.8
+                },
+                {
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.8,
+                    stagger: 0.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top 70%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, []);
+
+    // Framer Motion variants for title reveal
+    const titleVariants = {
+        hidden: {},
+        visible: {
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const wordVariants = {
+        hidden: { 
+            y: "100%", 
+            opacity: 0 
+        },
+        visible: { 
+            y: "0%", 
+            opacity: 1,
+            transition: {
+                duration: 0.6,
+                ease: [0.33, 1, 0.68, 1] as const // Custom ease for smooth slide
+            }
+        }
+    };
+
+    const titleText = "Designed for What Comes Next";
+
     return (
-        <section className={styles.sectionWrapper}>
+        <section className={styles.sectionWrapper} ref={containerRef}>
             <div className={styles.backgroundGlow} />
             
             <div className={styles.contentContainer}>
@@ -49,13 +112,22 @@ const OutcomesFuture = () => {
                     
                     <motion.h2 
                         className={styles.title}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, delay: 0.1 }}
+                        ref={titleRef}
+                        variants={titleVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
                     >
-                        <span className={styles.titleGradient}>
-                            Designed for What Comes Next
+                        <span className={styles.titleGradient} style={{ display: "inline-block", overflow: "hidden" }}>
+                             {titleText.split(" ").map((word, index) => (
+                                <motion.span 
+                                    key={index} 
+                                    variants={wordVariants}
+                                    style={{ display: "inline-block", marginRight: "0.25em" }}
+                                >
+                                    {word}
+                                </motion.span>
+                             ))}
                         </span>
                     </motion.h2>
 
@@ -74,13 +146,10 @@ const OutcomesFuture = () => {
 
                 <div className={styles.cardsContainer}>
                     {features.map((feature, index) => (
-                        <motion.div
+                        <div
                             key={index}
                             className={styles.card}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: feature.delay }}
+                            ref={el => { if(el) cardsRef.current[index] = el; }}
                         >
                             <div className={styles.topSection}>
                                 <div className={styles.border}></div>
@@ -92,7 +161,7 @@ const OutcomesFuture = () => {
                                 <span className={styles.cardTitle}>{feature.title}</span>
                                 <p className={styles.cardSubtext}>{feature.subtext}</p>
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 
