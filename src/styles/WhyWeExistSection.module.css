@@ -20,7 +20,7 @@
 
 /* Titles Outside Cards */
 .sectionTitle {
-    font-size: 0.75rem;
+    font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: 0.2em;
     color: #ffffff;
@@ -36,8 +36,8 @@
     content: '';
     display: block;
     width: 60px;
-    height: 1px;
-    background-color: #187bec;
+    height: 2px;
+    background-color: #ffffff;
 }
 
 /* Glass Card Style */
@@ -96,7 +96,7 @@
 
 /* Typography */
 .accentText {
-    color: #2986ff;
+    color: #2696ff;
     transition: color 0.4s ease;
 }
 

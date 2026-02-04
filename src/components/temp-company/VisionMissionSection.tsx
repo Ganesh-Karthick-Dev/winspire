@@ -215,7 +215,7 @@ export default function VisionMissionSection() {
                     <div className={styles.valuesList}>
                         {values.map((val, i) => (
                             <div key={i} className={styles.valueItem}>
-                                <span className={styles.valueMetric}>Metric 0{i + 1}</span>
+                                {/* <span className={styles.valueMetric}>Metric 0{i + 1}</span> */}
                                 <h4 className={styles.valueItemTitle}>{val.name}</h4>
                                 <div className={styles.valueContent}>
                                     <p className={styles.valueDescriptionText}>{val.desc}</p>
