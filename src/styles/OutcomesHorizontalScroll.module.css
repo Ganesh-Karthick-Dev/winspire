@@ -176,29 +176,103 @@
 }
 
 @media (max-width: 1024px) {
+    .scrollContainer {
+        height: auto; /* Allow natural height */
+        overflow: visible; /* Let content flow */
+    }
+
+    .stickyHeader {
+        position: relative;
+        padding: 4rem 2rem 0; /* Adjust padding */
+        text-align: center;
+    }
+
     .contentLineWrapper {
         display: none;
+    }
+
+    .scrollTrack {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 4rem; /* Space between stacked panels */
+        padding-bottom: 4rem;
+    }
+
+    .sectionPanel {
+        position: relative; /* No longer absolute overlaps */
+        height: auto;
+        padding: 0 2rem;
+        opacity: 1 !important; /* Force visible */
+        visibility: visible !important;
+        pointer-events: auto !important;
     }
 
     .panelContent {
         flex-direction: column;
         height: auto;
-        gap: 2rem;
+        gap: 2.5rem;
         text-align: center;
-        margin-top: 2rem;
+        margin-top: 3rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .leftImage {
         flex: 0 0 auto;
         width: 100%;
         height: 300px;
+        /* Reset any GSAP clip-paths or transforms via !important if needed, 
+           or rely on inline styles being cleared/ignored if JS checks width. 
+           GSAP usually sets inline styles, so we might need !important to override for mobile layout fallback. 
+           However, cleaner is to disable GSAP on mobile in JS. 
+           For now, pure CSS overrides: */
+        opacity: 1 !important;
+        transform: none !important;
+        clip-path: none !important; 
     }
 
     .rightContent {
         align-items: center;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .textContent {
+        max-width: 100%;
     }
 
     .pointItem {
-        text-align: left;
+        text-align: left; /* Keep points left aligned for readability even if container is centered */
+        background: #f8fafc;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+
+    .pointText h4 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .stickyHeader {
+        padding: 3rem 1.5rem 0;
+    }
+
+    .mainTitle {
+        font-size: 2rem;
+    }
+
+    .sectionPanel {
+        padding: 0 1.5rem;
+    }
+
+    .leftImage {
+        height: 250px;
+    }
+
+    .panelTitle {
+        font-size: 2rem;
     }
 }

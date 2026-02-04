@@ -40,31 +40,36 @@ const OutcomesFuture = () => {
     const cardsRef = React.useRef<HTMLDivElement[]>([]);
 
     React.useEffect(() => {
-        const ctx = gsap.context(() => {
-             // Card Animation
-             gsap.fromTo(cardsRef.current, 
-                { 
-                    y: 100, 
-                    opacity: 0,
-                    scale: 0.8
-                },
-                {
-                    y: 0,
-                    opacity: 1,
-                    scale: 1,
-                    duration: 0.8,
-                    stagger: 0.2,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: "top 70%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        }, containerRef);
+        const matchMedia = gsap.matchMedia();
 
-        return () => ctx.revert();
+        matchMedia.add("(min-width: 1025px)", () => {
+            const ctx = gsap.context(() => {
+                 // Card Animation
+                 gsap.fromTo(cardsRef.current, 
+                    { 
+                        y: 100, 
+                        opacity: 0,
+                        scale: 0.8
+                    },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        scale: 1,
+                        duration: 0.8,
+                        stagger: 0.2,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: containerRef.current,
+                            start: "top 70%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            }, containerRef);
+            return () => ctx.revert();
+        });
+
+        return () => matchMedia.revert();
     }, []);
 
     // Framer Motion variants for title reveal

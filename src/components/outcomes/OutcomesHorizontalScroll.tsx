@@ -51,96 +51,101 @@ const OutcomesHorizontalScroll = () => {
         const container = containerRef.current;
         if (!container) return;
 
-        const ctx = gsap.context(() => {
-            const panels = panelsRef.current.filter((p): p is HTMLDivElement => p !== null);
-            const totalPanels = panels.length;
-            
-            if (totalPanels === 0) return;
+        // Use matchMedia to only enable GSAP on desktop/large tablets
+        const matchMedia = gsap.matchMedia();
 
-            // Initialize Styles
-            panels.forEach((panel, i) => {
-                const img = panel.querySelector(`.${styles.leftImage}`);
-                const text = panel.querySelector(`.${styles.rightContent}`);
+        matchMedia.add("(min-width: 1025px)", () => {
+            const ctx = gsap.context(() => {
+                const panels = panelsRef.current.filter((p): p is HTMLDivElement => p !== null);
+                const totalPanels = panels.length;
                 
-                gsap.set(panel, { zIndex: i + 1, autoAlpha: 1 });
-                
-                if (i === 0) {
-                     // First panel fully visible
-                     if (img) gsap.set(img, { clipPath: 'circle(100% at 50% 50%)', scale: 1, opacity: 1 });
-                     if (text) gsap.set(text, { opacity: 1, y: 0 });
-                } else {
-                    // Others hidden - Circular reveal from center point
-                    if (img) gsap.set(img, { clipPath: 'circle(0% at 50% 50%)', opacity: 0, scale: 0.8 });
-                    if (text) gsap.set(text, { opacity: 0, y: 50 });
+                if (totalPanels === 0) return;
+
+                // Initialize Styles
+                panels.forEach((panel, i) => {
+                    const img = panel.querySelector(`.${styles.leftImage}`);
+                    const text = panel.querySelector(`.${styles.rightContent}`);
+                    
+                    gsap.set(panel, { zIndex: i + 1, autoAlpha: 1 });
+                    
+                    if (i === 0) {
+                        // First panel fully visible
+                        if (img) gsap.set(img, { clipPath: 'circle(100% at 50% 50%)', scale: 1, opacity: 1 });
+                        if (text) gsap.set(text, { opacity: 1, y: 0 });
+                    } else {
+                        // Others hidden - Circular reveal from center point
+                        if (img) gsap.set(img, { clipPath: 'circle(0% at 50% 50%)', opacity: 0, scale: 0.8 });
+                        if (text) gsap.set(text, { opacity: 0, y: 50 });
+                    }
+                });
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top top",
+                        end: `+=${totalPanels * 100}%`,
+                        pin: true,
+                        scrub: 1,
+                        anticipatePin: 1
+                    }
+                });
+
+                for (let i = 1; i < totalPanels; i++) {
+                    const currentPanel = panels[i];
+                    const previousPanel = panels[i - 1];
+
+                    if (!currentPanel || !previousPanel) continue;
+
+                    const currentImg = currentPanel.querySelector(`.${styles.leftImage}`);
+                    const currentText = currentPanel.querySelector(`.${styles.rightContent}`);
+                    const prevText = previousPanel.querySelector(`.${styles.rightContent}`);
+                    
+                    const startTime = i - 1; 
+
+                    // 1. Animate NEW Image Enters (Circular expansion from center point)
+                    if (currentImg) {
+                        tl.to(currentImg, {
+                            clipPath: 'circle(100% at 50% 50%)',
+                            opacity: 1,
+                            scale: 1,
+                            duration: 1,
+                            ease: "power2.inOut"
+                        }, startTime);
+                    }
+
+                    // 2. Animate PREVIOUS Text Exit
+                    if (prevText) {
+                        tl.to(prevText, {
+                            opacity: 0,
+                            y: -30,
+                            duration: 0.5,
+                            ease: "power2.in"
+                        }, startTime);
+                    }
+
+                    // 3. Animate NEW Text Enter
+                    if (currentText) {
+                        tl.to(currentText, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        }, startTime + 0.4); 
+                    }
                 }
-            });
 
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: container,
-                    start: "top top",
-                    end: `+=${totalPanels * 100}%`,
-                    pin: true,
-                    scrub: 1,
-                    anticipatePin: 1
-                }
-            });
-
-            for (let i = 1; i < totalPanels; i++) {
-                const currentPanel = panels[i];
-                const previousPanel = panels[i - 1];
-
-                if (!currentPanel || !previousPanel) continue;
-
-                const currentImg = currentPanel.querySelector(`.${styles.leftImage}`);
-                const currentText = currentPanel.querySelector(`.${styles.rightContent}`);
-                const prevText = previousPanel.querySelector(`.${styles.rightContent}`);
-                
-                const startTime = i - 1; 
-
-                // 1. Animate NEW Image Enters (Circular expansion from center point)
-                if (currentImg) {
-                    tl.to(currentImg, {
-                        clipPath: 'circle(100% at 50% 50%)',
-                        opacity: 1,
-                        scale: 1,
-                        duration: 1,
-                        ease: "power2.inOut"
-                    }, startTime);
+                if (progressBarRef.current) {
+                    tl.to(progressBarRef.current, {
+                        width: '100%',
+                        ease: 'none',
+                        duration: totalPanels - 1
+                    }, 0);
                 }
 
-                // 2. Animate PREVIOUS Text Exit
-                if (prevText) {
-                    tl.to(prevText, {
-                        opacity: 0,
-                        y: -30,
-                        duration: 0.5,
-                        ease: "power2.in"
-                    }, startTime);
-                }
+            }, containerRef);
+        });
 
-                // 3. Animate NEW Text Enter
-                if (currentText) {
-                    tl.to(currentText, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.8,
-                        ease: "power2.out"
-                    }, startTime + 0.4); 
-                }
-            }
-
-            if (progressBarRef.current) {
-                tl.to(progressBarRef.current, {
-                    width: '100%',
-                    ease: 'none',
-                    duration: totalPanels - 1
-                }, 0);
-            }
-
-        }, containerRef);
-
-        return () => ctx.revert();
+        return () => matchMedia.revert();
     }, []);
 
     return (
