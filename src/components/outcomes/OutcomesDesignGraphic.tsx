@@ -26,23 +26,23 @@ const OutcomesDesignGraphic: React.FC<OutcomesDesignGraphicProps> = ({ items, is
                 tl.to('.segment', {
                     opacity: 1,
                     scale: 1,
-                    stagger: 0.2,
-                    duration: 0.8,
+                    stagger: 0.4,
+                    duration: 1.2,
                     ease: 'back.out(1.7)'
                 })
                 .to('.line', {
                     strokeDashoffset: 0,
-                    stagger: 0.2,
-                    duration: 0.8,
+                    stagger: 0.4,
+                    duration: 1.2,
                     ease: 'power2.out'
-                }, '-=0.4')
+                }, '-=0.8')
                 .to('.point-text', {
                     opacity: 1,
                     x: 0,
-                    stagger: 0.2,
-                    duration: 0.6,
+                    stagger: 0.4,
+                    duration: 0.8,
                     ease: 'power2.out'
-                }, '-=0.6');
+                }, '-=0.8');
             } else {
                 // Reset or fade out if needed
                 gsap.to(svgRef.current, { opacity: 0.5, duration: 0.5 });

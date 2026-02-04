@@ -1,15 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 import styles from '@/styles/OutcomesContent.module.css';
 import OutcomesDesignGraphic from './OutcomesDesignGraphic';
-import { useEffect, useRef, useState } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
-import { 
-    Brain, ShieldAlert, LineChart, 
-    LayoutDashboard, Activity, Clock, 
-    Users, Target, Award 
-} from 'lucide-react';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -41,6 +35,9 @@ const FallingWord = ({ text, delay, isHighlight = false, highlightClass = "" }: 
 };
 
 const OutcomesContent = () => {
+    const graphicRef = useRef(null);
+    const isGraphicInView = useInView(graphicRef, { once: true, amount: 0.3 });
+
     // Outcome Data - Single Static Section
     const staticSection = {
         id: 1,
@@ -56,11 +53,11 @@ const OutcomesContent = () => {
             <div className={styles.staticContentWrapper}>
                 
                 {/* Left Side: Graphic (Solutions) */}
-                <div className={styles.staticLeft}>
+                <div className={styles.staticLeft} ref={graphicRef}>
                     <div className={styles.designGraphicWrapper}>
                          <OutcomesDesignGraphic 
                             items={staticSection.list} 
-                            isActive={true} 
+                            isActive={isGraphicInView} 
                         />
                     </div>
                 </div>

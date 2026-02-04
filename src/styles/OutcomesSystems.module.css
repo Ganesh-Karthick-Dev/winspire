@@ -47,19 +47,21 @@
 }
 
 .subtitleTop {
-    font-size: 2.25rem;
+    font-size: 2rem;
     line-height: 1.2;
-    color: #94a3b8; /* Slate 400 */
-    font-weight: 400;
+    color: #ffffff; /* Slate 400 */
+    font-weight: 300;
     margin: 0;
+    /* text-align: left; */
 }
 
 .subtitleBottom {
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 1.1;
-    color: #38bdf8; /* Sky 400 */
-    font-weight: 600;
+    color: #ffffff; /* Sky 400 */
+    font-weight: 300;
     margin: 0;
+    /* text-align: left; */
 }
 
 /* Systems Cards Grid */
@@ -84,7 +86,7 @@
 
 /* Specific Card Colors */
 .card_1 {
-    background-color: #bef264; 
+    background-color: #adfffb; 
     color: #000000 !important;
 }
 
@@ -180,7 +182,7 @@
     position: relative;
     width: 100%;
     padding: 3rem 2rem;
-    background: #0ea5e9; /* Brand blue for the attachment */
+    background: #001d53; /* Brand blue for the attachment */
     text-align: center;
     border-radius: 0; 
     border: none;

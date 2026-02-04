@@ -43,12 +43,13 @@
     font-family: 'Outfit', sans-serif;
     font-size: clamp(1.5rem, 2.5vw, 2.5rem);
     font-weight: 500;
-    text-align: left; /* Left align */
+    text-align: right; /* Right align */
     color: rgba(255, 255, 255, 0.9);
     max-width: 800px;
     margin-bottom: 4rem; /* Space from bottom */
     line-height: 1.2;
     z-index: 2;
+    align-self: flex-end; /* Align to the right of the flex container */
 }
 
 /* Text Reveal Section Wrapper */
