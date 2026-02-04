@@ -2,23 +2,28 @@
  * Outcomes Page
  * 
  * Features:
- * - Same Hero section as Company/Solutions pages
- * - 3D Model with scroll animation
- * - Existing Outcomes content sections
+ * - Hero section (redesigned)
+ * - CTA Section
  */
 
 'use client';
 
+'use client';
+
+import React, { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
-import OutcomesContent from '@/components/outcomes/OutcomesContent';
 import OutcomesHero from '@/components/outcomes/OutcomesHero';
+import OutcomesContent from '@/components/outcomes/OutcomesContent';
+import OutcomesSystems from '@/components/outcomes/OutcomesSystems';
+import OutcomesHumanCentric from '@/components/outcomes/OutcomesHumanCentric';
+import OutcomesHorizontalScroll from '@/components/outcomes/OutcomesHorizontalScroll';
+import OutcomesSecurity from '@/components/outcomes/OutcomesSecurity';
+import OutcomesCTA from '@/components/outcomes/OutcomesCTA';
+import pageStyles from '@/styles/temp-outcomes.module.css'; 
+import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
 
 import { shouldDisable3D } from '@/lib/threeUtils';
-import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
-import pageStyles from '@/styles/temp-outcomes.module.css'; // Outcomes-page-only mobile overrides (desktop unchanged)
-
 import { outcomesScrollKeyframes } from '@/lib/outcomesScrollAnimations';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -29,7 +34,6 @@ const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
 });
 
 export default function Outcomes() {
-    const heroRef = useRef<HTMLElement>(null);
     const is3DDisabled = useRef(false);
 
     // Use custom scroll animation for Outcomes page
@@ -50,10 +54,6 @@ export default function Outcomes() {
             loader.style.visibility = 'hidden';
         }
         document.body.classList.remove('loading');
-
-        // Note: Hero animations are now handled within OutcomesHero (if any) or are static CSS
-        // The 3D model animation is handled by useScrollAnimation hook above
-
     }, []);
 
     const handleScrollClick = () => {
@@ -62,9 +62,9 @@ export default function Outcomes() {
 
     return (
         <Layout title="Outcomes" description="Measurable results with Winspire RCM">
-            {/* 3D Model - FIXED behind everything; on mobile (temp-outcomes only) modelWrapper sends it to background */}
+            {/* 3D Model - FIXED behind everything */}
             {!is3DDisabled.current && (
-                <div className={`${styles.modelContainer} ${pageStyles.modelWrapper}`}>
+                <div className={`${styles.modelContainer} ${pageStyles.modelWrapper}`} style={{ zIndex: -1 }}>
                     <GLTFViewer
                         manualTransform={transform}
                         rotateSpeed={rotateSpeed}
@@ -74,14 +74,15 @@ export default function Outcomes() {
                 </div>
             )}
 
-            {/* Wrapper: mobile-only styles in temp-outcomes.module.css (z-index above model); desktop has no styles */}
             <div className={pageStyles.outcomesPageContent}>
                 <OutcomesHero />
-                <div id="outcomes-content" style={{ marginTop: '0' }}>
-                    <OutcomesContent />
-                </div>
+                <OutcomesContent />
+                <OutcomesSystems />
+                <OutcomesHumanCentric />
+                <OutcomesHorizontalScroll />
+                <OutcomesSecurity />
+                <OutcomesCTA />
             </div>
-
         </Layout>
     );
 }

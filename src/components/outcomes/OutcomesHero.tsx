@@ -1,70 +1,34 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import styles from '@/styles/OutcomesHero.module.css';
+import { TextRevealSlider } from '@/components/ui/text-reveal-slider';
 
 const OutcomesHero = () => {
-    // We need to know dimensions to set viewBox correctly or just use 100%
-    // Using simple responsive SVG approach
-    
+    const textPoints = [
+        "At Winspire RCM, outcomes are not numbers teams are pressured to chase. They are the natural consequence of how revenue systems are designed.",
+        "When structure, accountability, and intelligence are aligned upfront, performance becomes calm, predictable, and repeatable.",
+        "We don’t chase metrics. We design environments where the right metrics emerge."
+    ];
+
     return (
         <section id="outcomes-hero" className={styles.heroSection}>
-            <svg 
-                className={styles.heroSvg}
-                viewBox="0 0 1920 1080" 
-                preserveAspectRatio="xMidYMid slice"
-                width="100%"
-                height="100%"
-            >
-                <defs>
-                    <mask id="textMask">
-                        {/* White = Opaque (Keep the Background), Black = Transparent (Show hole) */}
-                        {/* Wait! For a "Mask" to SHOW the background image (3D), we need:
-                            - The Overlay Layer (Blue).
-                            - The Overlay must have HOLES where the text is.
-                            - A Mask on a DOM Element defines opacity: White = Visible, Black = Invisible.
-                            
-                            If we put the MASK on the BLUE RECT:
-                            - Where Mask is White, Blue Rect is Visible.
-                            - Where Mask is Black, Blue Rect is Transparent (Showing 3D Model).
-                            
-                            So:
-                            - Mask BG: White (Keep Blue Wall).
-                            - Mask Text: Black (Cut Blue Wall).
-                        */}
-                        <rect x="0" y="0" width="100%" height="100%" fill="white" />
-                        <text
-                            x="50%"
-                            y="50%"
-                            textAnchor="middle"
-                            dominantBaseline="middle"
-                            className={styles.svgText}
-                        >
-                           OUTCOMES 
-                        </text>
-                    </mask>
-                </defs>
-
-                {/* The Solid Overlay Layer that hides everything except the text */}
-                <rect 
-                    x="0" 
-                    y="0" 
-                    width="100%" 
-                    height="100%" 
-                    className={styles.overlayRect}
-                    mask="url(#textMask)" 
-                />
-            </svg>
-
-            {/* Subheading Overlay */}
-            <div className={styles.subheadingContainer}>
-                <p className={styles.subheadingText}>
-                    Outcomes Are Not Metrics. They Are the Result of Design.
-                </p>
+            {/* Top Hero Section */}
+            <div className={styles.heroTop}>
+                <h1 className={styles.mainTitle}>
+                    OUTCOMES AT <br /> WINSPIRE RCM
+                </h1>
+                
+                <h2 className={styles.bottomSubtitle}>
+                    Outcomes Are Not Metrics.<br /> They Are the Result of Design.
+                </h2>
             </div>
 
-            <div className={styles.scrollIndicator}>
-                Scroll Down &darr;
+            {/* Separator / Transition (Visual gap or line if needed, currently just flow) */}
+
+            {/* Text Reveal Section */}
+            <div className={styles.revealSection}>
+                <TextRevealSlider text={textPoints} />
             </div>
         </section>
     );

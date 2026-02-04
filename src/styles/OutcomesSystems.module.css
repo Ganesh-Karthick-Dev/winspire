@@ -1,0 +1,210 @@
+/* OutcomesSystems.module.css */
+
+.section {
+    width: 100%;
+    padding: 6rem 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Removed gap to allow scaling section to attach to grid if desired, 
+       but header still needs gap. I'll handle it inside children. */
+}
+
+/* Header Section */
+.header {
+    max-width: 900px;
+    margin: 0 auto 4rem; /* Added margin here */
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.title {
+    font-size: 5rem; /* Bigger for falling text */
+    font-weight: 800;
+    margin-bottom: 3rem;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: white;
+}
+
+.subtitle {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.subtitleTop {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    color: #94a3b8; /* Slate 400 */
+    font-weight: 400;
+    margin: 0;
+}
+
+.subtitleBottom {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    color: #38bdf8; /* Sky 400 */
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Systems Cards Grid */
+.cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    gap: 0; 
+}
+
+.card {
+    position: relative;
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 500px;
+    overflow: hidden; 
+    will-change: transform, opacity;
+    transform: translateZ(0); 
+}
+
+/* Specific Card Colors */
+.card_1 {
+    background-color: #bef264; 
+    color: #000000 !important;
+}
+
+.card_1 .cardTitle, 
+.card_1 .cardDescription, 
+.card_1 .cardNumber, 
+.card_1 .cardIcon {
+    color: #000000 !important;
+    opacity: 1;
+}
+
+.card_2 {
+    background-color: #0f172a; 
+    color: #ffffff !important;
+}
+
+.card_2 .cardTitle,
+.card_2 .cardDescription,
+.card_2 .cardNumber,
+.card_2 .cardIcon {
+    color: #ffffff !important;
+    opacity: 1;
+}
+
+.card_3 {
+    background-color: #f1f5f9; 
+    color: #000000 !important;
+}
+
+.card_3 .cardTitle, 
+.card_3 .cardDescription, 
+.card_3 .cardNumber, 
+.card_3 .cardIcon {
+    color: #000000 !important;
+    opacity: 1;
+}
+
+/* Card Content Layout */
+.cardNumber {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.6;
+    font-family: monospace;
+}
+
+.cardIconWrapper {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 3rem;
+}
+
+.cardIcon {
+    width: 6rem;
+    height: 6rem;
+    stroke-width: 1.2;
+}
+
+.cardTextContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cardTitle {
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.cardDescription {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    opacity: 0.9;
+    margin: 0;
+    max-width: 90%;
+}
+
+/* Scaling Performance Section (Bottom) - ATTACHED DESIGN */
+.scalingSection {
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.scalingContainer {
+    position: relative;
+    width: 100%;
+    padding: 3rem 2rem;
+    background: #0ea5e9; /* Brand blue for the attachment */
+    text-align: center;
+    border-radius: 0; 
+    border: none;
+    box-shadow: none;
+}
+
+.scalingText {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .cardsGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .card {
+        min-height: 400px;
+        padding: 3rem 2rem;
+    }
+
+    .scalingText {
+        font-size: 1.5rem;
+    }
+}
