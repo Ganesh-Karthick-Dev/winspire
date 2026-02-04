@@ -57,8 +57,9 @@ export default function DockNavbar() {
         <nav
             style={{
                 position: 'fixed',
-                top: '24px',
-                right: '24px',
+                top: '16px',
+                left: '50%',
+                transform: 'translateX(-50%)',
                 zIndex: 1000,
             }}
         >
