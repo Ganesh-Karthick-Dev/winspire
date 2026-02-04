@@ -2,27 +2,28 @@
  * Outcomes Page
  * 
  * Features:
- * - Same Hero section as Company/Solutions pages
- * - 3D Model with scroll animation
- * - Existing Outcomes content sections
+ * - Hero section (redesigned)
+ * - CTA Section
  */
 
 'use client';
 
+'use client';
+
+import React, { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import { useEffect, useRef } from 'react';
 import Layout from '@/components/Layout';
-import OutcomesVision from '@/components/outcomes/OutcomesVision';
-import OutcomesCarousel from '@/components/outcomes/OutcomesCarousel';
-import OutcomesTeam from '@/components/outcomes/OutcomesTeam';
-import ValuesSection from '@/components/company/ValuesSection';
-import FAQSection from '@/components/solutions/FAQSection';
-import MaterialsSection from '@/components/solutions/MaterialsSection';
-import CareersContactLinks from '@/components/CareersContactLinks';
-import FloatingSectionNav from '@/components/FloatingSectionNav';
-import { shouldDisable3D } from '@/lib/threeUtils';
+import OutcomesHero from '@/components/outcomes/OutcomesHero';
+import OutcomesContent from '@/components/outcomes/OutcomesContent';
+import OutcomesSystems from '@/components/outcomes/OutcomesSystems';
+import OutcomesHumanCentric from '@/components/outcomes/OutcomesHumanCentric';
+import OutcomesHorizontalScroll from '@/components/outcomes/OutcomesHorizontalScroll';
+import OutcomesSecurity from '@/components/outcomes/OutcomesSecurity';
+import OutcomesCTA from '@/components/outcomes/OutcomesCTA';
+import pageStyles from '@/styles/temp-outcomes.module.css'; 
 import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
 
+import { shouldDisable3D } from '@/lib/threeUtils';
 import { outcomesScrollKeyframes } from '@/lib/outcomesScrollAnimations';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -33,7 +34,6 @@ const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
 });
 
 export default function Outcomes() {
-    const heroRef = useRef<HTMLElement>(null);
     const is3DDisabled = useRef(false);
 
     // Use custom scroll animation for Outcomes page
@@ -54,68 +54,6 @@ export default function Outcomes() {
             loader.style.visibility = 'hidden';
         }
         document.body.classList.remove('loading');
-
-        let ctx: gsap.Context;
-
-        const initAnimations = async () => {
-            const { gsap } = await import('gsap');
-            const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-            gsap.registerPlugin(ScrollTrigger);
-
-
-
-            // Use gsap.context for easy cleanup
-            ctx = gsap.context(() => {
-                const tl = gsap.timeline({ delay: 0.1 });
-
-                // Initialize state immediately
-                gsap.set(`.${styles.heroLabel}`, { y: 20, opacity: 0 });
-                gsap.set(`.${styles.heroTitle}`, { y: 60, opacity: 0 });
-                gsap.set(`.${styles.heroCard}`, { x: 100, opacity: 0 });
-
-                tl.to(`.${styles.heroLabel}`, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' });
-                tl.to(`.${styles.heroTitle}`, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.5');
-                tl.to(`.${styles.heroCard}`, { x: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.7');
-
-                ScrollTrigger.create({
-                    trigger: heroRef.current,
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: 0.5,
-                    onUpdate: (self) => {
-                        const card = document.querySelector(`.${styles.heroCard}`) as HTMLElement;
-                        if (card) {
-                            const yMove = 20 - (self.progress * 15);
-                            card.style.transform = `translateY(${yMove}%)`;
-                        }
-                    }
-                });
-            }, heroRef);
-
-            // Failsafe: Ensure visibility after delay
-            setTimeout(() => {
-                const elements = [
-                    document.querySelector(`.${styles.heroLabel}`),
-                    document.querySelector(`.${styles.heroTitle}`),
-                    document.querySelector(`.${styles.heroCard}`)
-                ];
-                elements.forEach(el => {
-                    if (el) {
-                        (el as HTMLElement).style.opacity = '1';
-                        (el as HTMLElement).style.visibility = 'visible';
-                    }
-                });
-                ScrollTrigger.refresh();
-            }, 1000);
-        };
-
-        if (heroRef.current) {
-            initAnimations();
-        }
-
-        return () => {
-            if (ctx) ctx.revert();
-        };
     }, []);
 
     const handleScrollClick = () => {
@@ -126,7 +64,7 @@ export default function Outcomes() {
         <Layout title="Outcomes" description="Measurable results with Winspire RCM">
             {/* 3D Model - FIXED behind everything */}
             {!is3DDisabled.current && (
-                <div className={styles.modelContainer}>
+                <div className={`${styles.modelContainer} ${pageStyles.modelWrapper}`} style={{ zIndex: -1 }}>
                     <GLTFViewer
                         manualTransform={transform}
                         rotateSpeed={rotateSpeed}
@@ -136,120 +74,15 @@ export default function Outcomes() {
                 </div>
             )}
 
-            {/* Hero Section */}
-            <section ref={heroRef} className={styles.heroSection}>
-                {/* Content */}
-                <div className={styles.heroContent}>
-                    {/* Quote Section - styled like home page "Our Mission" */}
-                    <div className={styles.heroQuoteBlock}>
-                        <div
-                            className="text-2xl font-bold leading-tight font-[Outfit] text-gradient-shimmer"
-                        >
-                            <span style={{ fontSize: '1.3em', fontWeight: 700 }}>Outcomes Are Not Metrics.</span>
-                            <br />
-                            They Are the Consequence of Design.
-                        </div>
-
-                        {/* Description paragraphs */}
-                        <div className={styles.heroDescription}>
-                            <p>
-                                At Winspire RCM, outcomes are not targets that teams are pushed to chase. They are the natural result of how revenue systems are designed.
-                            </p>
-                            <p>
-                                When structure, accountability, and intelligence are aligned upfront, performance becomes predictable, calm, and repeatable.
-                            </p>
-                            <p>
-                                We don't chase metrics.<br />
-                                We design environments where the right metrics emerge.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Main Title - SEO optimized H1 */}
-                    <h1 className={styles.heroTitle}>Outcomes</h1>
-                </div>
-
-                {/* Image Card - half in, half out */}
-                <div className={styles.heroCard}>
-                    <img
-                        className={styles.heroCardVideo}
-                        src="/poster/qefqe.webp"
-                        alt="Outcomes"
-                    />
-                </div>
-
-                {/* Scroll Indicator */}
-                <div className={styles.scrollIndicator} onClick={handleScrollClick}>
-                    <span>Scroll</span>
-                    <span>↓</span>
-                </div>
-            </section>
-
-            {/* Existing Outcomes Content Sections */}
-            <div id="vision" style={{ scrollMarginTop: '100px' }}>
-                <OutcomesVision />
+            <div className={pageStyles.outcomesPageContent}>
+                <OutcomesHero />
+                <OutcomesContent />
+                <OutcomesSystems />
+                <OutcomesHumanCentric />
+                <OutcomesHorizontalScroll />
+                <OutcomesSecurity />
+                <OutcomesCTA />
             </div>
-
-            {/* Title Section - Introduces the Five Dimensions */}
-            <div
-                style={{
-                    position: 'relative',
-                    zIndex: 30,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    paddingTop: '200px',
-                    paddingBottom: '200px',
-                    paddingLeft: '24px',
-                    paddingRight: '24px',
-                    textAlign: 'center',
-                }}
-            >
-                <h2
-                    style={{
-                        fontSize: 'clamp(2rem, 5vw, 3.75rem)',
-                        fontWeight: 700,
-                        color: 'white',
-                        maxWidth: '56rem',
-                        lineHeight: 1.2,
-                    }}
-                >
-                    The Five Dimensions of Revenue Performance We Transform.
-                </h2>
-            </div>
-
-            <div id="results" style={{ scrollMarginTop: '100px' }}>
-                <OutcomesCarousel />
-            </div>
-
-            <div id="team" style={{ scrollMarginTop: '100px' }}>
-                <OutcomesTeam />
-            </div>
-
-            {/* Additional Sections from Other Pages */}
-            <div id="case-studies" style={{ scrollMarginTop: '100px' }}>
-                <ValuesSection />
-            </div>
-
-            <div id="faq" style={{ scrollMarginTop: '100px' }}>
-                <FAQSection />
-            </div>
-
-            <div id="materials" style={{ scrollMarginTop: '100px' }}>
-                <MaterialsSection />
-            </div>
-
-            <CareersContactLinks />
-
-            <FloatingSectionNav sections={[
-                { id: 'vision', label: 'Vision' },
-                { id: 'results', label: 'Results' },
-                { id: 'team', label: 'Team' },
-                { id: 'case-studies', label: 'Case Studies' },
-                { id: 'faq', label: 'FAQ' },
-                { id: 'materials', label: 'Materials' },
-            ]} />
-
         </Layout>
     );
 }

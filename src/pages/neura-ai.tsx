@@ -1,195 +1,217 @@
 /**
- * Neura AI Page
- * 
- * Clean page with parallax hero section.
- * Old content available at: /old-neura-ai
+ * Temp Neura AI Page
+ *
+ * Hero section with 3D model (centered, no spin), navbar and footer.
+ * Sections will be added one by one.
  */
-
-'use client';
 
 import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Layout from '@/components/Layout';
-import { ParallaxComponent } from '@/components/ui/parallax-scrolling';
-import { ParallaxContentSection } from '@/components/ui/parallax-content-section';
-import { shouldDisable3D } from '@/lib/threeUtils';
-import { bookDemoScrollKeyframes } from '@/lib/bookDemoScrollAnimations';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import styles from '@/styles/neura.module.css';
+import NeuraHeroSection from '@/components/neura/NeuraHeroSection';
+import ProblemCardsSection from '@/components/neura/ProblemCardsSection';
+import NeuraDifferentSection from '@/components/neura/NeuraDifferentSection';
+import NeuraEfficiencySection from '@/components/neura/NeuraEfficiencySection';
 import NeuraCapabilitiesSection from '@/components/neura/NeuraCapabilitiesSection';
-import { ContainerScroll } from '@/components/ui/container-scroll-animation';
-import Image from 'next/image';
+import NeuraLivingSystemsSection from '@/components/neura/NeuraLivingSystemsSection';
+import NeuraGeminiEffectSection from '@/components/neura/NeuraGeminiEffectSection';
+import NeuraStaySecureSection from '@/components/neura/NeuraStaySecureSection';
 
-// 3D Model
+import { resetLoaderToZero } from '@/lib/loaderManager';
+import { shouldDisable3D } from '@/lib/threeUtils';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import type { ScrollKeyframe } from '@/lib/scrollAnimations';
+
+/** Hero: model centered, tilted (rotation transform), no constant spin (rotateSpeed=0). After hero: usual footer. */
+const tempNeuraHeroKeyframes: ScrollKeyframe[] = [
+    // Hero section - model centered
+    { scrollProgress: 0, label: 'Hero Center', transform: { position: { x: 0, y: -0.08, z: 0 }, rotation: { x: 22.177, y: -27.456, z: -23.23 }, scale: 7.5 } },
+    // Hold position through middle sections
+    { scrollProgress: 0.50, label: 'Hold Mid', transform: { position: { x: 0, y: -0.08, z: 0 }, rotation: { x: 22.177, y: -35, z: -23.23 }, scale: 7.5 } },
+    { scrollProgress: 0.70, label: 'Hold', transform: { position: { x: 0, y: -0.08, z: 0 }, rotation: { x: 22.177, y: -42, z: -23.23 }, scale: 7.5 } },
+    // Living Systems section (near end) - model moves to right side
+    { scrollProgress: 0.80, label: 'Living Systems Trans', transform: { position: { x: 0.35, y: -0.05, z: 0 }, rotation: { x: 18, y: -30, z: -18 }, scale: 6 } },
+    { scrollProgress: 0.88, label: 'Living Systems', transform: { position: { x: 0.6, y: 0, z: 0 }, rotation: { x: 12, y: -15, z: -12 }, scale: 5 } },
+    { scrollProgress: 0.94, label: 'Living Systems Hold', transform: { position: { x: 0.6, y: 0, z: 0 }, rotation: { x: 12, y: -8, z: -12 }, scale: 5 } },
+    // Footer transition
+    { scrollProgress: 1.0, label: 'Footer', transform: { position: { x: 0, y: -0.34, z: 0.6 }, rotation: { x: -82.177, y: 180, z: 8.23 }, scale: 15 } },
+];
+
 const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
     ssr: false,
     loading: () => null,
 });
 
-// Why Neura Section - needs SSR disabled for React Flow
-const WhyNeuraSection = dynamic(() => import('@/components/WhyNeuraSection'), {
-    ssr: false,
-    loading: () => <div style={{ minHeight: '100vh', background: '#0a1628' }} />,
-});
+export async function getStaticProps() {
+    return { props: {} };
+}
 
-export default function NeuraAI() {
+import NeuraCTASection from '@/components/neura/NeuraCTASection';
+import NeuraBentoSection from '@/components/neura/NeuraBentoSection';
+import NeuraIntegrationSection from '@/components/neura/NeuraIntegrationSection';
+import NeuraClosingPerspectiveSection from '@/components/neura/NeuraClosingPerspectiveSection';
+
+export default function TempNeuraAI() {
     const is3DDisabled = useRef(false);
-
-    // Use scroll animation for 3D model (same as book-demo page)
-    const { transform, scrollProgress } = useScrollAnimation({
-        keyframes: bookDemoScrollKeyframes
+    const heroRef = useRef<HTMLDivElement>(null);
+    const secondSectionRef = useRef<HTMLElement>(null);
+    const whiteSectionRef = useRef<HTMLDivElement>(null);
+    const secondTitleRef = useRef<HTMLHeadingElement>(null);
+    const capabilitiesWrapperRef = useRef<HTMLDivElement>(null);
+    const capabilitiesTrackRef = useRef<HTMLDivElement>(null);
+    const { transform } = useScrollAnimation({
+        keyframes: tempNeuraHeroKeyframes,
     });
-
-    const enableWobble = scrollProgress <= 0.95;
-    const rotateSpeed = 0.003;
+    const enableWobble = false;
+    const rotateSpeed = 0; /* no constant spin on this page only */
 
     useEffect(() => {
         is3DDisabled.current = shouldDisable3D();
+        resetLoaderToZero();
 
-        // Hide the loader immediately
-        const loader = document.querySelector('.loader-overlay') as HTMLElement;
-        if (loader) {
-            loader.style.opacity = '0';
-            loader.style.visibility = 'hidden';
-        }
-        document.body.classList.remove('loading');
+        const safetyTimeout = setTimeout(() => {
+            const progressEl = document.querySelector('.loader-progress');
+            const loaderOverlay = document.querySelector('.loader-overlay') as HTMLElement;
+            if (progressEl && progressEl.textContent === '0%' && loaderOverlay) {
+                loaderOverlay.style.opacity = '0';
+                loaderOverlay.style.visibility = 'hidden';
+                document.body.classList.remove('loading');
+            }
+        }, 5000);
+
+        return () => clearTimeout(safetyTimeout);
+    }, []);
+
+    useEffect(() => {
+        if (typeof window === 'undefined' || !secondSectionRef.current) return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        const ctx = gsap.context(() => {
+            // Pin the section while animating the cards
+            ScrollTrigger.create({
+                trigger: secondSectionRef.current,
+                start: 'top top',
+                end: '+=2000', // Scroll distance to complete animation
+                pin: true,
+                pinSpacing: true,
+                invalidateOnRefresh: true,
+            });
+
+            // Refresh to ensure following sections know their positions
+            ScrollTrigger.refresh();
+        });
+
+        return () => ctx.revert();
+    }, []);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const wrapper = capabilitiesWrapperRef.current;
+        const track = capabilitiesTrackRef.current;
+        if (!wrapper || !track) return;
+
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.set(track, { x: 0 });
+
+        const PIN_SCROLL = 2000;
+
+        const ctx = gsap.context(() => {
+            gsap.to(track, {
+                x: () => -(track.scrollWidth - wrapper.clientWidth),
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: wrapper,
+                    start: 'top top',
+                    end: `+=${PIN_SCROLL}`,
+                    pin: true,
+                    scrub: 1,
+                },
+            });
+        }, wrapper);
+
+        return () => ctx.revert();
     }, []);
 
     return (
-        <Layout title="Neura AI" description="Discover Winspire's Neura AI - intelligent automation for healthcare">
-            {/* 3D Model - FIXED behind everything (like book-demo page) */}
-            {!is3DDisabled.current && (
-                <div className={styles.modelContainer}>
-                    <GLTFViewer
-                        manualTransform={transform}
-                        rotateSpeed={rotateSpeed}
-                        enableWobble={enableWobble}
-                        className="w-full h-full"
-                    />
-                </div>
-            )}
+        <Layout
+            title="Neura AI (Temp)"
+            description="Neura AI - The Intelligence That Makes Revenue Cycles Predictable"
+        >
+            <div className="temp-neura-page-wrapper">
 
-            {/* Parallax Hero Section */}
-            <ParallaxComponent title="Neura AI" />
+                {/* Scroll Group: Hero + Second Section. 
+                    Hero is sticky relative to THIS container. 
+                    When this container scrolls away, Hero goes with it. */}
+                <div className="temp-neura-hero-scroll-group">
+                    <div ref={heroRef} className="temp-neura-hero-viewport">
+                        <div className="temp-neura-hero-bg" aria-hidden="true" />
+                        {!is3DDisabled.current && (
+                            <div className="temp-neura-model-layer">
+                                <GLTFViewer
+                                    manualTransform={transform}
+                                    rotateSpeed={rotateSpeed}
+                                    enableWobble={enableWobble}
+                                    className="w-full h-full"
+                                />
+                            </div>
+                        )}
 
-            {/* Content Section - Related to Hero */}
-            <ParallaxContentSection />
-
-            {/* Why Neura AI Is Fundamentally Different Section */}
-            <WhyNeuraSection />
-
-            {/* Neura Capabilities Section - from old page */}
-            <div id="capabilities" style={{ scrollMarginTop: '100px' }}>
-                <NeuraCapabilitiesSection />
-            </div>
-
-            {/* Container Scroll with Side Content - Using Absolute Positioning */}
-            <div style={{ position: 'relative', zIndex: 10 }}>
-
-                {/* Left Side - Absolute Position */}
-                <div style={{
-                    position: 'absolute',
-                    left: '50px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    width: '320px'
-                }} className="hidden xl:block">
-                    <h3 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'white', marginBottom: '32px', lineHeight: 1.3 }}>
-                        Information Collection <span style={{ color: 'white', opacity: 0.7 }}>→</span> Intelligent Action
-                    </h3>
-                    <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)', marginBottom: '20px' }}>
-                        In most RCM teams, time is lost to:
-                    </p>
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                        {['Calling payers', 'Logging into multiple portals', 'Waiting on handoffs', 'Reconciling delayed reports'].map((item, i) => (
-                            <li key={i} style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '12px',
-                                color: 'rgba(255,255,255,0.9)',
-                                fontSize: '1.05rem',
-                                marginBottom: '12px'
-                            }}>
-                                <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.6)' }} />
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
-                    <p style={{ fontSize: '1.2rem', fontWeight: 600, color: 'white', marginTop: '28px' }}>
-                        Neura eliminates this drag.
-                    </p>
-                </div>
-
-                {/* Center - Tablet (Original Layout) */}
-                <div className="relative z-10" style={{ width: 'calc(100% - 1.5rem)', margin: '0.6rem auto' }}>
-                    <div className="flex flex-col items-center overflow-hidden rounded-3xl">
-                        <ContainerScroll
-                            titleComponent={
-                                <>
-                                    <h1 className="text-4xl font-semibold text-white text-center mx-auto">
-                                        The Biggest Shift <br />
-                                        <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none block">
-                                            Neura Creates
-                                        </span>
-                                    </h1>
-                                </>
-                            }
-                        >
-                            <Image
-                                src="/poster/dashboard_new.jpg"
-                                alt="Neura AI Dashboard"
-                                height={720}
-                                width={1400}
-                                className="mx-auto rounded-2xl object-cover h-full object-center"
-                                draggable={false}
-                            />
-                        </ContainerScroll>
+                        <div className="temp-neura-hero-layer">
+                            <NeuraHeroSection />
+                        </div>
                     </div>
-                </div>
 
-                {/* Right Side - Absolute Position */}
-                <div style={{
-                    position: 'absolute',
-                    right: '50px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    width: '320px'
-                }} className="hidden xl:block">
-                    <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)', marginBottom: '20px', lineHeight: 1.5 }}>
-                        With live connectivity to <span style={{ color: 'white', fontWeight: 700 }}>1,300+ payers</span>, Neura retrieves in seconds:
-                    </p>
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                        {[
-                            'Claim status',
-                            'Eligibility and benefits',
-                            'Coverage discovery & COB',
-                            'Authorization status',
-                            'Payer response signals'
-                        ].map((item, i) => (
-                            <li key={i} style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '12px',
-                                color: 'rgba(255,255,255,0.9)',
-                                fontSize: '1.05rem',
-                                marginBottom: '12px'
-                            }}>
-                                <svg style={{ width: '18px', height: '18px', color: 'white', flexShrink: 0 }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    <section ref={secondSectionRef} className="temp-neura-second-section" aria-label="The Problem Neura Solves">
+                        <div ref={whiteSectionRef} className="temp-neura-second-white">
+                            {/* Text Layer - SVG MASK Implementation (Aggressive Cutout) */}
+                            <div className="temp-neura-text-layer">
+                                <svg className="temp-neura-mask-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+                                    <defs>
+                                        <mask id="text-mask">
+                                            {/* White rect = Opaque (The Sheet) */}
+                                            <rect width="100%" height="100%" fill="white" />
+                                            {/* Black text = Transparent (The Hole) */}
+                                            <text x="50%" y="45%" textAnchor="middle" className="svg-title">
+                                                The Problem Neura Solves
+                                            </text>
+
+                                            {/* Multiline subtitle check - SVG doesn't wrap automatically well */}
+                                            {/* Breaking manually or using tspan */}
+                                            <text x="50%" y="55%" textAnchor="middle" className="svg-subtitle">
+                                                Modern healthcare revenue cycles operate
+                                            </text>
+                                            <text x="50%" y="60%" textAnchor="middle" className="svg-subtitle">
+                                                in a constantly shifting environment:
+                                            </text>
+                                        </mask>
+                                    </defs>
+                                    {/* The Visible White Sheet with Cutouts */}
+                                    <rect width="100%" height="100%" fill="white" mask="url(#text-mask)" className="svg-bg-rect" />
                                 </svg>
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
-                    <div style={{ marginTop: '28px', paddingTop: '24px', borderTop: '1px solid rgba(255,255,255,0.15)' }}>
-                        <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.9)', marginBottom: '12px' }}>
-                            Clarifications happen within <span style={{ fontWeight: 700, color: 'white' }}>minutes</span>.
-                        </p>
-                        <p style={{ fontSize: '1.05rem', color: 'white', fontWeight: 600 }}>
-                            Claim velocity improves — without adding headcount.
-                        </p>
-                    </div>
+                            </div>
+
+                            {/* Cards Layer - On Top */}
+                            <div className="temp-neura-cards-layer">
+                                <ProblemCardsSection pinTriggerRef={secondSectionRef} />
+                            </div>
+                        </div>
+                    </section>
                 </div>
+
+                <NeuraDifferentSection />
+                <NeuraEfficiencySection />
+                <div ref={capabilitiesWrapperRef} className="capabilities-pin-wrapper">
+                    <NeuraCapabilitiesSection trackRef={capabilitiesTrackRef} />
+                </div>
+                <NeuraLivingSystemsSection />
+                <NeuraGeminiEffectSection />
+                <NeuraStaySecureSection />
+                <NeuraCTASection />
+                <NeuraBentoSection />
+                <NeuraIntegrationSection />
+                <NeuraClosingPerspectiveSection />
 
             </div>
         </Layout>
