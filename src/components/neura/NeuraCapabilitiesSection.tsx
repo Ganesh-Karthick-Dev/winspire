@@ -91,27 +91,57 @@ const NeuraCapabilitiesSection: React.FC = () => {
     const [activeId, setActiveId] = useState<number>(1);
 
     useLayoutEffect(() => {
-        const ctx = gsap.context(() => {
-            ScrollTrigger.create({
-                trigger: sectionRef.current,
-                start: "top top",
-                end: "+=3000", // Scroll distance to cycle through cards
-                pin: true,
-                scrub: 0.5,
-                onUpdate: (self) => {
-                    // Map progress (0-1) to card index (0-4)
-                    // If progress is 0.0 -> index 0. 0.9 -> index 4.
-                    const index = Math.min(
-                        capabilities.length - 1, 
-                        Math.floor(self.progress * capabilities.length)
-                    );
-                    const newActiveId = capabilities[index].id;
-                    setActiveId(prev => (prev !== newActiveId ? newActiveId : prev));
-                }
-            });
-        }, sectionRef);
+        const mm = gsap.matchMedia();
 
-        return () => ctx.revert();
+        mm.add("(min-width: 1025px)", () => {
+            const ctx = gsap.context(() => {
+                ScrollTrigger.create({
+                    trigger: sectionRef.current,
+                    start: "top top",
+                    end: "+=3000",
+                    pin: true,
+                    scrub: 0.5,
+                    onUpdate: (self) => {
+                        const index = Math.min(
+                            capabilities.length - 1,
+                            Math.floor(self.progress * capabilities.length)
+                        );
+                        const newActiveId = capabilities[index].id;
+                        setActiveId(prev => (prev !== newActiveId ? newActiveId : prev));
+                    }
+                });
+            }, sectionRef);
+            return () => ctx.revert();
+        });
+
+        mm.add("(max-width: 1024px)", () => {
+            const ctx = gsap.context(() => {
+                const cards = gsap.utils.toArray<HTMLElement>(`.${styles.card}`);
+                
+                // Ensure initial state is clean before animating
+                gsap.set(cards, { clearProps: "all" });
+
+                cards.forEach((card) => {
+                    gsap.fromTo(card, 
+                        { opacity: 0, y: 50 },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: card,
+                                start: "top 85%",
+                                toggleActions: "play none none reverse"
+                            }
+                        }
+                    );
+                });
+            }, sectionRef);
+            return () => ctx.revert();
+        });
+
+        return () => mm.revert();
     }, []);
 
     return (

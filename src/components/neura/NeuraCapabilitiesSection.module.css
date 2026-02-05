@@ -107,38 +107,92 @@
     
     .card {
         width: 100%;
-        height: 500px;
+        height: auto;
+        min-height: 500px;
         flex: none;
         padding: 2rem;
+        /* Force expanded look on mobile */
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(20px);
     }
 
     .expanded {
-        flex: none;
+        flex: none; /* No flex expansion on mobile */
     }
-}
-.expanded.cardBlue {
-    background: linear-gradient(135deg, rgba(10, 20, 50, 0.9) 0%, rgba(10, 20, 50, 0.6) 100%);
-    border-color: rgba(137, 247, 254, 0.3);
-}
 
-.expanded.cardPink {
-    background: linear-gradient(135deg, rgba(50, 10, 30, 0.9) 0%, rgba(50, 10, 30, 0.6) 100%);
-    border-color: rgba(255, 154, 158, 0.3);
-}
+    /* Force details visible on mobile - OVERRIDE collapsed state */
+    .card .details,
+    .collapsed .details {
+        display: grid !important;
+        grid-template-rows: 1fr !important;
+        opacity: 1 !important;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        visibility: visible !important;
+    }
 
-.expanded.cardPurple {
-    background: linear-gradient(135deg, rgba(30, 10, 50, 0.9) 0%, rgba(30, 10, 50, 0.6) 100%);
-    border-color: rgba(204, 153, 255, 0.3);
-}
+    .card .detailsInner,
+    .collapsed .detailsInner {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+    }
 
-.expanded.cardCyan {
-    background: linear-gradient(135deg, rgba(5, 50, 50, 0.9) 0%, rgba(10, 40, 40, 0.6) 100%);
-    border-color: rgba(0, 255, 255, 0.3);
-}
+    /* Title size adjustment */
+    .cardTitle {
+        font-size: 2rem;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+    }
 
-.expanded.cardGold {
-    background: linear-gradient(135deg, rgba(50, 30, 5, 0.9) 0%, rgba(50, 35, 10, 0.6) 100%);
-    border-color: rgba(255, 215, 0, 0.3);
+    /* Icon adjustment */
+    .iconWrapper {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: scale(1);
+    }
+    .icon {
+        color: #ffffff;
+        width: 36px;
+        height: 36px;
+    }
+
+    /* Image visibility */
+    .cardImage {
+        opacity: 0.7;
+    }
+    .imageOverlay {
+        background: linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.4) 0%,
+            rgba(0,0,0,0) 40%,
+            rgba(0,0,0,0.8) 100%
+        );
+    }
+
+    /* Card Background Overrides for Mobile (simulate expanded) */
+    .cardBlue {
+        background: linear-gradient(135deg, rgba(10, 20, 50, 0.9) 0%, rgba(10, 20, 50, 0.6) 100%);
+        border-color: rgba(137, 247, 254, 0.3);
+    }
+    .cardPink {
+        background: linear-gradient(135deg, rgba(50, 10, 30, 0.9) 0%, rgba(50, 10, 30, 0.6) 100%);
+        border-color: rgba(255, 154, 158, 0.3);
+    }
+    .cardPurple {
+        background: linear-gradient(135deg, rgba(30, 10, 50, 0.9) 0%, rgba(30, 10, 50, 0.6) 100%);
+        border-color: rgba(204, 153, 255, 0.3);
+    }
+    .cardCyan {
+        background: linear-gradient(135deg, rgba(5, 50, 50, 0.9) 0%, rgba(10, 40, 40, 0.6) 100%);
+        border-color: rgba(0, 255, 255, 0.3);
+    }
+    .cardGold {
+        background: linear-gradient(135deg, rgba(50, 30, 5, 0.9) 0%, rgba(50, 35, 10, 0.6) 100%);
+        border-color: rgba(255, 215, 0, 0.3);
+    }
 }
 
 
