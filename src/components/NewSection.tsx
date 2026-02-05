@@ -82,7 +82,7 @@ export default function NewSection() {
                     ease: "power3.out",
                     scrollTrigger: {
                         trigger: ".ns-cta-banner",
-                        start: "top 90%",
+                        start: "top 95%",
                         toggleActions: "play none none none"
                     }
                 }
@@ -192,7 +192,9 @@ export default function NewSection() {
 
                         <button className="ns-cta-button-white mt-8">
                             <span>Explore How We Work</span>
-                            <ArrowRight size={18} />
+                            <span className="ns-cta-arrow-hit">
+                                <ArrowRight size={18} />
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -200,8 +202,8 @@ export default function NewSection() {
 
             <style jsx>{`
                 .ns-section {
-                    padding: 8rem 0;
-                    background: transparent; /* Transparent to show page background through the card */
+                    padding: 2rem 0;
+                    background: transparent;
                     position: relative;
                     z-index: 30;
                 }
@@ -210,7 +212,7 @@ export default function NewSection() {
                     width: 100%;
                     max-width: 1400px;
                     margin: 0 auto;
-                    padding: 6rem 48px;
+                    padding: 2.5rem 48px;
                     background: rgba(255, 255, 255, 0.85); /* Transparent white */
                     backdrop-filter: blur(40px);
                     -webkit-backdrop-filter: blur(40px);
@@ -278,7 +280,7 @@ export default function NewSection() {
 
                 /* Body Content Styling */
                 .ns-content-body {
-                    margin-bottom: 6rem;
+                    margin-bottom: 2.5rem;
                     width: 100%;
                 }
 
@@ -357,7 +359,7 @@ export default function NewSection() {
                     width: 100%;
                     background: #3b82f6;
                     border-radius: 24px;
-                    padding: 5rem 2rem;
+                    padding: 3.5rem 2rem;
                     text-align: center;
                     overflow: hidden;
                     box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
@@ -469,6 +471,29 @@ export default function NewSection() {
                     transform: translateY(-2px);
                     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
                     background: #f8fafc;
+                }
+
+                .ns-cta-arrow-hit {
+                    display: inline-flex;
+                    animation: exitEnter 2s infinite ease-in-out;
+                }
+
+                .ns-cta-button-white:hover .ns-cta-arrow-hit {
+                    animation: exitEnter 0.8s infinite linear;
+                }
+
+                .ns-cta-button-white:active .ns-cta-arrow-hit {
+                    transform: translateX(30px) scale(0.8);
+                    opacity: 0;
+                    transition: all 0.15s ease-in;
+                    animation: none;
+                }
+
+                @keyframes exitEnter {
+                    0% { transform: translateX(0); opacity: 1; }
+                    40% { transform: translateX(15px); opacity: 0; }
+                    41% { transform: translateX(-15px); opacity: 0; }
+                    80%, 100% { transform: translateX(0); opacity: 1; }
                 }
 
                 @media (max-width: 768px) {

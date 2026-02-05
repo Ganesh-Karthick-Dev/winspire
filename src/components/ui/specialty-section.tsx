@@ -10,7 +10,8 @@ export function SpecialtySection() {
         "Hospitals and ambulatory surgery centers",
         "Behavioral and mental health providers",
         "Emergency & Urgent Care Providers",
-        "Tribal and community health networks"
+        "Tribal and community health networks",
+        "Laboratory and Diagnostic Services"
     ];
 
     return (

@@ -7,28 +7,28 @@ import SectionTitle from "./ui/section-title";
 import { CleanTestimonial } from "./ui/clean-testimonial";
 
 // Animated Counter Component
-function AnimatedCounter({ value, delay = 0 }: { value: string; delay?: number }) {
+function AnimatedCounter({ value, startValue = "0", delay = 0 }: { value: string; startValue?: string; delay?: number }) {
     const ref = useRef<HTMLSpanElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-50px" });
-    const [displayValue, setDisplayValue] = useState("0");
+    const [displayValue, setDisplayValue] = useState(startValue);
 
+    // Initial animation
     useEffect(() => {
         if (!isInView) return;
 
-        // Parse the value to determine if it's a number
-        const isNegative = value.startsWith("-");
         const cleanValue = value.replace(/[^0-9.]/g, "");
         const numericValue = parseFloat(cleanValue);
-        const suffix = value.replace(/[0-9.-]/g, ""); // Get non-numeric suffix like %
+        const suffix = value.replace(/[0-9.-]/g, "");
 
-        // Non-numeric values (like "AI") just fade in
+        const cleanStartValue = startValue.replace(/[^0-9.]/g, "");
+        const numericStart = parseFloat(cleanStartValue) || 0;
+
         if (isNaN(numericValue)) {
             const timer = setTimeout(() => setDisplayValue(value), delay * 1000);
             return () => clearTimeout(timer);
         }
 
-        // Animate numeric values
-        const duration = 1500; // 1.5 seconds
+        const duration = 2000; // Increased to 2 seconds for a more dramatic entrance
         const startTime = Date.now() + delay * 1000;
         const isDecimal = cleanValue.includes(".");
 
@@ -42,25 +42,72 @@ function AnimatedCounter({ value, delay = 0 }: { value: string; delay?: number }
             }
 
             const progress = Math.min(elapsed / duration, 1);
-            // Ease-out cubic for smooth deceleration
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const current = eased * numericValue;
+            const eased = 1 - Math.pow(1 - progress, 4); // Smoother ease-out
+            const current = numericStart + eased * (numericValue - numericStart);
 
             const formatted = isDecimal
                 ? current.toFixed(1)
                 : Math.floor(current).toString();
 
-            setDisplayValue(`${isNegative ? "-" : ""}${formatted}${suffix}`);
+            setDisplayValue(`${formatted}${suffix}`);
 
             if (progress < 1) {
                 requestAnimationFrame(animate);
             } else {
-                setDisplayValue(value); // Ensure final value is exact
+                setDisplayValue(value);
             }
         };
 
         requestAnimationFrame(animate);
-    }, [isInView, value, delay]);
+    }, [isInView, value, startValue, delay]);
+
+    // Random Jitter/Fluctuation effect (Continuous)
+    useEffect(() => {
+        if (!isInView) return;
+
+        const cleanValue = value.replace(/[^0-9.]/g, "");
+        const numericValue = parseFloat(cleanValue);
+        const suffix = value.replace(/[0-9.-]/g, "");
+        const isDecimal = cleanValue.includes(".");
+
+        if (isNaN(numericValue)) {
+            // Special handling for non-numeric like "AI"
+            if (value === "AI") {
+                const terms = ["AI", "ML", "GEN", "IQ", "AI"];
+                const interval = setInterval(() => {
+                    if (Math.random() > 0.8) { // Only change occasionally
+                        const randomTerm = terms[Math.floor(Math.random() * terms.length)];
+                        setDisplayValue(randomTerm);
+                        setTimeout(() => setDisplayValue("AI"), 300); // Quick flicker back
+                    }
+                }, 3000);
+                return () => clearInterval(interval);
+            }
+            return;
+        }
+
+        // Periodic jitter for numeric values
+        const interval = setInterval(() => {
+            if (Math.random() > 0.6) { // 40% chance every check
+                // Random drift between -1.5% and +1.5% of the value
+                const drift = numericValue * (0.015 * (Math.random() * 2 - 1));
+                const jittered = numericValue + drift;
+                
+                const formatted = isDecimal
+                    ? jittered.toFixed(1)
+                    : Math.round(jittered).toString();
+                
+                setDisplayValue(`${formatted}${suffix}`);
+                
+                // Return to base value after a short moment
+                setTimeout(() => {
+                    setDisplayValue(value);
+                }, 1000 + Math.random() * 1000);
+            }
+        }, 4000);
+
+        return () => clearInterval(interval);
+    }, [isInView, value]);
 
     return (
         <span ref={ref} className="stat-value animated-stat">
@@ -77,36 +124,42 @@ export default function OutcomesSection() {
             text: "Faster, more predictable cash flow",
             icon: Zap,
             stat: "50%",
+            startStat: "25%",
             statLabel: "Faster Claim to Cash Cycle"
         },
         {
             text: "Fewer denials and stronger first-pass performance",
             icon: Shield,
             stat: "98%",
+            startStat: "85%",
             statLabel: "Clean Claims"
         },
         {
             text: "Lower cost to collect without staff dependency",
             icon: Users,
             stat: "200%",
+            startStat: "50%",
             statLabel: "Cost to Collection"
         },
         {
             text: "Transparent oversight across every department",
             icon: Eye,
             stat: "100%",
+            startStat: "0%",
             statLabel: "Visibility"
         },
         {
             text: "Decisions guided by intelligence—not guesswork",
             icon: Activity,
             stat: "AI",
+            startStat: "0",
             statLabel: "Driven Insights"
         },
         {
             text: "Scale operations without proportional cost increases",
             icon: CheckCircle2,
             stat: "3x",
+            startStat: "1x",
             statLabel: "Capacity Growth"
         }
     ];
@@ -147,7 +200,7 @@ export default function OutcomesSection() {
                                         </div>
                                         <h3 className="card-text">{item.text}</h3>
                                         <div className="card-stat">
-                                            <AnimatedCounter value={item.stat} delay={index * 0.15} />
+                                            <AnimatedCounter value={item.stat} startValue={item.startStat} delay={index * 0.15} />
                                             <span className="stat-label">{item.statLabel}</span>
                                         </div>
                                     </div>

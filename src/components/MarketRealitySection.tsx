@@ -3,38 +3,50 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import SectionTitle from "./ui/section-title";
-import { ArrowRight, TrendingDown, Clock, ShieldAlert, UserX, BarChart3, AlertCircle } from "lucide-react";
+import { ArrowRight, TrendingDown, Clock, ShieldAlert, UserX, BarChart3, AlertCircle, UserMinus } from "lucide-react";
 
 const consequences = [
     {
         icon: ShieldAlert,
         title: "Preventable Denials",
         desc: "Revenue lost to simple administrative errors.",
-        color: "#ef4444"
+        color: "#ef4444",
+        animClass: "mr-anim-alert"
     },
     {
         icon: Clock,
         title: "Missed Windows",
         desc: "Appeal deadlines that pass without action.",
-        color: "#f97316"
+        color: "#f97316",
+        animClass: "mr-anim-clock"
     },
     {
         icon: TrendingDown,
         title: "AR Aging",
         desc: "Cash flow trapped in uncollectible buckets.",
-        color: "#f59e0b"
+        color: "#f59e0b",
+        animClass: "mr-anim-sink"
     },
     {
         icon: UserX,
         title: "Patient Friction",
         desc: "Billing errors that erode trust and satisfaction.",
-        color: "#f43f5e"
+        color: "#f43f5e",
+        animClass: "mr-anim-friction"
     },
     {
         icon: BarChart3,
         title: "Market Lag",
         desc: "Falling behind automated, efficient competitors.",
-        color: "#fb7185"
+        color: "#fb7185",
+        animClass: "mr-anim-lag"
+    },
+    {
+        icon: UserMinus,
+        title: "Client Attrition",
+        desc: "Silent revenue erosion from lost provider trust.",
+        color: "#ff3366",
+        animClass: "mr-anim-attrition"
     }
 ];
 
@@ -53,7 +65,7 @@ export default function MarketRealitySection() {
                         className="mr-title-wrapper"
                     >
                         <SectionTitle
-                            title="What Waiting Is Quietly Costing Your Revenue"
+                            title="Why Waiting Is Quietly Costing Your Revenue"
                             subtitle="The Cost of Operating RCM the Old Way"
                             align="left"
                             textColor="text-white"
@@ -116,7 +128,7 @@ export default function MarketRealitySection() {
                             >
 
 
-                                <div className="mr-card-icon-prism">
+                                <div className={`mr-card-icon-prism ${item.animClass}`}>
                                     <item.icon size={28} />
                                 </div>
 
@@ -377,11 +389,54 @@ export default function MarketRealitySection() {
                     transition: all 0.5s ease;
                 }
 
+                /* Unique icon animations */
+                .mr-anim-alert { animation: mr-alert 2s infinite ease-in-out; }
+                .mr-anim-clock { animation: mr-clock 4s infinite linear; }
+                .mr-anim-sink { animation: mr-sink 3s infinite ease-in-out; }
+                .mr-anim-friction { animation: mr-friction 2.5s infinite ease-in-out; }
+                .mr-anim-lag { animation: mr-lag 3s infinite ease-in-out; }
+                .mr-anim-attrition { animation: mr-attrition 4s infinite ease-in-out; }
+
+                @keyframes mr-alert {
+                    0%, 100% { transform: scale(1); filter: brightness(1); }
+                    50% { transform: scale(1.1); filter: brightness(1.3); }
+                }
+
+                @keyframes mr-clock {
+                    0% { transform: rotate(0deg); }
+                    25% { transform: rotate(10deg); }
+                    50% { transform: rotate(0deg); }
+                    75% { transform: rotate(-10deg); }
+                    100% { transform: rotate(0deg); }
+                }
+
+                @keyframes mr-sink {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(8px); }
+                }
+
+                @keyframes mr-friction {
+                    0%, 100% { transform: translateX(0); }
+                    25% { transform: translateX(3px) rotate(2deg); }
+                    75% { transform: translateX(-3px) rotate(-2deg); }
+                }
+
+                @keyframes mr-lag {
+                    0%, 100% { transform: scaleX(1); opacity: 1; }
+                    50% { transform: scaleX(0.85); opacity: 0.7; }
+                }
+
+                @keyframes mr-attrition {
+                    0%, 100% { opacity: 1; transform: scale(1); }
+                    50% { opacity: 0.4; transform: scale(0.9); }
+                }
+
                 .mr-glass-card:hover .mr-card-icon-prism {
                     background: rgba(var(--item-color-rgb), 0.15);
                     border-color: var(--item-color);
                     color: var(--item-color);
                     transform: scale(1.1) rotate(5deg);
+                    animation: none !important; /* Stop unique anim on hover */
                 }
 
                 .mr-card-title {

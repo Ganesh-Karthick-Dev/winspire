@@ -15,6 +15,7 @@ const PILLAR_LOTTIE_URLS = {
     target: "/lottie-json/Target.json",
     layers: "/lottie-json/Stack Icon Animation.json",
     lightning: "/lottie-json/Lightning Lottie Animation.json",
+    alert: "https://lottie.host/78370783-f8a4-4a4a-950e-360e7e974955/qQ6O5K9N0g.json",
 };
 
 const systemPillars = [
@@ -23,7 +24,7 @@ const systemPillars = [
     { name: "Leadership Visibility & Control", range: "10–12%", minPercent: 10, maxPercent: 12 },
     { name: "People Performance & Quality at Scale", range: "15–18%", minPercent: 15, maxPercent: 18 },
     { name: "Culture, Alignment & Continuous Improvement", range: "5–8%", minPercent: 5, maxPercent: 8 },
-    { name: "Total Impact", range: "100%", minPercent: 0, maxPercent: 100 },
+    { name: "Efficiency gain", range: "60–70%", minPercent: 60, maxPercent: 70 },
 ];
 
 const successPillars: Array<{
@@ -116,7 +117,7 @@ export default function CoreInsightSection() {
                 }
             );
 
-            // Animate RHS value from 0 to peak (e.g. "0–0%" → "20–25%")
+            // Animate RHS value from 0 to peak
             const items = sectionRef.current?.querySelectorAll<HTMLElement>(".ci-stats-item") || [];
             systemPillars.forEach((pillar, i) => {
                 const item = items[i];
@@ -126,15 +127,15 @@ export default function CoreInsightSection() {
                 gsap.to(obj, {
                     min: pillar.minPercent,
                     max: pillar.maxPercent,
-                    duration: 1,
-                    delay: 0.2 + i * 0.1,
-                    ease: "power3.out",
+                    duration: 0.8,
+                    delay: i * 0.05,
+                    ease: "power2.out",
                     onUpdate: () => {
                         valueEl.textContent = `${Math.round(obj.min)}–${Math.round(obj.max)}%`;
                     },
                     scrollTrigger: {
                         trigger: item,
-                        start: "top 85%",
+                        start: "top 95%", // Trigger earlier
                         toggleActions: "play none none none"
                     }
                 });
@@ -204,7 +205,12 @@ export default function CoreInsightSection() {
                         {/* Quote with Icon */}
                         <div className="ci-quote-box">
                             <div className="ci-quote-icon">
-                                <AlertTriangle size={20} />
+                                <Player
+                                    src={PILLAR_LOTTIE_URLS.alert}
+                                    autoplay
+                                    loop
+                                    style={{ width: 80, height: 80 }}
+                                />
                             </div>
                             <div className="ci-quote-content">
                                 <p>In today's RCM environments, one of these is almost always missing or misaligned.</p>
@@ -224,16 +230,17 @@ export default function CoreInsightSection() {
                             {systemPillars.map((pillar, idx) => (
                                 <li
                                     key={idx}
-                                    className="ci-stats-item"
+                                    className={`ci-stats-item ${idx === systemPillars.length - 1 ? 'ci-stats-item-featured' : ''}`}
                                 >
                                     {/* Animated Bars */}
                                     <div className="ci-bar-base" style={{ width: `${pillar.minPercent}%` }} />
-                                    <div className="ci-bar-highlight" style={{ left: `${pillar.minPercent}%`, width: `${pillar.maxPercent - pillar.minPercent}%` }} />
+                                    <div className={`ci-bar-highlight ${idx === systemPillars.length - 1 ? 'ci-bar-highlight-pulse' : ''}`} 
+                                         style={{ left: `${pillar.minPercent}%`, width: `${pillar.maxPercent - pillar.minPercent}%` }} />
 
                                     {/* Content - value animates from 0–0% to pillar range via GSAP */}
                                     <div className="ci-stats-content">
                                         <span>{pillar.name}</span>
-                                        <strong>0–0%</strong>
+                                        <strong>--</strong>
                                     </div>
                                 </li>
                             ))}

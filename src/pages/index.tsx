@@ -203,7 +203,7 @@ export default function TempHome() {
                             }}
                         >
                             <MarqueeText
-                                text="Designing Revenue Cycles That Actually Work • "
+                                text="Designing Revenue Cycles That Work • "
                                 duration={45}
                                 fontSize="clamp(2.25rem, 7vw, 5.5rem)"
                                 color="#083151"
@@ -222,8 +222,7 @@ export default function TempHome() {
                                         opacity: missionFade ? 1 : 0,
                                         transition: 'opacity 0.3s ease-in-out'
                                     }}
-                                >
-                                    Our Mission
+                                >Our experience says
                                 </h3>
                                 <div
                                     className="text-2xl font-bold leading-tight font-[Outfit] text-gradient-shimmer"
@@ -278,7 +277,7 @@ export default function TempHome() {
                                     width="340px"
                                     height="56px"
                                 >
-                                    Book a Strategic Conversation
+                                    Find Your Revenue Leakage in 15 Minutes
                                 </GradientButton>
                             </div>
                         )}
@@ -289,7 +288,7 @@ export default function TempHome() {
                 {/* Hero Section with Mobile Overlay Container */}
                 <div className="hero-section-container" style={{ position: 'relative' }}>
                     <Hero
-                        title={`Designing Revenue Cycles That Actually Work`}
+                        title={`Designing Revenue Cycles That Work`}
                         subtitle="AI-Powered. System-Driven. Outcome-Guaranteed"
                         ctaText="Explore Features"
                         ctaHref="#about"
@@ -334,7 +333,7 @@ export default function TempHome() {
                                     width="280px"
                                     height="50px"
                                 >
-                                    Book a Strategic Conversation
+                                    Find Your Revenue Leakage in 15 Minutes
                                 </GradientButton>
                             </div>
 

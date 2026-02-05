@@ -407,7 +407,7 @@ export default function Hero({
                     alignItems: 'center',
                 }}>
                     <MarqueeText
-                        text="Designing Revenue Cycles That Actually Work • "
+                        text="Designing Revenue Cycles That Work • "
                         duration={45}
                         fontSize="clamp(2.25rem, 7vw, 5.5rem)"
                         color="#000000"

@@ -6722,14 +6722,16 @@ footer p {
 
 .ci-quote-icon {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
   color: #fff;
+  overflow: hidden;
 }
 
 .ci-quote-content {
@@ -6851,6 +6853,49 @@ footer p {
   margin-left: 16px;
   white-space: nowrap;
 }
+
+/* Featured row and pulse animation */
+@keyframes ci-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes ci-slow-pulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+.ci-stats-item-featured {
+  background: rgba(56, 189, 248, 0.15) !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+  margin-top: 8px;
+}
+
+.ci-bar-highlight-pulse {
+  background: linear-gradient(90deg, #38bdf8, #60a5fa) !important;
+  animation: ci-slow-pulse 3s infinite ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.ci-bar-highlight-pulse::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: ci-shimmer 2s infinite linear;
+}
+
 
 /* Closing */
 .ci-closing {
