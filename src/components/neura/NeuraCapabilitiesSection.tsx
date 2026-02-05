@@ -1,14 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import styles from './NeuraCapabilitiesSection.module.css';
 import {
-    FaShieldAlt,
-    FaBolt,
-    FaUsers,
-    FaChartLine,
-    FaCogs
-} from 'react-icons/fa';
+    ShieldCheck,
+    Zap,
+    Users,
+    LineChart,
+    Settings
+} from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const capabilities = [
     {
@@ -21,8 +25,7 @@ const capabilities = [
             { text: "10–20% higher appeal overturn rates", min: 10, max: 20 }
         ],
         takeaway: "Revenue is protected early instead of chased late.",
-        icon: FaShieldAlt,
-        level: "Level 01",
+        icon: ShieldCheck,
         colorClass: styles.cardBlue,
         image: "/temp/revenue_abstract.png"
     },
@@ -36,8 +39,7 @@ const capabilities = [
             { text: "5–10% fewer SLA misses", min: 5, max: 10 }
         ],
         takeaway: "Time shifts from gathering to action.",
-        icon: FaBolt,
-        level: "Level 02",
+        icon: Zap,
         colorClass: styles.cardPink,
         image: "/temp/speed_abstract.png"
     },
@@ -51,53 +53,75 @@ const capabilities = [
             { text: "30–40% faster onboarding", min: 30, max: 40 }
         ],
         takeaway: "Performance scales without burnout.",
-        icon: FaUsers,
-        level: "Level 03",
+        icon: Users,
         colorClass: styles.cardPurple,
         image: "/temp/people_abstract.png"
-    }
-];
-
-const secondaryCapabilities = [
+    },
     {
         id: 3,
         title: "Leadership Visibility and Control",
-        description: "Neura replaces lagging reports with live operational insight.",
+        description: "Neura replaces lagging reports with live operational insight. Real-time dashboards drive better decisions.",
         outcomes: [
             { text: "1–2% net collections improvement" },
             { text: "5–7 days earlier intervention" }
         ],
         takeaway: "Reacting → Guiding",
-        icon: FaChartLine,
-        level: "Level 03"
+        icon: LineChart,
+        colorClass: styles.cardCyan,
+        image: "/temp/leadership_abstract.png"
     },
     {
         id: 5,
         title: "Culture, Alignment, and Continuous Improvement",
-        description: "Neura embeds recognition, learning, and improvement into daily execution.",
+        description: "Neura embeds recognition, learning, and improvement into daily execution. Aligning teams to shared goals.",
         outcomes: [
             { text: "Lower attrition (top performers)" },
             { text: "1–3% efficiency gains YoY" }
         ],
         takeaway: "Episodic → Continuous",
-        icon: FaCogs,
-        level: "Level 05"
+        icon: Settings,
+        colorClass: styles.cardGold,
+        // Using placeholder until generated
+        image: "/temp/culture_abstract_fluid.png" 
     }
 ];
 
 const NeuraCapabilitiesSection: React.FC = () => {
-    const [hoveredId, setHoveredId] = useState<number | null>(null);
+    const sectionRef = useRef<HTMLElement>(null);
+    const [activeId, setActiveId] = useState<number>(1);
+
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            ScrollTrigger.create({
+                trigger: sectionRef.current,
+                start: "top top",
+                end: "+=3000", // Scroll distance to cycle through cards
+                pin: true,
+                scrub: 0.5,
+                onUpdate: (self) => {
+                    // Map progress (0-1) to card index (0-4)
+                    // If progress is 0.0 -> index 0. 0.9 -> index 4.
+                    const index = Math.min(
+                        capabilities.length - 1, 
+                        Math.floor(self.progress * capabilities.length)
+                    );
+                    const newActiveId = capabilities[index].id;
+                    setActiveId(prev => (prev !== newActiveId ? newActiveId : prev));
+                }
+            });
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, []);
 
     return (
-        <section className={styles.section}>
-            {/* Main Primary Capabilities (Flex Expand) */}
+        <section ref={sectionRef} className={styles.section}>
             <div className={styles.container}>
                 {capabilities.map((cap) => (
                     <div
                         key={cap.id}
-                        className={`${styles.card} ${cap.colorClass} ${hoveredId === cap.id ? styles.expanded : ''} ${hoveredId !== null && hoveredId !== cap.id ? styles.collapsed : ''}`}
-                        onMouseEnter={() => setHoveredId(cap.id)}
-                        onMouseLeave={() => setHoveredId(null)}
+                        data-id={cap.id}
+                        className={`${styles.card} ${cap.colorClass} ${activeId === cap.id ? styles.expanded : styles.collapsed}`}
                     >
                         <div className={styles.cardContent}>
                             <div className={styles.iconWrapper}>
@@ -119,53 +143,10 @@ const NeuraCapabilitiesSection: React.FC = () => {
                                     <div className={styles.cardTakeaway}>{cap.takeaway}</div>
                                 </div>
                             </div>
-
-                            <div className={styles.mobileCta}>
-                                <span>Read More</span>
-                            </div>
                         </div>
                         
                         <div className={styles.imageOverlay} />
                         <img src={cap.image} alt={cap.title} className={styles.cardImage} />
-                    </div>
-                ))}
-            </div>
-
-            {/* Secondary Capabilities (Weather Card Design) */}
-            <div className={styles.secondaryContainer}>
-                {secondaryCapabilities.map((cap) => (
-                    <div key={cap.id} className={styles.cardm}>
-                        {/* Top Card: Icon + Description - Slides UP */}
-                        <div className={styles.cardTop}>
-                            <div className={styles.weatherIcon}>
-                                <cap.icon />
-                            </div>
-                            <div className={styles.weatherDesc}>
-                                {cap.description}
-                            </div>
-                        </div>
-
-                        {/* Center Card: Title & Level - Stays (Anchor) */}
-                        <div className={styles.cardCenter}>
-                            <div className={styles.mainTitle}>{cap.title}</div>
-                            <div className={styles.subTitle}>{cap.level}</div>
-                        </div>
-
-                        {/* Bottom Card: Stats & Takeaway - Slides DOWN */}
-                        <div className={styles.cardBottom}>
-                            <div className={styles.outcomesBox}>
-                                {cap.outcomes.map((outcome, i) => (
-                                    <div key={i} className={styles.statItem}>
-                                        <FaBolt size={10} color="#2563eb" />
-                                        <span>{outcome.text}</span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className={styles.cardTakeawayBar}>
-                                {cap.takeaway}
-                            </div>
-                        </div>
                     </div>
                 ))}
             </div>

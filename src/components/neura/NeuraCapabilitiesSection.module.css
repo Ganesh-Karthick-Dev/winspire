@@ -1,68 +1,152 @@
 .section {
     width: 100%;
-    min-height: 80vh;
-    padding: 4rem 2rem;
+    height: 100vh; /* Full viewport height for pinning */
+    min-height: 800px;
+    padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background: transparent;
+    overflow: hidden;
 }
 
 .container {
     display: flex;
+    flex-direction: row;
     width: 100%;
-    max-width: 1400px;
-    height: 600px;
+    max-width: 1600px;
+    height: 680px; /* Increased height to fit content */
+    padding: 0 4rem;
     gap: 1.5rem;
-    transition: all 0.5s ease;
+    /* No overflow/scroll here - handled by GSAP Pin */
+}
+
+/* Hide scrollbar just in case */
+.container::-webkit-scrollbar {
+    display: none;
 }
 
 .card {
     position: relative;
-    flex: 1;
-    border-radius: 24px;
+    flex: 1; /* Default flex value */
+    height: 100%;
+    border-radius: 60px; /* Semicircle / Highly rounded */
     overflow: hidden;
-    cursor: pointer;
-    transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s ease, border-color 0.4s ease;
+    cursor: default;
+    /* Smooth width/flex transition */
+    transition: flex 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s ease;
+    
     display: flex;
     flex-direction: column;
-    padding: 2.5rem;
-    background: rgba(0, 0, 0, 0.4); /* Dark base glass */
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    /* Reduced padding to fit more content, especially in collapsed state */
+    padding: 2rem; 
+    
+    /* Initial Dark Glass State */
+    background: rgba(10, 10, 20, 0.6); /* Increased opacity for visibility */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
 }
 
-/* Dark Tinted Glass */
-.cardBlue {
-    background: rgba(10, 20, 40, 0.6);
-    border-color: rgba(137, 247, 254, 0.2);
-}
-
-.cardPink {
-    background: rgba(40, 10, 30, 0.6);
-    border-color: rgba(255, 154, 158, 0.2);
-}
-
-.cardPurple {
-    background: rgba(25, 10, 40, 0.6);
-    border-color: rgba(204, 153, 255, 0.2);
-}
-
-/* Interaction States */
+/* === Interaction States === */
 .expanded {
-    flex: 3;
+    flex: 6; /* Active takes more space for visibility */
+    /* Active State (Centered) */
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.6); /* Darkens on expand */
+    backdrop-filter: blur(30px);
+    z-index: 10;
+    padding: 3.5rem; /* Larger padding only when expanded */
 }
 
 .collapsed {
     flex: 1;
+    opacity: 1; 
+    /* Base background is overridden by specific colors below */
 }
 
+/* === Specific Card Colors (Collapsed & Expanded) === */
+.cardBlue {
+    background: linear-gradient(180deg, rgba(10, 20, 50, 0.4) 0%, rgba(137, 247, 254, 0.05) 100%);
+    border-color: rgba(137, 247, 254, 0.1);
+}
+.cardPink {
+    background: linear-gradient(180deg, rgba(50, 10, 30, 0.4) 0%, rgba(255, 154, 158, 0.05) 100%);
+    border-color: rgba(255, 154, 158, 0.1);
+}
+.cardPurple {
+    background: linear-gradient(180deg, rgba(30, 10, 50, 0.4) 0%, rgba(204, 153, 255, 0.05) 100%);
+    border-color: rgba(204, 153, 255, 0.1);
+}
+.cardCyan {
+    background: linear-gradient(180deg, rgba(5, 50, 50, 0.4) 0%, rgba(0, 255, 255, 0.05) 100%);
+    border-color: rgba(0, 255, 255, 0.1);
+}
+.cardGold {
+    background: linear-gradient(180deg, rgba(50, 30, 5, 0.4) 0%, rgba(255, 215, 0, 0.05) 100%);
+    border-color: rgba(255, 215, 0, 0.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+    .section {
+        height: auto;
+        min-height: auto;
+        padding: 4rem 1rem;
+    }
+
+    .container {
+        flex-direction: column;
+        height: auto;
+        padding: 0;
+        gap: 2rem;
+    }
+    
+    .card {
+        width: 100%;
+        height: 500px;
+        flex: none;
+        padding: 2rem;
+    }
+
+    .expanded {
+        flex: none;
+    }
+}
+.expanded.cardBlue {
+    background: linear-gradient(135deg, rgba(10, 20, 50, 0.9) 0%, rgba(10, 20, 50, 0.6) 100%);
+    border-color: rgba(137, 247, 254, 0.3);
+}
+
+.expanded.cardPink {
+    background: linear-gradient(135deg, rgba(50, 10, 30, 0.9) 0%, rgba(50, 10, 30, 0.6) 100%);
+    border-color: rgba(255, 154, 158, 0.3);
+}
+
+.expanded.cardPurple {
+    background: linear-gradient(135deg, rgba(30, 10, 50, 0.9) 0%, rgba(30, 10, 50, 0.6) 100%);
+    border-color: rgba(204, 153, 255, 0.3);
+}
+
+.expanded.cardCyan {
+    background: linear-gradient(135deg, rgba(5, 50, 50, 0.9) 0%, rgba(10, 40, 40, 0.6) 100%);
+    border-color: rgba(0, 255, 255, 0.3);
+}
+
+.expanded.cardGold {
+    background: linear-gradient(135deg, rgba(50, 30, 5, 0.9) 0%, rgba(50, 35, 10, 0.6) 100%);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+
+/* === Details Animation === */
 .details {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+    transition: grid-template-rows 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease 0.2s;
     opacity: 0;
     overflow: hidden;
 }
@@ -70,87 +154,104 @@
 .expanded .details {
     grid-template-rows: 1fr;
     opacity: 1;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .detailsInner {
     min-height: 0;
-    transform: translateY(20px);
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: translateY(30px);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .expanded .detailsInner {
     transform: translateY(0);
 }
 
-/* Card Content Styling */
+/* === Content Styles === */
 .cardContent {
     position: relative;
-    z-index: 5; /* Above images */
+    z-index: 5;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .iconWrapper {
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 12px;
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.05); /* Subtle in collapsed */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1.5rem;
-    backdrop-filter: blur(10px);
-    transition: transform 0.4s ease;
-}
-
-.expanded .iconWrapper {
-    transform: scale(1.1);
-    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    transition: all 0.6s ease;
+    /* Removed filters */
 }
 
 .icon {
-    font-size: 1.8rem;
-    color: #ffffff;
+    width: 32px;
+    height: 32px;
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.6s ease;
 }
+
+.expanded .icon {
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+}
+
+.expanded .iconWrapper {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+
 
 .cardTitle {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.75rem;
+    font-size: 1.5rem; /* Smaller for collapsed state */
     font-weight: 700;
     line-height: 1.2;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-    transition: all 0.4s ease;
+    color: rgba(255, 255, 255, 0.8); /* Muted title collapsed */
+    margin-bottom: 0px;
+    transition: all 0.6s ease;
+    word-wrap: break-word; /* Ensure long words don't overflow */
 }
 
 .expanded .cardTitle {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
 }
 
 .cardDescription {
     font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .outcomesWrapper {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .outcomeItem {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
     font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     color: #ffffff;
     font-weight: 500;
 }
@@ -159,21 +260,25 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #ffffff;
+    background: #00f2ff;
     flex-shrink: 0;
+    box-shadow: 0 0 8px #00f2ff;
 }
 
 .cardTakeaway {
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
     font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: #ffffff;
+    color: rgba(255, 255, 255, 1);
     margin-top: auto;
+    background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    border-left: 3px solid #00f2ff;
+    display: inline-block;
 }
 
-/* Card Image & Overlay */
+/* === Images === */
 .cardImage {
     position: absolute;
     top: 0;
@@ -182,14 +287,14 @@
     height: 100%;
     object-fit: cover;
     z-index: 1;
-    opacity: 0.4;
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 1s ease 0.2s, transform 1.2s ease;
     filter: grayscale(20%);
+    opacity: 0.6; /* Visible in collapsed state too */
 }
 
 .expanded .cardImage {
-    opacity: 0.9;
-    transform: scale(1.1);
+    opacity: 0.7; /* Reveal when expanded */
+    transform: scale(1.05);
 }
 
 .imageOverlay {
@@ -199,209 +304,47 @@
     width: 100%;
     height: 100%;
     z-index: 2;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.6) 0%,
-        rgba(0, 0, 0, 0) 50%,
-        rgba(0, 0, 0, 0.7) 100%
-    );
-    transition: opacity 0.6s ease;
+    background: transparent;
+    transition: background 0.6s ease;
 }
 
-.cardBlue .imageOverlay { background: linear-gradient(to bottom, rgba(0, 10, 30, 0.7) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 5, 20, 0.8) 100%); }
-.cardPink .imageOverlay { background: linear-gradient(to bottom, rgba(30, 0, 15, 0.7) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(20, 0, 10, 0.8) 100%); }
-.cardPurple .imageOverlay { background: linear-gradient(to bottom, rgba(20, 0, 30, 0.7) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(10, 0, 20, 0.8) 100%); }
+.expanded .imageOverlay {
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.4) 0%,
+        rgba(0,0,0,0) 40%,
+        rgba(0,0,0,0.8) 100%
+    );
+}
+
+.levelBadge {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    z-index: 6;
+    font-family: 'Outfit', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.05);
+    transition: all 0.6s ease;
+}
+
+.expanded .levelBadge {
+    color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-    .section {
-        height: auto;
-        padding: 2rem 1rem;
-    }
-
     .container {
-        flex-direction: column;
-        height: auto;
-        gap: 1rem;
+        padding-bottom: 5vh;
     }
-
+    
     .card {
-        flex: none;
-        width: 100%;
-        height: auto;
-        min-height: 300px;
+        padding: 1.5rem;
     }
-
-    .expanded, .collapsed {
-        flex: none;
-    }
-
-    /* On mobile, show details by default or maybe keep them collapsed until click? 
-       User said "Simple", let's show title + icon and maybe a "Read more" or just show all.
-       Let's show all for clarity on mobile since hover doesn't exist. */
-    .details {
-        opacity: 1;
-        max-height: none;
-        margin-top: 1.5rem;
-    }
-
-    .cardTitle {
+    
+    .expanded .cardTitle {
         font-size: 1.5rem;
     }
-}
-
-/* Secondary Section (Weather Card Design - 3 Card Split) */
-.secondaryContainer {
-    display: flex;
-    justify-content: center;
-    gap: 6rem;
-    width: 100%;
-    max-width: 1400px;
-    margin-top: 6rem;
-    flex-wrap: wrap;
-    padding-bottom: 4rem;
-}
-
-/* The wrapper for the stack */
-.cardm {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 350px;
-    height: 200px; /* Base height for the collapsed state */
-    perspective: 1000px;
-}
-
-/* Common Card Base Style */
-.cardTop, .cardCenter, .cardBottom {
-    position: absolute;
-    width: 340px;
-    height: 200px;
-    border-radius: 30px;
-    background: whitesmoke;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    text-align: center;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-/* --- CARD TOP (Icon) --- */
-.cardTop {
-    z-index: 1; /* Behind Center initially */
-    background: #ffffff;
-    top: 0;
-}
-
-.weatherIcon {
-    font-size: 3.5rem;
-    color: #333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* --- CARD CENTER (Title & Level) --- */
-.cardCenter {
-    z-index: 3; /* Always on top initially */
-    background: whitesmoke;
-    top: 0;
-    /* On hover it serves as the anchor/visual center */
-}
-
-/* --- CARD BOTTOM (Content) --- */
-.cardBottom {
-    z-index: 1; /* Behind Center initially */
-    background: #ffffff;
-    top: 0;
-    opacity: 0; /* Hidden initially */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 2rem;
-}
-
-/* Content Styling */
-.mainTitle {
-    font-size: 1.3rem;
-    font-weight: 700;
-    line-height: 1.2;
-    font-family: 'Outfit', sans-serif;
-    color: #1a1a1a;
-    max-width: 90%;
-}
-
-.subTitle {
-    font-size: 0.8rem;
-    color: #666;
-    margin-top: 0.5rem;
-    font-family: 'Inter', sans-serif;
-}
-
-.weatherDesc {
-    font-size: 0.85rem;
-    line-height: 1.4;
-    color: #444;
-    font-family: 'Inter', sans-serif;
-    margin-top: 1rem;
-    max-width: 90%;
-}
-
-.outcomesBox {
-    background: #f0f7ff; /* light blue hint */
-    padding: 1rem;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    width: 100%;
-    border: 1px solid #d1e5fa;
-    margin-bottom: 1rem;
-}
-
-.statItem {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    color: #1a1a1a;
-    padding: 0;
-    font-weight: 500;
-}
-
-.cardTakeawayBar {
-    margin-top: auto;
-    width: 100%;
-    background: #2563eb; /* Primary Blue */
-    color: white;
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 0.5rem;
-    border-radius: 5px;
-    font-family: 'Inter', sans-serif;
-}
-
-/* --- HOVER ANIMATIONS --- */
-
-.cardm:hover .cardTop {
-    transform: translateY(-90%); /* Slide UP */
-    z-index: 2; /* Needs to be visible */
-    background: #00f2ff; /* Cyan highlight */
-}
-
-/* Center card stays but maybe slight scale or shadow shift */
-.cardm:hover .cardCenter {
-    transform: scale(1.02);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    z-index: 4; /* Stays on top of the seam */
-}
-
-.cardm:hover .cardBottom {
-    transform: translateY(90%); /* Slide DOWN */
-    opacity: 1;
-    z-index: 2; /* Visible below center */
 }
