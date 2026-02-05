@@ -4,7 +4,7 @@
 
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -47,8 +47,9 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
     const containerRef = useRef<HTMLDivElement>(null);
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (typeof window === 'undefined' || !containerRef.current) return;
+        // Use the passed ref for the trigger (parent section), falling back to this container
         const triggerEl = pinTriggerRef?.current ?? containerRef.current;
         gsap.registerPlugin(ScrollTrigger);
 
@@ -56,15 +57,10 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
         if (cards.length === 0) return;
 
         // Set initial positions off-screen
-        // We'll calculate a "random" starting position for each card
-        // varying x and y to simulate "coming from all directions"
-        // IMPORTANT: No Opacity animation, purely position (flying in from outside)
         cards.forEach((card, i) => {
-            // Directions: 0=Left, 1=Right, 2=Bottom, 3=Top-Left, 4=Top-Right
             const mode = i % 5;
             let startX = 0;
             let startY = 0;
-            // Much larger distance to ensure off-screen
             const dist = 1500;
             const distDiag = 1200;
 
@@ -80,50 +76,57 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
                 x: startX,
                 y: startY,
                 z: i * 5,
-                opacity: 1, // Visible whole time
-                scale: 1,   // No scale in/out, just move? Or maybe slight scale? Let's keep scale 1 for "solid" feeling.
-                rotation: (Math.random() - 0.5) * 90 // Initial heavy rotation
+                opacity: 1,
+                scale: 1,
+                rotation: (Math.random() - 0.5) * 90 
             });
         });
 
         const ctx = gsap.context(() => {
+            // Pin the PARENT section (secondSectionRef) here
+            // This ensures it happens in the same layout cycle as the cards
+            ScrollTrigger.create({
+                trigger: triggerEl,
+                start: 'top top',
+                end: '+=2000',
+                pin: true,
+                pinSpacing: true, // Important: adds the spacer
+                scrub: 1.5,
+                invalidateOnRefresh: true,
+            });
+
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: triggerEl,
                     start: 'top top',
-                    end: '+=2000', // Sync with parent pin
-                    scrub: 1.5,    // Smooth scrubbing
-                    // anticipatePin: 1 // help prevent jitter?
+                    end: '+=2000', 
+                    scrub: 1.5,
                 }
             });
 
             cards.forEach((card, i) => {
-                // Final random rotation for the "messy pile" look
                 const finalRotation = (Math.random() - 0.5) * 15;
-
                 tl.to(
                     card,
                     {
                         x: 0,
                         y: 0,
                         rotation: finalRotation,
-                        duration: 1, // Normalized duration for scrub
+                        duration: 1, 
                         ease: 'power2.out'
                     },
-                    i * 0.2 // Stagger
+                    i * 0.2 
                 );
             });
 
-            // FADE OUT TEXT (Close the holes)
-            // Animate mask text fill from Black (hole) to White (sheet).
-            // This effectively "fills in" the letters with white, making them disappear into the white bg.
-
+            // Fade out text
             tl.to('.svg-title, .svg-subtitle', {
-                fill: 'white', // Close the hole
-                attr: { fill: 'white' }, // Backup attr plugin if needed
+                fill: 'white',
+                attr: { fill: 'white' },
                 duration: 0.8,
                 ease: 'power2.inOut'
             }, '+=0.1');
+
         }, triggerEl as HTMLElement);
 
         return () => ctx.revert();

@@ -98,13 +98,18 @@ const NeuraCapabilitiesSection: React.FC = () => {
                 ScrollTrigger.create({
                     trigger: sectionRef.current,
                     start: "top top",
-                    end: "+=3000",
+                    end: "+=5000",
                     pin: true,
                     scrub: 0.5,
                     onUpdate: (self) => {
+                        // Add a buffer: 0.0 to 0.15 is all Card 1
+                        // 0.15 to 1.0 is mapped to 0 to 1 for the rest
+                        const buffer = 0.15;
+                        const adjustedProgress = Math.max(0, (self.progress - buffer) / (1 - buffer));
+
                         const index = Math.min(
                             capabilities.length - 1,
-                            Math.floor(self.progress * capabilities.length)
+                            Math.floor(adjustedProgress * capabilities.length)
                         );
                         const newActiveId = capabilities[index].id;
                         setActiveId(prev => (prev !== newActiveId ? newActiveId : prev));

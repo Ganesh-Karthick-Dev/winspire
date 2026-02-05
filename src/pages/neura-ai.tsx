@@ -81,26 +81,19 @@ export default function TempNeuraAI() {
         return () => clearTimeout(safetyTimeout);
     }, []);
 
+    // Use Layout Effect for hero height if needed, but pinning is now handled by child components
+
+    // Simple refresh to handle initial load variance
     useEffect(() => {
-        if (typeof window === 'undefined' || !secondSectionRef.current) return;
-        gsap.registerPlugin(ScrollTrigger);
-
-        const ctx = gsap.context(() => {
-            // Pin the section while animating the cards
-            ScrollTrigger.create({
-                trigger: secondSectionRef.current,
-                start: 'top top',
-                end: '+=2000', // Scroll distance to complete animation
-                pin: true,
-                pinSpacing: true,
-                invalidateOnRefresh: true,
-            });
-
-            // Refresh to ensure following sections know their positions
-            ScrollTrigger.refresh();
-        });
-
-        return () => ctx.revert();
+        const refresh = () => ScrollTrigger.refresh();
+        // Small delay to allow any layout shifts to settle
+        const timer = setTimeout(refresh, 500);
+        window.addEventListener('load', refresh);
+        
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener('load', refresh);
+        };
     }, []);
 
     return (
