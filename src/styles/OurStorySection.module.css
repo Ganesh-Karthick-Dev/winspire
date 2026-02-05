@@ -301,9 +301,9 @@
 
 /* Card 3: Center Image */
 .card3 {
-    top: 450px;
+    top: 350px;
     left: 50%;
-    transform: translateX(-50%) rotate(1deg);
+    /* transform: translateX(-50%) rotate(1deg); */
     max-width: 28rem;
     padding: 1rem;
     padding-bottom: 2.5rem;
@@ -431,7 +431,7 @@
     }
 
     .journeySection {
-        min-height: 900px;
+        min-height: 1200px;
     }
 
     .dateStamp {

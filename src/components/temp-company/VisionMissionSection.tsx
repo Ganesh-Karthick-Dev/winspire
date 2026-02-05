@@ -193,7 +193,7 @@ export default function VisionMissionSection() {
                                     priority={i === 0}
                                 />
                                 <div className={styles.glassCard}>
-                                    <span className={styles.cardHeading}>Winspire {slide.title.replace('Our ', '')}</span>
+                                    {/* <span className={styles.cardHeading}>Winspire {slide.title.replace('Our ', '')}</span> */}
                                     <p className={styles.cardText}>{slide.text}</p>
                                 </div>
                             </div>
