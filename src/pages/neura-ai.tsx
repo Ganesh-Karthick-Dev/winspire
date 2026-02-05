@@ -58,9 +58,6 @@ export default function TempNeuraAI() {
     const heroRef = useRef<HTMLDivElement>(null);
     const secondSectionRef = useRef<HTMLElement>(null);
     const whiteSectionRef = useRef<HTMLDivElement>(null);
-    const secondTitleRef = useRef<HTMLHeadingElement>(null);
-    const capabilitiesWrapperRef = useRef<HTMLDivElement>(null);
-    const capabilitiesTrackRef = useRef<HTMLDivElement>(null);
     const { transform } = useScrollAnimation({
         keyframes: tempNeuraHeroKeyframes,
     });
@@ -104,50 +101,6 @@ export default function TempNeuraAI() {
         });
 
         return () => ctx.revert();
-    }, []);
-
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        const wrapper = capabilitiesWrapperRef.current;
-        const track = capabilitiesTrackRef.current;
-        if (!wrapper || !track) return;
-
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.set(track, { x: 0 });
-
-        const PIN_SCROLL = 2000;
-        const mm = gsap.matchMedia();
-
-        mm.add({
-            isDesktop: "(min-width: 769px)",
-            isMobile: "(max-width: 768px)"
-        }, (context) => {
-            const { isDesktop } = context.conditions as any;
-
-            if (isDesktop) {
-                gsap.to(track, {
-                    x: () => -(track.scrollWidth - wrapper.clientWidth),
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: wrapper,
-                        start: 'top top',
-                        end: `+=${PIN_SCROLL}`,
-                        pin: true,
-                        scrub: 1,
-                        invalidateOnRefresh: true,
-                    },
-                });
-            } else {
-                gsap.set(track, { x: 0, clearProps: 'all' });
-            }
-        });
-
-        // Refresh ScrollTrigger to catch correct positions after model/DOM load
-        setTimeout(() => {
-            ScrollTrigger.refresh();
-        }, 500);
-
-        return () => mm.revert();
     }, []);
 
     return (
@@ -218,9 +171,7 @@ export default function TempNeuraAI() {
 
                 <NeuraDifferentSection />
                 <NeuraEfficiencySection />
-                <div ref={capabilitiesWrapperRef} className="capabilities-pin-wrapper">
-                    <NeuraCapabilitiesSection trackRef={capabilitiesTrackRef} />
-                </div>
+                <NeuraCapabilitiesSection />
                 <NeuraLivingSystemsSection />
                 <NeuraGeminiEffectSection />
                 <NeuraStaySecureSection />
