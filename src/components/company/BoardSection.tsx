@@ -56,6 +56,38 @@ const boardMembers = [
 ];
 
 const BoardSection: React.FC = () => {
+    const ceo = boardMembers.find(m => m.id === 7);
+    const otherMembers = boardMembers.filter(m => m.id !== 7);
+
+    // Reuse the card rendering logic
+    const renderMemberCard = (member: typeof boardMembers[0]) => (
+        <div key={member.id} className={styles.card}>
+            {/* Image Side */}
+            <div className={styles.imageWrapper}>
+                {member.image ? (
+                    <Image
+                        src={member.image}
+                        alt={member.name}
+                        fill
+                        className={styles.memberImage}
+                    />
+                ) : (
+                    <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #083151 0%, #0a4a7a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <span style={{ fontSize: '3rem', color: 'rgba(255,255,255,0.3)', fontWeight: 700 }}>{member.name.charAt(0)}</span>
+                    </div>
+                )}
+            </div>
+
+            {/* Text Side */}
+            <div className={styles.textContent}>
+                <div className={styles.role}>{member.role}</div>
+                <h3 className={styles.name}>{member.name}</h3>
+                <div className={styles.divider}></div>
+                <p className={styles.bio}>{member.bio}</p>
+            </div>
+        </div>
+    );
+
     return (
         <section className={styles.boardSection}>
             <div className={styles.header}>
@@ -69,34 +101,17 @@ const BoardSection: React.FC = () => {
                 <div className={styles.subtitle}>Executive Introduction</div>
             </div>
 
-            <div className={styles.grid}>
-                {boardMembers.map((member) => (
-                    <div key={member.id} className={styles.card}>
-                        {/* Image Side */}
-                        <div className={styles.imageWrapper}>
-                            {member.image ? (
-                                <Image
-                                    src={member.image}
-                                    alt={member.name}
-                                    fill
-                                    className={styles.memberImage}
-                                />
-                            ) : (
-                                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #083151 0%, #0a4a7a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <span style={{ fontSize: '3rem', color: 'rgba(255,255,255,0.3)', fontWeight: 700 }}>{member.name.charAt(0)}</span>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Text Side */}
-                        <div className={styles.textContent}>
-                            <div className={styles.role}>{member.role}</div>
-                            <h3 className={styles.name}>{member.name}</h3>
-                            <div className={styles.divider}></div>
-                            <p className={styles.bio}>{member.bio}</p>
-                        </div>
+            {/* CEO Section - Centered */}
+            {ceo && (
+                <div className={styles.ceoWrapper}>
+                    <div className={styles.ceoContainer}>
+                        {renderMemberCard(ceo)}
                     </div>
-                ))}
+                </div>
+            )}
+
+            <div className={styles.grid}>
+                {otherMembers.map((member) => renderMemberCard(member))}
             </div>
         </section>
     );

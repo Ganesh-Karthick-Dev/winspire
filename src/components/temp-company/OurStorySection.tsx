@@ -9,6 +9,7 @@
 import React from 'react';
 import { FaQuoteLeft } from 'react-icons/fa';
 import styles from '@/styles/OurStorySection.module.css';
+import BoardSection from '@/components/company/BoardSection';
 
 export default function OurStorySection() {
     return (
@@ -36,6 +37,11 @@ export default function OurStorySection() {
                         </div>
                     </div>
                 </div>
+             </div>
+
+             {/* Board Members Section Embedded */}
+             <div className="w-full">
+                 <BoardSection />
              </div>
 
              {/* Part 2: The Pattern (Large Editorial Text) */}
