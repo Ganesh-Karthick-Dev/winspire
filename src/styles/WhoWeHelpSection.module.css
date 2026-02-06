@@ -51,7 +51,7 @@
     position: relative;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 2rem 0 0 0;
 }
 
 /* The Central Line */
@@ -106,7 +106,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     /* Spacing between items */
     position: relative;
     opacity: 0.2;
@@ -193,10 +193,105 @@
     transform: translate(-50%, -50%) scale(1.2);
 }
 
+/* And More Styles */
+.andMoreRow {
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 3rem;
+    opacity: 0 !important;
+    transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.andMoreRow.activeRow {
+    opacity: 1 !important;
+}
+
+.andMoreContent {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+.andMoreWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 4rem;
+}
+
+.andMoreBg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 200px;
+    height: 200px;
+    color: rgba(96, 195, 252, 0.15);
+    z-index: -1;
+    filter: blur(2px);
+    transition: all 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0;
+}
+
+.activeRow .andMoreBg {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+}
+
+.andMoreBg svg {
+    width: 100%;
+    height: 100%;
+}
+
+.andMoreLabel {
+    font-size: 2.5rem;
+    font-weight: 200;
+    color: #6bdcff;
+    margin-bottom: -1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+.activeRow .andMoreLabel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.andMoreTitle {
+    font-size: 3.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin: 0;
+    background: linear-gradient(135deg, #ffffff 0%, #6bdcff 50%, #2241ee 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px rgba(96, 195, 252, 0.2));
+    transform: scale(0.9);
+    transition: all 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    animation: shine 4s linear infinite;
+}
+
+.activeRow .andMoreTitle {
+    transform: scale(1);
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
 /* Footer Section */
 .footer {
     text-align: center;
-    margin-top: 5rem;
+    margin-top: 2rem;
     padding: 4rem 3rem;
     background: rgba(255, 255, 255, 0.03);
     border-radius: 3rem;
@@ -276,6 +371,43 @@
         align-items: flex-start;
     }
 
+    .andMoreRow {
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-left: 50px;
+        margin-bottom: 2rem;
+    }
+
+    .andMoreContent {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .andMoreWrapper {
+        padding: 2rem 0;
+        align-items: flex-start;
+    }
+
+    .andMoreLabel {
+        font-size: 1.5rem;
+        margin-bottom: -0.5rem;
+    }
+
+    .andMoreTitle {
+        font-size: 2.2rem;
+    }
+
+    .andMoreBg {
+        width: 150px;
+        height: 150px;
+        left: 0;
+        transform: translate(0, -50%) scale(0.8);
+    }
+
+    .activeRow .andMoreBg {
+        transform: translate(0, -50%) scale(1.1);
+    }
+
     /* Hide unused side in mobile layout if needed due to flex column */
     /* Actually leftSide and rightSide are distinct items in the code, likely alternating. 
        If they are just containers for text, we ensure they align. */
@@ -286,7 +418,7 @@
     }
 
     .footer {
-        margin-top: 3rem;
+        margin-top: 1rem;
         padding: 2rem 1.5rem;
         border-radius: 2rem;
     }

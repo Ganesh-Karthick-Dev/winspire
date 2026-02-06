@@ -47,69 +47,59 @@ export default function WhoWeHelpSection() {
         ctx = gsap.context(() => {
             const mm = gsap.matchMedia();
 
-            // DESKTOP: Full timeline scrub animation
-            mm.add("(min-width: 769px)", () => {
-                const tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: 'top 40%',
-                        end: 'bottom 80%',
-                        scrub: 1,
-                    }
-                });
-
+            const animateTimeline = () => {
                 const timelineWrapper = containerRef.current?.querySelector(`.${styles.timelineWrapper}`);
+                const markers = containerRef.current?.querySelectorAll(`.${styles.marker}`);
+                const firstMarker = markers?.[0] as HTMLElement;
+                const lastMarker = markers?.[markers.length - 1] as HTMLElement;
 
-                if (timelineWrapper) {
-                    tl.to(ballRef.current, {
-                        top: '100%',
-                        ease: 'none',
-                    }, 0);
+                if (!timelineWrapper || !firstMarker || !lastMarker) return;
 
-                    tl.to(activeLineRef.current, {
-                        height: '100%',
-                        ease: 'none',
-                    }, 0);
+                const wrapperRect = timelineWrapper.getBoundingClientRect();
+                const firstRect = firstMarker.getBoundingClientRect();
+                const lastRect = lastMarker.getBoundingClientRect();
 
-                    itemsRef.current.forEach((item, index) => {
-                        if (!item) return;
-                        ScrollTrigger.create({
-                            trigger: item,
-                            start: 'top 60%',
-                            end: 'bottom 40%',
-                            onEnter: () => item.classList.add(styles.activeRow),
-                            onLeaveBack: () => item.classList.remove(styles.activeRow)
-                        });
-                    });
-                }
-            });
+                const startY = firstRect.top - wrapperRect.top + (firstRect.height / 2);
+                const endY = lastRect.top - wrapperRect.top + (lastRect.height / 2);
 
-            // MOBILE: Scroll-linked ball + line animation (same idea as desktop, different bounds)
-            mm.add("(max-width: 768px)", () => {
-                const timelineWrapper = containerRef.current?.querySelector(`.${styles.timelineWrapper}`);
-                if (timelineWrapper && ballRef.current && activeLineRef.current) {
+                // Set initial states relative to dynamic markers
+                gsap.set(lineRef.current, { top: startY, height: endY - startY });
+                gsap.set(ballRef.current, { top: startY });
+                gsap.set(activeLineRef.current, { top: startY, height: 0 });
+
+                mm.add({
+                    isDesktop: "(min-width: 769px)",
+                    isMobile: "(max-width: 768px)"
+                }, (context) => {
+                    const { isDesktop } = context.conditions as any;
+                    
                     const tl = gsap.timeline({
                         scrollTrigger: {
                             trigger: containerRef.current,
-                            start: 'top 35%',
-                            end: 'bottom 65%',
+                            start: isDesktop ? 'top 30%' : 'top 35%',
+                            end: isDesktop ? 'bottom 95%' : 'bottom 65%',
                             scrub: 1,
+                            invalidateOnRefresh: true
                         }
                     });
-                    tl.to(ballRef.current, { top: '100%', ease: 'none' }, 0);
-                    tl.to(activeLineRef.current, { height: '100%', ease: 'none' }, 0);
-                }
 
-                // Items light up as they enter viewport
-                itemsRef.current.forEach((item) => {
-                    if (!item) return;
-                    ScrollTrigger.create({
-                        trigger: item,
-                        start: 'top 82%',
-                        end: 'bottom 18%',
-                        onEnter: () => item.classList.add(styles.activeRow),
-                        onLeaveBack: () => item.classList.remove(styles.activeRow),
-                    });
+                    tl.to(ballRef.current, { top: endY, ease: 'none' }, 0);
+                    tl.to(activeLineRef.current, { height: endY - startY, ease: 'none' }, 0);
+                });
+            };
+
+            animateTimeline();
+
+            // Items light up as they enter viewport (Shared)
+            itemsRef.current.forEach((item) => {
+                if (!item) return;
+                ScrollTrigger.create({
+                    trigger: item,
+                    start: 'top 85%',
+                    end: 'bottom 15%',
+                    onEnter: () => item.classList.add(styles.activeRow),
+                    onLeaveBack: () => item.classList.remove(styles.activeRow),
+                    invalidateOnRefresh: true
                 });
             });
 
@@ -142,7 +132,7 @@ export default function WhoWeHelpSection() {
             {/* Timeline */}
             <div className={styles.timelineWrapper}>
                 {/* Lines */}
-                <div className={styles.linePlane}></div>
+                <div ref={lineRef} className={styles.linePlane}></div>
                 <div ref={activeLineRef} className={styles.activeLine}></div>
 
                 {/* The Ball */}
@@ -185,6 +175,28 @@ export default function WhoWeHelpSection() {
                             </div>
                         );
                     })}
+
+                    {/* And More Center Item */}
+                    <div 
+                        ref={(el: HTMLDivElement | null) => { itemsRef.current[partners.length] = el; }}
+                        className={`${styles.itemRow} ${styles.andMoreRow}`}
+                    >
+                        {/* Marker on the line */}
+                        <div className={styles.marker}></div>
+
+                        <div className={styles.andMoreContent}>
+                            <div className={styles.andMoreWrapper}>
+                                {/* Decorative Background Shape */}
+                                <div className={styles.andMoreBg}>
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 3V21M3 12H21M5.635 5.635L18.365 18.365M18.365 5.635L5.635 18.365" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                                    </svg>
+                                </div>
+                                <span className={styles.andMoreLabel}>&</span>
+                                <h3 className={styles.andMoreTitle}>More</h3>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
