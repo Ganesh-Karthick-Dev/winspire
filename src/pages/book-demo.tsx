@@ -16,6 +16,7 @@ import StackingCards from '@/components/StackingCards';
 import DemoForm from '@/components/DemoForm';
 import ZeroRiskSection from '@/components/ZeroRiskSection';
 import NewsSection from '@/components/NewsSection';
+import HomeFAQSection from '@/components/HomeFAQSection';
 import MissionSection from '@/components/company/MissionSection';
 import CareersContactLinks from '@/components/CareersContactLinks';
 import FloatingSectionNav from '@/components/FloatingSectionNav';
@@ -197,6 +198,10 @@ export default function BookDemo() {
                 <NewsSection />
             </div>
 
+            <div id="faq" style={{ scrollMarginTop: '100px' }}>
+                <HomeFAQSection />
+            </div>
+
             <CareersContactLinks />
 
             <FloatingSectionNav sections={[
@@ -205,6 +210,7 @@ export default function BookDemo() {
                 { id: 'guarantee', label: 'Guarantee' },
                 { id: 'mission', label: 'Mission' },
                 { id: 'news', label: 'News' },
+                { id: 'faq', label: 'FAQ' },
             ]} />
 
         </Layout>
