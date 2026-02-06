@@ -17,6 +17,7 @@ import MarketRealitySection from '@/components/MarketRealitySection';
 import NeuraSection from '@/components/NeuraSection';
 import OutcomesSection from '@/components/OutcomesSection';
 import { SpecialtySection } from '@/components/ui/specialty-section';
+import HomeFAQSection from '@/components/HomeFAQSection';
 // ⚠️ DISABLED: EngagementModelsSection causes compilation hang
 // import { EngagementModelsSection } from '@/components/ui/engagement-models-section';
 import { useIsMobile } from '@/hooks/useIsMobile';
@@ -376,6 +377,9 @@ export default function TempHome() {
 
                 {/* Specialties Section */}
                 <SpecialtySection />
+
+                {/* FAQ Section */}
+                <HomeFAQSection />
 
                 {/* ⚠️ DISABLED: EngagementModelsSection causes compilation hang */}
                 {/* <EngagementModelsSection /> */}
