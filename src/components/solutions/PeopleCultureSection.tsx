@@ -38,7 +38,7 @@ const PeopleCultureSection: React.FC = () => {
                         pin: true,
                         scrub: 1,
                         start: 'center center',
-                        end: () => `+=${Math.abs(xMovement)}`, 
+                        end: () => `+=${Math.abs(xMovement) + 150}`, 
                         invalidateOnRefresh: true,
                         anticipatePin: 1,
                     },
