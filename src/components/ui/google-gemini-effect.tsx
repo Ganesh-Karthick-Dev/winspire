@@ -14,30 +14,40 @@ export const GoogleGeminiEffect = ({
     description,
     details,
     className,
+    children,
 }: {
     pathLengths: MotionValue[];
     title?: string;
     description?: string;
     details?: string[];
     className?: string;
+    children?: React.ReactNode;
 }) => {
     return (
         <div className={`${styles.container} ${className || ''}`}>
-            <p className={styles.title}>
-                {title || `Build with Aceternity UI`}
-            </p>
-            <p className={styles.description}>
-                {description || `Scroll this component and see the bottom SVG come to life wow this works!`}
-            </p>
-
-            {details && details.length > 0 && (
-                <div className={styles.detailsContainer}>
-                    {details.map((detail, index) => (
-                        <span key={index} className={styles.detailItem}>
-                            {detail}
-                        </span>
-                    ))}
+            {children ? (
+                <div className={styles.contentWrapper}>
+                    {children}
                 </div>
+            ) : (
+                <>
+                    <p className={styles.title}>
+                        {title || `Build with Aceternity UI`}
+                    </p>
+                    <p className={styles.description}>
+                        {description || `Scroll this component and see the bottom SVG come to life wow this works!`}
+                    </p>
+
+                    {details && details.length > 0 && (
+                        <div className={styles.detailsContainer}>
+                            {details.map((detail, index) => (
+                                <span key={index} className={styles.detailItem}>
+                                    {detail}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+                </>
             )}
 
             <div className={styles.svgContainer}>

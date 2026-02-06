@@ -165,7 +165,7 @@ export default function TempNeuraAI() {
                 <NeuraCapabilitiesSection />
                 <NeuraLivingSystemsSection />
                 <NeuraGeminiEffectSection />
-                <NeuraStaySecureSection />
+                {/* <NeuraStaySecureSection /> - merged into GeminiEffectSection */}
                 <NeuraCTASection />
                 <NeuraBentoSection />
                 <NeuraIntegrationSection />

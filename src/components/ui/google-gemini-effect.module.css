@@ -62,7 +62,6 @@
 @media (min-width: 768px) {
     .title {
         font-size: 3rem;
-        /* 4.5rem was too big for this long text */
     }
 
     .description {
@@ -72,11 +71,25 @@
 
     .svgContainer {
         top: -10rem;
-        /* Pull up more on larger screens */
     }
 
     .svgElement {
         top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .svgContainer {
+        height: 500px; /* limit height on mobile */
+        top: 0;
+    }
+    .svgElement {
+        height: 100%;
+        width: 100%;
+        /* preserve aspect ratio or cover */
+    }
+    .container {
+        top: 7rem; /* Increased from 3.5rem to clear the floating navbar */
     }
 }
 
