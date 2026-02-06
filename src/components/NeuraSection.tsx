@@ -72,12 +72,12 @@ function NeuraBentoSlot({ item }: { item: (typeof enablesList)[number] }) {
 
 // Data for "Neura supports"
 const supportsList = [
-    { text: "Revenue operations", icon: PieChart },
-    { text: "Leadership insight and governance", icon: LineChart },
     { text: "Workforce enablement", icon: Users },
     { text: "Quality and compliance", icon: ShieldCheck },
     { text: "Culture and accountability", icon: Heart },
-    { text: "Offshore execution—without risk", icon: Globe2 }
+    { text: "Offshore execution—without risk", icon: Globe2 },
+    { text: "Revenue operations", icon: PieChart },
+    { text: "Leadership insight and governance", icon: LineChart },
 ];
 
 export default function NeuraSection() {
@@ -189,6 +189,7 @@ export default function NeuraSection() {
                                 defaultOpen={true}
                                 radius={180}
                                 className="ns-circle-menu"
+                                centerOffset={{ x: 25, y: 15 }}
                             />
                         </div>
                     </motion.div>

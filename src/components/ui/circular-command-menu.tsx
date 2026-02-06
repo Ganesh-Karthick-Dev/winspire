@@ -1,9 +1,8 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef, type ReactNode } from "react"
-import { motion, AnimatePresence, useInView } from "framer-motion"
+import { useState, useEffect, useRef, type ReactNode } from "react"
+import { motion, AnimatePresence, useInView, useMotionValue, useTransform, MotionValue } from "framer-motion"
 import { cn } from "@/lib/utils"
-import styles from "./circular-command-menu.module.css"
 
 export interface CommandItem {
     id: string
@@ -20,84 +19,63 @@ export interface CircularCommandMenuProps {
     radius?: number
     defaultOpen?: boolean
     onSelect?: (item: CommandItem) => void
+    centerOffset?: { x?: number; y?: number }
 }
 
-function CircularCommandMenu({
+export function CircularCommandMenu({
     items = [],
     trigger,
     className,
-    radius = 240, // Further increased radius for extreme airiness
+    radius = 240,
     defaultOpen = false,
     onSelect,
+    centerOffset = { x: 0, y: 0 },
 }: CircularCommandMenuProps) {
     const [isOpen, setIsOpen] = useState(defaultOpen)
     const [activeIndex, setActiveIndex] = useState<number | null>(null)
+    const [isHovered, setIsHovered] = useState(false)
 
-    // Defensive check for items
+    // Ensure we have items
     const safeItems = items || []
     const itemCount = safeItems.length
-
-    const angleStep = itemCount > 0 ? 360 / itemCount : 0
-    const startAngle = -90 // Start from top
-
-    useEffect(() => {
-        if (defaultOpen) {
-            setIsOpen(true)
-        }
-    }, [defaultOpen])
-
-    const handleKeyDown = useCallback(
-        (e: KeyboardEvent) => {
-            // If forced open, we might not want to close on escape, but valid for now
-            if (!isOpen || itemCount === 0) return
-
-            const currentActive = activeIndex ?? 0
-
-            switch (e.key) {
-                case "ArrowRight":
-                case "ArrowDown":
-                    e.preventDefault()
-                    setActiveIndex((currentActive + 1) % itemCount)
-                    break
-                case "ArrowLeft":
-                case "ArrowUp":
-                    e.preventDefault()
-                    setActiveIndex((currentActive - 1 + itemCount) % itemCount)
-                    break
-                case "Enter":
-                    e.preventDefault()
-                    const selectedItem = safeItems[currentActive]
-                    if (selectedItem) {
-                        selectedItem.onClick?.()
-                        onSelect?.(selectedItem)
-                    }
-                    // If it's a menu that should stay open, maybe don't close?
-                    // For now, let's keep it closeable unless strictly required otherwise
-                    // But user said "no button click to open", implying it stays open or opens on view?
-                    // Let's assume standard behavior for selection but auto-open.
-                    break
-            }
-        },
-        [isOpen, activeIndex, safeItems, itemCount, onSelect],
-    )
-
-    useEffect(() => {
-        window.addEventListener("keydown", handleKeyDown)
-        return () => window.removeEventListener("keydown", handleKeyDown)
-    }, [handleKeyDown])
-
-    const getItemPosition = (index: number) => {
-        const angle = ((startAngle + index * angleStep) * Math.PI) / 180
-        return {
-            x: Math.cos(angle) * radius,
-            y: Math.sin(angle) * radius,
-        }
-    }
-
-    const totalSize = (radius + 80) * 2 // Reduced buffer for tighter layout
+    
     const wrapperRef = useRef<HTMLDivElement>(null)
     const isInView = useInView(wrapperRef, { once: true, amount: 0.25 })
+    
+    // Animation State
+    const rotation = useMotionValue(0)
+    
+    // Configuration
+    const duration = 60 // Seconds for a full 360 rotation
+    
+    useEffect(() => {
+        if (!isInView) return;
+        
+        let animationFrame: number;
+        let lastTime = performance.now();
+        
+        const loop = (time: number) => {
+            const delta = time - lastTime;
+            lastTime = time;
 
+            if (!isHovered) {
+                const speed = 360 / (duration * 1000); 
+                const increment = speed * delta;
+                rotation.set(rotation.get() + increment);
+            }
+            
+            animationFrame = requestAnimationFrame(loop);
+        };
+        
+        animationFrame = requestAnimationFrame(loop);
+        
+        return () => cancelAnimationFrame(animationFrame);
+    }, [isInView, isHovered, duration, rotation]);
+
+
+    // Total size includes radius + buffer for labels
+    const totalSize = (radius + 140) * 2 
+    
     return (
         <div
             ref={wrapperRef}
@@ -106,112 +84,57 @@ function CircularCommandMenu({
                 height: `${totalSize}px`,
                 width: `${totalSize}px`
             }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Central logo — appears first when in view */}
+            {/* Central Trigger / Logo - Absolutely centered for perfect alignment */}
             <motion.div
                 className={cn(
-                    "relative z-20 flex h-20 w-20 items-center justify-center rounded-full",
+                    "absolute left-1/2 top-1/2 z-20 flex h-24 w-24 items-center justify-center rounded-full",
                     "bg-[#0f172a] border border-blue-500/30 shadow-[0_0_40px_rgba(59,130,246,0.3)]",
                     "text-blue-400"
                 )}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: isInView ? 1 : 0, opacity: isInView ? 1 : 0 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                style={{
+                    marginLeft: centerOffset.x,
+                    marginTop: centerOffset.y,
+                }}
+                initial={{ scale: 0, opacity: 0, x: "-50%", y: "-50%" }}
+                animate={{ 
+                    scale: isInView ? 1 : 0, 
+                    opacity: isInView ? 1 : 0,
+                    x: "-50%",
+                    y: "-50%"
+                }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
                 {trigger || (
                     <div className="flex flex-col items-center justify-center">
-                        <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mt-1">Supports</span>
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Menu</span>
                     </div>
                 )}
             </motion.div>
 
-            {/* Menu Items */}
+            {/* Orbiting Items */}
             <AnimatePresence>
-                {isOpen && itemCount > 0 && (
-                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10" role="menu">
-                        {safeItems.map((item, index) => {
-                            const position = getItemPosition(index)
-                            // Determine if on left or right side to align tooltip
-                            const isRightSide = position.x >= 0;
-
-                            return (
-                                <motion.div
+                {(isOpen || defaultOpen) && itemCount > 0 && isInView && (
+                    <div className="absolute inset-0 pointer-events-none">
+                         {/* Centered coordinate system */}
+                        <div className="absolute left-1/2 top-1/2 w-0 h-0"> 
+                            {safeItems.map((item, index) => (
+                                <OrbitingItem
                                     key={item.id}
-                                    initial={{
-                                        opacity: 1,
-                                        x: 0,
-                                        y: 0,
-                                        scale: 0,
-                                    }}
-                                    animate={
-                                        isInView
-                                            ? {
-                                                opacity: 1,
-                                                x: position.x - 28,
-                                                y: position.y - 28,
-                                                scale: 1,
-                                            }
-                                            : {
-                                                opacity: 1,
-                                                x: 0,
-                                                y: 0,
-                                                scale: 0,
-                                            }
-                                    }
-                                    exit={{
-                                        opacity: 0,
-                                        x: 0,
-                                        y: 0,
-                                        scale: 0,
-                                    }}
-                                    transition={{
-                                        duration: 0.65,
-                                        ease: [0.22, 1, 0.36, 1],
-                                        delay: isInView ? 0.25 : 0,
-                                    }}
-                                    className="absolute"
-                                >
-                                    <motion.button
-                                        onClick={() => {
-                                            item.onClick?.()
-                                            onSelect?.(item)
-                                        }}
-                                        onMouseEnter={() => setActiveIndex(index)}
-                                        onMouseLeave={() => setActiveIndex(null)}
-                                        className={cn(
-                                            "flex h-16 w-16 items-center justify-center rounded-full",
-                                            "border border-white/10 bg-[#0f172a]",
-                                            "transition-all duration-300 hover:bg-blue-600 hover:border-blue-400 hover:scale-110",
-                                            activeIndex === index && "ring-2 ring-blue-500 bg-blue-600 scale-110",
-                                            "text-blue-400 hover:text-white"
-                                        )}
-                                        role="menuitem"
-                                        aria-label={item.label}
-                                    >
-                                        <div className="text-current scale-125">{item.icon}</div>
-                                    </motion.button>
-
-                                    {/* Label: raw CSS positioning + gap (circular-command-menu.module.css) */}
-                                    <motion.div
-                                        className={cn(
-                                            styles.ccmLabel,
-                                            Math.abs(position.x) < 40
-                                                ? position.y < 0
-                                                    ? styles.ccmLabelTop
-                                                    : styles.ccmLabelBottom
-                                                : position.x > 0
-                                                    ? styles.ccmLabelRight
-                                                    : styles.ccmLabelLeft
-                                        )}
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: isInView ? 1 : 0 }}
-                                        transition={{ delay: isInView ? 0.95 : 0, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                                    >
-                                        {item.label}
-                                    </motion.div>
-                                </motion.div>
-                            )
-                        })}
+                                    item={item}
+                                    index={index}
+                                    total={itemCount}
+                                    radius={radius}
+                                    rotation={rotation}
+                                    onSelect={onSelect}
+                                    isActive={activeIndex === index}
+                                    setActive={() => setActiveIndex(index)}
+                                    clearActive={() => setActiveIndex(null)}
+                                />
+                            ))}
+                        </div>
                     </div>
                 )}
             </AnimatePresence>
@@ -219,5 +142,95 @@ function CircularCommandMenu({
     )
 }
 
-// Export Component as default and named
-export { CircularCommandMenu }
+function OrbitingItem({ 
+    item, 
+    index, 
+    total, 
+    radius, 
+    rotation, 
+    onSelect,
+    isActive,
+    setActive,
+    clearActive
+}: { 
+    item: CommandItem, 
+    index: number, 
+    total: number, 
+    radius: number, 
+    rotation: MotionValue<number>,
+    onSelect?: (item: CommandItem) => void,
+    isActive: boolean;
+    setActive: () => void;
+    clearActive: () => void;
+}) {
+    // Distribute items evenly starting from -90deg (top)
+    const angleOffset = (360 / total) * index - 90; 
+    
+    // Combine offset with continuous rotation
+    const angleRad = useTransform(rotation, r => ((angleOffset + r) * Math.PI) / 180);
+    
+    const x = useTransform(angleRad, rad => Math.cos(rad) * radius);
+    const y = useTransform(angleRad, rad => Math.sin(rad) * radius);
+    
+    // Label placement: Pushed out by an extra 80px
+    const labelRadius = radius + 80; 
+    const labelX = useTransform(angleRad, rad => Math.cos(rad) * labelRadius);
+    const labelY = useTransform(angleRad, rad => Math.sin(rad) * labelRadius);
+
+    // Dynamic anchoring: 
+    // Right side (0 deg, cos=1) -> anchor 0% (Left aligned) -> 50(1) - 50 = 0
+    // Left side (180 deg, cos=-1) -> anchor -100% (Right aligned) -> 50(-1) - 50 = -100
+    // Top/Bottom (90/270, cos=0) -> anchor -50% (Centered) -> 50(0) - 50 = -50
+    const xPercent = useTransform(angleRad, rad => `${(Math.cos(rad) * 50) - 50}%`);
+
+    return (
+        <>
+            {/* Icon Button */}
+            <motion.div
+                className="absolute pointer-events-auto"
+                style={{ x, y }}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+                <motion.button
+                     onClick={() => {
+                        item.onClick?.()
+                        onSelect?.(item)
+                    }}
+                    onMouseEnter={setActive}
+                    onMouseLeave={clearActive}
+                    className={cn(
+                        "flex h-16 w-16 -ml-8 -mt-8 items-center justify-center rounded-full", 
+                        "border border-white/10 bg-[#0f172a] backdrop-blur-md",
+                        "transition-all duration-300 hover:bg-blue-600 hover:border-blue-400 hover:scale-110",
+                        isActive && "ring-2 ring-blue-500 bg-blue-600 scale-110",
+                        "text-blue-400 hover:text-white"
+                    )}
+                    aria-label={item.label}
+                >
+                    <div className="text-current scale-125">{item.icon}</div>
+                </motion.button>
+            </motion.div>
+
+            {/* Label */}
+            <motion.div
+                className="absolute flex items-center justify-center pointer-events-none"
+                style={{ x: labelX, y: labelY }}
+            >
+                <motion.div 
+                    className={cn(
+                        "text-white font-outfit font-bold text-lg whitespace-nowrap -translate-y-1/2",
+                        "drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                    )}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    style={{ x: xPercent }}
+                    transition={{ delay: 0.6 + index * 0.1 }}
+                >
+                    {item.label}
+                </motion.div>
+            </motion.div>
+        </>
+    )
+}
