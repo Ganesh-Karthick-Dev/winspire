@@ -103,24 +103,26 @@ const PeopleCultureSection: React.FC = () => {
                             </p>
                         </div>
                         
-                        <div className={styles.smaartGrid}>
-                            <div className={styles.smaartItem}>
-                                <div className={styles.smaartIcon}>
-                                    <Target size={24} />
+                        <div className={styles.gratifyContainer}>
+                            <div className={`${styles.visualContainer} ${styles.visualContainerBlue}`}>
+                                <Image 
+                                    src="/images/careers/team-rooftop.png"
+                                    alt="Smaart Hire Team" 
+                                    fill 
+                                    style={{ objectFit: 'cover' }}
+                                />
+                                <div className={`${styles.floatingPoint} ${styles.point1}`}>
+                                    <span className={`${styles.pointNumber} ${styles.pointNumberBlue}`}>01</span>
+                                    <span className={styles.pointText}>Deep domain expertise</span>
                                 </div>
-                                <span className={styles.smaartText}>Deep domain expertise</span>
-                            </div>
-                            <div className={styles.smaartItem}>
-                                <div className={styles.smaartIcon}>
-                                    <User size={24} />
+                                <div className={`${styles.floatingPoint} ${styles.point2}`}>
+                                    <span className={`${styles.pointNumber} ${styles.pointNumberBlue}`}>02</span>
+                                    <span className={styles.pointText}>Ownership and accountability</span>
                                 </div>
-                                <span className={styles.smaartText}>Ownership and accountability</span>
-                            </div>
-                            <div className={styles.smaartItem}>
-                                <div className={styles.smaartIcon}>
-                                    <Award size={24} />
+                                <div className={`${styles.floatingPoint} ${styles.point3}`}>
+                                    <span className={`${styles.pointNumber} ${styles.pointNumberBlue}`}>03</span>
+                                    <span className={styles.pointText}>Consistent quality at scale</span>
                                 </div>
-                                <span className={styles.smaartText}>Consistent quality at scale</span>
                             </div>
                         </div>
                     </div>
@@ -139,7 +141,7 @@ const PeopleCultureSection: React.FC = () => {
                         </div>
 
                         <div className={styles.gratifyContainer}>
-                            <div className={styles.gratifyVisual}>
+                            <div className={`${styles.visualContainer} ${styles.visualContainerGreen}`}>
                                 {/* Image Background */}
                                 <Image 
                                     src="/temp/13071.jpg" 
@@ -148,19 +150,19 @@ const PeopleCultureSection: React.FC = () => {
                                     style={{ objectFit: 'cover' }}
                                 />
                                 <div className={`${styles.floatingPoint} ${styles.point1}`}>
-                                    <span className={styles.pointNumber}>01</span>
+                                    <span className={`${styles.pointNumber} ${styles.pointNumberGreen}`}>01</span>
                                     <span className={styles.pointText}>Celebrates impact created for clients and teams</span>
                                 </div>
                                 <div className={`${styles.floatingPoint} ${styles.point2}`}>
-                                    <span className={styles.pointNumber}>02</span>
+                                    <span className={`${styles.pointNumber} ${styles.pointNumberGreen}`}>02</span>
                                     <span className={styles.pointText}>Recognizes quality, ownership, collaboration, innovation, and integrity</span>
                                 </div>
                                 <div className={`${styles.floatingPoint} ${styles.point3}`}>
-                                    <span className={styles.pointNumber}>03</span>
+                                    <span className={`${styles.pointNumber} ${styles.pointNumberGreen}`}>03</span>
                                     <span className={styles.pointText}>Operates in real time with transparent recognition</span>
                                 </div>
                                 <div className={`${styles.floatingPoint} ${styles.point4}`}>
-                                    <span className={styles.pointNumber}>04</span>
+                                    <span className={`${styles.pointNumber} ${styles.pointNumberGreen}`}>04</span>
                                     <span className={styles.pointText}>Encourages peer, leadership, and client-driven appreciation</span>
                                 </div>
                             </div>
@@ -180,26 +182,30 @@ const PeopleCultureSection: React.FC = () => {
                             </p>
                         </div>
 
-                        <div className={styles.innovationGrid}>
-                            <div className={styles.innovationCard}>
-                                <span className={styles.innovationHighlight}>Empowerment</span>
-                                <h4 className={styles.innovationTitle}>Team-Led Innovation</h4>
-                                <p className={styles.innovationDesc}>Empowering teams closest to the work to drive changes.</p>
-                            </div>
-                            <div className={styles.innovationCard}>
-                                <span className={styles.innovationHighlight}>Evaluation</span>
-                                <h4 className={styles.innovationTitle}>Value-Based Filtering</h4>
-                                <p className={styles.innovationDesc}>Evaluates ideas based on efficiency and quality.</p>
-                            </div>
-                            <div className={styles.innovationCard}>
-                                <span className={styles.innovationHighlight}>Execution</span>
-                                <h4 className={styles.innovationTitle}>Actionable Improvements</h4>
-                                <p className={styles.innovationDesc}>Converts strong ideas into measurable progress.</p>
-                            </div>
-                            <div className={styles.innovationCard}>
-                                <span className={styles.innovationHighlight}>Culture</span>
-                                <h4 className={styles.innovationTitle}>Continuous Growth</h4>
-                                <p className={styles.innovationDesc}>Reinforces improvement as a daily practice.</p>
+                        <div className={styles.gratifyContainer}>
+                            <div className={`${styles.visualContainer} ${styles.visualContainerPurple}`}>
+                                <Image 
+                                    src="/images/careers/brainstorm.png" 
+                                    alt="Innovation Hub" 
+                                    fill 
+                                    style={{ objectFit: 'cover' }}
+                                />
+                                <div className={`${styles.floatingPoint} ${styles.point1}`}>
+                                    <span className={`${styles.pointNumber} ${styles.pointNumberPurple}`}>01</span>
+                                    <span className={styles.pointText}>Team-Led Innovation: Empowering teams closest to the work</span>
+                                </div>
+                                <div className={`${styles.floatingPoint} ${styles.point2}`}>
+                                    <span className={`${styles.pointNumber} ${styles.pointNumberPurple}`}>02</span>
+                                    <span className={styles.pointText}>Value-Based Filtering: Evaluates ideas based on efficiency</span>
+                                </div>
+                                <div className={`${styles.floatingPoint} ${styles.point3}`}>
+                                    <span className={`${styles.pointNumber} ${styles.pointNumberPurple}`}>03</span>
+                                    <span className={styles.pointText}>Actionable Improvements: Converts strong ideas into progress</span>
+                                </div>
+                                <div className={`${styles.floatingPoint} ${styles.point4}`}>
+                                    <span className={`${styles.pointNumber} ${styles.pointNumberPurple}`}>04</span>
+                                    <span className={styles.pointText}>Continuous Growth: Reinforces improvement as a daily practice</span>
+                                </div>
                             </div>
                         </div>
                     </div>
