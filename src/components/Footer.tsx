@@ -269,6 +269,10 @@ export default function Footer() {
                     gap: 40px;
                 }
 
+                .contact-item {
+                    text-align: left;
+                }
+
                 .contact-item h5 {
                     font-family: 'Outfit', sans-serif;
                     font-size: 0.75rem;
@@ -285,6 +289,7 @@ export default function Footer() {
                     line-height: 1.5;
                     color: #444;
                     margin: 0;
+                    text-align: left;
                 }
 
                 /* Trust Section */
@@ -312,10 +317,10 @@ export default function Footer() {
 
                 .azure-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.125rem;
-                    font-weight: 500;
-                    line-height: 1.3;
-                    color: #1a1a1a;
+                    font-size: 0.875rem;
+                    font-weight: 400;
+                    line-height: 1.6;
+                    color: #666;
                     max-width: 400px;
                     margin: 0;
                 }
@@ -549,11 +554,13 @@ export default function Footer() {
                     /* New Mobile Styles */
                     .footer-contact-row {
                         flex-direction: column;
+                        align-items: flex-start;
                         gap: 20px;
                     }
 
                     .contact-info {
                         flex-direction: column;
+                        align-items: flex-start;
                         gap: 24px;
                     }
 
