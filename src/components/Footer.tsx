@@ -84,20 +84,40 @@ export default function Footer() {
                             making billing efficient, predictable, and transparent.
                         </p>
 
-                        {/* Social Icons */}
-                        <div className="footer-socials">
-                            <a
-                                href="https://www.linkedin.com/company/winspire-rcm-private-limited/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="social-icon"
-                                aria-label="LinkedIn"
-                            >
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                </svg>
-                            </a>
+                        {/* Middle Row - Socials + Addresses */}
+                        <div className="footer-contact-row">
+                            <div className="footer-socials">
+                                <a
+                                    href="https://www.linkedin.com/company/winspire-rcm-private-limited/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="social-icon"
+                                    aria-label="LinkedIn"
+                                >
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                    </svg>
+                                </a>
+                            </div>
+
+                            <div className="contact-info">
+                                <div className="contact-item">
+                                    <h5>Regional Office:</h5>
+                                    <p>
+                                        Regus - UB City, Level 14 & 15, Concorde Towers 1,<br />
+                                        Ashok Nagar, Bangalore, India - 560001
+                                    </p>
+                                </div>
+                                <div className="contact-item">
+                                    <h5>Headquarters:</h5>
+                                    <p>
+                                        2810 N Church St, Wilmington,<br />
+                                        Delaware, USA. 19802-4447
+                                    </p>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
 
                     {/* Right - Link Columns - Mapped */}
@@ -124,6 +144,24 @@ export default function Footer() {
                                 </ul>
                             </div>
                         ))}
+                    </div>
+                </div>
+
+                {/* Trust Row - Dedicated Section */}
+                <div className="footer-trust-section">
+                    <div className="azure-badge">
+                        <img src="/images/certifications/azure-icon.png" alt="Azure" className="azure-icon" />
+                        <p className="azure-text">
+                            Built on Microsoft Azure for Unmatched <br />
+                            Security and Reliability
+                        </p>
+                    </div>
+                    <div className="footer-certs">
+                        <img src="/images/certifications/aicpa-soc.png" alt="AICPA SOC" />
+                        <img src="/images/certifications/soc2-type2.png" alt="SOC 2 Type II" />
+                        <img src="/images/certifications/soc1-type2.png" alt="SOC 1 Type II" />
+                        <img src="/images/certifications/iso-27001.png" alt="ISO 27001" />
+                        <img src="/images/certifications/iso-9001.png" alt="ISO 9001" />
                     </div>
                 </div>
 
@@ -156,7 +194,7 @@ export default function Footer() {
                 .footer-card {
                     position: relative;
                     z-index: 10;
-                    max-width: 1200px;
+                    max-width: 1100px;
                     margin: 0 auto;
                     background: white;
                     border-radius: 32px;
@@ -168,15 +206,14 @@ export default function Footer() {
                 .footer-top {
                     display: flex;
                     justify-content: space-between;
-                    gap: 48px;
+                    gap: 60px;
                     padding-bottom: 40px;
                     border-bottom: 1px solid #eee;
                 }
 
-                /* Brand Section */
                 .footer-brand {
-                    flex: 0 0 320px;
-                    max-width: 320px;
+                    flex: 1;
+                    min-width: 0;
                 }
 
                 .footer-logo {
@@ -196,12 +233,20 @@ export default function Footer() {
                     font-size: 0.875rem;
                     line-height: 1.6;
                     color: #666;
-                    margin: 0 0 24px 0;
+                    margin: 0 0 32px 0;
+                    max-width: 400px;
+                }
+
+                .footer-contact-row {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 32px;
+                    margin-bottom: 32px;
                 }
 
                 .footer-socials {
                     display: flex;
-                    gap: 16px;
+                    flex-shrink: 0;
                 }
 
                 .social-icon {
@@ -219,12 +264,88 @@ export default function Footer() {
                     transform: translateY(-2px);
                 }
 
+                .contact-info {
+                    display: flex;
+                    gap: 40px;
+                }
+
+                .contact-item h5 {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.05rem;
+                    color: #999;
+                    margin: 0 0 8px 0;
+                }
+
+                .contact-item p {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 0.8125rem;
+                    line-height: 1.5;
+                    color: #444;
+                    margin: 0;
+                }
+
+                /* Trust Section */
+                .footer-trust-section {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 32px;
+                    // padding-top: 5px;
+                    // margin-top: 5px;
+                    border-top: 1px solid #f0f0f0;
+                }
+
+                .azure-badge {
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+                }
+
+                .azure-icon {
+                    height: 40px;
+                    width: auto;
+                    object-fit: contain;
+                }
+
+                .azure-text {
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 1.125rem;
+                    font-weight: 500;
+                    line-height: 1.3;
+                    color: #1a1a1a;
+                    max-width: 400px;
+                    margin: 0;
+                }
+
+                .footer-certs {
+                    display: flex;
+                    align-items: center;
+                    gap: 24px;
+                    flex-wrap: wrap;
+                    justify-content: flex-end;
+                }
+
+                .footer-certs img {
+                    height: 64px;
+                    width: auto;
+                    filter: none;
+                    opacity: 1;
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+
+                .footer-certs img:hover {
+                    transform: scale(1.1) translateY(-4px);
+                }
+
                 .footer-links {
                     display: flex;
                     gap: 32px;
-                    flex-wrap: wrap; 
-                    flex: 1;
+                    flex-wrap: nowrap; 
                     justify-content: flex-end;
+                    flex-shrink: 0;
                 }
 
                 .footer-column {
@@ -338,7 +459,7 @@ export default function Footer() {
 
                 /* ========== RESPONSIVE ========== */
 
-                /* Tablet */
+                /* Tablet & Mobile Layout Shifts */
                 @media (max-width: 1024px) {
                     .footer-card {
                         padding: 40px 32px;
@@ -357,6 +478,15 @@ export default function Footer() {
                     .footer-links {
                         justify-content: flex-start;
                         gap: 48px;
+                        flex-wrap: wrap; /* Allow wrapping on tablet */
+                    }
+
+                    .footer-contact-row {
+                        gap: 24px;
+                    }
+
+                    .contact-info {
+                        gap: 32px;
                     }
                 }
 
@@ -364,7 +494,7 @@ export default function Footer() {
                 @media (max-width: 768px) {
                     .footer-links {
                         flex-direction: column;
-                        gap: 0; /* Remove gap, headers control spacing */
+                        gap: 0;
                         width: 100%;
                     }
 
@@ -388,7 +518,7 @@ export default function Footer() {
                     }
 
                     .column-title {
-                        margin: 0; /* Remove bottom margin for alignment */
+                        margin: 0;
                         font-size: 1rem;
                     }
 
@@ -402,7 +532,6 @@ export default function Footer() {
                         transform: rotate(180deg);
                     }
 
-                    /* Links are hidden by default on mobile */
                     .column-links {
                         max-height: 0;
                         opacity: 0;
@@ -417,7 +546,37 @@ export default function Footer() {
                         margin-bottom: 20px;
                     }
 
-                    /* Footer Bottom Adjustments */
+                    /* New Mobile Styles */
+                    .footer-contact-row {
+                        flex-direction: column;
+                        gap: 20px;
+                    }
+
+                    .contact-info {
+                        flex-direction: column;
+                        gap: 24px;
+                    }
+
+                    .footer-trust-section {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 24px;
+                        padding-top: 24px;
+                    }
+
+                    .azure-text {
+                        max-width: 100%;
+                    }
+
+                    .footer-certs {
+                        justify-content: flex-start;
+                        gap: 16px;
+                    }
+
+                    .footer-certs img {
+                        height: 48px; /* Slightly smaller on mobile */
+                    }
+
                     .footer-bottom {
                         flex-direction: column;
                         gap: 16px;
