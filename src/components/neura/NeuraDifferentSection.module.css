@@ -59,6 +59,67 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Zap Icon Animation */
+.zapIcon {
+    animation: zap-subtle 3s infinite ease-in-out;
+}
+
+.featureBlock:hover .zapIcon {
+    animation: zap-active 0.5s infinite alternate ease-in-out;
+}
+
+@keyframes zap-subtle {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes zap-active {
+    0% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 0px #fff); }
+    100% { transform: scale(1.2) rotate(5deg); filter: drop-shadow(0 0 8px #fff); }
+}
+
+/* Workflow Icon Animation */
+.workflowIcon {
+    animation: workflow-subtle 4s infinite linear;
+}
+
+.featureBlock:hover .workflowIcon {
+    animation: workflow-active 2s infinite linear;
+}
+
+@keyframes workflow-subtle {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(5deg) scale(1.05); }
+    100% { transform: rotate(0deg) scale(1); }
+}
+
+@keyframes workflow-active {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Trending Icon Animation */
+.trendingIcon {
+    animation: trending-subtle 3s infinite ease-in-out;
+}
+
+.featureBlock:hover .trendingIcon {
+    animation: trending-active 0.8s infinite ease-in-out;
+}
+
+@keyframes trending-subtle {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-3px) scale(1.1); }
+}
+
+@keyframes trending-active {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(4px, -4px) scale(1.1); }
+    100% { transform: translate(0, 0); }
 }
 
 .featureTitle {

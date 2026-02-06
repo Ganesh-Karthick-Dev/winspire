@@ -166,6 +166,22 @@ export function SpecialtySection() {
 
                 :global(.check-icon) {
                     color: #60a5fa;
+                    animation: check-pulse 3s infinite ease-in-out;
+                }
+
+                @keyframes check-pulse {
+                    0%, 100% { transform: scale(1); opacity: 1; }
+                    50% { transform: scale(1.15); opacity: 0.8; }
+                }
+
+                .specialty-item:hover :global(.check-icon) {
+                    animation: check-active 0.5s ease-out forwards;
+                }
+
+                @keyframes check-active {
+                    0% { transform: scale(1) rotate(-10deg); }
+                    50% { transform: scale(1.3) rotate(10deg); }
+                    100% { transform: scale(1.1) rotate(0deg); }
                 }
 
                 .specialty-text {

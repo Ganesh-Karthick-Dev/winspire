@@ -37,7 +37,7 @@ const NeuraDifferentSection = () => {
                     {/* Feature 1: Command */}
                     <div className={styles.featureBlock}>
                         <div className={styles.iconContainer}>
-                            <Zap size={24} />
+                            <Zap size={24} className={styles.zapIcon} />
                         </div>
                         <h3 className={styles.featureTitle}>Real-time Command</h3>
                         <p className={styles.paragraph}>
@@ -48,7 +48,7 @@ const NeuraDifferentSection = () => {
                     {/* Feature 2: Architecture */}
                     <div className={styles.featureBlock}>
                         <div className={styles.iconContainer}>
-                            <Workflow size={24} />
+                            <Workflow size={24} className={styles.workflowIcon} />
                         </div>
                         <h3 className={styles.featureTitle}>Workflow Architecture</h3>
                         <p className={styles.paragraph}>
@@ -59,7 +59,7 @@ const NeuraDifferentSection = () => {
                     {/* Feature 3: Results */}
                     <div className={styles.featureBlock}>
                         <div className={styles.iconContainer}>
-                            <TrendingUp size={24} />
+                            <TrendingUp size={24} className={styles.trendingIcon} />
                         </div>
                         <h3 className={styles.featureTitle}>The Structural Leap</h3>
                         <p className={styles.paragraph}>
