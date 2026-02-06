@@ -636,48 +636,35 @@ body.modal-open .webgl-canvas.ready {
   display: block;
 }
 
-.svg-title {
+.neura-svg-title {
   font-family: 'Outfit', sans-serif;
-  /* Match project font */
   font-weight: 900;
-  font-size: 110px;
-  /* Increased from 80px */
-  /* Base size for SVG coordinate system */
-  /* Responsive scaling relies on SVG scaling */
+  pointer-events: none;
 }
 
-.svg-subtitle {
+.neura-svg-subtitle {
   font-family: 'Outfit', sans-serif;
   font-weight: 600;
-  font-size: 38px;
-  /* Increased from 24px */
-  fill: black;
+  pointer-events: none;
 }
 
-/* Close the hole animation target */
-/* We will animate the TEXT Fill from Black (Transparent) to White (Opaque/Hole Closed) -> No wait */
-/* If mask text is black, it cuts a hole. If mask text is white, it is opaque (sheet is white). */
-/* So changing mask text fill to WHITE will "close the hole" (make it just solid white sheet). Correct. */
-
 @media (max-width: 1024px) {
-  .svg-title {
-    font-size: 80px;
-    /* Increased from 60px */
+  .neura-svg-title {
+    font-size: 80px !important;
   }
 
-  .svg-subtitle {
-    font-size: 28px;
-    /* Increased from 20px */
+  .neura-svg-subtitle {
+    font-size: 24px !important;
   }
 }
 
 @media (max-width: 768px) {
-  .svg-title {
-    font-size: 40px;
+  .neura-svg-title {
+    font-size: 45px !important;
   }
 
-  .svg-subtitle {
-    font-size: 16px;
+  .neura-svg-subtitle {
+    font-size: 16px !important;
   }
 }
 

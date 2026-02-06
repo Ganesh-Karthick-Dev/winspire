@@ -120,7 +120,7 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
             });
 
             // Fade out text
-            tl.to('.svg-title, .svg-subtitle', {
+            tl.to('.neura-svg-title, .neura-svg-subtitle', {
                 fill: 'white',
                 attr: { fill: 'white' },
                 duration: 0.8,

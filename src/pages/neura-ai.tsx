@@ -135,16 +135,14 @@ export default function TempNeuraAI() {
                                             {/* White rect = Opaque (The Sheet) */}
                                             <rect width="100%" height="100%" fill="white" />
                                             {/* Black text = Transparent (The Hole) */}
-                                            <text x="50%" y="45%" textAnchor="middle" className="svg-title">
+                                            <text x="960" y="480" textAnchor="middle" className="neura-svg-title" fill="black" fontSize="110" fontWeight="900">
                                                 The Problem Neura Solves
                                             </text>
 
-                                            {/* Multiline subtitle check - SVG doesn't wrap automatically well */}
-                                            {/* Breaking manually or using tspan */}
-                                            <text x="50%" y="55%" textAnchor="middle" className="svg-subtitle">
+                                            <text x="960" y="580" textAnchor="middle" className="neura-svg-subtitle" fill="black" fontSize="34" fontWeight="600">
                                                 Modern healthcare revenue cycles operate
                                             </text>
-                                            <text x="50%" y="60%" textAnchor="middle" className="svg-subtitle">
+                                            <text x="960" y="630" textAnchor="middle" className="neura-svg-subtitle" fill="black" fontSize="34" fontWeight="600">
                                                 in a constantly shifting environment:
                                             </text>
                                         </mask>
