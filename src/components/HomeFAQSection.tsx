@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { Plus, Minus } from "lucide-react";
 import styles from "./HomeFAQSection.module.css";
 
@@ -81,29 +82,47 @@ export default function HomeFAQSection() {
     }, 550);
   };
 
-  useEffect(() => {
+  useGSAP(() => {
+    // Register plugin inside useGSAP is safe
     gsap.registerPlugin(ScrollTrigger);
     
     // Animate items in
-    const items = containerRef.current?.querySelectorAll(`.${styles.faqItem}`);
-    if (items && items.length > 0) {
-      gsap.fromTo(items, 
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.1,
-          duration: 0.6,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
+    const items = gsap.utils.toArray<HTMLElement>(`.${styles.faqItem}`);
+    
+    if (items.length > 0) {
+      // Set initial state via GSAP
+      gsap.set(items, { opacity: 0, y: 20 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom-=100", // Trigger as soon as it's nearly in view
+          toggleActions: "play none none reverse",
+          once: true
         }
-      );
+      });
+
+      tl.to(items, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: "power2.out",
+      });
     }
-  }, []);
+
+    // Explicitly refresh after a short delay to account for other sections loading
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+      ScrollTrigger.getAll().forEach(st => {
+        if (st.trigger === containerRef.current) st.kill();
+      });
+    };
+  }, { scope: containerRef });
 
   return (
     <section className={styles.section}>
