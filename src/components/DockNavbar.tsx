@@ -7,7 +7,7 @@ import {
     Building2,
     Target,
     Layers,
-    Sparkles,
+    BrainCircuit,
     CalendarCheck,
 } from 'lucide-react';
 import { Dock, DockIcon, DockItem, DockLabel } from '@/components/ui/dock';
@@ -35,7 +35,7 @@ const navItems = [
     },
     {
         title: 'Neura AI',
-        icon: Sparkles,
+        icon: BrainCircuit,
         href: '/neura-ai',
     },
     {
