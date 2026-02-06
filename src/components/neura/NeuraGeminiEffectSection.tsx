@@ -27,6 +27,12 @@ export default function NeuraGeminiEffectSection() {
                 description={`Neura transforms denial management from reaction to prevention.
 It classifies inventory, routes work intelligently, generates payer-specific appeals, and identifies trends that prevent repeat failures.
 Effort is focused only where value exists.`}
+                details={[
+                    "Cross-Department alignment at scale",
+                    "Predictable timelines",
+                    "Real-time controls",
+                    "Connected workflows"
+                ]}
                 pathLengths={[
                     pathLengthFirst,
                     pathLengthSecond,

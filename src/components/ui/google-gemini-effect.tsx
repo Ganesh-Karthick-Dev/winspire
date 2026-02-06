@@ -12,11 +12,13 @@ export const GoogleGeminiEffect = ({
     pathLengths,
     title,
     description,
+    details,
     className,
 }: {
     pathLengths: MotionValue[];
     title?: string;
     description?: string;
+    details?: string[];
     className?: string;
 }) => {
     return (
@@ -27,6 +29,16 @@ export const GoogleGeminiEffect = ({
             <p className={styles.description}>
                 {description || `Scroll this component and see the bottom SVG come to life wow this works!`}
             </p>
+
+            {details && details.length > 0 && (
+                <div className={styles.detailsContainer}>
+                    {details.map((detail, index) => (
+                        <span key={index} className={styles.detailItem}>
+                            {detail}
+                        </span>
+                    ))}
+                </div>
+            )}
 
             <div className={styles.svgContainer}>
 
