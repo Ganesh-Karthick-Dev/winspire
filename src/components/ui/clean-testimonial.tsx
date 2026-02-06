@@ -177,25 +177,7 @@ export function CleanTestimonial() {
           ))}
         </motion.div>
 
-        {/* Floating index indicator */}
-        <motion.div
-          className="index-indicator"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
-          <motion.span
-            className="current-index"
-            key={activeIndex}
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            {String(activeIndex + 1).padStart(2, "0")}
-          </motion.span>
-          <span className="separator">/</span>
-          <span className="total">{String(testimonials.length).padStart(2, "0")}</span>
-        </motion.div>
+
       </div>
 
       {/* Main content */}
@@ -356,23 +338,7 @@ export function CleanTestimonial() {
           text-transform: uppercase;
         }
 
-        :global(.index-indicator) {
-          display: flex;
-          align-items: baseline;
-          gap: 0.25rem;
-          font-family: monospace;
-          font-size: 0.75rem;
-        }
 
-        :global(.current-index) {
-          font-size: 1.5rem;
-          font-weight: 300;
-          color: white;
-        }
-
-        .separator, .total {
-          color: rgba(255, 255, 255, 0.4);
-        }
 
         .testimonial-content {
           position: relative;
