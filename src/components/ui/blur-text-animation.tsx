@@ -56,8 +56,8 @@ export default function BlurTextAnimation({
 
             return {
                 text: word,
-                duration: 2.2 + Math.cos(index * 0.3) * 0.3,
-                delay: baseDelay + exponentialDelay + microVariation,
+                duration: 1.2 + Math.cos(index * 0.3) * 0.2,
+                delay: (baseDelay + exponentialDelay + microVariation) * 0.8,
                 blur: 12 + Math.floor(Math.random() * 8),
                 scale: 0.9 + Math.sin(index * 0.2) * 0.05
             };

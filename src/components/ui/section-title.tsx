@@ -65,7 +65,7 @@ export default function SectionTitle({
       // White overlay shrinks from left to right (revealing title only)
       tl.to(overlayRef.current, {
         width: "0%",
-        duration: 1.2,
+        duration: 0.7,
         ease: "power3.inOut",
       });
     }, containerRef);

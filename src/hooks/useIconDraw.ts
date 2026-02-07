@@ -63,17 +63,17 @@ export function useIconDraw(options: {
             // Animate stroke buffer
             tl.to(targets, {
                 strokeDashoffset: 0,
-                duration: options.duration || 1.5,
+                duration: options.duration || 0.8,
                 ease: "power2.out",
-                stagger: options.stagger || 0.1
+                stagger: options.stagger || 0.05
             });
             
             // Fade in fill after stroke starts drawing (or overlaps slightly)
             tl.to(targets, {
                 fillOpacity: 1, // Restore original fill (if any)
-                duration: 0.5,
+                duration: 0.4,
                 ease: "power2.in"
-            }, ">-1.0"); // Start 1s before stroke finishes
+            }, ">-0.6"); // Start slightly before stroke finishes
 
         }, element); // Scope to the element
 

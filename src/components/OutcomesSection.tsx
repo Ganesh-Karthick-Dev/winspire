@@ -29,7 +29,7 @@ function AnimatedCounter({ value, startValue = "0", delay = 0 }: { value: string
             return () => clearTimeout(timer);
         }
 
-        const duration = 2000; // Increased to 2 seconds for a more dramatic entrance
+        const duration = 1000; // Reduced to 1 second for a faster feel 
         const startTime = Date.now() + delay * 1000;
         const isDecimal = cleanValue.includes(".");
 
