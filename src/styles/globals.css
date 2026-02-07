@@ -648,25 +648,7 @@ body.modal-open .webgl-canvas.ready {
   pointer-events: none;
 }
 
-@media (max-width: 1024px) {
-  .neura-svg-title {
-    font-size: 80px !important;
-  }
 
-  .neura-svg-subtitle {
-    font-size: 24px !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .neura-svg-title {
-    font-size: 45px !important;
-  }
-
-  .neura-svg-subtitle {
-    font-size: 16px !important;
-  }
-}
 
 .temp-neura-cards-layer {
   position: relative;
