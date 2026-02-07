@@ -135,14 +135,14 @@ export default function TempNeuraAI() {
                                             {/* White rect = Opaque (The Sheet) */}
                                             <rect width="100%" height="100%" fill="white" />
                                             {/* Black text = Transparent (The Hole) */}
-                                            <text x="960" y="480" textAnchor="middle" className="neura-svg-title" fill="black" fontSize="70" fontWeight="900">
+                                            <text x="960" y="480" textAnchor="middle" className="neura-svg-title" fill="black" fontSize="55" fontWeight="900">
                                                 The Problem Neura Solves
                                             </text>
 
-                                            <text x="960" y="580" textAnchor="middle" className="neura-svg-subtitle" fill="black" fontSize="22" fontWeight="600">
+                                            <text x="960" y="570" textAnchor="middle" className="neura-svg-subtitle" fill="black" fontSize="18" fontWeight="600">
                                                 Modern healthcare revenue cycles operate
                                             </text>
-                                            <text x="960" y="620" textAnchor="middle" className="neura-svg-subtitle" fill="black" fontSize="22" fontWeight="600">
+                                            <text x="960" y="600" textAnchor="middle" className="neura-svg-subtitle" fill="black" fontSize="18" fontWeight="600">
                                                 in a constantly shifting environment:
                                             </text>
                                         </mask>
