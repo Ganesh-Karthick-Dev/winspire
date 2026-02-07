@@ -129,20 +129,20 @@ export default function TempNeuraAI() {
                         <div ref={whiteSectionRef} className="temp-neura-second-white">
                             {/* Text Layer - SVG MASK Implementation (Aggressive Cutout) */}
                             <div className="temp-neura-text-layer">
-                                <svg className="temp-neura-mask-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet">
+                                <svg className="temp-neura-mask-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
                                     <defs>
                                         <mask id="text-mask">
                                             {/* White rect = Opaque (The Sheet) */}
                                             <rect width="100%" height="100%" fill="white" />
                                             {/* Black text = Transparent (The Hole) */}
-                                            <text x="960" y="480" textAnchor="middle" className="neura-svg-title" fill="black" fontSize="55" fontWeight="900">
+                                            <text x="960" y="460" textAnchor="middle" className="neura-svg-title" fill="black" fontSize="72" fontWeight="900">
                                                 The Problem Neura Solves
                                             </text>
 
-                                            <text x="960" y="570" textAnchor="middle" className="neura-svg-subtitle" fill="black" fontSize="18" fontWeight="600">
+                                            <text x="960" y="560" textAnchor="middle" className="neura-svg-subtitle" fill="black" fontSize="24" fontWeight="600">
                                                 Modern healthcare revenue cycles operate
                                             </text>
-                                            <text x="960" y="600" textAnchor="middle" className="neura-svg-subtitle" fill="black" fontSize="18" fontWeight="600">
+                                            <text x="960" y="600" textAnchor="middle" className="neura-svg-subtitle" fill="black" fontSize="24" fontWeight="600">
                                                 in a constantly shifting environment:
                                             </text>
                                         </mask>
