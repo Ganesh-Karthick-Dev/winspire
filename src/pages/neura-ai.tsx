@@ -129,7 +129,7 @@ export default function TempNeuraAI() {
                         <div ref={whiteSectionRef} className="temp-neura-second-white">
                             {/* Text Layer - SVG MASK Implementation (Aggressive Cutout) */}
                             <div className="temp-neura-text-layer">
-                                <svg className="temp-neura-mask-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+                                <svg className="temp-neura-mask-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet">
                                     <defs>
                                         <mask id="text-mask">
                                             {/* White rect = Opaque (The Sheet) */}
