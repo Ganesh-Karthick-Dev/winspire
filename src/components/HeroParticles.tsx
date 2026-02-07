@@ -1,10 +1,11 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useRef } from 'react';
+import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect';
 import gsap from 'gsap';
 
 export default function HeroParticles() {
     const containerRef = useRef<HTMLDivElement>(null);
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
         if (!containerRef.current) return;
         const container = containerRef.current;
         container.innerHTML = '';

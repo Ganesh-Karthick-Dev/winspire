@@ -4,7 +4,8 @@
 
 'use client';
 
-import { useEffect, useRef, useLayoutEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -47,7 +48,7 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
     const containerRef = useRef<HTMLDivElement>(null);
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
         if (typeof window === 'undefined' || !containerRef.current) return;
         // Use the passed ref for the trigger (parent section), falling back to this container
         const triggerEl = pinTriggerRef?.current ?? containerRef.current;
@@ -99,7 +100,7 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
                 scrollTrigger: {
                     trigger: triggerEl,
                     start: 'top top',
-                    end: '+=2000', 
+                    end: '+=2000',
                     scrub: 1.5,
                 }
             });
@@ -112,21 +113,13 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
                         x: 0,
                         y: 0,
                         rotation: finalRotation,
-                        duration: 1, 
+                        duration: 0.8, 
                         ease: 'power2.out'
                     },
-                    i * 0.2 
+                    i * 0.1 // Stagger
                 );
             });
-
-            // Fade out text
-            tl.to('.neura-svg-title, .neura-svg-subtitle', {
-                fill: 'white',
-                attr: { fill: 'white' },
-                duration: 0.8,
-                ease: 'power2.inOut'
-            }, '+=0.1');
-
+            
         }, triggerEl as HTMLElement);
 
         return () => ctx.revert();
@@ -134,7 +127,14 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
 
     return (
         <div ref={containerRef} className={styles.container}>
-            {/* Subtitle moved to parent for background layering */}
+            {/* Title Section - Static, no animation */}
+            <div className={styles.titleSection}>
+                <h2 className={styles.sectionTitle}>The Problem Neura Solves</h2>
+                <p className={styles.sectionSubtitle}>
+                    Modern healthcare revenue cycles operate<br />
+                    in a constantly shifting environment:
+                </p>
+            </div>
 
             <div className={styles.cardsStack}>
                 {// Reverse map to put first cards at bottom of stack visually if needed?

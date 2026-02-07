@@ -2,11 +2,44 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
     width: 100%;
-    max-width: 800px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 0;
+    position: relative;
+}
+
+/* Title Section */
+.titleSection {
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 0;
+    z-index: 10;
+}
+
+.sectionTitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.1;
+    /* Gradient text effect */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.sectionSubtitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.6;
+    /* Gradient text effect */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .subtitle {
@@ -21,15 +54,15 @@
     line-height: 1.4;
 }
 
-/* Stack of cards */
+/* Stack of cards - centered in the viewport */
 .cardsStack {
     display: grid;
     place-items: center;
     width: 100%;
-    margin-top: 2rem;
-    height: 350px;
-    /* Reserve space for the stack */
+    height: 60vh;
+    /* Reserve height for card stack */
     position: relative;
+    margin: 2rem 0;
 }
 
 .cardsStack>* {
@@ -130,6 +163,20 @@
         max-width: 100%;
         padding: 1.5rem 1rem;
         box-sizing: border-box;
+    }
+
+    .titleSection {
+        padding: 1rem;
+        margin-bottom: 0;
+    }
+
+    .sectionTitle {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        margin-bottom: 1rem;
+    }
+
+    .sectionSubtitle {
+        font-size: clamp(0.875rem, 3vw, 1.125rem);
     }
 
     .cardsStack {

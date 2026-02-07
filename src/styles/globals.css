@@ -599,29 +599,28 @@ body.modal-open .webgl-canvas.ready {
   width: 100%;
   min-height: 100vh;
   /* height: 100vh; <-- Removed to fix overflow */
-  background: transparent;
+  background: white;
   display: flex;
   align-items: stretch;
   justify-content: stretch;
   padding: 0;
 }
 
-/* White section - contains SVG mask and cards */
+/* White section - contains title and cards */
 .temp-neura-second-white {
   position: relative;
   z-index: 100;
   width: 100%;
   min-height: 100vh;
-  /* Transparent so 3D model shows through SVG cutouts */
-  background: transparent;
-  overflow: visible;
+  /* White background to cover 3D model */
+  background: white;
+  overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Allow pointer events on children */
-  pointer-events: none;
-  /* Ensure this creates a stacking context */
-
+  /* Enable pointer events */
+  pointer-events: auto;
 }
 
 .temp-neura-text-layer {
@@ -633,6 +632,55 @@ body.modal-open .webgl-canvas.ready {
   justify-content: center;
   pointer-events: none;
   background: transparent;
+}
+
+/* Container for the text knockout effect */
+.temp-neura-white-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  /* White background for the overlay */
+  background: white;
+}
+
+.temp-neura-cutout-text {
+  text-align: center;
+  padding: 2rem 4rem;
+  position: relative;
+  z-index: 3;
+}
+
+.temp-neura-cutout-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.1;
+  pointer-events: none;
+  /* Text gradient effect */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.temp-neura-cutout-subtitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.6;
+  pointer-events: none;
+  /* Gradient text effect matching title */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 

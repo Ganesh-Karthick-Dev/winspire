@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef } from 'react';
+import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect';
 import styles from './NeuraCapabilitiesSection.module.css';
 import {
     ShieldCheck,
@@ -89,7 +90,7 @@ const NeuraCapabilitiesSection: React.FC = () => {
     const sectionRef = useRef<HTMLElement>(null);
     const [activeId, setActiveId] = useState<number>(1);
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
         const mm = gsap.matchMedia();
 
         mm.add("(min-width: 1025px)", () => {
