@@ -27,7 +27,7 @@ const capabilities = [
         takeaway: "Revenue is protected early instead of chased late.",
         icon: ShieldCheck,
         colorClass: styles.cardBlue,
-        image: "/temp/revenue_abstract.png"
+        image: "/neura ai/Comprehensive Revenue Cycle Solutions.webp"
     },
     {
         id: 2,
@@ -41,7 +41,7 @@ const capabilities = [
         takeaway: "Time shifts from gathering to action.",
         icon: Zap,
         colorClass: styles.cardPink,
-        image: "/temp/speed_abstract.png"
+        image: "/neura ai/speed.webp"
     },
     {
         id: 4,
@@ -55,7 +55,7 @@ const capabilities = [
         takeaway: "Performance scales without burnout.",
         icon: Users,
         colorClass: styles.cardPurple,
-        image: "/temp/people_abstract.png"
+        image: "/neura ai/acuracy.webp"
     },
     {
         id: 3,
@@ -68,7 +68,7 @@ const capabilities = [
         takeaway: "Reacting → Guiding",
         icon: LineChart,
         colorClass: styles.cardCyan,
-        image: "/temp/leadership_abstract.png"
+        image: "/neura ai/savings.webp"
     },
     {
         id: 5,
@@ -82,7 +82,7 @@ const capabilities = [
         icon: Settings,
         colorClass: styles.cardGold,
         // Using placeholder until generated
-        image: "/temp/culture_abstract_fluid.png" 
+        image: "/neura ai/Efficiency.webp" 
     }
 ];
 

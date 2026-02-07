@@ -24,7 +24,11 @@ export function FUIBentoGridDark() {
                     title="Net Collection Rate"
                     description="Improves from approximately 75% to 95%"
                     graphic={
-                        <div className="absolute inset-0 bg-[url('https://framerusercontent.com/images/ghyfFEStl6BNusZl0ZQd5r7JpM.png')] bg-cover bg-center" />
+                        <img 
+                            src="/neura%20ai/Comprehensive%20Revenue%20Cycle%20Solutions.webp" 
+                            alt="Revenue" 
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
                     }
                     className="max-lg:rounded-t-[2rem] lg:col-span-3 lg:rounded-tl-[2rem]"
                 />
@@ -33,7 +37,11 @@ export function FUIBentoGridDark() {
                     title="AR Days"
                     description="Reduce from 50–60 to 25–30"
                     graphic={
-                        <div className="absolute inset-0 bg-[url('https://framerusercontent.com/images/7CJtT0Pu3w1vNADktNltoMFC9J4.png')] bg-cover bg-center" />
+                        <img 
+                            src="/neura%20ai/speed.webp" 
+                            alt="Speed" 
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
                     }
                     className="lg:col-span-3 lg:rounded-tr-[2rem]"
                 />
@@ -42,7 +50,11 @@ export function FUIBentoGridDark() {
                     title="Denial Rates"
                     description="Fall from 12–15% to below 3%"
                     graphic={
-                        <div className="absolute inset-0 -top-20 -left-60 bg-[url('https://framerusercontent.com/images/gR21e8Wh6l3pU6CciDrqt8wjHM.png')] bg-cover bg-center bg-black" />
+                        <img 
+                            src="/neura%20ai/Efficiency.webp" 
+                            alt="Efficiency" 
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
                     }
                     className="lg:col-span-2 lg:rounded-bl-[2rem]"
                 />
@@ -51,7 +63,11 @@ export function FUIBentoGridDark() {
                     title="First-pass Resolution"
                     description="Rises from 40–50% to 80–90%"
                     graphic={
-                        <div className="absolute inset-0 bg-[url('https://framerusercontent.com/images/PTO3RQ3S65zfZRFEGZGpiOom6aQ.png')] bg-contain bg-no-repeat bg-center" />
+                        <img 
+                            src="/neura%20ai/acuracy.webp" 
+                            alt="Accuracy" 
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
                     }
                     className="lg:col-span-2"
                 />
@@ -60,7 +76,11 @@ export function FUIBentoGridDark() {
                     title="Cost to Collect"
                     description="Drops from 10–15% to approximately 5%"
                     graphic={
-                        <div className="absolute inset-0 -top-44 -left-60 bg-[url('https://framerusercontent.com/images/h496iPSwtSnGZwpJyErl6cLWdtE.png')] bg-contain bg-no-repeat bg-center" />
+                        <img 
+                            src="/neura%20ai/savings.webp" 
+                            alt="Savings" 
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
                     }
                     className="max-lg:rounded-b-[2rem] lg:col-span-2 lg:rounded-br-[2rem]"
                 />

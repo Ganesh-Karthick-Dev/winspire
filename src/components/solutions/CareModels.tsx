@@ -171,7 +171,7 @@ const CareModels: React.FC = () => {
                         </div>
                         <div className={styles.visualElement} ref={visualRef}>
                             <img
-                                src="/temp/117735.jpg"
+                                src="/solutions/Scale Confidentlys.webp"
                                 alt="Scale confidently"
                                 className={styles.visualImage}
                             />

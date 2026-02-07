@@ -165,15 +165,14 @@ const IntelligenceSolutionsSection: React.FC = () => {
                 <div className={styles.leftColumn} ref={leftColumnRef}>
                     <div className={styles.imageHolder}>
                         <video
+                            src="/video/sample/section2_video.mp4"
                             autoPlay
-                            loop
                             muted
+                            loop
                             playsInline
                             className={styles.imageHolderImg}
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        >
-                            <source src="/temp/0_Brain_Research_1280x720 (1).mp4" type="video/mp4" />
-                        </video>
+                        />
                     </div>
                     <div className={styles.titleWrapper}>
                         {SECTIONS.map((sec, index) => (
@@ -220,15 +219,14 @@ const IntelligenceSolutionsSection: React.FC = () => {
             <div className={styles.mobileView}>
                 <div className={styles.mobileImageHolder}>
                     <video
+                        src="/video/sample/section2_video.mp4"
                         autoPlay
-                        loop
                         muted
+                        loop
                         playsInline
                         className={styles.mobileImageHolderImg}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    >
-                        <source src="/temp/0_Brain_Research_1280x720 (1).mp4" type="video/mp4" />
-                    </video>
+                    />
                 </div>
                 {SECTIONS.map((sec) => (
                     <div key={sec.id} className={styles.mobileBlock}>

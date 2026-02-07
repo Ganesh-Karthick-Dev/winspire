@@ -125,7 +125,7 @@ export default function HowWeWorkSection() {
                  <div ref={containerRef} className={styles.imageSide}>
                      <img 
                         ref={imageRef}
-                        src="/temp/39810.jpg" 
+                        src="/company/How We Work.webp" 
                         alt="How We Work" 
                         className={styles.parallaxImage}
                         loading="lazy"

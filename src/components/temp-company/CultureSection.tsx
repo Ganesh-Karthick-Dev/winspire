@@ -47,7 +47,7 @@ export default function CultureSection() {
                     <div className={styles.imageWrapperLeft}>
                         {/* Image 1 - Left Bottom */}
                         <img 
-                            src="/temp/2151968689.jpg" 
+                            src="/company/our culture.webp" 
                             alt="Team collaboration" 
                             className={styles.imageLeft}
                         />

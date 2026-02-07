@@ -33,7 +33,7 @@ const RevenueCycleSolutions: React.FC = () => {
                     <div className={styles.featureImageWrapper}>
                         {/* Placeholder image - ensuring we use an absolute path or public URL */}
                         <img 
-                            src="/temp/97345.jpg" 
+                            src="/solutions/revenu.webp" 
                             alt="Integrated System" 
                             className={styles.featureImage} 
                         />

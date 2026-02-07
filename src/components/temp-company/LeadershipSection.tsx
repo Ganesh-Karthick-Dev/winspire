@@ -18,7 +18,7 @@ const principles = [
     {
         title: 'Design before scaling',
         description: 'We believe in laying a robust foundation before rapid expansion. Every system is architected for future growth.',
-        image: '/temp/550.jpg'
+        image: '/company/design before our scale.webp'
     },
     {
         title: 'Solve root causes, not symptoms',
@@ -28,7 +28,7 @@ const principles = [
     {
         title: 'Build systems that outlast individuals',
         description: 'Creating resilient processes and knowledge bases that ensure continuity and excellence regardless of personnel changes.',
-        image: '/temp/8414.jpg'
+        image: '/company/Build systems that outlast individuals.webp'
     },
 ];
 

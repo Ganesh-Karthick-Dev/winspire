@@ -16,7 +16,7 @@ const horizontalSections = [
             { icon: LineChart, title: "Financial Prioritization", desc: "Prioritizing work by financial impact." },
             { icon: Brain, title: "Real-time Visibility", desc: "Providing real-time visibility across teams." }
         ],
-        image: "/temp/human-interact-with-ai-artificial-intelligence-brain-process-generative-ai-uuid (1).jpg"
+        image: "/outcomes/inteligence that enable.webp"
     },
     {
         id: 'dashboards',
@@ -27,7 +27,7 @@ const horizontalSections = [
             { icon: Activity, title: "Monitor Performance", desc: "Track adherence & team efficiency." },
             { icon: Clock, title: "Measure Turnaround", desc: "Turnaround times vs outcomes." }
         ],
-        image: "/temp/woman-sits-front-monitor-that-has-word-brain-it.jpg"
+        image: "/outcomes/dashboard that drive action medic.webp"
     },
     {
         id: 'accountability',
@@ -38,7 +38,7 @@ const horizontalSections = [
             { icon: Award, title: "Full Lifecycle", desc: "Performance across full revenue lifecycle." },
             { icon: Users, title: "Impact Over Tenure", desc: "Recognition based on impact." }
         ],
-        image: "/temp/hand-with-brain-dark-backdrop.jpg"
+        image: "/outcomes/acountablity at every level.webp"
     }
 ];
 

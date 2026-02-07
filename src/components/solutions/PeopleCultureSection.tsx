@@ -106,7 +106,7 @@ const PeopleCultureSection: React.FC = () => {
                         <div className={styles.gratifyContainer}>
                             <div className={`${styles.visualContainer} ${styles.visualContainerBlue}`}>
                                 <Image 
-                                    src="/images/careers/team-rooftop.png"
+                                    src="/solutions/Performance Delivered by the Right Teams.webp"
                                     alt="Smaart Hire Team" 
                                     fill 
                                     style={{ objectFit: 'cover' }}
@@ -144,7 +144,7 @@ const PeopleCultureSection: React.FC = () => {
                             <div className={`${styles.visualContainer} ${styles.visualContainerGreen}`}>
                                 {/* Image Background */}
                                 <Image 
-                                    src="/temp/13071.jpg" 
+                                    src="/solutions/Recognition That Reflects Real Impact.webp" 
                                     alt="Team Recognition" 
                                     fill 
                                     style={{ objectFit: 'cover' }}
@@ -185,7 +185,7 @@ const PeopleCultureSection: React.FC = () => {
                         <div className={styles.gratifyContainer}>
                             <div className={`${styles.visualContainer} ${styles.visualContainerPurple}`}>
                                 <Image 
-                                    src="/images/careers/brainstorm.png" 
+                                    src="/solutions/Turning Ideas Into Measurable Progress.webp" 
                                     alt="Innovation Hub" 
                                     fill 
                                     style={{ objectFit: 'cover' }}
