@@ -44,9 +44,7 @@ const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
     loading: () => null,
 });
 
-export async function getStaticProps() {
-    return { props: {} };
-}
+
 
 import NeuraCTASection from '@/components/neura/NeuraCTASection';
 import NeuraBentoSection from '@/components/neura/NeuraBentoSection';
@@ -127,17 +125,81 @@ export default function TempNeuraAI() {
 
                     <section ref={secondSectionRef} className="temp-neura-second-section" aria-label="The Problem Neura Solves">
                         <div ref={whiteSectionRef} className="temp-neura-second-white">
-                            {/* Text Layer - CSS mix-blend-mode cutout (production-reliable) */}
+                            {/* Text Layer - SVG MASK Implementation (Unique ID for Prod) */}
                             <div className="temp-neura-text-layer">
-                                <div className="temp-neura-white-overlay">
-                                    <div className="temp-neura-cutout-text">
-                                        <h2 className="temp-neura-cutout-title">The Problem Neura Solves</h2>
-                                        <p className="temp-neura-cutout-subtitle">
-                                            Modern healthcare revenue cycles operate<br />
-                                            in a constantly shifting environment:
-                                        </p>
-                                    </div>
-                                </div>
+                                <svg 
+                                    className="temp-neura-mask-svg" 
+                                    viewBox="0 0 1920 1080" 
+                                    preserveAspectRatio="xMidYMid slice"
+                                    style={{ 
+                                        position: 'absolute', 
+                                        inset: 0, 
+                                        width: '100%', 
+                                        height: '100%', 
+                                        zIndex: 2,
+                                        pointerEvents: 'none'
+                                    }}
+                                >
+                                    <defs>
+                                        <mask id="neura-mask-unique-v2">
+                                            {/* White rect = Opaque (The Sheet) */}
+                                            <rect x="0" y="0" width="1920" height="1080" fill="white" />
+                                            {/* Black text = Transparent (The Hole) */}
+                                            <text 
+                                                x="960" 
+                                                y="460" 
+                                                textAnchor="middle" 
+                                                dominantBaseline="central"
+                                                fill="black" 
+                                                style={{ 
+                                                    fontFamily: "'Outfit', sans-serif", 
+                                                    fontSize: '72px', 
+                                                    fontWeight: 900 
+                                                }}
+                                            >
+                                                The Problem Neura Solves
+                                            </text>
+
+                                            <text 
+                                                x="960" 
+                                                y="560" 
+                                                textAnchor="middle" 
+                                                dominantBaseline="central"
+                                                fill="black" 
+                                                style={{ 
+                                                    fontFamily: "'Outfit', sans-serif", 
+                                                    fontSize: '24px', 
+                                                    fontWeight: 600 
+                                                }}
+                                            >
+                                                Modern healthcare revenue cycles operate
+                                            </text>
+                                            <text 
+                                                x="960" 
+                                                y="600" 
+                                                textAnchor="middle" 
+                                                dominantBaseline="central"
+                                                fill="black" 
+                                                style={{ 
+                                                    fontFamily: "'Outfit', sans-serif", 
+                                                    fontSize: '24px', 
+                                                    fontWeight: 600 
+                                                }}
+                                            >
+                                                in a constantly shifting environment:
+                                            </text>
+                                        </mask>
+                                    </defs>
+                                    {/* The Visible White Sheet with Cutouts */}
+                                    <rect 
+                                        x="0" 
+                                        y="0" 
+                                        width="1920" 
+                                        height="1080" 
+                                        fill="white" 
+                                        mask="url(#neura-mask-unique-v2)" 
+                                    />
+                                </svg>
                             </div>
 
                             {/* Cards Layer - On Top */}
