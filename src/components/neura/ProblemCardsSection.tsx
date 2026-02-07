@@ -127,40 +127,39 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
 
     return (
         <div ref={containerRef} className={styles.container}>
-            {/* Title Section - Static, no animation */}
-            <div className={styles.titleSection}>
-                <h2 className={styles.sectionTitle}>The Problem Neura Solves</h2>
-                <p className={styles.sectionSubtitle}>
-                    Modern healthcare revenue cycles operate<br />
-                    in a constantly shifting environment:
-                </p>
+            {/* Centered Text Content */}
+            <div className={styles.textContent}>
+                <div className={styles.titleSection}>
+                    <h2 className={styles.sectionTitle}>The Problem Neura Solves</h2>
+                    <p className={styles.sectionSubtitle}>
+                        Modern healthcare revenue cycles operate<br />
+                        in a constantly shifting environment:
+                    </p>
+                </div>
+
+                <div className={styles.conclusion}>
+                    <p>That creates visibility but not control.</p>
+                    <p className={styles.highlight}>
+                        Neura was designed to replace fragmented activity with a single operating structure that thinks, adapts, and acts in real time.
+                    </p>
+                </div>
             </div>
 
+            {/* Overlaid Cards Stack */}
             <div className={styles.cardsStack}>
-                {// Reverse map to put first cards at bottom of stack visually if needed?
-                    // Standard DOM order: last is on top. 
-                    // We want "Payers automate" (index 0) to be... well, it depends.
-                    // Let's keep order.
-                    CARDS.map(({ icon: Icon, label }, i) => (
-                        <div
-                            key={i}
-                            ref={(el) => { cardRefs.current[i] = el; }}
-                            className={styles.card}
-                            style={{ zIndex: i }} /* explicit stacking order */
-                        >
-                            <div className={styles.cardIcon}>
-                                <Icon size={24} />
-                            </div>
-                            <span className={styles.cardLabel}>{label}</span>
+                {CARDS.map(({ icon: Icon, label }, i) => (
+                    <div
+                        key={i}
+                        ref={(el) => { cardRefs.current[i] = el; }}
+                        className={styles.card}
+                        style={{ zIndex: i + 10 }}
+                    >
+                        <div className={styles.cardIcon}>
+                            <Icon size={24} />
                         </div>
-                    ))}
-            </div>
-
-            <div className={styles.conclusion}>
-                <p>That creates visibility but not control.</p>
-                <p className={styles.highlight}>
-                    Neura was designed to replace fragmented activity with a single operating structure that thinks, adapts, and acts in real time.
-                </p>
+                        <span className={styles.cardLabel}>{label}</span>
+                    </div>
+                ))}
             </div>
         </div>
     );
