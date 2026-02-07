@@ -84,24 +84,16 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
         });
 
         const ctx = gsap.context(() => {
-            // Pin the PARENT section (secondSectionRef) here
-            // This ensures it happens in the same layout cycle as the cards
-            ScrollTrigger.create({
-                trigger: triggerEl,
-                start: 'top top',
-                end: '+=2000',
-                pin: true,
-                pinSpacing: true, // Important: adds the spacer
-                scrub: 1.5,
-                invalidateOnRefresh: true,
-            });
-
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: triggerEl,
                     start: 'top top',
-                    end: '+=2000',
+                    end: '+=1500', // Reduced from 2000 for smoother completion
+                    pin: true,
+                    pinSpacing: true,
                     scrub: 1.5,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
                 }
             });
 

@@ -2,7 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 100%;
+    min-height: 100vh;
     margin: 0 auto;
     padding: 0;
     position: relative;
@@ -14,10 +16,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    max-width: 1200px;
     padding: 2rem;
     position: relative;
     z-index: 10;
-    min-height: 50vh;
     text-align: center;
 }
 
