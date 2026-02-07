@@ -21,7 +21,7 @@ export default function NeuraHeroSection() {
         <section className={styles.hero} aria-label="Neura AI hero">
             <div className={styles.leftCol}>
                 <h1 className={styles.headline}>
-                    The Intelligence That Makes Revenue Cycles Predictableee
+                    The Intelligence That Makes Revenue Cycles Predictable
                 </h1>
             </div>
             <div className={styles.rightCol}>
