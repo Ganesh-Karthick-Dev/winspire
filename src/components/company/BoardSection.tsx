@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState, TouchEvent } from 'react';
 import Image from 'next/image';
 import styles from './BoardSection.module.css';
 
 // Board Member Data
 const boardMembers = [
+    {
+        id: 7,
+        name: 'Suresh H. Nish',
+        role: 'Founder & Chief Executive Officer',
+        image: '', // No photo provided
+        bio: 'Suresh built Winspire RCM on the belief that revenue outcomes improve when intelligence enters the cycle early. With over two decades of experience in healthcare revenue cycle operations, he has led and scaled large RCM operations. Under his leadership, Winspire focuses on sustainable revenue improvement, transparent performance measurement, and responsible automation.'
+    },
     {
         id: 1,
         name: 'Shravan Kumar',
@@ -45,48 +52,73 @@ const boardMembers = [
         role: 'Principal Consultant',
         image: '/images/team/dan-schulte.png',
         bio: 'Dan Schulte has worked in healthcare provider and RCM vendor arena for over 40 years. He has helped large and small organizations find weak spots, change processes, and realize immediate returns. Previously held senior RCM positions at HGS, The Outsource Group, Parallon, Apollo Health Street, and Siemens Health Services. Dan holds an MBA from Southern Illinois University and CHFP certification from HFMA.'
-    },
-    {
-        id: 7,
-        name: 'Suresh H. Nish',
-        role: 'Founder & Chief Executive Officer',
-        image: '', // No photo provided
-        bio: 'Suresh built Winspire RCM on the belief that revenue outcomes improve when intelligence enters the cycle early. With over two decades of experience in healthcare revenue cycle operations, he has led and scaled large RCM operations. Under his leadership, Winspire focuses on sustainable revenue improvement, transparent performance measurement, and responsible automation.'
     }
 ];
 
 const BoardSection: React.FC = () => {
-    const ceo = boardMembers.find(m => m.id === 7);
-    const otherMembers = boardMembers.filter(m => m.id !== 7);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [touchStart, setTouchStart] = useState<number | null>(null);
+    const [touchEnd, setTouchEnd] = useState<number | null>(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [dragOffset, setDragOffset] = useState(0);
 
-    // Reuse the card rendering logic
-    const renderMemberCard = (member: typeof boardMembers[0]) => (
-        <div key={member.id} className={styles.card}>
-            {/* Image Side */}
-            <div className={styles.imageWrapper}>
-                {member.image ? (
-                    <Image
-                        src={member.image}
-                        alt={member.name}
-                        fill
-                        className={styles.memberImage}
-                    />
-                ) : (
-                    <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #083151 0%, #0a4a7a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ fontSize: '3rem', color: 'rgba(255,255,255,0.3)', fontWeight: 700 }}>{member.name.charAt(0)}</span>
-                    </div>
-                )}
-            </div>
+    // Minimum swipe distance
+    const minSwipeDistance = 50;
 
-            {/* Text Side */}
-            <div className={styles.textContent}>
-                <div className={styles.role}>{member.role}</div>
-                <h3 className={styles.name}>{member.name}</h3>
-                <div className={styles.divider}></div>
-                <p className={styles.bio}>{member.bio}</p>
-            </div>
-        </div>
-    );
+    const handleNext = () => {
+        setActiveIndex((prev) => (prev + 1) % boardMembers.length);
+    };
+
+    const handlePrev = () => {
+        setActiveIndex((prev) => (prev - 1 + boardMembers.length) % boardMembers.length);
+    };
+
+    const goToSlide = (index: number) => {
+        setActiveIndex(index);
+    };
+
+    // Touch handlers for mobile swipe
+    const onTouchStart = (e: TouchEvent) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+        setIsDragging(true);
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+        if (!touchStart) return;
+        const currentTouch = e.targetTouches[0].clientX;
+        setTouchEnd(currentTouch);
+        setDragOffset(currentTouch - touchStart);
+    };
+
+    const onTouchEnd = () => {
+        setIsDragging(false);
+        setDragOffset(0);
+
+        if (!touchStart || !touchEnd) return;
+
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+
+        if (isLeftSwipe) {
+            handleNext();
+        } else if (isRightSwipe) {
+            handlePrev();
+        }
+    };
+
+    // Desktop: Get visible members
+    const getVisibleMembers = () => {
+        const visible = [];
+        for (let i = 0; i < boardMembers.length; i++) {
+            visible.push(boardMembers[(activeIndex + i) % boardMembers.length]);
+        }
+        return visible;
+    };
+
+    const visibleMembers = getVisibleMembers();
+    const activeMember = visibleMembers[0];
 
     return (
         <section className={styles.boardSection}>
@@ -101,17 +133,154 @@ const BoardSection: React.FC = () => {
                 <div className={styles.subtitle}>Executive Introduction</div>
             </div>
 
-            {/* CEO Section - Centered */}
-            {ceo && (
-                <div className={styles.ceoWrapper}>
-                    <div className={styles.ceoContainer}>
-                        {renderMemberCard(ceo)}
+            {/* ===== DESKTOP VIEW ===== */}
+            <div className={styles.desktopView}>
+                <div className={styles.carouselContainer}>
+                    {/* Active Card (Expanded Key Visual) */}
+                    <div className={styles.activeCardWrapper} key={activeMember.id}>
+                        <div className={styles.activeCardImage}>
+                            {activeMember.image ? (
+                                <Image
+                                    src={activeMember.image}
+                                    alt={activeMember.name}
+                                    fill
+                                    className={styles.memberImage}
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                />
+                            ) : (
+                                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <span style={{ fontSize: '6rem', color: 'rgba(15, 23, 42, 0.1)', fontWeight: 700 }}>{activeMember.name.charAt(0)}</span>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Expanded Description Area */}
+                        <div className={styles.activeDetails}>
+                            <div className={styles.nameBlock}>
+                                <p className={styles.roleLabel}>{activeMember.role}</p>
+                                <h3 className={styles.nameLabel}>{activeMember.name}</h3>
+                            </div>
+                            
+                            {/* Navigation Buttons */}
+                             <div className={styles.navigationButtons}>
+                                <button className={styles.navButton} onClick={handlePrev} aria-label="Previous">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button className={styles.navButton} onClick={handleNext} aria-label="Next">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <p className={styles.description}>
+                                {activeMember.bio}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Next Cards List */}
+                    <div className={styles.nextCardsList}>
+                        {visibleMembers.slice(1, 4).map((member, index) => (
+                            <div 
+                                key={member.id} 
+                                className={styles.smallCard} 
+                                onClick={() => goToSlide((activeIndex + index + 1) % boardMembers.length)}
+                            >
+                                <div className={styles.smallCardImage}>
+                                    {member.image ? (
+                                        <Image
+                                            src={member.image}
+                                            alt={member.name}
+                                            fill
+                                            className={styles.memberImage}
+                                            sizes="25vw"
+                                        />
+                                    ) : (
+                                        <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <span style={{ fontSize: '4rem', color: 'rgba(15, 23, 42, 0.1)', fontWeight: 700 }}>{member.name.charAt(0)}</span>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className={styles.smallInfo}>
+                                    <p className={styles.smallRole}>{member.role}</p>
+                                    <h4 className={styles.smallName}>{member.name}</h4>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            )}
+            </div>
 
-            <div className={styles.grid}>
-                {otherMembers.map((member) => renderMemberCard(member))}
+            {/* ===== MOBILE VIEW ===== */}
+            <div className={styles.mobileView}>
+                {/* Swipeable Cards Container */}
+                <div
+                    className={styles.mobileCarousel}
+                    onTouchStart={onTouchStart}
+                    onTouchMove={onTouchMove}
+                    onTouchEnd={onTouchEnd}
+                >
+                    <div
+                        className={styles.mobileCardsTrack}
+                        style={{
+                            transform: `translateX(calc(-${activeIndex * 100}% + ${isDragging ? dragOffset : 0}px))`,
+                            transition: isDragging ? 'none' : 'transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)'
+                        }}
+                    >
+                        {boardMembers.map((member, index) => (
+                            <div
+                                key={member.id}
+                                className={`${styles.mobileCard} ${index === activeIndex ? styles.mobileCardActive : ''}`}
+                            >
+                                {/* Profile Image */}
+                                <div className={styles.mobileCardImage}>
+                                    {member.image ? (
+                                        <Image
+                                            src={member.image}
+                                            alt={member.name}
+                                            fill
+                                            className={styles.memberImage}
+                                            sizes="80vw"
+                                        />
+                                    ) : (
+                                        <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <span style={{ fontSize: '5rem', color: 'rgba(15, 23, 42, 0.1)', fontWeight: 700 }}>{member.name.charAt(0)}</span>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Info Section */}
+                                <div className={styles.mobileCardInfo}>
+                                    <div className={styles.mobileNameRow}>
+                                        <div>
+                                            <p className={styles.mobileRole}>{member.role}</p>
+                                            <h3 className={styles.mobileName}>{member.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <p className={styles.mobileDescription}>
+                                        {member.bio}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Navigation Dots */}
+                <div className={styles.mobileDots}>
+                    {boardMembers.map((_, index) => (
+                        <button
+                            key={index}
+                            className={`${styles.mobileDot} ${index === activeIndex ? styles.mobileDotActive : ''}`}
+                            onClick={() => goToSlide(index)}
+                            aria-label={`Go to slide ${index + 1}`}
+                        />
+                    ))}
+                </div>
             </div>
         </section>
     );
