@@ -8,6 +8,7 @@
  */
 
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
@@ -61,6 +62,7 @@ export default function TempHome() {
     const isDev = process.env.NODE_ENV === 'development';
 
     const isMobile = useIsMobile();
+    const router = useRouter();
 
     // ========================================
     // DEBUG MODE TOGGLE
@@ -267,14 +269,7 @@ export default function TempHome() {
                                 style={{ zIndex: 50 }}
                             >
                                 <GradientButton
-                                    onClick={() => {
-                                        const contactBtn = document.querySelector('[data-contact-modal]') as HTMLElement;
-                                        if (contactBtn) {
-                                            contactBtn.click();
-                                        } else {
-                                            window.location.href = '#contact';
-                                        }
-                                    }}
+                                    onClick={() => router.push('/book-demo')}
                                     width="340px"
                                     height="56px"
                                 >
@@ -291,8 +286,6 @@ export default function TempHome() {
                     <Hero
                         title={`Designing Revenue Cycles That Work`}
                         subtitle="AI-Powered. System-Driven. Outcome-Guaranteed"
-                        ctaText="Explore Features"
-                        ctaHref="#about"
                     />
 
                     {/* Mobile Hero Overlay - Mission & Scroll Indicator */}
@@ -323,14 +316,7 @@ export default function TempHome() {
                             {/* Mobile CTA Button */}
                             <div className="mobile-cta-container">
                                 <GradientButton
-                                    onClick={() => {
-                                        const contactBtn = document.querySelector('[data-contact-modal]') as HTMLElement;
-                                        if (contactBtn) {
-                                            contactBtn.click();
-                                        } else {
-                                            window.location.href = '#contact';
-                                        }
-                                    }}
+                                    onClick={() => router.push('/book-demo')}
                                     width="280px"
                                     height="50px"
                                 >

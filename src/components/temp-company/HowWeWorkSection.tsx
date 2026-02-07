@@ -48,7 +48,7 @@ export default function HowWeWorkSection() {
     }, []);
 
     return (
-        <section ref={sectionRef} className={styles.section}>
+        <section ref={sectionRef} id="how-we-work" className={styles.section}>
             <div className={styles.container}>
                  {/* Left: Content */}
                 <div className={styles.contentSide}>

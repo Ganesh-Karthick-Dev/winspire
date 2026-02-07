@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
+import { useRouter } from 'next/router';
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, CheckCircle2, Activity, Shield, Users, Eye, Zap } from "lucide-react";
 import SectionTitle from "./ui/section-title";
@@ -119,6 +120,7 @@ function AnimatedCounter({ value, startValue = "0", delay = 0 }: { value: string
 import { useIconDraw } from "@/hooks/useIconDraw";
 
 export default function OutcomesSection() {
+    const router = useRouter();
     const sectionRef = useRef<HTMLElement>(null);
     const iconsRef = useIconDraw({ stagger: 0.1, start: "top 75%" });
 

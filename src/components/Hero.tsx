@@ -30,8 +30,8 @@ interface HeroProps {
 export default function Hero({
     title = 'Welcome to the Future of Revenue Cycle',
     subtitle = 'AI-Powered. System-Driven. Outcome-Guaranteed.',
-    ctaText = 'Get Started',
-    ctaHref = '#features',
+    ctaText,
+    ctaHref,
     onCtaClick,
 }: HeroProps) {
     const buttonRef = useRef<HTMLAnchorElement>(null);
@@ -455,38 +455,40 @@ export default function Hero({
                 </p> */}
 
                 {/* Premium CTA with GSAP animations */}
-                {/* <a
-                    ref={buttonRef}
-                    href={ctaHref}
-                    className="cta-button-premium"
-                    onClick={handleClick}
-                    aria-label={ctaText}
-                >
-                    <span ref={glowRef} className="cta-glow" aria-hidden="true" />
-                    <span ref={shimmerRef} className="cta-shimmer" aria-hidden="true" />
-                    <span className="cta-border" aria-hidden="true" />
-                    <span ref={contentRef} className="cta-content">
-                        <span className="cta-text">{ctaText}</span>
-                        <span ref={arrowRef} className="cta-arrow">
-                            <svg
-                                width="20"
-                                height="20"
-                                viewBox="0 0 20 20"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    d="M4 10H16M16 10L11 5M16 10L11 15"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
+                {ctaText && (
+                    <a
+                        ref={buttonRef}
+                        href={ctaHref || '#'}
+                        className="cta-button-premium"
+                        onClick={handleClick}
+                        aria-label={ctaText}
+                    >
+                        <span ref={glowRef} className="cta-glow" aria-hidden="true" />
+                        <span ref={shimmerRef} className="cta-shimmer" aria-hidden="true" />
+                        <span className="cta-border" aria-hidden="true" />
+                        <span ref={contentRef} className="cta-content">
+                            <span className="cta-text">{ctaText}</span>
+                            <span ref={arrowRef} className="cta-arrow">
+                                <svg
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 20 20"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="M4 10H16M16 10L11 5M16 10L11 15"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            </span>
                         </span>
-                    </span>
-                </a> */}
+                    </a>
+                )}
             </div>
         </section>
     );

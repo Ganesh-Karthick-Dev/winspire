@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Link from 'next/link';
 import { useState, useRef } from "react";
 import styles from "./hero-dithering-card.module.css";
 
@@ -7,7 +8,7 @@ import styles from "./hero-dithering-card.module.css";
 //    import("@paper-design/shaders-react").then((mod) => ({ default: mod.Dithering }))
 // );
 
-export function HeroDitheringCard() {
+export function HeroDitheringCard({ onClick }: { onClick?: () => void }) {
     const [isHovered, setIsHovered] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);
 
@@ -57,7 +58,7 @@ export function HeroDitheringCard() {
                         </p>
 
                         {/* Button */}
-                        <button className={styles.button}>
+                        <button onClick={onClick} className={styles.button}>
                             <span className={styles.buttonText}>Get Started</span>
                             <ArrowRight className={styles.buttonIcon} />
                         </button>

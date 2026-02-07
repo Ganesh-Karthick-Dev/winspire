@@ -20,6 +20,7 @@ import {
 import { CircularCommandMenu } from "./ui/circular-command-menu";
 import { BentoGridShowcase } from "./ui/bento-product-features";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { useRouter } from 'next/router';
 
 // Data for "Neura enables our teams to"
 const enablesList = [
@@ -86,6 +87,7 @@ export default function NeuraSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const iconsRef = useIconDraw({ stagger: 0.05, start: "top 75%" });
     const isMobile = useIsMobile();
+    const router = useRouter();
 
     return (
         <section ref={sectionRef} id="neura-intelligence" className="ns-section">
@@ -205,7 +207,10 @@ export default function NeuraSection() {
                     viewport={{ once: true }}
                     className="ns-footer-banner"
                 >
-                    <div className="ns-footer-inner">
+                    <div 
+                        className="ns-footer-inner cursor-pointer"
+                        onClick={() => router.push('/book-demo')}
+                    >
                         <div className="ns-footer-head">
                             <p className="ns-footer-eyebrow">Technology with purpose</p>
                             <h3 className="ns-footer-title">Perform at your best.</h3>

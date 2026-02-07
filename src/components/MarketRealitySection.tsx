@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import SectionTitle from "./ui/section-title";
 import { ArrowRight, TrendingDown, Clock, ShieldAlert, UserX, BarChart3, AlertCircle, UserMinus } from "lucide-react";
+import { useRouter } from 'next/router';
 
 const consequences = [
     {
@@ -55,6 +56,7 @@ import { useIconDraw } from "@/hooks/useIconDraw";
 // ... existing imports
 
 export default function MarketRealitySection() {
+    const router = useRouter();
     const sectionRef = useRef<HTMLElement>(null);
     const iconsRef = useIconDraw({ stagger: 0.05, start: "top 80%" });
 
@@ -163,7 +165,8 @@ export default function MarketRealitySection() {
                             <h3 className="font-outfit text-[3.5rem] md:text-[4.5rem] font-extrabold !text-slate-900 m-0 leading-[1.1] tracking-tighter">It erodes it.</h3>
                         </div>
                         <button
-                            className="flex items-center justify-center gap-5 bg-rose-500 text-white font-outfit text-xl md:text-2xl font-bold rounded-[20px] transition-all hover:scale-105 hover:shadow-xl shadow-lg border-none cursor-pointer shrink-0 w-full md:w-auto min-w-fit whitespace-nowrap"
+                            onClick={() => router.push('/book-demo')}
+                            className="flex items-center justify-center gap-5 bg-rose-500 text-white font-outfit text-xl md:text-2xl font-bold rounded-[20px] transition-all hover:scale-105 hover:shadow-xl shadow-lg border-none cursor-pointer shrink-0 w-full md:w-auto min-w-fit whitespace-nowrap !no-underline"
                             style={{ padding: "24px 48px" }}
                         >
                             <span className="relative top-[1px]">See Where Revenue Is Leaking</span>

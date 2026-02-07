@@ -2,11 +2,13 @@
 
 import React from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { useRouter } from 'next/router';
 import SectionTitle from "./section-title";
 
 import { useIconDraw } from "@/hooks/useIconDraw";
 
 export function SpecialtySection() {
+    const router = useRouter();
     const iconsRef = useIconDraw({ stagger: 0.05, start: "top 85%" });
     const specialties = [
         "Specialty and multispecialty practices",
@@ -59,7 +61,10 @@ export function SpecialtySection() {
                     </p>
 
                     <div className="cta-wrapper">
-                        <button className="specialty-cta group">
+                        <button 
+                            className="specialty-cta group"
+                            onClick={() => router.push('/book-demo')}
+                        >
                             <span className="cta-text">Explore Specialty Workflows</span>
                             <ArrowRight size={20} className="cta-arrow" />
                         </button>

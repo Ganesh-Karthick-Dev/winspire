@@ -2,9 +2,11 @@
 
 import React, { useEffect, useRef } from "react";
 import SectionTitle from "./ui/section-title";
+import { useRouter } from 'next/router';
 import { Users, Cpu, LineChart, ArrowRight, CheckCircle2 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Link from 'next/link';
 
 
 
@@ -34,6 +36,7 @@ import { useIconDraw } from "@/hooks/useIconDraw";
 // ... existing imports
 
 export default function NewSection() {
+    const router = useRouter();
     const sectionRef = useRef<HTMLElement>(null);
     const iconsGridRef = useIconDraw({ stagger: 0.1, start: "top 80%" });
 
@@ -195,7 +198,10 @@ export default function NewSection() {
                             It’s <strong>control, predictability, and confidence</strong>—day after day.
                         </p>
 
-                        <button className="ns-cta-button-white mt-8">
+                        <button 
+                            onClick={() => router.push('/company')}
+                            className="ns-cta-button-white mt-8"
+                        >
                             <span>Explore How We Work</span>
                             <span className="ns-cta-arrow-hit">
                                 <ArrowRight size={18} />

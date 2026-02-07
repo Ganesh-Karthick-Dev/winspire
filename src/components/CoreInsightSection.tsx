@@ -147,7 +147,7 @@ export default function CoreInsightSection() {
     }, []);
 
     return (
-        <section ref={sectionRef} id="core-insight" className="ci-section">
+        <section ref={sectionRef} id="about" className="ci-section">
             <div className="ci-wrapper">
                 {/* Title - Full Width Top */}
                 <header className="ci-title ci-animate">
