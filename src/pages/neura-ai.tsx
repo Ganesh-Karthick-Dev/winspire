@@ -44,6 +44,15 @@ const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
     loading: () => null,
 });
 
+import { GetServerSideProps } from 'next';
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    // Force dynamic rendering on every request
+    return {
+        props: {},
+    };
+};
+
 
 
 import NeuraCTASection from '@/components/neura/NeuraCTASection';
