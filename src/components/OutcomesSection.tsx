@@ -116,8 +116,11 @@ function AnimatedCounter({ value, startValue = "0", delay = 0 }: { value: string
     );
 }
 
+import { useIconDraw } from "@/hooks/useIconDraw";
+
 export default function OutcomesSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const iconsRef = useIconDraw({ stagger: 0.1, start: "top 75%" });
 
     const outcomes = [
         {
@@ -181,7 +184,7 @@ export default function OutcomesSection() {
                 </div>
 
                 {/* 3D Grid Layout */}
-                <div className="outcomes-grid">
+                <div className="outcomes-grid" ref={iconsRef}>
                     {outcomes.map((item, index) => {
                         const Icon = item.icon;
                         return (

@@ -14,6 +14,7 @@ import Image from 'next/image';
 import { Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useIconDraw } from "@/hooks/useIconDraw";
 import styles from '@/styles/VisionMissionSection.module.css';
 
 if (typeof window !== 'undefined') {
@@ -24,6 +25,7 @@ export default function VisionMissionSection() {
     const mainWrapperRef = useRef<HTMLDivElement>(null);
     const pinnedContentRef = useRef<HTMLDivElement>(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    const iconsRef = useIconDraw({ stagger: 0.1, start: "top 75%" });
 
     const slides = [
         {
@@ -141,7 +143,7 @@ export default function VisionMissionSection() {
         <div ref={mainWrapperRef} className={styles.mainWrapper}>
             {/* PINNED SECTION: Vision & Mission */}
             <div ref={pinnedContentRef} className={styles.pinnedSection}>
-                <div className={styles.cardsContainer}>
+                <div className={styles.cardsContainer} ref={iconsRef}>
                     {/* LEFT CARD */}
                     <div className={styles.leftCard}>
                         <div className={styles.leftCardAccent} aria-hidden />

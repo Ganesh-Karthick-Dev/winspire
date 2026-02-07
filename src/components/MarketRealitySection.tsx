@@ -50,8 +50,13 @@ const consequences = [
     }
 ];
 
+import { useIconDraw } from "@/hooks/useIconDraw";
+
+// ... existing imports
+
 export default function MarketRealitySection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const iconsRef = useIconDraw({ stagger: 0.05, start: "top 80%" });
 
     return (
         <section ref={sectionRef} id="market-reality" className="mr-section">
@@ -115,7 +120,7 @@ export default function MarketRealitySection() {
                         <div className="mr-leads-to-line" />
                     </div>
 
-                    <div className="mr-consequence-grid">
+                    <div className="mr-consequence-grid" ref={iconsRef}>
                         {consequences.map((item, index) => (
                             <motion.div
                                 key={index}

@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { HiOutlineTemplate, HiOutlineEye, HiOutlineScale } from 'react-icons/hi';
+import { useIconDraw } from "@/hooks/useIconDraw";
 import styles from '@/styles/OutcomesSystems.module.css';
 
 // Card Data
@@ -93,6 +94,7 @@ const SystemsCard = ({ item, index, isActive }: { item: typeof cards[0], index: 
 const OutcomesSystems = () => {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+    const iconsRef = useIconDraw({ stagger: 0.1, start: "top 75%" });
 
     return (
         <section className={styles.section} ref={sectionRef}>
@@ -117,7 +119,7 @@ const OutcomesSystems = () => {
                 </div>
 
                 {/* Cards Grid */}
-                <div className={styles.cardsGrid}>
+                <div className={styles.cardsGrid} ref={iconsRef}>
                     {cards.map((card, index) => (
                         <SystemsCard key={index} item={card} index={index} isActive={isInView} />
                     ))}

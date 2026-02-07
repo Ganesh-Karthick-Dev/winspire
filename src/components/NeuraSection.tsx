@@ -80,8 +80,11 @@ const supportsList = [
     { text: "Leadership insight and governance", icon: LineChart },
 ];
 
+import { useIconDraw } from "@/hooks/useIconDraw";
+
 export default function NeuraSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const iconsRef = useIconDraw({ stagger: 0.05, start: "top 75%" });
     const isMobile = useIsMobile();
 
     return (
@@ -120,7 +123,7 @@ export default function NeuraSection() {
                 </header>
 
                 {/* Bento grid: Predictive (tall left) + 5 capabilities (raw CSS, all bordered, images) */}
-                <div className="ns-content">
+                <div className="ns-content" ref={iconsRef}>
                     <p className="ns-content-intro">Neura enables our teams to</p>
                     <BentoGridShowcase
                         integration={

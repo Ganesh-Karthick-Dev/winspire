@@ -4,7 +4,10 @@ import React from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import SectionTitle from "./section-title";
 
+import { useIconDraw } from "@/hooks/useIconDraw";
+
 export function SpecialtySection() {
+    const iconsRef = useIconDraw({ stagger: 0.05, start: "top 85%" });
     const specialties = [
         "Specialty and multispecialty practices",
         "Hospitals and ambulatory surgery centers",
@@ -37,7 +40,7 @@ export function SpecialtySection() {
                     </p>
 
                     {/* Specialties List Grid */}
-                    <div className="specialties-grid">
+                    <div className="specialties-grid" ref={iconsRef}>
                         {specialties.map((item, index) => (
                             <div key={index} className="specialty-item group">
                                 <div className="icon-wrapper">

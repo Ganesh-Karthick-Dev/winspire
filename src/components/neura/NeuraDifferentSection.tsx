@@ -1,8 +1,10 @@
 import React from 'react';
 import { Zap, Workflow, TrendingUp } from 'lucide-react';
+import { useIconDraw } from "@/hooks/useIconDraw";
 import styles from './NeuraDifferentSection.module.css';
 
 const NeuraDifferentSection = () => {
+    const iconsRef = useIconDraw({ stagger: 0.1, start: "top 80%" });
     return (
         <section
             className={styles.section}
@@ -33,7 +35,7 @@ const NeuraDifferentSection = () => {
                     What Makes Neura Fundamentally Different
                 </h2>
 
-                <div className={styles.grid}>
+                <div className={styles.grid} ref={iconsRef}>
                     {/* Feature 1: Command */}
                     <div className={styles.featureBlock}>
                         <div className={styles.iconContainer}>

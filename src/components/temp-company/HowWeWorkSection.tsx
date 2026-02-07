@@ -11,6 +11,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaHandshake, FaChartPie, FaCheck } from 'react-icons/fa';
+import { useIconDraw } from "@/hooks/useIconDraw";
 import styles from '@/styles/HowWeWorkSection.module.css';
 
 if (typeof window !== 'undefined') {
@@ -21,6 +22,7 @@ export default function HowWeWorkSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
+    const iconsRef = useIconDraw({ stagger: 0.1, start: "top 75%" });
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -51,7 +53,7 @@ export default function HowWeWorkSection() {
                  {/* Left: Content */}
                 <div className={styles.contentSide}>
                     <div className={styles.contentWrapper}>
-                        <div className={styles.innerContent}>
+                        <div className={styles.innerContent} ref={iconsRef}>
                             <div>
                                 <span className={styles.label}>
                                     How We Work

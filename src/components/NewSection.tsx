@@ -29,8 +29,13 @@ const features = [
     }
 ];
 
+import { useIconDraw } from "@/hooks/useIconDraw";
+
+// ... existing imports
+
 export default function NewSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const iconsGridRef = useIconDraw({ stagger: 0.1, start: "top 80%" });
 
     useEffect(() => {
         if (!sectionRef.current) return;
@@ -131,7 +136,7 @@ export default function NewSection() {
                         Winspire functions as your internal revenue capability, powered by:
                     </p>
 
-                    <div className="ns-modern-grid">
+                    <div className="ns-modern-grid" ref={iconsGridRef}>
                         {/* Item 1 */}
                         <div className="ns-modern-item">
                             <div className="ns-icon-box blue">
