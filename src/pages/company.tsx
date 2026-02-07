@@ -126,7 +126,7 @@ export default function TempCompany() {
 
     return (
         <Layout
-            title="About Winspire RCMMM"
+            title="About Winspire RCM"
             description="Built Inside Healthcare. Designed for Predictable Outcomes. Learn about our mission, values, and team."
         >
             {/* 3D Model - FIXED behind everything */}

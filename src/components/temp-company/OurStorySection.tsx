@@ -27,7 +27,7 @@ export default function OurStorySection() {
                     {/* Content */}
                     <div className={styles.introContent}>
                         <h2 className={styles.introHeadline}>
-                            Built Inside Healthcare.<br/>
+                            Built Inside Healthcareeeee.<br/>
                             <span className={styles.introSubtitle}>Shaped by Real Revenue Challenges.</span>
                         </h2>
                         <div className={styles.introTextWrapper}>
