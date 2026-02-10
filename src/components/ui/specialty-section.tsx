@@ -105,7 +105,7 @@ export function SpecialtySection() {
 
                 .intro-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.25rem;
+                    font-size: 1.33rem; /* Increased to 16pt */
                     color: #bae6fd; /* Sky-200 */
                     line-height: 1.6;
                     margin-bottom: 3rem;
@@ -194,7 +194,7 @@ export function SpecialtySection() {
 
                 .specialty-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.125rem;
+                    font-size: 1.33rem; /* Increased to 16pt */
                     color: #f1f5f9; /* Slate-100 */
                     font-weight: 500;
                     line-height: 1.4;
@@ -209,12 +209,13 @@ export function SpecialtySection() {
 
                 .description-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.25rem;
-                    color: #ffffff; /* White for better visibility */
-                    line-height: 1.6;
-                    margin-bottom: 3rem;
+                    font-size: 1.33rem; /* Increased to 16pt */
+                    color: #ffffff;
+                    opacity: 0.95; /* Increased opacity from 0.7 (implied by user request for visibility) */
+                    line-height: 1.7;
                     max-width: 900px;
-                    text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Shadow to pop against 3D bg */
+                    margin: 0 auto 3rem;
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
                 }
 
                 .cta-wrapper {

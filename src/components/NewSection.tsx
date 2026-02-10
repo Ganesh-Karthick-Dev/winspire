@@ -257,13 +257,15 @@ export default function NewSection() {
                     align-items: center;
                     gap: 12px;
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.125rem;
+                    font-size: 1.33rem; /* 16pt */
                     font-weight: 500;
+                    color: #000000 !important;
                 }
 
                 .ns-intro-item p {
                     color: #000000 !important;
                     margin: 0;
+                    font-size: 1.33rem; /* 16pt */
                 }
 
                 .ns-intro-item strong {
@@ -278,7 +280,7 @@ export default function NewSection() {
 
                 .ns-main-desc {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.25rem;
+                    font-size: 1.33rem; /* 16pt */
                     line-height: 1.6;
                     color: #000000;
                     max-width: 900px;
@@ -297,7 +299,7 @@ export default function NewSection() {
 
                 .ns-body-intro {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.25rem;
+                    font-size: 1.33rem; /* 16pt */
                     color: #000000;
                     margin-bottom: 2rem;
                     font-weight: 500;
@@ -356,7 +358,7 @@ export default function NewSection() {
 
                 .ns-item-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.125rem;
+                    font-size: 1.33rem; /* 16pt */
                     color: #0f172a;
                     line-height: 1.5;
                     font-weight: 500;
@@ -563,7 +565,7 @@ export default function NewSection() {
 
                     .ns-cta-text {
                         margin-bottom: 1.5rem;
-                        font-size: 1.1rem;
+                        font-size: 1.33rem; /* 16pt on mobile too */
                     }
 
                     .ns-cta-button-white {

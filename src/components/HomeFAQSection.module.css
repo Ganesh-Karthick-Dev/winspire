@@ -108,7 +108,7 @@
     padding-bottom: 1.5rem;
     padding-right: 2rem;
     font-family: 'Outfit', sans-serif;
-    font-size: 1.125rem;
+    font-size: 1.33rem; /* Increased to 16pt */
     color: rgba(8, 49, 81, 0.8);
     line-height: 1.6;
     white-space: pre-wrap;

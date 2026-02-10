@@ -64,8 +64,8 @@ function NeuraBentoSlot({ item }: { item: (typeof enablesList)[number] }) {
                 <Icon size={22} />
             </div>
             <div className="ns-stack-text">
-                <h3 className="ns-stack-title">{item.title}</h3>
-                <p className="ns-stack-desc">{item.desc}</p>
+                <h3 className="ns-stack-title" style={{ fontSize: '18pt', color: '#ffffff' }}>{item.title}</h3>
+                <p className="ns-stack-desc" style={{ fontSize: '16pt', color: '#ffffff', opacity: 1 }}>{item.desc}</p>
             </div>
         </div>
     );
@@ -102,7 +102,7 @@ export default function NeuraSection() {
                     >
                         <div className="ns-header-main">
                             <h2 className="ns-mega-title-v2">
-                                NEURA — <br />
+                                NAURA - AI <br />
                                 <span className="text-glow">THE INTELLIGENCE LAYER</span>
                             </h2>
                             <p className="ns-mega-subtitle-v2">
@@ -116,7 +116,7 @@ export default function NeuraSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        style={{ marginTop: "4rem" }}
+                        style={{ marginTop: "4rem", fontSize: "16pt", color: "#ffffff", opacity: 1 }}
                         className="ns-intro-text"
                     >
                         Neura is not software you manage. <br />
@@ -135,8 +135,8 @@ export default function NeuraSection() {
                                     <BrainCircuit size={24} />
                                 </div>
                                 <div className="ns-stack-text">
-                                    <h3 className="ns-stack-title">Predictive, not reactive.</h3>
-                                    <p className="ns-stack-desc">Neura sees the problems before they impact your bottom line.</p>
+                                    <h3 className="ns-stack-title" style={{ fontSize: '18pt', color: '#ffffff' }}>Predictive, not reactive.</h3>
+                                    <p className="ns-stack-desc" style={{ fontSize: '16pt', color: '#ffffffff', opacity: 1 }}>Neura sees the problems before they impact your bottom line.</p>
                                 </div>
                             </div>
                         }
@@ -162,7 +162,7 @@ export default function NeuraSection() {
                                     <div className="ns-supports-list-icon">
                                         <item.icon size={22} className="ns-supports-list-icon-svg" />
                                     </div>
-                                    <span className="ns-supports-list-label">{item.text}</span>
+                                    <span className="ns-supports-list-label" style={{ fontSize: '16pt', color: '#ffffff', opacity: 1 }}>{item.text}</span>
                                 </div>
                             ))}
                         </div>
@@ -286,11 +286,11 @@ export default function NeuraSection() {
 
                 .ns-mega-subtitle-v2 {
                     font-family: 'Outfit', sans-serif;
-                    font-size: clamp(1.25rem, 3vw, 2rem);
-                    font-weight: 300;
+                    font-size: clamp(1.33rem, 3.5vw, 2.25rem); /* Increased slightly */
+                    font-weight: 400; /* Increased weight for visibility */
                     letter-spacing: 0.1em;
                     text-transform: uppercase;
-                    color: #94a3b8;
+                    color: #e2e8f0; /* Brighter than #94a3b8 for better visibility */
                     margin: 0;
                 }
 
@@ -302,12 +302,15 @@ export default function NeuraSection() {
                     margin-top: 3.5rem;
                 }
 
+                /* Intro Text - Force 16pt (21px) */
                 .ns-intro-text {
-                    font-family: 'Outfit', sans-serif;
-                    font-size: 1.5rem;
-                    line-height: 1.6;
-                    color: #cbd5e1;
-                    margin: 0;
+                    font-family: 'Outfit', sans-serif !important;
+                    font-size:  16pt !important; 
+                    line-height: 1.6 !important;
+                    color: #ffffff !important; 
+                    opacity: 1 !important;
+                    margin: 0 !important;
+                    display: block !important;
                 }
 
                 .ns-intro-text strong {
@@ -362,7 +365,7 @@ export default function NeuraSection() {
 
                 .ns-content-intro {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.5rem;
+                    font-size: 1.625rem; /* Increased from 1.5rem */
                     color: #ffffff;
                     margin-bottom: -3rem;
                     font-weight: 600;
@@ -480,18 +483,20 @@ export default function NeuraSection() {
                 }
 
                 .ns-stack-title {
-                    font-size: 1.125rem;
-                    font-weight: 700;
-                    color: #ffffff;
-                    margin: 0 0 0.35rem 0;
-                    letter-spacing: -0.01em;
+                    font-size: 18pt !important; 
+                    font-weight: 700 !important;
+                    color: #ffffff !important;
+                    margin: 0 0 0.35rem 0 !important;
+                    letter-spacing: -0.01em !important;
                 }
 
                 .ns-stack-desc {
-                    font-size: 0.9375rem;
-                    color: #94a3b8;
-                    line-height: 1.5;
-                    margin: 0;
+                    font-size: 16pt !important; /* 16pt */
+                    color: #ffffffdc !important;
+                    opacity: 1 !important;
+                    line-height: 1.5 !important;
+                    margin: 0 !important;
+                    font-weight: 300 !important;
                 }
 
                 /* Grid - Same as MarketReality */
@@ -567,8 +572,8 @@ export default function NeuraSection() {
 
                 .ns-item-desc {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.125rem;
-                    color: #94a3b8;
+                    font-size: 1.33rem; /* Increased to 16pt */
+                    color: #cbd5e1; /* Brighter than #94a3b8 */
                     line-height: 1.6;
                     margin: 0;
                 }
@@ -649,9 +654,9 @@ export default function NeuraSection() {
 
                 .ns-supports-list-label {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1rem;
+                    font-size: 1.25rem; /* Increased from 1rem */
                     font-weight: 500;
-                    color: #e2e8f0;
+                    color: #f1f5f9; /* Brighter than #e2e8f0 */
                 }
 
                 /* CTA Banner - Targeted Spacing & Visibility Redesign */

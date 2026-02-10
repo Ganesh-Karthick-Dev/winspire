@@ -230,7 +230,7 @@ export default function Footer() {
 
                 .footer-tagline {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 0.875rem;
+                    font-size: 1rem; /* Increased from 0.875rem */
                     line-height: 1.6;
                     color: #666;
                     margin: 0 0 32px 0;
@@ -390,7 +390,7 @@ export default function Footer() {
 
                 .column-links :global(a) {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 0.8rem;
+                    font-size: 1rem; /* Increased from 0.8rem */
                     color: #666;
                     text-decoration: none;
                     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

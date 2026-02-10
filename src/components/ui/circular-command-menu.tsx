@@ -220,12 +220,12 @@ function OrbitingItem({
             >
                 <motion.div 
                     className={cn(
-                        "text-white font-outfit font-bold text-lg whitespace-nowrap -translate-y-1/2",
-                        "drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                        "text-white font-outfit font-bold whitespace-nowrap -translate-y-1/2",
+                        "drop-shadow-[0_2px_6px_rgba(0,0,0,1)]"
                     )}
+                    style={{ fontSize: '16pt', color: '#ffffff', x: xPercent }}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    style={{ x: xPercent }}
                     transition={{ delay: 0.6 + index * 0.1 }}
                 >
                     {item.label}

@@ -413,8 +413,8 @@ export function CleanTestimonial() {
         .author-name {
           display: block;
           font-family: 'Outfit', sans-serif;
-          font-size: 1rem;
-          font-weight: 500;
+          font-size: 1.25rem; /* Increased from 1rem */
+          font-weight: 600; /* Slightly bolder */
           color: white;
           letter-spacing: 0.05em;
         }
@@ -422,8 +422,8 @@ export function CleanTestimonial() {
         .author-role {
           display: block;
           font-family: 'Outfit', sans-serif;
-          font-size: 0.8rem;
-          color: rgba(255, 255, 255, 0.6);
+          font-size: 1.1rem; /* Increased from 0.8rem */
+          color: rgba(255, 255, 255, 0.8); /* Slightly more opaque than 0.6 */
           margin-top: 0.25rem;
           letter-spacing: 0.05em;
         }

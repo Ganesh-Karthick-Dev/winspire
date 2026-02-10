@@ -6626,9 +6626,10 @@ footer p {
 /* Paragraphs */
 .ci-para {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.33rem; /* 16pt */
+  color: #ffffff; /* Forced full white for maximum visibility */
   line-height: 1.75;
+  font-weight: 450; /* Slightly heavier for better readability on dark BG */
 }
 
 .ci-para strong {
@@ -6644,12 +6645,13 @@ footer p {
 .ci-pillars-label {
   display: block;
   font-family: 'Outfit', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 1rem; /* Increased from 0.875rem */
+  font-weight: 700; /* Bolder */
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: #ffffff; /* Forced full white */
   margin-bottom: 16px;
+  opacity: 0.9;
 }
 
 .ci-pillars-grid {
@@ -6703,13 +6705,13 @@ footer p {
 
 .ci-pillar-action {
   font-family: 'Outfit', sans-serif;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.875rem; /* Increased from 0.75rem */
+  color: rgba(255, 255, 255, 0.8); /* Increased from 0.5 */
 }
 
 .ci-pillar-name {
   font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
+  font-size: 1.33rem; /* Standardized to 16pt */
   font-weight: 700;
   color: #fff;
 }
@@ -6744,8 +6746,8 @@ footer p {
 
 .ci-quote-content p {
   font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.33rem; /* Standardized to 16pt */
+  color: #ffffff;
   line-height: 1.6;
   margin-bottom: 8px;
 }
@@ -6762,7 +6764,7 @@ footer p {
 /* Right Column - Stats */
 .ci-stats-title {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.4rem; /* Increased from 1.4rem for better hierarchy */
   font-weight: 700;
   color: #fff;
   margin-bottom: 12px;
@@ -6771,8 +6773,8 @@ footer p {
 
 .ci-stats-intro {
   font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.33rem; /* 16pt */
+  color: #ffffff;
   line-height: 1.7;
   margin-bottom: 20px;
 }
@@ -6802,7 +6804,8 @@ footer p {
   z-index: 1;
   transition: transform 0.3s ease;
   font-family: 'Outfit', sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.33rem; /* Standardized to 16pt */
+  font-weight: 500;
   color: #ffffff;
 }
 
@@ -6904,8 +6907,8 @@ footer p {
 /* Closing */
 .ci-closing {
   font-family: 'Outfit', sans-serif;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.33rem; /* 16pt */
+  color: #ffffff;
   line-height: 1.7;
   padding-top: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -6972,7 +6975,7 @@ footer p {
   }
 
   .ci-para {
-    font-size: 1rem;
+    font-size: 1.25rem; /* Adjusted for mobile readability */
     min-width: 0;
     overflow-wrap: break-word;
     word-wrap: break-word;

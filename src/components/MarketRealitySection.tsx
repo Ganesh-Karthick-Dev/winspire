@@ -245,7 +245,7 @@ export default function MarketRealitySection() {
                 .mr-truth-sub {
                     display: block;
                     margin-top: 1.5rem;
-                    color: #fb7185;
+                    color: #f43f5e; /* Unified from #fb7185 */
                     font-weight: 700;
                     font-style: italic;
                 }
@@ -310,7 +310,7 @@ export default function MarketRealitySection() {
 
                 .mr-risk-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.45rem;
+                    font-size: 1.55rem; /* Increased slightly for better visibility */
                     line-height: 1.6;
                     color: #e2e8f0;
                     margin: 0;
@@ -462,7 +462,7 @@ export default function MarketRealitySection() {
 
                 .mr-card-desc {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.15rem;
+                    font-size: 1.33rem; /* Increased to 16pt */
                     line-height: 1.6;
                     color: #94a3b8;
                     margin: 0;

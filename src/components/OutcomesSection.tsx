@@ -335,7 +335,7 @@ export default function OutcomesSection() {
                 .outcome-card {
                     position: relative;
                     height: 100%;
-                    background: rgba(15, 23, 42, 0.4); /* Dark semi-transparent */
+                    background: rgba(15, 23, 42, 0.75); /* Increased opacity from 0.4 for better readability */
                     border-radius: 24px;
                     padding: 3rem 2rem;
                     display: flex;
@@ -385,7 +385,7 @@ export default function OutcomesSection() {
 
                 .card-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.5rem;
+                    font-size: 1.625rem; /* Increased slightly */
                     font-weight: 600;
                     color: white;
                     line-height: 1.3;
@@ -419,10 +419,10 @@ export default function OutcomesSection() {
 
                 .stat-label {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 0.8rem;
+                    font-size: 1rem; /* Increased from 0.8rem */
                     text-transform: uppercase;
                     letter-spacing: 0.1em;
-                    color: #94a3b8;
+                    color: #bae6fd; /* Sky-200 for better visibility */
                     font-weight: 600;
                 }
 
