@@ -18,6 +18,7 @@ import NeuraCapabilitiesSection from '@/components/neura/NeuraCapabilitiesSectio
 import NeuraLivingSystemsSection from '@/components/neura/NeuraLivingSystemsSection';
 import NeuraGeminiEffectSection from '@/components/neura/NeuraGeminiEffectSection';
 import NeuraStaySecureSection from '@/components/neura/NeuraStaySecureSection';
+import FloatingSectionNav from '@/components/FloatingSectionNav';
 
 import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
@@ -132,7 +133,7 @@ export default function TempNeuraAI() {
                         </div>
                     </div>
 
-                    <section ref={secondSectionRef} className="temp-neura-second-section" aria-label="The Problem Neura Solves">
+                    <section id="problem" ref={secondSectionRef} className="temp-neura-second-section" aria-label="The Problem Neura Solves">
                         <div ref={whiteSectionRef} className="temp-neura-second-white">
                             {/* Cards Layer - includes title */}
                             <div className="temp-neura-cards-layer">
@@ -142,17 +143,35 @@ export default function TempNeuraAI() {
                     </section>
                 </div>
 
-                <NeuraDifferentSection />
-                <NeuraEfficiencySection />
-                <NeuraCapabilitiesSection />
-                <NeuraLivingSystemsSection />
+                <div id="different">
+                    <NeuraDifferentSection />
+                </div>
+                <div id="efficiency">
+                    <NeuraEfficiencySection />
+                </div>
+                <div id="capabilities">
+                    <NeuraCapabilitiesSection />
+                </div>
+                <div id="living-systems">
+                    <NeuraLivingSystemsSection />
+                </div>
                 <NeuraGeminiEffectSection />
                 {/* <NeuraStaySecureSection /> - merged into GeminiEffectSection */}
-                <NeuraCTASection />
+                <div id="contact">
+                    <NeuraCTASection />
+                </div>
                 <NeuraBentoSection />
                 <NeuraIntegrationSection />
                 <NeuraClosingPerspectiveSection />
 
+                <FloatingSectionNav sections={[
+                    { id: 'problem', label: 'Problem' },
+                    { id: 'different', label: 'Different' },
+                    { id: 'efficiency', label: 'Efficiency' },
+                    { id: 'capabilities', label: 'Capabilities' },
+                    { id: 'living-systems', label: 'Living Systems' },
+                    { id: 'contact', label: 'Contact' },
+                ]} />
             </div>
         </Layout>
     );

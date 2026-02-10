@@ -21,6 +21,7 @@ import OutcomesHorizontalScroll from '@/components/outcomes/OutcomesHorizontalSc
 import OutcomesSecurity from '@/components/outcomes/OutcomesSecurity';
 import OutcomesFuture from '@/components/outcomes/OutcomesFuture';
 import OutcomesCTA from '@/components/outcomes/OutcomesCTA';
+import FloatingSectionNav from '@/components/FloatingSectionNav';
 import pageStyles from '@/styles/temp-outcomes.module.css'; 
 import styles from '@/styles/company.module.css'; // Reusing Company styles for Hero
 
@@ -77,13 +78,31 @@ export default function Outcomes() {
 
             <div className={pageStyles.outcomesPageContent}>
                 <OutcomesHero />
-                <OutcomesContent />
-                <OutcomesSystems />
-                <OutcomesHumanCentric />
+                <div id="overview">
+                    <OutcomesContent />
+                </div>
+                <div id="systems">
+                    <OutcomesSystems />
+                </div>
+                <div id="human-centric">
+                    <OutcomesHumanCentric />
+                </div>
                 <OutcomesHorizontalScroll />
-                <OutcomesSecurity />
+                <div id="security">
+                    <OutcomesSecurity />
+                </div>
                 <OutcomesFuture />
-                <OutcomesCTA />
+                <div id="contact">
+                    <OutcomesCTA />
+                </div>
+
+                <FloatingSectionNav sections={[
+                    { id: 'overview', label: 'Overview' },
+                    { id: 'systems', label: 'Systems' },
+                    { id: 'human-centric', label: 'Human-Centric' },
+                    { id: 'security', label: 'Security' },
+                    { id: 'contact', label: 'Contact' },
+                ]} />
             </div>
         </Layout>
     );

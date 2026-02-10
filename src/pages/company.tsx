@@ -27,6 +27,7 @@ import CultureSection from '@/components/temp-company/CultureSection';
 import LeadershipSection from '@/components/temp-company/LeadershipSection';
 import VisionMissionSection from '@/components/temp-company/VisionMissionSection';
 import FinalCTASection from '@/components/temp-company/FinalCTASection';
+import FloatingSectionNav from '@/components/FloatingSectionNav';
 import { VideoScrollHero } from '@/components/ui/video-scroll-hero';
 
 // 3D Model - same as company page
@@ -235,6 +236,15 @@ export default function TempCompany() {
                 <div id="contact">
                     <FinalCTASection />
                 </div>
+
+                <FloatingSectionNav sections={[
+                    { id: 'our-story', label: 'Story' },
+                    { id: 'why-we-exist', label: 'Purpose' },
+                    { id: 'how-we-work', label: 'Workflow' },
+                    { id: 'technology', label: 'Tech' },
+                    { id: 'leadership', label: 'Leadership' },
+                    { id: 'contact', label: 'Contact' },
+                ]} />
             </div>
         </Layout>
     );

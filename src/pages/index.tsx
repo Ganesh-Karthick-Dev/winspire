@@ -28,6 +28,7 @@ import { resetLoaderToZero } from '@/lib/loaderManager';
 import { shouldDisable3D } from '@/lib/threeUtils';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { scrollKeyframes, animationSettings } from '@/lib/scrollAnimations';
+import FloatingSectionNav from '@/components/FloatingSectionNav';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
@@ -369,6 +370,15 @@ export default function TempHome() {
 
                 {/* ⚠️ DISABLED: EngagementModelsSection causes compilation hang */}
                 {/* <EngagementModelsSection /> */}
+
+                <FloatingSectionNav sections={[
+                    { id: 'about', label: 'About' },
+                    { id: 'why-winspire', label: 'Why Winspire' },
+                    { id: 'market-reality', label: 'Reality' },
+                    { id: 'neura-intelligence', label: 'Neura AI' },
+                    { id: 'outcomes', label: 'Outcomes' },
+                    { id: 'faq', label: 'FAQ' },
+                ]} />
 
             </div>
 

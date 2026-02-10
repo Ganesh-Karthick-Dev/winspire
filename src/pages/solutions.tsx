@@ -13,6 +13,7 @@ import SolutionsFinalCTA from '../components/solutions/SolutionsFinalCTA';
 import { solutionsScrollKeyframes } from '@/lib/solutionsScrollAnimations';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { shouldDisable3D } from '@/lib/threeUtils';
+import FloatingSectionNav from '@/components/FloatingSectionNav';
 import styles from '@/styles/company.module.css';
 
 const GLTFViewer = dynamic(() => import('@/components/GLTFViewer'), {
@@ -51,14 +52,33 @@ export default function TempSolutions() {
                 </div>
             )}
             <SolutionsHero />
-            <SolutionsContent />
-            <RevenueCycleSolutions />
-            <TargetedSolutions />
-            <IntelligenceSolutionsSection />
-            <RevenueExperience />
-            <CareModels />
-            <PeopleCultureSection />
-            <SolutionsFinalCTA />
+            <div id="overview">
+                <SolutionsContent />
+            </div>
+            <div id="revenue-cycle">
+                <RevenueCycleSolutions />
+            </div>
+            <div id="targeted">
+                <TargetedSolutions />
+            </div>
+            <div id="intelligence">
+                <IntelligenceSolutionsSection />
+            </div>
+            <div id="care-models">
+                <CareModels />
+            </div>
+            <div id="contact">
+                <SolutionsFinalCTA />
+            </div>
+
+            <FloatingSectionNav sections={[
+                { id: 'overview', label: 'Overview' },
+                { id: 'revenue-cycle', label: 'Revenue Cycle' },
+                { id: 'targeted', label: 'Targeted' },
+                { id: 'intelligence', label: 'Intelligence' },
+                { id: 'care-models', label: 'Care Models' },
+                { id: 'contact', label: 'Contact' },
+            ]} />
         </Layout>
     );
 }
