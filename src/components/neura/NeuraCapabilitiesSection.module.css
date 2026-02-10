@@ -286,6 +286,14 @@
     margin-bottom: 0.5rem;
 }
 
+.collapsed .cardTitle {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    margin: 2rem auto 0;
+    width: max-content;
+}
+
 .cardDescription {
     font-family: 'Inter', sans-serif;
     font-size: 1.15rem;
