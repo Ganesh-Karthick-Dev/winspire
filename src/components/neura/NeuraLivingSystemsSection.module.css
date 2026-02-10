@@ -86,12 +86,12 @@
 /* Accent - gradient text like hero section, NO border */
 .accent {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
     line-height: 1.35;
     margin: 1rem 0 0;
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #0D1F47 0%, #264792 35%, #4073BF 65%, #332E73 100%);
+    background: linear-gradient(135deg, #60a5fa 0%, #4fc3f7 50%, #818cf8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
