@@ -106,7 +106,7 @@ export default function VisionMissionSection() {
             };
 
             const collapseItem = (item: any, title: any, content: any) => {
-                gsap.to(item, { opacity: 0.4, duration: 0.5, ease: "power2.inOut" });
+                gsap.to(item, { opacity: 0.7, duration: 0.5, ease: "power2.inOut" });
                 gsap.to(title, { scale: 1, marginBottom: '0', color: '#94a3b8', duration: 0.5, ease: "power2.inOut" });
                 gsap.to(content, { height: 0, opacity: 0, duration: 0.4, ease: 'power1.in' });
             };

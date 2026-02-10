@@ -40,7 +40,7 @@
 .glassCard {
     position: relative;
     z-index: 10;
-    background: rgba(15, 23, 42, 0.6);
+    background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -74,7 +74,7 @@
 .subText {
     font-size: 1.25rem;
     line-height: 1.6;
-    color: #94a3b8;
+    color: #cbd5e1;
     max-width: 700px;
     margin: 0 auto 3rem auto;
     font-weight: 300;

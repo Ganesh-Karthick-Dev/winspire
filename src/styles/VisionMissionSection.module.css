@@ -382,7 +382,7 @@
     flex-direction: column;
     padding: 3rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    opacity: 0.6;
+    opacity: 1;
     transition: all 0.3s ease;
 }
 
@@ -430,7 +430,7 @@
 
 .valueDescriptionText {
     font-size: 1.25rem;
-    color: #cbd5e1;
+    color: #e2e8f0;
     font-weight: 300;
     line-height: 1.625;
     padding-top: 1.5rem;
