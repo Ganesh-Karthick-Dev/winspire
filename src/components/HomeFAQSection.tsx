@@ -82,35 +82,10 @@ export default function HomeFAQSection() {
     }, 550);
   };
 
+  // No entry animation to ensure visibility
   useGSAP(() => {
-    // Register plugin inside useGSAP is safe
     gsap.registerPlugin(ScrollTrigger);
     
-    // Animate items in
-    const items = gsap.utils.toArray<HTMLElement>(`.${styles.faqItem}`);
-    
-    if (items.length > 0) {
-      // Set initial state via GSAP
-      gsap.set(items, { opacity: 0, y: 20 });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom-=100", // Trigger as soon as it's nearly in view
-          toggleActions: "play none none reverse",
-          once: true
-        }
-      });
-
-      tl.to(items, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.1,
-        duration: 0.6,
-        ease: "power2.out",
-      });
-    }
-
     // Explicitly refresh after a short delay to account for other sections loading
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
@@ -118,9 +93,6 @@ export default function HomeFAQSection() {
 
     return () => {
       clearTimeout(timer);
-      ScrollTrigger.getAll().forEach(st => {
-        if (st.trigger === containerRef.current) st.kill();
-      });
     };
   }, { scope: containerRef });
 

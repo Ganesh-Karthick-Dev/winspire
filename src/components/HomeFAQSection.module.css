@@ -1,12 +1,15 @@
 .section {
     position: relative;
-    width: 100%;
-    padding: 5rem 1rem;
+    width: 98%;
+    margin: 4rem auto;
+    padding: 5rem 2rem;
     z-index: 50; /* Ensure it sits above the model (z-20) */
     background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    margin-top: 0;
+    border-radius: 48px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
 }
 
 .container {
@@ -114,7 +117,6 @@
     white-space: pre-wrap;
 }
 
-/* Responsive adjustments */
 @media (min-width: 768px) {
     .section {
         padding: 6rem 2rem;
@@ -126,5 +128,22 @@
     
     .question {
         font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        width: calc(100% - 20px);
+        margin: 2rem 10px;
+        padding: 3rem 1rem;
+        border-radius: 24px;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
     }
 }
