@@ -71,9 +71,9 @@
 .carouselContainer {
     position: relative;
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px; /* Adjusted to comfortably fit 3 cards + gaps */
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 60px; /* Padding for arrows */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -82,11 +82,9 @@
 .carouselTrack {
     display: flex;
     gap: 30px;
-    overflow: hidden;
-    width: 100%;
-    padding: 20px 0;
-    /* Space for shadows/hover effects */
-    justify-content: center;
+    padding: 40px 0;
+    width: max-content;
+    will-change: transform;
 }
 
 .card {
@@ -219,35 +217,46 @@
         padding: 60px 0 60px 0;
     }
 
-    .description {
-        padding: 0 1.5rem;
-        font-size: 1rem;
+    .titleWrapper {
+        margin-bottom: 40px;
     }
 
     .mainTitle {
-        font-size: 3rem;
+        font-size: 2.5rem;
         padding: 0 1rem;
     }
 
+    .carouselContainer {
+        padding: 0 20px;
+        max-width: 100%;
+        overflow: visible !important;
+    }
+
     .carouselTrack {
-        flex-direction: column;
-        align-items: center;
-        overflow: visible;
-        gap: 2rem;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 32px !important;
+        width: 100% !important;
+        transform: none !important;
+        padding: 0 !important;
     }
 
     .card {
-        width: 100%;
-        max-width: 350px;
-        flex: 0 0 auto;
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 auto !important;
+        opacity: 1 !important;
+        transform: none !important;
+        min-height: 400px;
+    }
+
+    .cardContent {
+        width: 92%;
+        padding: 24px;
+        margin-bottom: 16px;
     }
 
     .navButton {
-        display: none;
-        /* Hide arrows on mobile, just stack them */
-    }
-
-    .carouselContainer {
-        padding: 0 1.5rem;
+        display: none !important;
     }
 }

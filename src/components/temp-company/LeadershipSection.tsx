@@ -10,25 +10,33 @@ if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
 
-const CARD_WIDTH = 350;
-const CARD_GAP = 30;
 const AUTO_ADVANCE_MS = 4500;
 
 const principles = [
     {
-        title: 'Design before scaling',
-        description: 'We believe in laying a robust foundation before rapid expansion. Every system is architected for future growth.',
+        title: 'One IDEA at a time. One ACTION at a time. One DAY at a time.',
+        description: 'Small steps and disciplined progress compound into momentum. Consistency is the engine of transformation — not perfection, not overnight breakthroughs. This mindset fuels meaningful change when teams show up every day with curiosity and belief.',
         image: '/company/design before our scale.webp'
     },
     {
-        title: 'Solve root causes, not symptoms',
-        description: 'Our approach digs deep to find the underlying issues, ensuring long-term solutions instead of quick fixes.',
+        title: 'Rural Hospitals Struggle with Staffing Shortages Amid $50B Funding',
+        description: '$50B is coming to rural healthcare, yet staffing shortages remain the #1 operational failure point. The difference isn’t more money — it’s structure, clarity, measurable workflows, and strategy. The right design brings measurable stability in just 90 days.',
         image: '/temp/656934.jpg'
     },
     {
-        title: 'Build systems that outlast individuals',
-        description: 'Creating resilient processes and knowledge bases that ensure continuity and excellence regardless of personnel changes.',
+        title: 'Silent denials: The hidden pandemic in RCM. How Neura AI can help.',
+        description: 'Silent denials aren’t delays — they are algorithmic denials without codes, quietly draining revenue. Detecting and acting on these early with AI keeps AR under control and improves collections.',
         image: '/company/Build systems that outlast individuals.webp'
+    },
+    {
+        title: 'Neura Boosts Collections by 30% in 90 Days.',
+        description: '30% better collections in under 3 months — no system replacement needed. A self-learning revenue cycle platform spots revenue leakage, automates workflows, and drives outcomes with real-time insights and smarter follow-ups. This isn’t another dashboard — it’s a performance engine that accelerates results and minimizes dollars left uncollected.',
+        image: '/company/design before our scale.webp'
+    },
+    {
+        title: 'How Neura’s Intelligence Layer Helps RCM Leaders See Clearly',
+        description: 'Most RCM systems aren’t broken — they’re blind. Without real-time visibility into denials, leakage, and performance, teams make decisions based on lagging spreadsheets. Neura’s intelligence layer tracks performance across the full cycle, identifies revenue loss early, and transforms reactive processes into proactive execution. Visibility isn’t optional — it’s foundational to sustained revenue health.',
+        image: '/temp/656934.jpg'
     },
 ];
 
@@ -100,16 +108,26 @@ export default function LeadershipSection() {
     }, []);
     
 
-    // Center the active slide: move track so active card's center aligns with container center
-    // Only apply complex transform on desktop
-    const effectiveWidth = containerWidth || 1400;
+    const currentWidth = typeof window !== 'undefined' ? window.innerWidth : 1400;
+    const CARD_WIDTH = isMobile ? currentWidth - 40 : 380;
+    const CARD_GAP = isMobile ? 32 : 40;
+    const effectiveWidth = containerWidth || currentWidth;
+
+    // Center the active slide - Desktop Only
     const offset = effectiveWidth / 2 - (activeIndex * (CARD_WIDTH + CARD_GAP) + CARD_WIDTH / 2);
 
-    // On mobile, we disable the track translation and let CSS stack them
-    const trackStyle = isMobile ? {} : {
+    const trackStyle = isMobile ? {
+        display: 'flex',
+        flexDirection: 'column' as const,
+        gap: `${CARD_GAP}px`,
+        width: '100%',
+        alignItems: 'center'
+    } : {
         transform: `translateX(${offset}px)`,
-        transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        transition: 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)',
         width: 'max-content',
+        display: 'flex',
+        gap: `${CARD_GAP}px`,
     };
 
     return (
@@ -124,44 +142,77 @@ export default function LeadershipSection() {
                     <p className={styles.description}>
                         Winspire is led by professionals who have built, managed, and transformed revenue cycles across diverse healthcare environments.
                     </p>
-                    <p className={styles.description}>
-                        Experience informs our decisions. Discipline guides our execution. Integrity anchors everything we do.
-                    </p>
                 </div>
             </div>
 
             <div
                 ref={containerRef}
                 className={styles.carouselContainer}
-                style={{ overflow: 'hidden' }}
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
+                style={{ 
+                    overflow: isMobile ? 'visible' : 'visible', 
+                    maxWidth: '1400px',
+                    display: isMobile ? 'block' : 'flex'
+                }}
+                onMouseEnter={() => !isMobile && setIsPaused(true)}
+                onMouseLeave={() => !isMobile && setIsPaused(false)}
             >
-                <button onClick={prevSlide} className={`${styles.navButton} ${styles.prevButton}`} aria-label="Previous">
-                    <ArrowLeft size={24} />
-                </button>
+                {!isMobile && (
+                    <button onClick={prevSlide} className={`${styles.navButton} ${styles.prevButton}`} aria-label="Previous">
+                        <ArrowLeft size={24} />
+                    </button>
+                )}
 
                 <div className={styles.carouselTrack} style={trackStyle}>
-                    {principles.map((p, i) => (
-                        <div
-                            key={i}
-                            className={`${styles.card} ${i === activeIndex ? styles.activeCard : ''}`}
-                            style={{ opacity: i === activeIndex ? 1 : 0.5, transform: i === activeIndex ? 'scale(1)' : 'scale(0.9)' }}
-                        >
-                            <div className={styles.cardImageContainer}>
-                                <img src={p.image} alt={p.title} className={styles.cardImage} />
+                    {principles.map((p, i) => {
+                        const isPrev = (i === (activeIndex - 1 + principles.length) % principles.length);
+                        const isNext = (i === (activeIndex + 1) % principles.length);
+                        const isActive = i === activeIndex;
+                        
+                        let opacity = 1;
+                        let scale = 1;
+                        
+                        if (!isMobile) {
+                            opacity = 0.3;
+                            scale = 0.85;
+                            if (isActive) {
+                                opacity = 1;
+                                scale = 1;
+                            } else if (isPrev || isNext) {
+                                opacity = 0.7;
+                                scale = 0.95;
+                            }
+                        }
+
+                        return (
+                            <div
+                                key={i}
+                                className={`${styles.card} ${isActive ? styles.activeCard : ''}`}
+                                style={{ 
+                                    opacity, 
+                                    transform: isMobile ? 'none' : `scale(${scale})`,
+                                    transition: isMobile ? 'none' : 'all 0.6s cubic-bezier(0.23, 1, 0.32, 1)',
+                                    flex: isMobile ? '0 0 auto' : `0 0 ${CARD_WIDTH}px`,
+                                    width: isMobile ? '100%' : `${CARD_WIDTH}px`,
+                                    maxWidth: isMobile ? '500px' : 'none'
+                                }}
+                            >
+                                <div className={styles.cardImageContainer}>
+                                    <img src={p.image} alt={p.title} className={styles.cardImage} />
+                                </div>
+                                <div className={styles.cardContent}>
+                                    <h3 className={styles.cardTitle}>{p.title}</h3>
+                                    <p className={styles.cardText}>{p.description}</p>
+                                </div>
                             </div>
-                            <div className={styles.cardContent}>
-                                <h3 className={styles.cardTitle}>{p.title}</h3>
-                                <p className={styles.cardText}>{p.description}</p>
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
 
-                <button onClick={nextSlide} className={`${styles.navButton} ${styles.nextButton}`} aria-label="Next">
-                    <ArrowRight size={24} />
-                </button>
+                {!isMobile && (
+                    <button onClick={nextSlide} className={`${styles.navButton} ${styles.nextButton}`} aria-label="Next">
+                        <ArrowRight size={24} />
+                    </button>
+                )}
             </div>
         </section>
     );
