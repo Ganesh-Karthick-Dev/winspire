@@ -12,7 +12,7 @@ export default function NeuraClosingPerspectiveSection() {
                 <span className={styles.cornerBottomLeft} aria-hidden="true">+</span>
                 <span className={styles.cornerBottomRight} aria-hidden="true">+</span>
                 <div className={styles.container}>
-                    <h2 className={styles.title}>Closing Perspective</h2>
+                    {/* <h2 className={styles.title}>Closing Perspective</h2> */}
                 <p className={styles.paragraph}>Revenue cycles do not fail because teams lack effort.</p>
                 <p className={styles.paragraph}>
                     They fail when leadership lacks a system that thinks, adapts, and executes at the speed of modern healthcare.
