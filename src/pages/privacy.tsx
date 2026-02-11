@@ -1,5 +1,5 @@
 /**
- * Privacy Policy Page - Simple Layout
+ * Privacy Policy Page - Updated
  */
 
 'use client';
@@ -18,203 +18,199 @@ export default function Privacy() {
     }, []);
 
     return (
-        <Layout title="Privacy Policy" description="Winspire RCM Privacy Policy">
+        <Layout title="Privacy Policy" description="Winspire RCM Privacy & Messaging Policy">
             <div style={{ background: '#fff', minHeight: '100vh', width: '100%' }}>
                 <article className="privacy-article">
-                    <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-                        <h1>Privacy Policy</h1>
-                        <p className="tagline">Privacy is not a checkbox.</p>
-                        <p className="tagline-strong">It's a responsibility.</p>
+                    <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                        <h1>Privacy & Messaging Policy</h1>
                     </div>
 
-                    <p>At Winspire RCM, we operate in an industry where trust is not optional. Healthcare data carries real consequences, and we treat that responsibility with the seriousness it deserves.</p>
-                    <p>This Privacy Policy explains how we collect, use, protect, and respect information when you interact with our website, services, and platforms, including Neura AI.</p>
+                    <p>Winspire RCM (“we,” “our,” or “us”) values your privacy and is committed to protecting your personal information. This Privacy & Messaging Policy explains how we collect, use, disclose, and safeguard information when you visit our website, engage with our services, or interact with us through SMS, email, phone calls, or other communication campaigns.</p>
+                    <p>By using our website or engaging with our communications, you consent to the practices described in this Policy.</p>
 
-                    <h2>Our Privacy Philosophy</h2>
-                    <p>We believe:</p>
+                    <h2>1. Introduction</h2>
+                    <p>This Policy explains how Winspire RCM collects, uses, and protects personal information.</p>
+                    <p>“Personal information” includes details that identify or relate to you directly or indirectly, such as your name, contact details, professional information, device data, and interaction history.</p>
+                    <p>This Policy applies to:</p>
                     <ul>
-                        <li>Data should be used with purpose, not curiosity</li>
-                        <li>Access should be limited, not convenient</li>
-                        <li>Transparency should be default, not requested</li>
-                        <li>Security should be proactive, not reactive</li>
+                        <li>Website visitors</li>
+                        <li>Business inquiries and prospects</li>
+                        <li>Job applicants and candidates</li>
+                        <li>Clients and partners</li>
+                        <li>Individuals who opt in to receive communications from Winspire RCM</li>
                     </ul>
-                    <p>Privacy is designed into our systems, processes, and culture.</p>
 
-                    <h2>Information We Collect</h2>
-                    <p>We collect only what is necessary to operate effectively and responsibly.</p>
-
-                    <h3>Information You Provide Directly</h3>
-                    <p>This may include:</p>
+                    <h2>2. Information We Collect</h2>
+                    <p>We may collect the following types of information:</p>
+                    <h3>a. Information You Provide</h3>
                     <ul>
-                        <li>Name, title, and organization</li>
-                        <li>Email address and contact details</li>
-                        <li>Information shared during demos or inquiries</li>
-                        <li>Communications you send to us</li>
+                        <li>Name, email address, phone number</li>
+                        <li>Company name, job title, and professional details</li>
+                        <li>Messages, inquiries, and form submissions</li>
+                        <li>Resume and application details (for careers)</li>
                     </ul>
-                    <p>We do not collect information without a clear operational reason.</p>
-
-                    <h3>Information Collected Automatically</h3>
-                    <p>When you visit our website, we may collect limited technical information such as:</p>
+                    <h3>b. Information Collected Automatically</h3>
                     <ul>
-                        <li>Browser type and device information</li>
-                        <li>IP address and general location</li>
-                        <li>Pages visited and time spent</li>
+                        <li>IP address, browser type, device information</li>
+                        <li>Pages visited, interaction data, and usage patterns</li>
+                        <li>Approximate location based on IP address</li>
                     </ul>
-                    <p>This data helps us improve performance, security, and experience.</p>
-                    <p>It is never used to profile individuals personally.</p>
 
-                    <h2>How We Use Information</h2>
-                    <p>We use information only for legitimate business purposes, including:</p>
+                    <h2>3. How We Use Your Information</h2>
+                    <p>We use your information to:</p>
                     <ul>
-                        <li>Responding to inquiries and requests</li>
-                        <li>Providing demonstrations or services</li>
-                        <li>Improving our website and platform performance</li>
-                        <li>Communicating relevant updates</li>
-                        <li>Ensuring security and compliance</li>
+                        <li>Respond to inquiries and requests</li>
+                        <li>Provide information about our services</li>
+                        <li>Schedule meetings, demos, or interviews</li>
+                        <li>Share job openings and application updates</li>
+                        <li>Improve our website, services, and communications</li>
+                        <li>Maintain security and prevent misuse</li>
+                        <li>Comply with legal and regulatory requirements</li>
                     </ul>
-                    <p>We do not sell, rent, or trade personal information.</p>
+                    <p>We do not collect or request patient medical records, insurance information, or Protected Health Information (PHI) through general website forms.</p>
 
-                    <h2>Use of Healthcare and Client Data</h2>
-                    <p>When providing services, we may process healthcare-related or operational data on behalf of clients.</p>
-                    <p>In these cases:</p>
+                    <h2>4. Messaging & Communications Policy</h2>
+                    <h3>a. Types of Messages You May Receive</h3>
+                    <p>If you opt in, you may receive communications related to:</p>
                     <ul>
-                        <li>We act strictly as a data processor</li>
-                        <li>Data ownership remains with the client</li>
-                        <li>Access is limited to authorized personnel</li>
-                        <li>Use is governed by contractual agreements</li>
+                        <li>Winspire RCM services and capabilities</li>
+                        <li>Job openings and career opportunities</li>
+                        <li>Interview scheduling and reminders</li>
+                        <li>Application or onboarding status updates</li>
+                        <li>Operational or administrative communications</li>
                     </ul>
-                    <p>All healthcare data is handled in alignment with applicable regulations, including HIPAA where applicable.</p>
+                    <p>We do not send unsolicited promotional messages.</p>
 
-                    <h2>Data Protection and Security</h2>
-                    <p>Security is treated as an operational discipline, not an IT feature.</p>
-                    <p>We implement:</p>
+                    <h3>b. Consent</h3>
+                    <p>By providing your phone number or email address through our website, forms, or direct communication, you consent to receive communications from Winspire RCM relevant to your inquiry, application, or professional engagement.</p>
+                    <p>Consent is not a condition of purchase or service.</p>
+
+                    <h3>c. Message Frequency</h3>
+                    <p>Message frequency may vary based on:</p>
                     <ul>
-                        <li>Role-based access controls</li>
-                        <li>Encryption in transit and at rest</li>
-                        <li>Secure infrastructure and monitoring</li>
-                        <li>Regular internal reviews and audits</li>
+                        <li>Your interaction with us</li>
+                        <li>Client engagement requirements</li>
+                        <li>Hiring or interview processes</li>
                     </ul>
-                    <p>No system is ever claimed to be infallible.</p>
-                    <p>But protection is continuously strengthened.</p>
 
-                    <h2>Sharing of Information</h2>
-                    <p>Information may be shared only:</p>
+                    <h3>d. Message and Data Rates</h3>
+                    <p>Standard message and data rates may apply based on your mobile carrier and service plan.</p>
+
+                    <h3>e. Opt Out Instructions</h3>
+                    <p>You may opt out at any time:</p>
                     <ul>
-                        <li>With trusted service providers under strict confidentiality</li>
-                        <li>When required by law or regulation</li>
-                        <li>To protect rights, safety, or security</li>
+                        <li>SMS: Reply “STOP” to unsubscribe from text messages</li>
+                        <li>Email: Click the “Unsubscribe” link in the email or reply with “Unsubscribe”</li>
                     </ul>
-                    <p>We never share data for advertising or unrelated commercial use.</p>
+                    <p>After opting out, you may receive a confirmation message. No further messages will be sent unless you re opt in.</p>
 
-                    <h2>Cookies and Tracking</h2>
-                    <p>Our website may use cookies or similar technologies to:</p>
+                    <h3>f. Support & Help</h3>
+                    <p>For assistance:</p>
                     <ul>
-                        <li>Improve site functionality</li>
-                        <li>Understand usage patterns</li>
-                        <li>Enhance user experience</li>
+                        <li>Reply “HELP” to any SMS message</li>
+                        <li>Email: <a href="mailto:contact@winspirercm.com">contact@winspirercm.com</a></li>
+                        <li>Phone: +1 (585) 563 7788</li>
                     </ul>
-                    <p>You may control cookie preferences through your browser settings.</p>
 
-                    <h2>Data Retention</h2>
-                    <p>We retain information only for as long as necessary:</p>
+                    <h2>5. Sharing of Information</h2>
+                    <p>We respect your privacy.</p>
                     <ul>
-                        <li>To fulfill the purpose for which it was collected</li>
-                        <li>To comply with legal or contractual obligations</li>
+                        <li>We do not sell, rent, or share your personal information with third parties for promotional or marketing purposes.</li>
+                        <li>Information may be shared only with trusted service providers who support our operations (such as hosting, communication, or scheduling tools), and only to the extent necessary to perform those services.</li>
+                        <li>We may disclose information if required by law or to protect the rights, security, and integrity of Winspire RCM.</li>
                     </ul>
-                    <p>When data is no longer required, it is securely deleted or anonymized.</p>
 
-                    <h2>Your Rights</h2>
+                    <h2>6. Data Security</h2>
+                    <p>We use industry standard administrative, technical, and organizational safeguards to protect your information from unauthorized access, misuse, alteration, or disclosure.</p>
+                    <p>While we take security seriously, no system can be guaranteed to be completely secure. If you believe your information has been compromised, please contact us immediately.</p>
+
+                    <h2>7. Children’s Privacy</h2>
+                    <p>Our services and communications are intended for adults.</p>
+                    <p>We do not knowingly collect personal information from individuals under the age of 18.</p>
+
+                    <h2>8. Data Retention</h2>
+                    <p>We retain personal information only as long as necessary to:</p>
+                    <ul>
+                        <li>Fulfill the purpose for which it was collected</li>
+                        <li>Meet business, legal, and compliance requirements</li>
+                        <li>Resolve disputes and enforce agreements</li>
+                    </ul>
+
+                    <h2>9. Your Privacy Rights</h2>
                     <p>Depending on your location, you may have the right to:</p>
                     <ul>
                         <li>Access your personal information</li>
-                        <li>Request correction or deletion</li>
-                        <li>Limit or object to certain uses</li>
-                        <li>Request information about data handling</li>
+                        <li>Request corrections</li>
+                        <li>Request deletion</li>
+                        <li>Withdraw consent for communications</li>
                     </ul>
-                    <p>We respect these rights and respond responsibly.</p>
+                    <p>To exercise your rights, contact us at <a href="mailto:contact@winspirercm.com">contact@winspirercm.com</a>.</p>
 
-                    <h2>Third-Party Links</h2>
-                    <p>Our website may contain links to third-party sites.</p>
-                    <p>We are not responsible for the privacy practices or content of those sites.</p>
-                    <p>We encourage reviewing their policies separately.</p>
+                    <h2>10. Policy Updates</h2>
+                    <p>We may update this Policy periodically. Any changes will be posted on this page with an updated effective date. Continued use of our website or services constitutes acceptance of the revised Policy.</p>
 
-                    <h2>Policy Updates</h2>
-                    <p>This Privacy Policy may be updated periodically to reflect:</p>
-                    <ul>
-                        <li>Regulatory changes</li>
-                        <li>Operational improvements</li>
-                        <li>Security enhancements</li>
-                    </ul>
-                    <p>Updates will be posted on this page with the revised effective date.</p>
-
-                    <h2>Contact Us</h2>
-                    <p>If you have questions about privacy, data handling, or security practices, you may contact us at:</p>
-                    <p><a href="mailto:privacy@winspirercm.com" style={{ color: '#3b82f6' }}>privacy@winspirercm.com</a></p>
-                    <p>or through our official contact channels.</p>
-
-                    <h2>Final Word</h2>
-                    <p>Privacy is not just about compliance.</p>
-                    <p style={{ fontWeight: '600' }}>It's about respect.</p>
-                    <p>We protect data the same way we manage revenue cycles — deliberately, transparently, and with accountability.</p>
-                    <p style={{ color: '#999', fontSize: '13px', marginTop: '32px' }}>Last updated: January 2, 2026</p>
+                    <h2>11. Contact Information</h2>
+                    <p>For questions, concerns, or privacy related requests:</p>
+                    <p><strong>Winspire RCM</strong><br />
+                    Email: <a href="mailto:contact@winspirercm.com">contact@winspirercm.com</a><br />
+                    Phone: +1 (585) 563 7788</p>
 
                     <style jsx>{`
                         .privacy-article {
                             max-width: 900px;
                             margin: 0 auto;
                             padding: 160px 48px 60px;
-                            color: #333;
-                            font-size: 15px;
-                            line-height: 1.7;
+                            color: #1a1a1a !important;
+                            font-size: 16pt; /* Requested font size */
+                            line-height: 1.6;
                         }
                         h1 {
-                            font-size: 2rem;
-                            margin-bottom: 4px;
-                            color: #111;
-                        }
-                        .tagline {
-                            font-style: italic;
-                            color: #666;
-                            margin: 0 0 2px;
-                        }
-                        .tagline-strong {
-                            font-weight: 600;
-                            color: #111;
-                            margin: 0 0 12px;
+                            font-size: 2.5rem;
+                            margin-bottom: 20px;
+                            color: #000000 !important;
                         }
                         h2 {
-                            font-size: 1.1rem;
-                            font-weight: 600;
-                            color: #111;
-                            margin: 20px 0 6px;
-                            border-bottom: 1px solid #e5e7eb;
-                            padding-bottom: 4px;
+                            font-size: 1.4rem;
+                            font-weight: 700;
+                            color: #000000 !important;
+                            margin: 48px 0 24px; /* Increased space */
+                            padding-top: 0;
+                            border-bottom: 1px solid #eee;
+                            padding-bottom: 12px;
                         }
                         h3 {
-                            font-size: 0.95rem;
+                            font-size: 1.15rem;
                             font-weight: 600;
-                            color: #333;
-                            margin: 12px 0 4px;
+                            color: #1a1a1a !important;
+                            margin: 32px 0 16px; /* Increased space */
                         }
                         p {
-                            margin: 0 0 6px;
+                            margin: 0 0 16px; /* Increased space */
+                            color: #1a1a1a !important;
                         }
                         ul {
-                            margin: 4px 0 6px 20px;
+                            margin: 0 0 24px 20px;
                             padding: 0;
+                            color: #1a1a1a !important;
                         }
                         li {
-                            margin-bottom: 2px;
+                            margin-bottom: 4px;
+                            color: #1a1a1a !important;
+                        }
+                        a {
+                            color: #3b82f6 !important;
+                            text-decoration: underline !important;
+                        }
+                        a:hover {
+                            text-decoration: none !important;
                         }
                         @media (max-width: 768px) {
                             .privacy-article {
                                 padding: 100px 20px 40px;
+                                font-size: 14pt; /* Slightly smaller for mobile readability */
                             }
                             h1 {
-                                font-size: 1.5rem;
-                            }
-                            h2 {
-                                margin: 16px 0 4px;
+                                font-size: 2rem;
                             }
                         }
                     `}</style>

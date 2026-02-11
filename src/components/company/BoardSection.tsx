@@ -7,7 +7,7 @@ const boardMembers = [
         id: 7,
         name: 'Suresh H. Nish',
         role: 'Founder & CEO',
-        image: '', // No photo provided
+        image: '/images/team/suresh-h-nish-ceo.png',
         bio: 'Suresh built Winspire RCM on the belief that revenue outcomes improve when intelligence enters the cycle early. With over two decades of experience in healthcare revenue cycle operations, he has led and scaled large RCM operations. Under his leadership, Winspire focuses on sustainable revenue improvement, transparent performance measurement, and responsible automation.'
     },
 

@@ -20,7 +20,8 @@ export default function DemoForm({ isModal = false, closeButton }: DemoFormProps
         organization: '',
         specialty: '',
         challenge: '',
-        demoType: 'live'
+        demoType: 'live',
+        consent: false
     });
     const [preferredDate, setPreferredDate] = useState<Date | undefined>(undefined);
     const [preferredTime, setPreferredTime] = useState<Date | undefined>(undefined);
@@ -65,6 +66,7 @@ export default function DemoForm({ isModal = false, closeButton }: DemoFormProps
         if (!formData.organization.trim()) newErrors.organization = 'Required';
         if (!formData.specialty.trim()) newErrors.specialty = 'Required';
         if (!formData.challenge) newErrors.challenge = 'Required';
+        if (!formData.consent) newErrors.consent = 'Required';
         if (!preferredDate) newErrors.preferredDate = 'Required';
         if (!preferredTime) newErrors.preferredTime = 'Required';
         setErrors(newErrors);
@@ -222,6 +224,27 @@ export default function DemoForm({ isModal = false, closeButton }: DemoFormProps
                         </select>
                         {errors.challenge && <span className={styles.errorMsg}>{errors.challenge}</span>}
                     </div>
+                </div>
+
+                {/* Consent Checkbox */}
+                <div style={{ gridColumn: 'span 2', marginBottom: '16px' }}>
+                    <div className={styles.field} style={{ flexDirection: 'row', alignItems: 'flex-start', gap: '12px' }}>
+                        <input
+                            type="checkbox"
+                            name="consent"
+                            id="consent-checkbox"
+                            checked={formData.consent}
+                            onChange={(e) => {
+                                setFormData({ ...formData, consent: e.target.checked });
+                                if (errors.consent) setErrors({ ...errors, consent: '' });
+                            }}
+                            style={{ width: '20px', height: '20px', marginTop: '4px', cursor: 'pointer', flexShrink: 0 }}
+                        />
+                        <label htmlFor="consent-checkbox" style={{ fontSize: '14px', lineHeight: '1.5', cursor: 'pointer', color: '#4b5563' }}>
+                            By submitting this form, you agree to receive communications from Winspire RCM as outlined in our <a href="/privacy" target="_blank" onClick={(e) => e.stopPropagation()} style={{ color: '#3b82f6', textDecoration: 'underline' }}>Privacy & Messaging Policy</a>.
+                        </label>
+                    </div>
+                    {errors.consent && <span className={styles.errorMsg} style={{ display: 'block', marginLeft: '32px', marginTop: '4px' }}>You must agree to the policy to proceed.</span>}
                 </div>
 
                 {/* Date & Time */}
