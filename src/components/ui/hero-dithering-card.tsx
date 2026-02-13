@@ -51,7 +51,7 @@ export function HeroDitheringCard({ onClick }: { onClick?: () => void }) {
                         <p className={styles.description}>
                             Automation only works when structure exists.
                             <br /><br />
-                            Neura provides the foundation for safe automation, agentic AI, and autonomous execution with compliance guardrails.
+                            Neura AI provides the foundation for safe automation, agentic AI, and autonomous execution with compliance guardrails.
                             <br /><br />
                             Clarity comes first. <br />
                             Automation follows.

@@ -53,7 +53,7 @@ const NeuraLivingSystemsSection = () => {
                     </p>
 
                     <p className={styles.paragraph}>
-                        Neura keeps execution adaptive by continuously learning from payer responses, dynamically reprioritizing work, and recommending actions based on financial impact.
+                        Neura AI keeps execution adaptive by continuously learning from payer responses, dynamically reprioritizing work, and recommending actions based on financial impact.
                     </p>
 
                     <p className={styles.accent}>

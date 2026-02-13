@@ -5,7 +5,7 @@ const NeuraEfficiencySection = () => {
     return (
         <section
             className={styles.section}
-            aria-label="How Neura Creates Measurable Efficiency"
+            aria-label="How Neura AI Creates Measurable Efficiency"
         >
             {/* Parallax Background - Uses CSS fixed attachment */}
             <div className={styles.parallaxBg}>
@@ -15,7 +15,7 @@ const NeuraEfficiencySection = () => {
             {/* Content */}
             <div className={styles.content}>
                 <h2 className={styles.headline}>
-                    How Neura Creates Measurable Efficiency
+                    How Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.1em' }}>TM</sup> Creates Measurable Efficiency
                 </h2>
 
                 <div className={styles.description}>
@@ -24,7 +24,7 @@ const NeuraEfficiencySection = () => {
                 </div>
 
                 <div className={styles.accent}>
-                    Neura drives performance through five system-level capabilities.
+                    Neura AI drives performance through five system-level capabilities.
                 </div>
             </div>
         </section>

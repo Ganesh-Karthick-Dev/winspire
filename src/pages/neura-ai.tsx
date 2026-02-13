@@ -133,7 +133,7 @@ export default function TempNeuraAI() {
                         </div>
                     </div>
 
-                    <section id="problem" ref={secondSectionRef} className="temp-neura-second-section" aria-label="The Problem Neura Solves">
+                    <section id="problem" ref={secondSectionRef} className="temp-neura-second-section" aria-label="The Problem Neura AI Solves">
                         <div ref={whiteSectionRef} className="temp-neura-second-white">
                             {/* Cards Layer - includes title */}
                             <div className="temp-neura-cards-layer">

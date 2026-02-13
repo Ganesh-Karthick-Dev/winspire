@@ -42,7 +42,7 @@ const cards = [
         items: [
             { title: "Step 1 — We Prepare Your Personalized Insights", desc: "We review your specialty, payer mix, revenue structure, and workflow gaps." },
             { title: "Step 2 — Live Walkthrough of Neura AI", desc: "You'll see predictive models, automation flows, AR intelligence, and sample dashboards." },
-            { title: "Step 3 — Real-Time Problem Solving", desc: "We show exactly how Neura solves your specific RCM challenges." },
+            { title: "Step 3 — Real-Time Problem Solving", desc: "We show exactly how Neura AI solves your specific RCM challenges." },
             { title: "Step 4 — Customized Outcome Roadmap", desc: "You get a tailored 30–90 day improvement plan at no cost." }
         ],
         cta: "Schedule Your Demo",

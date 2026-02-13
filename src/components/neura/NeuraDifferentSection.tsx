@@ -8,7 +8,7 @@ const NeuraDifferentSection = () => {
     return (
         <section
             className={styles.section}
-            aria-label="What Makes Neura Fundamentally Different"
+            aria-label="What Makes Neura AI Fundamentally Different"
             style={{
                 backgroundColor: 'transparent',
                 marginTop: '10vh',
@@ -32,7 +32,7 @@ const NeuraDifferentSection = () => {
                 }}
             >
                 <h2 className={styles.headline}>
-                    What Makes Neura Fundamentally Different
+                    What Makes Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.1em' }}>TM</sup> Fundamentally Different
                 </h2>
 
                 <div className={styles.grid} ref={iconsRef}>
@@ -43,7 +43,7 @@ const NeuraDifferentSection = () => {
                         </div>
                         <h3 className={styles.featureTitle}>Real-time Command</h3>
                         <p className={styles.paragraph}>
-                            Traditional RCM tracks what happened. Neura masters the timing, sequencing, and precise control of every decision as it happens.
+                            Traditional RCM tracks what happened. Neura AI masters the timing, sequencing, and precise control of every decision as it happens.
                         </p>
                     </div>
 

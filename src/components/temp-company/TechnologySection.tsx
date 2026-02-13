@@ -76,12 +76,12 @@ export default function TechnologySection() {
                          
                          <p className="text-slate-400 text-lg leading-relaxed max-w-md">
                              Winspire is deeply technology-enabled but never technology-led.
-                             Our proprietary intelligence layer, <strong>Neura</strong>, is embedded directly into how work gets done. It removes friction from execution and supports smarter, faster decisions without adding complexity.
+                             Our proprietary intelligence layer, <strong>Neura AI</strong>, is embedded directly into how work gets done. It removes friction from execution and supports smarter, faster decisions without adding complexity.
                          </p>
                     </div>
 
                     <div className="border-l border-white/10 pl-10 space-y-12">
-                         <p className="text-white text-lg font-medium">Neura enables our teams to:</p>
+                         <p className="text-white text-lg font-medium">Neura AI enables our teams to:</p>
                          {[
                              { title: "Identify risk early" },
                              { title: "Prioritize work based on impact" },

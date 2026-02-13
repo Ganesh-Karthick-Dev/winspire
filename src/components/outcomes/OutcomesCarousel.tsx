@@ -47,7 +47,7 @@ const slides = [
         id: 3,
         title: 'Denial Prevention &',
         titleHighlight: 'Appeals Intelligence',
-        description: "Neura doesn't just fix denials — it predicts them before they happen.",
+        description: "Neura AI doesn't just fix denials — it predicts them before they happen.",
         resultsHeading: 'Results Clients See:',
         bullets: [
             'Avoidable denials drop below 1%',

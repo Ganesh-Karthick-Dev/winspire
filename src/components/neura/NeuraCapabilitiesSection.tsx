@@ -19,7 +19,7 @@ const capabilities = [
     {
         id: 1,
         title: "Revenue Protection and Yield Improvement",
-        description: "Neura shifts revenue protection upstream. It predicts risk before claims are submitted.",
+        description: "Neura AI shifts revenue protection upstream. It predicts risk before claims are submitted.",
         outcomes: [
             { text: "30–50% fewer avoidable denials", min: 30, max: 50 },
             { text: "2–3% higher liquidation on aged AR", min: 2, max: 3 },
@@ -33,7 +33,7 @@ const capabilities = [
     {
         id: 2,
         title: "Speed, Throughput, and Operational Efficiency",
-        description: "Neura eliminates time lost searching and waiting. Automated checks prioritize work by urgency.",
+        description: "Neura AI eliminates time lost searching and waiting. Automated checks prioritize work by urgency.",
         outcomes: [
             { text: "30–50% reduction in time/claim", min: 30, max: 50 },
             { text: "3–5 days faster resolution", min: 3, max: 5 },
@@ -47,7 +47,7 @@ const capabilities = [
     {
         id: 4,
         title: "People Performance and Quality at Scale",
-        description: "Neura turns individual effort into consistent performance, unifying productivity and quality.",
+        description: "Neura AI turns individual effort into consistent performance, unifying productivity and quality.",
         outcomes: [
             { text: "10–15% productivity gain", min: 10, max: 15 },
             { text: "20–30% error reduction", min: 20, max: 30 },
@@ -61,7 +61,7 @@ const capabilities = [
     {
         id: 3,
         title: "Leadership Visibility and Control",
-        description: "Neura replaces lagging reports with live operational insight. Real-time dashboards drive better decisions.",
+        description: "Neura AI replaces lagging reports with live operational insight. Real-time dashboards drive better decisions.",
         outcomes: [
             { text: "1–2% net collections improvement" },
             { text: "5–7 days earlier intervention" }
@@ -74,7 +74,7 @@ const capabilities = [
     {
         id: 5,
         title: "Culture, Alignment, and Continuous Improvement",
-        description: "Neura embeds recognition, learning, and improvement into daily execution. Aligning teams to shared goals.",
+        description: "Neura AI embeds recognition, learning, and improvement into daily execution. Aligning teams to shared goals.",
         outcomes: [
             { text: "Lower attrition (top performers)" },
             { text: "1–3% efficiency gains YoY" }

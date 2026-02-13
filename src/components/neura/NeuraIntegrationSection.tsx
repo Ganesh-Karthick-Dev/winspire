@@ -32,7 +32,7 @@ export default function NeuraIntegrationSection() {
     }, []);
 
     const content = [
-        "Neura is not sold as standalone software.",
+        "Neura AI is not sold as standalone software.",
         "It is embedded into how Winspire designs and executes tailored revenue operations.",
         "It enables visibility without micromanagement, offshore execution without risk, accountability without friction, and scale without quality loss.",
         "Technology exists here for one reason to help people perform at their best, consistently."
@@ -44,7 +44,7 @@ export default function NeuraIntegrationSection() {
             <div className={styles.container}>
                 <div className={styles.titleWrapper}>
                     <h2 className={styles.title} ref={titleRef}>
-                        How Neura Fits Into the Winspire Model
+                        How Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.1em' }}>TM</sup> Fits Into the Winspire Model
                     </h2>
                 </div>
                 <div className={styles.content}>

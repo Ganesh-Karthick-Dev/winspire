@@ -22,7 +22,7 @@ import { BentoGridShowcase } from "./ui/bento-product-features";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useRouter } from 'next/router';
 
-// Data for "Neura enables our teams to"
+// Data for "Neura AI enables our teams to"
 const enablesList = [
     {
         icon: ShieldAlert,
@@ -71,7 +71,7 @@ function NeuraBentoSlot({ item }: { item: (typeof enablesList)[number] }) {
     );
 }
 
-// Data for "Neura supports"
+// Data for "Neura AI supports"
 const supportsList = [
     { text: "Workforce enablement", icon: Users },
     { text: "Quality and compliance", icon: ShieldCheck },
@@ -114,7 +114,7 @@ export default function NeuraSection() {
                     >
                         <div className="ns-header-main">
                             <h2 className="ns-mega-title-v2">
-                                NAURA - AI <br />
+                                Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.2em' }}>TM</sup> <br />
                                 <span className="text-glow">THE INTELLIGENCE LAYER</span>
                             </h2>
                             <p className="ns-mega-subtitle-v2">
@@ -131,14 +131,14 @@ export default function NeuraSection() {
                         style={{ marginTop: "4rem", fontSize: "16pt", color: "#ffffff", opacity: 1 }}
                         className="ns-intro-text"
                     >
-                        Neura is not software you manage. <br />
+                        Neura AI is not software you manage. <br />
                         It is intelligence embedded into how work happens.
                     </motion.p>
                 </header>
 
                 {/* Bento grid: Predictive (tall left) + 5 capabilities (raw CSS, all bordered, images) */}
                 <div className="ns-content" ref={iconsRef}>
-                    <p className="ns-content-intro">Neura enables our teams to</p>
+                    <p className="ns-content-intro">Neura AI enables our teams to</p>
                     <BentoGridShowcase
                         integration={
                             <div className="ns-bento-card ns-bento-card-hero">
@@ -148,7 +148,7 @@ export default function NeuraSection() {
                                 </div>
                                 <div className="ns-stack-text">
                                     <h3 className="ns-stack-title" style={{ fontSize: '18pt', color: '#ffffff' }}>Predictive, not reactive.</h3>
-                                    <p className="ns-stack-desc" style={{ fontSize: '16pt', color: '#ffffffff', opacity: 1 }}>Neura sees the problems before they impact your bottom line.</p>
+                                    <p className="ns-stack-desc" style={{ fontSize: '16pt', color: '#ffffffff', opacity: 1 }}>Neura AI sees the problems before they impact your bottom line.</p>
                                 </div>
                             </div>
                         }

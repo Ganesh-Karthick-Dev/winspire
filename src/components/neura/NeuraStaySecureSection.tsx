@@ -20,7 +20,7 @@ export default function NeuraStaySecureSection() {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className={styles.subtitle}
             >
-                Neura aligns billing, coding, AR, denials, eligibility, and posting around enterprise-level outcomes.
+                Neura AI aligns billing, coding, AR, denials, eligibility, and posting around enterprise-level outcomes.
             </motion.p>
 
             {/* Top Markers */}

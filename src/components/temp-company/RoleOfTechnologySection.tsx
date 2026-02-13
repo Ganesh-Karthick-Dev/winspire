@@ -96,7 +96,7 @@ const RoleOfTechnologySection: React.FC = () => {
                             </h2>
                             <p className={styles.subText}>
                                 Winspire is deeply technology-enabled but never technology-led.<br /><br />
-                                Our proprietary intelligence layer, <strong>Neura</strong>, is embedded directly into how work gets done. It removes friction from execution and supports smarter, faster decisions without adding complexity.
+                                Our proprietary intelligence layer, <strong>Neura AI</strong>, is embedded directly into how work gets done. It removes friction from execution and supports smarter, faster decisions without adding complexity.
                             </p>
                         </div>
 
@@ -128,7 +128,7 @@ const RoleOfTechnologySection: React.FC = () => {
                     <div className={styles.featureList}>
                         <div className={styles.featureItem}>
                             <h3 className={styles.featureTitle}>Identify risk early</h3>
-                            <p className={styles.featureDesc}>Neura scans data patterns to flag potential issues before they become critical problems.</p>
+                            <p className={styles.featureDesc}>Neura AI scans data patterns to flag potential issues before they become critical problems.</p>
                         </div>
                         <div className={styles.featureItem}>
                             <h3 className={styles.featureTitle}>Prioritize work based on impact</h3>

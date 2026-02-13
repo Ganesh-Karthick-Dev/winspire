@@ -101,7 +101,7 @@ export function ParallaxContentSection() {
     const rightCards = [
         <span>Neura AI replaces fragmented RCM activity with a <strong>single, intelligent operating structure</strong>.</span>,
         <span>It is the structure that governs how revenue cycles actually perform.</span>,
-        <span>Where traditional systems tell you what happened after the damage is done, Neura works <strong>ahead of outcomes</strong>, continuously guiding execution across people, processes, and payers.</span>
+        <span>Where traditional systems tell you what happened after the damage is done, Neura AI works <strong>ahead of outcomes</strong>, continuously guiding execution across people, processes, and payers.</span>
     ];
 
     return (

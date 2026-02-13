@@ -25,16 +25,16 @@ const SECTIONS = [
     },
     {
         id: '07',
-        title: 'Neura Intelligence Embedded in Execution',
+        title: 'Neura AI Intelligence Embedded in Execution',
         subtitle: 'Intelligence That Supports Delivery',
-        intro: 'Neura is our proprietary intelligence layer embedded into how solutions are executed. Within our solutions, Neura enables:',
+        intro: 'Neura AI is our proprietary intelligence layer embedded into how solutions are executed. Within our solutions, Neura AI enables:',
         bullets: [
             'Real-time performance visibility',
             'Early identification of revenue leakage and risk',
             'Prioritization based on impact and urgency',
             'Leadership dashboards and alerts',
         ],
-        closing: 'For organizations that require it, Neura can also be deployed as a standalone intelligence solution aligned to existing teams and workflows.',
+        closing: 'For organizations that require it, Neura AI can also be deployed as a standalone intelligence solution aligned to existing teams and workflows.',
     },
     {
         id: '08',

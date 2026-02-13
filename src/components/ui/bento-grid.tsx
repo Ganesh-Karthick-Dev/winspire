@@ -13,7 +13,7 @@ export function FUIBentoGridDark() {
                 className="text-2xl/8 font-medium tracking-tight bg-gradient-to-br from-white to-white/40 bg-clip-text text-transparent max-w-3xl mb-20"
                 style={{ marginBottom: '60px' }}
             >
-                Across Neura-enabled organizations
+                Across Neura AI-enabled organizations
             </p>
             <div
                 className="grid grid-cols-1 gap-4 lg:grid-cols-6 lg:grid-rows-2"

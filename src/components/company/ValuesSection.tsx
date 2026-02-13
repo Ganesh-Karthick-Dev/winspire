@@ -40,7 +40,7 @@ const ValuesSection: React.FC = () => {
                             <p className={styles.challengeLabel}>Challenge:</p>
                             <p>High denial rates, unstructured AR, unpredictable revenue.</p>
                             <p className={styles.solutionLabel}>Solution:</p>
-                            <p>Neura Predict + Neura AR + full RCM integration.</p>
+                            <p>Neura AI Predict + Neura AI AR + full RCM integration.</p>
                             <p className={styles.outcomeLabel}>Outcome:</p>
                             <ul className={styles.outcomeList}>
                                 <li>Denials dropped from 18% to under 1%</li>
@@ -83,7 +83,7 @@ const ValuesSection: React.FC = () => {
                             <p className={styles.challengeLabel}>Challenge:</p>
                             <p>Fragmented documentation, persistent coding errors, payer delays.</p>
                             <p className={styles.solutionLabel}>Solution:</p>
-                            <p>Neura Code + Neura Flow + Denial automation.</p>
+                            <p>Neura AI Code + Neura AI Flow + Denial automation.</p>
                             <p className={styles.outcomeLabel}>Outcome:</p>
                             <ul className={styles.outcomeList}>
                                 <li>E&M coding accuracy improved by 28%</li>
@@ -119,7 +119,7 @@ const ValuesSection: React.FC = () => {
                             <p className={styles.challengeLabel}>Challenge:</p>
                             <p>Missing charges, manual verification, inconsistent credentialing.</p>
                             <p className={styles.solutionLabel}>Solution:</p>
-                            <p>Neura Charge + Neura Eligibility + Credentialing workflows.</p>
+                            <p>Neura AI Charge + Neura AI Eligibility + Credentialing workflows.</p>
                             <p className={styles.outcomeLabel}>Outcome:</p>
                             <ul className={styles.outcomeList}>
                                 <li>Charge capture increased by 22%</li>

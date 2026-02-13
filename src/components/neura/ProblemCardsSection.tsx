@@ -122,7 +122,7 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
             {/* Centered Text Content */}
             <div className={styles.textContent}>
                 <div className={styles.titleSection}>
-                    <h2 className={styles.sectionTitle}>The Problem Neura Solves</h2>
+                    <h2 className={styles.sectionTitle}>The Problem Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.1em' }}>TM</sup> Solves</h2>
                     <p className={styles.sectionSubtitle}>
                         Modern healthcare revenue cycles operate<br />
                         in a constantly shifting environment:
@@ -132,7 +132,7 @@ export default function ProblemCardsSection({ pinTriggerRef }: ProblemCardsSecti
                 <div className={styles.conclusion}>
                     <p>That creates visibility but not control.</p>
                     <p className={styles.highlight}>
-                        Neura was designed to replace fragmented activity with a single operating structure that thinks, adapts, and acts in real time.
+                        Neura AI was designed to replace fragmented activity with a single operating structure that thinks, adapts, and acts in real time.
                     </p>
                 </div>
             </div>

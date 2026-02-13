@@ -305,7 +305,7 @@ const DepartmentsSection: React.FC = () => {
                         <div className={styles.neuraSection}>
                             <div className={styles.sectionLabel}>
                                 <span className={styles.neuraIcon}><FaBrain /></span>
-                                Neura Optimization
+                                Neura AI Optimization
                             </div>
                             <ul className={styles.neuraList}>
                                 {dept.neuraOptimization.map((item, i) => (

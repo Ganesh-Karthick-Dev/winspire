@@ -97,7 +97,7 @@ export default function NeuraGeminiEffectSection() {
                             Denial Management That Thinks Strategically
                         </h2>
                         <p className={styles.slideSubtitle}>
-                            Neura transforms denial management from reaction to prevention.
+                            Neura AI transforms denial management from reaction to prevention.
                             It classifies inventory, routes work intelligently, generates payer-specific appeals, and identifies trends that prevent repeat failures.
                             <br /><br />
                             Effort is focused only where value exists.
@@ -118,7 +118,7 @@ export default function NeuraGeminiEffectSection() {
                             Cross-Department Alignment at Scale
                         </h2>
                         <p className={styles.slideSubtitle}>
-                            Neura aligns billing, coding, AR, denials, eligibility, and posting around enterprise-level outcomes.
+                            Neura AI aligns billing, coding, AR, denials, eligibility, and posting around enterprise-level outcomes.
                         </p>
 
                         <div className={styles.glassCardsGrid}>
@@ -139,7 +139,7 @@ export default function NeuraGeminiEffectSection() {
                         <div className={styles.finalGlassCard}>
                             <p className={styles.finalText}>
                                 In revenue cycles, communication is money.
-                                <span className={styles.finalTextHighlight}>Neura makes it measurable and accountable.</span>
+                                <span className={styles.finalTextHighlight}>Neura AI makes it measurable and accountable.</span>
                             </p>
                         </div>
                     </motion.div>

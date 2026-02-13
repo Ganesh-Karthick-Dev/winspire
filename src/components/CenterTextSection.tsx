@@ -51,7 +51,7 @@ export default function CenterTextSection() {
                         marginBottom: '24px',
                     }}
                 >
-                    Meet Neura. The Intelligence Behind Our Execution.
+                    Meet Neura AI. The Intelligence Behind Our Execution.
                 </h2>
 
                 {/* Description */}
@@ -65,7 +65,7 @@ export default function CenterTextSection() {
                         marginBottom: '8px',
                     }}
                 >
-                    Neura is not software you manage.
+                    Neura AI is not software you manage.
                 </p>
                 <p
                     style={{
@@ -120,7 +120,7 @@ export default function CenterTextSection() {
                                 marginBottom: '16px',
                             }}
                         >
-                            Neura supports:
+                            Neura AI supports:
                         </p>
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                             <li style={bulletStyle}><span style={bulletDot}>•</span> Revenue operations</li>
@@ -184,7 +184,7 @@ export default function CenterTextSection() {
                         e.currentTarget.style.backgroundPosition = '0% 0';
                     }}
                 >
-                    See Neura in Action
+                    See Neura AI in Action
                     <span
                         style={{
                             width: '40px',

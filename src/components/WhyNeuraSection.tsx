@@ -192,8 +192,8 @@ const WhyNeuraSection: React.FC = () => {
                 </h2>
 
                 <div className="text-content">
-                    <p>Most RCM technology focuses on visibility. Neura focuses on <strong>control, sequencing, and decision timing</strong>.</p>
-                    <p className="highlight-text">By redesigning the entire revenue ecosystem, Neura delivers a <strong>60–70% efficiency improvement within 60–90 days</strong>.</p>
+                    <p>Most RCM technology focuses on visibility. Neura AI focuses on <strong>control, sequencing, and decision timing</strong>.</p>
+                    <p className="highlight-text">By redesigning the entire revenue ecosystem, Neura AI delivers a <strong>60–70% efficiency improvement within 60–90 days</strong>.</p>
                 </div>
 
                 <div className="flow-diagram">

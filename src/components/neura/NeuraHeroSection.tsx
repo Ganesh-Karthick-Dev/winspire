@@ -14,7 +14,7 @@ Neura AI was built to solve that problem.`;
 const BOTTOM_CENTER = `It is not software to manage.
 It is an embedded intelligence layer that governs how revenue work is prioritized, executed, and improved every day.`;
 
-const BOTTOM_RIGHT = `Where traditional RCM tools tell you what went wrong after the fact, Neura works ahead of outcomes guiding decisions before revenue is lost.`;
+const BOTTOM_RIGHT = `Where traditional RCM tools tell you what went wrong after the fact, Neura AI works ahead of outcomes guiding decisions before revenue is lost.`;
 
 export default function NeuraHeroSection() {
     return (
@@ -25,7 +25,7 @@ export default function NeuraHeroSection() {
                 </h1>
             </div>
             <div className={styles.rightCol}>
-                <p className={styles.rightTitle}>Neura AI</p>
+                <p className={styles.rightTitle}>Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.1em' }}>TM</sup></p>
             </div>
             <div className={styles.divider} aria-hidden>
                 <span className={styles.dividerLine} />

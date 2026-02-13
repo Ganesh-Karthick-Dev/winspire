@@ -29,13 +29,13 @@ const principles = [
         image: '/company/Build systems that outlast individuals.webp'
     },
     {
-        title: 'Neura Boosts Collections by 30% in 90 Days.',
+        title: 'Neura AI Boosts Collections by 30% in 90 Days.',
         description: '30% better collections in under 3 months — no system replacement needed. A self-learning revenue cycle platform spots revenue leakage, automates workflows, and drives outcomes with real-time insights and smarter follow-ups. This isn’t another dashboard — it’s a performance engine that accelerates results and minimizes dollars left uncollected.',
         image: '/company/design before our scale.webp'
     },
     {
-        title: 'How Neura’s Intelligence Layer Helps RCM Leaders See Clearly',
-        description: 'Most RCM systems aren’t broken — they’re blind. Without real-time visibility into denials, leakage, and performance, teams make decisions based on lagging spreadsheets. Neura’s intelligence layer tracks performance across the full cycle, identifies revenue loss early, and transforms reactive processes into proactive execution. Visibility isn’t optional — it’s foundational to sustained revenue health.',
+        title: 'How Neura AI’s Intelligence Layer Helps RCM Leaders See Clearly',
+        description: 'Most RCM systems aren’t broken — they’re blind. Without real-time visibility into denials, leakage, and performance, teams make decisions based on lagging spreadsheets. Neura AI’s intelligence layer tracks performance across the full cycle, identifies revenue loss early, and transforms reactive processes into proactive execution. Visibility isn’t optional — it’s foundational to sustained revenue health.',
         image: '/temp/656934.jpg'
     },
 ];
