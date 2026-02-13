@@ -66,7 +66,7 @@ export default function CultureSection() {
                     <div className={styles.imageWrapperLeft}>
                         {/* Image 1 - Left Bottom */}
                         <img 
-                            src="/company/our culture.webp" 
+                            src="/company/our culture copy.webp" 
                             alt="Team collaboration" 
                             className={styles.imageLeft}
                         />
@@ -78,7 +78,7 @@ export default function CultureSection() {
                     <div className={styles.imageWrapperRight}>
                         {/* Image 2 - Right Top */}
                         <img 
-                            src="/temp/31625.jpg" 
+                            src="/company/Our Culture 2.webp" 
                             alt="Quality assurance" 
                             className={styles.imageRight}
                         />

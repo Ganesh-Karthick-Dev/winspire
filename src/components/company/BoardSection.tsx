@@ -15,7 +15,7 @@ const boardMembers = [
         id: 6,
         name: 'Dan Schulte',
         role: 'Chief Operating Officer',
-        image: '/images/team/dan-schulte.png',
+        image: '/images/team/dan-schulte-new.png',
         bio: 'Dan Schulte has worked in healthcare provider and RCM vendor arena for over 40 years. He has helped large and small organizations find weak spots, change processes, and realize immediate returns. Previously held senior RCM positions at HGS, The Outsource Group, Parallon, Apollo Health Street, and Siemens Health Services.'
     },
     {

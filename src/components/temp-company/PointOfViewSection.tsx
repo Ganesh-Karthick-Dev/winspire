@@ -84,7 +84,7 @@ export default function PointOfViewSection() {
                 <div ref={containerRef} className={styles.imageSide}>
                      <img 
                         ref={imageRef}
-                        src="/company/Leadership Design.webp" 
+                        src="/company/Our Point of View.webp" 
                         alt="Leadership Design" 
                         className={styles.parallaxImage}
                         loading="lazy"
