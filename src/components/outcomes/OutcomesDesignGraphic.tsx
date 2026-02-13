@@ -56,7 +56,7 @@ const OutcomesDesignGraphic: React.FC<OutcomesDesignGraphicProps> = ({ items, is
         <div className={styles.designGraphicWrapper}>
             <svg
                 ref={svgRef}
-                viewBox="0 0 450 500" // Widened viewBox slightly for longer text
+                viewBox="0 0 500 500" // Widened viewBox slightly for longer text
                 className={styles.designGraphicSvg}
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -100,13 +100,13 @@ const OutcomesDesignGraphic: React.FC<OutcomesDesignGraphicProps> = ({ items, is
                 {/* Text Labels - Mapping the SOLUTIONS items now */}
                 {/* Note: Colors are lightened for readability on dark glass */}
                 <g className="point-text">
-                    <text x="250" y="155" fill="#f8fafc" fontSize="14" fontWeight="bold">{items[0]}</text>
+                    <text x="250" y="155" fill="#f8fafc" fontSize="18" fontWeight="bold">{items[0]}</text>
                 </g>
                 <g className="point-text">
-                    <text x="290" y="270" fill="#f8fafc" fontSize="14" fontWeight="bold">{items[1]}</text>
+                    <text x="290" y="270" fill="#f8fafc" fontSize="18" fontWeight="bold">{items[1]}</text>
                 </g>
                 <g className="point-text">
-                    <text x="250" y="375" fill="#f8fafc" fontSize="14" fontWeight="bold">{items[2]}</text>
+                    <text x="250" y="375" fill="#f8fafc" fontSize="18" fontWeight="bold">{items[2]}</text>
                 </g>
 
                 {/* Updated Vertical Label */}

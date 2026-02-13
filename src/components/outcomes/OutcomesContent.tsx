@@ -4,6 +4,7 @@ import styles from '@/styles/OutcomesContent.module.css';
 import OutcomesDesignGraphic from './OutcomesDesignGraphic';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
+import { useIconDraw } from "@/hooks/useIconDraw";
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
@@ -37,6 +38,7 @@ const FallingWord = ({ text, delay, isHighlight = false, highlightClass = "" }: 
 const OutcomesContent = () => {
     const graphicRef = useRef(null);
     const isGraphicInView = useInView(graphicRef, { once: true, amount: 0.3 });
+    const pillIconRef = useIconDraw({ start: "top 90%", duration: 1.2 });
 
     // Outcome Data - Single Static Section
     const staticSection = {
@@ -79,12 +81,24 @@ const OutcomesContent = () => {
                     </p>
 
                     <div className={styles.finalStatementPill}>
-                        <div className={styles.pillIcon}>
+                        <motion.div 
+                            className={styles.pillIcon} 
+                            ref={pillIconRef}
+                            animate={{ 
+                                scale: [1, 1.1, 1],
+                                opacity: [1, 0.85, 1]
+                            }}
+                            transition={{
+                                duration: 3,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                        >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
                             </svg>
-                        </div>
+                        </motion.div>
                         <div className={styles.pillContent}>
                             <p>{staticSection.final}</p>
                         </div>
