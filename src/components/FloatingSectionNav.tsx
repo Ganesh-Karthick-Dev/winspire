@@ -17,9 +17,32 @@ interface FloatingSectionNavProps {
 export default function FloatingSectionNav({ sections, cta }: FloatingSectionNavProps) {
     const [activeId, setActiveId] = useState(sections[0]?.id || '');
     const [isVisible, setIsVisible] = useState(true);
+    const [isScrollingDown, setIsScrollingDown] = useState(false);
     const navRef = useRef<HTMLDivElement>(null);
+    const lastScrollY = useRef(0);
 
     useEffect(() => {
+        // --- Scroll Direction Logic ---
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            const threshold = 10; // Threshold to prevent jitter
+
+            if (Math.abs(currentScrollY - lastScrollY.current) < threshold) {
+                return;
+            }
+
+            // If scrolling down and not at the very top (optional, but good UX)
+            if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
+                setIsScrollingDown(true);
+            } else {
+                setIsScrollingDown(false);
+            }
+
+            lastScrollY.current = currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
         // --- Scroll Spy Logic ---
         const observerOptions = {
             root: null,
@@ -59,6 +82,7 @@ export default function FloatingSectionNav({ sections, cta }: FloatingSectionNav
         if (footer) footerObserver.observe(footer);
 
         return () => {
+            window.removeEventListener('scroll', handleScroll);
             observer.disconnect();
             footerObserver.disconnect();
         };
@@ -84,7 +108,7 @@ export default function FloatingSectionNav({ sections, cta }: FloatingSectionNav
     };
 
     return (
-        <div className={`${styles.container} ${!isVisible ? styles.hidden : ''}`} ref={navRef}>
+        <div className={`${styles.container} ${(!isVisible || isScrollingDown) ? styles.hidden : ''}`} ref={navRef}>
             <nav className={styles.nav}>
                 <ul className={styles.list}>
                     {sections.map((section) => (
