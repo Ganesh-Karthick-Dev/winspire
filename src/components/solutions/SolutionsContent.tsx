@@ -78,11 +78,11 @@ const SolutionsContent: React.FC = () => {
 
             const items = cardListRef.current?.children;
             if (items) {
-                gsap.set(items, { opacity: 0, y: 28 });
+                gsap.set(items, { opacity: 0, x: 40 });
                 Array.from(items).forEach((item, i) => {
                     tl.to(
                         item,
-                        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' },
+                        { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' },
                         1.4 + i * 0.35
                     );
                 });
