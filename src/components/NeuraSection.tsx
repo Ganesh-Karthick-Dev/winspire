@@ -83,6 +83,18 @@ const supportsList = [
 
 import { useIconDraw } from "@/hooks/useIconDraw";
 
+const NeuraIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
+    <svg 
+        viewBox="0 0 2119 2299" 
+        fill="currentColor" 
+        width={size}
+        height={size}
+        className={className}
+    >
+        <path fillRule="evenodd" clipRule="evenodd" d="M1186.93 928.055V0H931.512V928.055L127.709 464.094L0 685.281L774.084 1132.29C898.637 1080.18 1025.95 998.656 1058.5 744.078C1091.11 999.141 1218.85 1080.48 1343.63 1132.59L2118.43 685.281L1990.73 464.094L1186.93 928.055ZM1343.27 1165.72C1218.61 1217.83 1091.08 1299.26 1058.5 1554.08C1026 1299.91 899.042 1218.24 774.68 1166.12L0 1613.47L127.709 1834.66L931.512 1370.56V2298.75H1186.93V1370.56L1990.73 1834.66L2118.43 1613.47L1343.27 1165.72Z" />
+    </svg>
+);
+
 export default function NeuraSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const iconsRef = useIconDraw({ stagger: 0.05, start: "top 75%" });
@@ -132,7 +144,7 @@ export default function NeuraSection() {
                             <div className="ns-bento-card ns-bento-card-hero">
                                 <div className="ns-bento-hero-bg" aria-hidden="true" />
                                 <div className="ns-stack-icon ns-stack-icon-blue">
-                                    <BrainCircuit size={24} />
+                                    <NeuraIcon size={24} />
                                 </div>
                                 <div className="ns-stack-text">
                                     <h3 className="ns-stack-title" style={{ fontSize: '18pt', color: '#ffffff' }}>Predictive, not reactive.</h3>

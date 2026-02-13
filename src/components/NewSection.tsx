@@ -39,6 +39,7 @@ export default function NewSection() {
     const router = useRouter();
     const sectionRef = useRef<HTMLElement>(null);
     const iconsGridRef = useIconDraw({ stagger: 0.1, start: "top 80%" });
+    const iconsIntroRef = useIconDraw({ stagger: 0.2, start: "top 85%" });
 
     useEffect(() => {
         if (!sectionRef.current) return;
@@ -117,7 +118,7 @@ export default function NewSection() {
                         />
                     </div>
 
-                    <div className="ns-intro-grid ns-header-animate">
+                    <div className="ns-intro-grid ns-header-animate" ref={iconsIntroRef}>
                         <div className="ns-intro-item">
                             <div className="ns-check-icon"><CheckCircle2 size={20} /></div>
                             <p>Your leadership focuses on <strong>vision and growth</strong>.</p>
@@ -237,7 +238,7 @@ export default function NewSection() {
                 .ns-header {
                     text-align: left;
                     margin-bottom: 3rem;
-                    max-width: 800px;
+                    width: 100%;
                 }
 
                 .ns-header-animate.title-container {
@@ -246,10 +247,11 @@ export default function NewSection() {
 
                 .ns-intro-grid {
                     display: flex;
-                    justify-content: flex-start;
-                    gap: 3rem;
+                    justify-content: space-around;
+                    gap: 1.5rem;
                     margin-bottom: 2.5rem;
                     flex-wrap: wrap;
+                    width: 100%;
                 }
 
                 .ns-intro-item {
@@ -257,9 +259,10 @@ export default function NewSection() {
                     align-items: center;
                     gap: 12px;
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1.33rem; /* 16pt */
+                    font-size: 1.15rem; /* Slightly smaller for better fit */
                     font-weight: 500;
                     color: #000000 !important;
+                    flex: 0 1 auto;
                 }
 
                 .ns-intro-item p {
@@ -527,9 +530,10 @@ export default function NewSection() {
                     }
 
                     .ns-intro-grid {
-                        flex-direction: column;
-                        gap: 1rem;
-                        align-items: flex-start;
+                        flex-direction: row;
+                        gap: 1.5rem;
+                        align-items: center;
+                        flex-wrap: wrap;
                     }
 
                     .ns-content-body {
@@ -565,7 +569,11 @@ export default function NewSection() {
 
                     .ns-cta-text {
                         margin-bottom: 1.5rem;
-                        font-size: 1.33rem; /* 16pt on mobile too */
+                        font-size: 1.15rem;
+                    }
+
+                    .ns-intro-item p {
+                        font-size: 1.1rem;
                     }
 
                     .ns-cta-button-white {
