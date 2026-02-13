@@ -258,6 +258,13 @@ export function SpecialtySection() {
                     animation: exitEnter 0.8s infinite linear;
                 }
 
+                .specialty-cta:active .cta-arrow-hit {
+                    transform: translateX(30px) scale(0.8);
+                    opacity: 0;
+                    transition: all 0.15s ease-in;
+                    animation: none;
+                }
+
                 @keyframes exitEnter {
                     0% { transform: translateX(0); opacity: 1; }
                     40% { transform: translateX(15px); opacity: 0; }
