@@ -11,18 +11,27 @@ export default function NeuraClosingPerspectiveSection() {
                 <span className={styles.cornerTopRight} aria-hidden="true">+</span>
                 <span className={styles.cornerBottomLeft} aria-hidden="true">+</span>
                 <span className={styles.cornerBottomRight} aria-hidden="true">+</span>
-                <div className={styles.container}>
-                    {/* <h2 className={styles.title}>Closing Perspective</h2> */}
-                <p className={styles.paragraph}>Revenue cycles do not fail because teams lack effort.</p>
-                <p className={styles.paragraph}>
-                    They fail when leadership lacks a system that thinks, adapts, and executes at the speed of modern healthcare.
-                </p>
-                <p className={styles.paragraph}>Neura AI is that system.</p>
-                <p className={styles.paragraph}>
-                    It is how revenue cycles stop reacting
-                    <br />
-                    and start performing with intent.
-                </p>
+                <div className={styles.grid}>
+                    <div className={styles.card}>
+                        <p className={styles.statement}>Revenue cycles do not fail because teams lack effort.</p>
+                        <p className={styles.problemStatement}>
+                            They fail when leadership lacks a system that thinks, adapts, and executes at the speed of modern healthcare.
+                        </p>
+                    </div>
+                    <div className={styles.card}>
+                        <h2 className={styles.solutionStatement}>
+                            <span className={styles.gradientText}>Neura AI</span>
+                            <br />
+                            is that system.
+                        </h2>
+                    </div>
+                    <div className={styles.card}>
+                        <p className={styles.outcomeStatement}>
+                            It is how revenue cycles stop reacting
+                            <br />
+                            and start performing with <span className={styles.intent}>intent</span>.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
