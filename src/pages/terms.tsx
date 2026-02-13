@@ -26,8 +26,6 @@ export default function Terms() {
                     </div>
 
                     <p><strong>Winspire RCM</strong></p>
-                    <p><strong>Effective Date:</strong> [18th May 2024]</p>
-                    <p><strong>Last Updated:</strong> [10th Feb, 2026]</p>
                     <p>These Terms and Conditions (“Terms”) govern your access to and use of the websites operated by Winspire RCM, LLC and its affiliates (including Winspire RCM Private Limited) (“Winspire,” “we,” “our,” “us”), including [winspirercm.com], and any related pages, portals, forms, and content (collectively, the “Website”).</p>
                     <p>By accessing or using the Website, you agree to these Terms. If you do not agree, do not use the Website.</p>
 
