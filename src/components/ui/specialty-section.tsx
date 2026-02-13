@@ -66,7 +66,9 @@ export function SpecialtySection() {
                             onClick={() => router.push('/book-demo')}
                         >
                             <span className="cta-text">Explore Specialty Workflows</span>
-                            <ArrowRight size={20} className="cta-arrow" />
+                            <span className="cta-arrow-hit">
+                                <ArrowRight size={20} className="cta-arrow" />
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -247,12 +249,24 @@ export function SpecialtySection() {
                     font-size: 1.125rem;
                 }
 
+                .cta-arrow-hit {
+                    display: inline-flex;
+                    animation: exitEnter 2s infinite ease-in-out;
+                }
+
+                .specialty-cta:hover .cta-arrow-hit {
+                    animation: exitEnter 0.8s infinite linear;
+                }
+
+                @keyframes exitEnter {
+                    0% { transform: translateX(0); opacity: 1; }
+                    40% { transform: translateX(15px); opacity: 0; }
+                    41% { transform: translateX(-15px); opacity: 0; }
+                    80%, 100% { transform: translateX(0); opacity: 1; }
+                }
+
                 :global(.cta-arrow) {
                     color: #0f172a;
-                    transition: transform 0.3s ease;
-                }
-                .specialty-cta:hover :global(.cta-arrow) {
-                    transform: translateX(4px);
                 }
 
             `}</style>
