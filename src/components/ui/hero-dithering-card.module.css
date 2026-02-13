@@ -202,11 +202,33 @@
     width: 1.25rem;
     position: relative;
     z-index: 10;
-    transition: transform 0.3s ease;
+    transition: none; /* Remove transition to allow animation */
+    animation: exitEnter 2.5s infinite ease-in-out;
 }
 
 .button:hover .buttonIcon {
-    transform: translateX(4px);
+    transform: none; /* Reset transform */
+    animation: exitEnter 0.8s infinite linear;
+}
+
+@keyframes exitEnter {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    40% {
+        transform: translateX(15px);
+        opacity: 0;
+    }
+    41% {
+        transform: translateX(-15px);
+        opacity: 0;
+    }
+    80%,
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .buttonText {
