@@ -8,13 +8,32 @@
 
 import styles from '@/styles/CultureSection.module.css';
 
+import { UserPlus, Shield, Target, Award, GraduationCap } from 'lucide-react';
+import { useIconDraw } from "@/hooks/useIconDraw";
+
 export default function CultureSection() {
+    const iconsRef = useIconDraw({ stagger: 0.1, start: "top 80%" });
     const values = [
-        'Hire carefully and invest deeply in our people',
-        'Trust teams with ownership and accountability',
-        'Focus on outcomes rather than activity',
-        'Recognize contributions consistently',
-        'Encourage continuous learning and improvement',
+        { 
+            text: 'Hire carefully and invest deeply in our people', 
+            icon: UserPlus 
+        },
+        { 
+            text: 'Trust teams with ownership and accountability', 
+            icon: Shield 
+        },
+        { 
+            text: 'Focus on outcomes rather than activity', 
+            icon: Target 
+        },
+        { 
+            text: 'Recognize contributions consistently', 
+            icon: Award 
+        },
+        { 
+            text: 'Encourage continuous learning and improvement', 
+            icon: GraduationCap 
+        },
     ];
 
     return (
@@ -69,16 +88,21 @@ export default function CultureSection() {
                         <h4 className={styles.listHeader}>
                             At Winspire, we:
                         </h4>
-                        {values.map((item, i) => (
-                            <div key={i} className={styles.listItem}>
-                                <span className={styles.numberCircle}>
-                                    0{i + 1}
-                                </span>
-                                <p className={styles.itemText}>
-                                    {item}
-                                </p>
-                            </div>
-                        ))}
+                        <div className={styles.listItems} ref={iconsRef}>
+                            {values.map((item, i) => {
+                                const Icon = item.icon;
+                                return (
+                                    <div key={i} className={styles.listItem}>
+                                        <div className={styles.iconCircle}>
+                                            <Icon size={20} className={styles.icon} />
+                                        </div>
+                                        <p className={styles.itemText}>
+                                            {item.text}
+                                        </p>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
             </div>

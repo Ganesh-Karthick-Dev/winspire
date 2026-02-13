@@ -136,6 +136,12 @@
     letter-spacing: 0.1em;
 }
 
+.listItems {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 .listItem {
     display: flex;
     align-items: center;
@@ -153,7 +159,7 @@
     border-color: rgba(255, 255, 255, 0.1);
 }
 
-.numberCircle {
+.iconCircle {
     width: 2.5rem;
     height: 2.5rem;
     flex-shrink: 0;
@@ -162,15 +168,17 @@
     justify-content: center;
     background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
-    /* White numbers */
+    /* White icons */
     border-radius: 50%;
-    font-weight: 700;
-    font-size: 1.15rem;
-    /* Increased size */
     transition: transform 0.3s ease;
 }
 
-.listItem:hover .numberCircle {
+.icon {
+    stroke-width: 1.5;
+    /* Important for useIconDraw to target */
+}
+
+.listItem:hover .iconCircle {
     transform: scale(1.1);
 }
 
