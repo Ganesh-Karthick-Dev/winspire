@@ -101,11 +101,12 @@ export default function FinalCTASection() {
                 <div className={styles.buttonGroup}>
                     <Link href="/book-demo" className={styles.primaryButton}>
                         Book a Strategic Conversation
-                        <FaArrowRight size={12} />
+                        <FaArrowRight size={12} className={styles.icon} />
                     </Link>
                     
                     <Link href="#how-we-work" className={styles.secondaryButton}>
                         Explore How We Work
+                        <FaArrowRight size={12} className={styles.icon} />
                     </Link>
                 </div>
             </div>
