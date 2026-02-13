@@ -22,6 +22,9 @@ export default function FloatingSectionNav({ sections, cta }: FloatingSectionNav
     const lastScrollY = useRef(0);
 
     useEffect(() => {
+        // Initialize lastScrollY to current position to avoid false positive on initial scroll
+        lastScrollY.current = window.scrollY;
+
         // --- Scroll Direction Logic ---
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
