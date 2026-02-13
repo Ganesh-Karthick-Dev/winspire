@@ -227,6 +227,7 @@
         text-align: center;
         padding: 1.5rem;
         gap: 1rem;
+        border-radius: 1.5rem; /* Reduced from 9999px */
     }
     
     .pillIcon {

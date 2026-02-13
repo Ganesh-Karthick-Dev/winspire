@@ -108,9 +108,9 @@
 @media (max-width: 1024px) {
     .stickyWrapper {
         flex-direction: column;
-        justify-content: center;
-        align-items: center; /* Center align everything */
-        padding: 0 2rem;
+        justify-content: flex-start;
+        align-items: center; 
+        padding: 8rem 2rem 2rem;
     }
 
     .progressContainer {
@@ -122,9 +122,9 @@
         position: relative;
         top: auto;
         left: auto;
-        margin-bottom: 2rem; /* Reduced from 3rem */
+        margin-bottom: 2rem;
         width: auto;
-        margin-top: -5rem; /* Pull it up significantly */
+        margin-top: 7rem;
     }
 
     /* Reset absolute positioning for text */
