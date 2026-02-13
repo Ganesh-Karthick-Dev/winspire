@@ -133,6 +133,7 @@
 
 .arrowIcon {
     display: inline-flex;
+    animation: exitEnter 2.5s infinite ease-in-out;
 }
 
 .ctaButton:hover .arrowIcon {

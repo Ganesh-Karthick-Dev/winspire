@@ -144,6 +144,7 @@
 
 .ctaArrow {
     display: flex;
+    animation: exitEnter 2.5s infinite ease-in-out;
 }
 
 .ctaButton:hover .ctaArrow {
