@@ -107,7 +107,9 @@ export default function SolutionsFinalCTA() {
                     </p>
                     <Link href="/book-demo" className={styles.ctaButton}>
                         Book a Strategic Conversation
-                        <FaArrowRight size={12} />
+                        <span className={styles.arrowIcon}>
+                            <FaArrowRight size={12} />
+                        </span>
                     </Link>
                 </div>
             </div>

@@ -144,11 +144,30 @@
 
 .ctaArrow {
     display: flex;
-    transition: transform 0.2s ease;
 }
 
 .ctaButton:hover .ctaArrow {
-    transform: translateX(4px);
+    animation: exitEnter 0.8s infinite linear;
+}
+
+@keyframes exitEnter {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    40% {
+        transform: translateX(15px);
+        opacity: 0;
+    }
+    41% {
+        transform: translateX(-15px);
+        opacity: 0;
+    }
+    80%,
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .scrollIndicator {

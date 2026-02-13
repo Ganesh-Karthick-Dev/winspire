@@ -131,6 +131,34 @@
     background: #f8fafc;
 }
 
+.arrowIcon {
+    display: inline-flex;
+}
+
+.ctaButton:hover .arrowIcon {
+    animation: exitEnter 0.8s infinite linear;
+}
+
+@keyframes exitEnter {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    40% {
+        transform: translateX(15px);
+        opacity: 0;
+    }
+    41% {
+        transform: translateX(-15px);
+        opacity: 0;
+    }
+    80%,
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 @media (max-width: 768px) {
     .section {
         padding: 5rem 1.25rem 6rem;

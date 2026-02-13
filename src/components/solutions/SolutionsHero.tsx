@@ -7,6 +7,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
+import { FaArrowRight } from 'react-icons/fa';
 import styles from '../../styles/SolutionsHero.module.css';
 
 const HEADLINE_LINE1 = 'Revenue Solutions';
@@ -116,11 +117,9 @@ export default function SolutionsHero() {
                             aria-label="Explore solutions"
                         >
                             <span className={styles.ctaText}>Explore solutions</span>
-                            {/* <span className={styles.ctaArrow} aria-hidden="true">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 10h12M16 6l-4 4 4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </span> */}
+                            <span className={styles.ctaArrow} aria-hidden="true">
+                                <FaArrowRight />
+                            </span>
                         </button>
                     </div>
                     {/* <a
