@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import styles from '@/styles/OutcomesCTA.module.css';
 
 const OutcomesCTA = () => {
@@ -12,7 +13,12 @@ const OutcomesCTA = () => {
                 <p className={styles.description}>
                     If you’re ready to move from reactive execution to intelligently designed performance, we’re ready to build it with you.
                 </p>
-                <Link href="/book-demo" className={styles.ctaButton}>Book a Strategic Conversation</Link>
+                <Link href="/book-demo" className={styles.ctaButton}>
+                    Book a Strategic Conversation
+                    <span className={styles.arrowHit}>
+                        <ArrowRight size={20} />
+                    </span>
+                </Link>
             </div>
         </section>
     );

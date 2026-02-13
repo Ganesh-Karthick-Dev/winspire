@@ -43,7 +43,9 @@
 }
 
 .ctaButton {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
     padding: 1rem 3rem;
     background: linear-gradient(90deg, #0ea5e9, #2563eb);
     color: white;
@@ -57,4 +59,33 @@
 .ctaButton:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.5);
+}
+
+.arrowHit {
+    display: inline-flex;
+    animation: exitEnter 2.5s infinite ease-in-out;
+}
+
+.ctaButton:hover .arrowHit {
+    animation: exitEnter 0.8s infinite linear;
+}
+
+@keyframes exitEnter {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    40% {
+        transform: translateX(15px);
+        opacity: 0;
+    }
+    41% {
+        transform: translateX(-15px);
+        opacity: 0;
+    }
+    80%,
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
