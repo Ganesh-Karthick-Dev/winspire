@@ -103,6 +103,23 @@ export default function WhoWeHelpSection() {
                 });
             });
 
+            // Footer Animation
+            const footer = containerRef.current?.querySelector(`.${styles.footer}`);
+            if (footer) {
+                gsap.from(footer, {
+                    y: 50,
+                    opacity: 0,
+                    scale: 0.95,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: footer,
+                        start: "top 90%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+            }
+
             ScrollTrigger.refresh();
         }, containerRef);
 
