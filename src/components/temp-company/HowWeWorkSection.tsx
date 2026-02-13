@@ -41,6 +41,39 @@ export default function HowWeWorkSection() {
                     }
                 });
             }
+            if (sectionRef.current) {
+                // Checklist Items Animation
+                const checkItems = sectionRef.current.querySelectorAll(`.${styles.checkItem}`);
+                if (checkItems.length > 0) {
+                    gsap.from(checkItems, {
+                    x: -30,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.2,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: checkItems[0],
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+
+                // Extra pop for the icons
+                const checkCircles = sectionRef.current.querySelectorAll(`.${styles.checkIconCircle}`);
+                gsap.from(checkCircles, {
+                    scale: 0,
+                    duration: 1,
+                    stagger: 0.2,
+                    ease: "back.out(1.7)",
+                    scrollTrigger: {
+                        trigger: checkItems[0],
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+            }
+        }
+
             ScrollTrigger.refresh();
         }, sectionRef);
 

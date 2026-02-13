@@ -38,6 +38,39 @@ export default function PointOfViewSection() {
                     }
                 });
             }
+            if (sectionRef.current) {
+                // List Items Animation
+                const listItems = sectionRef.current.querySelectorAll(`.${styles.listItem}`);
+                if (listItems.length > 0) {
+                    gsap.from(listItems, {
+                    x: -30,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.2,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: listItems[0],
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+
+                // Extra pop for the numbers
+                const bubbles = sectionRef.current.querySelectorAll(`.${styles.listNumber}`);
+                gsap.from(bubbles, {
+                    scale: 0,
+                    duration: 1,
+                    stagger: 0.2,
+                    ease: "back.out(1.7)",
+                    scrollTrigger: {
+                        trigger: listItems[0],
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+            }
+        }
+
             ScrollTrigger.refresh();
         }, sectionRef);
 
@@ -77,7 +110,7 @@ export default function PointOfViewSection() {
                             
                             <div className={styles.quoteContainer}>
                                 <p className={styles.quoteBox}>
-                                    People do not fail. <br/>
+                                    <span className={styles.redHighlight}>People do not fail.</span> <br/>
                                     <span className={styles.quoteHighlight}>
                                         Poorly designed systems do.
                                     </span>

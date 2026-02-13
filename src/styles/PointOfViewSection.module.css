@@ -224,6 +224,11 @@
     /* inline color */
 }
 
+.redHighlight {
+    color: #ef4444;
+    font-weight: 900;
+}
+
 /* List "Sequence for Success" */
 .listSection {
     display: flex;
