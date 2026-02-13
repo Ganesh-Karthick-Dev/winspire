@@ -23,7 +23,7 @@ const testimonials = [
   },
   {
     quote: "The transparency and real-time insights transformed how we make decisions.",
-    author: "COO",
+    author: "Chief Operating Officer",
     company: "Regional Medical Center",
   },
   {
