@@ -6,14 +6,57 @@
 
 'use client';
 
-import React from 'react';
+import { useRef } from 'react';
 import { FaQuoteLeft } from 'react-icons/fa';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import styles from '@/styles/OurStorySection.module.css';
 import BoardSection from '@/components/company/BoardSection';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function OurStorySection() {
+    const containerRef = useRef<HTMLElement>(null);
+    const textRef = useRef<HTMLDivElement>(null);
+    const cardsRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: textRef.current, // Trigger specifically when the journey text enters
+                start: 'top 85%', // Start earlier in the scroll
+                toggleActions: 'play none none reverse',
+            }
+        });
+
+        // Animate the text first (slower duration)
+        tl.fromTo(textRef.current, 
+            { opacity: 0, y: 50 },
+            { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }
+        );
+
+        // Animate the cards with stagger
+        const cardRotations = [-3, 2, 1, -4, 3]; // Matches the CSS scrapbook rotations
+
+        tl.fromTo('[data-animate-card]',
+            { opacity: 0, y: 100, scale: 0.7, rotate: (i) => i % 2 === 0 ? -15 : 15 },
+            { 
+                opacity: 1, 
+                y: 0, 
+                scale: 1, 
+                rotate: (i) => cardRotations[i] || 0,
+                duration: 1.8, 
+                stagger: 0.3, 
+                ease: 'back.out(1.5)' 
+            },
+            "-=0.8"
+        );
+
+    }, { scope: containerRef });
+
     return (
-        <section className={styles.sectionContainer}>
+        <section ref={containerRef} className={styles.sectionContainer}>
              
              {/* Part 1: Who We Are (Serif Intro) */}
              <div className={styles.introSection}>
@@ -73,7 +116,7 @@ export default function OurStorySection() {
                 <div className={styles.journeyContainer}>
 
                     {/* New Transition Text */}
-                    <div className={styles.journeyIntro}>
+                    <div ref={textRef} className={styles.journeyIntro}>
                         <h3 className={styles.journeyHeadline}>
                             Yet revenue cycles remained unstable.<br/>
                             <span>That experience shaped the belief that defines Winspire today.</span>
@@ -86,7 +129,7 @@ export default function OurStorySection() {
                     </div>
 
                     {/* Card 1: Image (Top Left) */}
-                    <div className={`${styles.card} ${styles.card1}`}>
+                    <div className={`${styles.card} ${styles.card1} data-animate-card`} data-animate-card>
                         <div className={styles.imageWrapper}>
                              <img 
                                 src="/temp/117735.jpg" 
@@ -97,7 +140,7 @@ export default function OurStorySection() {
                     </div>
 
                      {/* Card 2: Belief Part 1 (Top Right) */}
-                    <div className={`${styles.card} ${styles.card2}`}>
+                    <div className={`${styles.card} ${styles.card2} data-animate-card`} data-animate-card>
                          {/* Tape effect */}
                          <div className={styles.tape}></div>
                         
@@ -108,7 +151,7 @@ export default function OurStorySection() {
                     </div>
 
                     {/* Card 3: Main Image (Center) */}
-                    <div className={`${styles.card} ${styles.card3}`}>
+                    <div className={`${styles.card} ${styles.card3} data-animate-card`} data-animate-card>
                          <div className={styles.imageWrapper}>
                              <img 
                                 src="/temp/13071.jpg" 
@@ -119,14 +162,14 @@ export default function OurStorySection() {
                     </div>
 
                     {/* Card 4: Belief Part 2 (Bottom Left) */}
-                    <div className={`${styles.card} ${styles.card4}`}>
+                    <div className={`${styles.card} ${styles.card4} data-animate-card`} data-animate-card>
                          <p className={styles.missionText}>
                             They fail because the system was never designed to succeed.
                          </p>
                     </div>
 
                      {/* Card 5: Final Goal (Bottom Right) */}
-                     <div className={`${styles.card} ${styles.card5}`}>
+                     <div className={`${styles.card} ${styles.card5} data-animate-card`} data-animate-card>
                          <p className={styles.cardText} style={{ fontSize: '1.1rem', lineHeight: '1.5' }}>
                             Winspire exists to help healthcare organizations design revenue cycles that work consistently, calmly, and predictably by fixing the system, not exhausting the people inside it.
                          </p>
