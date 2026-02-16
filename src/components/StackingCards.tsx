@@ -131,15 +131,15 @@ export default function StackingCards() {
                 tl.to(starWipe, {
                     x: endPosition,
                     rotation: 360,
-                    duration: 1.8,
+                    duration: 0.8,
                     ease: "power1.inOut"
                 }, "-=0.1");
 
                 tl.to(title, {
                     clipPath: 'inset(0 0% 0 0)',
-                    duration: 1.8,
+                    duration: 0.8,
                     ease: "power1.inOut"
-                }, "-=1.8");
+                }, "-=0.8");
             });
         }, containerRef);
 
