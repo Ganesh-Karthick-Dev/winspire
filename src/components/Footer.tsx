@@ -162,6 +162,7 @@ export default function Footer() {
                         <img src="/images/certifications/soc1-type2.png" alt="SOC 1 Type II" />
                         <img src="/images/certifications/iso-27001.png" alt="ISO 27001" />
                         <img src="/images/certifications/iso-9001.png" alt="ISO 9001" />
+                        <img src="/images/certifications/hipaa-compliant.png" alt="HIPAA Compliant" />
                     </div>
                 </div>
 

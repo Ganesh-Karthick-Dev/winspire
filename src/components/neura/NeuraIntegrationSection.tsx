@@ -44,7 +44,7 @@ export default function NeuraIntegrationSection() {
             <div className={styles.container}>
                 <div className={styles.titleWrapper}>
                     <h2 className={styles.title} ref={titleRef}>
-                        How Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.1em' }}>TM</sup> Fits Into the Winspire Model
+                        How Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.1em', color: '#0D1F47', WebkitTextFillColor: 'initial' }}>TM</sup> Fits Into the Winspire Model
                     </h2>
                 </div>
                 <div className={styles.content}>

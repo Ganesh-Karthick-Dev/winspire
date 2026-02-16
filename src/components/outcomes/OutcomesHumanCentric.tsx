@@ -31,7 +31,7 @@ const OutcomesHumanCentric = () => {
     const containerRef = useRef(null);
     
     const sectionData = {
-        title: "3. Human-Centric, Not People-Dependent",
+        title: "Human-Centric, Not People-Dependent",
         content: "People are our greatest enablers but outcomes should never depend on individual heroics.",
         list: [
             "Knowledge is embedded into systems",
@@ -103,7 +103,7 @@ const OutcomesHumanCentric = () => {
                 {/* Right Side: Text Content */}
                 <div className={styles.rightSection}>
                     <h3 className={styles.title}>
-                        <FallingWord text="3." delay={0.1} />
+                        {/* <FallingWord text="3." delay={0.1} /> */}
                         <FallingWord text="Human-Centric," isHighlight={true} delay={0.3} />
                         <br />
                         <FallingWord text="Not" delay={0.5} />

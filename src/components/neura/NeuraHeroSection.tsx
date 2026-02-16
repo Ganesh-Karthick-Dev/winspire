@@ -56,7 +56,7 @@ export default function NeuraHeroSection() {
                 </h1>
             </div>
             <div className={styles.rightCol}>
-                <p className={styles.rightTitle}>Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.1em' }}>TM</sup></p>
+                <p className={styles.rightTitle}>Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.1em', color: '#0D1F47', WebkitTextFillColor: 'initial' }}>TM</sup></p>
             </div>
             <div className={styles.divider} aria-hidden>
                 <span className={styles.dividerLine} />

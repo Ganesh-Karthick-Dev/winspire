@@ -32,7 +32,7 @@ const NeuraDifferentSection = () => {
                 }}
             >
                 <h2 className={styles.headline}>
-                    What Makes Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.1em' }}>TM</sup> Fundamentally Different
+                    What Makes Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.1em', color: '#0D1F47', WebkitTextFillColor: 'initial' }}>TM</sup> Fundamentally Different
                 </h2>
 
                 <div className={styles.grid} ref={iconsRef}>

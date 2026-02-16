@@ -114,7 +114,7 @@ export default function NeuraSection() {
                     >
                         <div className="ns-header-main">
                             <h2 className="ns-mega-title-v2">
-                                Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.2em' }}>TM</sup> <br />
+                                Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.2em', color: '#ffffff', WebkitTextFillColor: 'initial' }}>TM</sup> <br />
                                 <span className="text-glow">THE INTELLIGENCE LAYER</span>
                             </h2>
                             <p className="ns-mega-subtitle-v2">
