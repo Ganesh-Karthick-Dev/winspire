@@ -28,16 +28,16 @@ export default function HowWeWorkSection() {
         const ctx = gsap.context(() => {
             // Image Parallax Effect
             if (containerRef.current && imageRef.current) {
-                gsap.set(imageRef.current, { scale: 1.15, yPercent: -10 });
+                gsap.set(imageRef.current, { scale: 1.15, yPercent: -5 });
                 
                 gsap.to(imageRef.current, {
-                    yPercent: 10,
+                    yPercent: 5,
                     ease: 'none',
                     scrollTrigger: {
                         trigger: containerRef.current,
                         start: 'top bottom',
                         end: 'bottom top',
-                        scrub: 1.5 // Smoother scrubbing
+                        scrub: 1
                     }
                 });
             }
@@ -160,7 +160,7 @@ export default function HowWeWorkSection() {
                  <div ref={containerRef} className={styles.imageSide}>
                      <img 
                         ref={imageRef}
-                        src="/company/How We Work.webp" 
+                        src="/company/How We Work.jpg" 
                         alt="How We Work" 
                         className={styles.parallaxImage}
                         loading="lazy"
