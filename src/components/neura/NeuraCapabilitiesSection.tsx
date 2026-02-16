@@ -22,7 +22,7 @@ const capabilities = [
         description: "Neura AI shifts revenue protection upstream. It predicts risk before claims are submitted.",
         outcomes: [
             { text: "30–50% fewer avoidable denials", min: 30, max: 50 },
-            { text: "2–3% higher liquidation on aged AR", min: 2, max: 3 },
+            { text: "20–30% higher liquidation on aged AR", min: 2, max: 3 },
             { text: "10–20% higher appeal overturn rates", min: 10, max: 20 }
         ],
         takeaway: "Revenue is protected early instead of chased late.",
@@ -49,8 +49,8 @@ const capabilities = [
         title: "People Performance and Quality at Scale",
         description: "Neura AI turns individual effort into consistent performance, unifying productivity and quality.",
         outcomes: [
-            { text: "10–15% productivity gain", min: 10, max: 15 },
-            { text: "20–30% error reduction", min: 20, max: 30 },
+            { text: "30–40% productivity gain", min: 10, max: 15 },
+            { text: "50–60% error reduction", min: 20, max: 30 },
             { text: "30–40% faster onboarding", min: 30, max: 40 }
         ],
         takeaway: "Performance scales without burnout.",
@@ -63,7 +63,7 @@ const capabilities = [
         title: "Leadership Visibility and Control",
         description: "Neura AI replaces lagging reports with live operational insight. Real-time dashboards drive better decisions.",
         outcomes: [
-            { text: "1–2% net collections improvement" },
+            { text: "30–40% Net collection Rate" },
             { text: "5–7 days earlier intervention" }
         ],
         takeaway: "Reacting → Guiding",
@@ -76,8 +76,8 @@ const capabilities = [
         title: "Culture, Alignment, and Continuous Improvement",
         description: "Neura AI embeds recognition, learning, and improvement into daily execution. Aligning teams to shared goals.",
         outcomes: [
-            { text: "Lower attrition (top performers)" },
-            { text: "1–3% efficiency gains YoY" }
+            { text: "Less than 1% talent Attrition" },
+            { text: "30–50% Efficiency gains YoY" }
         ],
         takeaway: "Episodic → Continuous",
         icon: Settings,
