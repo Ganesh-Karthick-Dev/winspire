@@ -168,7 +168,7 @@ export default function TempHome() {
 
     return (
         <Layout
-            title="Temp Home"
+            title="Home"
             description="Temporary homepage with navbar, hero, and footer only."
         >
             {/* Leva Debug Panel - Only in dev mode AND debug mode enabled */}
