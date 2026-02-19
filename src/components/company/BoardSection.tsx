@@ -26,35 +26,35 @@ const boardMembers: BoardMember[] = [
         id: 6,
         name: 'Dan Schulte',
         role: 'Chief Operating Officer',
-        image: '/images/team/Chief Operating Officer.webp',
+        image: '/images/team/ChiefOperatingOfficer.webp',
         bio: 'Dan Schulte has worked in healthcare provider and RCM vendor arena for over 40 years. He has helped large and small organizations find weak spots, change processes, and realize immediate returns. Previously held senior RCM positions at HGS, The Outsource Group, Parallon, Apollo Health Street, and Siemens Health Services.'
     },
     {
         id: 5,
         name: 'Philip Leone',
         role: 'Chief Advisor',
-        image: '/images/team/Chief Advisor.webp',
+        image: '/images/team/ChiefAdvisor.webp',
         bio: 'Philip Leone is a seasoned healthcare executive with over two decades of experience guiding organizations through growth, reimbursement complexity, and market expansion. He has secured CPT codes, structured payer contracting strategies, and supported FDA-cleared technology launches. As Chief Advisor, he brings critical perspective on reimbursement strategy, regulatory risk, and sustainable commercialization.'
     },
     {
         id: 4,
         name: 'Curtis Cates',
         role: 'Chief Marketing & Sales',
-        image: '/images/team/Chief Marketing & Sales.webp',
+        image: '/images/team/ChiefMarketingSales.webp',
         bio: 'Curtis Cates leads growth at Winspire RCM with strategic depth, healthcare domain expertise, and modern AI-driven go-to-market execution. He has spent his career at the intersection of healthcare transformation and enterprise growth, advising Fortune 500 executives and driving multi-million-dollar client relationships. Curtis ensures Neura AI\'s value is communicated with clarity and credibility.'
     },
     {
         id: 3,
         name: 'John Kostic',
         role: 'Strategic Growth Officer',
-        image: '/images/team/Strategic Growth Officer.webp',
+        image: '/images/team/StrategicGrowthOfficer.webp',
         bio: 'John Kostic is a seasoned strategic advisor with over 25 years of experience guiding business owners, executives, and high-net-worth families through complex growth and transition decisions. A Certified Financial Planner™ and Certified Exit Planning Advisor, he supports Winspire RCM with executive relationships, market entry, and long-term partnership development.'
     },
     {
         id: 1,
         name: 'Shravan Kumar',
         role: 'Vice President - Operations',
-        image: '/images/team/Vice President - Operations.webp',
+        image: '/images/team/VicePresidentOperations.webp',
         bio: 'Shravan Kumar leads operations at Winspire RCM with a single focus: building systems, teams, and workflows that perform reliably in the real world. He has led end-to-end RCM delivery across complex client environments, large multi-layered operational teams, and high-volume, high-precision workflows. At Winspire, he shapes how Neura AI translates into clear work prioritization, fewer handoffs, faster decision cycles, and measurable productivity gains.'
     }
 ];
