@@ -231,7 +231,7 @@ export default function Footer() {
 
                 .footer-tagline {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1rem; /* Increased from 0.875rem */
+                    font-size: 13px; /* 80% scale equivalent */
                     line-height: 1.6;
                     color: #666;
                     margin: 0 0 32px 0;
@@ -276,7 +276,7 @@ export default function Footer() {
 
                 .contact-item h5 {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 0.75rem;
+                    font-size: 10px; /* 80% scale equivalent */
                     font-weight: 600;
                     text-transform: uppercase;
                     letter-spacing: 0.05rem;
@@ -286,7 +286,7 @@ export default function Footer() {
 
                 .contact-item p {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 0.8125rem;
+                    font-size: 10.5px; /* 80% scale equivalent */
                     line-height: 1.5;
                     color: #444;
                     margin: 0;
@@ -299,8 +299,6 @@ export default function Footer() {
                     align-items: center;
                     justify-content: space-between;
                     gap: 32px;
-                    // padding-top: 5px;
-                    // margin-top: 5px;
                     border-top: 1px solid #f0f0f0;
                 }
 
@@ -318,7 +316,7 @@ export default function Footer() {
 
                 .azure-text {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 0.875rem;
+                    font-size: 11px; /* 80% scale equivalent */
                     font-weight: 400;
                     line-height: 1.6;
                     color: #666;
@@ -368,7 +366,7 @@ export default function Footer() {
 
                 .column-title {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 0.875rem;
+                    font-size: 11px; /* 80% scale equivalent */
                     font-weight: 600;
                     color: #1a1a1a;
                     margin: 0 0 20px 0;
@@ -391,7 +389,7 @@ export default function Footer() {
 
                 .column-links :global(a) {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 1rem; /* Increased from 0.8rem */
+                    font-size: 13px; /* 80% scale equivalent */
                     color: #666;
                     text-decoration: none;
                     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -420,7 +418,7 @@ export default function Footer() {
 
                 .copyright {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 0.75rem;
+                    font-size: 10px; /* 80% scale equivalent */
                     color: rgba(255, 255, 255, 0.7);
                 }
 
@@ -431,7 +429,7 @@ export default function Footer() {
 
                 .legal-links :global(a) {
                     font-family: 'Outfit', sans-serif;
-                    font-size: 0.75rem;
+                    font-size: 10px; /* 80% scale equivalent */
                     color: #ffffff;
                     text-decoration: none;
                     opacity: 0.9;
@@ -525,7 +523,7 @@ export default function Footer() {
 
                     .column-title {
                         margin: 0;
-                        font-size: 1rem;
+                        font-size: 16px;
                     }
 
                     .accordion-icon {
