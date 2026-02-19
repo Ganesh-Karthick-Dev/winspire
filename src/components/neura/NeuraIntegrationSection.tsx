@@ -32,7 +32,7 @@ export default function NeuraIntegrationSection() {
     }, []);
 
     const content = [
-        "Neura AI is not sold as standalone software.",
+        "Neura Ai™ is not sold as standalone software.",
         "It is embedded into how Winspire designs and executes tailored revenue operations.",
         "It enables visibility without micromanagement, offshore execution without risk, accountability without friction, and scale without quality loss.",
         "Technology exists here for one reason to help people perform at their best, consistently."
@@ -44,7 +44,7 @@ export default function NeuraIntegrationSection() {
             <div className={styles.container}>
                 <div className={styles.titleWrapper}>
                     <h2 className={styles.title} ref={titleRef}>
-                        How Neura AI<sup style={{ fontSize: '0.4em', verticalAlign: 'top', marginLeft: '0.1em', color: '#0D1F47', WebkitTextFillColor: 'initial' }}>TM</sup> Fits Into the Winspire Model
+                        How <span style={{ whiteSpace: 'nowrap' }}>Neura Ai<span style={{ fontSize: '0.35em', verticalAlign: 'super', marginLeft: '0.25em', color: '#0D1F47', WebkitTextFillColor: '#0D1F47', display: 'inline-block', lineHeight: '1', position: 'relative', top: '-0.25em' }}>TM</span></span> Fits Into the Winspire Model
                     </h2>
                 </div>
                 <div className={styles.content}>
