@@ -52,12 +52,43 @@ export default function Terms() {
                     <p>If there is a conflict between these Terms and the Privacy Policy regarding personal information, the Privacy Policy will govern.</p>
 
                     <h2>7. Communications and Messaging</h2>
-                    <p>If you provide your email address or phone number, you may receive communications from Winspire RCM as described in our Privacy and Messaging Policy, including messages relating to services, job opportunities, interview scheduling, application status updates, and administrative communications.</p>
-                    <p>Message frequency may vary. Standard message and data rates may apply.</p>
-                    <p>SMS opt out: reply “STOP”</p>
-                    <p>SMS help: reply “HELP”</p>
-                    <p>Email opt out: use the unsubscribe link or reply “Unsubscribe”</p>
-                    <p>You agree that communications may be provided electronically and that such communications satisfy legal notice requirements where permitted by law.</p>
+                    <h3>7.a. Sharing of Information</h3>
+                    <p>We respect your privacy.</p>
+                    <ul>
+                        <li>We do not sell, rent, or share your personal information with third parties for promotional or marketing purposes.</li>
+                        <li>Information may be shared only with trusted service providers who support our operations (such as hosting, communication, or scheduling tools), and only to the extent necessary to perform those services.</li>
+                        <li>We may disclose information if required by law or to protect the rights, security, and integrity of Winspire RCM.</li>
+                    </ul>
+                    <h3>7.b. Consent</h3>
+                    <p>By providing your phone number or email address through our website, forms, or direct communication, you consent to receive communications from Winspire RCM relevant to your inquiry, application, or professional engagement.</p>
+                    <p>Consent is not a condition of purchase or service.</p>
+
+                    <h3>7.c. Message Frequency</h3>
+                    <p>Message frequency may vary based on:</p>
+                    <ul>
+                        <li>Your interaction with us</li>
+                        <li>Client engagement requirements</li>
+                        <li>Hiring or interview processes</li>
+                    </ul>
+
+                    <h3>7.d. Message and Data Rates</h3>
+                    <p>Standard message and data rates may apply based on your mobile carrier and service plan.</p>
+
+                    <h3>7.e. Opt Out Instructions</h3>
+                    <p>You may opt out at any time:</p>
+                    <ul>
+                        <li>SMS: Reply “STOP” to unsubscribe from text messages</li>
+                        <li>Email: Click the “Unsubscribe” link in the email or reply with “Unsubscribe”</li>
+                    </ul>
+                    <p>After opting out, you may receive a confirmation message. No further messages will be sent unless you re-opt in.</p>
+
+                    <h3>7.f. Support & Help</h3>
+                    <p>For assistance:</p>
+                    <ul>
+                        <li>Reply “HELP” to any SMS message</li>
+                        <li>Email: <a href="mailto:contact@winspirercm.com">contact@winspirercm.com</a></li>
+                        <li>Phone: +1 (585) 563 7788</li>
+                    </ul>
 
                     <h2>8. Intellectual Property and License</h2>
                     <h3>8.1 Ownership</h3>

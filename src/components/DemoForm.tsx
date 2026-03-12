@@ -53,14 +53,10 @@ export default function DemoForm({ isModal = false, closeButton }: DemoFormProps
     const validate = () => {
         const newErrors: Record<string, string> = {};
         if (!formData.name.trim()) newErrors.name = 'Required';
-        if (!formData.email.trim()) {
-            newErrors.email = 'Required';
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+        if (formData.email.trim() && !/\S+@\S+\.\S+/.test(formData.email)) {
             newErrors.email = 'Invalid email';
         }
-        if (!formData.phone.trim()) {
-            newErrors.phone = 'Required';
-        } else if (formData.phone.replace(/\D/g, '').length !== 10) {
+        if (formData.phone.trim() && formData.phone.replace(/\D/g, '').length !== 10) {
             newErrors.phone = '10 digits required';
         }
         if (!formData.organization.trim()) newErrors.organization = 'Required';
@@ -152,7 +148,7 @@ export default function DemoForm({ isModal = false, closeButton }: DemoFormProps
                         {errors.name && <span className={styles.errorMsg}>{errors.name}</span>}
                     </div>
                     <div className={styles.field}>
-                        <label>Email</label>
+                        <label>Email (Optional)</label>
                         <input
                             type="email"
                             name="email"
@@ -168,7 +164,7 @@ export default function DemoForm({ isModal = false, closeButton }: DemoFormProps
                 {/* Phone & Organization */}
                 <div className={styles.row}>
                     <div className={styles.field}>
-                        <label>Phone</label>
+                        <label>Phone (Optional)</label>
                         <input
                             type="tel"
                             name="phone"
@@ -241,7 +237,7 @@ export default function DemoForm({ isModal = false, closeButton }: DemoFormProps
                             style={{ width: '20px', height: '20px', marginTop: '4px', cursor: 'pointer', flexShrink: 0 }}
                         />
                         <label htmlFor="consent-checkbox" style={{ fontSize: '14px', lineHeight: '1.5', cursor: 'pointer', color: '#4b5563' }}>
-                            By submitting this form, you agree to receive communications from Winspire RCM as outlined in our <a href="/privacy" target="_blank" onClick={(e) => e.stopPropagation()} style={{ color: '#3b82f6', textDecoration: 'underline' }}>Privacy & Messaging Policy</a>.
+                            By providing your contact information, you agree to receive text messages from Winspire RCM, Message frequency may vary, and standard message and data rates may apply. You can opt out at any time by replying “STOP” or text “HELP” for support. You may receive messages related to (Message types *) <a href="/privacy" target="_blank" onClick={(e) => e.stopPropagation()} style={{ color: '#3b82f6', textDecoration: 'underline' }}>privacy policy</a> and <a href="/terms" target="_blank" onClick={(e) => e.stopPropagation()} style={{ color: '#3b82f6', textDecoration: 'underline' }}>terms and conditions</a>.
                         </label>
                     </div>
                     {errors.consent && <span className={styles.errorMsg} style={{ display: 'block', marginLeft: '32px', marginTop: '4px' }}>You must agree to the policy to proceed.</span>}
